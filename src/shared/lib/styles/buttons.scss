@@ -1,0 +1,15 @@
+@mixin button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    border: none;
+    outline: none;
+    background-color: transparent;
+    color: #FFF;
+    width: auto;
+    height: 40px;
+    border-radius: 10px;
+    transition: all .5s;
+    padding: 10px;
+}

@@ -1,0 +1,33 @@
+$KT1: 320px;
+$KT2: 576px;
+$KT3: 768px;
+$KT4: 992px;
+$KT5: 1200px;
+$KT6: 1440px;
+@mixin for-size($range) {
+    @if $range == KT1 {
+        @media (min-width: $KT1) {
+            @content;
+        }
+    } @else if $range == KT2 {
+        @media (min-width: $KT2) {
+            @content;
+        }
+    } @else if $range == KT3 {
+        @media (min-width: $KT3) {
+            @content;
+        }
+    } @else if $range == KT4 {
+        @media (min-width: $KT4) {
+            @content;
+        }
+    } @else if $range == KT5 {
+        @media (min-width: $KT5) {
+            @content;
+        }
+    } @else if $range == KT6 {
+        @media (min-width: $KT6) {
+            @content;
+        }
+    } 
+}

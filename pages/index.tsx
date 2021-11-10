@@ -1,6 +1,6 @@
 import type { NextPage } from 'next'
 import React from 'react'
-import SampleComponent from '../src/shared/ui/SampleComponent/SampleComponent'
+import BaseButton from '../src/shared/ui/BaseButton/BaseButtons'
 
 
 
@@ -8,7 +8,7 @@ const Home: NextPage = () => {
 
   return (
     <div>
-      <SampleComponent />
+      <BaseButton>BTN </BaseButton>
 
     </div>
   )
