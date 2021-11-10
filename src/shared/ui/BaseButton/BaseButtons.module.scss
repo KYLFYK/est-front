@@ -1,5 +1,51 @@
 @import '../../lib/styles/colours.scss';
 
 .basebutton {
-    background-color: $ACCENT
+    cursor: pointer;
+    color: $WHITE;
+    padding: 10px 10px;
+    border-radius: 6px;
+    border: 0;
+    font-weight: 400;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    max-height: 40px;
+}
+
+.primary {
+    padding: 10px 20px;
+    background-color: $NUDE;
+    font-weight: 500;
+}
+
+
+.secondary {
+    background-color: $WHITE;
+    color: $BLACK;
+    border: 1px solid #F2F2F2;
+    &.active {
+        background-color: $ACCENT;
+        color: $WHITE;
+        border: 0,
+    }
+}
+
+.blank {
+    background-color: $WHITE;
+    color: $ACCENT;
+    border: 1px solid $ACCENT;
+    font-size: 14px;
+}
+
+.iconWrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: auto;
+}
+.iconSpace {
+    padding-left: 8px;
 }
