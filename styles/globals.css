@@ -1,0 +1,54 @@
+@font-face {
+    font-family: "MontserratRegular";
+    font-weight: 400;
+    font-style: normal;
+    src: url("../src/app/fonts/Montserrat/Montserrat-Regular.ttf")
+  }
+  
+  
+  @font-face {
+    font-family: "MontserratBold";
+    font-weight: 700;
+    font-style: normal;
+    src: url("../src/app/fonts/Montserrat/Montserrat-Bold.ttf")
+  }
+  
+  @font-face {
+    font-family: "MontserratLight";
+    font-weight: 300;
+    font-style: normal;
+    src: url("../src/app/fonts/Montserrat/Montserrat-Light.ttf")
+  }
+
+
+
+
+  @font-face {
+    font-family: "RobotoRegular";
+    font-weight: 400;
+    font-style: normal;
+    src: url("../src/app/fonts/Roboto/Roboto-Regular.ttf")
+  }
+  
+  
+  @font-face {
+    font-family: "RobotoBold";
+    font-weight: 700;
+    font-style: normal;
+    src: url("../src/app/fonts/Roboto/Roboto-Bold.ttf")
+  }
+  
+  @font-face {
+    font-family: "RobotoMedium";
+    font-weight: 500;
+    font-style: normal;
+    src: url("../src/app/fonts/Roboto/Roboto-Medium.ttf")
+  }
+
+  @font-face {
+    font-family: "RobotoLight";
+    font-weight: 300;
+    font-style: normal;
+    src: url("../src/app/fonts/Roboto/Roboto-Light.ttf")
+  }
+  
