@@ -1,4 +1,4 @@
-@import '../../lib/styles/colours.scss';
+@import '../../../app/styles/colours.scss';
 
 .basebutton {
     cursor: pointer;
@@ -12,7 +12,6 @@
     align-items: center;
     justify-content: center;
     text-align: center;
-    max-height: 40px;
 }
 
 .primary {
