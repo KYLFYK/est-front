@@ -3,7 +3,13 @@ import React from 'react'
 import FavoriteIcon from '../src/shared/icons/Favorite/Favorite'
 import BaseButton from '../src/shared/ui/BaseButton/BaseButtons'
 import { BaseDropDown } from '../src/shared/ui/BaseDropDown/BaseDropDown'
+import { BaseInput } from '../src/shared/ui/BaseInput/Input'
+import { CompareInput } from '../src/shared/ui/CompareInput/CompareInput'
+import { ToggleButtons } from '../src/shared/ui/ToggleButtons/ToggleButtons'
 import Typography from '../src/shared/ui/Typography/Typography'
+
+const OPTION_DATA = [{label: 'option_1', value: "1"}, {label: 'option_2', value: "2"}, {label: 'option_3', value: "4"}, {label: 'option_4', value: "3"}]
+const emptyFunc = () => {}
 
 const Home: NextPage = () => {
 
@@ -18,6 +24,7 @@ const Home: NextPage = () => {
         <BaseButton type="blank">На главную</BaseButton>
         <BaseButton type="secondary" icon={<FavoriteIcon />} />
       </div>
+      <div style={{display: 'flex', justifyContent: 'center'}}> <ToggleButtons items={OPTION_DATA} onChange={emptyFunc} activeValue={OPTION_DATA[0].value}/> </div>
       <div style={{ display: 'flex', gap: '15px', alignItems: 'center', flexDirection: 'column' }}>
         <h3>Typography:</h3>
         <Typography size={'small'}> Small text </Typography>
@@ -31,7 +38,9 @@ const Home: NextPage = () => {
       </div>
       <div style={{ display: 'flex', gap: '15px', alignItems: 'center', flexDirection: 'column' }}>
         <h3>Inputs:</h3>
-        <BaseDropDown options={[{label: 'option_1', value: "1"}, {label: 'option_2', value: "2"}]} placeholder="Выбрерите опцию" onChange={() => {}}/>
+        <CompareInput placeholderFrom="start" placeholderTo="end" valueFrom="startvalue" valueTo="endvalue" onChangeFrom={emptyFunc} onChangeTo={emptyFunc} />
+        <BaseInput placeholder="placeholder" />
+        <BaseDropDown options={OPTION_DATA} value={OPTION_DATA[0].value} placeholder="Выбрерите опцию" onChange={emptyFunc}/>
       </div>
     </div>
   )
