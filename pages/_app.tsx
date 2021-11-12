@@ -1,7 +1,7 @@
 import '../styles/globals.css'
 import type { AppProps } from 'next/app'
 import { MuiThemeProvider } from '@material-ui/core'
-import theme from '../src/app/MUITheme/Theme'
+import theme from '../src/app/theme/Theme'
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (

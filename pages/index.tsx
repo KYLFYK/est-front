@@ -7,6 +7,9 @@ import { BaseInput } from '../src/shared/ui/BaseInput/Input'
 import { CompareInput } from '../src/shared/ui/CompareInput/CompareInput'
 import { ToggleButtons } from '../src/shared/ui/ToggleButtons/ToggleButtons'
 import Typography from '../src/shared/ui/Typography/Typography'
+import { ObjectCard } from '../src/entities/object'
+import { APIObject } from '../src/shared/api'
+
 
 const OPTION_DATA = [{label: 'option_1', value: "1"}, {label: 'option_2', value: "2"}, {label: 'option_3', value: "4"}, {label: 'option_4', value: "3"}]
 const emptyFunc = () => {}
@@ -41,6 +44,10 @@ const Home: NextPage = () => {
         <CompareInput placeholderFrom="start" placeholderTo="end" valueFrom="startvalue" valueTo="endvalue" onChangeFrom={emptyFunc} onChangeTo={emptyFunc} />
         <BaseInput placeholder="placeholder" />
         <BaseDropDown options={OPTION_DATA} value={OPTION_DATA[0].value} placeholder="Выбрерите опцию" onChange={emptyFunc}/>
+      </div>
+      <div style={{ display: 'flex', gap: '15px', alignItems: 'center', flexDirection: 'column' }}>
+        <h3>House Card:</h3>
+        <ObjectCard houseData={new APIObject.types.IObjectEntry()}/>
       </div>
     </div>
   )

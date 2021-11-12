@@ -15,3 +15,21 @@ export interface IPropsGeneral {
     value: string | number,
     label: string,
 }
+
+export type TServerLanguages = "ru" | "zh"
+export type TClientLanguages = "ru" | "cn"
+
+export interface IGeneralResponse<T> {
+    success: boolean,
+    data: T
+}
+
+interface IPaging {
+    total_pages: number,
+    page_size: number,
+}
+export interface IGeneralObjectResponse<T> {
+    objects: T[],
+    paging: IPaging
+}
+
