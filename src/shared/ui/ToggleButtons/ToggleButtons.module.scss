@@ -1,0 +1,54 @@
+@import '../../../app/styles/colours.scss';
+@import '../../../app/styles/typography.scss';
+@import '../../../app/styles/resolutions.scss';
+
+
+.wrapper {
+    background-color: #fff;
+    max-width: fit-content;
+    @include for-size(KT1) {
+        border: 1px solid $ACCENTBUTTONDISABLED;
+        display: flex;
+        flex-wrap: wrap;
+        border-radius: 6px;
+        justify-content: center;
+        gap: 5px;
+        padding: 5px;
+    }
+   @include for-size(KT3) {
+       flex-wrap: nowrap;
+       justify-content: flex-start;
+       gap: 0px;
+       padding: 0px;
+   }
+}
+
+.divider {
+    @include for-size(KT1) {
+        width: 0px;
+        background-color: #BDBDBD;
+        margin: 7px 0;
+    }
+    @include for-size(KT3) {
+        width: 1px;
+    }
+
+}
+
+.button {
+    max-width: 205px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    border-radius: 6px;
+    padding: 12px;
+    background-color: transparent;
+    border: 0;
+    @include ROBOTOREGULAR16;
+    cursor: pointer;
+}
+
+.activeButton {
+    background-color: $NUDE;
+    color: #fff;
+}

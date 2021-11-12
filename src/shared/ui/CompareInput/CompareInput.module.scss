@@ -1,0 +1,46 @@
+@import '../../../app/styles/colours.scss';
+@import '../../../app/styles/typography.scss';
+
+
+.input {
+    @include ROBOTOREGULAR16;
+    width: 90px;
+    border: 0;
+    overflow: hidden;
+    &::-webkit-outer-spin-button,
+    &::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+    -moz-appearance: textfield;
+    &:focus{
+        outline: none;
+    }
+    &::placeholder{
+        font-size: 16px;
+    }
+}
+.wrapper {
+    background-color: #fff;
+    position: relative;
+    @include ROBOTOREGULAR16;
+    padding: 12px 10px 8px 10px;
+    border: 1px solid $ACCENTBUTTONDISABLED;
+    border-radius: 6px;
+}
+
+.divider {
+    display: inline-block;
+    height: 2px;
+    width: 10px;
+    background-color: #BDBDBD;
+    margin: 0 12px 5px 12px;
+}
+
+.icon {
+    color: #000;
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+}
