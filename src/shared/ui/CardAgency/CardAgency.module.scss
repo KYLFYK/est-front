@@ -11,7 +11,7 @@
   height:205px;
   display:flex;
   flex-direction: column;
-  justify-content: center;
+  //justify-content: center;
   align-items: center;
   border-radius: 8px;
   background: #FFFFFF;
@@ -24,6 +24,7 @@
 }
 
 .img{
+  margin-top: 14px ;
   width:153px;
   height:72px;
 }
@@ -33,7 +34,7 @@
   display: flex;
   justify-content: space-between;
   width:100%;
-  padding:0 10px ;
+  padding:0 20px ;
 }
 .description{
   box-sizing: border-box;
@@ -41,5 +42,5 @@
   display: flex;
   justify-content: flex-start;
   width:100%;
-  padding:0 10px ;
+  padding:0 20px ;
 }

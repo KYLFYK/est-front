@@ -5,6 +5,8 @@ import IconLocation from '../../Icons/Header/IconLocation';
 import {LoginIcon} from "../../Icons/Header/LoginIcon";
 import css from './Header.module.scss'
 import classNames from 'classnames';
+import FavoriteIcon from "../../../icons/Favorite/Favorite";
+import Typography from "../../Typography/Typography";
 
 type HeaderPropsType = {
     className?:string
@@ -28,7 +30,9 @@ export const Header:FC<HeaderPropsType> = ({className}) => {
                         style={{color: active === 0 ? '#C5A28E' : '#3D4550'}}
                     >
                         <IconLocation />
-                        Крым
+                        <Typography size={'default'} color="nude">
+                            Крым
+                        </Typography>
                     </div>
                 </Link>
                 <Link href={'/Buy'}>
@@ -37,7 +41,9 @@ export const Header:FC<HeaderPropsType> = ({className}) => {
                         onClick={() => setActive(1)}
                         style={{color: active === 1 ? '#C5A28E' : '#3D4550'}}
                     >
-                        Купить
+                        <Typography size={'default'} color="accent">
+                            Купить
+                        </Typography>
                     </div>
                 </Link>
                 <Link href={'/Take'}>
@@ -46,7 +52,9 @@ export const Header:FC<HeaderPropsType> = ({className}) => {
                         onClick={() => setActive(2)}
                         style={{color: active === 2 ? '#C5A28E' : '#3D4550'}}
                     >
-                        Снять
+                        <Typography size={'default'} color="accent">
+                            Снять
+                        </Typography>
                     </div>
                 </Link>
                 <Link href={'/Mortgage'}>
@@ -55,7 +63,9 @@ export const Header:FC<HeaderPropsType> = ({className}) => {
                         onClick={() => setActive(3)}
                         style={{color: active === 3 ? '#C5A28E' : '#3D4550'}}
                     >
-                        Ипотека
+                        <Typography size={'default'} color="accent">
+                           Ипотека
+                        </Typography>
                     </div>
                 </Link>
                 <Link href={'/Сonstruction'}>
@@ -64,7 +74,9 @@ export const Header:FC<HeaderPropsType> = ({className}) => {
                         onClick={() => setActive(4)}
                         style={{color: active === 4 ? '#C5A28E' : '#3D4550'}}
                     >
-                        Строящиеся дома
+                        <Typography size={'default'} color="accent">
+                            Строящиеся дома
+                        </Typography>
                     </div>
                 </Link>
                 <Link href={'/Contact'}>
@@ -73,7 +85,9 @@ export const Header:FC<HeaderPropsType> = ({className}) => {
                         onClick={() => setActive(5)}
                         style={{color: active === 5 ? '#C5A28E' : '#3D4550'}}
                     >
-                        Контакты
+                        <Typography size={'default'} color="accent">
+                            Контакты
+                        </Typography>
                     </div>
                 </Link>
                 <Link href={'/User'}>

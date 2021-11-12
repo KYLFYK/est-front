@@ -3,6 +3,18 @@ import React from 'react'
 import FavoriteIcon from '../src/shared/icons/Favorite/Favorite'
 import BaseButton from '../src/shared/ui/BaseButton/BaseButtons'
 import Typography from '../src/shared/ui/Typography/Typography'
+import ThreeColumnCard from "../src/shared/ui/ThreeColumnCard/ThreeColumnCard";
+import EnumerationColumn from "../src/shared/ui/EnumerationColumn/EnumerationColumn";
+import ParamsColumn from "../src/shared/ui/ParamsColumn/ParamsColumn";
+import Header from "../src/shared/ui/Components/Header/Header";
+import {Footer} from "../src/shared/ui/Components/Footer/Footer";
+import {TabsWrappedLabel} from "../src/shared/ui/Components/AnchorLine/AnchorLine";
+import SelectTab from "../src/shared/ui/SelectTab/SelectTab";
+import {CardAgency} from "../src/shared/ui/CardAgency/CardAgency";
+
+const emunsArray =[{title:'цена',value:'5 000 000 '},{title:'Тип объекта',value:'участок'},
+    {title:'площадь',value:'30 соток'},{title:'Статус',value:'ИЖС'},
+    {title:'Строения',value:'нет'},{title:'Коммуникации',value:'По улице'},]
 
 const Home: NextPage = () => {
 
@@ -28,6 +40,48 @@ const Home: NextPage = () => {
         <Typography size={'big'} color='nude'> Big text with nude color (price example) - 30 000 000 $</Typography>
         <div style={{backgroundColor: "#000"}}><Typography size={'header'} color='secondary'> Header text with secondary color (white)</Typography></div>
       </div>
+
+        <h3>Header : </h3>
+        <Header />
+        <h3>Footer :</h3>
+        <Footer />
+
+        <h3>TabsWrappedLabel :</h3>
+        <TabsWrappedLabel />
+
+        <h3>SelectTab : ??</h3>
+        <SelectTab />
+
+        <hr color={'red'} style={{width:'100%'}}/>
+        <Typography size={'big'} weight={'bold'} color={'nude'}>ADMIN :</Typography>
+
+        <h3>ThreeColumnCard :</h3>
+      <ThreeColumnCard>
+          <Typography size={'default'} weight={'bold'}>Арнеда, 3-этажный коттедж , 600м2</Typography>
+          <Typography size={'default'} color='tertiary'>Агент: Виталий Панкратов</Typography>
+          <div>del , edit</div>
+      </ThreeColumnCard>
+        <h3>EnumerationColumn :</h3>
+        <EnumerationColumn>
+            {
+                emunsArray.map(({title,value})=>(
+                   <ParamsColumn
+                        title={title}
+                        value={value}
+                        key={title}
+                   />
+                ))
+            }
+        </EnumerationColumn>
+        <h3>CardAgency :</h3>
+        <CardAgency
+            id={1}
+            onDelete={()=>console.log(1)}
+            img={'https://www.publicdomainpictures.net/pictures/20000/velka/westminster-abbey-11297883825gkU.jpg'}
+            name={'Emmar'}
+            description={'lorem ipsum'}
+
+        />
     </div>
   )
 }

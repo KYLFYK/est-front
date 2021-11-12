@@ -3,7 +3,8 @@ import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import Box from '@mui/material/Box';
 import css from './AnchorLine.module.scss'
-import './MiStyle.module.css'
+import Typography from "../../Typography/Typography";
+import FavoriteIcon from "../../../icons/Favorite/Favorite";
 
 const line = ['Об объекте','Особенности','Архитектура','Квартиры','Инфраструктура','Застройщик',]
 
@@ -30,7 +31,7 @@ export const TabsWrappedLabel :FC<TabsWrappedLabelType> = () => {
                         TabIndicatorProps={{style: {
                                 backgroundColor:'#C5A28E',
                                 width:'50px',
-                                marginLeft:'25px',
+                                marginLeft:'30px',
                             }}}
                     >
                         {
@@ -38,8 +39,14 @@ export const TabsWrappedLabel :FC<TabsWrappedLabelType> = () => {
                               <Tab
                                 key={index}
                                 value={index}
-                                label={<div className={css.label}>{l}</div>}
+                                style={{textTransform: 'none'}}
+                                label={
+                                    <Typography  color="accent"   > {l}</Typography>
+                                    // <div className={css.label}>{l}</div>
+                                }
                                 />
+
+
                             ))
                         }
                     </Tabs>

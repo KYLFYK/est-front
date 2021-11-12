@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import css from './SelectTab.module.scss'
+import Typography from "../Typography/Typography";
 
 function searchMenu(num: number) {
     switch (num) {
@@ -49,35 +50,42 @@ const MenuUser: React.FC<MenuUserType> = ({active, onActive}) => {
                 style={{color: active === 1 ? '#C5A28E' : ''}}
                 onClick={() => onActive(1)}
             >
-                Агенства
+                <Typography size={'default'} color={active === 1 ? 'nude' : 'tertiary'} weight="bold">
+                    Агенства
+                </Typography>
             </div>
             <div
                 className={css.menuItem}
                 style={{color: active === 2 ? '#C5A28E' : ''}}
                 onClick={() => onActive(2)}
             >
-                Застройщики
+                <Typography size={'default'} color={active === 2 ? 'nude' : 'tertiary'} weight="bold">
+                    Застройщики
+                </Typography>
             </div>
             <div
                 className={css.menuItem}
-                style={{color: active === 3 ? '#C5A28E' : ''}}
                 onClick={() => onActive(3)}
             >
-                Собственники
+                <Typography size={'default'} color={active === 3 ? 'nude' : 'tertiary'} weight="bold">
+                    Собственники
+                </Typography>
             </div>
             <div
                 className={css.menuItem}
-                style={{color: active === 4 ? '#C5A28E' : ''}}
                 onClick={() => onActive(4)}
             >
-                Статистика
+                <Typography size={'default'} color={active === 4 ? 'nude' : 'tertiary'} weight="bold">
+                    Статистика
+                </Typography>
             </div>
             <div
                 className={css.menuItem}
-                style={{color: active === 5 ? '#C5A28E' : ''}}
                 onClick={() => onActive(5)}
             >
-                Добавления объектов ( old admin )
+                <Typography size={'default'} color={active === 5 ? 'nude' : 'tertiary'} weight="bold">
+                    Добавления объектов ( old admin )
+                </Typography>
             </div>
         </div>
     );
