@@ -16,7 +16,6 @@ const TwoColumn :FC<ThreeColumnInfoType> = ({children,title,className}) => {
                 {children}
             </div>
         </div>
-
     );
 };
 
