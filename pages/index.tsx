@@ -11,6 +11,10 @@ import {Footer} from "../src/shared/ui/Components/Footer/Footer";
 import {TabsWrappedLabel} from "../src/shared/ui/Components/AnchorLine/AnchorLine";
 import SelectTab from "../src/shared/ui/SelectTab/SelectTab";
 import {CardAgency} from "../src/shared/ui/CardAgency/CardAgency";
+import EditingProfile from "../src/shared/ui/EditingProfile/EditingProfile";
+import UploadLogo from "../src/shared/ui/UploadPhoto/UploadLogo";
+import UploadPhoto from "../src/shared/ui/UploadPhoto/UploadLogo";
+import TwoColumn from "../src/shared/ui/TwoColumn/TwoColumn";
 
 const emunsArray =[{title:'цена',value:'5 000 000 '},{title:'Тип объекта',value:'участок'},
     {title:'площадь',value:'30 соток'},{title:'Статус',value:'ИЖС'},
@@ -78,10 +82,23 @@ const Home: NextPage = () => {
             id={1}
             onDelete={()=>console.log(1)}
             img={'https://www.publicdomainpictures.net/pictures/20000/velka/westminster-abbey-11297883825gkU.jpg'}
-            name={'Emmar'}
+            name={'Emaar'}
             description={'lorem ipsum'}
-
+            phone={'+7 000 222 11'}
         />
+        <h3>EditingProfile :</h3>
+        <EditingProfile title={'DEAL'}/>
+        <h3>UploadPhoto :</h3>
+        <UploadPhoto title={'Загрузить фото'} />
+        <h3>TwoColumn :</h3>
+        <TwoColumn>
+            <TwoColumn title={'Account'}  >
+                <div>1asdfasdf </div>
+                <div>2</div>
+            </TwoColumn>
+            <UploadPhoto title={'Загрузить фото'} />
+        </TwoColumn>
+
     </div>
   )
 }
