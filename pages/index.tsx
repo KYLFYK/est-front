@@ -27,6 +27,7 @@ import { ObjectCard } from '../src/entities/object'
 import { APIObject } from '../src/shared/api'
 import DevelopersContainer from "../src/entities/DevelopersContainer/ui/DevelopersContainer";
 import {AgentsContainer} from "../src/entities/AgentsContainer/agentsContainer";
+import {Advantages} from "../src/entities/Advantages/advantages";
 
 
 const OPTION_DATA = [{label: 'option_1', value: "1"}, {label: 'option_2', value: "2"}, {label: 'option_3', value: "4"}, {label: 'option_4', value: "3"}]
@@ -123,6 +124,7 @@ const Home: NextPage = () => {
         </TwoColumn>
         <DevelopersContainer  />
         <AgentsContainer />
+        <Advantages />
     </div>
   )
 }

@@ -24,7 +24,7 @@ export const AgentBlock: React.FC<AgentBlockPropsType> = ({name, heldPost, img})
             <div className={css.dataAgent}>
                 <div>
                     <ModalPersonal setActive={() => setEdit(false)} active={edit}>
-                        <AgentData />
+                        <AgentData name={name} heldPost={heldPost} />
                     </ModalPersonal>
                     <div onClick={()=>setEdit(true)}>
                         <AgentName name={name}/>

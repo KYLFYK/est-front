@@ -6,18 +6,19 @@ import css from "./AgentData.module.scss";
 import Typography from "../Typography/Typography";
 
 type AgentDataPropsType ={
-
+    name:string
+    heldPost:string
 }
 
-export const AgentData :React.FC<AgentDataPropsType> = ({}) => {
+export const AgentData :React.FC<AgentDataPropsType> = ({name,heldPost}) => {
     return (
         <>
             <img className={css.photoAgent} src="https://cana-da.ru/wp-content/uploads/2020/08/day-1-2048x2048.jpg" alt="agent"/>
             <Typography size={'default'} color="accent" weight={'medium'} className={css.marginTop} >
-                Валерий Сидоров
+                {name}
             </Typography>
             <Typography size={'default'} color="accent" >
-                старший агент
+                {heldPost}
             </Typography>
             <div className={css.gridWork}>
                 <div className={css.marginWork}>
