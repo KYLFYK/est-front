@@ -1,0 +1,12 @@
+@import '../../../../app/styles/typography.scss';
+@import '../../../../app/styles/colours.scss';
+@import '../../../../app/styles/scrollbars.scss';
+
+$cardHeight: 315px;
+$sliderHeight: 500px;
+$contentHeight: 115px;
+$borderRadius: 6px;
+
+.sliderContainer {
+    width: 900px;
+}

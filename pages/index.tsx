@@ -7,13 +7,13 @@ import { BaseInput } from '../src/shared/ui/BaseInput/Input'
 import { CompareInput } from '../src/shared/ui/CompareInput/CompareInput'
 import { ToggleButtons } from '../src/shared/ui/ToggleButtons/ToggleButtons'
 import Typography from '../src/shared/ui/Typography/Typography'
-import { ObjectCard } from '../src/entities/object'
+import { ObjectCard, ObjectGeneralInfo } from '../src/entities/object'
 import { APIObject } from '../src/shared/api'
-
 
 const OPTION_DATA = [{label: 'option_1', value: "1"}, {label: 'option_2', value: "2"}, {label: 'option_3', value: "4"}, {label: 'option_4', value: "3"}]
 const emptyFunc = () => {}
 
+const imgs = [{url: 'https://cdn.pixabay.com/photo/2021/08/25/20/42/field-6574455__340.jpg', id: 0}, {url: 'https://cdn.pixabay.com/photo/2021/08/25/20/42/field-6574455__340.jpg',id: 1}, {url: '213', id: 2}, {url: '32123', id: 4}]
 const Home: NextPage = () => {
 
   return (
@@ -47,8 +47,9 @@ const Home: NextPage = () => {
       </div>
       <div style={{ display: 'flex', gap: '15px', alignItems: 'center', flexDirection: 'column' }}>
         <h3>House Card:</h3>
-        <ObjectCard houseData={new APIObject.types.IObjectEntry()}/>
+        <ObjectCard houseData={new APIObject.types.IObjectEntry(imgs)}/>
       </div>
+      <ObjectGeneralInfo info={[]} price="0" images={imgs.map((i) => i.url)}/>
     </div>
   )
 }

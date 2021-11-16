@@ -8,11 +8,12 @@ interface Props extends IPropsGeneral {
     weight?: "light" | "regular" | "medium" | "bold",
     icon?: JSX.Element | string,
     iconPosition?: "start" | "end"
+    inline?: boolean,
 }
 
-const Typography: React.FC<Props> = ({ className, color = 'default', size = 'default', weight = 'regular', iconPosition = 'start', icon, children }) => {
+const Typography: React.FC<Props> = ({ className, color = 'default', size = 'default', weight = 'regular', iconPosition = 'start', icon, inline, children }) => {
     return (
-        <p className={classNames(s.general, s[`color_${color}`], s[`weight_${weight}`], s[`size_${size}`], className)}>
+        <p className={classNames(s.general, s[`color_${color}`], s[`weight_${weight}`], s[`size_${size}`], className)} style={{display: inline ? 'inline-block' : 'block'}}>
             {(icon && iconPosition === 'start') && <span className={s.icon}>{icon}</span>}
             {children}
             {(icon && iconPosition === 'end') && <span className={s.icon}>{icon}</span>}

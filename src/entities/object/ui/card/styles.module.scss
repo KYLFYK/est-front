@@ -2,50 +2,18 @@
 @import '../../../../app/styles/colours.scss';
 @import '../../../../app/styles/scrollbars.scss';
 
-$cardHeight: 315px;
-$sliderHeight: 200px;
 $contentHeight: 115px;
 $borderRadius: 6px;
 
 .wrapper {
     border: 1px #F2F2F2 solid;
     width: 315px;
-    height: $cardHeight;
     background-color: #fff;
     border-radius: $borderRadius;
     transition: .3s all ease;
     &:hover {
         box-shadow: 15px 15px 40px -40px black;
     }
-}
-
-.slider {
-    width: 100%;
-    height: $sliderHeight;
-}
-
-.imgContainer {
-    width: 100%;
-    position: relative;
-    height: $sliderHeight;
-    &:focus {
-        outline: none;
-    }
-    & > span {
-        max-height: 100%;
-    }
-}
-
-.image {
-    border-radius: $borderRadius;
-    position: absolute;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    right: 0;
-    object-fit: cover;
-    width: 100%;
-    height: 100%;
 }
 
 .content {
@@ -71,8 +39,6 @@ $borderRadius: 6px;
 }
 
 .title {
-    @include ROBOTOBOLD16;
-    color: $ACCENT;
     margin: 0px 0px 4px 0px;
 }
 
@@ -92,17 +58,3 @@ $borderRadius: 6px;
     font-weight: 300;
 }
 
-.sliderDot {
-    margin-right: 12px;
-    cursor: pointer;
-}
-
-.dotsClass {
-    display: flex !important;
-    position: absolute;
-    list-style: none;
-    bottom: 0;
-    padding: 0;
-    left: 50%;
-    transform: translateX(-50%);
-}
