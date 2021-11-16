@@ -3,7 +3,6 @@ import { ComponentStory, ComponentMeta } from '@storybook/react';
 import Typography from './Typography'
 import FavoriteIcon from '../../icons/Favorite/Favorite';
 
-// More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {
   title: 'Components/Typography',
   component: Typography,
@@ -27,7 +26,6 @@ export default {
   },
 } as ComponentMeta<typeof Typography>;
 
-// More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
 const Template: ComponentStory<typeof Typography> = (args) => <Typography {...args} />;
 
 export const Small = Template.bind({});
@@ -39,7 +37,6 @@ Small.args = {
   };
 
 export const Default = Template.bind({});
-// More on args: https://storybook.js.org/docs/react/writing-stories/args
 Default.args = {
   color: "default",
   weight: "regular",
@@ -92,18 +89,3 @@ IconAtEnd.args = {
   icon: <FavoriteIcon />,
   iconPosition: 'end'
 };
-
-
-
-
-
-
-
-// export const Secondary = Template.bind({});
-// // More on args: https://storybook.js.org/docs/react/writing-stories/args
-// Secondary.args = {
-//   type: 'secondary',
-//   isActive: false,
-//   children: 'Secondary Button (Can be active)'
-// };
-
