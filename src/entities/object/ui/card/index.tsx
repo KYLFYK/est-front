@@ -11,13 +11,14 @@ import Link from 'next/link'
 import placeholderImage from '../../assets/house.jpg'
 
 interface Props {
-    houseData: APIObject.types.IObjectEntry
+    houseData: APIObject.types.IObjectEntry,
+    isStorie?: boolean,
 }
 
 const TEMP_LINK = '/'
 const MAX_SLIDERS_AMMOUNT = 7
 
-const ObjectCard: React.FC<Props> = ({ houseData }) => {
+const ObjectCard: React.FC<Props> = ({ houseData, isStorie }) => {
     const [selectedSlider, setSelectedSlide] = React.useState<number>(0)
 
     const settings: Settings = {
@@ -37,7 +38,8 @@ const ObjectCard: React.FC<Props> = ({ houseData }) => {
         ))
     ) : (
         <Box className={s.imgContainer}>
-            <Image src={placeholderImage} className={s.image} alt={`Slider Screen Placeholder`} />
+            {isStorie ? <img src={placeholderImage} className={s.image} alt={`Slider Screen Placeholder`} /> :
+                <Image layout="fill" src={'/' + placeholderImage} className={s.image} alt={`Slider Screen Placeholder`} />}
         </Box>
     )
 
