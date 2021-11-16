@@ -39,7 +39,7 @@ const ObjectCard: React.FC<Props> = ({ houseData, isStorie }) => {
     ) : (
         <Box className={s.imgContainer}>
             {isStorie ? <img src={placeholderImage} className={s.image} alt={`Slider Screen Placeholder`} /> :
-                <Image layout="fill" src={'/' + placeholderImage} className={s.image} alt={`Slider Screen Placeholder`} />}
+                <Image src={placeholderImage} className={s.image} alt={`Slider Screen Placeholder`} />}
         </Box>
     )
 
