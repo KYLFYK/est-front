@@ -32,3 +32,9 @@ WithArrows.args = {
     height: 300,
     withArrows: true,
 };
+
+export const WithoutImages = Template.bind({});
+WithoutImages.args = {
+    images: [],
+    height: 300,
+};
