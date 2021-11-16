@@ -2,11 +2,33 @@
 @import '../../../../app/styles/colours.scss';
 @import '../../../../app/styles/scrollbars.scss';
 
-$cardHeight: 315px;
-$sliderHeight: 500px;
-$contentHeight: 115px;
-$borderRadius: 6px;
-
 .sliderContainer {
-    width: 900px;
+    max-width: 890px;
+    width: 70%;
 }
+
+.container {
+    display: flex;
+    width: 100%;
+}
+.infoContainer {
+    margin-left: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    max-width: 600px;
+    width: 29%;
+}
+.infoItem {
+    display: flex;
+}
+
+.infoLabel {
+    width: 40%;
+}
+
+.infoValue {
+    margin-left: 40px;
+    width: 60%;
+}
+

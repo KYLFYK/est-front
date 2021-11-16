@@ -8,17 +8,12 @@ import Image from 'next/image'
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import BaseSlider from '../../../../shared/ui/BaseSlider/BaseSlider';
-const MOCK_ITMES = [
-    { name: "TV", value: "Big big TV", icon: "tv", descr: "" },
-    { name: "TV", value: "Big b Bigbig ig TV", icon: "tv", descr: "" },
-    { name: "TV", value: "Big Big big Big big TV", icon: "tv", descr: "" },
-]
-const imgs = [{url: 'https://cdn.pixabay.com/photo/2021/08/25/20/42/field-6574455__340.jpg', id: 0}, {url: 'https://cdn.pixabay.com/photo/2021/08/25/20/42/field-6574455__340.jpg',id: 1}, {url: '213', id: 2}, {url: '32123', id: 4}]
-
+import Typography from '../../../../shared/ui/Typography/Typography';
+import { objectLib } from '../..';
 
 interface Props {
     images: string[],
-    price: string,
+    price?: number,
     info: IOption[]
 }
 
@@ -27,8 +22,16 @@ const GeneralInfo: React.FC<Props> = ({ images, price, info }) => {
     return (
         <div className={s.container}>
             <div className={s.sliderContainer}>
-                <BaseSlider images={images} height={600} withArrows/>
-                {/* <Card choosedHouse={choosedHouse} /> */}
+                <BaseSlider images={images} height={600} withArrows />
+            </div>
+            <div className={s.infoContainer}>
+                {price && <Typography size="big" color="nude">{objectLib.formatNumbersToCurrency(price)} $</Typography>}
+                {info.map((item, idx) => (
+                    <div className={s.infoItem} key={idx}>
+                        <Typography weight="medium" className={s.infoLabel}> {item.label} </Typography>
+                        <Typography className={s.infoValue}> {item.value} </Typography>
+                    </div>
+                ))}
             </div>
         </div>
     )

@@ -7,7 +7,7 @@ import { BaseInput } from '../src/shared/ui/BaseInput/Input'
 import { CompareInput } from '../src/shared/ui/CompareInput/CompareInput'
 import { ToggleButtons } from '../src/shared/ui/ToggleButtons/ToggleButtons'
 import Typography from '../src/shared/ui/Typography/Typography'
-import { ObjectCard, ObjectGeneralInfo } from '../src/entities/object'
+import { ObjectCard, objectConfigs, ObjectGeneralInfo } from '../src/entities/object'
 import { APIObject } from '../src/shared/api'
 
 const OPTION_DATA = [{label: 'option_1', value: "1"}, {label: 'option_2', value: "2"}, {label: 'option_3', value: "4"}, {label: 'option_4', value: "3"}]
@@ -49,7 +49,7 @@ const Home: NextPage = () => {
         <h3>House Card:</h3>
         <ObjectCard houseData={new APIObject.types.IObjectEntry()}/>
       </div>
-      <ObjectGeneralInfo info={[]} price="0" images={imgs.map((i) => i.url)}/>
+      <ObjectGeneralInfo info={objectConfigs.generalInfo.INFO_OPTIONS} price={300000} images={objectConfigs.generalInfo.IMAGES_SET}/>
     </div>
   )
 }

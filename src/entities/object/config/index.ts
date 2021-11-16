@@ -1,0 +1,1 @@
+export * as generalInfo from './general-info'
