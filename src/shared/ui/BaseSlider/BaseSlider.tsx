@@ -37,7 +37,7 @@ const BaseSlider: React.FC<Props> = ({ images, height, withArrows }) => {
     ) : (
         <Box className={s.imgContainer} style={{ height }}>
             <div style={{ height }}>
-                <Image src={placeholderImage} className={s.image} alt={`Slider Screen Placeholder`} />
+                <Image src={placeholderImage} className={s.image} alt={`Slider Screen Placeholder`} layout="fill" />
             </div>
         </Box>
     )

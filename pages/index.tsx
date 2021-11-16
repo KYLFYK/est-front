@@ -47,7 +47,7 @@ const Home: NextPage = () => {
       </div>
       <div style={{ display: 'flex', gap: '15px', alignItems: 'center', flexDirection: 'column' }}>
         <h3>House Card:</h3>
-        <ObjectCard houseData={new APIObject.types.IObjectEntry(imgs)}/>
+        <ObjectCard houseData={new APIObject.types.IObjectEntry()}/>
       </div>
       <ObjectGeneralInfo info={[]} price="0" images={imgs.map((i) => i.url)}/>
     </div>
