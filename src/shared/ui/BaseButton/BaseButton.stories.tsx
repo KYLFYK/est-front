@@ -1,9 +1,9 @@
 import React from 'react';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 import BaseButton from './BaseButtons';
+import FavoriteIcon from '../../icons/Favorite/Favorite';
 
 
-// More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {
   title: 'Components/Button',
   component: BaseButton,
@@ -16,31 +16,44 @@ export default {
   },
 } as ComponentMeta<typeof BaseButton>;
 
-// More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
 const Template: ComponentStory<typeof BaseButton> = (args) => <BaseButton {...args} />;
 
 export const Primary = Template.bind({});
-// More on args: https://storybook.js.org/docs/react/writing-stories/args
 Primary.args = {
   type: 'primary',
   isActive: false,
-  children: 'Button'
+  children: 'Primary Button'
 };
 
 export const Blank = Template.bind({});
-// More on args: https://storybook.js.org/docs/react/writing-stories/args
 Blank.args = {
   type: 'blank',
   isActive: false,
-  children: 'Button',
+  children: 'Blank Button',
 };
 
 export const Secondary = Template.bind({});
-// More on args: https://storybook.js.org/docs/react/writing-stories/args
 Secondary.args = {
   type: 'secondary',
   isActive: false,
-  children: 'Button'
-  
+  children: 'Secondary Button (Can be active)'
+};
+
+export const IconButton = Template.bind({});
+IconButton.args = {
+  type: 'secondary',
+  isActive: false,
+  children: '',
+  icon: <FavoriteIcon />,
+  iconActive: '',
+};
+
+export const IconWithText = Template.bind({});
+IconWithText.args = {
+  type: 'secondary',
+  isActive: false,
+  children: 'Sample text',
+  icon: <FavoriteIcon />,
+  iconActive: '',
 };
 

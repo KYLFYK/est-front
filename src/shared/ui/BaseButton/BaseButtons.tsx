@@ -28,7 +28,7 @@ const BaseButton: React.FC<Props> = ({ children, type = 'blank', className, icon
     return (
         <button onClick={onClick} className={classNames(styles.basebutton, styles[type], isActive && styles.active, className)}>
             {children}
-            {(icon || iconActive) && <span className={classNames({ [styles.iconSpace]: children }, styles.iconWrapper)}>{isActive ? iconActive : icon}</span>}
+            {(icon || iconActive) && <span className={classNames({ [styles.iconSpace]: children }, styles.iconWrapper)}>{(isActive && iconActive) ? iconActive : icon}</span>}
         </button>
     )
 }
