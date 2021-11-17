@@ -3,7 +3,7 @@ import { IPropsGeneral } from "../../lib/interfaces/general"
 import s from './Typography.module.scss'
 
 interface Props extends IPropsGeneral {
-    color?: "default" | "nude" | "accent" | "secondary" | "tertiary",
+    color?: "default" | "nude" | "accent" | "secondary" | "tertiary" | 'red',
     size?: "default" | "subheader" | "header" | "small" | "medium" | "big",
     weight?: "light" | "regular" | "medium" | "bold",
     icon?: JSX.Element | string,

@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import { ModalPersonal } from '../Modal/Modal';
+import { Modal } from '../../../entities/Modal/Modal';
 import css from './EstateDevelopers.module.scss'
 import Typography from "../Typography/Typography";
 import { DeveloperData } from '../DeveloperData/DeveloperData';
@@ -16,9 +16,9 @@ export const EstateDevelopers: React.FC<EstateDevelopersPropsType> = ({title, im
 
     return (
         <div className={css.containerEstate}>
-            <ModalPersonal setActive={() => setEdit(false)} active={edit}>
+            <Modal setActive={() => setEdit(false)} active={edit}>
                 <DeveloperData />
-            </ModalPersonal>
+            </Modal>
             <div onClick={() => setEdit(true)}>
                 <img
                     className={css.img}

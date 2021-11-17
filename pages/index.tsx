@@ -10,25 +10,29 @@ import Typography from '../src/shared/ui/Typography/Typography'
 import ThreeColumnCard from "../src/shared/ui/ThreeColumnCard/ThreeColumnCard";
 import EnumerationColumn from "../src/shared/ui/EnumerationColumn/EnumerationColumn";
 import ParamsColumn from "../src/shared/ui/ParamsColumn/ParamsColumn";
-import Header from "../src/shared/ui/Components/Header/Header";
-import {Footer} from "../src/shared/ui/Components/Footer/Footer";
-import {TabsWrappedLabel} from "../src/shared/ui/Components/AnchorLine/AnchorLine";
-import SelectTab from "../src/shared/ui/SelectTab/SelectTab";
+import Header from "../src/widget/Header/ui/Header";
+import {Footer} from "../src/widget/Footer/ui/Footer";
+import {TabsWrappedLabel} from "../src/entities/TabsWrappedLabel/TabsWrappedLabel";
+import SelectTab from "../src/entities/SelectTab/ui/SelectTab";
 import {CardAgency} from "../src/shared/ui/CardAgency/CardAgency";
 import EditingProfile from "../src/shared/ui/EditingProfile/EditingProfile";
-import UploadLogo from "../src/shared/ui/UploadPhoto/UploadLogo";
 import UploadPhoto from "../src/shared/ui/UploadPhoto/UploadLogo";
 import TwoColumn from "../src/shared/ui/TwoColumn/TwoColumn";
+import { ObjectCard } from '../src/entities/object'
+import { APIObject } from '../src/shared/api'
+import DevelopersContainer from "../src/entities/DevelopersContainer/ui/DevelopersContainer";
+import {AgentsContainer} from "../src/entities/AgentsContainer/ui/agentsContainer";
+import {Advantages} from "../src/entities/Advantages/ui/advantages";
+import {OfferNews} from "../src/entities/OfferNews/ui/offerNews";
+import {BestOffers} from "../src/entities/BestOffers/ui/bestOffers";
+import {SelectEstate} from "../src/shared/ui/SelectCastom/SelectCastom";
+import {SearchOffice} from "../src/shared/ui/SearchOffice/SearchOffice";
 
 const emunsArray =[{title:'цена',value:'5 000 000 '},{title:'Тип объекта',value:'участок'},
     {title:'площадь',value:'30 соток'},{title:'Статус',value:'ИЖС'},
     {title:'Строения',value:'нет'},{title:'Коммуникации',value:'По улице'},]
-import { ObjectCard } from '../src/entities/object'
-import { APIObject } from '../src/shared/api'
-import DevelopersContainer from "../src/entities/DevelopersContainer/ui/DevelopersContainer";
-import {AgentsContainer} from "../src/entities/AgentsContainer/agentsContainer";
-import {Advantages} from "../src/entities/Advantages/advantages";
 
+const home = ['Москва', 'Санкт-Петербург', 'Крым','Нижний Новгород']
 
 const OPTION_DATA = [{label: 'option_1', value: "1"}, {label: 'option_2', value: "2"}, {label: 'option_3', value: "4"}, {label: 'option_4', value: "3"}]
 const emptyFunc = () => {}
@@ -125,6 +129,10 @@ const Home: NextPage = () => {
         <DevelopersContainer  />
         <AgentsContainer />
         <Advantages />
+        <OfferNews />
+        <SearchOffice />
+        <BestOffers />
+        <SelectEstate  params={'housingCondition'} options={home} />
     </div>
   )
 }

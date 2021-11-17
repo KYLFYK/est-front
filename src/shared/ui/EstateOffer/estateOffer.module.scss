@@ -1,0 +1,21 @@
+.block{
+    margin-right: 15px;
+    width: 430px;
+    height: 300px;
+
+}
+.positionButton{
+    z-index:2;
+    position: relative;
+    left: 15px;
+    bottom: 290px;
+    margin:0 5px;
+}
+.img {
+    width: 430px;
+    height: 300px;
+    border-radius: 8px;
+}
+.buttonBlock{
+    display: flex;
+}

@@ -1,17 +1,17 @@
-import React from 'react';
+import React, { FC } from 'react';
 import {IconLocation} from '../../icons/Development/IconLocation';
 import {IconKey} from "../../icons/Development/IconKey";
 import {IconDevelopmentObjects} from "../../icons/Development/IconDevelopmentObjects";
 import Typography from "../Typography/Typography";
 import css from './DeveloperData.module.scss'
 
-// type DeveloperDataPropsType = {
-//
-// }
+type DeveloperDataPropsType = {
+
+}
 
 const nameObject = ['ЖК Космический-7', 'ЖК Космический-2', 'ЖК Космический-3', 'ЖК Космический-4', 'ЖК Космический-5']
 
-export const DeveloperData = () => {
+export const DeveloperData :FC<DeveloperDataPropsType> = () => {
     return (
         <>
             <img
