@@ -4,7 +4,7 @@ export const useStyles = makeStyles(() => ({
     root: {
        backgroundColor: "#fff",
        width: 200,
-       borderRadius: 6,
+       borderRadius: 8,
        border: '1px solid #CAD1DA',
        "&::before": {
            display: 'none'
