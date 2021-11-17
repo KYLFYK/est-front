@@ -1,0 +1,21 @@
+@import '../../../app/styles/colours.scss';
+
+.unionInput {
+    background-color: #fff;
+    display: flex;
+    border: 1px solid $ACCENTBUTTONDISABLED;
+    border-radius: 8px;
+    width: 100%;
+    & > * {
+        border: 0;
+    }
+    & input {
+        border: 0;
+    }
+}
+
+.divider {
+    width: 1px;
+    background-color: #BDBDBD;
+    margin: 8px 0;
+}

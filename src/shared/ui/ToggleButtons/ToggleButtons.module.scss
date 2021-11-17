@@ -10,7 +10,7 @@
         border: 1px solid $ACCENTBUTTONDISABLED;
         display: flex;
         flex-wrap: wrap;
-        border-radius: 6px;
+        border-radius: 8px;
         justify-content: center;
         gap: 5px;
         padding: 5px;
@@ -40,7 +40,7 @@
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    border-radius: 6px;
+    border-radius: 8px;
     padding: 12px;
     background-color: transparent;
     border: 0;
