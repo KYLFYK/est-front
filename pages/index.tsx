@@ -18,8 +18,7 @@ import {CardAgency} from "../src/shared/ui/CardAgency/CardAgency";
 import EditingProfile from "../src/shared/ui/EditingProfile/EditingProfile";
 import UploadPhoto from "../src/shared/ui/UploadPhoto/UploadLogo";
 import TwoColumn from "../src/shared/ui/TwoColumn/TwoColumn";
-import { ObjectCard } from '../src/entities/object'
-import { ObjectCard, objectConfigs, ObjectGeneralInfo } from '../src/entities/object'
+import {ObjectCard, objectConfigs, ObjectGeneralInfo} from '../src/entities/object'
 import { APIObject } from '../src/shared/api'
 import DevelopersContainer from "../src/entities/DevelopersContainer/ui/DevelopersContainer";
 import {AgentsContainer} from "../src/entities/AgentsContainer/ui/agentsContainer";
