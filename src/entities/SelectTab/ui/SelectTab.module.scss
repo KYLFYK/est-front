@@ -1,0 +1,27 @@
+.body{
+  //height: 500px;
+  display: grid;
+  grid-template-columns: 233px 1fr;
+  margin-left:60px;
+}
+.menu{
+  display: flex;
+  background: #FFFFFF;
+  width: 100%;
+  flex-direction: column;
+  border: 1px solid #F2F2F2;
+  box-sizing: border-box;
+  border-radius: 6px;
+  padding: 8px 0;
+}
+.menuItem{
+  padding: 8px 10px;
+  cursor: pointer;
+}
+.information{
+  margin: 0 60px 0 20px ;
+  background: #FFFFFF;
+  border: 1px solid #F2F2F2;
+  box-sizing: border-box;
+  border-radius: 6px;
+}

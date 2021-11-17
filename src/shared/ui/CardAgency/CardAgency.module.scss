@@ -1,0 +1,46 @@
+.card{
+  padding:0 10px ;
+}
+.card :hover{
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.card_{
+  box-sizing: border-box;
+  width:239px;
+  height:205px;
+  display:flex;
+  flex-direction: column;
+  //justify-content: center;
+  align-items: center;
+  border-radius: 8px;
+  background: #FFFFFF;
+  border: 1px solid #F2F2F2;
+  cursor: pointer;
+  box-shadow: none;
+  :hover{
+    box-shadow: none;
+  }
+}
+
+.img{
+  margin-top: 14px ;
+  width:153px;
+  height:72px;
+}
+.nameCompany{
+  box-sizing: border-box;
+  font-size: 22px;
+  display: flex;
+  justify-content: space-between;
+  width:100%;
+  padding:0 20px ;
+}
+.description{
+  box-sizing: border-box;
+  font-size: 16px;
+  display: flex;
+  justify-content: flex-start;
+  width:100%;
+  padding:0 20px ;
+}

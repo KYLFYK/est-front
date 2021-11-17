@@ -1,0 +1,26 @@
+.photoAgent{
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+}
+.gridWork{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+}
+.gridConnection{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    width: 400px;
+}
+.marginWork{
+    margin: 20px;
+}
+.marginData{
+    margin:10px 10px;
+    display: flex;
+    align-items: center;
+    min-width: 180px;
+}
+.marginTop{
+    margin-top: 10px;
+}

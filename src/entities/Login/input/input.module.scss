@@ -1,0 +1,109 @@
+/*===== FORM =====*/
+.lForm{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-sizing: border-box;
+}
+.form{
+  min-width: 360px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+
+}
+
+.form__div{
+  left:-20px;
+  position: relative;
+  height: 40px;
+  margin: 10px 0;
+  min-width: 340px;
+}
+.form__input{
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  font-size: 16px;
+  border: 1px solid #DADCE0;
+  border-radius: 8px;
+  outline: none;
+  padding: 0 16px;
+  background: none;
+  z-index: 1;
+}
+.form__label{
+  position: absolute;
+  left: 16px;
+  top: 10px;
+  padding: 2px 3px;
+  background-color: #fff;
+  color: #80868B;
+  font-size: 16px;
+  transition: .2s;
+}
+.form__button{
+  display: block;
+  margin: 0 auto ;
+  padding: 12px 32px;
+  outline: none;
+  border: none;
+  background-color: #1A4862;
+  color: #fff;
+  font-size: 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: .2s;
+}
+.form__button:hover{
+  box-shadow: 0 10px 36px rgba(0,0,0,.15);
+}
+
+/*Input focus move up label*/
+.form__input:focus + .form__label{
+  top: -9px;
+  left: 13px;
+  color: #1A4862;
+  font-size: 12px;
+  font-weight: 500;
+  z-index: 10;
+}
+
+/*Input focus sticky top label*/
+.form__input:not(:placeholder-shown).form__input:not(:focus)+ .form__label{
+  top: -9px;
+  left: 13px;
+  font-size: 12px;
+  font-weight: 500;
+  z-index: 10;
+}
+
+/*Input focus*/
+.form__input:focus{
+  border: 2px solid #1A4862;
+}
+.inputEmail {
+  min-width: 280px;
+  font-style: normal;
+  padding: 10px;
+  border-radius: 8px ;
+  border: 1px solid #CAD1DA;
+  outline: none;
+  height: 18px;
+  width: 94%;
+}
+
+/*Прозрачный bgc для инпута .. пс не работает изза наличия классов класса - с их отсутствием не запускается проект*/
+.form__input input:-webkit-autofill,
+.form__input input:-webkit-autofill:hover,
+.form__input input:-webkit-autofill:focus,
+.form__input input:-webkit-autofill{
+  border-bottom: 3px solid #386a82;
+  -webkit-text-fill-color: navajowhite;
+  -webkit-box-shadow: 0 0 0px 1000px transparent inset;
+  transition: background-color 5000s ease-in-out 0s;
+  background: -webkit-linear-gradient(top,  rgba(255,255,255,0) 0%,rgba(0,174,255,0.04) 50%,rgba(255,255,255,0) 51%,rgba(0,174,255,0.03) 100%);
+}
