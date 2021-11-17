@@ -4,7 +4,7 @@ import GeneralInfo from './GeneralInfo';
 import { objectConfigs } from '../..';
 
 export default {
-    title: 'Entities_UI/GeneralInfo',
+    title: 'Entities_UI/Object/GeneralInfo',
     component: GeneralInfo,
     decorators: [
         (Story) => (

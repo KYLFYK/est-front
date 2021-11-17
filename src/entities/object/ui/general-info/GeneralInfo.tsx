@@ -22,7 +22,7 @@ const GeneralInfo: React.FC<Props> = ({ images, price, info }) => {
     return (
         <div className={s.container}>
             <div className={s.sliderContainer}>
-                <BaseSlider images={images} height={600} withArrows />
+                <BaseSlider images={images} height={600} withArrows withFavorite onClickFavorite={() => {}}/>
             </div>
             <div className={s.infoContainer}>
                 {price && <Typography size="big" color="nude">{objectLib.formatNumbersToCurrency(price)} $</Typography>}

@@ -9,7 +9,6 @@ import Typography from '../../../../shared/ui/Typography/Typography';
 
 interface Props {
     houseData: APIObject.types.IObjectEntry,
-    isStorie?: boolean,
 }
 
 const TEMP_LINK = '/'
@@ -24,7 +23,7 @@ const ObjectCard: React.FC<Props> = ({ houseData }) => {
     return (
         <div className={s.wrapper}>
             <div className={s.slider}>
-                <BaseSlider images={imagesUrls} height={200} />
+                <BaseSlider images={imagesUrls} height={200} withFavorite onClickFavorite={() => {}}/>
             </div>
 
             <Link href={TEMP_LINK}>

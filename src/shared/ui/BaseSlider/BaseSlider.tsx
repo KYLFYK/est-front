@@ -7,14 +7,18 @@ import s from './BaseSlider.module.scss'
 import { SliderDocIcon } from "../../icons/SliderDot/SliderDotIcon";
 import { Box } from "@material-ui/core";
 import placeholderImage from './assets/house.jpg'
+import BaseButton from "../BaseButton/BaseButtons";
+import FavoriteIcon from "../../icons/Favorite/Favorite";
 
 interface Props {
     images: string[],
     height: number,
     withArrows?: boolean
+    withFavorite?: boolean,
+    onClickFavorite?: () => void
 }
 
-const BaseSlider: React.FC<Props> = ({ images, height, withArrows }) => {
+const BaseSlider: React.FC<Props> = ({ images, height, withArrows, withFavorite, onClickFavorite }) => {
     const [selectedSlider, setSelectedSlide] = React.useState<number>(0)
 
     const settings: Settings = {
@@ -43,9 +47,13 @@ const BaseSlider: React.FC<Props> = ({ images, height, withArrows }) => {
     )
 
     return (
-        <Slider {...settings} className={s.root}>
-            {renderImages}
-        </Slider>
+        <div className={s.sliderWrapper}>
+            {(!!withFavorite && !!onClickFavorite && !!images.length) &&
+                <BaseButton type={'secondary'} icon={<FavoriteIcon />} className={s.favorite} onClick={onClickFavorite} />}
+            <Slider {...settings} className={s.root}>
+                {renderImages}
+            </Slider>
+        </div>
     )
 }
 
