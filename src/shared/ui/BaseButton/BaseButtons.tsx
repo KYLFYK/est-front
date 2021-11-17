@@ -1,8 +1,11 @@
 import classNames from 'classnames';
+import { IPropsGeneral } from '../../lib/interfaces/general';
 import s from './BaseButtons.module.scss';
-interface Props {
-    className?: string,
-    type?: "primary" | "secondary" | "blank",
+
+
+export type TBaseButtonType = "primary" | "secondary" | "blank"
+interface Props extends IPropsGeneral {
+    type?: TBaseButtonType,
     icon?: JSX.Element | string,
     iconActive?: JSX.Element | string,
     isActive?: boolean,
@@ -20,12 +23,12 @@ interface IStyles {
 }
 
 
-const BaseButton: React.FC<Props> = ({ children, type = 'blank', className, icon, iconActive, isActive }) => {
+const BaseButton: React.FC<Props> = ({ children, type = 'blank', className, icon, iconActive, isActive, onClick }) => {
     const styles = s as IStyles
     return (
-        <button className={classNames(styles.basebutton, styles[type], isActive && styles.active, className)}>
+        <button onClick={onClick} className={classNames(styles.basebutton, styles[type], isActive && styles.active, className)}>
             {children}
-            {(icon || iconActive) && <span className={classNames({ [styles.iconSpace]: children }, styles.iconWrapper)}>{isActive ? iconActive : icon}</span>}
+            {(icon || iconActive) && <span className={classNames({ [styles.iconSpace]: children }, styles.iconWrapper)}>{(isActive && iconActive) ? iconActive : icon}</span>}
         </button>
     )
 }

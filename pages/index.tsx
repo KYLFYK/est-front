@@ -19,6 +19,7 @@ import EditingProfile from "../src/shared/ui/EditingProfile/EditingProfile";
 import UploadPhoto from "../src/shared/ui/UploadPhoto/UploadLogo";
 import TwoColumn from "../src/shared/ui/TwoColumn/TwoColumn";
 import { ObjectCard } from '../src/entities/object'
+import { ObjectCard, objectConfigs, ObjectGeneralInfo } from '../src/entities/object'
 import { APIObject } from '../src/shared/api'
 import DevelopersContainer from "../src/entities/DevelopersContainer/ui/DevelopersContainer";
 import {AgentsContainer} from "../src/entities/AgentsContainer/ui/agentsContainer";
@@ -37,6 +38,7 @@ const home = ['Москва', 'Санкт-Петербург', 'Крым','Ни�
 const OPTION_DATA = [{label: 'option_1', value: "1"}, {label: 'option_2', value: "2"}, {label: 'option_3', value: "4"}, {label: 'option_4', value: "3"}]
 const emptyFunc = () => {}
 
+const imgs = [{url: 'https://cdn.pixabay.com/photo/2021/08/25/20/42/field-6574455__340.jpg', id: 0}, {url: 'https://cdn.pixabay.com/photo/2021/08/25/20/42/field-6574455__340.jpg',id: 1}, {url: '213', id: 2}, {url: '32123', id: 4}]
 const Home: NextPage = () => {
 
   return (
@@ -133,6 +135,7 @@ const Home: NextPage = () => {
         <SearchOffice />
         <BestOffers />
         <SelectEstate  params={'housingCondition'} options={home} />
+      <ObjectGeneralInfo info={objectConfigs.generalInfo.INFO_OPTIONS} price={300000} images={objectConfigs.generalInfo.IMAGES_SET}/>
     </div>
   )
 }
