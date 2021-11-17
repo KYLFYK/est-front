@@ -56,3 +56,14 @@ $borderRadius: 6px;
     margin-right: 12px;
     cursor: pointer;
 }
+
+.sliderWrapper {
+    position: relative;
+}
+
+.favorite {
+    position: absolute;
+    z-index: 10;
+    right: 11px;
+    top: 11px;
+}

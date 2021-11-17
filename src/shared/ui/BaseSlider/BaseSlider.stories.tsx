@@ -38,3 +38,11 @@ WithoutImages.args = {
     images: [],
     height: 300,
 };
+
+export const WithFavorite = Template.bind({});
+WithFavorite.args = {
+    images: images,
+    height: 300,
+    withFavorite: true,
+    onClickFavorite: () => {}
+};
