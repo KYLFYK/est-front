@@ -1,6 +1,6 @@
 import React, {FC} from 'react';
 import css from './developers.module.scss'
-import {EstateDevelopers} from "../../../shared/ui/EstateDeveloper/EstateDeveloper";
+import {EstateDeveloper} from "../../../shared/ui/EstateDeveloper/EstateDeveloper";
 import HeadLine from "../../../shared/ui/HeadLine/HeadLine";
 
 type DevelopersContainerType = {
@@ -16,7 +16,7 @@ const DevelopersContainer :FC<DevelopersContainerType> = () => {
                 <div className={css.containerDevelopers}>
                     {
                         mock.map((name,index)=>(
-                            <EstateDevelopers key={index} title={name}/>
+                            <EstateDeveloper key={index} title={name} img={"https://hasadalingaz.com/wp-content/uploads/2020/03/client16-min.png"}/>
                         ))
                     }
                 </div>

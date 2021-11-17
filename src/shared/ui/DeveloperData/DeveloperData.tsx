@@ -6,19 +6,21 @@ import Typography from "../Typography/Typography";
 import css from './DeveloperData.module.scss'
 
 type DeveloperDataPropsType = {
-
+    img:string
+    title:string
+    location:string
+    passed:string
+    objectDeveloper:Array<string>
 }
 
-const nameObject = ['ЖК Космический-7', 'ЖК Космический-2', 'ЖК Космический-3', 'ЖК Космический-4', 'ЖК Космический-5']
-
-export const DeveloperData :FC<DeveloperDataPropsType> = () => {
+export const DeveloperData :FC<DeveloperDataPropsType> = ({img,title,location,passed,objectDeveloper}) => {
     return (
         <>
             <img
-                src="https://uploads-ssl.webflow.com/5f14a5126f7ca904d71ec160/5f1586ce4fa5ae44b6609443_emaar-in-black.png"
+                src={img}
                 width='174px' height='60px' alt="emmar"/>
             <Typography size={'default'} color="accent" className={css.title}>
-                Инвестиционная компания, основанная в 1997 году
+                {title}
             </Typography>
             <div className={css.gridColumn}>
                 <IconLocation/>
@@ -28,7 +30,7 @@ export const DeveloperData :FC<DeveloperDataPropsType> = () => {
                     </Typography>
                     <div>
                         <Typography size={'default'} color="accent" weight={'regular'}>
-                            Дубай, Объединенные Араьские Эмираты
+                            {location}
                         </Typography>
                     </div>
                 </div>
@@ -39,7 +41,7 @@ export const DeveloperData :FC<DeveloperDataPropsType> = () => {
                     </Typography>
                     <div>
                         <Typography size={'default'} color="accent" weight={'regular'}>
-                            54 дома в 6 ЖК
+                            {passed}
                         </Typography>
                     </div>
                 </div>
@@ -49,7 +51,7 @@ export const DeveloperData :FC<DeveloperDataPropsType> = () => {
                         Объекты застройщика
                     </Typography>
                     {
-                        nameObject.map((name, index) => (
+                        objectDeveloper.map((name, index) => (
                             <div key={index} className={css.colorText}>
                                 <Typography size={'default'} color="nude">
                                     {name}

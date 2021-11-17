@@ -2,14 +2,14 @@ import React, { FC } from "react"
 import css from './CardAgency.module.scss'
 import DeleteOutlinedIcon from '@mui/icons-material/DeleteOutlined';
 import Typography from "../Typography/Typography";
-import FavoriteIcon from "../../icons/Favorite/Favorite";
+
 type CardAgencyType ={
     name:string
     description:string
     id:number
     img:any
     onDelete:(id:number)=>void
-    phone?:string
+    phone:string
 }
 
 

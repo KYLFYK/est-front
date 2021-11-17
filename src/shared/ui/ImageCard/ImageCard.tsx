@@ -12,7 +12,7 @@ type ImageCardType = {
 //     return `https://example.com/${src}?w=${width}&q=${quality || 75}`
 // }
 
-const ImageCard :FC<ImageCardType> = ({src,width,height}) => {
+export const ImageCard :FC<ImageCardType> = ({src,width,height}) => {
 
     return (
         <img src={src} alt="1"  className={css.image} />
@@ -26,5 +26,3 @@ const ImageCard :FC<ImageCardType> = ({src,width,height}) => {
         // />
     );
 };
-
-export default ImageCard;

@@ -12,10 +12,6 @@ type SelectPropsType = {
 
 export const SelectEstate: React.FC<SelectPropsType> = ({options, params, onChangeOption,selectLeft}) => {
 
-    if (selectLeft){
-
-    }
-
     const [open, setOpen] = useState(false);
     const [edit, setEdit] = useState<string>('Крым')
 

@@ -4,12 +4,11 @@ import Typography from "../Typography/Typography";
 type ParamsColumnType ={
     title:string
     value:string
-    key:string
 }
 
-const ParamsColumn :FC<ParamsColumnType>= ({title,value,key}) => {
+const ParamsColumn :FC<ParamsColumnType>= ({title,value}) => {
     return (
-        <div key={key} className={css.column}>
+        <div  className={css.column}>
             <Typography size={'default'} color="accent" weight="light">{title}</Typography>
             <Typography size={'default'}> {value} </Typography>
         </div>
