@@ -28,6 +28,7 @@ import {BestOffers} from "../src/entities/BestOffers/ui/bestOffers";
 import {SelectEstate} from "../src/shared/ui/SelectCastom/SelectCastom";
 import {SearchOffice} from "../src/shared/ui/SearchOffice/SearchOffice";
 
+
 const emunsArray =[{title:'цена',value:'5 000 000 '},{title:'Тип объекта',value:'участок'},
     {title:'площадь',value:'30 соток'},{title:'Статус',value:'ИЖС'},
     {title:'Строения',value:'нет'},{title:'Коммуникации',value:'По улице'},]
