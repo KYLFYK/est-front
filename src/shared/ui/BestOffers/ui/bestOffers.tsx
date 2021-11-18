@@ -1,9 +1,9 @@
 import React from 'react';
-import EstateOffer from "../../../shared/ui/EstateOffer/estateOffer";
-import HeadLine from "../../../shared/ui/HeadLine/HeadLine";
-import ArrayButton from "../../../shared/ui/ArrayButton/ArrayButton";
+import EstateOffer from "../../EstateOffer/estateOffer";
+import HeadLine from "../../HeadLine/HeadLine";
+import ArrayButton from "../../ArrayButton/ArrayButton";
 import css from './bestOffers.module.css'
-import BaseButton from "../../../shared/ui/BaseButton/BaseButtons";
+import BaseButton from "../../BaseButton/BaseButtons";
 
 
 const buttonName = ['Покупка', 'Аренда', 'Дом', 'Коммерческая недвижимость', 'Новостройка', 'Вторичноежилье',

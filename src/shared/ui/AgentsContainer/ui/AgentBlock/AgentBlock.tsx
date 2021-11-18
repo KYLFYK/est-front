@@ -1,10 +1,10 @@
 import React, {useState} from 'react';
 import {Modal} from "../../../Modal/Modal";
-import {IconWhatsapp} from "../../../../shared/icons/Agent/IconWhatsapp";
-import { IconTelegram } from '../../../../shared/icons/Agent/IconTelegram';
-import {IconMail} from "../../../../shared/icons/Agent/IconMail";
+import {IconWhatsapp} from "../../../../icons/Agent/IconWhatsapp";
+import { IconTelegram } from '../../../../icons/Agent/IconTelegram';
+import {IconMail} from "../../../../icons/Agent/IconMail";
 import { AgentInfo } from '../AgentInfo/AgentInfo';
-import Typography from "../../../../shared/ui/Typography/Typography";
+import Typography from "../../../Typography/Typography";
 import css from './AgentBlock.module.scss'
 
 type AgentBlockPropsType = {

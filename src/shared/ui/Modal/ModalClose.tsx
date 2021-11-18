@@ -1,6 +1,6 @@
 import css from './Modal.module.scss'
 import {FC} from "react";
-import {LogoClose} from "../../shared/icons/LogoClose/LogoClose";
+import {LogoClose} from "../../icons/LogoClose/LogoClose";
 
 
 type ModalClosePropsType ={

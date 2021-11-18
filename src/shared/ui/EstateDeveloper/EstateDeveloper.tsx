@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import { Modal } from '../../../entities/Modal/Modal';
+import { Modal } from '../Modal/Modal';
 import css from './EstateDevelopers.module.scss'
 import Typography from "../Typography/Typography";
 import { DeveloperData } from '../DeveloperData/DeveloperData';

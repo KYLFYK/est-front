@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import css from './SelectTab.module.scss'
-import Typography from "../../../shared/ui/Typography/Typography";
+import Typography from "../../Typography/Typography";
 
 function searchMenu(num: number) {
     switch (num) {

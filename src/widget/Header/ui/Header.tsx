@@ -6,10 +6,10 @@ import {LoginIcon} from "../../../shared/icons/Header/LoginIcon";
 import css from './Header.module.scss'
 import classNames from 'classnames';
 import Typography from "../../../shared/ui/Typography/Typography";
-import {Modal} from "../../../entities/Modal/Modal";
-import {Login} from "../../../entities/Login/login/Login";
-import {Recovery} from "../../../entities/Login/recovery/Recovery";
-import {Registration} from "../../../entities/Login/registration/Registration";
+import {Modal} from "../../../shared/ui/Modal/Modal";
+import {Login} from "../../../features/Login/login/Login";
+import {Recovery} from "../../../features/Login/recovery/Recovery";
+import {Registration} from "../../../features/Login/registration/Registration";
 import {SelectEstate} from "../../../shared/ui/SelectCastom/SelectCastom";
 import {SelectUser} from "./SelectUser/SelectUser";
 

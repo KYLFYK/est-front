@@ -1,7 +1,7 @@
 import React, {FC} from 'react';
 import css from './developers.module.scss'
-import {EstateDeveloper} from "../../../shared/ui/EstateDeveloper/EstateDeveloper";
-import HeadLine from "../../../shared/ui/HeadLine/HeadLine";
+import {EstateDeveloper} from "../../EstateDeveloper/EstateDeveloper";
+import HeadLine from "../../HeadLine/HeadLine";
 
 type DevelopersContainerType = {
 

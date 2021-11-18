@@ -1,18 +1,11 @@
-import React from 'react';
-import {Advantage} from "../../../shared/ui/Advantage/Advantage";
-import Mortgage from "../../../shared/icons/Advantages/Mortage";
-import InfrastructureAnalysis from "../../../shared/icons/Advantages/InfrastructureAnalysis";
-import Tours from "../../../shared/icons/Advantages/Tours";
-import AnalysisLegalPurity from "../../../shared/icons/Advantages/AnalysisLegalPurity";
+import React, {FC} from 'react';
+import {Advantage} from "../../Advantage/Advantage";
+import Mortgage from "../../../icons/Advantages/Mortage";
+import InfrastructureAnalysis from "../../../icons/Advantages/InfrastructureAnalysis";
+import Tours from "../../../icons/Advantages/Tours";
+import AnalysisLegalPurity from "../../../icons/Advantages/AnalysisLegalPurity";
 import css from './advantages.module.scss'
-import HeadLine from "../../../shared/ui/HeadLine/HeadLine";
-
-const moc = [{title: 'Ипотека от РКНБ', text: 'Используйте ипотечный калькулятор  для расчета своей ставки'},
-    {title: 'Анализ инфраструктуры', text: 'Оцените главные преимущества выбранного дома'},
-    {title: 'VR и 3D туры', text: 'Оцените главные преимущества выбранного дома'},
-    {title: 'Анализ юридической чистоты', text: 'Проверьте дом или квартиру в нашей базе'},
-]
-
+import HeadLine from "../../HeadLine/HeadLine";
 
 const searchIcon = (title: string) => {
     switch (title) {
@@ -29,15 +22,19 @@ const searchIcon = (title: string) => {
     }
 }
 
+type AdvantagesType={
+    advantages:Array<{title:string, text:string}>
+    title:string
+}
 
-export const Advantages = () => {
+export const Advantages :FC<AdvantagesType> = ({advantages,title}) => {
 
     return (
         <div className={css.allAdvantages}>
             <HeadLine title={'Наши преимущества'}>
                 <div className={css.advantages}>
                     {
-                        moc.map(({title, text}, index) => (
+                        advantages.map(({title, text}, index) => (
                             <Advantage
                                 key={index}
                                 title={title}
