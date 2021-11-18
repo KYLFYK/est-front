@@ -1,24 +1,27 @@
 import React from 'react';
 import css from './estateOffer.module.scss'
 import BaseButton from "../BaseButton/BaseButtons";
+import BaseSlider from "../BaseSlider/BaseSlider";
 
 
 type EstateOfferPropsType = {
-    title: string
-    title1: string
-    img: string
+    titleButtons: Array<string>
+    img: Array<string>
 }
 
-const EstateOffer: React.FC<EstateOfferPropsType> = ({title, title1, img}) => {
+const EstateOffer: React.FC<EstateOfferPropsType> = ({titleButtons, img}) => {
 
     return (
         <div className={css.block}>
             <div>
-                <img className={css.img} src={img} alt="img"/>
+                <BaseSlider images={img} height={300}  />
             </div>
             <div className={css.buttonBlock}>
-                <BaseButton type="secondary" className={css.positionButton}>{title}</BaseButton>
-                <BaseButton type="secondary" className={css.positionButton}>{title1}</BaseButton>
+                {
+                    titleButtons.map(t=>(
+                        <BaseButton key={t} type="secondary" className={css.positionButton}>{t}</BaseButton>
+                    ))
+                }
             </div>
         </div>
     );

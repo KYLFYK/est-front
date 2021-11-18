@@ -28,7 +28,7 @@
     &.active {
         background-color: $ACCENT;
         color: $WHITE;
-        border: 0,
+        border: 1px solid rgba(0,0,0,0);
     }
 }
 

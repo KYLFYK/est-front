@@ -4,7 +4,7 @@ import BaseButton from '../../shared/BaseButton/BaseButtons';
 import EstateOffer from '../../shared/EstateOffer/estateOffer';
 import HeadLine from '../../shared/HeadLine/HeadLine';
 import css from './bestOffers.module.css'
-
+import {IMAGES_SET} from "../GeneralInfo/config";
 
 const buttonName = ['Покупка', 'Аренда', 'Дом', 'Коммерческая недвижимость', 'Новостройка', 'Вторичноежилье',
     'Строящийся дом', '2-23 этажи']
@@ -31,19 +31,16 @@ export const BestOffers = () => {
 
                 <div className={css.offersPhoto}>
                     <EstateOffer
-                        title={'Покупка'}
-                        title1={'Дом'}
-                        img={"https://unikassa.ru/wp-content/uploads/images/Prognoz-tsen-na-nedvizhimost-v-2017-godu-v-Moskve.jpg"}
+                        titleButtons={['Покупка','Дом']}
+                        img={IMAGES_SET}
                     />
                     <EstateOffer
-                        title={'Покупка'}
-                        title1={'Дом'}
-                        img={"https://unikassa.ru/wp-content/uploads/images/Prognoz-tsen-na-nedvizhimost-v-2017-godu-v-Moskve.jpg"}
+                        titleButtons={['Покупка','Дом']}
+                        img={IMAGES_SET}
                     />
                     <EstateOffer
-                        title={'Покупка'}
-                        title1={'Дом'}
-                        img={"https://unikassa.ru/wp-content/uploads/images/Prognoz-tsen-na-nedvizhimost-v-2017-godu-v-Moskve.jpg"}
+                        titleButtons={['Покупка','Дом']}
+                        img={IMAGES_SET}
                     />
                 </div>
             </HeadLine>
