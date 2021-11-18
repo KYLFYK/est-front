@@ -29,12 +29,8 @@ import FavoriteIcon from '../src/icons/Favorite/Favorite'
 import VerticalTabs from '../src/components/shared/VerticalTabs/VerticalTabs'
 import { OfferNews } from '../src/components/containers/OfferNews/offerNews'
 import Header from '../src/components/widget/Header/Header'
+import { mocAdvantages } from '../src/components/containers/AdvantageList/config'
 
-const mocAdvantages = [{ title: 'Ипотека от РКНБ', text: 'Используйте ипотечный калькулятор  для расчета своей ставки' },
-{ title: 'Анализ инфраструктуры', text: 'Оцените главные преимущества выбранного дома' },
-{ title: 'VR и 3D туры', text: 'Оцените главные преимущества выбранного дома' },
-{ title: 'Анализ юридической чистоты', text: 'Проверьте дом или квартиру в нашей базе' },
-]
 
 const emunsArray = [{ title: 'цена', value: '5 000 000 ' }, { title: 'Тип объекта', value: 'участок' },
 { title: 'площадь', value: '30 соток' }, { title: 'Статус', value: 'ИЖС' },
@@ -154,7 +150,6 @@ const Home: NextPage = () => {
         agents={mocAgent}
       />
       <Advantages
-        title={'Наши преимущества'}
         advantages={mocAdvantages}
       />
       <OfferNews />

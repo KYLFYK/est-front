@@ -4,7 +4,7 @@ import PlanningFilter from '../../PlanningFilter/PlanningFilter';
 import Planning from './Plannings';
 
 export default {
-    title: 'Entities_UI/Object/PlanningSection',
+    title: 'Containers/PlanningSection',
     component: Planning,
 
 } as ComponentMeta<typeof Planning>;
