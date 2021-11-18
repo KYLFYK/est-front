@@ -34,14 +34,14 @@ const BaseSlider: React.FC<Props> = ({ images, height, withArrows, withFavorite,
         images.map((i) => (
             <Box className={s.imgContainer} key={i}>
                 <div style={{ height }}>
-                    <Image src={i} className={s.image} alt={`Slider Screen`} layout="fill" loader={() => i} />
+                    <Image unoptimized src={i} className={s.image} alt={`Slider Screen`} layout="fill" loader={() => i} />
                 </div>
             </Box>
         ))
     ) : (
         <Box className={s.imgContainer} style={{ height }}>
             <div style={{ height }}>
-                <Image src={placeholderImage} className={s.image} alt={`Slider Screen Placeholder`} layout="fill" />
+                <Image unoptimized src={placeholderImage} className={s.image} alt={`Slider Screen Placeholder`} layout="fill" />
             </div>
         </Box>
     )

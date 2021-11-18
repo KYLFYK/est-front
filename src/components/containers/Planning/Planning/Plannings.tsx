@@ -1,4 +1,5 @@
 import React from 'react'
+import HeadLine from '../../../shared/HeadLine/HeadLine'
 import SampleImage from '../assets/planning_sample.png'
 import Card from '../Card/Card'
 import s from './Plannings.module.scss'
@@ -15,10 +16,9 @@ interface Props {
         floor: number
     }[]
 }
-// TODO: Article wrapper
 const Planning: React.FC<Props> = ({ FilterComponent, planningList }) => {
     return (
-        <>
+        <HeadLine title="Квартиры и аппартаменты">
             <div className={s.filterWrapper}>
                 {FilterComponent}
             </div>
@@ -26,7 +26,7 @@ const Planning: React.FC<Props> = ({ FilterComponent, planningList }) => {
                 {planningList.map(({ image, price, title, housing, deadline, floor }, idx) =>
                     <Card key={idx} image={SampleImage} price={price} title={title} housing={housing} deadline={deadline} floor={floor} />)}
             </div>
-        </>
+        </HeadLine>
     )
 }
 
