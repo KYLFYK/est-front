@@ -1,9 +1,9 @@
 import React from 'react';
-import { IconMail } from '../../../../shared/icons/Agent/IconMail';
-import { IconTelegram } from '../../../../shared/icons/Agent/IconTelegram';
-import { IconWhatsapp } from '../../../../shared/icons/Agent/IconWhatsapp';
+import { IconMail } from '../../../../icons/Agent/IconMail';
+import { IconTelegram } from '../../../../icons/Agent/IconTelegram';
+import { IconWhatsapp } from '../../../../icons/Agent/IconWhatsapp';
 import css from "./AgentInfo.module.scss";
-import Typography from "../../../../shared/ui/Typography/Typography";
+import Typography from "../../../Typography/Typography";
 
 type AgentDataPropsType ={
     name:string

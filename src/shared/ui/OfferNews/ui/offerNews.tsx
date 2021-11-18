@@ -1,8 +1,8 @@
 import React from 'react';
 import css from './offerNews.module.scss'
-import BaseButton from "../../../shared/ui/BaseButton/BaseButtons";
-import {BaseInput} from "../../../shared/ui/BaseInput/Input";
-import HeadLine from "../../../shared/ui/HeadLine/HeadLine";
+import BaseButton from "../../BaseButton/BaseButtons";
+import {BaseInput} from "../../BaseInput/Input";
+import HeadLine from "../../HeadLine/HeadLine";
 
 export const OfferNews = () => {
     return (

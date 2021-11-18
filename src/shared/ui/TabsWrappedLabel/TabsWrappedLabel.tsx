@@ -3,7 +3,7 @@ import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import Box from '@mui/material/Box';
 import css from './AnchorLine.module.scss'
-import Typography from "../../shared/ui/Typography/Typography";
+import Typography from "../Typography/Typography";
 
 const line = ['Об объекте','Особенности','Архитектура','Квартиры','Инфраструктура','Застройщик',]
 
