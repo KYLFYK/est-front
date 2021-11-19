@@ -1,0 +1,52 @@
+@import '../../../app/styles/colours.scss';
+@import '../../../app/styles/buttons.scss';
+@import '../../../app/styles/typography.scss';
+@import '../../../app/styles/resolutions.scss';
+
+
+.wrapper {
+    display: flex;
+    padding: 0px;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+    @include for-size(KT2) {
+        padding: 0 60px;
+    }
+}
+
+.input {
+    width: 73px
+}
+
+.submit {
+    @include button;
+    @include ROBOTOREGULAR16;
+    width: 100%;
+    background-color: $NUDE;
+    border-radius: 6px;
+    @include for-size(KT3) {
+        width: auto;
+    }
+}
+
+.actionDropdownUnion {
+    max-width: fit-content;
+}
+
+.toggleButton {
+    padding: 12px;
+    width: auto;
+}
+
+.inputsUnion {
+    max-width: 478px;
+}
+
+.searchInput {
+    width: 400px;
+}
+
+.dropdownFloor {
+    width: 360px !important
+}
