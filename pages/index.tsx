@@ -151,7 +151,6 @@ const Home: NextPage = () => {
         agents={mocAgent}
       />
       <Advantages
-        title={'Наши преимущества'}
         advantages={mocAdvantages}
       />
       <OfferNews />
