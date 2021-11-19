@@ -1,33 +1,21 @@
 import React, { FC } from 'react';
-import Mortgage from "../../../icons/Advantages/Mortage";
-import InfrastructureAnalysis from "../../../icons/Advantages/InfrastructureAnalysis";
-import Tours from "../../../icons/Advantages/Tours";
-import AnalysisLegalPurity from "../../../icons/Advantages/AnalysisLegalPurity";
 import css from './AdvantageList.module.scss'
 import HeadLine from '../../shared/HeadLine/HeadLine';
 import { Advantage } from '../../shared/Advantage/Advantage';
+import { IOption } from '../../../utils/interfaces/general';
+import { searchIconByValue } from '../../../utils/general/icons';
+import { IconTypes } from '../../../utils/interfaces/icons';
 
-const searchIcon = (title: string) => {
-    switch (title) {
-        case 'Ипотека от РКНБ':
-            return <Mortgage />
-        case 'Анализ инфраструктуры':
-            return <InfrastructureAnalysis />
-        case 'VR и 3D туры':
-            return <Tours />
-        case 'Анализ юридической чистоты':
-            return <AnalysisLegalPurity />
-        default:
-            return <Mortgage />
-    }
+export interface IAdvantage {
+    title: IOption<IconTypes | string>,
+    text?: string
 }
 
 type AdvantagesType = {
-    advantages: Array<{ title: string, text: string }>
-    title: string
+    advantages: IAdvantage[],
 }
 
-export const Advantages: FC<AdvantagesType> = ({ advantages, title }) => {
+export const Advantages: FC<AdvantagesType> = ({ advantages }) => {
 
     return (
         <div className={css.allAdvantages}>
@@ -37,11 +25,11 @@ export const Advantages: FC<AdvantagesType> = ({ advantages, title }) => {
                         advantages.map(({ title, text }, index) => (
                             <Advantage
                                 key={index}
-                                title={title}
+                                title={title.label}
                                 text={text}
                             >
                                 {
-                                    searchIcon(title)
+                                    searchIconByValue(title.value)
                                 }
                             </Advantage>
                         ))

@@ -14,3 +14,11 @@
     justify-content: center;
     min-width: 430px;
 }
+.autoWidth {
+    min-width: auto;
+    margin: 0 10px;
+}
+.icon {
+    display: flex;
+    align-items: center;
+}

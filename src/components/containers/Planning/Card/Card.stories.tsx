@@ -4,7 +4,7 @@ import SampleImage from '../assets/planning_sample.png'
 import Card from './Card';
 
 export default {
-    title: 'Entities_UI/Object/PlanningCard',
+    title: 'Containers/PlanningCard',
     component: Card,
 
 } as ComponentMeta<typeof Card>;

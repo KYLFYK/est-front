@@ -5,7 +5,7 @@ import ObjectCard from '.';
 import { IMAGES_SET } from './config';
 
 export default {
-    title: 'Entities_UI/Object/ObjectCard',
+    title: 'Containers/ObjectCard',
     component: ObjectCard,
     argTypes: {
         test: {type: 'string', defaultValue: "teststr"}
