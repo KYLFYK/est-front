@@ -22,6 +22,7 @@ export const ConfirmationNewPassword :FC<ConfirmationNewPasswordType> = ({accoun
             <BaseButton type="secondary" isActive className={css.width}>
                 <Typography size={'small'} color={'secondary'} >Войти</Typography>
             </BaseButton>
+
         </div>
     );
 };
