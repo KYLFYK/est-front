@@ -5,7 +5,7 @@ import Typography from '../Typography/Typography';
 import ObjectDescription from '../ObjectDescription/ObjectDescription';
 
 export default {
-    title: 'Containers/VerticalTabs',
+    title: 'Components/VerticalTabs',
     component: VerticalTabs,
 
 } as ComponentMeta<typeof VerticalTabs>;
