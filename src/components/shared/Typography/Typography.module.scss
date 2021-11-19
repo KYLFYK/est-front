@@ -29,6 +29,9 @@
 .color_red{
     color:$RED
 }
+.color_green{
+    color:$GREEN
+}
 
 // sizes ---------------
 
@@ -40,6 +43,10 @@
     font-family: "MontserratBold" !important;
     font-size: 20px;
 }
+.size_subheader {
+    font-family: "MontserratBold" !important;
+    font-size: 24px;
+}
 
 .size_small {
     font-size: 14px;
@@ -48,6 +55,11 @@
 .size_header {
     font-family: "MontserratBold" !important;
     font-size: 48px;
+}
+
+.size_headerLow {
+    font-family: "MontserratBold" !important;
+    font-size: 40px;
 }
 
 .size_medium {
