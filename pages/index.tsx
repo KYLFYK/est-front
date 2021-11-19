@@ -29,6 +29,7 @@ import FavoriteIcon from '../src/icons/Favorite/Favorite'
 import VerticalTabs from '../src/components/shared/VerticalTabs/VerticalTabs'
 import { OfferNews } from '../src/components/containers/OfferNews/offerNews'
 import Header from '../src/components/widget/Header/Header'
+import {Record} from "../src/components/containers/Record/Record";
 
 const mocAdvantages = [{ title: 'Ипотека от РКНБ', text: 'Используйте ипотечный калькулятор  для расчета своей ставки' },
 { title: 'Анализ инфраструктуры', text: 'Оцените главные преимущества выбранного дома' },
@@ -162,6 +163,8 @@ const Home: NextPage = () => {
       <BestOffers />
       <SelectEstate params={'housingCondition'} options={home} />
       <GeneralInfo info={INFO_OPTIONS} price={300000} images={IMAGES_SET} />
+        <Record />
+
     </div>
   )
 }
