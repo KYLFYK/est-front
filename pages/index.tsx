@@ -32,6 +32,7 @@ import Header from '../src/components/widget/Header/Header'
 import { mocAdvantages } from '../src/components/containers/AdvantageList/config'
 import {Record} from "../src/components/containers/Record/Record";
 import {Mortgage} from "../src/components/shared/Mortgage/Mortgage";
+import ToursContainer from "../src/components/containers/ToursContainer/ToursContainer";
 
 
 const emunsArray = [{ title: 'цена', value: '5 000 000 ' }, { title: 'Тип объекта', value: 'участок' },
@@ -52,7 +53,14 @@ const mocAgent = [{
 },
 { name: 'Петр Петрович', heldPost: 'Старший агент', img: 'https://vsvlegalgroup.ru/d/yurist_po_nedvizhimosti.jpg' },
 ]
-
+const Online_tour = {
+    '3d_tour':{
+        url:'https://www.youtube.com/embed/Ke3qyQYNob4',
+    },
+    vr_tour:{
+        url:'https://3d-tur.ru/010/',
+    }
+}
 const OPTION_DATA = [{ label: 'option_1', value: "1" }, { label: 'option_2', value: "2" }, { label: 'option_3', value: "4" }, { label: 'option_4', value: "3" }]
 const emptyFunc = () => { }
 
@@ -102,7 +110,7 @@ const Home: NextPage = () => {
       <HorizontalTabs />
 
       <h3>CustomSidebarTabs : ??</h3>
-      <VerticalTabs />
+      <VerticalTabs tabs={[]} />
 
       <hr color={'red'} style={{ width: '100%' }} />
       <Typography size={'big'} weight={'bold'} color={'nude'}>ADMIN :</Typography>
@@ -161,6 +169,7 @@ const Home: NextPage = () => {
       <GeneralInfo info={INFO_OPTIONS} price={300000} images={IMAGES_SET} />
         <Record />
         <Mortgage/>
+        <ToursContainer Online_tour={Online_tour} />
     </div>
   )
 }

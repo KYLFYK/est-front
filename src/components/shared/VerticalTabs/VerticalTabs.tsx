@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import Typography from '../Typography/Typography';
 import css from './VerticalTabs.module.scss'
+import classNames from "classnames";
 
 interface ITabItem {
     title: string,
@@ -8,14 +9,15 @@ interface ITabItem {
 }
 interface Props {
     tabs: ITabItem[]
+    className?:string
 }
 
-const VerticalTabs: React.FC<Props> = ({tabs}) => {
+const VerticalTabs: React.FC<Props> = ({tabs,className}) => {
     const [active, setActive] = useState<number>(1)
     return (
         <div className={css.body}>
             <MenuUser active={active} onActive={setActive} menu={tabs.map((tab) => tab.title)} />
-            <div className={css.information}>
+            <div className={classNames(css.information,className)}>
                 {
                    tabs[active].Component
                 }
