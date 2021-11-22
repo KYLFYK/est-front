@@ -31,6 +31,7 @@ import { OfferNews } from '../src/components/containers/OfferNews/offerNews'
 import Header from '../src/components/widget/Header/Header'
 import { mocAdvantages } from '../src/components/containers/AdvantageList/config'
 import {Record} from "../src/components/containers/Record/Record";
+import {Mortgage} from "../src/components/shared/Mortgage/Mortgage";
 
 
 const emunsArray = [{ title: 'цена', value: '5 000 000 ' }, { title: 'Тип объекта', value: 'участок' },
@@ -159,7 +160,7 @@ const Home: NextPage = () => {
       <SelectEstate params={'housingCondition'} options={home} />
       <GeneralInfo info={INFO_OPTIONS} price={300000} images={IMAGES_SET} />
         <Record />
-
+        <Mortgage/>
     </div>
   )
 }
