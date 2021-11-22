@@ -40,12 +40,22 @@
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    border-radius: 8px;
     padding: 12px;
     background-color: transparent;
     border: 0;
     @include ROBOTOREGULAR16;
     cursor: pointer;
+}
+
+.firstButton {
+    border-radius: 8px 0px 0px 8px;
+}
+
+.lastButton {
+    border-radius: 0px 8px 8px 0px;
+}
+.roundedButton {
+    border-radius: 8px;
 }
 
 .activeButton {
