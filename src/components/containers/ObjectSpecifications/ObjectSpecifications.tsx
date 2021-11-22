@@ -9,14 +9,14 @@ import HeadLine from "../../shared/HeadLine/HeadLine"
 import Typography from "../../shared/Typography/Typography"
 import s from './ObjectSpecifications.module.scss'
 
-interface ISpecificationItem {
-    title: IOption<string>,
+export interface ISpecificationItem {
+    title: string,
     text?: string,
 }
 
 export interface ISpecificationsList {
     subtitle: string,
-    specificationsItems: ISpecificationItem[]
+    specificationsItems: IOption<ISpecificationItem>[]
 }
 
 interface Props {
@@ -32,8 +32,8 @@ const ObjectSpecifications: React.FC<Props> = ({ specificationsLists, title }) =
                     <Typography weight="bold" className={s.subTitle}>{specList.subtitle}</Typography>
                     <div className={s.specsList}>
                         {specList.specificationsItems.map((spec) =>
-                            <Advantage variant="secondary" text={spec.text} title={spec.title.label} key={spec.title.value}>
-                                {searchIconByValue(spec.title.value)}
+                            <Advantage variant="secondary" text={spec.label.text} title={spec.label.title} key={spec.value}>
+                                {searchIconByValue(spec.value as string)}
                             </Advantage>
                         )}
                     </div>
