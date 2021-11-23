@@ -10,12 +10,11 @@ import ExitIcon from '../../../../icons/Header/ExitIcon';
 
 type SelectPropsType = {
     options: Array<{ title: string, message: number, href: string }>
-    onChangeOption?: (option: any) => void
+    onChangeOption: (option: any) => void
     params: string
-    selectLeft?: boolean
 }
 
-export const SelectUser: React.FC<SelectPropsType> = ({options, params, onChangeOption, selectLeft}) => {
+export const SelectUser: React.FC<SelectPropsType> = ({options, params, onChangeOption}) => {
 
     const [open, setOpen] = useState(false);
     const {innerBorderRef} = useOnOutsideClick(() => setTimeout(() => setOpen(false), 0));
@@ -64,6 +63,7 @@ export const SelectUser: React.FC<SelectPropsType> = ({options, params, onChange
                             ref={innerBorderRef}
                             onClick={(e) => {
                                 setOpen(false);
+                                onChangeOption(false)
                             }}
                             className={css.dropdown_item_left}
                         >

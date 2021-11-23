@@ -6,13 +6,18 @@ import { DeveloperDataModal } from '../DeveloperDataModal/DeveloperDataModal';
 
 
 type EstateDevelopersPropsType = {
-    title: string
     img: string
+    title: string
+    description:string
+    developerInfo:{
+        title: string
+        location:string
+        passed:string
+        objectsDeveloper:Array<{nameObject:string,id:string}>
+    }
 }
 
-const nameObject = ['ЖК Космический-7', 'ЖК Космический-2', 'ЖК Космический-3', 'ЖК Космический-4', 'ЖК Космический-5']
-
-export const EstateDeveloper: React.FC<EstateDevelopersPropsType> = ({ title, img }) => {
+export const EstateDeveloper: React.FC<EstateDevelopersPropsType> = ({ title,description, img,developerInfo }) => {
 
     const [edit, setEdit] = useState<boolean>(false)
 
@@ -20,10 +25,7 @@ export const EstateDeveloper: React.FC<EstateDevelopersPropsType> = ({ title, im
         <div className={css.containerEstate}>
             <DeveloperDataModal
                 img={img}
-                title={'Инвестиционная компания, основанная в 1997 году'}
-                location={'Дубай, Объединенные Арабские Эмираты'}
-                passed={'54 дома в 6 ЖК'}
-                objectDeveloper={nameObject}
+                developer={developerInfo}
                 setActive={setEdit}
                 isActive={edit}
             />
@@ -37,7 +39,7 @@ export const EstateDeveloper: React.FC<EstateDevelopersPropsType> = ({ title, im
             <div>
                 <div className={css.infoCompany}>
                     <Typography size={'default'} color="accent" >{title} </Typography>
-                    <Typography size={'small'} >lorem ipsum </Typography>
+                    <Typography size={'small'} >{description} </Typography>
                 </div>
             </div>
         </div>

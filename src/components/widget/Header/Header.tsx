@@ -1,9 +1,5 @@
 import React, { FC, useState } from 'react';
 import Link from 'next/link';
-
-import css from './Header.module.scss'
-import classNames from 'classnames';
-
 import { SelectUser } from "./SelectUser/SelectUser";
 import LogoMain from '../../../icons/Header/LogoMain';
 import IconLocation from '../../../icons/Header/IconLocation';
@@ -14,20 +10,15 @@ import { Modal } from '../../shared/Modal/Modal';
 import { Login } from '../Login/login/Login';
 import { Recovery } from '../Login/recovery/Recovery';
 import { Registration } from '../Login/registration/Registration';
+import classNames from 'classnames';
+import css from './Header.module.scss'
 
 type HeaderPropsType = {
     className?: string
+    city:Array<string>
+    personalAccount:Array<{title:string, href:string,message:number}>
+    auth?:boolean
 }
-
-const home = ['Москва', 'Санкт-Петербург', 'Крым', 'Сочи', 'Нижний Новгород']
-const officeUser = [{ title: 'Личный кабинет', href: '/User', message: 0 },
-{ title: 'Избранное', href: '/User', message: 0 },
-{ title: 'Сохраненные поиски', href: '/User', message: 0 },
-{ title: 'Сообщения', href: '/User', message: 12 },
-{ title: 'Уведомления', href: '/User', message: 3 },
-{ title: 'Мои объекты', href: '/User', message: 0 },
-{ title: 'Проверка объекта', href: '/User', message: 0 },
-]
 
 const moc = [{ href: '/Buy', title: 'Купить' },
 { href: '/Take', title: 'Снять' },
@@ -36,7 +27,9 @@ const moc = [{ href: '/Buy', title: 'Купить' },
 { href: '/Contact', title: 'Контакты' }
 ]
 
-export const Header: FC<HeaderPropsType> = ({ className }) => {
+export const Header: FC<HeaderPropsType> = ({ className,city,personalAccount,auth = false }) => {
+
+    const [authorization,setAuthorization] =useState<boolean>(auth)
 
     const [login, setLogin] = useState<boolean>(false)
     const [registration, setRegistration] = useState<boolean>(false)
@@ -58,7 +51,7 @@ export const Header: FC<HeaderPropsType> = ({ className }) => {
                 >
                     <IconLocation />
                     <Typography size={'default'} color="nude">
-                        <SelectEstate params={'housingCondition'} options={home} />
+                        <SelectEstate params={'housingCondition'} options={city} />
                     </Typography>
                 </div>
                 {
@@ -77,17 +70,20 @@ export const Header: FC<HeaderPropsType> = ({ className }) => {
                     ))
                 }
                 {
-                    !login
+                    !authorization
                         ? <div className={css.menuName} onClick={() => setLogin(true)}>
                             <LoginIcon />
                         </div>
                         : <div className={css.menuName} >
                             <Typography size={'default'} color="nude">
-                                <SelectUser params={'housingCondition'} options={officeUser} selectLeft={true} />
+                                <SelectUser
+                                    params={'housingCondition'}
+                                    options={personalAccount}
+                                    onChangeOption={()=>setAuthorization(false)}
+                                />
                             </Typography>
                         </div>
                 }
-
                 <Modal setActive={() => setLogin(!login)} active={login}>
                     <Login
                         recoveryPass={() => {

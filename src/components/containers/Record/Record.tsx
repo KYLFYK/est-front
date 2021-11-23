@@ -1,4 +1,4 @@
-import React, {useState, useEffect, } from 'react';
+import React, {useState, useEffect, FC,} from 'react';
 import RomanSafonov from '../../../Pics/persons/РоманСафонов.png'
 import {Button} from "@mui/material";
 import {IconWhatsapp} from "../../../icons/Agent/IconWhatsapp";
@@ -10,12 +10,19 @@ import Typography from "../../shared/Typography/Typography";
 import {BaseInput} from "../../shared/BaseInput/Input";
 import Image from "next/image";
 
-interface Props {
-    // choosedHouse: IObjectDetailsEntry
-    // className?:string
+type AgentRecordType = {
+    Record: {
+        img: string
+        fullName: string
+        heldPost: string
+        workExperience: string
+        inWork: string
+        completed: string
+        connection: Array<{ title: string, value: string, url: string }>
+    }
 }
 
-export const Record = () => {
+export const Record: FC<AgentRecordType> = ({Record}) => {
 
     const [name, setName] = useState('')
     const [mail, setMail] = useState('')
@@ -41,17 +48,6 @@ export const Record = () => {
             setFormValid(true)
         }
     }, [nameError, mailError, phoneError, timeError])
-
-    /*const inputs = [{title: 'Имя', placeholder: 'Иван Петрович'}, {title: 'E-mail', placeholder: 'ivan@mail.com'},
-                    {title: 'Телефон', placeholder: '8 (923) 111 23 45'}, {title: 'Удобное время', placeholder: '12:00–18:00'},
-    ]*/
-
-    const contacts = [
-        {icon: <IconWhatsapp/>, value: '+7 992 146 37 15', to: 'https://wa.me/', title: '+7 992 146 37 15'},
-        {icon: <IconTelegram/>, value: '+7 992 146 37 15', to: 'https://telegram.me/', title: '+7 992 146 37 15'},
-        {icon: <IconPhone/>, value: '+7 992 146 37 15', to: 'tel:', title: '+7 992 146 37 15'},
-        {icon: <IconMail/>, value: 'valsidorov@mail.com', to: 'mailto:', title: 'valsidorov@mail.com'},
-    ]
 
     const [hover, setHover] = useState(false)
     const [clicked, setClicked] = useState(false)
@@ -147,6 +143,16 @@ export const Record = () => {
         }
     }
 
+    const searchIcon = (title:string) => {
+        switch (title) {
+            case "telegram": return <IconTelegram/>
+            case "phone": return <IconPhone/>
+            case "email": return <IconMail/>
+            case "whatsApp": return <IconWhatsapp/>
+            default:return <IconPhone/>
+        }
+    }
+
     return (
         <div className={s.container}>
             <ContentContainer>
@@ -154,7 +160,8 @@ export const Record = () => {
                     <Typography size={'big'} color='secondary'> Хотите посмотреть Объект?</Typography>
                 </div>
                 <div className={s.subTitle}>
-                    <Typography color='secondary'> Запишитесь на просмотр. Мы перезвоним Вам для уточнения даты и времени встречи</Typography>
+                    <Typography color='secondary'> Запишитесь на просмотр. Мы перезвоним Вам для уточнения даты и
+                        времени встречи</Typography>
                 </div>
                 <div className={s.blockInputButton}>
                     <div className={s.blockInputs}>
@@ -172,8 +179,11 @@ export const Record = () => {
                             {(nameDirty && nameError) && <div style={{color: 'red'}}>{nameError}</div>}
                         </div>
                         <div className={s.input}>
-                            <div className={s.inputTitle}><Typography size={'small'}
-                                                                      color='tertiary'>E-mail</Typography></div>
+                            <div className={s.inputTitle}>
+                                <Typography size={'small'} color='tertiary'>
+                                    E-mail
+                                </Typography>
+                            </div>
                             <BaseInput
                                 name='mail'
                                 placeholder={'ivan@mail.com'}
@@ -220,7 +230,7 @@ export const Record = () => {
                             className={(clicked && s.buttonClicked) || (hover && s.buttonHovered) || s.buttons}
                             style={{width: '100%', cursor: !formValid ? 'not-allowed' : ''}}
                         >
-                            <div > <Typography color='secondary' className={s.buttonTitle}> Записаться</Typography></div>
+                            <div><Typography color='secondary' className={s.buttonTitle}> Записаться</Typography></div>
                         </Button>
                         {((nameDirty && nameError) || (mailDirty && mailError) || (phoneDirty && phoneError) || (timeDirty && timeError))
                         && <div className={s.unselectable}>не заполнена форма</div>}
@@ -229,15 +239,20 @@ export const Record = () => {
                 <div className={s.card}>
                     <div className={s.avatar}>
                         <div style={{width: '100px', height: '100px', borderRadius: '100px', marginLeft: '30px'}}>
-                            <Image unoptimized src={RomanSafonov} width={100} height={100} className={s.image} alt={`property agent`}
+                            <Image unoptimized src={RomanSafonov} width={100} height={100} className={s.image}
+                                   alt={`property agent`}
                                    loader={() => '../../../Pics/persons/РоманСафонов.png'}/>
                         </div>
                         <div className={s.fullName}>
                             <div className={s.bold}>
-                                <Typography weight={'bold'}> Роман Сафонов</Typography>
+                                <Typography weight={'bold'}>
+                                    {Record.fullName}
+                                </Typography>
                             </div>
                             <div>
-                                <Typography> Старший агент</Typography>
+                                <Typography>
+                                    {Record.heldPost}
+                                </Typography>
                             </div>
                         </div>
                     </div>
@@ -246,33 +261,41 @@ export const Record = () => {
                             <div className={s.portfolioPosition}>
                                 <Typography> Работает: </Typography>
                                 <span className={s.bold}>
-                                    <Typography weight={'bold'}> 5 лет</Typography>
+                                    <Typography weight={'bold'}>
+                                        {Record.workExperience}
+                                    </Typography>
                                 </span>
                             </div>
                             <div className={s.portfolioPosition}>
                                 <Typography> Завершено: </Typography>
                                 <span className={s.bold}>
-                                    <Typography weight={'bold'}> 43 проекта</Typography>
+                                    <Typography weight={'bold'}>
+                                        {Record.completed}
+                                    </Typography>
                                 </span>
                             </div>
                             <div className={s.portfolioPosition}>
                                 <Typography> В работе: </Typography>
                                 <span className={s.bold}>
-                                    <Typography weight={'bold'}> 2 проекта</Typography>
+                                    <Typography weight={'bold'}>
+                                         {Record.inWork}
+                                    </Typography>
                                 </span>
                             </div>
                         </div>
                         <div className={s.contacts}>
-                            {contacts.map((i, id) => {
-                                return (
-                                    <a key={id} style={{color: '#3d4550', textDecoration:'none'}} href={`${i.to}${i.value}`}>
+                            {
+                                Record.connection.map((i, id) => (
+                                    <a key={id} style={{color: '#3d4550', textDecoration: 'none'}}
+                                       href={`${i.url}${i.value}`}>
                                         <div key={id} className={s.contact}>
-                                            <div style={{marginRight: '8px'}}>{i.icon}</div>
-                                            <Typography size={'small'}> {i.title}</Typography>
+                                            <div style={{marginRight: '8px'}}>{
+                                                searchIcon(i.title)
+                                            }</div>
+                                            <Typography size={'small'}> {i.value}</Typography>
                                         </div>
                                     </a>
-                                )
-                            })
+                                ))
                             }
                         </div>
                     </div>
