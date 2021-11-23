@@ -1,0 +1,27 @@
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.row {
+    max-width: 650px;
+    display: flex;
+    flex-wrap: wrap;
+    & > div {
+        width: 190px;
+    }
+    gap: 16px;
+}
+
+.article {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.content {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}

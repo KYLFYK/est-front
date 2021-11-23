@@ -1,0 +1,38 @@
+.wrapper {
+    width: 320px;
+    background-color: #F2F2F2;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    border-radius: 6px;
+}
+
+.header {
+    margin-bottom: 15px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.description {
+    margin-bottom: 20px;
+    max-height: 76px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+.title {
+    max-width: 80%;
+    margin-bottom: 10px;
+}
+
+.button {
+    max-width: 150px;
+    border-color: #CAD1DA;
+}
+
+.icon {
+    width: 35px;
+    height: 35px;
+    position: relative;
+    object-fit: contain;
+}
