@@ -16,6 +16,11 @@ export interface IPropsGeneral {
     label: T,
 }
 
+export interface IArticleGeneral {
+    text: string,
+    title: string
+}
+
 export type TServerLanguages = "ru" | "zh"
 export type TClientLanguages = "ru" | "cn"
 

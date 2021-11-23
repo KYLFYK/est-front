@@ -1,4 +1,4 @@
-import { IOption } from "../../../utils/interfaces/general";
+import { IArticleGeneral, IOption } from "../../../utils/interfaces/general";
 import { IDeveloperContactItem } from "./components/Contacts/Contacts";
 
 export const ABOUT_PARAGRAPHS = [
@@ -7,7 +7,7 @@ export const ABOUT_PARAGRAPHS = [
   "В Бруснике понимают девелопмент как постоянный процесс преобразования города и пространства, в котором живут люди. Для компании важны детали, которые могут сделать жизнь лучше. Для сотрудников Брусники это ежедневный добросовестный труд.",
 ];
 
-export const DEVELOPER_CONTACTS: IOption<IDeveloperContactItem>[] = [
+export const DEVELOPER_CONTACTS: IOption<IArticleGeneral>[] = [
   { value: "tel", label: { title: "Телефон", text: "+7 (495) 023 76 29" } },
   { value: "email", label: { title: "E-mail", text: "Сведения отсутствуют" } },
   { value: "site", label: { title: "Сайт", text: "brusnika.ru" } },
@@ -17,6 +17,95 @@ export const DEVELOPER_CONTACTS: IOption<IDeveloperContactItem>[] = [
       title: "Адрес",
       text:
         "Московская область, Ленинский район, г. Видное, д. Сапроново, ул. Калиновая, 1",
+    },
+  },
+];
+
+export const DEVELOPER_REQUISITS: IOption<IArticleGeneral>[] = [
+  {
+    value: "fullName",
+    label: {
+      title: "Полное наименование организации",
+      text:
+        "ОБЩЕСТВО С ОГРАНИЧЕННОЙ ОТВЕТСТВЕННОСТЬЮ СПЕЦИАЛИЗИРОВАННЫЙ ЗАСТРОЙЩИК «ГАРАНТ-ЖИЛЬЕ»",
+    },
+  },
+  {
+    value: "address",
+    label: {
+      title: "Адрес",
+      text: "Смоленская обл., г. Смоленск, ул. 25 Сентября, д. 64",
+    },
+  },
+  {
+    value: "capital",
+    label: {
+      title: "Уставный капитал",
+      text: "40 010 000 ₽",
+    },
+  },
+  {
+    value: "okfs",
+    label: {
+      title: "ОКФС",
+      text: "Частная собственность",
+    },
+  },
+  {
+    value: "okopf",
+    label: {
+      text: "Общества с ограниченной ответственностью",
+      title: "ОКОПФ",
+    },
+  },
+  {
+    value: "okogu",
+    label: {
+      title: "ОКОГУ",
+      text:
+        "Организации, учрежденные юридическими лицами или гражданами, или юридическими лицами и гражданами совместно",
+    },
+  },
+  {
+    value: "inn",
+    label: {
+      title: "ИНН",
+      text: "6732076930",
+    },
+  },
+  {
+    value: "okato",
+    label: {
+      title: "ОКАТО",
+      text: "Смоленская область, Смоленск",
+    },
+  },
+  {
+    value: "ogrn",
+    label: {
+      title: "ОГРН",
+      text: "1146733013350",
+    },
+  },
+  {
+    value: "okpo",
+    label: {
+      title: "ОКПО",
+      text: "25769055",
+    },
+  },
+  {
+    value: "kpp",
+    label: {
+      title: "КПП",
+      text: "673201001",
+    },
+  },
+  {
+    value: "oktmo",
+    label: {
+      title: "ОКТМО",
+      text: "Смоленская область, г. Смоленск",
     },
   },
 ];
