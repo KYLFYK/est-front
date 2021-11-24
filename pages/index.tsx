@@ -26,10 +26,11 @@ import Typography from '../src/components/shared/Typography/Typography'
 import UploadPhoto from '../src/components/shared/UploadPhoto/UploadLogo'
 import {Footer} from '../src/components/widget/Footer/ui/Footer'
 import FavoriteIcon from '../src/icons/Favorite/Favorite'
+import { OfferNews } from '../src/components/containers/OfferNews/offerNews'
 import VerticalTabs from '../src/components/shared/VerticalTabs/VerticalTabs'
-import {OfferNews} from '../src/components/containers/OfferNews/offerNews'
 import Header from '../src/components/widget/Header/Header'
-import {mocAdvantages} from '../src/components/containers/AdvantageList/config'
+import { mocAdvantages } from '../src/components/containers/AdvantageList/config'
+import DeveloperTabs from '../src/components/tabs/Developer'
 import {Record} from "../src/components/containers/Record/Record";
 import {Mortgage} from "../src/components/shared/Mortgage/Mortgage";
 import ToursContainer from "../src/components/containers/ToursContainer/ToursContainer";
