@@ -5,12 +5,12 @@ import BaseSlider from "../BaseSlider/BaseSlider";
 import Link from 'next/link'
 
 type EstateOfferPropsType = {
-    titleButtons: Array<string>
+    tags: Array<string>
     img: Array<string>
     url:string
 }
 
-const EstateOffer: React.FC<EstateOfferPropsType> = ({titleButtons, img,url}) => {
+const EstateOffer: React.FC<EstateOfferPropsType> = ({tags, img,url}) => {
 
     return (
         <div className={css.block}>
@@ -21,7 +21,7 @@ const EstateOffer: React.FC<EstateOfferPropsType> = ({titleButtons, img,url}) =>
             </Link>
             <div className={css.buttonBlock}>
                 {
-                    titleButtons.map(t=>(
+                    tags.map(t=>(
                         <BaseButton key={t} type="secondary" className={css.positionButton}>{t}</BaseButton>
                     ))
                 }

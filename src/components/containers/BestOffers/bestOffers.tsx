@@ -37,7 +37,7 @@ export const BestOffers :FC<BestOffersType> = ({bestOffers,tagsButton}) => {
                             <EstateOffer
                                 key={id}
                                 url={url}
-                                titleButtons={tags}
+                                tags={tags}
                                 img={img}
                             />
                         ))

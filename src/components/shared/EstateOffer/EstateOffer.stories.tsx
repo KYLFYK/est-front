@@ -21,6 +21,7 @@ const Template: ComponentStory<typeof EstateOffer> = (args) => <EstateOffer {...
 
 export const EstateOffer_ = Template.bind({});
 EstateOffer_.args = {
-    titleButtons:['Покупка','Дом'],
-    img:IMAGES_SET
+    tags:['Покупка','Дом'],
+    img:IMAGES_SET,
+    url:'www.google.com'
 };
