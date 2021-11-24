@@ -1,0 +1,20 @@
+.infoBlock {
+    display: flex;
+    margin-bottom: 30px;
+}
+
+.iconItem {
+    min-width: auto;
+    margin-right: 80px;
+}
+
+.imgContainer {
+    position: relative;
+    width: 100px;
+    height: 100px;
+}
+
+.img {
+    object-fit: contain;
+
+}

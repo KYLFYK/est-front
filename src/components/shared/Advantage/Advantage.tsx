@@ -9,10 +9,11 @@ type AdvantagePropsType = {
     title: string
     text?: string
     children: ReactNode,
-    variant?: "primary" | "secondary"
+    variant?: "primary" | "secondary",
+    className?: string,
 }
 
-export const Advantage: React.FC<AdvantagePropsType> = ({ title, text, children, variant = "primary" }) => {
+export const Advantage: React.FC<AdvantagePropsType> = ({ className, title, text, children, variant = "primary" }) => {
     const titleWeight = variant === 'primary' ? "bold" : "regular"
     const titleSize = variant === 'primary' ? "medium" : "default"
     const textWeight = variant === 'primary' ? "regular" : "light"
@@ -24,7 +25,7 @@ export const Advantage: React.FC<AdvantagePropsType> = ({ title, text, children,
                     children
                 }
             </div>
-            <div className={classNames(css.text, {[css.autoWidth]: variant === 'secondary'})}>
+            <div className={classNames(css.text, className, {[css.autoWidth]: variant === 'secondary'})}>
                 <Typography weight={titleWeight} size={titleSize}>
                     {title}
                 </Typography>

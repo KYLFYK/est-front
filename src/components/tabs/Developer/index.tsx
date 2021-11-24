@@ -1,28 +1,48 @@
 import React from "react"
+import { IArticleGeneral, IOption } from "../../../utils/interfaces/general"
 import VerticalTabs from "../../shared/VerticalTabs/VerticalTabs"
 import DeveloperAbout from "./components/About/About"
 import DeveloperActivity from "./components/Activity/DeveloperActivity"
 import DeveloperContacts from "./components/Contacts/Contacts"
-import DeveloperMassMedia from "./components/MassMedia/DeveloperMassMedia"
-import DeveloperOwners from "./components/Owners/DeveloperOwners"
+import DeveloperMassMedia, { IDeveloperArticleItem } from "./components/MassMedia/DeveloperMassMedia"
+import DeveloperOwners, { IDeveloperCompanyData } from "./components/Owners/DeveloperOwners"
 import DeveloperRequisites from "./components/Requisites/DeveloperRequisites"
 import DeveloperRisksTab from "./components/Risks/DeveloperRisksTab"
 import DeveloperStatisticTab from "./components/Statistic/DeveloperStatisticTab"
-import { ABOUT_PARAGRAPHS, DEVELOPER_CONTACTS, DEVELOPER_MASS_MEDIA_ARTICLES, DEVELOPER_OWNERS_COMPANY, DEVELOPER_OWNER_GOVERMENT, DEVELOPER_PRIMARY_ACTIVITIES, DEVELOPER_REQUISITS, DEVELOPER_RISKS, DEVELOPER_SECONDARY_ACTIVITIES, DEVELOPER_STATISTICS } from "./config"
 
-const DeveloperTabs: React.FC<{}> = () => {
+export interface IDeveloperTabsData {
+    about: string[],
+    contacts: IOption<IArticleGeneral>[],
+    requisits: IOption<IArticleGeneral>[],
+    owners: {
+        company: IDeveloperCompanyData,
+        goverment: IOption<IArticleGeneral>[]
+    },
+    activities: {
+        primary: string[],
+        secondary: string[]
+    },
+    news: IDeveloperArticleItem[],
+    statistics: IOption<IArticleGeneral[]>[],
+    risks: IOption<IArticleGeneral>[],
+}
+interface Props {
+    tabsData: IDeveloperTabsData
+}
+
+const DeveloperTabs: React.FC<Props> = ({ tabsData: { news, statistics, risks, activities, owners, requisits, contacts, about } }) => {
     return (
         <VerticalTabs
             tabs={[
-                { title: "О застройщике", Component: <DeveloperAbout paragraphs={ABOUT_PARAGRAPHS} /> },
-                { title: "Контакты", Component: <DeveloperContacts items={DEVELOPER_CONTACTS} /> },
-                { title: "Реквизиты", Component: <DeveloperRequisites items={DEVELOPER_REQUISITS}/> },
-                { title: "Учредители", Component: <DeveloperOwners companyData={DEVELOPER_OWNERS_COMPANY} govermentData={DEVELOPER_OWNER_GOVERMENT}/> },
-                { title: "Виды деятельности", Component: <DeveloperActivity primaryActivities={DEVELOPER_PRIMARY_ACTIVITIES} secondaryActivities={DEVELOPER_SECONDARY_ACTIVITIES}/> },
-                { title: "СМИ о застройщике", Component: <DeveloperMassMedia articlesItems={DEVELOPER_MASS_MEDIA_ARTICLES}/> },
-                { title: "Статистика", Component: <DeveloperStatisticTab items={DEVELOPER_STATISTICS}/> },
-                { title: "Риски", Component: <DeveloperRisksTab items={DEVELOPER_RISKS} /> },
-                
+                { title: "О застройщике", Component: <DeveloperAbout paragraphs={about} /> },
+                { title: "Контакты", Component: <DeveloperContacts items={contacts} /> },
+                { title: "Реквизиты", Component: <DeveloperRequisites items={requisits} /> },
+                { title: "Учредители", Component: <DeveloperOwners companyData={owners.company} govermentData={owners.goverment} /> },
+                { title: "Виды деятельности", Component: <DeveloperActivity primaryActivities={activities.primary} secondaryActivities={activities.secondary} /> },
+                { title: "СМИ о застройщике", Component: <DeveloperMassMedia articlesItems={news} /> },
+                { title: "Статистика", Component: <DeveloperStatisticTab items={statistics} /> },
+                { title: "Риски", Component: <DeveloperRisksTab items={risks} /> },
+
             ]}
         />
     )
