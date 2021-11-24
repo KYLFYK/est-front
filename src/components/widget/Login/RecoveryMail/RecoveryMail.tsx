@@ -5,11 +5,12 @@ import css from './RecoveryMail.module.scss'
 import BaseButton from "../../../shared/BaseButton/BaseButtons";
 
 type RecoveryMailType={
-    onClick:()=>void
+    // onClick:()=>void
     email:string
+    onEdit:(menu:string)=>void
 }
 
-export const RecoveryMail :FC<RecoveryMailType>  = ({onClick,email}) => {
+export const RecoveryMail :FC<RecoveryMailType>  = ({email,onEdit}) => {
     return (
         <div className={css.container}>
             <LogoIcon/>
@@ -20,9 +21,8 @@ export const RecoveryMail :FC<RecoveryMailType>  = ({onClick,email}) => {
                 <Typography size={'small'} color={'nude'} >
                     {email}
                 </Typography>
-
             </div>
-            <BaseButton type="secondary" isActive className={css.width}>
+            <BaseButton onClick={()=>onEdit('')} type="secondary" isActive className={css.width}>
                 <Typography size={'small'} color={'secondary'} >Хорошо</Typography>
             </BaseButton>
         </div>

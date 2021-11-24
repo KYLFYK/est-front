@@ -6,9 +6,10 @@ import BaseButton from "../../../shared/BaseButton/BaseButtons";
 
 type ConfirmationNewPasswordType ={
     account:string
+    onEdit:(menu:string)=>void
 }
 
-export const ConfirmationNewPassword :FC<ConfirmationNewPasswordType> = ({account}) => {
+export const ConfirmationNewPassword :FC<ConfirmationNewPasswordType> = ({account,onEdit}) => {
     return (
         <div className={css.container}>
             <LogoIcon/>
@@ -19,7 +20,7 @@ export const ConfirmationNewPassword :FC<ConfirmationNewPasswordType> = ({accoun
                     сохранён
                 </Typography>
             </div>
-            <BaseButton type="secondary" isActive className={css.width}>
+            <BaseButton onClick={()=>onEdit('login')} type="secondary" isActive className={css.width}>
                 <Typography size={'small'} color={'secondary'} >Войти</Typography>
             </BaseButton>
 

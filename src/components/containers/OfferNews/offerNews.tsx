@@ -13,7 +13,7 @@ export const OfferNews = () => {
                     <BaseInput placeholder="Имя"/>
                     <BaseInput placeholder="Email"/>
                     <BaseInput placeholder="Телефон"/>
-                    <BaseButton type="primary">Подписаться на новости</BaseButton>
+                    <BaseButton onClick={()=>console.log('Подписаться на новости')} type="primary">Подписаться на новости</BaseButton>
                 </div>
             </HeadLine>
         </div>

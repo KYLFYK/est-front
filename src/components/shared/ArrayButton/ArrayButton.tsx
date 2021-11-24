@@ -4,14 +4,15 @@ import BaseButton from "../BaseButton/BaseButtons";
 
 type ArrayButtonType = {
     name: string
+    index:number
 }
 
-const ArrayButton: FC<ArrayButtonType> = ({ name }) => {
+const ArrayButton: FC<ArrayButtonType> = ({ name,index }) => {
     const [active, setActive] = useState<boolean>(false)
     return (
-        <div onClick={() => setActive(!active)}>
+        <div onClick={() => setActive(!active)} style={{cursor:'default'}}>
             <BaseButton
-                type="secondary"
+                type={index > 1 ? "tags" : "secondary"}
                 className={css.margin}
                 isActive={active}
             >

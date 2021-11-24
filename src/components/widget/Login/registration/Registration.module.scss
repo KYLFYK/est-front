@@ -1,3 +1,11 @@
+.selectStyle{
+  height: 42px !important;
+  min-width: 374px;
+  margin:30px 0 5px;
+  text-align: center;
+  border-radius: 6px !important;
+  right: 3px;
+}
 .registrationContainer{
   display: flex;
   flex-direction: column;
@@ -35,6 +43,7 @@
 // checkbox
 .checkBoxMargin{
   //margin:0 25px;
+  cursor: pointer;
 }
 .check{
   display: flex;

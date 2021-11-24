@@ -7,22 +7,23 @@ import BaseButton from "../../../shared/BaseButton/BaseButtons";
 
 type NewPasswordType={
     account:string
+    onEdit:(menu:string)=>void
 }
 
-const NewPassword :FC<NewPasswordType> = ({account}) => {
+const NewPassword :FC<NewPasswordType> = ({account,onEdit}) => {
     return (
         <div className={css.recovery}>
             <LogoIcon/>
-            <Typography size={'small'}>
+            <Typography size={'small'} className={css.marginTypo}>
                 Придумайте новый пароль для аккаунта
                 <span className={css.nude}> {account} </span>
             </Typography>
             <div className={css.margin}>
                 <InputAlways title={'Пароль'} className={css.widthInput}/>
             </div>
-            <BaseButton type="secondary" isActive className={css.widthButton}>Восстанивить пароль</BaseButton>
-            <div onClick={()=>console.log('click')} className={css.widthButton}>
-                <BaseButton type="secondary" className={css.widthButton}>Отмена</BaseButton>
+            <BaseButton onClick={()=>onEdit('confirmationNewPassword')} type="secondary" isActive className={css.widthButton}>Сохранить</BaseButton>
+            <div className={css.widthButton}>
+                <BaseButton onClick={()=>onEdit('')} type="secondary" className={css.widthButton}>Отмена</BaseButton>
             </div>
 
         </div>

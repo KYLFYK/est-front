@@ -5,10 +5,11 @@ import css from './AddressConfirmation.module.scss'
 import BaseButton from "../../../shared/BaseButton/BaseButtons";
 
 type AddressConfirmationType={
-    onClick:()=>void
+    onClick?:()=>void
+    onEdit:(menu:string)=>void
 }
 
-export const AddressConfirmation :FC<AddressConfirmationType>  = ({onClick}) => {
+export const AddressConfirmation :FC<AddressConfirmationType>  = ({onClick,onEdit}) => {
         return (
             <div className={css.container}>
                 <LogoIcon/>
@@ -17,7 +18,7 @@ export const AddressConfirmation :FC<AddressConfirmationType>  = ({onClick}) => 
                        Адрес электронной почты подтвержден
                     </Typography>
                 </div>
-                <BaseButton type="secondary" isActive className={css.width}>
+                <BaseButton onClick={()=>onEdit('login')} type="secondary" isActive className={css.width}>
                     <Typography size={'small'} color={'secondary'} >Войти</Typography>
                 </BaseButton>
             </div>

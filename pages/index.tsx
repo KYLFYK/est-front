@@ -33,6 +33,8 @@ import {mocAdvantages} from '../src/components/containers/AdvantageList/config'
 import {Record} from "../src/components/containers/Record/Record";
 import {Mortgage} from "../src/components/shared/Mortgage/Mortgage";
 import ToursContainer from "../src/components/containers/ToursContainer/ToursContainer";
+import {ThreeDTour} from "../src/components/containers/ToursContainer/Tours/ThreeDTour/ThreeDTour";
+import {VRTour} from "../src/components/containers/ToursContainer/Tours/VRTour/VRTour";
 
 const emunsArray = [{title: 'цена', value: '5 000 000 '}, {title: 'Тип объекта', value: 'участок'},
     {title: 'площадь', value: '30 соток'}, {title: 'Статус', value: 'ИЖС'},
@@ -102,6 +104,13 @@ const agentRecord = {
             }]
 }
 
+const estateOffers = [{id:1,url:'www.google.com',img:IMAGES_SET,tags:["Покупка",'Таунхаус','Новостройка']},
+    {id:1,url:'www.google.com',img:IMAGES_SET,tags:["Покупка",'Таунхаус','Новостройка']},
+    {id:1,url:'www.google.com',img:IMAGES_SET,tags:["Покупка",'Таунхаус','Новостройка']}
+]
+const tagsButton = ['Покупка', 'Аренда', 'Дом', 'Коммерческая недвижимость', 'Новостройка', 'Вторичноежилье',
+    'Строящийся дом', 'От собственника']
+
 const Home: NextPage = () => {
 
     return (
@@ -162,7 +171,10 @@ const Home: NextPage = () => {
             <HorizontalTabs/>
 
             <h3>CustomSidebarTabs : ??</h3>
-            <VerticalTabs tabs={[]}/>
+            <VerticalTabs tabs={[
+                {title:'3D тур',Component:<ThreeDTour url={Online_tour["3d_tour"].url} />},
+                {title:'VR тур',Component:<VRTour url={Online_tour["vr_tour"].url} />}
+            ]}/>
 
             <hr color={'red'} style={{width: '100%'}}/>
             <Typography size={'big'} weight={'bold'} color={'nude'}>ADMIN :</Typography>
@@ -219,7 +231,10 @@ const Home: NextPage = () => {
             />
             <OfferNews/>
             <SearchOffice/>
-            <BestOffers/>
+            <BestOffers
+                tagsButton={tagsButton}
+                bestOffers={estateOffers}
+            />
             <SelectEstate params={'housingCondition'} options={home}/>
             <GeneralInfo info={INFO_OPTIONS} price={300000} images={IMAGES_SET}/>
             <Record

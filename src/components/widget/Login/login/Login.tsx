@@ -7,16 +7,17 @@ import Typography from '../../../shared/Typography/Typography';
 import BaseButton from '../../../shared/BaseButton/BaseButtons';
 
 type LoginPropsType = {
-    recoveryPass: () => void
-    registration: () => void
+    recoveryPass?: () => void
+    registration?: () => void
+    onEdit:(menu:string)=>void
 }
 
-export const Login: React.FC<LoginPropsType> = ({recoveryPass, registration}) => {
+export const Login: React.FC<LoginPropsType> = ({recoveryPass, registration,onEdit}) => {
     const recoveryPassword = () => {
-        recoveryPass()
+        recoveryPass && recoveryPass()
     }
     const newUser = () => {
-        registration()
+        registration && registration()
     }
     return (
         <div className={css.loginContainer}>
@@ -24,7 +25,8 @@ export const Login: React.FC<LoginPropsType> = ({recoveryPass, registration}) =>
             <InputAlways title={'Логин*'}/>
             <InputPassword/>
             <div className={css.recovery}>
-                <div style={{marginRight: '35px'}} onClick={() => recoveryPassword()}>
+                {/*<div style={{marginRight: '35px'}} onClick={() => recoveryPassword()}>*/}
+                <div style={{marginRight: '35px'}} onClick={() => onEdit('recovery')}>
                     <Typography size={'small'} className={css.text}>
                         забыли пароль?
                     </Typography>
@@ -35,7 +37,8 @@ export const Login: React.FC<LoginPropsType> = ({recoveryPass, registration}) =>
                 <Typography size={'small'} className={css.textFooter}>
                     Еще не зарегистрировались?
                 </Typography>
-                <div onClick={() => newUser()}>
+                {/*<div onClick={() => newUser()}>*/}
+                <div onClick={() => onEdit('registration')}>
                     <Typography size={'small'} color={'nude'} className={css.textFooter} >
                         Зарегистрироваться
                     </Typography>

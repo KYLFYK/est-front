@@ -1,4 +1,4 @@
-import React, { FC, useState } from 'react';
+import React, {FC, useEffect, useState} from 'react';
 import Link from 'next/link';
 import { SelectUser } from "./SelectUser/SelectUser";
 import LogoMain from '../../../icons/Header/LogoMain';
@@ -12,6 +12,11 @@ import { Recovery } from '../Login/recovery/Recovery';
 import { Registration } from '../Login/registration/Registration';
 import classNames from 'classnames';
 import css from './Header.module.scss'
+import {AddressConfirmation} from "../Login/AddressConfirmation/AddressConfirmation";
+import {RecoveryMail} from "../Login/RecoveryMail/RecoveryMail";
+import {ThankRegistering} from "../Login/ThankRegistering/ThankRegistering";
+import NewPassword from "../Login/NewPassword/NewPassword";
+import {ConfirmationNewPassword} from "../Login/ConfirmationNewPassword/ConfirmationNewPassword";
 
 type HeaderPropsType = {
     className?: string
@@ -32,8 +37,27 @@ export const Header: FC<HeaderPropsType> = ({ className,city,personalAccount,aut
     const [authorization,setAuthorization] =useState<boolean>(auth)
 
     const [login, setLogin] = useState<boolean>(false)
-    const [registration, setRegistration] = useState<boolean>(false)
-    const [newUser, setNewUser] = useState<boolean>(false)
+
+    const [edit, setEdit] =useState<string>('')
+
+    // useEffect(()=>{
+    //     setLogin(false)
+    //     if(edit!== '')setTimeout(()=>setLogin(true),200)
+    // },[edit])
+
+    const searchModal = (menu:string) => {
+        switch (menu){
+            case 'login': return <Login onEdit={(e)=>setEdit(e)} />
+            case 'recovery':return <Recovery onEdit={(e)=>setEdit(e)} />
+            case 'registration':return <Registration  onEdit={(e)=>setEdit(e)}/>
+            case 'addressConfirmation':return <AddressConfirmation  onEdit={(e)=>setEdit(e)}/>
+            case 'recoveryMail':return <RecoveryMail  onEdit={(e)=>setEdit(e)} email={'vika@mail.ru'} />
+            case 'thankRegistering':return <ThankRegistering  onEdit={(e)=>setEdit(e)} email={'vika@mail.ru'}/>
+            case 'newPassword':return <NewPassword  onEdit={(e)=>setEdit(e)} account={'vika@Best'}/>
+            case 'confirmationNewPassword':return <ConfirmationNewPassword  onEdit={(e)=>setEdit(e)} account={'vika@Best'}/>
+            default: return <div></div>
+        }
+    }
 
     const [active, setActive] = useState<number>(0)
     return (
@@ -71,47 +95,28 @@ export const Header: FC<HeaderPropsType> = ({ className,city,personalAccount,aut
                 }
                 {
                     !authorization
-                        ? <div className={css.menuName} onClick={() => setLogin(true)}>
+                        ? <div className={css.menuName} onClick={() => {
+                            setLogin(true)
+                            setEdit('login')
+                        }}>
                             <LoginIcon />
                         </div>
                         : <div className={css.menuName} >
                             <Typography size={'default'} color="nude">
                                 <SelectUser
-                                    params={'housingCondition'}
-                                    options={personalAccount}
-                                    onChangeOption={()=>setAuthorization(false)}
+                                params={'housingCondition'}
+                                options={personalAccount}
+                                onChangeOption={()=>setAuthorization(false)}
                                 />
                             </Typography>
                         </div>
+
                 }
-                <Modal setActive={() => setLogin(!login)} active={login}>
-                    <Login
-                        recoveryPass={() => {
-                            setLogin(!login)
-                            setRegistration(!registration)
-                        }}
-                        registration={() => {
-                            setLogin(!login)
-                            setNewUser(!newUser)
-                        }}
-                    />
-                </Modal>
-                <Modal setActive={() => setRegistration(!registration)} active={registration}>
-                    <Recovery
-                        recoveryPassword={() => {
-                            setLogin(!login)
-                            setRegistration(!registration)
-                        }}
-                    />
-                </Modal>
-                <Modal setActive={() => setNewUser(!newUser)} active={newUser}>
-                    <Registration
-                        enterLogin={() => {
-                            setLogin(!login)
-                            setNewUser(!newUser)
-                        }}
-                    />
-                </Modal>
+                {
+                    <Modal setActive={() => setLogin(!login)} active={login}>
+                        {searchModal(edit)}
+                    </Modal>
+                }
 
             </div>
         </div>

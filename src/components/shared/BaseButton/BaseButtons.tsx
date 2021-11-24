@@ -3,7 +3,7 @@ import { IPropsGeneral } from '../../../utils/interfaces/general';
 import s from './BaseButtons.module.scss';
 
 
-export type TBaseButtonType = "primary" | "secondary" | "blank"
+export type TBaseButtonType = "primary" | "secondary" | "blank" | "tags"
 interface Props extends IPropsGeneral {
     type?: TBaseButtonType,
     icon?: JSX.Element | string,

@@ -4,17 +4,13 @@ import Typography from "../../../shared/Typography/Typography";
 import css from './ThankRegistering.module.scss'
 import BaseButton from "../../../shared/BaseButton/BaseButtons";
 type ThankRegisteringType ={
-    onClick:()=>void
+    // onClick:()=>void
     email:string
+    onEdit:(menu:string)=>void
 }
 
-export const ThankRegistering :FC<ThankRegisteringType> = ({onClick,email}) => {
-    const recoveryPassword = () => {
+export const ThankRegistering :FC<ThankRegisteringType> = ({email,onEdit}) => {
 
-    }
-    const newUser = () => {
-
-    }
     return (
         <div className={css.container}>
             <LogoIcon/>
@@ -28,7 +24,7 @@ export const ThankRegistering :FC<ThankRegisteringType> = ({onClick,email}) => {
                 </Typography>
             </div>
 
-            <BaseButton type="secondary" isActive className={css.width}>
+            <BaseButton onClick={()=>onEdit('')} type="secondary" isActive className={css.width}>
                 <Typography size={'small'} color={'secondary'}>Хорошо</Typography>
             </BaseButton>
         </div>

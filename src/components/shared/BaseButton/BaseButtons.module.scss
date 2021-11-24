@@ -20,6 +20,18 @@
     font-weight: 500;
 }
 
+.tags{
+    background-color: $WHITE;
+    color: $BLACK;
+    border: 1px solid #F2F2F2;
+    &.active {
+        background-color: #96A2B5;
+        color: $WHITE;
+        border: 1px solid rgba(0,0,0,0);
+    }
+}
+
+
 
 .secondary {
     background-color: $WHITE;
