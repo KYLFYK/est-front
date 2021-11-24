@@ -1,0 +1,25 @@
+.article {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-right: 60px;
+}
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.pairArticle {
+  display: flex;
+  & > div {
+    min-width: 200px;
+  }
+}
+
+.restList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+}

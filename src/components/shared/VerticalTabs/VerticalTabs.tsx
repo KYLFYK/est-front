@@ -11,7 +11,7 @@ interface Props {
 }
 
 const VerticalTabs: React.FC<Props> = ({tabs}) => {
-    const [active, setActive] = useState<number>(1)
+    const [active, setActive] = useState<number>(0)
     return (
         <div className={css.body}>
             <MenuUser active={active} onActive={setActive} menu={tabs.map((tab) => tab.title)} />

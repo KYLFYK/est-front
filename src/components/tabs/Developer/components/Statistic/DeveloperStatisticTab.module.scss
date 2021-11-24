@@ -1,0 +1,19 @@
+.statisticGroup {
+    display: flex;
+    flex-direction: column;
+    gap: 17px;
+    margin-bottom: 34px;
+}
+
+.statisticGroupContent {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.statItem {
+    display: flex;
+    gap: 5px;
+    width: 250px;
+    padding-right: 20px;
+}
