@@ -235,3 +235,47 @@ export const DEVELOPER_MASS_MEDIA_ARTICLES: IDeveloperArticleItem[] = Array(
     "https://pbs.twimg.com/profile_images/984033833900298245/5U8I3xfZ_400x400.jpg",
   id: "1",
 });
+
+export const DEVELOPER_STATISTICS: IOption<IArticleGeneral[]>[] = [
+  {
+    value: "Арбитражные дела",
+    label: Array(4).fill({ title: "17", text: "Судебные дела" }),
+  },
+  {
+    value: "Исполнительные производства",
+    label: Array(4).fill({ title: "44", text: "Завершённые производства" }),
+  },
+  {
+    value: "Тендеры и госзакупки",
+    label: Array(1).fill({ title: "74", text: "Количество закупок" }),
+  },
+  {
+    value: "Существенные события",
+    label: Array(2).fill({ title: "7", text: "За всю историю компании" }),
+  },
+];
+
+export const DEVELOPER_RISKS: IOption<IArticleGeneral>[] = [
+  {
+    value: "15",
+    label: {
+      title: "Индекс должной осмотрительности",
+      text:
+        "Оценка, показывающая вероятность того, что компания является «фирмой- однодневкой»",
+    },
+  },
+  {
+    value: "0",
+    label: {
+      title: "Индекс финансового риска",
+      text: "Оценка вероятности неплатежеспособности компании",
+    },
+  },
+  {
+    value: "11",
+    label: {
+      title: "Индекс платежной дисциплины",
+      text: "Показатель, отражающий своевременность оплаты компанией счетов",
+    },
+  },
+];
