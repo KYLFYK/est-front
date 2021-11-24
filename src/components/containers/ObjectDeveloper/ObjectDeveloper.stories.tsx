@@ -1,7 +1,7 @@
 import React from 'react';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 import ObjectDeveloper from './ObjectDeveloper';
-import { DEVELOPER_TABS_DATA } from "./config"
+import { OBJECT_DEVELOPER_INFO } from "./config"
 
 export default {
     title: 'Containers/ObjectDeveloper',
@@ -12,5 +12,5 @@ const Template: ComponentStory<typeof ObjectDeveloper> = (args) => <ObjectDevelo
 
 export const Default = Template.bind({});
 Default.args = {
-    tabsData: DEVELOPER_TABS_DATA
+    developerData: OBJECT_DEVELOPER_INFO
 }
