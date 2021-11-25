@@ -1,0 +1,23 @@
+.item {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    margin-right: 60px;
+}
+
+.group {
+    display: flex;
+    flex-direction: column;
+    gap: 17px;
+    margin-bottom: 30px;
+}
+
+.groupContent {
+    display: flex;
+    gap: 17px;
+    flex-wrap: wrap;
+}
+
+.fullWidth {
+    width: 100%;
+}

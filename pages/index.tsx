@@ -56,7 +56,7 @@ const emptyFunc = () => { }
 
 const imgs = [{ url: 'https://cdn.pixabay.com/photo/2021/08/25/20/42/field-6574455__340.jpg', id: 0 }, { url: 'https://cdn.pixabay.com/photo/2021/08/25/20/42/field-6574455__340.jpg', id: 1 }, { url: '213', id: 2 }, { url: '32123', id: 4 }]
 const Home: NextPage = () => {
-
+  
   return (
     <div style={{ display: 'flex', gap: '15px', flexDirection: 'column' }}>
       <div style={{ display: 'flex', gap: '15px', alignItems: 'center' }}>
@@ -100,7 +100,7 @@ const Home: NextPage = () => {
       <HorizontalTabs />
 
       <h3>CustomSidebarTabs : ??</h3>
-      <DeveloperTabs />
+      {/* <DeveloperTabs /> */}
 
       <hr color={'red'} style={{ width: '100%' }} />
       <Typography size={'big'} weight={'bold'} color={'nude'}>ADMIN :</Typography>
