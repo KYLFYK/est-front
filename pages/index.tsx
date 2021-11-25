@@ -26,16 +26,46 @@ import Typography from '../src/components/shared/Typography/Typography'
 import UploadPhoto from '../src/components/shared/UploadPhoto/UploadLogo'
 import {Footer} from '../src/components/widget/Footer/ui/Footer'
 import FavoriteIcon from '../src/icons/Favorite/Favorite'
-import { OfferNews } from '../src/components/containers/OfferNews/offerNews'
+import {OfferNews} from '../src/components/containers/OfferNews/offerNews'
 import VerticalTabs from '../src/components/shared/VerticalTabs/VerticalTabs'
 import Header from '../src/components/widget/Header/Header'
-import { mocAdvantages } from '../src/components/containers/AdvantageList/config'
+import {mocAdvantages} from '../src/components/containers/AdvantageList/config'
 import DeveloperTabs from '../src/components/tabs/Developer'
 import {Record} from "../src/components/containers/Record/Record";
 import {Mortgage} from "../src/components/shared/Mortgage/Mortgage";
 import ToursContainer from "../src/components/containers/ToursContainer/ToursContainer";
 import {ThreeDTour} from "../src/components/containers/ToursContainer/Tours/ThreeDTour/ThreeDTour";
 import {VRTour} from "../src/components/containers/ToursContainer/Tours/VRTour/VRTour";
+import OurOffice from "../src/components/containers/OurOffice/OurOffice";
+import AverageMarketPrice from "../src/components/shared/AverageMarketPrice/AverageMarketPrice";
+import PaybackContainer from "../src/components/containers/PaybackContainer/PaybackContainer";
+
+export type ourOfficeType ={
+    positionMap:{
+        lat: number
+        lng: number
+    },
+    location:"finder" | "start" | "infrastructure" | "payback",
+    contactsOffice:Array<{title:string,value:string}>
+    plotRoute:string
+}
+const ourOffice: ourOfficeType = {
+    positionMap: {
+        lat: 44.959975,
+        lng: 34.109053
+    },
+    location: 'start',
+    contactsOffice: [
+        {title: 'metro', value: 'Проспект Победы'},
+        {title: 'dot', value: 'Крым, Ленина, 23 корпус 1'},
+        {title: 'time', value: 'Ежедневно с 10:00 до 20:00'},
+        {title: 'phone', value: '+7 913 453 22 34'},
+        {title: 'phone', value: '+7 913 453 22 35'},
+        {title: 'printer', value: '+7 913 453 22 34'},
+        {title: 'email', value: 'estatum@mail.com'}
+    ],
+    plotRoute: 'www.google.com'
+}
 
 const emunsArray = [{title: 'цена', value: '5 000 000 '}, {title: 'Тип объекта', value: 'участок'},
     {title: 'площадь', value: '30 соток'}, {title: 'Статус', value: 'ИЖС'},
@@ -67,47 +97,47 @@ const imgs = [{
 }, {url: '32123', id: 4}]
 
 const city = ['Москва', 'Санкт-Петербург', 'Крым', 'Сочи', 'Нижний Новгород']
-const personalAccount = [{ title: 'Личный кабинет', href: '/User', message: 0 },
-    { title: 'Избранное', href: '/User', message: 0 },
-    { title: 'Сохраненные поиски', href: '/User', message: 0 },
-    { title: 'Сообщения', href: '/User', message: 12 },
-    { title: 'Уведомления', href: '/User', message: 3 },
-    { title: 'Мои объекты', href: '/User', message: 0 },
-    { title: 'Проверка объекта', href: '/User', message: 0 },
+const personalAccount = [{title: 'Личный кабинет', href: '/User', message: 0},
+    {title: 'Избранное', href: '/User', message: 0},
+    {title: 'Сохраненные поиски', href: '/User', message: 0},
+    {title: 'Сообщения', href: '/User', message: 12},
+    {title: 'Уведомления', href: '/User', message: 3},
+    {title: 'Мои объекты', href: '/User', message: 0},
+    {title: 'Проверка объекта', href: '/User', message: 0},
 ]
 
 const agentRecord = {
-        "id": 1,
-        "img": " https://test-estatum.f-case.ru/static/media/%D0%A0%D0%BE%D0%BC%D0%B0%D0%BD%D0%A1%D0%B0%D1%84%D0%BE%D0%BD%D0%BE%D0%B2.b38acd57.png",
-        "fullName": "Роман Сафонов",
-        "heldPost": "Старший агент",
-        "workExperience": "5 лет",
-        "inWork": "2 проекта",
-        "completed": "43 проекта",
-        "connection": [{
-            "title": "telegram",
+    "id": 1,
+    "img": " https://test-estatum.f-case.ru/static/media/%D0%A0%D0%BE%D0%BC%D0%B0%D0%BD%D0%A1%D0%B0%D1%84%D0%BE%D0%BD%D0%BE%D0%B2.b38acd57.png",
+    "fullName": "Роман Сафонов",
+    "heldPost": "Старший агент",
+    "workExperience": "5 лет",
+    "inWork": "2 проекта",
+    "completed": "43 проекта",
+    "connection": [{
+        "title": "telegram",
+        "value": "+7 992 146 37 15",
+        "url": ""
+    },
+        {
+            "title": "whatsApp",
             "value": "+7 992 146 37 15",
             "url": ""
         },
-            {
-                "title": "whatsApp",
-                "value": "+7 992 146 37 15",
-                "url": ""
-            },
-            {
-                "title": "phone",
-                "value": "+7 992 146 37 15",
-                "url": ""
-            }, {
-                "title": "email",
-                "value": "valsidirov@mail.com",
-                "url": "",
-            }]
+        {
+            "title": "phone",
+            "value": "+7 992 146 37 15",
+            "url": ""
+        }, {
+            "title": "email",
+            "value": "valsidirov@mail.com",
+            "url": "",
+        }]
 }
 
-const estateOffers = [{id:1,url:'www.google.com',img:IMAGES_SET,tags:["Покупка",'Таунхаус','Новостройка']},
-    {id:1,url:'www.google.com',img:IMAGES_SET,tags:["Покупка",'Таунхаус','Новостройка']},
-    {id:1,url:'www.google.com',img:IMAGES_SET,tags:["Покупка",'Таунхаус','Новостройка']}
+const estateOffers = [{id: 1, url: 'www.google.com', img: IMAGES_SET, tags: ["Покупка", 'Таунхаус', 'Новостройка']},
+    {id: 1, url: 'www.google.com', img: IMAGES_SET, tags: ["Покупка", 'Таунхаус', 'Новостройка']},
+    {id: 1, url: 'www.google.com', img: IMAGES_SET, tags: ["Покупка", 'Таунхаус', 'Новостройка']}
 ]
 const tagsButton = ['Покупка', 'Аренда', 'Дом', 'Коммерческая недвижимость', 'Новостройка', 'Вторичноежилье',
     'Строящийся дом', 'От собственника']
@@ -173,8 +203,8 @@ const Home: NextPage = () => {
 
             <h3>CustomSidebarTabs : ??</h3>
             <VerticalTabs tabs={[
-                {title:'3D тур',Component:<ThreeDTour url={Online_tour["3d_tour"].url} />},
-                {title:'VR тур',Component:<VRTour url={Online_tour["vr_tour"].url} />}
+                {title: '3D тур', Component: <ThreeDTour url={Online_tour["3d_tour"].url}/>},
+                {title: 'VR тур', Component: <VRTour url={Online_tour["vr_tour"].url}/>}
             ]}/>
 
             <hr color={'red'} style={{width: '100%'}}/>
@@ -244,6 +274,8 @@ const Home: NextPage = () => {
 
             <Mortgage/>
             <ToursContainer Online_tour={Online_tour}/>
+            <OurOffice ourOffice={ourOffice}/>
+            <PaybackContainer/>
         </div>
     )
 }

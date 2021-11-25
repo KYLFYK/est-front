@@ -1,5 +1,6 @@
 @import './resolutions.scss';
 
+
 .image{
   width: 26px;
   padding-left: 6px !important;
@@ -15,6 +16,9 @@
 .paddingTypo{
   font-size: 12px;
   padding:8px 4px;
+}
+.typoHeader{
+  margin: 0 0 0 60px;
 }
 .block_container{
   width: 1500px;

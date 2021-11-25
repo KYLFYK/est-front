@@ -38,22 +38,22 @@ export const All = TemplateDiv.bind({});
 All.args = {
   children: <div>
     <h2>Size: </h2>
-    <Typography size={'small'} >small </Typography>
-    <Typography size={'default'}>default </Typography>
-    <Typography size={'medium'} color={"red"}> medium - red</Typography>
-    <Typography size={'subheader'} color={"accent"}>subheader -accent </Typography>
+    <Typography size={'small'} >14px - small </Typography>
+    <Typography size={'default'}>16px - default </Typography>
+    <Typography size={'medium'} color={"red"}>18px - medium - red</Typography>
+    <Typography size={'subheader'} color={"accent"}>20px -subheader -accent </Typography>
     <div style={{backgroundColor:'black'}}>
-      <Typography size={'subheaderBig'} color={"secondary"}>subheaderBig -secondary </Typography>
+      <Typography size={'subheaderBig'} color={"secondary"}>24px - subheaderBig -secondary </Typography>
     </div>
-    <Typography size={'big'} color={"green"}>big -green </Typography>
-    <Typography size={'headerLow'} color={"tertiary"}>headerLow -tertiary </Typography>
-    <Typography size={'header'} color={"nude"} >header -nude </Typography>
+    <Typography size={'big'} color={"green"}>30px - big -green </Typography>
+    <Typography size={'headerLow'} color={"tertiary"}>40px - headerLow -tertiary </Typography>
+    <Typography size={'header'} color={"nude"} >48px - header -nude </Typography>
 
     <h2>Weight :</h2>
-    <Typography size={'small'} color={"accent"} weight={'light'}>subheader -accent -light</Typography>
-    <Typography size={'small'} color={"accent"} weight={'regular'}>subheader -accent -regular</Typography>
-    <Typography size={'small'} color={"accent"} weight={'medium'}>subheader -accent -medium</Typography>
-    <Typography size={'small'} color={"accent"} weight={'bold'}>subheader -accent -bold</Typography>
+    <Typography size={'small'} color={"accent"} weight={'light'}>light -accent </Typography>
+    <Typography size={'small'} color={"accent"} weight={'regular'}>regular -accent </Typography>
+    <Typography size={'small'} color={"accent"} weight={'medium'}>medium -accent </Typography>
+    <Typography size={'small'} color={"accent"} weight={'bold'}>bold -accent </Typography>
   </div>
 };
 

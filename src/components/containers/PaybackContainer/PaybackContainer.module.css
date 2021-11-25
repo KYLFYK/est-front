@@ -1,0 +1,8 @@
+.columnGrid_top{
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+}
+.columnGrid_Bottom{
+    display: grid;
+    grid-template-columns: 19fr 7fr;
+}

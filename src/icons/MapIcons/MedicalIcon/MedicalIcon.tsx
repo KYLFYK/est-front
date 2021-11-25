@@ -1,0 +1,13 @@
+import s from '../hover.module.scss';
+
+export const MedicalIcon = () => {
+    return (
+      <>
+        <svg className={s.icon} width="50" height="50" viewBox="0 0 50 50" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="25" cy="25" r="25" fill="#F2F2F2"/>
+          <path d="M33 19H29V17C29 15.9 28.1 15 27 15H23C21.9 15 21 15.9 21 17V19H17C15.9 19 15 19.9 15 21V33C15 34.1 15.9 35 17 35H33C34.1 35 35 34.1 35 33V21C35 19.9 34.1 19 33 19ZM23 17H27V19H23V17ZM33 33H17V21H33V33Z" fill="#1A4862"/>
+          <path d="M26 23H24V26H21V28H24V31H26V28H29V26H26V23Z" fill="#1A4862"/>
+        </svg>
+      </>
+    )
+  };

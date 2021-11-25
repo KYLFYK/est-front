@@ -51,4 +51,9 @@
     font-style: normal;
     src: url("../src/app/fonts/Roboto/Roboto-Light.ttf")
   }
-  
+.recharts-cartesian-axis-line{
+  display: none;
+}
+.recharts-cartesian-axis-tick-line{
+  display: none;
+}
