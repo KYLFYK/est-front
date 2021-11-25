@@ -29,7 +29,7 @@ export const Advantages: FC<AdvantagesType> = ({ advantages }) => {
                                 text={text}
                             >
                                 {
-                                    searchIconByValue(title.value)
+                                    searchIconByValue(title.value as string)
                                 }
                             </Advantage>
                         ))
