@@ -1,4 +1,5 @@
 import React from 'react'
+import QuestionPopup from '../../../../shared/QuestionPopup/QuestionPopup'
 import Typography from '../../../../shared/Typography/Typography'
 import { ILegalPurityEncumbrances } from '../../config'
 import { transformStatusToIcon } from '../../lib'
@@ -17,10 +18,11 @@ const LegalPurityEncumbrancesTab: React.FC<Props> = ({ data }) => {
                     <div className={s.groupContent}>
                         {group.encumbrances.map((enc) => (
                             <div key={enc.text} className={s.item}>
-                                <div>
+                                <div className={s.icon}>
                                     {transformStatusToIcon(enc.status)}
                                 </div>
                                 <Typography weight="medium">{enc.text}</Typography>
+                                {enc.description && <QuestionPopup text={enc.description} />}
                             </div>
                         ))}
                     </div>
