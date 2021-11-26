@@ -1,0 +1,28 @@
+.root {
+  margin-left: 8px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  height: 20px;
+  width: 35px;
+  &:hover {
+    & > div {
+      display: inline-block;
+      &:hover {
+        display: inline-block;
+      }
+    }
+  }
+}
+.paper {
+  background-color: #fff;
+  position: absolute;
+  border: 1px #cad1da solid;
+  padding: 10px;
+  border-radius: 6px;
+  top: 0px;
+  left: 35px;
+  width: 275px;
+  display: none;
+  z-index: 99;
+}

@@ -1,4 +1,5 @@
 import React from 'react'
+import QuestionPopup from '../../../../shared/QuestionPopup/QuestionPopup'
 import Typography from '../../../../shared/Typography/Typography'
 import { ILegalPurityArticle } from '../../config'
 import s from './LegalPurityFoundersTab.module.scss'
@@ -12,7 +13,10 @@ const LegalPurityFoundersTab: React.FC<Props> = ({ data }) => {
         <div>
             {data.map((group) => (
                 <div key={group.value} className={s.group}>
-                    <Typography weight="bold">{group.value}</Typography>
+                    <div className={s.groupTitle}>
+                        <Typography weight="bold">{group.value}</Typography>
+                        {group.description && <QuestionPopup text={group.description} />}
+                    </div>
                     <div className={s.groupContent}>
                         {group.label.map((item, idx) => (
                             <div key={idx} className={s.item}>

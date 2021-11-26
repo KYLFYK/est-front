@@ -1,0 +1,10 @@
+.root {
+    transition: .3s all ease-in;
+  &:hover {
+    background-color: #cad1da;
+    border-radius: 50%;
+    & > path:last-of-type {
+        fill: #fff;
+    }
+  }
+}
