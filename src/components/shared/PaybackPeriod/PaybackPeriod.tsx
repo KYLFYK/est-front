@@ -16,7 +16,9 @@ const PaybackPeriod = () => {
     const [cost, setCost] = useState<number>(price);
     const [rent, setRent] = useState<number>(price / 240);
     const [expenses, setExpenses] = useState<number>(price / 100);
-    const [months, setMonths] = useState<number>(6);
+
+    // const [months, setMonths] = useState<number>(12);
+    const months = 12
 
     const maxCost = price * 2;
     const maxRent = price / 120;
@@ -76,7 +78,7 @@ const PaybackPeriod = () => {
         <div>
             <div ref={card} className={s.cardContainer}>
                 <Typography weight={'bold'}>Сроки окупаемости</Typography>
-                <Card style={{ margin: '20px 0 0 0' }}>
+                <Card className={s.card}>
                     <div className={s.cards}>
                         <Card style={cardStyle}>
                             <div>
@@ -120,24 +122,26 @@ const PaybackPeriod = () => {
                         <div style={sliderStyle}>
                             <InputRange value={expenses} setValue={setExpenses} max={maxExpenses} min={0} />
                         </div>
-                        <Card style={cardStyle}>
-                            <div>
-                                <Typography className={s.low_size} weight={'light'} color={'tertiary'}>
-                                    Аренда месяцев в году (сезон)
-                                </Typography>
-                                <Typography>{months}</Typography>
-                            </div>
-                            <Typography>мес.</Typography>
-                        </Card>
-                        <div style={sliderStyle}>
-                            <InputRange value={months} setValue={setMonths} max={maxMonths} min={0} />
-                        </div>
+                        {/*<Card style={cardStyle}>*/}
+                        {/*    <div>*/}
+                        {/*        <Typography className={s.low_size} weight={'light'} color={'tertiary'}>*/}
+                        {/*            Аренда месяцев в году (сезон)*/}
+                        {/*        </Typography>*/}
+                        {/*        <Typography>{months}</Typography>*/}
+                        {/*    </div>*/}
+                        {/*    <Typography>мес.</Typography>*/}
+                        {/*</Card>*/}
+                        {/*<div style={sliderStyle}>*/}
+                        {/*    <InputRange value={months} setValue={setMonths} max={maxMonths} min={0} />*/}
+                        {/*</div>*/}
                         <div className={s.calculations}>
                             <div className={s.position}>
                                 <Typography weight={"medium"} >Срок окупаемости дома при заданных параметрах</Typography>
                                 <Typography color={'nude'} weight={'bold'} size={'subheaderBig'} className={s.resultterm}>
-                                    <div  style={{ fontSize: yearPayback >= 100 ? '22px' : (months === 0 || expenses >= rent * months) ? '16px' : '' }}>
-                                        {months !== 0 && expenses < rent * months
+                                    {/*<div  style={{ fontSize: yearPayback >= 100 ? '22px' : (months === 0 || expenses >= rent * months) ? '16px' : '' }}>*/}
+                                    <div  style={{ fontSize: yearPayback >= 100 ? '22px' : ( expenses >= rent * months) ? '16px' : '' }}>
+                                        {/*{months !== 0 && expenses < rent * months*/}
+                                        {expenses < rent * months
                                             ? `${yearPayback.toFixed(1)} ${yearString}`
                                             : <div>Не окупается</div>}
                                     </div>
@@ -159,7 +163,8 @@ const PaybackPeriod = () => {
                                     />
                                 </Typography>
                                 <Typography className={s.rent}>
-                                    {months !== 0 && expenses < rent * months
+                                    {/*{months !== 0 && expenses < rent * months*/}
+                                    { expenses < rent * months
                                         ? `${new Intl.NumberFormat('ru-RU').format(+rentPayments.toFixed(0))} ${currency}`
                                         : `${(rent * months).toFixed(0)} ${currency} / год`}
                                 </Typography>
@@ -180,7 +185,8 @@ const PaybackPeriod = () => {
                                     />
                                 </Typography>
                                 <Typography className={s.rent}>
-                                    {months !== 0 && expenses < rent * months
+                                    {/*{months !== 0 && expenses < rent * months*/}
+                                    {expenses < rent * months
                                         ? `${new Intl.NumberFormat('ru-RU').format(pureIncome)} ${currency}`
                                         : <div>нет</div>}
                                 </Typography>

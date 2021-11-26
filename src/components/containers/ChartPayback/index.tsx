@@ -22,8 +22,8 @@ export const Chart: React.FC<Props> = ({}) => {
         <div className={s.container}>
             <Typography color={'tertiary'} className={s.textSize}>Прибыль млн.₽</Typography>
           <LineChart
-            width={900}
-            height={400}
+            width={870}
+            height={300}
             data={data}
             className={s.rechartsCartesianAxisTickLine}
             margin={{
@@ -42,8 +42,63 @@ export const Chart: React.FC<Props> = ({}) => {
             <Line dataKey="Москва" stroke="#AFAFAF" dot={false} activeDot={false} legendType="none" strokeWidth={2} />
           </LineChart>
             <Typography color={'tertiary'} className={s.positionText}>Лет</Typography>
+            <div className={s.lineAnalytics}>
+                <div className={s.lineAnalyticsBorder}>
+                    <div className={s.lineAnalyticsItemsPadding}>
+                        <IconHouseAccent/>
+                        <Typography color={"accent"} weight={"light"} className={s.textPadding}>
+                            Крым
+                        </Typography>
+                    </div>
+                    <div className={s.lineAnalyticsItemsPadding}>
+                        <IconHouseTertiary/>
+                        <Typography color={"accent"} weight={"light"} className={s.textPadding}>
+                            Москва
+                        </Typography>
+                    </div>
+                    <div className={s.lineAnalyticsItemsPadding}>
+                        <IconHouseAccentLight/>
+                        <Typography color={"accent"} weight={"light"} className={s.textPadding}>
+                            Санкт-Петербург
+                        </Typography>
+                    </div>
+                </div>
+                <div>
+                    <Typography color={"accent"}>Ознакомиться с аналитикой</Typography>
+                </div>
+            </div>
         </div>
     )
 }
   
 export default Chart
+
+
+const IconHouseAccent = () => {
+    return (
+        <>
+            <svg width="24" height="25" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M12 6.14215L17 10.6421V18.4521H15V12.4521H9V18.4521H7V10.6421L12 6.14215V6.14215ZM12 3.45215L2 12.4521H5V20.4521H11V14.4521H13V20.4521H19V12.4521H22L12 3.45215Z" fill="#1A4862"/>
+            </svg>
+        </>
+    );
+};
+const IconHouseTertiary = () => {
+    return (
+        <>
+            <svg width="24" height="25" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M12 6.14215L17 10.6421V18.4521H15V12.4521H9V18.4521H7V10.6421L12 6.14215ZM12 3.45215L2 12.4521H5V20.4521H11V14.4521H13V20.4521H19V12.4521H22L12 3.45215Z" fill="#AFAFAF"/>
+            </svg>
+        </>
+    );
+};
+const IconHouseAccentLight = () => {
+    return (
+        <>
+            <svg width="24" height="25" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M12 6.14215L17 10.6421V18.4521H15V12.4521H9V18.4521H7V10.6421L12 6.14215ZM12 3.45215L2 12.4521H5V20.4521H11V14.4521H13V20.4521H19V12.4521H22L12 3.45215Z" fill="#7F96A3"/>
+            </svg>
+        </>
+    );
+};
+

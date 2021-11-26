@@ -33,7 +33,8 @@ export const Chart: React.FC<Props> = ({heightValue,language}) => {
     ]
 
     let width = 900;
-    let height = heightValue > 200 ? heightValue : 375;
+    // let height = heightValue > 200 ? heightValue : 375;
+    let height = 204
     useEffect(()=>{
         if(window !== undefined){
             if (window.innerWidth < 768) {

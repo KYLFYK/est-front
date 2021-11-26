@@ -4,7 +4,7 @@ import {Card} from "../Mortgage/Card";
 import {Chart} from "./Chart";
 import QuestionIcon from './QuestionIcon.svg';
 import Typography from "../Typography/Typography";
-
+import Image from 'next/image'
 const DynamicsPriceTable = () => {
 
 
@@ -30,17 +30,18 @@ const DynamicsPriceTable = () => {
         <div className={css.graphics}>
             <div className={css.chart}>
                 <Typography className={css.subtitle} weight={'bold'}>
-                    Динамика изменения стоимости за м² в этом районе
-                    <img
-                        id={'2'}
-                        src={QuestionIcon}
-                        onMouseEnter={onMouseCardhoverHandler}
-                        onMouseLeave={onMouseCardoutHandler}
-                        style={{ width: '20px', paddingLeft: '6px' }}
-                        alt='icon'
-                    />
+                    <div style={{display:'flex',alignItems:"center"}}>
+                        Динамика изменения стоимости за м² в этом районе
+                        <Image
+                            id={'2'}
+                            src={QuestionIcon}
+                            onMouseEnter={onMouseCardhoverHandler}
+                            onMouseLeave={onMouseCardoutHandler}
+                            alt='icon'
+                        />
+                    </div>
                 </Typography>
-                <Card style={{ backgroundColor: '#FFF', border: 'solid 1px #F2F2F2', margin: '20px 0 0 0', padding: '20px' }} >
+                <Card style={{ backgroundColor: '#FFF', border: 'solid 1px #F2F2F2', margin: '20px 0 0 0', padding: '0px' }} >
                     <Chart heightValue={cardHeight} language={'ru'} />
                 </Card>
             </div>

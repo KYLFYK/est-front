@@ -31,7 +31,12 @@ $KT6: 1440px;
     }
   }
 }
-
+.card{
+  border: 1px solid #F2F2F2;
+  border-radius: 6px;
+  background: #FFFFFF;
+  margin-top: 20px;
+}
 .container {
   display: grid;
   @include for-size(KT1) {
