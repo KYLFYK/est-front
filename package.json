@@ -28,7 +28,10 @@
     "react-slick": "^0.28.1",
     "sass-loader": "^7.1.0",
     "slick-carousel": "^1.8.1",
-    "style-loader": "^2.0.0"
+    "style-loader": "^2.0.0",
+    "use-supercluster": "^0.2.0",
+    "react-map-gl": "^4.0.14",
+    "recharts": "^2.1.6"
   },
   "devDependencies": {
     "@babel/core": "^7.16.0",
@@ -39,6 +42,7 @@
     "@storybook/react": "^6.3.12",
     "@types/node": "16.11.7",
     "@types/react": "17.0.34",
+    "@types/react-map-gl": "^6.1.1",
     "@types/react-slick": "^0.23.7",
     "babel-loader": "^8.2.3",
     "eslint": "7.32.0",

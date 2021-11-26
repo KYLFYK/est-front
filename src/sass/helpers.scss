@@ -1,0 +1,32 @@
+@import './resolutions.scss';
+@import './colours.scss';
+@import './typography.scss';
+
+.general_container {
+    margin: 0 auto;
+    width: 100%;
+    box-sizing: border-box;
+    position: relative;
+    @include for-size(KT6) {
+        max-width: $KT6;
+    }
+}
+
+.icon-map-helper {
+    background-color: transparent !important;
+    border: 0 !important;
+    &:hover:not(.icon-map-helper--active) img {
+        filter: brightness(2);
+    }
+}
+
+.icon-map-subtext {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    white-space: nowrap;
+    top: 15px;
+    color: $ACCENT;
+    @include ROBOTOBOLD16;
+    font-size: 13px;
+}
