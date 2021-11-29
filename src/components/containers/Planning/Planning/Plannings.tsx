@@ -5,17 +5,21 @@ import Card from '../Card/Card'
 import s from './Plannings.module.scss'
 
 // TODO: Take types from 'model' folder, when global state gets its types
+
+interface IObjectPlanningItem {
+    image: string,
+    price: number,
+    title: string,
+    housing: number,
+    deadline: string,
+    floor: number
+}
+
 interface Props {
     FilterComponent: JSX.Element,
-    planningList: {
-        image: string,
-        price: number,
-        title: string,
-        housing: number,
-        deadline: string,
-        floor: number
-    }[]
+    planningList: IObjectPlanningItem[]
 }
+
 const Planning: React.FC<Props> = ({ FilterComponent, planningList }) => {
     return (
         <HeadLine title="Квартиры и аппартаменты">

@@ -25,7 +25,6 @@ const Map: React.FC<Props> = ({center, location}) => {
     setViewport({ ...viewport, transitionDuration: 100 });
   }
 
-
   return (
     <div className={s.wrapper}>
         <MapGL
@@ -40,7 +39,7 @@ const Map: React.FC<Props> = ({center, location}) => {
             longitude={center.lng}
           > 
             <div style={{transform: 'scale(.5) translate(-100%, -150%)'}}>
-              <Image src={OfficeIcon} alt={'officeIcon'} height={100} width={100} />
+              <Image width={'100%'} height={'100%'} src={OfficeIcon} alt={'officeIcon'}/>
             </div>
           </Marker>
         </MapGL>

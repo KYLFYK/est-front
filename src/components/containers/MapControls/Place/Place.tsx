@@ -1,6 +1,6 @@
 import React from 'react';
 import s from "./Place.module.scss";
-import { ArrowIcon } from '../../../../icons/MapControlsIcons/PlaceIcons/ArrowIcon';
+import { BackIcon } from '../../../../icons/MapControlsIcons/PlaceIcons/BackIcon';
 import { ImagePlace } from './Image/Image';
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
@@ -39,7 +39,7 @@ export const Place = ({ places, placeClicked, setPlaceClicked, active, hidden, p
                 <div className={s.backbutton}>
                     <div className={s.backbuttonContainer}>
                         <button onClick={() => setPlaceClicked('')} className={s.button}>
-                            <ArrowIcon />
+                            <BackIcon />
                         </button>
                         <span className={s.backTitle}>Назад к категориям</span>
                     </div>

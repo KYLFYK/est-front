@@ -1,17 +1,21 @@
 import React from "react";
 import Typography from "../../components/shared/Typography/Typography";
+import { HomeIcon } from "../../icons/MapIcons/HomeIcon/HomeIcon";
 import s from "./IconsCreator.module.scss";
 
 import { Denomination } from "./denomination";
  
 interface Props {
     locationProject: 'startPage' | 'infrastucture' | 'payback' | 'finder'
-    color: string
+    color?: string
     title?: string | number
     clusterPoints?: number
+    colorBody?: any
+    colorPath?: any
 }
 
-export const IconsCreator: React.FC<Props> = ({locationProject, color, title, clusterPoints}) => {
+export const IconsCreator: React.FC<Props> = ({locationProject, color, title, clusterPoints, colorBody, colorPath}) => {
+
     return (
         <div className={s.wrapper}>
             <div className={s.dataWrapper}>
@@ -24,8 +28,7 @@ export const IconsCreator: React.FC<Props> = ({locationProject, color, title, cl
                         </Typography>
                     </div> 
                 }
-
-                { title && 
+                { title && locationProject !== 'payback'  &&
                     <div className={s.title}>
                         <Typography
                             size={'small'}
@@ -35,11 +38,24 @@ export const IconsCreator: React.FC<Props> = ({locationProject, color, title, cl
                     </div>
                 }
             </div>
-            <div
-                className={s.marker}
-                style={{backgroundColor: color}}
-            >
-            </div>
+
+            { locationProject !== 'payback'
+                ? <div
+                    className={s.marker}
+                    style={{backgroundColor: color}}
+                  />
+                : <>
+                    <HomeIcon colorBody={colorBody} colorPath={colorPath}/>
+                    <div className={s.title}>
+                        <Typography
+                            size={'small'}
+                            color={'nude'}
+                        >
+                            {title}
+                        </Typography>
+                    </div>
+                </>
+            }
             
         </div>
     )

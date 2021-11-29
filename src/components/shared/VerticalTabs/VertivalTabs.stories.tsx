@@ -2,7 +2,7 @@ import React from 'react';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 import VerticalTabs from './VerticalTabs';
 import Typography from '../Typography/Typography';
-import ObjectDescription from '../ObjectDescription/ObjectDescription';
+import ObjectDescription from '../../containers/ObjectDescription/ObjectDescription';
 
 export default {
     title: 'Components/VerticalTabs',
