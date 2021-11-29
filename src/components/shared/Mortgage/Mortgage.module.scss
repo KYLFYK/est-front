@@ -10,12 +10,12 @@
   margin:2px 0;
 }
 .paddingCard{
-  padding:8px 15px !important;
+  padding:0px 15px !important;
   background: #FFF !important;
 }
 .paddingTypo{
   font-size: 12px;
-  padding:8px 4px;
+  padding:8px 4px 0 4px;
 }
 .typoHeader{
   margin: 0 0 0 60px;
@@ -257,7 +257,7 @@
   align-items: center;
   text-align: center;
   color: #1A4862;
-  padding: 20px 40px 20px 80px;
+  padding: 0 40px 0 80px;
   //margin-bottom: 30px;
 }
 
@@ -267,16 +267,24 @@
   //  width: 400px;
   //}
   display: grid;
-  grid-template-columns: 3fr 5fr 4fr 4fr;
+  grid-template-columns: 3fr 5fr 4fr 4fr 30px;
   grid-column-gap: 10px;
   margin-bottom: 30px;
   padding: 0 40px;
+}
+.DeleteIconPosition{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 54px;
+  cursor: pointer;
 }
 
 .dropdown {
   width: 100% !important;
   font-family: "RobotoRegular" !important;
   border: 0 solid white !important;
+  padding: 1px !important;
 }
 
 .earlyPaymentDelete {
@@ -300,12 +308,26 @@
 }
 
 .baseInputStyle {
-  border: 1px solid #CAD1DA;
+  border: 0 solid #CAD1DA;
+  height: 24px;
   font-family: "RobotoRegular";
   &::-webkit-datetime-edit-fields-wrapper {
     margin-left: -20px;
   }
+  &::-webkit-calendar-picker-indicator {
+    color: transparent;
+    opacity: 1;
+    background: url(icons/calendar.svg) no-repeat center;
+    background-size: contain;
+  }
 }
+.baseInput{
+  border: 0 solid #CAD1DA;
+  height: 24px;
+  position: relative;
+  right: 15px;
+}
+
 
 .earlyPaymentSubtitle {
   margin-top: 15px;
@@ -319,21 +341,23 @@
 .earlyPaymentChooseBlock {
   display: flex;
   justify-content: center;
+  height: 24px;
 }
 
 .earlyPaymentChooseButton {
-  background-color: #C5A28E;
-  min-width: 100px;
-  margin-left: 20px;
-
+  min-width: 50px;
+  border: 0;
   display: flex;
   justify-content: space-around;
   box-sizing: content-box;
-  padding: 5px 10px;
+  padding: 5px 2px;
+  &:nth-child(2){
+   margin-left: 11px;
+  }
 }
 
 .earlyPaymentButtonActive {
-  background-color: #1A4862;
-  color: #fff;
+  color:#1A4862;
+  border: 0;
 }
 

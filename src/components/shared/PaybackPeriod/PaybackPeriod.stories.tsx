@@ -3,7 +3,7 @@ import { ComponentStory, ComponentMeta } from '@storybook/react';
 import PaybackPeriod from './PaybackPeriod';
 
 export default {
-    title: 'Components/PaybackPeriod',
+    title: 'Containers/PaybackContainer',
     component: PaybackPeriod,
     argTypes: {
         onClick: {action: "onClick"},

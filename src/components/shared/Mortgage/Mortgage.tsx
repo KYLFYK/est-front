@@ -1,7 +1,7 @@
 import React, {ChangeEvent, SyntheticEvent, useState} from 'react';
 import s from './Mortgage.module.scss';
 import classNames from 'classnames';
-import QuestionIcon from './QuestionIcon.svg';
+import QuestionIcon from './icons/QuestionIcon.svg';
 import {InputRange} from './InputRange';
 import {Card} from './Card';
 import BaseButton from "../BaseButton/BaseButtons";
@@ -17,8 +17,11 @@ import {
 } from './ipotek';
 import Typography from "../Typography/Typography";
 import Image from 'next/image'
+import {RadioIconChecked, RadioIconUnChecked} from "./icons/RadioIcon";
+import {makeStyles} from "@material-ui/core";
+import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
 
-export const formatNumbersToCurrency = (value: number, currency: "RUB" | "CNY") => {
+export const formatNumbersToCurrency = (value: number, currency: "RUB" ) => {
     return new Intl.NumberFormat('ru-RU').format(value)
 }
 
@@ -35,10 +38,33 @@ interface Props {
     // choosedHouse: IObjectDetailsEntry
 }
 
+export const useStyles = makeStyles(() => ({
+    root: {
+        backgroundColor: "#fff",
+        width: 200,
+        borderRadius: 8,
+        border: '0px solid #CAD1DA',
+        "&::before": {
+            display: 'none'
+        },
+        "&.MuiInput-underline::after": {
+            display: 'none'
+        },
+        "& > .MuiSelect-root": {
+            padding: '4px 4px 11px 4px !important',
+            "&:focus": {
+                backgroundColor: 'inherit'
+            }
+        }
+    },
+}))
+
+
+
 export const Mortgage: React.FC<Props> = ({}) => {
     // const price = Number(String(choosedHouse.price || "").replace(/[^0-9]+/g, ""));
     const price = 10000000
-
+    const classes = useStyles()
     // функции для преобразования дат, например при получении с датапикера дату в текстовом формате, перевести её в число, добавить месяц, вернуть обратно
     const dateToDigit = (date: string = currentDate()) => {
         return Number(date.split('-')[0]) * 12 + Number(date.split('-')[1]);
@@ -210,7 +236,7 @@ export const Mortgage: React.FC<Props> = ({}) => {
             month: i,
             payment: payments[i - 1].remainder < payment - payments[i - 1].remainder * rate / Number((12 * 100).toFixed(0))
                 ? payments[i - 1].remainder + Number((payments[i - 1].remainder * rate / (12 * 100)).toFixed(0))
-                : Number(payment.toFixed(0)) + Number(summEarlyPay),
+                : Number(payment.toFixed(0)) - Number(summEarlyPay),                                                        // fix date(payment) - срок - отображение (Ваш ежемесячный прятёж)
             debt: payments[i - 1].remainder < payment - payments[i - 1].remainder * rate / Number((12 * 100).toFixed(0))
                 ? payments[i - 1].remainder + Number((payments[i - 1].remainder * rate / (12 * 100)).toFixed(0)) - Number((payments[i - 1].remainder * rate / (12 * 100)).toFixed(0))
                 : Number(payment.toFixed(0)) + Number(summEarlyPay) - Number((payments[i - 1].remainder * rate / (12 * 100)).toFixed(0)),
@@ -233,7 +259,8 @@ export const Mortgage: React.FC<Props> = ({}) => {
     })
 
     const renderResult = earlyRepayment.every((er) => er.summ < 1) ? payment : averagePayment
-
+    console.log(payment)
+    console.log(averagePayment)
     const onChangePaymentPeriod = (value: string, id: string) => {
         const newRepaymentList = earlyRepayment.map((em) => {
             if (em.id === id) {
@@ -277,7 +304,6 @@ export const Mortgage: React.FC<Props> = ({}) => {
                 Срок окупаемости
             </Typography>
             <div className={s.block_container}>
-                {/*<div >*/}
                 <div className={s.container}>
                     {cardhover.map((c, index) => {
                         return (
@@ -304,7 +330,6 @@ export const Mortgage: React.FC<Props> = ({}) => {
                                 <></>
                         )
                     })}
-                    {/*<div className={s.titleCalc}>Ваш ежемесячный пратёж</div>*/}
                     <Card>
                         <div className={s.card}>
                             <div className={s.cards}>
@@ -461,20 +486,7 @@ export const Mortgage: React.FC<Props> = ({}) => {
                             </div>
                         </div>
                     </Card>
-
                     <div className={s.request}>
-                        {/*<Button
-                    onMouseEnter={onMouseHoverHandler}
-                    onMouseLeave={onMouseOutHandler}
-                    onMouseDown={onClickHandler}
-                    className={(clicked && s.buttonClicked) || (hover && s.buttonHovered) || s.button}
-                >
-                    Подать заявку
-                </Button>*/}
-
-
-
-
                         {earlyRepayment.map((r, i) => {
                             return (
                                 <div key={i} className={s.cardEarlyRepayment}>
@@ -485,14 +497,17 @@ export const Mortgage: React.FC<Props> = ({}) => {
                                         <Typography weight={"medium"} className={s.earlyPaymentTitle}>
                                             {`Досрочный платёж ${i + 1}`}
                                         </Typography>
-                                        <BaseButton
-                                            className={s.earlyPaymentDelete}
-                                            onClick={() => {
-                                                setEarlyRepayment(earlyRepayment.filter((ef) => ef.id !== r.id))
-                                            }}
-                                        >
-                                            <CloseOutlined className={s.deleteIcon}/> <Typography>Удалить</Typography>
-                                        </BaseButton>
+                                        {
+                                            earlyRepayment.length-1 === i
+                                                && <div
+                                                    style={{cursor:'pointer', paddingRight:'60px'}}
+                                                    onClick={OnAddEarlyPayment}
+                                                    >
+                                                        <Typography color={'nude'}>
+                                                            + Добавить досрочное погашение
+                                                        </Typography>
+                                                    </div>
+                                        }
                                     </div>
 
                                     <div key={r.id} id={r.id} className={s.cardContainer}>
@@ -500,27 +515,29 @@ export const Mortgage: React.FC<Props> = ({}) => {
                                             <Typography  className={s.paddingTypo} color={'tertiary'} weight={'light'}>
                                                 Дата платежа
                                             </Typography>
-                                            <BaseInput
-                                                className={s.baseInputStyle}
-                                                id={r.id}
-                                                type='date'
-                                                value={earlyRepayment.filter((ef) => ef.id === r.id)[0] && earlyRepayment.filter((ef) => ef.id === r.id)[0].date}
-                                                onChange={(e: ChangeEvent & { target: HTMLInputElement }) => {
-                                                    setEarlyRepayment(earlyRepayment.map((em) => {
-                                                        if (em.id === e.target.id) {
-                                                            return {
-                                                                id: em.id,
-                                                                summ: em.summ,
-                                                                date: e.target.value,
-                                                                diff: dateToDigit(e.target.value) - dateToDigit(currentDate()) + 1,
-                                                                select: em.select,
-                                                                buttons: em.buttons,
+                                            <div className={s.earlyPaymentChooseBlock}>
+                                                <BaseInput
+                                                    className={s.baseInputStyle}
+                                                    id={r.id}
+                                                    type='date'
+                                                    value={earlyRepayment.filter((ef) => ef.id === r.id)[0] && earlyRepayment.filter((ef) => ef.id === r.id)[0].date}
+                                                    onChange={(e: ChangeEvent & { target: HTMLInputElement }) => {
+                                                        setEarlyRepayment(earlyRepayment.map((em) => {
+                                                            if (em.id === e.target.id) {
+                                                                return {
+                                                                    id: em.id,
+                                                                    summ: em.summ,
+                                                                    date: e.target.value,
+                                                                    diff: dateToDigit(e.target.value) - dateToDigit(currentDate()) + 1,
+                                                                    select: em.select,
+                                                                    buttons: em.buttons,
+                                                                }
                                                             }
-                                                        }
-                                                        return em
-                                                    }))
-                                                }}
-                                            />
+                                                            return em
+                                                        }))
+                                                    }}
+                                                />
+                                            </div>
                                         </Card>
 
 
@@ -532,7 +549,7 @@ export const Mortgage: React.FC<Props> = ({}) => {
                                                           value={r.select}
                                                           onChange={(value: any) => onChangePaymentPeriod(value, r.id)}
                                                           placeholder="Выберите периодичность платежа"
-                                                          className={s.dropdown}
+                                                          className={classes.root}
                                             />
                                         </Card>
 
@@ -560,6 +577,11 @@ export const Mortgage: React.FC<Props> = ({}) => {
                                                         }))
                                                     }}
                                                 >
+                                                    {
+                                                        r.buttons === EarlyPaymentButtonsTypes.PAYMENT
+                                                            ? <RadioIconChecked/>
+                                                            : <RadioIconUnChecked/>
+                                                    }
                                                     <Typography>Платеж</Typography>
                                                 </BaseButton>
 
@@ -582,7 +604,12 @@ export const Mortgage: React.FC<Props> = ({}) => {
                                                         }))
                                                     }}
                                                 >
-                                                    <Typography color={'secondary'}>Срок</Typography>
+                                                    {
+                                                        r.buttons === EarlyPaymentButtonsTypes.PAYMENT
+                                                           ? <RadioIconUnChecked/>
+                                                           : <RadioIconChecked/>
+                                                    }
+                                                    <Typography color={'accent'}>Срок</Typography>
                                                 </BaseButton>
                                             </div>
 
@@ -593,7 +620,7 @@ export const Mortgage: React.FC<Props> = ({}) => {
                                                 Сумма
                                             </Typography>
                                             <BaseInput
-                                                className={s.baseInputStyle}
+                                                className={s.baseInput}
                                                 id={r.id}
                                                 type="text"
                                                 onChange={onChangePaymentSumm}
@@ -601,6 +628,13 @@ export const Mortgage: React.FC<Props> = ({}) => {
                                                 value={earlyRepayment.filter((ef) => ef.id === r.id)[0] && formatNumbersToCurrency(earlyRepayment.filter((ef) => ef.id === r.id)[0].summ, "RUB")}
                                             />
                                         </Card>
+                                        <div
+                                            className={s.DeleteIconPosition}
+                                            onClick={() => {
+                                            setEarlyRepayment(earlyRepayment.filter((ef) => ef.id !== r.id))}}
+                                        >
+                                            <DeleteOutlineIcon color={'error'}  />
+                                        </div>
                                     </div>
                                 </div>
                             )

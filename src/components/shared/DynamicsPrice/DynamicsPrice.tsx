@@ -4,7 +4,7 @@ import Chart from "../../containers/ChartPayback";
 import Typography from "../Typography/Typography";
 import {Card} from "../Mortgage/Card";
 
-const DynamicsPriceContainer = () => {
+const DynamicsPrice = () => {
     return (
         <div >
             <Typography weight={'bold'} className={css.margin}>
@@ -17,4 +17,4 @@ const DynamicsPriceContainer = () => {
     );
 };
 
-export default DynamicsPriceContainer;
+export default DynamicsPrice;

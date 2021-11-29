@@ -3,7 +3,7 @@ import { ComponentStory, ComponentMeta } from '@storybook/react';
 import PaybackContainer from './PaybackContainer';
 
 export default {
-    title: 'Components/PaybackContainer',
+    title: 'Containers/PaybackContainer',
     component: PaybackContainer,
     argTypes: {
         onClick: {action: "onClick"},

@@ -1,6 +1,6 @@
 import React, {FC} from 'react';
 import HeadLine from "../../shared/HeadLine/HeadLine";
-import DynamicsPriceContainer from "../../shared/DynamicsPrice/DynamicsPriceContainer";
+import DynamicsPrice from "../../shared/DynamicsPrice/DynamicsPrice";
 import PaybackPeriod from "../../shared/PaybackPeriod/PaybackPeriod";
 import css from './PaybackContainer.module.css'
 import DynamicsPriceTable from "../../shared/DynamicsPrice/DynamicsPriceTable";
@@ -23,7 +23,7 @@ const PaybackContainer :FC<PaybackContainerType> = ({averagePrice}) => {
             <HeadLine title={'Окупаемость'}>
                 <div className={css.columnGrid_top}>
                     <PaybackPeriod/>
-                    <DynamicsPriceContainer/>
+                    <DynamicsPrice/>
                 </div>
                 <div className={css.columnGrid_Bottom}>
                     <DynamicsPriceTable/>

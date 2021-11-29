@@ -5,9 +5,8 @@ import {Chart} from "./Chart";
 import QuestionIcon from './QuestionIcon.svg';
 import Typography from "../Typography/Typography";
 import Image from 'next/image'
+
 const DynamicsPriceTable = () => {
-
-
     const [cardX, setCardX] = useState(0);
     const [cardhover, setCardhover] = useState<boolean[]>([false, false, false]);
     const [cardCoords, setCardcoords] = useState<[number, number]>([0, 0])
@@ -35,6 +34,8 @@ const DynamicsPriceTable = () => {
                         <Image
                             id={'2'}
                             src={QuestionIcon}
+                            height={20}
+                            width={20}
                             onMouseEnter={onMouseCardhoverHandler}
                             onMouseLeave={onMouseCardoutHandler}
                             alt='icon'

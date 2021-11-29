@@ -1,10 +1,10 @@
 import React from 'react';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
-import DynamicsPriceTable from './DynamicsPriceTable';
+import DynamicsPrice from './DynamicsPrice';
 
 export default {
     title: 'Containers/PaybackContainer',
-    component: DynamicsPriceTable,
+    component: DynamicsPrice,
     argTypes: {
         onClick: {action: "onClick"},
         type: {
@@ -12,10 +12,10 @@ export default {
             control: { type: 'select' }
         },
     },
-} as ComponentMeta<typeof DynamicsPriceTable>;
+} as ComponentMeta<typeof DynamicsPrice>;
 
-const Template: ComponentStory<typeof DynamicsPriceTable> = (args) => <DynamicsPriceTable  />;
+const Template: ComponentStory<typeof DynamicsPrice> = (args) => <DynamicsPrice  />;
 
-export const DinamicPrice_ = Template.bind({});
-DinamicPrice_.args = {
+export const DynamicsPrice_ = Template.bind({});
+DynamicsPrice_.args = {
 };
