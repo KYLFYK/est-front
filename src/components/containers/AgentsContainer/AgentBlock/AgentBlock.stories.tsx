@@ -2,7 +2,6 @@ import React from 'react';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 import { AgentBlock } from './AgentBlock';
 
-
 export default {
     title: 'Components/AgentsContainer',
     component: AgentBlock,
