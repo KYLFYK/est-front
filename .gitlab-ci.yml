@@ -20,7 +20,7 @@ build:
     # - yarn install --production --silent \
     # - apk del .build-deps
      - yarn install
-     - yarn run build_prod
+     - yarn run build
      - mkdir public
     #- ls -la
     #- ls -la dist
