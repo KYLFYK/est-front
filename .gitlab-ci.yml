@@ -21,7 +21,6 @@ build:
     # - apk del .build-deps
      - yarn install
      - yarn run build
-     - mkdir public
     #- ls -la
     #- ls -la dist
      - cp -rf dist/* public
