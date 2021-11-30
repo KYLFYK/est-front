@@ -1,20 +1,21 @@
 import React from 'react';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
-import Map from '.';
+import MapModal from '.';
 import { mapData } from './config';
 
 export default {
-    title: 'Containers/MapFinder',
-    component: Map,
+    title: 'Containers/Maps/MapFinder',
+    component: MapModal,
     argTypes: {
         test: {type: 'string', defaultValue: "teststr"}
     }
-} as ComponentMeta<typeof Map>;
+} as ComponentMeta<typeof MapModal>;
 
 
-const Template: ComponentStory<typeof Map> = (args: any) => <Map {...args} isStorie />;
+const Template: ComponentStory<typeof MapModal> = (args: any) => <MapModal {...args} isStorie />;
 export const FinderMap = Template.bind({});
 FinderMap.args = {
     mapData: mapData,
     location: 'finder',
+    center: {lat: 45.16, lng: 36.90},
 };

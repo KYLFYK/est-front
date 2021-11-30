@@ -1,4 +1,4 @@
-import { IObjectEntry } from "../../../../../api/objects/interfaces";
+import { IObjectEntry } from "../../../../../../api/objects/interfaces";
 
 export interface IObjectPayback {
     month_rent_price: null | number,

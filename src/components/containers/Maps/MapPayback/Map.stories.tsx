@@ -1,9 +1,11 @@
 import React from 'react';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 import Map from '.';
+import { currentHouse } from './config';
+import { objects } from './config';
 
 export default {
-    title: 'Containers/MapStart',
+    title: 'Containers/Maps/MapPayback',
     component: Map,
     argTypes: {
         test: {type: 'string', defaultValue: "teststr"}
@@ -12,8 +14,9 @@ export default {
 
 
 const Template: ComponentStory<typeof Map> = (args: any) => <Map {...args} isStorie />;
-export const StartMap = Template.bind({});
-StartMap.args = {
-    center: {lat: 44.959975, lng: 34.109053},
-    location: 'start',
+export const PaybackMap = Template.bind({});
+PaybackMap.args = {
+    currentHouse: currentHouse,
+    objects: objects,
+    location: 'payback',
 };

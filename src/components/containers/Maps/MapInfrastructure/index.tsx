@@ -2,25 +2,26 @@ import React, {useState} from "react";
 import MapGL, {Marker} from "react-map-gl";
 import "mapbox-gl/dist/mapbox-gl.css";
 import { MapControls } from "../MapControls/Buttons/index";
-import { IconsCreator } from "../../../lib/mapIcons/IconsCreator";
-import BaseButton from "../../shared/BaseButton/BaseButtons";
-import { ArrowIcon } from "../../../icons/MapControlsIcons/PlaceIcons/ArrowIcon";
+import { IconsCreator } from "../../../../lib/mapIcons/IconsCreator";
+import BaseButton from "../../../shared/BaseButton/BaseButtons";
+import { ArrowIcon } from "../../../../icons/MapControlsIcons/PlaceIcons/ArrowIcon";
 import { CheckBox } from "../MapControls/Checkbox/CheckBox";
 import { Place } from "../MapControls/Place/Place";
 import s from './styles.module.scss';
 
 interface Props {
-  places: any
+  currentHouse: any
+  infrastructura: any
   location: 'finder' | 'start' | 'infrastructure' | 'payback'
 }
 
-const Map: React.FC<Props> = ({places, location}) => {
-
+const Map: React.FC<Props> = ({currentHouse, infrastructura, location}) => {
+  const places = [currentHouse, ...infrastructura];
   const getUniqueTypesOptions = React.useCallback((categoriesList: string[]) => {
     const uniqueSetTypes = Array.from(new Set(categoriesList));
     const optionsList: any = uniqueSetTypes.map((category) => {
-        const placeByCategory = places.find((place: any) => (place.category || place.type[0]) === category)
-        const placeType = placeByCategory ? placeByCategory.type[0] : "Unknown"
+        const placeByCategory = places.find((place: any) => (place.category) === category)
+        const placeType = placeByCategory ? placeByCategory.type : "Unknown"
         return {
             label: category,
             value: placeType
@@ -29,7 +30,7 @@ const Map: React.FC<Props> = ({places, location}) => {
     return optionsList
   }, [places])
   
-  const uniqueTypesList: any = React.useMemo(() => getUniqueTypesOptions(places.map((pl: any) => pl.category || pl.type[0])), [places, getUniqueTypesOptions]);
+  const uniqueTypesList: any = React.useMemo(() => getUniqueTypesOptions(places.map((pl: any) => pl.category)), [places, getUniqueTypesOptions]);
   const [updatePlaces, setUpdatePlaces] = useState(places);
   const [pressed, setPressed] = useState<string[]>(uniqueTypesList.map((item: any) => item.label));
 
@@ -49,15 +50,10 @@ const Map: React.FC<Props> = ({places, location}) => {
       showFilteredResults(newFilters)
   }
   const showFilteredResults = (filters: string[]) => {
-    let filteredResults = places.filter((pl: any) => filters.includes(pl.category || pl.type[0]))
+    let filteredResults = places.filter((pl: any) => filters.includes(pl.category))
     setUpdatePlaces(filteredResults);
   }
   const [picSlider, setPicSlider] = useState(0);
-
-  const center = {
-    lat: 45.16,
-    lng: 36.90
-  }
 
   const [activeMarker, setActivemarker] = useState(0)
   const [open, setOpen] = useState(true)
@@ -65,15 +61,15 @@ const Map: React.FC<Props> = ({places, location}) => {
   const [viewport, setViewport] = useState({
     width: "100%",
     height: "100%",
-    latitude: center.lat,
-    longitude: center.lng,
-    zoom: 6,
+    latitude: currentHouse.lat,
+    longitude: currentHouse.lng,
+    zoom: 9,
   });
 
   const _onViewportChange = (viewport: any) => {
     setViewport({ ...viewport, transitionDuration: 100 });
   } 
-  console.log(updatePlaces)  
+
   return (
     <div className={s.wrapper}>
         <MapGL
@@ -88,20 +84,25 @@ const Map: React.FC<Props> = ({places, location}) => {
         {updatePlaces.map((up: any) => {
           return (
             <Marker
-                key={up.id}
-                latitude={Number(up.address.geo.lat)}
-                longitude={Number(up.address.geo.lng)}
+                key={up.object_id}
+                latitude={up.lat ? up.lat : Number(up.address.geo.lat)}
+                longitude={up.lng ? up.lng : Number(up.address.geo.lng)}
             >
+              <div style={{transform: `${up.type !== 'apartment' ? 'translate(-50%, -50%)' : 'translate(0, 0)'}`}}>
                 <BaseButton className={s.button} onClick={() => {
-                  setActivemarker(up.id)
+                  setActivemarker(up.object_id)
                   setOpen(true)
                 }}>
                   <IconsCreator 
-                    locationProject={'payback'}
-                    colorBody={up.id === activeMarker ? '#C5A28E' : '#FFFFFF'}
-                    colorPath={up.id === activeMarker ? '#FFFFFF' : '#C5A28E'}
+                    locationProject={'infrastucture'}
+                    colorBody={up.object_id === activeMarker ? '#0B3248' : '#1A4862'}
+                    colorPath={up.object_id === activeMarker ? '#FFFFFF' : '#FFFFFF'}
+                    currentHouse={currentHouse}
+                    type={up.type}
+                    active={up.object_id === activeMarker}
                   />
                 </BaseButton>
+              </div>
             </Marker>
           )
         })}
@@ -127,7 +128,7 @@ const Map: React.FC<Props> = ({places, location}) => {
                             </div>
                         </button>
         </div>
-        <MapControls location={location} viewport={viewport} setViewport={setViewport} center={center} />
+        <MapControls location={location} viewport={viewport} setViewport={setViewport} center={{lat: currentHouse.lat, lng: currentHouse.lng}} />
     </div>
   );
 };

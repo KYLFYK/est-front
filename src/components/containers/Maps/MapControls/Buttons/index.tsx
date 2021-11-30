@@ -1,11 +1,11 @@
 import React from 'react';
 import s from './styles.module.scss';
-import BaseButton from '../../../shared/BaseButton/BaseButtons';
-import {AltCenter} from '../../../../icons/MapControlsIcons/AltCenter';
-import {Center} from '../../../../icons/MapControlsIcons/Center';
-import {FullScreen} from '../../../../icons/MapControlsIcons/FullScreen';
-import {ZoomIn} from '../../../../icons/MapControlsIcons/ZoomIn';
-import {ZoomOut} from '../../../../icons/MapControlsIcons/ZoomOut';
+import BaseButton from '../../../../shared/BaseButton/BaseButtons';
+import {AltCenter} from '../../../../../icons/MapControlsIcons/AltCenter';
+import {Center} from '../../../../../icons/MapControlsIcons/Center';
+import {FullScreen} from '../../../../../icons/MapControlsIcons/FullScreen';
+import {ZoomIn} from '../../../../../icons/MapControlsIcons/ZoomIn';
+import {ZoomOut} from '../../../../../icons/MapControlsIcons/ZoomOut';
 
 interface Props {
     viewport: any

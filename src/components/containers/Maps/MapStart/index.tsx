@@ -4,7 +4,7 @@ import "mapbox-gl/dist/mapbox-gl.css";
 import Image from 'next/image';
 import { MapControls } from "../MapControls/Buttons/index";
 import s from './styles.module.scss';
-import OfficeIcon from "../../../icons/MapIcons/OfficeIcon/OfficeIcon.png";
+import OfficeIcon from "../../../../icons/MapIcons/OfficeIcon/OfficeIcon.png";
 
 interface Props {
   center: any

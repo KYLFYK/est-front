@@ -30,6 +30,9 @@ import { OfferNews } from '../src/components/containers/OfferNews/offerNews'
 import Header from '../src/components/widget/Header/Header'
 import { mocAdvantages } from '../src/components/containers/AdvantageList/config'
 import DeveloperTabs from '../src/components/tabs/Developer'
+import Map from '../src/components/containers/Maps/MapInfrastructure/index'
+import {currentHouse} from '../src/components/containers/Maps/MapInfrastructure/config'
+import {infrastructura} from '../src/components/containers/Maps/MapInfrastructure/config'
 
 
 const emunsArray = [{ title: 'цена', value: '5 000 000 ' }, { title: 'Тип объекта', value: 'участок' },
@@ -90,7 +93,7 @@ const Home: NextPage = () => {
         <h3>House Card:</h3>
         <ObjectCard houseData={new APIObject.types.IObjectEntry()} />
       </div>
-
+      <Map infrastructura={infrastructura} currentHouse={currentHouse} location={'infrastructure'}/>
       <h3>Header : </h3>
       <Header />
       <h3>Footer :</h3>

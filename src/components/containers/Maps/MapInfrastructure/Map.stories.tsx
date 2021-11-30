@@ -1,10 +1,11 @@
 import React from 'react';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 import Map from '.';
-import { places } from './config';
+import { infrastructura } from './config';
+import { currentHouse } from './config';
 
 export default {
-    title: 'Containers/MapInfrastructure',
+    title: 'Containers/Maps/MapInfrastructure',
     component: Map,
     argTypes: {
         test: {type: 'string', defaultValue: "teststr"}
@@ -15,7 +16,8 @@ export default {
 const Template: ComponentStory<typeof Map> = (args: any) => <Map {...args} isStorie />;
 export const InfrastructureMap = Template.bind({});
 InfrastructureMap.args = {
-    places: places,
+    currentHouse: currentHouse,
+    infrastructura: infrastructura,
     location: 'infrastructure',
 };
 

@@ -3,19 +3,23 @@ import MapGL, {Marker} from "react-map-gl";
 import "mapbox-gl/dist/mapbox-gl.css";
 import useSupercluster from "use-supercluster";
 import { MapControls } from "../MapControls/Buttons/index";
-import { IconsCreator } from "../../../lib/mapIcons/IconsCreator";
-import { MappingCluster } from "../../../lib/mapping/mapCluster";
-import BaseButton from "../../shared/BaseButton/BaseButtons";
-import { ArrowIcon } from "../../../icons/MapControlsIcons/PlaceIcons/ArrowIcon";
-import ObjectCard from "../Card/index";
+import { IconsCreator } from "../../../../lib/mapIcons/IconsCreator";
+import { MappingCluster } from "../../../../lib/mapping/mapCluster";
+import BaseButton from "../../../shared/BaseButton/BaseButtons";
+import { CrossIcon } from "../../../../icons/MapControlsIcons/PlaceIcons/CrossIcon";
+import ObjectCard from "../../Card/index";
 import s from './styles.module.scss';
 
 interface Props {
   mapData: any
   location: 'finder' | 'start' | 'infrastructure' | 'payback'
+  modal: boolean
+  setModal: any
+  viewport: any
+  setViewport: any
 }
 
-const Map: React.FC<Props> = ({mapData, location}) => {
+const Map: React.FC<Props> = ({mapData, location, modal, setModal, viewport, setViewport}) => {
 
   const center = {
     lat: 45.16,
@@ -25,19 +29,9 @@ const Map: React.FC<Props> = ({mapData, location}) => {
   const [activeMarker, setActivemarker] = useState(0)
   const [choosedPlaces, setChoosedplaces] = useState([])
   const [open, setOpen] = useState(false)
-
-  const [viewport, setViewport] = useState({
-    width: "100%",
-    height: "100%",
-    latitude: center.lat,
-    longitude: center.lng,
-    zoom: 6,
-  });
   
-  const [modal, setModal] = useState(false);
   const onsetModal = () => {
     setModal(!modal)
-    console.log(`установлено ${modal}`)
   }
   const mapRef: any = useRef(null);
 
@@ -85,6 +79,7 @@ const Map: React.FC<Props> = ({mapData, location}) => {
                   latitude={latitude}
                   longitude={longitude}
                 >
+                  <div style={{transform: 'translate(-50%, -50%)'}}>
                   <BaseButton className={s.button} onClick={() => {
                     setActivemarker(cluster.id)
                     setChoosedplaces(supercluster.getLeaves(cluster.id, Infinity))
@@ -97,6 +92,7 @@ const Map: React.FC<Props> = ({mapData, location}) => {
                       clusterPoints={pointCount}
                     />
                   </BaseButton>
+                  </div>
                 </Marker>
               );
             }
@@ -107,6 +103,7 @@ const Map: React.FC<Props> = ({mapData, location}) => {
                 latitude={latitude}
                 longitude={longitude}
               >
+                <div style={{transform: 'translate(-50%, -50%)'}}>
                 <BaseButton className={s.button} onClick={() => {
                   setActivemarker(cluster.properties.prop.id)
                   setChoosedplaces(cluster)
@@ -118,19 +115,22 @@ const Map: React.FC<Props> = ({mapData, location}) => {
                     title={cluster.properties.prop.price}
                   />
                 </BaseButton>
+                </div>
               </Marker>
             );
           })}
         </MapGL>
         <div className={s.dynamicBar}>
                         <div className={open && s.localbarActive || s.localbar}>
-                          {choosedPlaces.length && choosedPlaces.map((cp: any, i: number) => <ObjectCard key={i} houseData={cp.properties.prop}/>)}
+                          <div className={s.checkboxTitle}> 
+                            <div> {choosedPlaces.length} объектов </div>
+                            <BaseButton className={s.button} onClick={() => { setOpen(!open) }}>
+                                <CrossIcon />
+                            </BaseButton>
+                          </div>
+                          {choosedPlaces.length && choosedPlaces.map((cp: any, i: number) => <div key={i} style={{padding:'5px'}}><ObjectCard key={i} houseData={cp.properties.prop}/></div>)}
                         </div>
-                        <button className={open ? s.openButton : s.backButton} onClick={() => { setOpen(!open) }}>
-                            <div className={open ? s.openArrow : s.arrow}>
-                                <ArrowIcon />
-                            </div>
-                        </button>
+                        
         </div>
         <MapControls location={location} viewport={viewport} setViewport={setViewport} center={center} setModal={onsetModal}/>
     </div>

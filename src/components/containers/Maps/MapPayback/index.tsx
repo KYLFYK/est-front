@@ -2,36 +2,33 @@ import React, {useState} from "react";
 import MapGL, {Marker} from "react-map-gl";
 import "mapbox-gl/dist/mapbox-gl.css";
 import { MapControls } from "../MapControls/Buttons/index";
-import { IconsCreator } from "../../../lib/mapIcons/IconsCreator";
-import BaseButton from "../../shared/BaseButton/BaseButtons";
+import { IconsCreator } from "../../../../lib/mapIcons/IconsCreator";
+import BaseButton from "../../../shared/BaseButton/BaseButtons";
 import s from './styles.module.scss';
 
 interface Props {
-  mapData: any
+  currentHouse: any
+  objects: any
   location: 'finder' | 'start' | 'infrastructure' | 'payback'
 }
 
-const Map: React.FC<Props> = ({mapData, location}) => {
-
-  const center = {
-    lat: 45.16,
-    lng: 36.90
-  }
+const Map: React.FC<Props> = ({currentHouse, objects, location}) => {
+  const mapData = [currentHouse, ...objects];
 
   const [activeMarker, setActivemarker] = useState(0)
 
   const [viewport, setViewport] = useState({
     width: "100%",
     height: "100%",
-    latitude: center.lat,
-    longitude: center.lng,
+    latitude: currentHouse.lat,
+    longitude: currentHouse.lng,
     zoom: 6,
   });
 
   const _onViewportChange = (viewport: any) => {
     setViewport({ ...viewport, transitionDuration: 100 });
   } 
-  console.log(mapData)
+
   return (
     <div className={s.wrapper}>
         <MapGL
@@ -47,9 +44,10 @@ const Map: React.FC<Props> = ({mapData, location}) => {
             return (
               <Marker
                   key={md.object_id}
-                  latitude={md.lng}
-                  longitude={md.lat}
+                  latitude={md.lat}
+                  longitude={md.lng}
               >
+                <div style={{transform: 'translate(-50%, -50%)'}}>
                   <BaseButton className={s.button} onClick={() => {
                     setActivemarker(md.object_id)
                   }}>
@@ -58,8 +56,11 @@ const Map: React.FC<Props> = ({mapData, location}) => {
                       title={md.price}
                       colorBody={md.object_id === activeMarker ? '#C5A28E' : '#FFFFFF'}
                       colorPath={md.object_id === activeMarker ? '#FFFFFF' : '#C5A28E'}
+                      currentHouse={currentHouse}
+                      type={md.type}
                     />
                   </BaseButton>
+                </div>
               </Marker>
             )
           })}
@@ -68,7 +69,6 @@ const Map: React.FC<Props> = ({mapData, location}) => {
                         <div className={s.localbarActive}>
                           {mapData.map((md:any) => {
                             return (
-
                                 <div 
                                   className={`${s.card} ${Number(activeMarker) === Number(md.object_id) && s.select}`}  
                                   key={md.object_id} 
@@ -89,7 +89,7 @@ const Map: React.FC<Props> = ({mapData, location}) => {
                           )}
                         </div>
         </div>
-        <MapControls location={location} viewport={viewport} setViewport={setViewport} center={center} />
+        <MapControls location={location} viewport={viewport} setViewport={setViewport} center={{lat: currentHouse.lat, lng: currentHouse.lng}} />
     </div>
   );
 };

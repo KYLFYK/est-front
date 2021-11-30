@@ -1,6 +1,6 @@
-@import '../../../sass/colours.scss';
-@import '../../../sass/resolutions.scss';
-@import '../../../sass/scrollbars.scss';
+@import '../../../../sass/colours.scss';
+@import '../../../../sass/resolutions.scss';
+@import '../../../../sass/scrollbars.scss';
 
 .wrapper {
     position: relative;
@@ -80,6 +80,7 @@
         flex-direction: column;
     }
     @include for-size(KT2) {
+        flex-direction: row;
         top: 20px; 
         left: -500px;
         width: 323px;
@@ -97,7 +98,6 @@
     z-index: 10;
     transition: all .5s;
     display: flex;
-    overflow: scroll;
     @include for-size(KT1) {
         border-radius: 10px;
         flex-direction: column;
@@ -107,6 +107,7 @@
     }
     @include for-size(KT2) {
         border-radius: 10px 0 10px 10px;
+        flex-direction: row;
         height: 660px;
         width: 323px;
         left: 20px;
