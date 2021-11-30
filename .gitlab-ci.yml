@@ -14,11 +14,11 @@ variables:
 build:
   stage: build
   script:
-     - RUN apk add --no-cache --virtual .build-deps alpine-sdk python \
-     - RUN npm install --production --silent \
-     - RUN apk del .build-deps
-     - yarn install
-     - yarn run build_prod
+     - apk add --no-cache --virtual .build-deps alpine-sdk python \
+     - yarn install --production --silent \
+     - apk del .build-deps
+     #- yarn install
+     #- yarn run build_prod
      - mkdir public
     #- ls -la
     #- ls -la dist
