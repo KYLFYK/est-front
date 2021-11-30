@@ -1,4 +1,4 @@
-image: node:latest
+image: docker:latest
 
 stages:
    - build
@@ -12,8 +12,8 @@ variables:
 build:
   stage: build
   before_script:
-     - node -v
-     - apt install g++ make python
+    #- node -v
+     - apk install g++ make python
   script:
     # - apk add --no-cache --virtual .build-deps alpine-sdk python \
     # - yarn install --production --silent \
