@@ -27,7 +27,7 @@ const Map: React.FC<Props> = ({mapData, location, modal, setModal, viewport, set
   }
 
   const [activeMarker, setActivemarker] = useState(0)
-  const [choosedPlaces, setChoosedplaces] = useState([])
+  const [choosedPlaces, setChoosedplaces] = useState<any>([])
   const [open, setOpen] = useState(false)
   
   const onsetModal = () => {
@@ -50,7 +50,7 @@ const Map: React.FC<Props> = ({mapData, location, modal, setModal, viewport, set
   const _onViewportChange = (viewport: any) => {
     setViewport({ ...viewport, transitionDuration: 100 });
   } 
-
+  console.log(choosedPlaces)
   return (
     <div className={s.wrapper}>
         <MapGL
@@ -60,7 +60,7 @@ const Map: React.FC<Props> = ({mapData, location, modal, setModal, viewport, set
           onViewportChange={_onViewportChange}
           onClick={() => {
             setActivemarker(0)
-            setChoosedplaces([])
+            setChoosedplaces('')
             setOpen(false)
           }}
           ref={mapRef}
@@ -84,6 +84,7 @@ const Map: React.FC<Props> = ({mapData, location, modal, setModal, viewport, set
                     setActivemarker(cluster.id)
                     setChoosedplaces(supercluster.getLeaves(cluster.id, Infinity))
                     setOpen(true)
+                    
                   }}>
                     <IconsCreator 
                       locationProject={'finder'}
@@ -99,19 +100,19 @@ const Map: React.FC<Props> = ({mapData, location, modal, setModal, viewport, set
 
             return (
               <Marker
-                key={cluster.properties.prop.id}
+                key={cluster.properties.prop.object_id}
                 latitude={latitude}
                 longitude={longitude}
               >
                 <div style={{transform: 'translate(-50%, -50%)'}}>
                 <BaseButton className={s.button} onClick={() => {
-                  setActivemarker(cluster.properties.prop.id)
-                  setChoosedplaces(cluster)
+                  setActivemarker(cluster.properties.prop.object_id)
+                  setChoosedplaces([cluster])
                   setOpen(true)
                 }}>
                   <IconsCreator 
                     locationProject={'finder'}
-                    color={cluster.properties.prop.id === activeMarker ? '#C5A28E' : '#1A4862'}
+                    color={cluster.properties.prop.object_id === activeMarker ? '#C5A28E' : '#1A4862'}
                     title={cluster.properties.prop.price}
                   />
                 </BaseButton>

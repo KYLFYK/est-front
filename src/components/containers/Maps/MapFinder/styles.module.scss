@@ -97,8 +97,10 @@
     z-index: 10;
     transition: all .5s;
     display: flex;
-    overflow: scroll;
     padding: 5px;
+    overflow-y: scroll;
+    scrollbar-width: 1px;
+    @include MapScrollbar;
     @include for-size(KT1) {
         border-radius: 10px;
         flex-direction: column;
