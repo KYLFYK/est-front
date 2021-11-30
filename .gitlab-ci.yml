@@ -9,8 +9,6 @@ variables:
   DEPLOY_USER: deployer
   DEPLOY_PORT: 20071 #22 #20064
 
-
-
 build:
   stage: build
   before_script:
