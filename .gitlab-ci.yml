@@ -13,7 +13,7 @@ build:
   stage: build
   before_script:
      - node -v
-     - apk add g++ make python
+     - apt install g++ make python
   script:
     # - apk add --no-cache --virtual .build-deps alpine-sdk python \
     # - yarn install --production --silent \
