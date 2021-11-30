@@ -3,11 +3,11 @@ export const MappingCluster = (objs: any) => {
     objs.forEach((o: any) => {
         returnedObjs.push({
             properties:{
-                cluster: false, 
+                cluster: false,
                 prop: o
-            }, 
+            },
             geometry:{
-                type:'Point', 
+                type:'Point',
                 coordinates:[o.lat, o.lng]
             }
         })

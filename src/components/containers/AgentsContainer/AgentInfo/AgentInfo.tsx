@@ -4,22 +4,39 @@ import { IconTelegram } from '../../../../icons/Agent/IconTelegram';
 import { IconWhatsapp } from '../../../../icons/Agent/IconWhatsapp';
 import Typography from '../../../shared/Typography/Typography';
 import css from "./AgentInfo.module.scss";
+import {IconPhone} from "../../../../icons/Agent/IconPhone";
 
 
 type AgentDataPropsType = {
-    name: string
-    heldPost: string
+    img: string
+    connection:{
+        whatsApp:string,
+        telegram:string,
+        email:string
+        phone:string
+    },
+    infoAgent:{
+        fullName:string,
+        heldPost:string,
+        professionalExperience:string,
+        completed:string,
+        inWork:string,
+        whatsApp:string,
+        telegram:string,
+        phone:string,
+        email:string
+    }
 }
 
-export const AgentInfo: React.FC<AgentDataPropsType> = ({ name, heldPost }) => {
+export const AgentInfo: React.FC<AgentDataPropsType> = ({ img,connection,infoAgent }) => {
     return (
         <>
-            <img className={css.photoAgent} src="https://cana-da.ru/wp-content/uploads/2020/08/day-1-2048x2048.jpg" alt="agent" />
+            <img className={css.photoAgent} src={img} alt="agent" />
             <Typography size={'default'} color="accent" weight={'medium'} className={css.marginTop} >
-                {name}
+                {infoAgent.fullName}
             </Typography>
             <Typography size={'default'} color="accent" >
-                {heldPost}
+                {infoAgent.heldPost}
             </Typography>
             <div className={css.gridWork}>
                 <div className={css.marginWork}>
@@ -27,7 +44,7 @@ export const AgentInfo: React.FC<AgentDataPropsType> = ({ name, heldPost }) => {
                         Работает
                     </Typography>
                     <Typography size={'default'} color="accent" weight={'medium'} >
-                        5лет
+                        {infoAgent.professionalExperience}
                     </Typography>
                 </div>
                 <div className={css.marginWork}>
@@ -35,7 +52,7 @@ export const AgentInfo: React.FC<AgentDataPropsType> = ({ name, heldPost }) => {
                         Завершенных
                     </Typography>
                     <Typography size={'default'} color="accent" weight={'medium'} >
-                        43 проекта
+                        {infoAgent.completed}
                     </Typography>
                 </div>
                 <div className={css.marginWork}>
@@ -43,7 +60,7 @@ export const AgentInfo: React.FC<AgentDataPropsType> = ({ name, heldPost }) => {
                         В работе
                     </Typography>
                     <Typography size={'default'} color="accent" weight={'medium'} >
-                        2 проекта
+                        {infoAgent.inWork}
                     </Typography>
                 </div>
             </div>
@@ -51,25 +68,29 @@ export const AgentInfo: React.FC<AgentDataPropsType> = ({ name, heldPost }) => {
                 <div className={css.marginData}>
                     <IconWhatsapp />
                     <Typography size={'default'} color="accent"  >
-                        +7 912 426 30 98
-                    </Typography>
-                </div>
-                <div className={css.marginData}>
-                    <IconMail />
-                    <Typography size={'default'} color="accent"  >
-                        +7 912 426 30 98
+                        {/*{connection.whatsApp}*/}
+                        {infoAgent.whatsApp}
                     </Typography>
                 </div>
                 <div className={css.marginData}>
                     <IconTelegram />
                     <Typography size={'default'} color="accent"  >
-                        +7 912 426 30 98
+                        {/*{connection.telegram}*/}
+                        {infoAgent.telegram}
+                    </Typography>
+                </div>
+                <div className={css.marginData}>
+                    <IconPhone/>
+                    <Typography size={'default'} color="accent"  >
+                        {/*{connection.phone}*/}
+                        {infoAgent.phone}
                     </Typography>
                 </div>
                 <div className={css.marginData}>
                     <IconMail />
                     <Typography size={'default'} color="accent"  >
-                        marketPlace@mail.ru
+                        {/*{connection.email}*/}
+                        {infoAgent.email}
                     </Typography>
                 </div>
             </div>

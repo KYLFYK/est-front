@@ -1,0 +1,362 @@
+$KT1: 320px;
+$KT2: 576px;
+$KT3: 768px;
+$KT4: 992px;
+$KT5: 1200px;
+$KT6: 1440px;
+@mixin for-size($range) {
+  @if $range == KT1 {
+    @media (min-width: $KT1) {
+      @content;
+    }
+  } @else if $range == KT2 {
+    @media (min-width: $KT2) {
+      @content;
+    }
+  } @else if $range == KT3 {
+    @media (min-width: $KT3) {
+      @content;
+    }
+  } @else if $range == KT4 {
+    @media (min-width: $KT4) {
+      @content;
+    }
+  } @else if $range == KT5 {
+    @media (min-width: $KT5) {
+      @content;
+    }
+  } @else if $range == KT6 {
+    @media (min-width: $KT6) {
+      @content;
+    }
+  }
+}
+.card{
+  border: 1px solid #F2F2F2;
+  border-radius: 6px;
+  background: #FFFFFF;
+  margin-top: 20px;
+}
+.container {
+  display: grid;
+  @include for-size(KT1) {
+    box-sizing: border-box;
+    padding: 40px 10px 40px 10px;
+  }
+  @include for-size(KT2) {
+    padding: 40px 20px 40px 20px;
+  }
+  @include for-size(KT3) {
+    padding: 60px 24px 60px 24px;
+  }
+  @include for-size(KT4) {
+    padding: 60px 40px 60px 40px;
+  }
+  @include for-size(KT5) {
+    padding: 70px 30px 60px 30px;
+  }
+  @include for-size(KT6) {
+    padding: 80px 100px 60px 100px;
+  }
+}
+.subContainer {
+  display: grid;
+  grid-gap: 30px;
+  color: #3D4550;
+  @include for-size(KT1) {
+    grid-template-columns: 1fr;
+  }
+  @include for-size(KT3) {
+    grid-template-columns: 1fr 1fr;
+  }
+
+}
+.low_size{
+  font-size: 12px;
+  margin:2px 0;
+}
+
+.cardContainer {
+  padding-right: 20px;
+  @include for-size(KT2) {
+    padding-right: 0;
+  }
+}
+
+.cards {
+  margin: -10px 0 0 0;
+}
+
+.inputBlock {
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+}
+
+.calculations {
+  display: flex;
+  flex-direction: column;
+  margin-top: 35px;
+}
+
+.request {
+  display: flex;
+  flex-direction: column;
+}
+
+.chart {
+  display: flex;
+  flex-direction: column;
+  //@include ROBOTOBOLD16;
+  font-weight: 300;
+  font-size: 10px;
+  line-height: 12px;
+}
+
+.subtitle {
+  //@include ROBOTOBOLD16;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  color: #3D4550;
+}
+
+.resultterm {
+  //@include MONTSERRATBOLD;
+  font-size: 26px;
+  line-height: 32px;
+  color: #C5A28E;
+  white-space: nowrap;
+}
+
+.titlerent {
+  //@include ROBOTOREGULAR16;
+  font-weight: 300;
+  display: flex;
+  align-items: center;
+}
+
+.rent {
+  //@include ROBOTOREGULAR16;
+  white-space: nowrap;
+}
+
+.chartwrapper {
+  background-color: #FFFFFF;
+  border: 1px solid #F2F2F2;
+}
+
+.position {
+  display: grid;
+  grid-template-columns: 2.2fr 1fr;
+  grid-gap: 20px;
+}
+
+.popupText {
+  //@include NunitoSans;
+  $BLACK: #3D4550;
+}
+
+.mapBlock {
+  display: flex;
+  flex-direction: column;
+  margin: 20px 0 0 0;
+}
+
+.map {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  position: relative;
+  margin: 20px 0 0 0;
+}
+
+.controls {
+  position: absolute;
+  display: flex;
+  @include for-size(KT1) {
+    transform: rotateZ(270deg);
+    bottom: 60px;
+    right: -30px;
+  }
+  @include for-size(KT3) {
+    transform: rotateZ(0deg);
+    bottom: 20px;
+    right: 20px;
+  }
+}
+
+.localbar {
+  background-color: #ffffff;
+  height: 0px;
+  position: absolute;
+  opacity: 0;
+  top: 720px;
+  transition: all .5s;
+  display: flex;
+  border-radius: 10px;
+  @include for-size(KT1) {
+    left: 10px;
+    width: 95%;
+    flex-direction: column;
+  }
+  @include for-size(KT2) {
+    flex-direction: row;
+    top: 20px;
+    left: -500px;
+    width: 323px;
+    height: 660px;
+  }
+  @include for-size(KT5) {
+    width: 343px;
+  }
+}
+
+.localbarActive {
+  background-color: #ffffff;
+  height: 360px;
+  position: absolute;
+  z-index: 10;
+  transition: all .5s;
+  display: flex;
+  padding-right: 5px;
+  @include for-size(KT1) {
+    border-radius: 10px;
+    flex-direction: column;
+    width: 95%;
+    left: 10px;
+    top: 320px;
+  }
+  @include for-size(KT2) {
+    border-radius: 10px 0 10px 10px;
+    flex-direction: row;
+    height: 660px;
+    width: 323px;
+    left: 20px;
+    top: 20px;
+  }
+  @include for-size(KT5) {
+    width: 343px;
+  }
+}
+.localbarDragger {
+  background-color: #ffffff;
+  height: 660px;
+  position: absolute;
+  z-index: 10;
+  transition: all .5s;
+  display: flex;
+  flex-direction: column;
+  border-radius: 10px;
+  @include for-size(KT1) {
+    width: 95%;
+    top: 10px;
+    left: 10px;
+  }
+  @include for-size(KT2) {
+    display: none;
+  }
+}
+
+.dynamicBar{
+  display: flex;
+}
+.openButton {
+  position: absolute;
+  top: 20px;
+  width: 40px;
+  height: 64px;
+  display: none;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  border: none;
+  outline: none;
+  background: #FFFFFF;
+  box-shadow: 0px 0px 16px rgba(0, 0, 0, 0.1);
+  border-radius: 0px 10px 10px 0px;
+  transition: all .5s;
+  @include for-size(KT2) {
+    left: 344px;
+    display: flex;
+  }
+  @include for-size(KT5) {
+    left: 364px;
+  }
+}
+.button {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  width: 40px;
+  height: 64px;
+  display: none;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  border: none;
+  outline: none;
+  background: #FFFFFF;
+  box-shadow: 0px 0px 16px rgba(0, 0, 0, 0.1);
+  border-radius: 0px 10px 10px 0px;
+  transition: all .5s;
+  @include for-size(KT2) {
+    display: flex;
+  }
+}
+
+.lowResButton {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  width: 102px;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  border: none;
+  outline: none;
+  background: #FFFFFF;
+  box-shadow: 0px 0px 16px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  @include for-size(KT2) {
+    display: none;
+  }
+}
+.openArrow {
+  transition: all .5s;
+  transform: rotateZ(270deg);
+}
+.arrow {
+  transition: all .5s;
+  transform: rotateZ(90deg);
+}
+.draggerContainer {
+  margin: 5px 0 0 0;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  height: 4px;
+  cursor: pointer;
+  @include for-size(KT2) {
+    display: none;
+  }
+}
+
+.dragger {
+  width: 50px;
+  height: 4px;
+  background-color: #F2F2F2;
+  cursor: pointer;
+  position: relative;
+  z-index: 100;
+  @include for-size(KT2) {
+    display: none;
+  }
+}
+
+.lowResCategory {
+  //@include ROBOTOREGULAR14;
+  color: #7F96A3
+}

@@ -1,6 +1,6 @@
 import React from 'react';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
-import DevelopersContainer from './DevelopersContainer';
+import DevelopersContainer, {mockDevelopers} from './DevelopersContainer';
 
 
 export default {
@@ -21,4 +21,6 @@ const mock = ['EMAAR','EMAAR','EMAAR','EMAAR','EMAAR',]
 
 export const DevelopersContainer_ = Template.bind({});
 DevelopersContainer_.args = {
+    title:'Developers',
+    developersInfo:mockDevelopers
 };

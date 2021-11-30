@@ -1,0 +1,295 @@
+//@import '../../../shared/sass/colours.scss';
+//@import '../../../shared/sass/typography.scss';
+//@import '../../../shared/sass/buttons.scss';
+//@import '../../../shared/sass/resolutions.scss';
+@import './all.scss';
+
+
+
+
+.paddingInput{
+    padding: 0;
+}
+.container {
+    display: flex;
+    flex-direction: column;
+    background-color: #1A4862;
+    color: #FFFFFF;
+    @include for-size(KT1) {
+        padding: 40px 10px 40px 10px;
+    }
+    @include for-size(KT2) {
+        padding: 40px 20px 40px 20px;
+    }
+    @include for-size(KT3) {
+        padding: 60px 24px 60px 24px;
+    }
+    @include for-size(KT4) {
+        padding: 60px 40px 60px 40px;
+    }
+    @include for-size(KT5) {
+        padding: 60px 30px 60px 30px;
+    }
+    @include for-size(KT6) {
+        padding: 80px 100px 60px 100px;
+    }
+}
+
+.buttons {
+    @include button;
+    background-color: #C5A28E !important;
+    padding: 10px 80px 10px 80px;
+    height: 40px;
+}
+
+.buttonHovered {
+    @include button;
+    background-color: #F89258;
+    padding: 10px 80px 10px 80px;
+    height: 40px;
+}
+
+.buttonClicked {
+    @include button;
+    background-color: #AC8975;
+    padding: 10px 80px 10px 80px;
+    height: 40px;
+}
+
+.title {
+    //@include MONTSERRATBOLD;
+    @include for-size(KT1) {
+        font-size: 25px;
+        line-height: 30px;
+    }
+    @include for-size(KT3) {
+        font-size: 30px;
+        line-height: 37px;
+    }
+    @include for-size(KT4) {
+        font-size: 34px;
+        line-height: 41px;
+    }
+    @include for-size(KT5) {
+        font-size: 40px;
+        line-height: 49px;
+    }
+}
+
+.subTitle {
+    //@include ROBOTOBOLD16;
+    @include for-size(KT1) {
+        margin-top: 10px;
+    }
+    @include for-size(KT3) {
+        margin: 15px 0 30px 0;
+    }
+    @include for-size(KT4) {
+        margin: 15px 0 0 0;
+    }
+}
+.agent {
+    //@include ROBOTOBOLD16;
+    @include for-size(KT1) {
+        margin-top: 40px;
+    }
+    @include for-size(KT2) {
+        margin-top: 30px;
+    }
+    @include for-size(KT4) {
+        margin-top: 40px;
+    }
+}
+
+.inputTitle {
+    //@include ROBOTOREGULAR16;
+    color: #96A2B5;
+    margin: 0 0 6px 0;
+}
+
+.blockInputButton {
+    display: grid;
+    @include for-size(KT1) {
+        grid-template-columns: 1fr;
+    }
+    @include for-size(KT3) {
+        
+    }
+    @include for-size(KT4) {
+        grid-template-columns: 4fr 1fr;
+        grid-gap: 8px;
+        align-items: end;
+        margin: 30px 0 0 0;
+    }
+}
+.blockInputs {
+    @include for-size(KT3) {
+        display: grid;
+        grid-gap: 20px;
+        grid-template-columns: 1fr 1fr;
+    }
+    @include for-size(KT4) {
+        grid-template-columns: 1fr 1fr 1fr 1fr;
+        grid-gap: 8px;
+    }
+}
+.input {
+    @include for-size(KT1) {
+        margin: 20px 0 0 0;
+        width: 100%;
+    }
+    @include for-size(KT3) {
+        margin: 0 0 0 0;
+    }
+}
+.sendButton {
+    @include for-size(KT1) {
+        margin: 30px 0 0 0;
+        width: 100%;
+    }
+    @include for-size(KT4) {
+        margin: 0 0 0 0;
+    }
+}
+
+.card {
+    display: grid;
+    background-color: #FFFFFF;
+    border-radius: 8px;
+    color: #3D4550;
+    margin-top: 20px;
+    //@include ROBOTOREGULAR16;
+
+    @include for-size(KT1) {
+        grid-template-columns: 1fr;
+    }
+    @include for-size(KT2) {
+        
+    }
+    @include for-size(KT3) {
+        
+    }
+    @include for-size(KT4) {
+        grid-template-columns: 4fr 8fr;
+    }
+    @include for-size(KT5) {
+        grid-template-columns: 4fr 11fr;
+    }
+}
+
+.bold {
+    //@include ROBOTOMEDIUM16;
+}
+
+.buttonTitle {
+    text-transform: none;
+}
+
+.avatar {
+    @include for-size(KT1) {
+        margin: 30px 0 20px 15px;
+        display: flex;
+        align-items: center;
+    }
+    @include for-size(KT4) {
+        display: grid;
+        grid-template-columns: 1fr 2fr;
+        margin: -10px 0 20px 15px;
+    }
+    @include for-size(KT5) {
+        margin: 30px 0 30px 15px;
+    }
+}
+.fullName {
+    margin: 0 0 0 12px;
+}
+
+.portfolio {
+    display: grid;
+    @include for-size(KT1) {
+        grid-template-columns: 1fr;
+        width: 100%;
+    }
+    @include for-size(KT2) {
+        display: flex;
+        margin: 0 0 0 90px;
+    }
+    @include for-size(KT4) {
+        margin: 0 0 0 -30px;
+    }
+    @include for-size(KT5) {
+        width: 75%;
+    }
+}
+
+.contacts {
+    display: grid;
+    @include for-size(KT1) {
+        grid-template-columns: 1fr;
+    }
+    @include for-size(KT2) {
+        grid-template-columns: 1fr 1fr;
+        margin: 0 0 0 120px;
+    }
+    @include for-size(KT4) {
+        grid-template-columns: 1fr 1fr;
+        margin: 0 0 0 0;
+    }
+    @include for-size(KT5) {
+        grid-template-columns: 1fr 1fr 1fr 1fr;
+    }
+}
+.contact {
+    display: flex;
+    align-items: center;
+    @include for-size(KT1) {
+        margin: 20px 0 0 0;
+    }
+}
+.portfolioPosition {
+    display: flex;
+    @include for-size(KT1) {
+        flex-direction: row;
+        margin: 10px 0 0 0;
+    }
+    @include for-size(KT2) {
+        flex-direction: column;
+        margin: 0 0 0 30px;
+    }
+    @include for-size(KT3) {
+        flex-direction: row;
+        white-space: nowrap;
+    }
+}
+
+.portfolioContacts {
+    display: grid;
+    justify-content: space-evenly;
+    @include for-size(KT1) {
+        grid-template-columns: 1fr;
+        padding: 0 0 30px 15px;
+    }
+    @include for-size(KT2) {
+        
+    }
+    @include for-size(KT3) {
+        
+    }
+    @include for-size(KT4) {
+        padding: 50px 0 30px 15px; 
+    }
+    @include for-size(KT5) {
+        padding: 50px 40px 30px 0; 
+    }
+}
+
+.unselectable {
+    color: #1A4862;
+    -webkit-touch-callout: none; 
+    -webkit-user-select: none;  
+    -khtml-user-select: none;    
+    -moz-user-select: none;      
+    -ms-user-select: none;       
+    user-select: none;          
+    transition: all .5s;
+}

@@ -1,9 +1,5 @@
-import React, { FC, useState } from 'react';
+import React, {FC, useEffect, useState} from 'react';
 import Link from 'next/link';
-
-import css from './Header.module.scss'
-import classNames from 'classnames';
-
 import { SelectUser } from "./SelectUser/SelectUser";
 import LogoMain from '../../../icons/Header/LogoMain';
 import IconLocation from '../../../icons/Header/IconLocation';
@@ -14,20 +10,20 @@ import { Modal } from '../../shared/Modal/Modal';
 import { Login } from '../Login/login/Login';
 import { Recovery } from '../Login/recovery/Recovery';
 import { Registration } from '../Login/registration/Registration';
+import classNames from 'classnames';
+import css from './Header.module.scss'
+import {AddressConfirmation} from "../Login/AddressConfirmation/AddressConfirmation";
+import {RecoveryMail} from "../Login/RecoveryMail/RecoveryMail";
+import {ThankRegistering} from "../Login/ThankRegistering/ThankRegistering";
+import NewPassword from "../Login/NewPassword/NewPassword";
+import {ConfirmationNewPassword} from "../Login/ConfirmationNewPassword/ConfirmationNewPassword";
 
 type HeaderPropsType = {
     className?: string
+    city:Array<string>
+    personalAccount:Array<{title:string, href:string,message:number}>
+    auth?:boolean
 }
-
-const home = ['Москва', 'Санкт-Петербург', 'Крым', 'Сочи', 'Нижний Новгород']
-const officeUser = [{ title: 'Личный кабинет', href: '/User', message: 0 },
-{ title: 'Избранное', href: '/User', message: 0 },
-{ title: 'Сохраненные поиски', href: '/User', message: 0 },
-{ title: 'Сообщения', href: '/User', message: 12 },
-{ title: 'Уведомления', href: '/User', message: 3 },
-{ title: 'Мои объекты', href: '/User', message: 0 },
-{ title: 'Проверка объекта', href: '/User', message: 0 },
-]
 
 const moc = [{ href: '/Buy', title: 'Купить' },
 { href: '/Take', title: 'Снять' },
@@ -36,11 +32,32 @@ const moc = [{ href: '/Buy', title: 'Купить' },
 { href: '/Contact', title: 'Контакты' }
 ]
 
-export const Header: FC<HeaderPropsType> = ({ className }) => {
+export const Header: FC<HeaderPropsType> = ({ className,city,personalAccount,auth = false }) => {
+
+    const [authorization,setAuthorization] =useState<boolean>(auth)
 
     const [login, setLogin] = useState<boolean>(false)
-    const [registration, setRegistration] = useState<boolean>(false)
-    const [newUser, setNewUser] = useState<boolean>(false)
+
+    const [edit, setEdit] =useState<string>('')
+
+    // useEffect(()=>{
+    //     setLogin(false)
+    //     if(edit!== '')setTimeout(()=>setLogin(true),200)
+    // },[edit])
+
+    const searchModal = (menu:string) => {
+        switch (menu){
+            case 'login': return <Login onEdit={(e)=>setEdit(e)} />
+            case 'recovery':return <Recovery onEdit={(e)=>setEdit(e)} />
+            case 'registration':return <Registration  onEdit={(e)=>setEdit(e)}/>
+            case 'addressConfirmation':return <AddressConfirmation  onEdit={(e)=>setEdit(e)}/>
+            case 'recoveryMail':return <RecoveryMail  onEdit={(e)=>setEdit(e)} email={'vika@mail.ru'} />
+            case 'thankRegistering':return <ThankRegistering  onEdit={(e)=>setEdit(e)} email={'vika@mail.ru'}/>
+            case 'newPassword':return <NewPassword  onEdit={(e)=>setEdit(e)} account={'vika@Best'}/>
+            case 'confirmationNewPassword':return <ConfirmationNewPassword  onEdit={(e)=>setEdit(e)} account={'vika@Best'}/>
+            default: return <div></div>
+        }
+    }
 
     const [active, setActive] = useState<number>(0)
     return (
@@ -58,7 +75,7 @@ export const Header: FC<HeaderPropsType> = ({ className }) => {
                 >
                     <IconLocation />
                     <Typography size={'default'} color="nude">
-                        <SelectEstate params={'housingCondition'} options={home} />
+                        <SelectEstate params={'housingCondition'} options={city} />
                     </Typography>
                 </div>
                 {
@@ -77,45 +94,29 @@ export const Header: FC<HeaderPropsType> = ({ className }) => {
                     ))
                 }
                 {
-                    !login
-                        ? <div className={css.menuName} onClick={() => setLogin(true)}>
+                    !authorization
+                        ? <div className={css.menuName} onClick={() => {
+                            setLogin(true)
+                            setEdit('login')
+                        }}>
                             <LoginIcon />
                         </div>
                         : <div className={css.menuName} >
                             <Typography size={'default'} color="nude">
-                                <SelectUser params={'housingCondition'} options={officeUser} selectLeft={true} />
+                                <SelectUser
+                                params={'housingCondition'}
+                                options={personalAccount}
+                                onChangeOption={()=>setAuthorization(false)}
+                                />
                             </Typography>
                         </div>
-                }
 
-                <Modal setActive={() => setLogin(!login)} active={login}>
-                    <Login
-                        recoveryPass={() => {
-                            setLogin(!login)
-                            setRegistration(!registration)
-                        }}
-                        registration={() => {
-                            setLogin(!login)
-                            setNewUser(!newUser)
-                        }}
-                    />
-                </Modal>
-                <Modal setActive={() => setRegistration(!registration)} active={registration}>
-                    <Recovery
-                        recoveryPassword={() => {
-                            setLogin(!login)
-                            setRegistration(!registration)
-                        }}
-                    />
-                </Modal>
-                <Modal setActive={() => setNewUser(!newUser)} active={newUser}>
-                    <Registration
-                        enterLogin={() => {
-                            setLogin(!login)
-                            setNewUser(!newUser)
-                        }}
-                    />
-                </Modal>
+                }
+                {
+                    <Modal setActive={() => setLogin(!login)} active={login}>
+                        {searchModal(edit)}
+                    </Modal>
+                }
 
             </div>
         </div>

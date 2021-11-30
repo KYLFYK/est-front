@@ -20,17 +20,13 @@
     src: url("../src/app/fonts/Montserrat/Montserrat-Light.ttf")
   }
 
-
-
-
   @font-face {
     font-family: "RobotoRegular";
     font-weight: 400;
     font-style: normal;
     src: url("../src/app/fonts/Roboto/Roboto-Regular.ttf")
   }
-  
-  
+
   @font-face {
     font-family: "RobotoBold";
     font-weight: 700;
@@ -51,4 +47,9 @@
     font-style: normal;
     src: url("../src/app/fonts/Roboto/Roboto-Light.ttf")
   }
-  
+.recharts-cartesian-axis-line{
+  display: none;
+}
+.recharts-cartesian-axis-tick-line{
+  display: none;
+}

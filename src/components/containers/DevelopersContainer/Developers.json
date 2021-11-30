@@ -1,0 +1,60 @@
+{
+  "developersAndAgencies": [
+    {
+      "id": 1,
+      "img": "https://hasadalingaz.com/wp-content/uploads/2020/03/client16-min.png",
+      "title": "EMMAR1",
+      "description": "lorem ipsum1",
+      "developerInfo": [
+        {
+          "nameObject": "EMAAR1",
+          "id": "1"
+        },
+        {
+          "nameObject": "EMAAR2",
+          "id": "2"
+        },
+        {
+          "nameObject": "EMAAR3",
+          "id": "3"
+        },
+        {
+          "nameObject": "EMAAR4",
+          "id": "4"
+        },
+        {
+          "nameObject": "EMAAR5",
+          "id": "5"
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "img": "https://hasadalingaz.com/wp-content/uploads/2020/03/client16-min.png",
+      "title": "EMMAR1112",
+      "description": "lorem ipsum12",
+      "developerInfo": [
+        {
+          "nameObject": "EMAAR12",
+          "id": "12"
+        },
+        {
+          "nameObject": "EMAAR22",
+          "id": "22"
+        },
+        {
+          "nameObject": "EMAAR32",
+          "id": "32"
+        },
+        {
+          "nameObject": "EMAAR42",
+          "id": "42"
+        },
+        {
+          "nameObject": "EMAAR52",
+          "id": "52"
+        }
+      ]
+    }
+  ]
+}

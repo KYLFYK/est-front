@@ -1,0 +1,363 @@
+@import './resolutions.scss';
+
+
+.image{
+  width: 26px;
+  padding-left: 6px !important;
+}
+.size{
+  font-size: 12px;
+  margin:2px 0;
+}
+.paddingCard{
+  padding:0px 15px !important;
+  background: #FFF !important;
+}
+.paddingTypo{
+  font-size: 12px;
+  padding:8px 4px 0 4px;
+}
+.typoHeader{
+  margin: 0 0 0 60px;
+}
+.block_container{
+  width: 1500px;
+  @include for-size(KT1) {
+    width: 400px;
+    display: block;
+  }
+  @include for-size(KT2) {
+    width: 600px;
+  }
+  @include for-size(KT3) {
+    width: 700px;
+  }
+  @include for-size(KT4) {
+    width: 900px;
+  }
+  @include for-size(KT5) {
+    width: 1100px;
+  }
+  @include for-size(KT6) {
+    width: 1400px;
+    display: flex;
+  }
+}
+
+.container {
+  color: #3D4550;
+  @include for-size(KT1) {
+    padding: 20px 10px 20px 10px;
+  }
+  @include for-size(KT2) {
+    padding: 20px 20px 20px 60px;
+  }
+  @include for-size(KT3) {
+    padding: 20px 24px 20px 24px;
+  }
+  @include for-size(KT4) {
+    padding: 20px 20px 20px 60px;
+    width: 800px;
+  }
+  @include for-size(KT5) {
+    padding: 20px 20px 20px 60px;
+    width: 1000px;
+  }
+  @include for-size(KT6) {
+    padding: 80px 20px 20px 60px;
+    width: 1100px;
+  }
+}
+
+.displayFlex{
+  display: flex;
+  flex-direction: column;
+}
+
+.card {
+  display: grid;
+  width: 100%;
+  @include for-size(KT1) {
+    grid-template-columns: 1fr;
+  }
+  @include for-size(KT3) {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  border: none;
+  outline: none;
+  color: #FFF;
+  width: auto;
+  height: 40px;
+  border-radius: 10px;
+  transition: all .5s;
+  padding: 10px;
+  background-color: #C5A28E;
+}
+.buttonWidth{
+  width: 100%;
+  margin:10px 0;
+}
+.buttonHovered {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  border: none;
+  outline: none;
+  color: #FFF;
+  width: auto;
+  height: 40px;
+  border-radius: 10px;
+  transition: all .5s;
+  padding: 10px;
+  background-color: #F89258;
+}
+
+.buttonClicked {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  border: none;
+  outline: none;
+  color: #FFF;
+  width: auto;
+  height: 40px;
+  border-radius: 10px;
+  transition: all .5s;
+  padding: 10px;
+  background-color: #AC8975;
+}
+
+.cards {
+  display: grid;
+  grid-template-rows: 1fr 1fr 1fr 1fr;
+  margin: -10px 0 0 0;
+}
+
+.summ {
+  @include for-size(KT1) {
+    margin: 30px 0 0 0;
+  }
+  @include for-size(KT3) {
+    margin: 8px 0 0 60px;
+  }
+}
+
+.calculations {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+  margin: 40px 0 0 0;
+}
+
+.position {
+  display: flex;
+}
+
+.request {
+  display: flex;
+  flex-direction: column;
+}
+
+.reqsumm {
+
+  flex-direction: column-reverse;
+  color: #C5A28E;
+  margin: 10px 0 15px 0;
+  cursor: pointer;
+  padding:30px 20px 0 60px;
+  min-width: 265px ;
+  @include for-size(KT1) {
+    width: 400px;
+    flex-direction: column-reverse;
+    display: flex;
+    align-items: center;
+  }
+  @include for-size(KT5) {
+    flex-direction: column-reverse;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    width: 265px ;
+  }
+  @include for-size(KT6) {
+    display: block;
+  }
+}
+.buttonContainer{
+  @include for-size(KT1) {
+    justify-content: center;
+    display: flex;
+    width: 100% ;
+  }
+  @include for-size(KT6) {
+    width: 256px ;
+    margin: 30px 0;
+  }
+
+}
+
+.result {
+  font-size: 30px;
+  line-height: 37px;
+  letter-spacing: 0.03em;
+  color: #C5A28E;
+  margin: 10px 0 0 0;
+}
+
+.subtitle {
+  display: inherit !important;
+  align-content: center;
+  width: 50%;
+}
+
+.subresult {
+
+  width: 50%;
+}
+
+.popupText {
+
+  $BLACK: #3D4550;
+}
+
+
+.titleCalc {
+  display: none;
+  @include for-size(KT4) {
+    display: flex;
+
+    margin: 0 0 20px 0;
+  }
+}
+
+.cardEarlyRepayment {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  background: #F2F2F2;
+}
+.earlyPaymentTitle{
+  padding: 20px 40px;
+}
+.titleEarlyRepayment {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  text-align: center;
+  color: #1A4862;
+  padding: 0 40px 0 80px;
+  //margin-bottom: 30px;
+}
+
+.cardContainer {
+  //width: 100%;
+  //@include for-size(KT2) {
+  //  width: 400px;
+  //}
+  display: grid;
+  grid-template-columns: 3fr 5fr 4fr 4fr 30px;
+  grid-column-gap: 10px;
+  margin-bottom: 30px;
+  padding: 0 40px;
+}
+.DeleteIconPosition{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 54px;
+  cursor: pointer;
+}
+
+.dropdown {
+  width: 100% !important;
+  font-family: "RobotoRegular" !important;
+  border: 0 solid white !important;
+  padding: 1px !important;
+}
+
+.earlyPaymentDelete {
+  background-color: #C5A28E;
+  min-width: 100px;
+  display: flex;
+  justify-content: space-around;
+  box-sizing: content-box;
+  padding: 5px 10px;
+  margin-right: 60px;
+  @include for-size(KT3) {
+    //position: absolute;
+    top: 20px;
+    right: 20px;
+  }
+}
+
+.deleteIcon {
+  font-size: 19px;
+  margin-top: 3px;
+}
+
+.baseInputStyle {
+  border: 0 solid #CAD1DA;
+  height: 24px;
+  font-family: "RobotoRegular";
+  &::-webkit-datetime-edit-fields-wrapper {
+    margin-left: -20px;
+  }
+  &::-webkit-calendar-picker-indicator {
+    color: transparent;
+    opacity: 1;
+    background: url(icons/calendar.svg) no-repeat center;
+    background-size: contain;
+  }
+}
+.baseInput{
+  border: 0 solid #CAD1DA;
+  height: 24px;
+  position: relative;
+  right: 15px;
+}
+
+
+.earlyPaymentSubtitle {
+  margin-top: 15px;
+  margin-bottom: 5px;
+
+  &Centered {
+    text-align: center;
+  }
+}
+
+.earlyPaymentChooseBlock {
+  display: flex;
+  justify-content: center;
+  height: 24px;
+}
+
+.earlyPaymentChooseButton {
+  min-width: 50px;
+  border: 0;
+  display: flex;
+  justify-content: space-around;
+  box-sizing: content-box;
+  padding: 5px 2px;
+  &:nth-child(2){
+   margin-left: 11px;
+  }
+}
+
+.earlyPaymentButtonActive {
+  color:#1A4862;
+  border: 0;
+}
+

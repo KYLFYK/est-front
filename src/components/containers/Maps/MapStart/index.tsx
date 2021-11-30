@@ -23,8 +23,8 @@ const Map: React.FC<Props> = ({center, location}) => {
 
   const _onViewportChange = (viewport: any) => {
     setViewport({ ...viewport, transitionDuration: 100 });
-  } 
-    
+  }
+
   return (
     <div className={s.wrapper}>
         <MapGL
@@ -32,6 +32,7 @@ const Map: React.FC<Props> = ({center, location}) => {
           mapboxApiAccessToken={'pk.eyJ1Ijoibmlja29sYXlhcmJ1em92IiwiYSI6ImNrdmdtYWQxYjd0enQybnM3bGR5b2Fnd2YifQ.IEtk0ClJ58f6dgZYa8hKpA'}
           mapStyle="mapbox://styles/mapbox/streets-v9"
           onViewportChange={_onViewportChange}
+         className={s.border}
         >
           <Marker 
             latitude={center.lat}

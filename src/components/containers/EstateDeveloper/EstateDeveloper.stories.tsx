@@ -16,10 +16,21 @@ export default {
 
 const Template: ComponentStory<typeof EstateDeveloper> = (args) => <EstateDeveloper {...args} />;
 
-const nameObject = ['ЖК Космический-7', 'ЖК Космический-2', 'ЖК Космический-3', 'ЖК Космический-4', 'ЖК Космический-5']
+const mockObjects = [{nameObject:'EMAAR',id:'1'},
+    {nameObject:'EMAAR',id:'1'},
+    {nameObject:'EMAAR',id:'1'},
+    {nameObject:'EMAAR',id:'1'},
+    {nameObject:'EMAAR',id:'1'},]
 
 export const Card = Template.bind({});
 Card.args = {
+    img:"https://hasadalingaz.com/wp-content/uploads/2020/03/client16-min.png",
     title:'EMAAR',
-    img:"https://hasadalingaz.com/wp-content/uploads/2020/03/client16-min.png"
+    description:'lorem ipsum',
+    developerInfo:{
+        title: 'EMAAR date of foundation 1997',
+        location:'xianjos',
+        passed:'50 in 50',
+        objectsDeveloper:mockObjects
+    }
 };

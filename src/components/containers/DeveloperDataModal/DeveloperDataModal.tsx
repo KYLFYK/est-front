@@ -8,15 +8,17 @@ import { IconDevelopmentObjects } from '../../../icons/Development/IconDevelopme
 
 type DeveloperDataPropsType = {
     img: string
-    title: string
-    location: string
-    passed: string
-    objectDeveloper: Array<string>,
+    developer: {
+        title: string
+        location:string
+        passed:string
+        objectsDeveloper:Array<{nameObject:string,id:string}>
+    }
     setActive: (value: boolean) => void,
     isActive: boolean,
 }
 
-export const DeveloperDataModal: FC<DeveloperDataPropsType> = ({ img, title, location, passed, objectDeveloper, isActive, setActive }) => {
+export const DeveloperDataModal: FC<DeveloperDataPropsType> = ({ img,  developer,isActive, setActive }) => {
     return (
 
         <Modal setActive={() => setActive(false)} active={isActive}>
@@ -24,7 +26,7 @@ export const DeveloperDataModal: FC<DeveloperDataPropsType> = ({ img, title, loc
                 src={img}
                 width='174px' height='60px' alt="emmar" className={css.img}/>
             <Typography size={'default'} color="accent" className={css.title}>
-                {title}
+                {developer.title}
             </Typography>
             <div className={css.gridColumn}>
                 <IconLocation />
@@ -34,7 +36,7 @@ export const DeveloperDataModal: FC<DeveloperDataPropsType> = ({ img, title, loc
                     </Typography>
                     <div>
                         <Typography size={'default'} color="accent" weight={'regular'}>
-                            {location}
+                            {developer.location}
                         </Typography>
                     </div>
                 </div>
@@ -45,7 +47,7 @@ export const DeveloperDataModal: FC<DeveloperDataPropsType> = ({ img, title, loc
                     </Typography>
                     <div>
                         <Typography size={'default'} color="accent" weight={'regular'}>
-                            {passed}
+                            {developer.passed}
                         </Typography>
                     </div>
                 </div>
@@ -55,10 +57,10 @@ export const DeveloperDataModal: FC<DeveloperDataPropsType> = ({ img, title, loc
                         Объекты застройщика
                     </Typography>
                     {
-                        objectDeveloper.map((name, index) => (
+                        developer.objectsDeveloper.map(({ nameObject,id}, index) => (
                             <div key={index} className={css.colorText}>
                                 <Typography size={'default'} color="nude">
-                                    {name}
+                                    {nameObject}
                                 </Typography>
                             </div>
                         ))

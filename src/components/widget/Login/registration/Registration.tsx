@@ -7,10 +7,11 @@ import Typography from '../../../shared/Typography/Typography';
 import BaseButton from '../../../shared/BaseButton/BaseButtons';
 
 type RegistrationPropsType ={
-    enterLogin:()=>void
+    enterLogin?:()=>void
+    onEdit:(menu:string)=>void
 }
 
-export const Registration :React.FC<RegistrationPropsType>= ({enterLogin}) => {
+export const Registration :React.FC<RegistrationPropsType>= ({enterLogin,onEdit}) => {
 
     return (
         <div className={css.registrationContainer}>
@@ -27,7 +28,7 @@ export const Registration :React.FC<RegistrationPropsType>= ({enterLogin}) => {
                 </div>
             </Checkbox>
 
-            <div style={{width:'100%',display:"flex",justifyContent:'center',margin:'8px 0'}}>
+            <div style={{width:'100%',display:"flex",justifyContent:'center',margin:'20px 0'}}>
                 <BaseButton className={css.marginButton} type={'secondary'} isActive>Зарегистрироваться</BaseButton>
             </div>
 
@@ -38,7 +39,8 @@ export const Registration :React.FC<RegistrationPropsType>= ({enterLogin}) => {
                     </Typography>
                 </div>
 
-                <div onClick={()=>enterLogin()}>
+                {/*<div onClick={()=>enterLogin()}>*/}
+                <div onClick={()=>onEdit('login')}>
                     <Typography size={'small'} color={'nude'} >Войти</Typography>
                 </div>
             </div>

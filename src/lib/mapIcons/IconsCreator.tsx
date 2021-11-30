@@ -33,7 +33,7 @@ export const IconsCreator: React.FC<Props> = ({locationProject, color, title, cl
                         </Typography>
                     </div> 
                 }
-                { title && locationProject !== 'payback'  && 
+                { title && locationProject !== 'payback'  &&
                     <div className={s.title}>
                         <Typography
                             size={'small'}
@@ -61,7 +61,7 @@ export const IconsCreator: React.FC<Props> = ({locationProject, color, title, cl
                             </div>
 
                         </div>
-                        : <Image src={OpenStreetIconsFactory(type, active, 'map')}/>
+                        : <Image width='50px' height='50px' src={OpenStreetIconsFactory(type, active, 'map')}/>
                     }
                     { locationProject !== 'infrastucture' && type !== 'apartment' && <div className={s.title}>
                         <Typography

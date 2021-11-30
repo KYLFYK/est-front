@@ -5,8 +5,8 @@ import { Advantages } from '../src/components/containers/AdvantageList/Advantage
 import { AgentsContainer } from '../src/components/containers/AgentsContainer/AgentsContainer'
 import { BestOffers } from '../src/components/containers/BestOffers/bestOffers'
 import ObjectCard from '../src/components/containers/Card'
-import DevelopersContainer from '../src/components/containers/DevelopersContainer/DevelopersContainer'
-import { IMAGES_SET, INFO_OPTIONS } from '../src/components/containers/GeneralInfo/config'
+import DevelopersContainer, {mockDevelopers} from '../src/components/containers/DevelopersContainer/DevelopersContainer'
+import {IMAGES_SET, INFO_OPTIONS} from '../src/components/containers/GeneralInfo/config'
 import GeneralInfo from '../src/components/containers/GeneralInfo/GeneralInfo'
 import BaseButton from '../src/components/shared/BaseButton/BaseButtons'
 import { BaseDropDown } from '../src/components/shared/BaseDropDown/BaseDropDown'
@@ -30,10 +30,41 @@ import { OfferNews } from '../src/components/containers/OfferNews/offerNews'
 import Header from '../src/components/widget/Header/Header'
 import { mocAdvantages } from '../src/components/containers/AdvantageList/config'
 import DeveloperTabs from '../src/components/tabs/Developer'
-import Map from '../src/components/containers/Maps/MapInfrastructure/index'
-import {currentHouse} from '../src/components/containers/Maps/MapInfrastructure/config'
-import {infrastructura} from '../src/components/containers/Maps/MapInfrastructure/config'
+import {Record} from "../src/components/containers/Record/Record";
+import {Mortgage} from "../src/components/shared/Mortgage/Mortgage";
+import ToursContainer from "../src/components/containers/ToursContainer/ToursContainer";
+import {ThreeDTour} from "../src/components/containers/ToursContainer/Tours/ThreeDTour/ThreeDTour";
+import {VRTour} from "../src/components/containers/ToursContainer/Tours/VRTour/VRTour";
+import OurOffice from "../src/components/containers/OurOffice/OurOffice";
+import AverageMarketPrice from "../src/components/shared/AverageMarketPrice/AverageMarketPrice";
+import PaybackContainer from "../src/components/containers/PaybackContainer/PaybackContainer";
 
+export type ourOfficeType ={
+    positionMap:{
+        lat: number
+        lng: number
+    },
+    location:"finder" | "start" | "infrastructure" | "payback",
+    contactsOffice:Array<{title:string,value:string}>
+    plotRoute:string
+}
+const ourOffice: ourOfficeType = {
+    positionMap: {
+        lat: 44.959975,
+        lng: 34.109053
+    },
+    location: 'start',
+    contactsOffice: [
+        {title: 'metro', value: 'Проспект Победы'},
+        {title: 'dot', value: 'Крым, Ленина, 23 корпус 1'},
+        {title: 'time', value: 'Ежедневно с 10:00 до 20:00'},
+        {title: 'phone', value: '+7 913 453 22 34'},
+        {title: 'phone', value: '+7 913 453 22 35'},
+        {title: 'printer', value: '+7 913 453 22 34'},
+        {title: 'email', value: 'estatum@mail.com'}
+    ],
+    plotRoute: 'www.google.com'
+}
 
 const emunsArray = [{ title: 'цена', value: '5 000 000 ' }, { title: 'Тип объекта', value: 'участок' },
 { title: 'площадь', value: '30 соток' }, { title: 'Статус', value: 'ИЖС' },
@@ -41,25 +72,90 @@ const emunsArray = [{ title: 'цена', value: '5 000 000 ' }, { title: 'Тип
 
 const home = ['Москва', 'Санкт-Петербург', 'Крым', 'Нижний Новгород']
 
-const mocAgent = [{
-  name: 'Василий Сидоров',
-  heldPost: 'Старший агент',
-  img: 'https://vsvlegalgroup.ru/d/yurist_po_nedvizhimosti.jpg'
-},
-{
-  name: 'Семён Панкратов ',
-  heldPost: 'Старший агент',
-  img: 'https://vsvlegalgroup.ru/d/yurist_po_nedvizhimosti.jpg'
-},
-{ name: 'Петр Петрович', heldPost: 'Старший агент', img: 'https://vsvlegalgroup.ru/d/yurist_po_nedvizhimosti.jpg' },
+const Online_tour = {
+    '3d_tour': {
+        url: 'https://www.youtube.com/embed/Ke3qyQYNob4',
+    },
+    vr_tour: {
+        url: 'https://3d-tur.ru/010/',
+    }
+}
+const OPTION_DATA = [{label: 'option_1', value: "1"}, {label: 'option_2', value: "2"}, {
+    label: 'option_3',
+    value: "4"
+}, {label: 'option_4', value: "3"}]
+const emptyFunc = () => {
+}
+
+const imgs = [{
+    url: 'https://cdn.pixabay.com/photo/2021/08/25/20/42/field-6574455__340.jpg',
+    id: 0
+}, {url: 'https://cdn.pixabay.com/photo/2021/08/25/20/42/field-6574455__340.jpg', id: 1}, {
+    url: '213',
+    id: 2
+}, {url: '32123', id: 4}]
+
+const city = ['Москва', 'Санкт-Петербург', 'Крым', 'Сочи', 'Нижний Новгород']
+const personalAccount = [{title: 'Личный кабинет', href: '/User', message: 0},
+    {title: 'Избранное', href: '/User', message: 0},
+    {title: 'Сохраненные поиски', href: '/User', message: 0},
+    {title: 'Сообщения', href: '/User', message: 12},
+    {title: 'Уведомления', href: '/User', message: 3},
+    {title: 'Мои объекты', href: '/User', message: 0},
+    {title: 'Проверка объекта', href: '/User', message: 0},
 ]
+
+const agentRecord = {
+    "id": 1,
+    "img": " https://test-estatum.f-case.ru/static/media/%D0%A0%D0%BE%D0%BC%D0%B0%D0%BD%D0%A1%D0%B0%D1%84%D0%BE%D0%BD%D0%BE%D0%B2.b38acd57.png",
+    "fullName": "Роман Сафонов",
+    "heldPost": "Старший агент",
+    "workExperience": "5 лет",
+    "inWork": "2 проекта",
+    "completed": "43 проекта",
+    "connection": [{
+        "title": "telegram",
+        "value": "+7 992 146 37 15",
+        "url": ""
+    },
+        {
+            "title": "whatsApp",
+            "value": "+7 992 146 37 15",
+            "url": ""
+        },
+        {
+            "title": "phone",
+            "value": "+7 992 146 37 15",
+            "url": ""
+        }, {
+            "title": "email",
+            "value": "valsidirov@mail.com",
+            "url": "",
+        }]
+}
+
+const estateOffers = [{id: 1, url: 'www.google.com', img: IMAGES_SET, tags: ["Покупка", 'Таунхаус', 'Новостройка']},
+    {id: 1, url: 'www.google.com', img: IMAGES_SET, tags: ["Покупка", 'Таунхаус', 'Новостройка']},
+    {id: 1, url: 'www.google.com', img: IMAGES_SET, tags: ["Покупка", 'Таунхаус', 'Новостройка']}
+]
+const tagsButton = ['Покупка', 'Аренда', 'Дом', 'Коммерческая недвижимость', 'Новостройка', 'Вторичноежилье',
+    'Строящийся дом', 'От собственника']
 
 const OPTION_DATA = [{ label: 'option_1', value: "1" }, { label: 'option_2', value: "2" }, { label: 'option_3', value: "4" }, { label: 'option_4', value: "3" }]
 const emptyFunc = () => { }
 
+const averagePrice ={
+    price:'150 001 240',
+    priceUSD:' 2 025 221.09',
+    priceEU:'1 728 447.47',
+    priceMetre:'79 000',
+    priceMetreUSD:'1 0066.61',
+    priceMetreEU:'910.31',
+}
+
 const imgs = [{ url: 'https://cdn.pixabay.com/photo/2021/08/25/20/42/field-6574455__340.jpg', id: 0 }, { url: 'https://cdn.pixabay.com/photo/2021/08/25/20/42/field-6574455__340.jpg', id: 1 }, { url: '213', id: 2 }, { url: '32123', id: 4 }]
 const Home: NextPage = () => {
-  
+
   return (
     <div style={{ display: 'flex', gap: '15px', flexDirection: 'column' }}>
       <div style={{ display: 'flex', gap: '15px', alignItems: 'center' }}>
@@ -93,17 +189,23 @@ const Home: NextPage = () => {
         <h3>House Card:</h3>
         <ObjectCard houseData={new APIObject.types.IObjectEntry()} />
       </div>
-      <Map infrastructura={infrastructura} currentHouse={currentHouse} location={'infrastructure'}/>
-      <h3>Header : </h3>
-      <Header />
-      <h3>Footer :</h3>
-      <Footer />
 
-      <h3>TabsWrappedLabel :</h3>
-      <HorizontalTabs />
+            <h3>Header : </h3>
+            <Header
+                city={city}
+                personalAccount={personalAccount}
+            />
+            <h3>Footer :</h3>
+            <Footer/>
 
-      <h3>CustomSidebarTabs : ??</h3>
-      {/* <DeveloperTabs /> */}
+            <h3>TabsWrappedLabel :</h3>
+            <HorizontalTabs/>
+
+            <h3>CustomSidebarTabs : ??</h3>
+            <VerticalTabs tabs={[
+                {title: '3D тур', Component: <ThreeDTour url={Online_tour["3d_tour"].url}/>},
+                {title: 'VR тур', Component: <VRTour url={Online_tour["vr_tour"].url}/>}
+            ]}/>
 
       <hr color={'red'} style={{ width: '100%' }} />
       <Typography size={'big'} weight={'bold'} color={'nude'}>ADMIN :</Typography>
@@ -147,7 +249,10 @@ const Home: NextPage = () => {
         </TwoColumn>
         <UploadPhoto title={'Загрузить фото'} />
       </TwoColumn>
-      <DevelopersContainer />
+      <DevelopersContainer
+          title={'Застройщики и агества, которые нам доверяют'}
+          developersInfo={mockDevelopers}
+      />
       <AgentsContainer
         title={'Наши агенты к вашим услугам'}
         agents={mocAgent}
@@ -157,11 +262,25 @@ const Home: NextPage = () => {
       />
       <OfferNews />
       <SearchOffice />
-      <BestOffers />
+      <BestOffers
+          tagsButton={tagsButton}
+          bestOffers={estateOffers}
+      />
       <SelectEstate params={'housingCondition'} options={home} />
       <GeneralInfo info={INFO_OPTIONS} price={300000} images={IMAGES_SET} />
+        <Record
+            Record={agentRecord}
+        />
+
+        <Mortgage/>
+        <ToursContainer Online_tour={Online_tour}/>
+        <OurOffice ourOffice={ourOffice}/>
+        <PaybackContainer
+            averagePrice={averagePrice}
+        />
     </div>
   )
 }
 
 export default Home
+

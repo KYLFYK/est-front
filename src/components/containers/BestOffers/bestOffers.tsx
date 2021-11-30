@@ -1,23 +1,25 @@
-import React from 'react';
+import React, {FC} from 'react';
 import ArrayButton from '../../shared/ArrayButton/ArrayButton';
 import BaseButton from '../../shared/BaseButton/BaseButtons';
 import EstateOffer from '../../shared/EstateOffer/estateOffer';
 import HeadLine from '../../shared/HeadLine/HeadLine';
 import css from './bestOffers.module.css'
 
+type BestOffersType = {
+    bestOffers:Array<{id:number,url:string,img:Array<string>,tags:Array<string>}>
+    tagsButton:Array<string>
+}
 
-const buttonName = ['Покупка', 'Аренда', 'Дом', 'Коммерческая недвижимость', 'Новостройка', 'Вторичноежилье',
-    'Строящийся дом', '2-23 этажи']
+export const BestOffers :FC<BestOffersType> = ({bestOffers,tagsButton}) => {
 
-export const BestOffers = () => {
     return (
-        <div className={css.offers}>
+        <div className={css.offers} >
             <HeadLine title={'Лучшие предложения'} >
                 <div className={css.positionButton}>
                     <div className={css.buttonLine}>
                         {
-                            buttonName.map((name,index) => {
-                                return <ArrayButton key={index} name={name} />
+                            tagsButton.map((name,index) => {
+                                return <ArrayButton key={index} index={index} name={name} />
                             })
                         }
                     </div>
@@ -30,21 +32,16 @@ export const BestOffers = () => {
                 </div>
 
                 <div className={css.offersPhoto}>
-                    <EstateOffer
-                        title={'Покупка'}
-                        title1={'Дом'}
-                        img={"https://unikassa.ru/wp-content/uploads/images/Prognoz-tsen-na-nedvizhimost-v-2017-godu-v-Moskve.jpg"}
-                    />
-                    <EstateOffer
-                        title={'Покупка'}
-                        title1={'Дом'}
-                        img={"https://unikassa.ru/wp-content/uploads/images/Prognoz-tsen-na-nedvizhimost-v-2017-godu-v-Moskve.jpg"}
-                    />
-                    <EstateOffer
-                        title={'Покупка'}
-                        title1={'Дом'}
-                        img={"https://unikassa.ru/wp-content/uploads/images/Prognoz-tsen-na-nedvizhimost-v-2017-godu-v-Moskve.jpg"}
-                    />
+                    {
+                        bestOffers.map(({id, img,tags,url})=>(
+                            <EstateOffer
+                                key={id}
+                                url={url}
+                                tags={tags}
+                                img={img}
+                            />
+                        ))
+                    }
                 </div>
             </HeadLine>
         </div>
