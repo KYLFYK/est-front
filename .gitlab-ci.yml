@@ -1,4 +1,4 @@
-image: node:v17.0.2
+image: node:latest
 
 stages:
    - build
@@ -14,6 +14,9 @@ variables:
 build:
   stage: build
   script:
+     - RUN apk add --no-cache --virtual .build-deps alpine-sdk python \
+     - RUN npm install --production --silent \
+     - RUN apk del .build-deps
      - yarn install
      - yarn run build_prod
      - mkdir public
