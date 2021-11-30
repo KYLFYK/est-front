@@ -14,8 +14,8 @@ variables:
 build:
   stage: build
   script:
-     - npm install
-     - npm run build_prod
+     - yarn install
+     - yarn run build_prod
      - mkdir public
     #- ls -la
     #- ls -la dist
