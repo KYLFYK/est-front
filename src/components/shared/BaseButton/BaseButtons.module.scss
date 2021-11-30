@@ -40,7 +40,7 @@
     &.active {
         background-color: $ACCENT;
         color: $WHITE;
-        border: 1px solid rgba(0,0,0,0);
+        border: 1px solid rgba(22, 18, 18, 0);
     }
 }
 
@@ -59,4 +59,8 @@
 }
 .iconSpace {
     padding-left: 8px;
+}
+
+.startIcon {
+    margin-right: 8px;
 }

@@ -1,0 +1,23 @@
+@import '../../../../../app/styles/colours.scss';
+
+.nav {
+    display: flex;
+    gap: 60px;
+}
+
+.navItem {
+    position: relative;
+}
+.navUnderline {
+    position: absolute;
+    height: 2px;
+    width: 100%;
+    bottom: -10px;
+    display: flex;
+    gap: 3px;
+}
+
+.underlineItem {
+    background-color: $ACCENT;
+    height: 100%;
+}

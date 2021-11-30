@@ -1,0 +1,48 @@
+@import '../../../../app/styles/colours.scss';
+@import '../../../../app/styles/helpers.scss';
+
+.card {
+    width: 250px;
+    height: 180px;
+    border: 1px #EFEFF2 solid;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    cursor: pointer;
+    &:hover {
+        background-color: $ACCENT;
+        & * {
+            color: #fff;
+            fill: #fff
+        }
+    }
+}
+
+.cardList {
+    display: flex;
+    gap: 30px
+}
+
+.row {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    align-items: center;
+}
+
+.content {
+    display: flex;
+    flex-direction: column;
+    gap: 50px;
+    margin-top: 40px;
+}
+
+.iconBlock {
+    min-height: 50px;
+}
+
+.link {
+    @include ResetLinkStyle
+}

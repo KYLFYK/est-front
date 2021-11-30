@@ -1,0 +1,29 @@
+@import "../../../../app/styles/helpers.scss";
+
+.link {
+  @include ResetLinkStyle;
+}
+
+.nav {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.nextArrow {
+    transform: rotate(180deg);
+  & path {
+    fill: #fff;
+  }
+}
+
+.buttonsBlock {
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.buttonsGroup {
+    display: flex;
+    gap: 10px;
+}
