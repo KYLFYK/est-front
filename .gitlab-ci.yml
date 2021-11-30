@@ -2,7 +2,7 @@ image: node:latest
 
 stages:
    - build
- #  - deploy
+   - deploy
 variables:
   DEPLOY_FOLDER: /data/front #/data/test-sas-realestate-front/
   DEPLOY_SERVER: 185.98.83.65  # 84.201.179.232 #185.98.83.65
