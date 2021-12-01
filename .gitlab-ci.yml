@@ -16,7 +16,7 @@ build:
   script:
      - yarn install
      - yarn run build
-    #- ls -la
+     - ls -la
     #- ls -la dist
      #- cp -rf dist/* public
      - ls -la public
