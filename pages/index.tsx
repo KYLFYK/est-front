@@ -38,11 +38,8 @@ import {VRTour} from "../src/components/containers/ToursContainer/Tours/VRTour/V
 import OurOffice from "../src/components/containers/OurOffice/OurOffice";
 import AverageMarketPrice from "../src/components/shared/AverageMarketPrice/AverageMarketPrice";
 import PaybackContainer from "../src/components/containers/PaybackContainer/PaybackContainer";
-import MapInfrastructure from "../src/components/containers/Maps/MapInfrastructure/index"
-import { currentHouse } from '../src/components/containers/Maps/MapInfrastructure/config'
-import { infrastructura } from '../src/components/containers/Maps/MapInfrastructure/config'
-import MapPayback from '../src/components/containers/Maps/MapPayback/index'
-import { objects } from '../src/components/containers/Maps/MapPayback/config'
+import MapFinder from "../src/components/containers/Maps/MapFinder/index"
+import { mapData } from '../src/components/containers/Maps/MapFinder/config'
 
 export type ourOfficeType ={
   positionMap:{
@@ -167,9 +164,8 @@ const Home: NextPage = () => {
 
 return (
   <div style={{ display: 'flex', gap: '15px', flexDirection: 'column' }}>
+    <MapFinder center={{lat: 45.16, lng: 36.90}} mapData={mapData} location={'finder'}/>
     <div style={{ display: 'flex', gap: '15px', alignItems: 'center' }}>
-    <MapInfrastructure currentHouse={currentHouse} infrastructura={infrastructura} location={'infrastructure'}/>
-    <MapPayback currentHouse={currentHouse} objects={objects} location={'payback'}/>
       <h3>Buttons:</h3>
       <BaseButton type="secondary" icon={<FavoriteIcon />}>Кнопка с иконкой</BaseButton>
       <BaseButton type="primary">Основная кнопка</BaseButton>
