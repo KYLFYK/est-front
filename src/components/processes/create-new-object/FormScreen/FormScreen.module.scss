@@ -4,26 +4,20 @@
   @include ResetLinkStyle;
 }
 
-.nav {
+.navContent {
   display: flex;
   justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.nav {
   margin-bottom: 20px;
 }
 
-.nextArrow {
-    transform: rotate(180deg);
-  & path {
-    fill: #fff;
-  }
+.divider {
+  height: 1px;
+  width: 100%;
+  background-color: #F2F2F2;
 }
 
-.buttonsBlock {
-    margin-top: 20px;
-    display: flex;
-    justify-content: space-between;
-}
 
-.buttonsGroup {
-    display: flex;
-    gap: 10px;
-}

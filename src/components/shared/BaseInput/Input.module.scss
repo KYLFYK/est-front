@@ -9,6 +9,7 @@
     border-radius: 8px;
     text-indent: 16px;
     border: 1px #CAD1DA solid;
+    font-family: "RobotoRegular", sans-serif;
     font-size: 16px;
     &::-webkit-outer-spin-button,
     &::-webkit-inner-spin-button {
@@ -31,4 +32,9 @@
     right: 12px;
     top: 50%;
     transform: translateY(-50%);
+}
+
+.label {
+    color: #CAD1DA;
+    margin-bottom: 5px;
 }

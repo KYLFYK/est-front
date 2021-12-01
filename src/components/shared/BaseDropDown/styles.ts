@@ -22,5 +22,9 @@ export const useStyles = makeStyles(() => ({
     icon: {
         top: "43% !important",
         right: "10px !important"
+    },
+    label: {
+        marginBottom: 5,
+        color: '#CAD1DA'
     }
 }))
