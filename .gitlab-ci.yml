@@ -5,9 +5,9 @@ stages:
    - deploy
 variables:
   DEPLOY_FOLDER: /data/front #/data/test-sas-realestate-front/
-  DEPLOY_SERVER: 185.98.83.65  # 84.201.179.232 #185.98.83.65
+ # DEPLOY_SERVER: 185.98.83.65  # 84.201.179.232 #185.98.83.65
   DEPLOY_USER: deployer
-  DEPLOY_PORT: 20071 #22 #20064
+  #DEPLOY_PORT: 20071 #22 #20064
 
 build:
   stage: build
@@ -42,14 +42,15 @@ deploy:
        
   script:
   #    - ls -la
-   #   - ls -la ../checkest.ru
     #  - ls -la src/app
-     - ls -la public
- #    - ssh deployer@$DEPLOY_SERVER -p DEPLOY_PORT "ls -la $DEPLOY_FOLDER"
-     #- ssh deployer@$DEPLOY_SERVER "rm -r /data/checkest-front/front/*"
-     #- ssh deployer@$DEPLOY_SERVER "mkdir /data/checkest-front/front"
-     #- ssh deployer@$DEPLOY_SERVER "ls -la /data/checkest-front/front"
-     - scp -P 20071 -r public/* deployer@$DEPLOY_SERVER:$DEPLOY_FOLDER 
- #    - ssh deployer@$DEPLOY_SERVER -p DEPLOY_PORT "ls -la $DEPLOY_FOLDER"
+     #- ls -la public
+     #- ls -la build
+     #- ls -la build/static
+     - ssh deployer@$DEPLOY_SERVER "ls -la /data/estatum-front"
+     - scp -r build/* deployer@$DEPLOY_SERVER:/data/estatum-front/front 
+     #- ssh deployer@$DEPLOY_SERVER "ls -la /data/brokers_front"
   environment:
     name: production
+  only:
+     - main
+
