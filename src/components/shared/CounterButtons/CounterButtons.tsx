@@ -5,11 +5,12 @@ import s from './CounterButton.module.scss'
 
 interface Props {
     initValue: number,
-    label: string,
+    label?: string,
+    className?: string,
     onChange: (value: number) => void
 }
 
-const CounterButtons: React.FC<Props> = ({ onChange, initValue, label }) => {
+const CounterButtons: React.FC<Props> = ({ onChange, initValue, label, className }) => {
     const [value, setValue] = React.useState<number>(0)
 
     useEffect(() => {
@@ -28,7 +29,7 @@ const CounterButtons: React.FC<Props> = ({ onChange, initValue, label }) => {
     }
 
     return (
-        <div>
+        <div className={className}>
             <Typography className={s.label}>{label}</Typography>
             <div className={s.buttonsGroup}>
                 <button className={s.button} onClick={decreaseValue}>—</button>

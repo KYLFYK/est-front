@@ -12,10 +12,11 @@ interface Props {
     label?: string,
     placeholder: string,
     className?: string,
+    classNameWrapper?: string,
     onChange: (value: string) => void,
 }
 
-export const BaseDropDown: React.FC<Props> = ({ options, value, placeholder, className, label, onChange }) => {
+export const BaseDropDown: React.FC<Props> = ({ options, value, placeholder, className, label, classNameWrapper, onChange }) => {
     const classes = useStyles()
     const handleOnChange = (event: React.ChangeEvent<{ name?: string | unknown, value: unknown }>) => {
         onChange(event.target.value as string)
@@ -33,7 +34,7 @@ export const BaseDropDown: React.FC<Props> = ({ options, value, placeholder, cla
         return _value ? _value : placeholder;
     };
     return (
-        <div>
+        <div className={classNameWrapper}>
             {label && <Typography className={classes.label}>{label}</Typography>}
             <Select
                 IconComponent={({ className }) => <SmallArrowIcon className={classNames(className, classes.icon)} />}

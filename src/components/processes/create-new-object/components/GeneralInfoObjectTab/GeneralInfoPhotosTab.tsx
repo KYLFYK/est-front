@@ -33,7 +33,7 @@ const GeneralInfoPhotosTab: React.FC<Props> = ({ onNextTab, onPrevTab }) => {
     return (
         <ButtonPanel onNextTab={onNextTab} onPrevTab={onPrevTab}>
             <InputsGroup title={"Фотографии объекта"}>
-                <div>
+                <div className={s.wrapper}>
                     <Typography className={s.subTitle}>Добавьте как минимум одно изображение</Typography>
                     <div className={s.photosWrapper} style={{ backgroundImage: dashedBorder }}>
                         {files.map((img, idx) => {

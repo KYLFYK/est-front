@@ -5,15 +5,16 @@ import s from './Input.module.scss';
 
 interface Props extends React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLInputElement>, HTMLInputElement> {
     icon?: JSX.Element | string,
-    label?: string
+    label?: string,
+    classNameWrapper?: string,
 }
 
-export const BaseInput: React.FC<Props> = ({ className = '', icon, label, ...props }) => {
+export const BaseInput: React.FC<Props> = ({ className = '', icon, label, classNameWrapper, ...props }) => {
     return (
-        <div>
+        <div className={classNameWrapper}>
             {label && <Typography className={s.label}>{label}</Typography>}
             <div className={s.wrapper}>
-                <input {...props} className={classNames(s.input, className)} />
+                <input {...props} className={classNames(s.input, {[s.iconPadding]: !!icon}, className)} />
                 {icon && <span className={s.icon}>{icon}</span>}
             </div>
         </div>
