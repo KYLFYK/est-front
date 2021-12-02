@@ -9,8 +9,22 @@ import TownhouseIcon from "../../../../icons/TownhouseIcon/TownhouseIcon"
 import Typography from "../../../shared/Typography/Typography"
 import s from './StartScreen.module.scss'
 import Link from 'next/link'
+import { NewObjectActionTypes, ObjectTypes } from "../../../../utils/interfaces/objects"
+import classNames from "classnames"
 
-const StartScreen = () => {
+interface Props {
+    onChooseAction: (value: NewObjectActionTypes) => void
+    onChooseObjectType: (value: ObjectTypes) => void
+    choosedAction?: NewObjectActionTypes,
+    choosedObjectType?: ObjectTypes
+}
+
+const StartScreen: React.FC<Props> = ({onChooseAction, onChooseObjectType, choosedAction, choosedObjectType}) => {
+
+    const cardClassName = (cardValue: NewObjectActionTypes | ObjectTypes, choosedValue?: NewObjectActionTypes | ObjectTypes) => {
+        return classNames(s.card, {[s.active]: cardValue === choosedValue})
+    } 
+
     return (
         <div>
             <Link href="/">
@@ -25,11 +39,11 @@ const StartScreen = () => {
                     <Typography weight="medium">Новый объект</Typography>
 
                     <div className={s.cardList}>
-                        <div className={s.card}>
+                        <div className={cardClassName(NewObjectActionTypes.SELL, choosedAction)} onClick={() => onChooseAction(NewObjectActionTypes.SELL)}>
                             <div className={s.iconBlock}><KeyIcon /></div>
                             <Typography size="subheaderBig" weight="medium">Продать</Typography>
                         </div>
-                        <div className={s.card}>
+                        <div className={cardClassName(NewObjectActionTypes.RENT, choosedAction)} onClick={() => onChooseAction(NewObjectActionTypes.RENT)}>
                             <div className={s.iconBlock}><CalendarIcon /></div>
                             <Typography size="subheaderBig" weight="medium">Сдать</Typography>
                         </div>
@@ -39,19 +53,19 @@ const StartScreen = () => {
                 <div className={s.row}>
                     <Typography weight="medium">Выберите тип недвижимости</Typography>
                     <div className={s.cardList}>
-                        <div className={s.card}>
+                        <div className={cardClassName(ObjectTypes.APARTMENTS, choosedObjectType)} onClick={() => onChooseObjectType(ObjectTypes.APARTMENTS)}>
                             <div className={s.iconBlock}><ApartmentsIcon /></div>
                             <Typography size="subheaderBig" weight="medium">Квартира</Typography>
                         </div>
-                        <div className={s.card}>
+                        <div className={cardClassName(ObjectTypes.HOUSE, choosedObjectType)} onClick={() => onChooseObjectType(ObjectTypes.HOUSE)}>
                             <div className={s.iconBlock}><HouseIcon /></div>
                             <Typography size="subheaderBig" weight="medium">Дом</Typography>
                         </div>
-                        <div className={s.card}>
+                        <div className={cardClassName(ObjectTypes.TOWNHOUSE, choosedObjectType)} onClick={() => onChooseObjectType(ObjectTypes.TOWNHOUSE)}>
                             <div className={s.iconBlock}><TownhouseIcon /></div>
                             <Typography size="subheaderBig" weight="medium">Таунхаус</Typography>
                         </div>
-                        <div className={s.card}>
+                        <div className={cardClassName(ObjectTypes.LAND, choosedObjectType)} onClick={() => onChooseObjectType(ObjectTypes.LAND)}>
                             <div className={s.iconBlock}><LandIcon /></div>
                             <Typography size="subheaderBig" weight="medium">Участок</Typography>
                         </div>

@@ -4,14 +4,14 @@ import BaseButton from "../../../../shared/BaseButton/BaseButtons"
 import Typography from "../../../../shared/Typography/Typography"
 import s from './ButtonsPanel.module.scss'
 
-interface Props {
+export interface ICreateObjectControls {
     onPrevTab: () => void;
     onNextTab: () => void;
     onPublish?: () => void;
     onPreview?: () => void;
 }
 
-const ButtonPanel: React.FC<Props> = ({ children, onNextTab, onPrevTab, onPreview, onPublish }) => {
+const ButtonPanel: React.FC<ICreateObjectControls> = ({ children, onNextTab, onPrevTab, onPreview, onPublish }) => {
     return (
         <div className={s.wrapper}>
             <div>

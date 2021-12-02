@@ -1,17 +1,20 @@
 import Link from 'next/link'
 import React from 'react'
 import NavArrowIcon from '../../../../icons/NavArrow/NavArrow'
+import { ObjectTypes } from '../../../../utils/interfaces/objects'
 import Typography from '../../../shared/Typography/Typography'
-import AboutObject from '../components/AboutObject/AboutObject'
+import AboutObject from '../components/AboutObjectTab/AboutObject'
+import GeneralInfoDescriptionTab from '../components/GeneralInfoObjectTab/GeneralInfoDescriptionTab'
 import MultipleHorizontalTab, { ICreateObjectTabs } from '../components/MultipleHorizontalTab/MultipleHorizontalTab'
 import s from './FormScreen.module.scss'
 
 
 interface Props {
-    
+    objectType: ObjectTypes
+    clearObjectType: () => void
 }
 
-const FormScreen: React.FC<Props> = ({}) => {
+const FormScreen: React.FC<Props> = ({ clearObjectType, objectType }) => {
     const [activeTabIdx, setActiveTabIdx] = React.useState<number>(0)
     const [activeSubTabIdx, setActiveSubTabIdx] = React.useState<number>(0)
     const [tabsProp, setTabsProp] = React.useState<ICreateObjectTabs[]>([])
@@ -33,7 +36,10 @@ const FormScreen: React.FC<Props> = ({}) => {
     }, [activeTabIdx, activeSubTabIdx, isLastScreen, lastSubTabIdx])
 
     const handlePrevTab = React.useCallback(() => {
-        if (activeTabIdx === 0 && activeSubTabIdx === 0) return
+        if (activeTabIdx === 0 && activeSubTabIdx === 0) {
+            clearObjectType()
+            return
+        }
 
         if (activeSubTabIdx > 0) {
             setActiveSubTabIdx(activeSubTabIdx - 1)
@@ -53,15 +59,21 @@ const FormScreen: React.FC<Props> = ({}) => {
                 {
                     isDone: activeTabIdx > 0,
                     label: "Об объекте",
-                    Components: [<AboutObject key={1} onNextTab={handleNextTab} onPrevTab={handlePrevTab} />],
+                    Components: [<AboutObject key={1} objectType={objectType} onNextTab={handleNextTab} onPrevTab={handlePrevTab} />],
                 },
-                { isDone: activeTabIdx > 1, label: "Основная информация", Components: [<AboutObject key={23} onNextTab={handleNextTab} onPrevTab={handlePrevTab} />, <AboutObject key={3} onNextTab={handleNextTab} onPrevTab={handlePrevTab} />, <AboutObject key={51} onNextTab={handleNextTab} onPrevTab={handlePrevTab} />] },
+                {
+                    isDone: activeTabIdx > 1, label: "Основная информация", Components: [
+                        <GeneralInfoDescriptionTab key={23} onNextTab={handleNextTab} onPrevTab={handlePrevTab} />,
+                        <AboutObject objectType={objectType} key={3} onNextTab={handleNextTab} onPrevTab={handlePrevTab} />,
+                        <AboutObject objectType={objectType} key={51} onNextTab={handleNextTab} onPrevTab={handlePrevTab} />
+                    ]
+                },
                 { isDone: activeTabIdx > 2, label: "Инфраструктура", Components: [<div key={1} />] },
                 { isDone: activeTabIdx > 3, label: "О доме", Components: [<div key={1} />, <div key={1} />, <div key={1} />] },
                 { isDone: activeTabIdx > 4, label: "Юридическая чистота", Components: [<div key={1} />, <div key={1} />] },
             ]
         )
-    }, [handleNextTab, handlePrevTab, activeTabIdx])
+    }, [handleNextTab, handlePrevTab, activeTabIdx, objectType])
 
     return (
         <div>

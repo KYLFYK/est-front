@@ -1,27 +1,11 @@
-import { IGeneralObjectResponse, IGeneralResponse, TServerLanguages } from "../../utils/interfaces/general";
+import { IGeneralResponse, TServerLanguages } from "../../utils/interfaces/general";
+import { IGeneralObjectResponse, ObjectTypes } from "../../utils/interfaces/objects";
 
 interface IObjectImage {
     id: number,
     url: string,
 }
 
-export enum ObjectTypes {
-    VILLA = "villa",
-    APARTMENTS = "apartment",
-    MUSEUM = "Museum",
-    PARK = "Park",
-    BEACH = "Beach",
-    MEDICINE = "Medicine",
-    RESTRAUNT = "Restraunt",
-    SPA = 'Spa',
-    DOLPHIN = 'Dolphin',
-    AQUAPARK = 'Aquapark',
-    ZOO = 'Zoo',
-    CINEMA = 'Cinema',
-    THEATER = 'Theater',
-    PALACE = 'Palace',
-    CUSTOM_TYPE = "Attractions",
-}
 
 export class IObjectEntry {
     public images: IObjectImage[]
