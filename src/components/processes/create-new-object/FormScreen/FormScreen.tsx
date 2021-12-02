@@ -5,6 +5,7 @@ import { ObjectTypes } from '../../../../utils/interfaces/objects'
 import Typography from '../../../shared/Typography/Typography'
 import AboutObject from '../components/AboutObjectTab/AboutObject'
 import GeneralInfoDescriptionTab from '../components/GeneralInfoObjectTab/GeneralInfoDescriptionTab'
+import GeneralInfoPhotosTab from '../components/GeneralInfoObjectTab/GeneralInfoPhotosTab'
 import MultipleHorizontalTab, { ICreateObjectTabs } from '../components/MultipleHorizontalTab/MultipleHorizontalTab'
 import s from './FormScreen.module.scss'
 
@@ -64,7 +65,7 @@ const FormScreen: React.FC<Props> = ({ clearObjectType, objectType }) => {
                 {
                     isDone: activeTabIdx > 1, label: "Основная информация", Components: [
                         <GeneralInfoDescriptionTab key={23} onNextTab={handleNextTab} onPrevTab={handlePrevTab} />,
-                        <AboutObject objectType={objectType} key={3} onNextTab={handleNextTab} onPrevTab={handlePrevTab} />,
+                        <GeneralInfoPhotosTab key={3} onNextTab={handleNextTab} onPrevTab={handlePrevTab} />,
                         <AboutObject objectType={objectType} key={51} onNextTab={handleNextTab} onPrevTab={handlePrevTab} />
                     ]
                 },

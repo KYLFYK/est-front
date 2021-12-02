@@ -8,14 +8,16 @@ interface Props extends ICreateObjectControls {
     
 }
 
-const GeneralInfoDescriptionTab: React.FC<Props> = ({onNextTab, onPrevTab}) => {
+const GeneralInfoPhotosTab: React.FC<Props> = ({onNextTab, onPrevTab}) => {
     return (
         <ButtonPanel onNextTab={onNextTab} onPrevTab={onPrevTab}>
-            <InputsGroup title={"Описание"}>
-                <BaseTextarea className={s.textarea} label="Опишите сильные стороны вашего объекта"/>
+            <InputsGroup title={"Фотографии объекта"}>
+                <div className={s.dashedWrapper}>
+
+                </div>
             </InputsGroup>
         </ButtonPanel>
     )
 }
 
-export default GeneralInfoDescriptionTab
+export default GeneralInfoPhotosTab
