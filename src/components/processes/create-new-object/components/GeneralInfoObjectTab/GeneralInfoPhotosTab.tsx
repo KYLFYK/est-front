@@ -6,18 +6,26 @@ import InputsGroup from "../InputsGroup/InputsGroup"
 import s from './GeneralInfoObjectTab.module.scss'
 import { useDropzone } from 'react-dropzone';
 import Image from 'next/image'
+import { ObjectTypes } from "../../../../../utils/interfaces/objects"
+import { getInitialStateGeneralInfoTab } from "../../lib"
 
 
 const dashedBorder = `url("data:image/svg+xml,%3csvg width='100%25' height='100%25' xmlns='http://www.w3.org/2000/svg'%3e%3crect width='100%25' height='100%25' fill='none' rx='6' ry='6' stroke='black' stroke-width='1' stroke-dasharray='8%2c 8' stroke-dashoffset='12' stroke-linecap='square'/%3e%3c/svg%3e")`
 interface Props extends ICreateObjectControls {
-
+    objectType: ObjectTypes
 }
-interface ICustomFile extends File {
+
+export interface ICustomFile extends File {
     preview: string
 }
 
-const GeneralInfoPhotosTab: React.FC<Props> = ({ onNextTab, onPrevTab }) => {
+const GeneralInfoPhotosTab: React.FC<Props> = ({ onNextTab, onPrevTab, objectType }) => {
     const [files, setFiles] = React.useState<ICustomFile[]>([]) // TODO: Replace by MobX / Redux
+
+    React.useEffect(() => {
+        const initState = getInitialStateGeneralInfoTab(objectType)
+        setFiles(initState?.photos || [])
+    }, [objectType])
 
     const { getRootProps, getInputProps } = useDropzone({
         accept: '.bmp, .jpeg, .png, .jpg',

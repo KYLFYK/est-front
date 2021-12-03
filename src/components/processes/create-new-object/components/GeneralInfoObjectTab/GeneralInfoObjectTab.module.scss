@@ -55,6 +55,10 @@
     width: 140px !important;
 }
 
+.inputMd {
+    width: 550px
+}
+
 .largeIconSpace {
     padding-right: 58px !important;
 }
@@ -81,4 +85,26 @@
     display: flex;
     flex-direction: column;
     gap: 20px;
+}
+
+.floorInput {
+    width: 75%;
+}
+
+.floorHeightInput {
+    width: 140px;
+    margin-left: 10px;
+}
+
+.floorInputsGroup {
+    display: flex;
+}
+
+.dropdownStatus {
+    width: 280px !important;
+}
+
+.newRoomLabel {
+    margin-top: 20px;
+    cursor: pointer;
 }

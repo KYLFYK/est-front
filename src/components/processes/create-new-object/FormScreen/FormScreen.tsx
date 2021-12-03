@@ -65,9 +65,9 @@ const FormScreen: React.FC<Props> = ({ clearObjectType, objectType }) => {
                 },
                 {
                     isDone: activeTabIdx > 1, label: "Основная информация", Components: [
-                        <GeneralInfoDescriptionTab key={23} onNextTab={handleNextTab} onPrevTab={handlePrevTab} />,
-                        <GeneralInfoPhotosTab key={3} onNextTab={handleNextTab} onPrevTab={handlePrevTab} />,
-                        <GeneralInfoDataTab key={51} onNextTab={handleNextTab} onPrevTab={handlePrevTab} />
+                        <GeneralInfoDescriptionTab objectType={objectType}  key={23} onNextTab={handleNextTab} onPrevTab={handlePrevTab} />,
+                        <GeneralInfoPhotosTab objectType={objectType}  key={3} onNextTab={handleNextTab} onPrevTab={handlePrevTab} />,
+                        <GeneralInfoDataTab objectType={objectType} key={51} onNextTab={handleNextTab} onPrevTab={handlePrevTab} />
                     ]
                 },
                 { isDone: activeTabIdx > 2, label: "Инфраструктура", Components: [<div key={1} />] },
