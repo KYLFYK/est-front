@@ -19,7 +19,7 @@ const MapModal: React.FC<Props> = ({mapData, location, center}) => {
   });
 
   return (
-    <div>
+    <div style={{width: '100%'}}>
       <Map mapData={mapData} location={location} viewport={viewport} setViewport={setViewport} />
       {/*<Modal active={modal} setActive={setModal} >
         <Map mapData={mapData} location={location} modal={modal} setModal={setModal} viewport={viewport} setViewport={setViewport} main={false}/>

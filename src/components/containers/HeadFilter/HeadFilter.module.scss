@@ -1,0 +1,127 @@
+@import '../../../app/styles/colours.scss';
+@import '../../../app/styles/typography.scss';
+@import '../../../app/styles/buttons.scss';
+@import '../../../app/styles/resolutions.scss';
+
+.container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background-size: cover;
+    color: #FFF;
+    @include for-size(KT1) {
+        min-height: 503px;
+        background-position-x: 90%;
+        background-position-y: 43%;
+    }
+    @include for-size(KT2) {
+        min-height: 305px;
+        background-position-x: 0%;
+    }
+    @include for-size(KT3) {
+        min-height: 530px;
+    }
+    @include for-size(KT4) {
+        min-height: 503px;
+    }
+    @include for-size(KT5) {
+        height: 600px;
+    }
+    @include for-size(KT6) {
+    }
+}
+
+.button {
+    @include button;
+    background-color: $SECONDARYBUTTON;
+}
+
+.buttonHovered {
+    @include button;
+    background-color: $SECONDARYBUTTONHOVER;
+}
+
+.buttonClicked {
+    @include button;
+    background-color: $SECONDARYBUTTONPRESSED;
+}
+
+.title {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.containerTitle {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.titleText {
+    @include MONTSERRATBOLD;
+    @include for-size(KT1) {
+        font-size: 26px;
+        line-height: 32px;
+        padding: 0 0 0 10px;
+    }
+    @include for-size(KT2) {
+        padding: 0 0 0 20px;
+    }
+    @include for-size(KT3) {
+        font-size: 42px;
+        line-height: 51px;
+        padding: 0 0 0 20px;
+    }
+    @include for-size(KT4) {
+        padding: 0 0 0 40px;
+    }
+    @include for-size(KT5) {
+        font-size: 58px;
+        line-height: 71px;
+        padding: 0 0 0 30px;
+    }
+    @include for-size(KT6) {
+        padding: 0 0 0 100px;
+    }
+}
+
+.subtitleText {
+    @include ROBOTOREGULAR16;
+    font-weight: bold;
+}
+
+.icon {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    margin: 0 40px 40px 0;
+}
+
+.containerIcon {
+    @include for-size(KT1) {
+        display: none;
+    }
+    @include for-size(KT6) {
+        display: none;
+        grid-gap: 18px;
+    }
+}
+
+.buttonTitle {
+    @include ROBOTOBOLD16;
+}
+
+.filterWrapper {
+    display: flex;
+    justify-content: center;
+    margin-top: 50px;
+}
+
+.contentContainer {
+    margin: 0 auto;
+    width: 100%;
+    box-sizing: border-box;
+    position: relative;
+}

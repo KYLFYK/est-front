@@ -1,4 +1,4 @@
-import React, {FC} from 'react';
+import React, {FC, useState, useEffect} from 'react';
 import Metro from "../../../icons/OurOffice/Metro";
 import Dot from "../../../icons/OurOffice/Dot";
 import Time from "../../../icons/OurOffice/Time";
@@ -10,11 +10,18 @@ import Link from 'next/link'
 import css from './ContractOffice.module.scss'
 
 type ContactOfficeType = {
-    contactOffice: Array<{ title: string, value: string, }>
-    link:string
+    contactOffice: Array<{ title: string, value: string, href?: string}>
+    link: string
+    destination: any
 }
 
-const ContactOffice: FC<ContactOfficeType> = ({contactOffice,link}) => {
+const ContactOffice: FC<ContactOfficeType> = ({contactOffice, link, destination}) => {
+
+    const [currentLocation, setCurrentLocation] = useState<GeolocationPosition>()
+
+    useEffect(() => {
+        navigator.geolocation.getCurrentPosition((position) => setCurrentLocation(position))
+    }, [])
 
     const searchIcon = (title: string) => {
         switch (title) {
@@ -39,22 +46,34 @@ const ContactOffice: FC<ContactOfficeType> = ({contactOffice,link}) => {
         <div className={css.contactOfficeBlock}>
             <div>
                 {
-                    contactOffice.map(({title, value}, index) => (
-                        <Typography key={index} >
-                            <div className={css.position} style={{marginTop : index ===3? '40px':'' }}>
-                                {
-                                    searchIcon(title)
-                                }
-                                <div className={css.margin}>
-                                    {value}
+                    contactOffice.map((co, index) => (
+                        co.href 
+                        ? <a href={`${co.href}${co.value}`} style={{textDecoration:'none'}}><Typography key={index} >
+                                <div className={css.position} style={{marginTop : index ===3? '40px':'' }}>
+                                    {
+                                        searchIcon(co.title)
+                                    }
+                                    <div className={css.margin}>
+                                        {co.value}
+                                    </div>
                                 </div>
-                            </div>
-                        </Typography>
+                            </Typography></a>
+                        : <Typography key={index} >
+                                <div className={css.position} style={{marginTop : index ===3? '40px':'' }}>
+                                    {
+                                        searchIcon(co.title)
+                                    }
+                                    <div className={css.margin}>
+                                        {co.value}
+                                    </div>
+                                </div>
+                            </Typography>
                     ))
                 }
             </div>
             <Link href={link}>
-                <a href="" style={{textDecoration:'none'}} target={'_blank'}>
+                <a href={`https://yandex.by/maps/?ll=${destination.lng}%2C${destination.lat}&mode=routes&rtext=${currentLocation?.coords.latitude}%2C${currentLocation?.coords.longitude}~44.962107%2C34.104277&rtt=auto&ruri=~&z=7`} 
+                    style={{textDecoration:'none'}} target={'_blank'}>
                     <Typography color={'nude'} weight={'bold'}>
                         Проложить маршрут
                     </Typography>

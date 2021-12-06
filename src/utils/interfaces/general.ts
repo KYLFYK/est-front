@@ -4,7 +4,8 @@
 
 export interface IPropsGeneral {
     className?: string,
-    onClick?: () => void
+    onClick?: () => void,
+    fill?: string,
 }
 
 /**

@@ -9,7 +9,6 @@ import BaseButton from "../../../shared/BaseButton/BaseButtons";
 import { CrossIcon } from "../../../../icons/MapControlsIcons/PlaceIcons/CrossIcon";
 import ObjectCard from "../../Card/index";
 import s from './styles.module.scss';
-import { ConstructionOutlined } from "@mui/icons-material";
 
 interface Props {
   mapData: any
@@ -69,7 +68,7 @@ const Map: React.FC<Props> = ({mapData, location, viewport, setViewport}) => {
       setViewport({ ...viewport, width: "100%", height: "100%", transitionDuration: 100 });
     }
   )}, [])
-  console.log(fullscreen)
+
   return (
     <div className={s.wrapper} ref={mapWrap}>
         <MapGL
@@ -97,8 +96,8 @@ const Map: React.FC<Props> = ({mapData, location, viewport, setViewport}) => {
                   key={`cluster-${cluster.id}`}
                   latitude={latitude}
                   longitude={longitude}
+                  className={s.marker}
                 >
-                  <div style={{transform: 'translate(-50%, -50%)'}}>
                   <BaseButton className={s.button} onClick={() => {
                     setActivemarker(cluster.id)
                     setChoosedplaces(supercluster.getLeaves(cluster.id, Infinity))
@@ -112,7 +111,6 @@ const Map: React.FC<Props> = ({mapData, location, viewport, setViewport}) => {
                       clusterPoints={pointCount}
                     />
                   </BaseButton>
-                  </div>
                 </Marker>
               );
             }
@@ -122,8 +120,8 @@ const Map: React.FC<Props> = ({mapData, location, viewport, setViewport}) => {
                 key={cluster.properties.prop.object_id}
                 latitude={latitude}
                 longitude={longitude}
+                className={s.marker}
               >
-                <div style={{transform: 'translate(-50%, -50%)'}}>
                 <BaseButton className={s.button} onClick={() => {
                   setActivemarker(cluster.properties.prop.object_id)
                   setChoosedplaces([cluster])
@@ -135,7 +133,6 @@ const Map: React.FC<Props> = ({mapData, location, viewport, setViewport}) => {
                     title={cluster.properties.prop.price}
                   />
                 </BaseButton>
-                </div>
               </Marker>
             );
           })}

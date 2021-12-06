@@ -71,7 +71,7 @@ export const Filter: React.FC<Props> = ({ initialValues }) => {
     const onChangeSearchValue = (e: ChangeEvent<HTMLInputElement>) => {
         setValues({...values, searchValue: e.target.value})
     }
-
+    console.log(values)
     return (
         <div className={s.wrapper}>
             <InputsUnion className={s.actionDropdownUnion}>

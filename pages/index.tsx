@@ -3,6 +3,7 @@ import React from 'react'
 import { APIObject } from '../src/api'
 import { Advantages } from '../src/components/containers/AdvantageList/AdvantageList'
 import { AgentsContainer } from '../src/components/containers/AgentsContainer/AgentsContainer'
+import mocAgent from '../src/components/containers/AgentsContainer/Agents.json'
 import { BestOffers } from '../src/components/containers/BestOffers/bestOffers'
 import ObjectCard from '../src/components/containers/Card'
 import DevelopersContainer, {mockDevelopers} from '../src/components/containers/DevelopersContainer/DevelopersContainer'
@@ -19,6 +20,7 @@ import ParamsColumn from '../src/components/shared/ParamsColumn/ParamsColumn'
 import { SearchOffice } from '../src/components/containers/SearchOffice/SearchOffice'
 import { SelectEstate } from '../src/components/shared/SelectCustom/SelectCustom'
 import { HorizontalTabs } from '../src/components/shared/HorizontalTabs/HorizontalTabs'
+import VerticalTabs from '../src/components/shared/VerticalTabs/VerticalTabs'
 import ThreeColumnCard from '../src/components/shared/ThreeColumnCard/ThreeColumnCard'
 import { ToggleButtons } from '../src/components/shared/ToggleButtons/ToggleButtons'
 import TwoColumn from '../src/components/shared/TwoColumn/TwoColumn'
@@ -109,6 +111,32 @@ const personalAccount = [{title: 'Личный кабинет', href: '/User', m
   {title: 'Уведомления', href: '/User', message: 3},
   {title: 'Мои объекты', href: '/User', message: 0},
   {title: 'Проверка объекта', href: '/User', message: 0},
+]
+
+const tabs = [{
+    title: "Об объекте",
+    Component: <div>Об объекте</div>
+  },
+  {
+    title: "Особенности",
+    Component: <div>Особенности</div>
+  },
+  {
+    title: "Архитектура",
+    Component: <div>Архитектура</div>,
+  },
+  {
+    title: "Квартиры",
+    Component: <div>Квартиры</div>
+  },
+  {
+    title: "Инфраструктура",
+    Component: <div>Инфраструктура</div>,
+  },
+  {
+    title: "Застройщик",
+    Component: <div>Застройщик</div>
+  }
 ]
 
 const agentRecord = {
@@ -206,17 +234,13 @@ return (
           <Footer/>
 
           <h3>TabsWrappedLabel :</h3>
-          {/*
-          <HorizontalTabs/>
-          */}
+          <HorizontalTabs tabs={tabs}/>
 
           <h3>CustomSidebarTabs : ??</h3>
-          {/*
           <VerticalTabs tabs={[
               {title: '3D тур', Component: <ThreeDTour url={Online_tour["3d_tour"].url}/>},
               {title: 'VR тур', Component: <VRTour url={Online_tour["vr_tour"].url}/>}
           ]}/>
-          */}
 
     <hr color={'red'} style={{ width: '100%' }} />
     <Typography size={'big'} weight={'bold'} color={'nude'}>ADMIN :</Typography>
@@ -264,12 +288,10 @@ return (
         title={'Застройщики и агества, которые нам доверяют'}
         developersInfo={mockDevelopers}
     />
-    {/*
     <AgentsContainer
       title={'Наши агенты к вашим услугам'}
-      agents={mocAgent}
+      agents={mocAgent.Agents}
     />
-    */}
 
     <Advantages
       advantages={mocAdvantages}
