@@ -7,6 +7,7 @@ import AboutObject from '../components/AboutObjectTab/AboutObject'
 import GeneralInfoDataTab from '../components/GeneralInfoObjectTab/GeneralInfoDataTab'
 import GeneralInfoDescriptionTab from '../components/GeneralInfoObjectTab/GeneralInfoDescriptionTab'
 import GeneralInfoPhotosTab from '../components/GeneralInfoObjectTab/GeneralInfoPhotosTab'
+import InfrastructureTab from '../components/InfrastructureTab/InfrastructureTab'
 import MultipleHorizontalTab, { ICreateObjectTabs } from '../components/MultipleHorizontalTab/MultipleHorizontalTab'
 import s from './FormScreen.module.scss'
 
@@ -70,7 +71,7 @@ const FormScreen: React.FC<Props> = ({ clearObjectType, objectType }) => {
                         <GeneralInfoDataTab objectType={objectType} key={51} onNextTab={handleNextTab} onPrevTab={handlePrevTab} />
                     ]
                 },
-                { isDone: activeTabIdx > 2, label: "Инфраструктура", Components: [<div key={1} />] },
+                { isDone: activeTabIdx > 2, label: "Инфраструктура", Components: [<InfrastructureTab objectType={objectType} key={231} onNextTab={handleNextTab} onPrevTab={handlePrevTab} />] },
                 { isDone: activeTabIdx > 3, label: "О доме", Components: [<div key={1} />, <div key={1} />, <div key={1} />] },
                 { isDone: activeTabIdx > 4, label: "Юридическая чистота", Components: [<div key={1} />, <div key={1} />] },
             ]

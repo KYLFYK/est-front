@@ -235,7 +235,7 @@ const GeneralInfoDataTab: React.FC<Props> = ({ onNextTab, onPrevTab, objectType 
                     <BaseInput
                         type="text"
                         label="Описание комнат"
-                        className={s.inputMd}
+                        classNameWrapper={s.fullWidth}
                     />
                 </InputsGroup>
             )}
