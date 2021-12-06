@@ -40,6 +40,7 @@ import {VRTour} from "../src/components/containers/ToursContainer/Tours/VRTour/V
 import OurOffice from "../src/components/containers/OurOffice/OurOffice";
 import AverageMarketPrice from "../src/components/shared/AverageMarketPrice/AverageMarketPrice";
 import PaybackContainer from "../src/components/containers/PaybackContainer/PaybackContainer";
+import VerticalTabs from '../src/components/shared/VerticalTabs/VerticalTabs'
 import MapFinder from "../src/components/containers/Maps/MapFinder/index"
 import { mapData } from '../src/components/containers/Maps/MapFinder/config'
 
@@ -84,14 +85,14 @@ const Online_tour = {
       url: 'https://3d-tur.ru/010/',
   }
 }
-/*
+
 const OPTION_DATA = [{label: 'option_1', value: "1"}, {label: 'option_2', value: "2"}, {
   label: 'option_3',
   value: "4"
 }, {label: 'option_4', value: "3"}]
 const emptyFunc = () => {
 }
-*/
+
 
 /*
 const imgs = [{
@@ -174,9 +175,6 @@ const estateOffers = [{id: 1, url: 'www.google.com', img: IMAGES_SET, tags: ["П
 ]
 const tagsButton = ['Покупка', 'Аренда', 'Дом', 'Коммерческая недвижимость', 'Новостройка', 'Вторичноежилье',
   'Строящийся дом', 'От собственника']
-
-const OPTION_DATA = [{ label: 'option_1', value: "1" }, { label: 'option_2', value: "2" }, { label: 'option_3', value: "4" }, { label: 'option_4', value: "3" }]
-const emptyFunc = () => { }
 
 const averagePrice ={
   price:'150 001 240',

@@ -40,7 +40,7 @@
     &.active {
         background-color: $ACCENT;
         color: $WHITE;
-        border: 1px solid rgba(0,0,0,0);
+        border: 1px solid rgba(22, 18, 18, 0);
     }
 }
 
@@ -68,4 +68,7 @@
     background-color: $WHITE;
     border: none; 
     outline: none;
+}
+.startIcon {
+    margin-right: 8px;
 }

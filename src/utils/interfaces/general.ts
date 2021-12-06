@@ -30,12 +30,3 @@ export interface IGeneralResponse<T> {
     data: T
 }
 
-interface IPaging {
-    total_pages: number,
-    page_size: number,
-}
-export interface IGeneralObjectResponse<T> {
-    objects: T[],
-    paging: IPaging
-}
-
