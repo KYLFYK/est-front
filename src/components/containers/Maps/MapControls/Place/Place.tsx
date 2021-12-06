@@ -57,6 +57,7 @@ export const Place = ({ places, placeClicked, setPlaceClicked, active, hidden, p
                             afterChange={(current) => setPicSlider(current)}
                         >
                             {pics && pics.map((p: string, i: number) => {
+                                console.log(p)
                                 return <ImagePlace key={i} image={p} />
                             })}
                         </Slider>

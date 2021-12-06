@@ -1,4 +1,4 @@
-import React, {useState, useRef} from "react";
+import React, {useState, useRef, useEffect} from "react";
 import MapGL, {Marker} from "react-map-gl";
 import "mapbox-gl/dist/mapbox-gl.css";
 import useSupercluster from "use-supercluster";
@@ -9,17 +9,16 @@ import BaseButton from "../../../shared/BaseButton/BaseButtons";
 import { CrossIcon } from "../../../../icons/MapControlsIcons/PlaceIcons/CrossIcon";
 import ObjectCard from "../../Card/index";
 import s from './styles.module.scss';
+import { ConstructionOutlined } from "@mui/icons-material";
 
 interface Props {
   mapData: any
   location: 'finder' | 'start' | 'infrastructure' | 'payback'
-  modal: boolean
-  setModal: any
   viewport: any
-  setViewport: any
+  setViewport?: any
 }
 
-const Map: React.FC<Props> = ({mapData, location, modal, setModal, viewport, setViewport}) => {
+const Map: React.FC<Props> = ({mapData, location, viewport, setViewport}) => {
 
   const center = {
     lat: 45.16,
@@ -27,18 +26,18 @@ const Map: React.FC<Props> = ({mapData, location, modal, setModal, viewport, set
   }
 
   const [activeMarker, setActivemarker] = useState(0)
-  const [choosedPlaces, setChoosedplaces] = useState([])
+  const [choosedPlaces, setChoosedplaces] = useState<any>([])
   const [open, setOpen] = useState(false)
+  const [fullscreen, setFullscreen] = useState(false)
   
-  const onsetModal = () => {
-    setModal(!modal)
-  }
   const mapRef: any = useRef(null);
+  const mapWrap: any = useRef(null);
 
   let bounds;
   if (mapRef.current) {
     bounds = mapRef.current.getMap().getBounds().toArray().flat()
   }
+  
   const points = MappingCluster(mapData);
   const { clusters, supercluster } = useSupercluster({
     points,
@@ -51,8 +50,28 @@ const Map: React.FC<Props> = ({mapData, location, modal, setModal, viewport, set
     setViewport({ ...viewport, transitionDuration: 100 });
   } 
 
+  const onsetFullscreen = () => {
+    if (!fullscreen && mapWrap.current) {
+      mapWrap.current.requestFullscreen();
+    } 
+    else if (fullscreen) {
+      document.exitFullscreen();
+    }
+  }
+
+  useEffect(() => { 
+    document.addEventListener('fullscreenchange', () => {
+      if (document.fullscreenElement) {
+        setFullscreen(true);
+      } else {
+        setFullscreen(false);
+      }
+      setViewport({ ...viewport, width: "100%", height: "100%", transitionDuration: 100 });
+    }
+  )}, [])
+  console.log(fullscreen)
   return (
-    <div className={s.wrapper}>
+    <div className={s.wrapper} ref={mapWrap}>
         <MapGL
           {...viewport}
           mapboxApiAccessToken={'pk.eyJ1Ijoibmlja29sYXlhcmJ1em92IiwiYSI6ImNrdmdtYWQxYjd0enQybnM3bGR5b2Fnd2YifQ.IEtk0ClJ58f6dgZYa8hKpA'}
@@ -60,7 +79,7 @@ const Map: React.FC<Props> = ({mapData, location, modal, setModal, viewport, set
           onViewportChange={_onViewportChange}
           onClick={() => {
             setActivemarker(0)
-            setChoosedplaces([])
+            setChoosedplaces('')
             setOpen(false)
           }}
           ref={mapRef}
@@ -84,6 +103,7 @@ const Map: React.FC<Props> = ({mapData, location, modal, setModal, viewport, set
                     setActivemarker(cluster.id)
                     setChoosedplaces(supercluster.getLeaves(cluster.id, Infinity))
                     setOpen(true)
+                    
                   }}>
                     <IconsCreator 
                       locationProject={'finder'}
@@ -99,19 +119,19 @@ const Map: React.FC<Props> = ({mapData, location, modal, setModal, viewport, set
 
             return (
               <Marker
-                key={cluster.properties.prop.id}
+                key={cluster.properties.prop.object_id}
                 latitude={latitude}
                 longitude={longitude}
               >
                 <div style={{transform: 'translate(-50%, -50%)'}}>
                 <BaseButton className={s.button} onClick={() => {
-                  setActivemarker(cluster.properties.prop.id)
-                  setChoosedplaces(cluster)
+                  setActivemarker(cluster.properties.prop.object_id)
+                  setChoosedplaces([cluster])
                   setOpen(true)
                 }}>
                   <IconsCreator 
                     locationProject={'finder'}
-                    color={cluster.properties.prop.id === activeMarker ? '#C5A28E' : '#1A4862'}
+                    color={cluster.properties.prop.object_id === activeMarker ? '#C5A28E' : '#1A4862'}
                     title={cluster.properties.prop.price}
                   />
                 </BaseButton>
@@ -132,7 +152,7 @@ const Map: React.FC<Props> = ({mapData, location, modal, setModal, viewport, set
                         </div>
                         
         </div>
-        <MapControls location={location} viewport={viewport} setViewport={setViewport} center={center} setModal={onsetModal}/>
+        <MapControls location={location} viewport={viewport} setViewport={setViewport} center={center} onsetFullscreen={onsetFullscreen}/>
     </div>
   );
 };

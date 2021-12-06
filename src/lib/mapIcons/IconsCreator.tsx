@@ -52,16 +52,19 @@ export const IconsCreator: React.FC<Props> = ({locationProject, color, title, cl
                 : <> 
                     {
                       type === 'apartment' 
-                        ? <div style={{width: '100px', height: '100px', backgroundColor: '#000', borderRadius: '100%', border: '4px solid #fff', 
+                        ? <div style={{width: '100px', height: '100px', backgroundColor: '#000', borderRadius: '100%', 
+                            border: `4px solid ${locationProject === 'payback' ? '#1A4862' : '#FFFFFF'}`, 
                             backgroundSize: 'cover', position: 'relative', top: '-120px', left: '-55px',
                             backgroundImage: `url(${currentHouse.images[1].url})`}}>
 
-                            <div style={{width: '20px', height: '20px', backgroundColor: '#FFFFFF', transform: 'rotate(45deg)', position: 'relative', 
-                                top: '90px', left: '40px', zIndex: -1}}>
+                            <div style={{width: '20px', height: '20px', backgroundColor: `${locationProject === 'payback' ? '#1A4862' : '#FFFFFF'}`, 
+                                transform: 'rotate(45deg)', position: 'relative', top: '90px', left: '40px', zIndex: -1}}>
                             </div>
 
                         </div>
-                        : <Image width='50px' height='50px' src={OpenStreetIconsFactory(type, active, 'map')}/>
+                        : locationProject === 'infrastucture' 
+                            ? <Image src={OpenStreetIconsFactory(type, active, 'map')} width={50} height={50} />
+                            : <HomeIcon colorBody={colorBody} colorPath={colorPath}/>
                     }
                     { locationProject !== 'infrastucture' && type !== 'apartment' && <div className={s.title}>
                         <Typography

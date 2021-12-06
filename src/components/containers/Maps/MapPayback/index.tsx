@@ -47,7 +47,7 @@ const Map: React.FC<Props> = ({currentHouse, objects, location}) => {
                   latitude={md.lat}
                   longitude={md.lng}
               >
-                <div style={{transform: 'translate(-50%, -50%)'}}>
+                <div style={{transform: `${md.type !== 'apartment' ? 'translate(-50%, -50%)' : 'translate(0, 0)'}`}}>
                   <BaseButton className={s.button} onClick={() => {
                     setActivemarker(md.object_id)
                   }}>
@@ -58,6 +58,7 @@ const Map: React.FC<Props> = ({currentHouse, objects, location}) => {
                       colorPath={md.object_id === activeMarker ? '#FFFFFF' : '#C5A28E'}
                       currentHouse={currentHouse}
                       type={md.type}
+                      active={md.object_id === activeMarker}
                     />
                   </BaseButton>
                 </div>

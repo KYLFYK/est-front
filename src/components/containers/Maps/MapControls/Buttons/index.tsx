@@ -12,10 +12,10 @@ interface Props {
     setViewport: any 
     location: 'finder' | 'start' | 'infrastructure' | 'payback'
     center?: any
-    setModal?: any
+    onsetFullscreen?: any
 }
 
-export const MapControls: React.FC<Props> = ({location, viewport, setViewport, center, setModal}) => {
+export const MapControls: React.FC<Props> = ({location, viewport, setViewport, center, onsetFullscreen}) => {
 
     return (
         <div className={s.wrapper}>
@@ -32,7 +32,7 @@ export const MapControls: React.FC<Props> = ({location, viewport, setViewport, c
                 <BaseButton onClick={() => setViewport({ ...viewport, zoom: viewport.zoom - 1 })} className={s.button} type="secondary" icon={<ZoomOut />} />
             }
             {location==='finder' && 
-                <BaseButton onClick={setModal} className={s.button} type="secondary" icon={<FullScreen />} />
+                <BaseButton onClick={onsetFullscreen} className={s.button} type="secondary" icon={<FullScreen />} />
             }
         </div>
     )
