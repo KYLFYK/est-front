@@ -1,8 +1,8 @@
 import React, {FC} from 'react';
-import Typography from "../../../../../../../../shared/Typography/Typography";
-import {Card} from "../../../../../../../../shared/Mortgage/Card";
-import css from "../Statistics.module.scss";
-import {Chart} from "../../../../../../../../shared/DynamicsPrice/Chart";
+import Typography from "../../../../../../../shared/Typography/Typography";
+import {Card} from "../../../../../../../shared/Mortgage/Card";
+import css from "../../../PersonalCabinetTab/components/Statistics/Statistics.module.scss";
+import {Chart} from "../../../../../../../shared/DynamicsPrice/Chart";
 
 const table = [
     {name: '0:00', price: '0'},

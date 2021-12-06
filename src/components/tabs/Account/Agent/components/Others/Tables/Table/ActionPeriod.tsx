@@ -1,28 +1,31 @@
 import React, { FC } from 'react';
-import Typography from "../../../../../../../../shared/Typography/Typography";
-import css from './../Statistics.module.scss'
-import {Card} from "../../../../../../../../shared/Mortgage/Card";
+import Typography from "../../../../../../../shared/Typography/Typography";
+import css from '../../../PersonalCabinetTab/components/Statistics/Statistics.module.scss'
+import {Card} from "../../../../../../../shared/Mortgage/Card";
 
 type ActionPeriodType ={
+    left:string
+    center:string
+    right:string
+
     title:string
     agentActivity:{
         month:string
-        active:string
-        notActive:string
-        allRevenue:string
+        monthActive:string
+        monthNotActive:string
+        monthAll:string
         year:string
         yearActive:string
         yearNotActive:string
-        allYearRevenue:string
+        allYear:string
     }
-
 }
 
-const ActionPeriod :FC<ActionPeriodType> = ({title,agentActivity}) => {
+const ActionPeriod :FC<ActionPeriodType> = ({title,agentActivity,left,center,right}) => {
     return (
         <div>
             <Typography weight={"bold"}>
-                {title}
+                {title}{left}{center}{right}
             </Typography>
             <Card className={css.marginCard}>
                 <div style={{display: 'flex',marginBottom:'10px'}}>
@@ -39,19 +42,19 @@ const ActionPeriod :FC<ActionPeriodType> = ({title,agentActivity}) => {
                     <Typography className={css.marginTypo} weight={"light"}>
                         Активно
                         <Typography color={"accent"} size={"subheaderBig"} className={css.marginTypo}>
-                            {agentActivity.active}
+                            {agentActivity.monthActive}
                         </Typography>
                     </Typography>
                     <Typography className={css.marginTypo} weight={"light"}>
                         Неактивно
                         <Typography color={"tertiary"} size={"subheaderBig"} className={css.marginTypo}>
-                            {agentActivity.notActive}
+                            {agentActivity.monthNotActive}
                         </Typography>
                     </Typography>
                     <Typography className={css.marginTypo} weight={"light"}>
                         Общая выручка
                         <Typography color={"nude"} size={"subheaderBig"} className={css.marginTypo}>
-                            {agentActivity.allRevenue} ₽
+                            {agentActivity.monthAll}
                         </Typography>
                     </Typography>
                 </div>
@@ -82,7 +85,7 @@ const ActionPeriod :FC<ActionPeriodType> = ({title,agentActivity}) => {
                     <Typography className={css.marginTop1} weight={"light"}>
                         Общая выручка
                         <Typography color={"nude"} size={"subheaderBig"} className={css.marginTop1}>
-                            {agentActivity.allYearRevenue} ₽
+                            {agentActivity.yearNotActive}
                         </Typography>
                     </Typography>
                 </div>

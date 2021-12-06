@@ -1,8 +1,8 @@
 // тут описываем горизонтальный подтаб "Статистика", который является частью таба "Заявки на просмотр"
-import WorkloadWork from "./Table/WorkloadWork";
-import RevenueMonth from "./Table/RevenueMonth";
-import ActionPeriod from "./Table/ActionPeriod";
-import ClosedApplicationsMonth from "./Table/ClosedApplicationsMonth";
+import WorkloadWork from "../../../Others/Tables/Table/WorkloadWork";
+import RevenueMonth from "../../../Others/Tables/Table/RevenueMonth";
+import ActionPeriod from "../../../Others/Tables/Table/ActionPeriod";
+import ClosedApplicationsMonth from "../../../Others/Tables/Table/ClosedApplicationsMonth";
 import css from './Statistics.module.scss'
 import Typography from "../../../../../../../shared/Typography/Typography";
 import {BaseDropDown} from "../../../../../../../shared/BaseDropDown/BaseDropDown";
@@ -56,13 +56,13 @@ const listAgents = [
 ]
 const agentsActivity = {
     month: 'Сентябрь 2021',
-    active: '6',
-    notActive: '12',
-    allRevenue: '30 млн.',
+    monthActive: '6',
+    monthNotActive: '12',
+    monthAll: '30 млн.₽',
     year: '2021,',
     yearActive:'6',
     yearNotActive:'12',
-    allYearRevenue:'71 млн.'
+    allYear:'71 млн.₽'
 }
 const tableActiveDay=[
     {name: '0:00', price: '0'},
@@ -100,7 +100,13 @@ const PersonalCabinetStatistics: React.FC<Props> = () => {
 
             <div className={css.columnGrid}>
                 <ClosedApplicationsMonth table={tableClosingByMonth} title={"Закрытые заявки по месяцам"}/>
-                <ActionPeriod agentActivity={agentsActivity} title={"Активность агентов за период"}/>
+                <ActionPeriod
+                    left={'Активно'}
+                    center={'Неактивно'}
+                    right={'Общая выручка'}
+                    agentActivity={agentsActivity}
+                    title={"Активность агентов за период"}
+                />
                 <RevenueMonth table={tableRevenue} title={"Выручка по месяцам"}/>
                 <WorkloadWork  table={tableActiveDay} title={"Загруженность в течении дня"}/>
             </div>

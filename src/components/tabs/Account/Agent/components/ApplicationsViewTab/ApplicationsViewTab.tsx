@@ -3,17 +3,26 @@
 import { HorizontalTabs } from "../../../../../shared/HorizontalTabs/HorizontalTabs"
 import ApplicationsViewCatalog from "./components/Catalog"
 import ApplicationsViewStatistics from "./components/Statistics"
+import {useState} from "react";
 
 interface Props {
 
 }
 
 const ApplicationsViewTab: React.FC<Props> = () => {
+    const [edit, setEdit] = useState<boolean>(false)
     return (
-        <HorizontalTabs tabs={[
-            {title: "Каталог заявок", Component: <ApplicationsViewCatalog />},
-            {title: "Статистика", Component: <ApplicationsViewStatistics />}
-        ]}/> 
+        <>
+            {
+                !edit
+                    ? <HorizontalTabs tabs={[
+                        {title: "Каталог заявок", Component: <ApplicationsViewCatalog />},
+                        {title: "Статистика", Component: <ApplicationsViewStatistics />}
+                    ]}/>
+                    : <div onClick={()=>setEdit(false)}>edit</div>
+            }
+        </>
+
     )
 }
 
