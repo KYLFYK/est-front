@@ -4,6 +4,7 @@ import React from "react"
 import VerticalTabs from "../../../shared/VerticalTabs/VerticalTabs"
 import ApplicationsViewTab from "./components/ApplicationsViewTab/ApplicationsViewTab"
 import PersonalCabinetTab from "./components/PersonalCabinetTab/PersonalCabinetTab"
+import MyAds from "./components/MyAds/MyAds";
 
 interface Props {
 }
@@ -14,7 +15,7 @@ const AgentRoleTabs: React.FC<Props> = () => {
             tabs={[
                 { title: "Личный кабинет", Component: <PersonalCabinetTab /> },
                 { title: "Заявки на просмотр", Component: <ApplicationsViewTab /> },
-                { title: "Мои объявления", Component: <div /> },
+                { title: "Мои объявления", Component: <MyAds /> },
                 { title: "Тарифы размещения", Component: <div /> },
                 { title: "Профпоиск", Component: <div /> },
                 { title: "Сообщения", Component: <div /> },

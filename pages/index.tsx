@@ -38,6 +38,7 @@ import {VRTour} from "../src/components/containers/ToursContainer/Tours/VRTour/V
 import OurOffice from "../src/components/containers/OurOffice/OurOffice";
 import AverageMarketPrice from "../src/components/shared/AverageMarketPrice/AverageMarketPrice";
 import PaybackContainer from "../src/components/containers/PaybackContainer/PaybackContainer";
+import VerticalTabs from "../src/components/shared/VerticalTabs/VerticalTabs";
 
 export type ourOfficeType ={
     positionMap:{
@@ -80,20 +81,9 @@ const Online_tour = {
         url: 'https://3d-tur.ru/010/',
     }
 }
-const OPTION_DATA = [{label: 'option_1', value: "1"}, {label: 'option_2', value: "2"}, {
-    label: 'option_3',
-    value: "4"
-}, {label: 'option_4', value: "3"}]
-const emptyFunc = () => {
-}
 
-const imgs = [{
-    url: 'https://cdn.pixabay.com/photo/2021/08/25/20/42/field-6574455__340.jpg',
-    id: 0
-}, {url: 'https://cdn.pixabay.com/photo/2021/08/25/20/42/field-6574455__340.jpg', id: 1}, {
-    url: '213',
-    id: 2
-}, {url: '32123', id: 4}]
+const OPTION_DATA = [{ label: 'option_1', value: "1" }, { label: 'option_2', value: "2" }, { label: 'option_3', value: "4" }, { label: 'option_4', value: "3" }]
+const emptyFunc = () => { }
 
 const city = ['Москва', 'Санкт-Петербург', 'Крым', 'Сочи', 'Нижний Новгород']
 const personalAccount = [{title: 'Личный кабинет', href: '/User', message: 0},
@@ -141,8 +131,7 @@ const estateOffers = [{id: 1, url: 'www.google.com', img: IMAGES_SET, tags: ["П
 const tagsButton = ['Покупка', 'Аренда', 'Дом', 'Коммерческая недвижимость', 'Новостройка', 'Вторичноежилье',
     'Строящийся дом', 'От собственника']
 
-const OPTION_DATA = [{ label: 'option_1', value: "1" }, { label: 'option_2', value: "2" }, { label: 'option_3', value: "4" }, { label: 'option_4', value: "3" }]
-const emptyFunc = () => { }
+
 
 const averagePrice ={
     price:'150 001 240',
@@ -199,7 +188,8 @@ const Home: NextPage = () => {
             <Footer/>
 
             <h3>TabsWrappedLabel :</h3>
-            <HorizontalTabs/>
+
+            {/*<HorizontalTabs/>*/}
 
             <h3>CustomSidebarTabs : ??</h3>
             <VerticalTabs tabs={[
@@ -253,10 +243,10 @@ const Home: NextPage = () => {
           title={'Застройщики и агества, которые нам доверяют'}
           developersInfo={mockDevelopers}
       />
-      <AgentsContainer
-        title={'Наши агенты к вашим услугам'}
-        agents={mocAgent}
-      />
+      {/*<AgentsContainer*/}
+      {/*  title={'Наши агенты к вашим услугам'}*/}
+      {/*  agents={mocAgent}*/}
+      {/*/>*/}
       <Advantages
         advantages={mocAdvantages}
       />

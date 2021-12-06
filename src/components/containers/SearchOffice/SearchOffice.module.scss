@@ -2,8 +2,17 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+  margin: 10px 0;
 }
 .position{
   display: flex;
   align-items: center;
+}
+.inputMargin{
+  margin-right: 12px;
+}
+.textButton{
+  font-size: 14px;
+  height: 40px;
+  padding: 11px 15px;
 }

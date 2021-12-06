@@ -1,4 +1,4 @@
-import React, { FC, useState } from 'react';
+import React, {FC, ReactNode, useState} from 'react';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import Box from '@mui/material/Box';
@@ -14,7 +14,7 @@ interface Props {
     tabs: ITabItem[]
 }
 export const HorizontalTabs: FC<Props> = ({ tabs }) => {
-    const [selectedTabIdx, setSelectedTabIdx] = useState(0);
+    const [selectedTabIdx, setSelectedTabIdx] = useState(1);
 
     const handleChange = (event: React.SyntheticEvent, newValue: number) => {
         setSelectedTabIdx(newValue);

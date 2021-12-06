@@ -1,0 +1,20 @@
+.borderCard{
+  border: 1px solid #F2F2F2;
+  border-radius: 6px;
+  margin-bottom: 20px;
+  &:hover{
+    box-shadow: 0 4px 8px 0 #1A486226;
+  }
+}
+.paddingCard{
+  padding: 10px 20px 0 20px;
+}
+.paddingRight_10{
+  padding-right: 10px;
+}
+.paddingRight_5{
+  padding-right: 5px;
+}
+.paddingRight_20{
+  padding-right: 20px;
+}

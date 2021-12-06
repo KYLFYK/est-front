@@ -20,7 +20,7 @@ export const OBJECT_DEVELOPER_TABS_DATA: IDeveloperTabsData = {
 }
 
 export const OBJECT_DEVELOPER_INFO: IObjectDeveloperInfo = {
-    name: "Брусника",
+    x: "Брусника",
     developerType: "Девелоперская компания",
     logo: "https://d3n32ilufxuvd1.cloudfront.net/55ad267d853a8ee05ba03cb2/226965/upload-9b246d20-77e5-11e5-a659-371ac3ded399.jpg",
     risks: false,

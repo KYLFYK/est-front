@@ -9,10 +9,13 @@ export const SearchOffice = () => {
     return(
         <div className={css.search} >
             <div className={css.position}>
-                <BaseInput />
+                <div className={css.inputMargin}>
+                    <BaseInput  />
+                </div>
+
                 <IconOption />
             </div>
-            <BaseButton >Добавить</BaseButton>
+            <BaseButton type={"secondary"} isActive className={css.textButton} >Добавить объект</BaseButton>
         </div>
     )
 }
