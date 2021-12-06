@@ -1,4 +1,8 @@
 import React from "react"
+import { ICreateApartsGeneralInfo } from "../../../../../mobx/types/CreateObjectStoresTypes/CreateApartmentStoreType"
+import { ICreateHouseGeneralInfo } from "../../../../../mobx/types/CreateObjectStoresTypes/CreateHouseStoreType"
+import { ICreateLandGeneralInfo } from "../../../../../mobx/types/CreateObjectStoresTypes/CreateLandStoreType"
+import { ICreateTownhouseGeneralInfo } from "../../../../../mobx/types/CreateObjectStoresTypes/CreateTownhouseStoreType"
 import { ObjectTypes } from "../../../../../utils/interfaces/objects"
 import { BaseTextarea } from "../../../../shared/BaseTextarea/BaseTextarea"
 import { getInitialStateGeneralInfoTab } from "../../lib"

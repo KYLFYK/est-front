@@ -1,13 +1,11 @@
 import React from "react"
-import { isUndefined } from "../../../../../utils/general"
 import { ObjectTypes } from "../../../../../utils/interfaces/objects"
 import { DROPDOWN_FILTER_OPTIONS } from "../../../../containers/PlanningFilter/config"
 import { BaseDropDown } from "../../../../shared/BaseDropDown/BaseDropDown"
 import { BaseInput } from "../../../../shared/BaseInput/Input"
 import CounterButtons from "../../../../shared/CounterButtons/CounterButtons"
 import Typography from "../../../../shared/Typography/Typography"
-import { TAboutTabState } from "../../config"
-import { getInitStateAboutTab } from "../../lib"
+import { getInitStateAboutTab, TAboutTabState } from "../../lib"
 import ButtonPanel, { ICreateObjectControls } from "../ButtonsPanel/ButtonsPanel"
 import InputsGroup from "../InputsGroup/InputsGroup"
 import s from './AboutObject.module.scss'
@@ -15,6 +13,8 @@ import s from './AboutObject.module.scss'
 interface Props extends ICreateObjectControls {
     objectType: ObjectTypes
 }
+
+
 
 const AboutObjectTab: React.FC<Props> = ({ onNextTab, onPrevTab, objectType }) => {
     const [values, setValues] = React.useState<TAboutTabState>()

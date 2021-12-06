@@ -1,3 +1,7 @@
+import { ICreateApartmentAboutTab, ICreateApartsGeneralInfo, ICreateApartsInfoTab, ICreateApartsInfrastructure } from "../../../mobx/types/CreateObjectStoresTypes/CreateApartmentStoreType";
+import { ICreateHouseAboutTab, ICreateHouseGeneralInfo, ICreateHouseInfoTab, ICreateHouseInfrastructure } from "../../../mobx/types/CreateObjectStoresTypes/CreateHouseStoreType";
+import { ICreateLandAboutTab, ICreateLandGeneralInfo, ICreateLandInfrastructure } from "../../../mobx/types/CreateObjectStoresTypes/CreateLandStoreType";
+import { ICreateTownhouseGeneralInfo, ICreateTownhouseInfoTab, ICreateTownhouseInfrastructure } from "../../../mobx/types/CreateObjectStoresTypes/CreateTownhouseStoreType";
 import { ObjectTypes } from "../../../utils/interfaces/objects";
 import {
   ABOUT_TAB_APARTMENT_INIT,
@@ -16,6 +20,13 @@ import {
   INFRASTRUCTURE_TAB_LAND_INIT,
   INFRASTRUCTURE_TAB_TOWNHOUSE_INIT,
 } from "./config";
+
+
+export type TGeneralInfoState = ICreateApartsGeneralInfo | ICreateHouseGeneralInfo | ICreateTownhouseGeneralInfo | ICreateLandGeneralInfo
+export type TInfoState = ICreateHouseInfoTab | ICreateTownhouseInfoTab | ICreateApartsInfoTab
+export type TInfrastructureState = ICreateHouseInfrastructure | ICreateTownhouseInfrastructure | ICreateLandInfrastructure | ICreateApartsInfrastructure
+export type TAboutTabState = ICreateApartmentAboutTab | ICreateHouseAboutTab | ICreateLandAboutTab
+
 
 export const getInitStateAboutTab = (objectType: ObjectTypes) => {
   switch (objectType) {

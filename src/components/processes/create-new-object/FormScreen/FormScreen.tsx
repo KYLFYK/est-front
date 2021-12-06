@@ -1,5 +1,7 @@
+import { observer } from 'mobx-react-lite'
 import Link from 'next/link'
 import React from 'react'
+import { useStores } from '../../../../hooks/useStores'
 import NavArrowIcon from '../../../../icons/NavArrow/NavArrow'
 import { ObjectTypes } from '../../../../utils/interfaces/objects'
 import Typography from '../../../shared/Typography/Typography'
@@ -20,7 +22,8 @@ interface Props {
     clearObjectType: () => void
 }
 
-const FormScreen: React.FC<Props> = ({ clearObjectType, objectType }) => {
+const FormScreen: React.FC<Props> = observer(({ clearObjectType, objectType }) => {
+
     const [activeTabIdx, setActiveTabIdx] = React.useState<number>(0)
     const [activeSubTabIdx, setActiveSubTabIdx] = React.useState<number>(0)
     const [tabsProp, setTabsProp] = React.useState<ICreateObjectTabs[]>([])
@@ -86,7 +89,6 @@ const FormScreen: React.FC<Props> = ({ clearObjectType, objectType }) => {
             ]
         )
     }, [handleNextTab, handlePrevTab, activeTabIdx, objectType])
-
     return (
         <div>
             <div className={s.nav}>
@@ -106,6 +108,6 @@ const FormScreen: React.FC<Props> = ({ clearObjectType, objectType }) => {
 
         </div>
     )
-}
+})
 
 export default FormScreen

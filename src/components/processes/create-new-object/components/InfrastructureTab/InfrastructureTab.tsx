@@ -1,7 +1,9 @@
+import { useState } from "react"
 import { ObjectTypes } from "../../../../../utils/interfaces/objects"
 import { BaseDropDown } from "../../../../shared/BaseDropDown/BaseDropDown"
 import { BaseTextarea } from "../../../../shared/BaseTextarea/BaseTextarea"
 import { INFRASTRUCTURE_TAB_VIEW_OPTIONS } from "../../config"
+import { TInfrastructureState } from "../../lib"
 import ButtonPanel, { ICreateObjectControls } from "../ButtonsPanel/ButtonsPanel"
 import InputsGroup from "../InputsGroup/InputsGroup"
 import s from './InfrastructureTab.module.scss'
@@ -11,6 +13,8 @@ interface Props extends ICreateObjectControls {
 }
 
 const InfrastructureTab: React.FC<Props> = ({ onNextTab, onPrevTab, objectType }) => {
+    const [values, setValue] = useState<TInfrastructureState>()
+
     return (
         <ButtonPanel onNextTab={onNextTab} onPrevTab={onPrevTab}>
             <InputsGroup title="Описание">
