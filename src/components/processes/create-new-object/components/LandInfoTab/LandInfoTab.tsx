@@ -1,4 +1,6 @@
 import { Divider } from "@material-ui/core"
+import React from "react"
+import { ICreateLandInfoTab } from "../../../../../mobx/types/CreateObjectStoresTypes/CreateLandStoreType"
 import { BaseDropDown } from "../../../../shared/BaseDropDown/BaseDropDown"
 import ButtonPanel, { ICreateObjectControls } from "../ButtonsPanel/ButtonsPanel"
 import InputsGroup from "../InputsGroup/InputsGroup"
@@ -7,7 +9,10 @@ import s from './LandInfoTab.module.scss'
 interface Props extends ICreateObjectControls {
 }
 
+
 const LandInfoTab: React.FC<Props> = ({ onNextTab, onPrevTab }) => {
+    const [values, setValues] = React.useState<ICreateLandInfoTab>()
+
     return (
         <ButtonPanel onNextTab={onNextTab} onPrevTab={onPrevTab}>
             <InputsGroup title="Инженерные коммуникации">

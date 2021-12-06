@@ -1,7 +1,9 @@
 import classNames from "classnames"
+import { useState } from "react"
 import { ObjectTypes } from "../../../../../utils/interfaces/objects"
 import { BaseDropDown } from "../../../../shared/BaseDropDown/BaseDropDown"
 import { BaseInput } from "../../../../shared/BaseInput/Input"
+import { TInfoState } from "../../lib"
 import ButtonPanel, { ICreateObjectControls } from "../ButtonsPanel/ButtonsPanel"
 import InputsGroup from "../InputsGroup/InputsGroup"
 import s from './HouseInfoTab.module.scss'
@@ -10,7 +12,10 @@ interface Props extends ICreateObjectControls {
     objectType: ObjectTypes
 }
 
+
 const HouseInfoDetailsTab: React.FC<Props> = ({ onNextTab, onPrevTab, objectType }) => {
+    const [values, setValues] = useState<TInfoState>()
+
     return (
         <ButtonPanel onNextTab={onNextTab} onPrevTab={onPrevTab}>
             <InputsGroup title="Строительно-техническая экспертиза">
