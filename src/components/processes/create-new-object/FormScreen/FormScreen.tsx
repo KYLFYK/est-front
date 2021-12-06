@@ -7,7 +7,10 @@ import AboutObject from '../components/AboutObjectTab/AboutObject'
 import GeneralInfoDataTab from '../components/GeneralInfoObjectTab/GeneralInfoDataTab'
 import GeneralInfoDescriptionTab from '../components/GeneralInfoObjectTab/GeneralInfoDescriptionTab'
 import GeneralInfoPhotosTab from '../components/GeneralInfoObjectTab/GeneralInfoPhotosTab'
+import HouseInfoDetailsTab from '../components/HouseInfoTab/HouseInfoDetailsTab'
+import HouseInfoInterierTab from '../components/HouseInfoTab/HouseInfoInterierTab'
 import InfrastructureTab from '../components/InfrastructureTab/InfrastructureTab'
+import LandInfoTab from '../components/LandInfoTab/LandInfoTab'
 import MultipleHorizontalTab, { ICreateObjectTabs } from '../components/MultipleHorizontalTab/MultipleHorizontalTab'
 import s from './FormScreen.module.scss'
 
@@ -57,6 +60,12 @@ const FormScreen: React.FC<Props> = ({ clearObjectType, objectType }) => {
     const handlePublicate = () => { }
 
     React.useEffect(() => {
+
+        const AboutTabComponents: JSX.Element[] = objectType === ObjectTypes.LAND ?
+            [<LandInfoTab key={331} onNextTab={handleNextTab} onPrevTab={handlePrevTab} />] :
+            [<HouseInfoDetailsTab objectType={objectType} key={33} onNextTab={handleNextTab} onPrevTab={handlePrevTab} />, <HouseInfoInterierTab key={33} onNextTab={handleNextTab} onPrevTab={handlePrevTab} />]
+        const aboutTabLabel = objectType === ObjectTypes.LAND ? "Об учатске" : "О доме"
+
         setTabsProp(
             [
                 {
@@ -66,13 +75,13 @@ const FormScreen: React.FC<Props> = ({ clearObjectType, objectType }) => {
                 },
                 {
                     isDone: activeTabIdx > 1, label: "Основная информация", Components: [
-                        <GeneralInfoDescriptionTab objectType={objectType}  key={23} onNextTab={handleNextTab} onPrevTab={handlePrevTab} />,
-                        <GeneralInfoPhotosTab objectType={objectType}  key={3} onNextTab={handleNextTab} onPrevTab={handlePrevTab} />,
+                        <GeneralInfoDescriptionTab objectType={objectType} key={23} onNextTab={handleNextTab} onPrevTab={handlePrevTab} />,
+                        <GeneralInfoPhotosTab objectType={objectType} key={3} onNextTab={handleNextTab} onPrevTab={handlePrevTab} />,
                         <GeneralInfoDataTab objectType={objectType} key={51} onNextTab={handleNextTab} onPrevTab={handlePrevTab} />
                     ]
                 },
                 { isDone: activeTabIdx > 2, label: "Инфраструктура", Components: [<InfrastructureTab objectType={objectType} key={231} onNextTab={handleNextTab} onPrevTab={handlePrevTab} />] },
-                { isDone: activeTabIdx > 3, label: "О доме", Components: [<div key={1} />, <div key={1} />, <div key={1} />] },
+                { isDone: activeTabIdx > 3, label: aboutTabLabel, Components: AboutTabComponents },
                 { isDone: activeTabIdx > 4, label: "Юридическая чистота", Components: [<div key={1} />, <div key={1} />] },
             ]
         )

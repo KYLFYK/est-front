@@ -25,36 +25,39 @@ interface ICreateObjectLand extends ICreateObjectModel<ICreateLandAboutTab, ICre
 
 export type TAboutTabState = ICreateApartmentAboutTab | ICreateHouseAboutTab | ICreateLandAboutTab
 export type TGeneralInfoState = ICreateApartsGeneralInfo | ICreateHouseGeneralInfo | ICreateTownhouseGeneralInfo | ICreateLandGeneralInfo
+export type TInfrastructureState = ICreateHouseInfrastructure | ICreateTownhouseInfrastructure | ICreateLandInfrastructure | ICreateApartsInfrastructure
+export type TInfoState = ICreateHouseInfoTab | ICreateTownhouseInfoTab | ICreateLandInfoTab | ICreateApartsInfoTab
 export interface ICreateApartmentAboutTab {
-    name: "",
-    country: "",
-    city: "",
-    address: "",
-    cost: "",
-    index: "",
-    type: "",
-    complexName: "",
-    floor: "",
-    floorsAmmount?: "",
+    name: string,
+    country: string,
+    city: string,
+    address: string,
+    cost: number,
+    index: number,
+    type: string,
+    complexName: string,
+    floor: number,
+    floorsAmmount?: number,
 }
 
 export interface ICreateHouseAboutTab {
-    name: "",
-    country: "",
-    city: "",
-    address: "",
-    cost: "",
-    index: "",
+    name: string,
+    country: string,
+    city: string,
+    address: string,
+    cost: number,
+    index: number,
 }
 
 export interface ICreateLandAboutTab {
-    name: "",
-    country: "",
-    city: "",
-    address: "",
-    cost: "",
+    name: string,
+    country: string,
+    city: string,
+    address: string,
+    cost: number,
 }
 
+// GENERAL INFO TAB
 export interface ICreateHouseGeneralInfo {
     description: string,
     photos: ICustomFile[],
@@ -129,14 +132,103 @@ export interface ICreateApartsGeneralInfo {
 }
 
 
+// INFRASTRUCTURE TAB
+export interface ICreateHouseInfrastructure {
+    description: string,
+    view: string,
+}
+
+export interface ICreateTownhouseInfrastructure {
+    description: string,
+    view: string,
+}
+export interface ICreateLandInfrastructure {
+    description: string,
+}
+export interface ICreateApartsInfrastructure {
+    description: string,
+    view: string,
+}
+
+
+// ABOUT INFO TAB
+
+export interface ICreateHouseInfoTab {
+    houseType: string,
+    fundament: string,
+    roof: string,
+    walls: string,
+    technicalComment: string,
+    waterPipe: string,
+    heating: string,
+    sewerage: string,
+    electricity: string,
+    vent: string,
+    internet: string,
+    engineeringComment: string,
+    bedrooms: number,
+    bathrooms: number,
+    lavatories: number,
+    plumbing: string,
+    renovation: string,
+    furnitureList: string[]
+}
+
+export interface ICreateTownhouseInfoTab {
+    houseType: string,
+    fundament: string,
+    roof: string,
+    walls: string,
+    waterPipe: string,
+    heating: string,
+    sewerage: string,
+    electricity: string,
+    internet: string,
+    bedrooms: number,
+    bathrooms: number,
+    lavatories: number,
+    plumbing: string,
+    renovation: string,
+    furnitureList: string[]
+}
+
+
+export interface ICreateApartsInfoTab {
+    houseType: string,
+    fundament: string,
+    roof: string,
+    walls: string,
+    waterPipe: string,
+    heating: string,
+    sewerage: string,
+    electricity: string,
+    internet: string,
+    parking: string,
+    parkingPrice: number,
+    bedrooms: number,
+    bathrooms: number,
+    lavatories: number,
+    plumbing: string,
+    renovation: string,
+    furnitureList: string[]
+}
+
+export interface ICreateLandInfoTab {
+    waterPipe: string,
+    heating: string,
+    sewerage: string,
+    buildings: string,
+}
+
+
 
 export const ABOUT_TAB_HOUSE_INIT: ICreateHouseAboutTab = {
     name: "",
     country: "",
     city: "",
-    index: "",
+    index: 0,
     address: "",
-    cost: "",
+    cost: 0,
 };
 
 export const ABOUT_TAB_LAND_INIT: ICreateLandAboutTab = {
@@ -144,20 +236,20 @@ export const ABOUT_TAB_LAND_INIT: ICreateLandAboutTab = {
     country: "",
     city: "",
     address: "",
-    cost: "",
+    cost: 0,
 };
 
 export const ABOUT_TAB_APARTMENT_INIT: ICreateApartmentAboutTab = {
     name: "",
     country: "",
     city: "",
-    index: "",
+    index: 0,
     address: "",
-    cost: "",
+    cost: 0,
     type: "",
     complexName: "",
-    floor: "",
-    floorsAmmount: "",
+    floor: 0,
+    floorsAmmount: 0,
 };
 
 export const GENERALINFO_TAB_HOUSE_INIT: ICreateHouseGeneralInfo = {
@@ -232,10 +324,98 @@ export const GENERALINFO_TAB_APARTS_INIT: ICreateApartsGeneralInfo = {
     interiorDescription: "",
 }
 
+export const INFRASTRUCTURE_TAB_HOUSE_INIT: ICreateHouseInfrastructure = {
+    description: "",
+    view: "",
+}
+
+export const INFRASTRUCTURE_TAB_TOWNHOUSE_INIT: ICreateTownhouseInfrastructure = {
+    description: "",
+    view: "",
+}
+
+export const INFRASTRUCTURE_TAB_LAND_INIT: ICreateLandInfrastructure = {
+    description: "",
+}
+
+export const INFRASTRUCTURE_TAB_APARTS_INIT: ICreateApartsInfrastructure = {
+    description: "",
+    view: "",
+}
+
+export const INFO_TAB_HOUSE_INIT: ICreateHouseInfoTab = {
+    houseType: '',
+    fundament: '',
+    roof: '',
+    walls: '',
+    waterPipe: '',
+    heating: '',
+    sewerage: '',
+    electricity: '',
+    internet: '',
+    bedrooms: 0,
+    bathrooms: 0,
+    lavatories: 0,
+    plumbing: '',
+    renovation: '',
+    furnitureList: [],
+    technicalComment: "",
+    engineeringComment: "",
+    vent: ""
+}
+
+export const INFO_TAB_TOWNHOUSE_INIT: ICreateTownhouseInfoTab = {
+    houseType: '',
+    fundament: '',
+    roof: '',
+    walls: '',
+    waterPipe: '',
+    heating: '',
+    sewerage: '',
+    electricity: '',
+    internet: '',
+    bedrooms: 0,
+    bathrooms: 0,
+    lavatories: 0,
+    plumbing: '',
+    renovation: '',
+    furnitureList: [],
+}
+
+export const INFO_TAB_APARTS_INIT: ICreateApartsInfoTab = {
+    houseType: '',
+    fundament: '',
+    roof: '',
+    walls: '',
+    waterPipe: '',
+    heating: '',
+    sewerage: '',
+    electricity: '',
+    internet: '',
+    bedrooms: 0,
+    bathrooms: 0,
+    lavatories: 0,
+    plumbing: '',
+    renovation: '',
+    furnitureList: [],
+    parking: "",
+    parkingPrice: 0
+}
+
+export const INFO_TAB_LAND_INIT: ICreateLandInfoTab = {
+    waterPipe: "",
+    heating: "",
+    sewerage: "",
+    buildings: "",
+}
+
+
 export const INFRASTRUCTURE_TAB_VIEW_OPTIONS: IOption[] = [
-    {value: "park", label: "Двор, Парк"},
-    {value: "sea", label: "Набережная, море"},
-    {value: "downtown", label: "Центр города, историческая застройка"}
+    { value: "park", label: "Двор, Парк" },
+    { value: "sea", label: "Набережная, море" },
+    { value: "downtown", label: "Центр города, историческая застройка" }
 ]
+
+
 
 

@@ -230,7 +230,7 @@ const GeneralInfoDataTab: React.FC<Props> = ({ onNextTab, onPrevTab, objectType 
             )}
 
             <div className={s.divider} />
-            {objectType === ObjectTypes.APARTMENTS && (
+            {('interiorDescription' in values) && (
                 <InputsGroup title="Описание интерьера">
                     <BaseInput
                         type="text"
