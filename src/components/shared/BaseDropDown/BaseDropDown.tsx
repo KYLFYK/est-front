@@ -3,17 +3,20 @@ import classNames from "classnames"
 import React from "react"
 import { SmallArrowIcon } from "../../../icons/SmallArrow/SmallArrow"
 import { IOption } from "../../../utils/interfaces/general"
+import Typography from "../Typography/Typography"
 import { useStyles } from './styles'
 
 interface Props {
     options: IOption[],
     value?: string,
+    label?: string,
     placeholder: string,
     className?: string,
+    classNameWrapper?: string,
     onChange: (value: string) => void,
 }
 
-export const BaseDropDown: React.FC<Props> = ({ options, value, placeholder, className, onChange }) => {
+export const BaseDropDown: React.FC<Props> = ({ options, value, placeholder, className, label, classNameWrapper, onChange }) => {
     const classes = useStyles()
     const handleOnChange = (event: React.ChangeEvent<{ name?: string | unknown, value: unknown }>) => {
         onChange(event.target.value as string)
@@ -31,15 +34,18 @@ export const BaseDropDown: React.FC<Props> = ({ options, value, placeholder, cla
         return _value ? _value : placeholder;
     };
     return (
-        <Select
-            IconComponent={({ className }) => <SmallArrowIcon className={classNames(className, classes.icon)} />}
-            className={classNames(classes.root, className)}
-            renderValue={renderValue}
-            displayEmpty={true}
-            value={value === undefined || value === null ? "" : value}
-            onChange={handleOnChange}
-        >
-            {options.map(({ value, label }) => <MenuItem key={value} value={value}>{label}</MenuItem>)}
-        </Select>
+        <div className={classNameWrapper}>
+            {label && <Typography className={classes.label}>{label}</Typography>}
+            <Select
+                IconComponent={({ className }) => <SmallArrowIcon className={classNames(className, classes.icon)} />}
+                className={classNames(classes.root, className)}
+                renderValue={renderValue}
+                displayEmpty={true}
+                value={value === undefined || value === null ? "" : value}
+                onChange={handleOnChange}
+            >
+                {options.map(({ value, label }) => <MenuItem key={value} value={value}>{label}</MenuItem>)}
+            </Select>
+        </div>
     )
 }

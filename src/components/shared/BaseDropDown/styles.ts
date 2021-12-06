@@ -13,7 +13,7 @@ export const useStyles = makeStyles(() => ({
            display: 'none'
        },
        "& > .MuiSelect-root": {
-           padding: '11px 15px 12px 12px !important',
+           padding: '10px 15px 10px 12px !important',
            "&:focus": {
                backgroundColor: 'inherit'
            }
@@ -22,5 +22,9 @@ export const useStyles = makeStyles(() => ({
     icon: {
         top: "43% !important",
         right: "10px !important"
+    },
+    label: {
+        marginBottom: 5,
+        color: '#CAD1DA'
     }
 }))
