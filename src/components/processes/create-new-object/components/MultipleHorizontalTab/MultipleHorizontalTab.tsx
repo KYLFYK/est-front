@@ -18,7 +18,6 @@ interface Props {
 }
 
 const MultipleHorizontalTab: React.FC<Props> = ({ activeSubTabIdx, activeTabIdx, tabs }) => {
-    console.log("TABS", tabs)
     return (
         <div className={s.wrapper}>
             <div className={s.nav}>

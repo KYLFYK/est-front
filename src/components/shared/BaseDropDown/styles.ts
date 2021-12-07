@@ -26,5 +26,11 @@ export const useStyles = makeStyles(() => ({
     label: {
         marginBottom: 5,
         color: '#CAD1DA'
+    },
+    error: {
+        position: "absolute",
+    },
+    wrapper: {
+        position: "relative",
     }
 }))

@@ -57,7 +57,7 @@ export const getInitStateAboutTab = (
       return createObjectStore.land.about;
 
     default:
-      break;
+      return createObjectStore.land.about;
   }
 };
 
@@ -110,5 +110,39 @@ export const getInitialStateInfoTab = (
       return createObjectStore.townhouse.info;
     default:
       break;
+  }
+};
+
+export const isValidInputsAboutTab = (
+  objectType: ObjectTypes,
+  name: boolean,
+  type: boolean,
+  complexName: boolean,
+  country: boolean,
+  city: boolean,
+  index: boolean,
+  address: boolean,
+  cost: boolean
+): boolean => {
+  switch (objectType) {
+    case ObjectTypes.APARTMENTS:
+      return !!(
+        name &&
+        type &&
+        complexName &&
+        country &&
+        city &&
+        index &&
+        address &&
+        cost
+      );
+    case ObjectTypes.HOUSE:
+      return !!(name && country && city && index && address && cost);
+    case ObjectTypes.TOWNHOUSE:
+      return !!(name && country && city && index && address && cost);
+    case ObjectTypes.LAND:
+      return !!(name && country && city && address && cost);
+    default:
+      return false
   }
 };
