@@ -1,3 +1,4 @@
+import { observer } from "mobx-react-lite"
 import React, { useState } from "react"
 import { useStores } from "../../../../../hooks/useStores"
 import { ICreateHouseAboutTab } from "../../../../../mobx/types/CreateObjectStoresTypes/CreateHouseStoreType"
@@ -16,14 +17,11 @@ interface Props extends ICreateObjectControls {
     objectType: ObjectTypes
 }
 
-
-
-const AboutObjectTab: React.FC<Props> = ({ onNextTab, onPrevTab, objectType }) => {
+const AboutObjectTab: React.FC<Props> = observer(({ onNextTab, onPrevTab, objectType }) => {
     const { createObjectStore } = useStores()
     const [values, setValues] = React.useState<TAboutTabState>(getInitStateAboutTab(objectType, createObjectStore))
     const [isValid, setIsValid] = useState<boolean>(true)
     const saveAboutTab = createObjectStore.saveAboutTab.bind(createObjectStore)
-
 
     const isValidName = (("name" in values) && !!values.name.length) // REPLACE BY VALIDATION SERVICE
     const isValidType = (("type" in values) && !!values.type.length) // REPLACE BY VALIDATION SERVICE
@@ -33,8 +31,6 @@ const AboutObjectTab: React.FC<Props> = ({ onNextTab, onPrevTab, objectType }) =
     const isValidIndex = (("index" in values) && !!values.index) // REPLACE BY VALIDATION SERVICE
     const isValidAddress = (("address" in values) && !!values.address.length) // REPLACE BY VALIDATION SERVICE
     const isValidCost = (("cost" in values) && !!values.cost) // REPLACE BY VALIDATION SERVICE
-
-
 
     const handleNext = () => {
         const isValid = isValidInputsAboutTab(
@@ -48,50 +44,49 @@ const AboutObjectTab: React.FC<Props> = ({ onNextTab, onPrevTab, objectType }) =
             isValidAddress,
             isValidCost
         )
-        if (!isValid) {
-            setIsValid(isValid)
-            return
+        if (isValid) {
+            saveAboutTab(values!, objectType)
+            onNextTab()
         }
-        saveAboutTab(values!, objectType)
-        onNextTab()
+        else {
+            setIsValid(isValid)
+        }
     }
 
     const handlePrev = () => {
-        console.log('prev')
         onPrevTab()
     }
 
     const onChangeName = (event: React.ChangeEvent & { target: HTMLInputElement }) => {
-        setValues({ ...values!, name: event.target.value })
+        setValues({ ...values, name: event.target.value })
     }
     const onChangeType = (value: string) => {
-        setValues({ ...values!, type: value })
+        setValues({ ...values, type: value })
     }
     const onChangeComplexName = (value: string) => {
-        setValues({ ...values!, complexName: value })
+        setValues({ ...values, complexName: value })
     }
     const onChangeFloor = (value: number) => {
-        setValues({ ...values!, floor: value })
+        setValues({ ...values, floor: value })
     }
     const onChangeFloorsAmmount = (value: number) => {
-        setValues({ ...values!, floorsAmmount: value })
+        setValues({ ...values, floorsAmmount: value })
     }
     const onChangeCountry = (value: string) => {
-        setValues({ ...values!, country: value })
+        setValues({ ...values, country: value })
     }
     const onChangeCity = (value: string) => {
-        setValues({ ...values!, city: value })
+        setValues({ ...values, city: value })
     }
     const onChangeIndex = (event: React.ChangeEvent & { target: HTMLInputElement }) => {
-        setValues({ ...values!, index: +event.target.value })
+        setValues({ ...values, index: +event.target.value })
     }
     const onChangeAddress = (event: React.ChangeEvent & { target: HTMLInputElement }) => {
-        setValues({ ...values!, address: event.target.value })
+        setValues({ ...values, address: event.target.value })
     }
     const onChangeCost = (event: React.ChangeEvent & { target: HTMLInputElement }) => {
-        setValues({ ...values!, cost: +event.target.value })
+        setValues({ ...values, cost: +event.target.value })
     }
-
     return (
         <ButtonPanel onNextTab={handleNext} onPrevTab={handlePrev}>
             <InputsGroup title={"Объект"}>
@@ -129,8 +124,8 @@ const AboutObjectTab: React.FC<Props> = ({ onNextTab, onPrevTab, objectType }) =
                         <CounterButtons
                             onChange={onChangeFloor}
                             initValue={values.floor}
-                            label="Этаж" 
-                            />
+                            label="Этаж"
+                        />
 
                         <CounterButtons
                             onChange={onChangeFloorsAmmount}
@@ -196,6 +191,6 @@ const AboutObjectTab: React.FC<Props> = ({ onNextTab, onPrevTab, objectType }) =
             </InputsGroup>
         </ButtonPanel>
     )
-}
+})
 
 export default AboutObjectTab

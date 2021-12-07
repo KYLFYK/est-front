@@ -3,7 +3,7 @@ import { ICreateObjectAparts } from "../../types/CreateObjectStoresTypes/CreateA
 
 class CreateApartmentStore implements ICreateObjectAparts {
   about: ICreateObjectAparts["about"] = {
-    name: "baba",
+    name: "",
     country: "",
     city: "",
     address: "",

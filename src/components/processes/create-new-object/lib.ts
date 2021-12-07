@@ -75,7 +75,7 @@ export const getInitialStateGeneralInfoTab = (
     case ObjectTypes.LAND:
       return createObjectStore.land.generalInfo;
     default:
-      break;
+      return createObjectStore.apartment.generalInfo;
   }
 };
 
@@ -143,6 +143,74 @@ export const isValidInputsAboutTab = (
     case ObjectTypes.LAND:
       return !!(name && country && city && address && cost);
     default:
-      return false
+      return false;
+  }
+};
+
+export const isValidInputsGeneralTab = (
+  objectType: ObjectTypes,
+  generalSquare: boolean,
+  houseSquare: boolean,
+  livingSquare: boolean,
+  land: boolean,
+  landGeneralSquare: boolean,
+  ceilingHeight: boolean,
+  rooms: boolean,
+  bathroom: boolean,
+  kitchen: boolean,
+  garage: boolean,
+  garageCapacity: boolean,
+  garageSquare: boolean,
+  pool: boolean,
+  poolSquare: boolean,
+  cottageVillageName: boolean,
+  landStatus: boolean,
+  interiorDescription: boolean
+): boolean => {
+  switch (objectType) {
+    case ObjectTypes.APARTMENTS:
+      return !!(
+        generalSquare &&
+        livingSquare &&
+        ceilingHeight &&
+        rooms &&
+        bathroom &&
+        kitchen &&
+        interiorDescription
+      );
+    case ObjectTypes.HOUSE:
+      return !!(
+        generalSquare &&
+        houseSquare &&
+        livingSquare &&
+        land &&
+        rooms &&
+        bathroom &&
+        kitchen &&
+        garage &&
+        garageCapacity &&
+        garageSquare &&
+        pool &&
+        poolSquare
+      );
+    case ObjectTypes.TOWNHOUSE:
+      return !!(
+        generalSquare &&
+        houseSquare &&
+        livingSquare &&
+        land &&
+        rooms &&
+        bathroom &&
+        kitchen &&
+        garage &&
+        garageCapacity &&
+        garageSquare &&
+        pool &&
+        poolSquare
+      );
+    case ObjectTypes.LAND:
+      return !!(landGeneralSquare && cottageVillageName && landStatus);
+    default:
+      return false;
   }
 };

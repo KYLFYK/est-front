@@ -31,12 +31,12 @@ export interface ICreateTownhouseGeneralInfo {
   bathroom: string;
   kitchen: string;
   garage: {
-    has: boolean;
+    has: string;
     capacity: string;
     square: string;
   };
   pool: {
-    has: boolean;
+    has: string;
     square: string;
   };
   floors: {

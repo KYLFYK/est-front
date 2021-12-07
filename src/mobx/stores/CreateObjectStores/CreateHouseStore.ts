@@ -22,12 +22,12 @@ class CreateHouseStore implements ICreateObjectHouse {
     bathroom: "",
     kitchen: "",
     garage: {
-      has: true,
+      has: '',
       capacity: "",
       square: "",
     },
     pool: {
-      has: true,
+      has: '',
       square: "",
     },
     floors: {

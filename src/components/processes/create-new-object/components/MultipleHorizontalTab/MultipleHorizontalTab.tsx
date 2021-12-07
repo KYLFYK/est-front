@@ -45,7 +45,7 @@ const MultipleHorizontalTab: React.FC<Props> = ({ activeSubTabIdx, activeTabIdx,
                 <div className={s.divider} />
             </div>
             <div className={s.content}>
-                {tabs.length && tabs[activeTabIdx].Components[activeSubTabIdx]}
+                {!!tabs.length && tabs[activeTabIdx].Components[activeSubTabIdx]}
             </div>
         </div>
     )

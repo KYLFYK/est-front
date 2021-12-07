@@ -23,12 +23,12 @@ class CreateTownhouseStore implements ICreateObjectTownhouse {
     bathroom: "",
     kitchen: "",
     garage: {
-      has: true,
+      has: "",
       capacity: "",
       square: "",
     },
     pool: {
-      has: true,
+      has: "",
       square: "",
     },
     floors: {
