@@ -8,12 +8,12 @@ export interface ICreateObjectModel<A, B, C, D, E = {}> {
     generalInfo: B,
     infrastructure: C,
     info: D,
-    legalPurity: E
+    legalPurity?: E
 }
 
 export interface ICreateObject {
     apartment: ICreateObjectAparts
-    land?: ICreateObjectLand
-    house?: ICreateObjectHouse
-    townhouse?: ICreateObjectTownhouse
+    land: ICreateObjectLand
+    house: ICreateObjectHouse
+    townhouse: ICreateObjectTownhouse
 }

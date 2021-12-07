@@ -1,4 +1,5 @@
 import React from "react"
+import { useStores } from "../../../../../hooks/useStores"
 import { ICreateApartsGeneralInfo } from "../../../../../mobx/types/CreateObjectStoresTypes/CreateApartmentStoreType"
 import { ICreateHouseGeneralInfo } from "../../../../../mobx/types/CreateObjectStoresTypes/CreateHouseStoreType"
 import { ICreateLandGeneralInfo } from "../../../../../mobx/types/CreateObjectStoresTypes/CreateLandStoreType"
@@ -17,11 +18,12 @@ interface Props extends ICreateObjectControls {
 
 const GeneralInfoDescriptionTab: React.FC<Props> = ({ onNextTab, onPrevTab, objectType }) => {
     const [description, setDescription] = React.useState<string>()
+    const { createObjectStore } = useStores()
 
     React.useEffect(() => {
-        const initState = getInitialStateGeneralInfoTab(objectType)
+        const initState = getInitialStateGeneralInfoTab(objectType, createObjectStore)
         setDescription(initState?.description)
-    }, [objectType])
+    }, [objectType, createObjectStore])
 
     const onChangeDescription = (e: React.ChangeEvent & { target: HTMLTextAreaElement }) => {
         setDescription(e.target.value)

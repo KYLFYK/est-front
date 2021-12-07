@@ -1,5 +1,6 @@
 import classNames from "classnames"
 import React from "react"
+import { useStores } from "../../../../../hooks/useStores"
 import { isUndefined } from "../../../../../utils/general"
 import { IOption } from "../../../../../utils/interfaces/general"
 import { ObjectTypes } from "../../../../../utils/interfaces/objects"
@@ -19,11 +20,13 @@ interface Props extends ICreateObjectControls {
 
 const GeneralInfoDataTab: React.FC<Props> = ({ onNextTab, onPrevTab, objectType }) => {
     const [values, setValues] = React.useState<TGeneralInfoState>()
+    const { createObjectStore } = useStores()
+
 
     React.useEffect(() => {
-        const initState = getInitialStateGeneralInfoTab(objectType)
+        const initState = getInitialStateGeneralInfoTab(objectType, createObjectStore)
         setValues(initState)
-    }, [objectType])
+    }, [objectType, createObjectStore])
 
 
     const onChangeFloors = (value: number) => {

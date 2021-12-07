@@ -20,7 +20,7 @@ export interface ICreateApartmentAboutTab {
   type: string;
   complexName: string;
   floor: number;
-  floorsAmmount?: number;
+  floorsAmmount: number;
 }
 
 export interface ICreateApartsGeneralInfo {

@@ -1,7 +1,6 @@
 import { observer } from 'mobx-react-lite'
 import Link from 'next/link'
 import React from 'react'
-import { useStores } from '../../../../hooks/useStores'
 import NavArrowIcon from '../../../../icons/NavArrow/NavArrow'
 import { ObjectTypes } from '../../../../utils/interfaces/objects'
 import Typography from '../../../shared/Typography/Typography'
@@ -23,7 +22,6 @@ interface Props {
 }
 
 const FormScreen: React.FC<Props> = observer(({ clearObjectType, objectType }) => {
-
     const [activeTabIdx, setActiveTabIdx] = React.useState<number>(0)
     const [activeSubTabIdx, setActiveSubTabIdx] = React.useState<number>(0)
     const [tabsProp, setTabsProp] = React.useState<ICreateObjectTabs[]>([])
@@ -65,8 +63,8 @@ const FormScreen: React.FC<Props> = observer(({ clearObjectType, objectType }) =
     React.useEffect(() => {
 
         const AboutTabComponents: JSX.Element[] = objectType === ObjectTypes.LAND ?
-            [<LandInfoTab key={331} onNextTab={handleNextTab} onPrevTab={handlePrevTab} />] :
-            [<HouseInfoDetailsTab objectType={objectType} key={33} onNextTab={handleNextTab} onPrevTab={handlePrevTab} />, <HouseInfoInterierTab key={33} onNextTab={handleNextTab} onPrevTab={handlePrevTab} />]
+            [<LandInfoTab objectType={objectType} key={331} onNextTab={handleNextTab} onPrevTab={handlePrevTab} />] :
+            [<HouseInfoDetailsTab objectType={objectType} key={33} onNextTab={handleNextTab} onPrevTab={handlePrevTab} />, <HouseInfoInterierTab objectType={objectType} key={33} onNextTab={handleNextTab} onPrevTab={handlePrevTab} />]
         const aboutTabLabel = objectType === ObjectTypes.LAND ? "Об учатске" : "О доме"
 
         setTabsProp(
@@ -83,7 +81,10 @@ const FormScreen: React.FC<Props> = observer(({ clearObjectType, objectType }) =
                         <GeneralInfoDataTab objectType={objectType} key={51} onNextTab={handleNextTab} onPrevTab={handlePrevTab} />
                     ]
                 },
-                { isDone: activeTabIdx > 2, label: "Инфраструктура", Components: [<InfrastructureTab objectType={objectType} key={231} onNextTab={handleNextTab} onPrevTab={handlePrevTab} />] },
+                {
+                    isDone: activeTabIdx > 2, label: "Инфраструктура", Components: [
+                        <InfrastructureTab objectType={objectType} key={231} onNextTab={handleNextTab} onPrevTab={handlePrevTab} />]
+                },
                 { isDone: activeTabIdx > 3, label: aboutTabLabel, Components: AboutTabComponents },
                 { isDone: activeTabIdx > 4, label: "Юридическая чистота", Components: [<div key={1} />, <div key={1} />] },
             ]

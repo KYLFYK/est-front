@@ -57,6 +57,10 @@ class CreateApartmentStore implements ICreateObjectAparts {
   constructor() {
     makeObservable(this, {
       about: observable,
+      generalInfo: observable,
+      info: observable,
+      infrastructure: observable,
+      legalPurity: observable,
       changeName: action,
     });
   }
