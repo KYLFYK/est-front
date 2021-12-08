@@ -93,7 +93,7 @@ export const getInitialStateInfrastructureTab = (
     case ObjectTypes.LAND:
       return createObjectStore.land.infrastructure;
     default:
-      break;
+      return createObjectStore.apartment.infrastructure;
   }
 };
 
@@ -210,6 +210,23 @@ export const isValidInputsGeneralTab = (
       );
     case ObjectTypes.LAND:
       return !!(landGeneralSquare && cottageVillageName && landStatus);
+    default:
+      return false;
+  }
+};
+
+export const isValidInputsInfrastructureTab = (
+  objectType: ObjectTypes,
+  description: boolean,
+  view: boolean
+): boolean => {
+  switch (objectType) {
+    case ObjectTypes.APARTMENTS:
+    case ObjectTypes.HOUSE:
+    case ObjectTypes.TOWNHOUSE:
+      return view && description;
+    case ObjectTypes.LAND:
+      return description;
     default:
       return false;
   }

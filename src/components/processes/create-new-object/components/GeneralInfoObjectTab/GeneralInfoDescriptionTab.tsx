@@ -40,10 +40,14 @@ const GeneralInfoDescriptionTab: React.FC<Props> = observer(({ onNextTab, onPrev
     return (
         <ButtonPanel onNextTab={handleNextTab} onPrevTab={onPrevTab}>
             <InputsGroup title={"Описание"}>
-                <BaseTextarea className={s.textarea} label="Опишите сильные стороны вашего объекта" value={values.description} onChange={onChangeDescription} />
+                <BaseTextarea 
+                className={s.textarea} 
+                label="Опишите сильные стороны вашего объекта" 
+                value={values.description} 
+                onChange={onChangeDescription} 
+                isError={!isValidDescription && !isValid}
+                />
             </InputsGroup>
-
-            {!isValid && <Typography color="red" size="small" className={s.error}>{"Заполните пожалуйта поле"}</Typography>}
 
         </ButtonPanel>
     )
