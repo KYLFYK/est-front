@@ -1,12 +1,12 @@
 import { action, makeObservable, observable } from "mobx";
 import { ICustomFile } from "../../../components/processes/create-new-object/components/GeneralInfoObjectTab/GeneralInfoPhotosTab";
-import { TAboutTabState, TGeneralInfoState } from "../../../components/processes/create-new-object/lib";
+import { TAboutTabState, TGeneralInfoState, TInfrastructureState } from "../../../components/processes/create-new-object/lib";
 import { ObjectTypes } from "../../../utils/interfaces/objects";
-import { ICreateApartmentAboutTab, ICreateApartsGeneralInfo } from "../../types/CreateObjectStoresTypes/CreateApartmentStoreType";
-import { ICreateHouseAboutTab, ICreateHouseGeneralInfo } from "../../types/CreateObjectStoresTypes/CreateHouseStoreType";
-import { ICreateLandAboutTab, ICreateLandGeneralInfo } from "../../types/CreateObjectStoresTypes/CreateLandStoreType";
+import { ICreateApartmentAboutTab, ICreateApartsGeneralInfo, ICreateApartsInfrastructure } from "../../types/CreateObjectStoresTypes/CreateApartmentStoreType";
+import { ICreateHouseAboutTab, ICreateHouseGeneralInfo, ICreateHouseInfrastructure } from "../../types/CreateObjectStoresTypes/CreateHouseStoreType";
+import { ICreateLandAboutTab, ICreateLandGeneralInfo, ICreateLandInfrastructure } from "../../types/CreateObjectStoresTypes/CreateLandStoreType";
 import { ICreateObject } from "../../types/CreateObjectStoresTypes/CreateObjectStoreType";
-import { ICreateTownhouseAboutTab, ICreateTownhouseGeneralInfo } from "../../types/CreateObjectStoresTypes/CreateTownhouseStoreType";
+import { ICreateTownhouseAboutTab, ICreateTownhouseGeneralInfo, ICreateTownhouseInfrastructure } from "../../types/CreateObjectStoresTypes/CreateTownhouseStoreType";
 import { IRootStore } from "../RootStore";
 import CreateApartmentStore from "./CreateApartmentStore";
 import CreateHouseStore from "./CreateHouseStore";
@@ -40,7 +40,7 @@ class CreateObjectStore implements ICreateObject {
         }
     }
 
-    
+
     saveGeneralTab(data: TGeneralInfoState, objectType: ObjectTypes) {
         switch (objectType) {
             case ObjectTypes.APARTMENTS:
@@ -60,13 +60,34 @@ class CreateObjectStore implements ICreateObject {
         }
     }
 
+    saveInfrastructureTab(data: TInfrastructureState, objectType: ObjectTypes) {
+        switch (objectType) {
+            case ObjectTypes.APARTMENTS:
+                this.apartment.infrastructure = data as ICreateApartsInfrastructure
+                break;
+            case ObjectTypes.HOUSE:
+                this.house.infrastructure = data as ICreateHouseInfrastructure
+                break;
+            case ObjectTypes.TOWNHOUSE:
+                this.townhouse.infrastructure = data as ICreateTownhouseInfrastructure
+                break;
+            case ObjectTypes.LAND:
+                this.land.infrastructure = data as ICreateLandInfrastructure
+                break;
+            default:
+                break;
+        }
+    }
+
     constructor(rootStore: IRootStore) {
         makeObservable(this, {
             apartment: observable,
             townhouse: observable,
             land: observable,
             house: observable,
-            saveAboutTab: action
+            saveAboutTab: action,
+            saveGeneralTab: action,
+            saveInfrastructureTab: action,
         })
 
     }

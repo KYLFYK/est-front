@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from "react"
+import { observer } from "mobx-react-lite"
+import React, { useState } from "react"
 import { useStores } from "../../../../../hooks/useStores"
 import { ObjectTypes } from "../../../../../utils/interfaces/objects"
 import { BaseDropDown } from "../../../../shared/BaseDropDown/BaseDropDown"
@@ -13,7 +14,7 @@ interface Props extends ICreateObjectControls {
     objectType: ObjectTypes
 }
 
-const InfrastructureTab: React.FC<Props> = ({ onNextTab, onPrevTab, objectType }) => {
+const InfrastructureTab: React.FC<Props> = observer(({ onNextTab, onPrevTab, objectType }) => {
     const { createObjectStore } = useStores()
     const [values, setValues] = useState<TInfrastructureState>(getInitialStateInfrastructureTab(objectType, createObjectStore))
     const [isValid, setIsValid] = useState<boolean>(true)
@@ -33,8 +34,10 @@ const InfrastructureTab: React.FC<Props> = ({ onNextTab, onPrevTab, objectType }
 
     const handleNextTab = () => {
         const isValidInputs = isValidInputsInfrastructureTab(objectType, isValidDescription, isValidView)
-        if (isValidInputs)
+        if (isValidInputs) {
+            createObjectStore.saveInfrastructureTab(values, objectType)
             onNextTab()
+        }
         else
             setIsValid(false)
     }
@@ -68,6 +71,6 @@ const InfrastructureTab: React.FC<Props> = ({ onNextTab, onPrevTab, objectType }
             )}
         </ButtonPanel>
     )
-}
+})
 
 export default InfrastructureTab
