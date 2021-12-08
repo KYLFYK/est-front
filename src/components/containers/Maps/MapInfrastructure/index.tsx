@@ -7,6 +7,8 @@ import BaseButton from "../../../shared/BaseButton/BaseButtons";
 import { ArrowIcon } from "../../../../icons/MapControlsIcons/PlaceIcons/ArrowIcon";
 import { CheckBox } from "../MapControls/Checkbox/CheckBox";
 import { Place } from "../MapControls/Place/Place";
+import HeadLine from "../../../shared/HeadLine/HeadLine";
+import Typography from '../../../shared/Typography/Typography';
 import s from './styles.module.scss';
 
 interface Props {
@@ -71,7 +73,14 @@ const Map: React.FC<Props> = ({currentHouse, infrastructura, location}) => {
   } 
 
   return (
-    <div className={s.wrapper}>
+    <div className={s.container}>
+      <HeadLine title={'Инфраструктура'}>
+        <Typography weight="light"> 
+          В 15 минутах езды расположена Ялта со своей знаменитой набережной, театр Чехова, авквариум и дельфинарий. Знаменитые дворцы, парки, ботанические сады и винные заводы расположены в получасовой доступности. 
+          В Гурзуфе есть свой причал, откуда регулярно отправляются рейсы на Ялту, Никиту, Ласточкино гнездо, Алупку, Партенит и Алушту.
+        </Typography>
+      </HeadLine>
+    <div className={s.mapWrapper}>
         <MapGL
           {...viewport}
           mapboxApiAccessToken={'pk.eyJ1Ijoibmlja29sYXlhcmJ1em92IiwiYSI6ImNrdmdtYWQxYjd0enQybnM3bGR5b2Fnd2YifQ.IEtk0ClJ58f6dgZYa8hKpA'}
@@ -129,6 +138,7 @@ const Map: React.FC<Props> = ({currentHouse, infrastructura, location}) => {
                         </button>
         </div>
         <MapControls location={location} viewport={viewport} setViewport={setViewport} center={{lat: currentHouse.lat, lng: currentHouse.lng}} />
+    </div>
     </div>
   );
 };

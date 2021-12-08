@@ -12,11 +12,18 @@ interface ITabItem {
 }
 interface Props {
     tabs: ITabItem[]
+    refs?: any[]
 }
-export const HorizontalTabs: FC<Props> = ({ tabs }) => {
+export const HorizontalTabs: FC<Props> = ({ tabs, refs }) => {
     const [selectedTabIdx, setSelectedTabIdx] = useState(0);
 
     const handleChange = (event: React.SyntheticEvent, newValue: number) => {
+        if (refs) {
+            window.scrollTo({
+                top: refs[newValue].offsetTop,
+                behavior: 'smooth',
+            })
+        }
         setSelectedTabIdx(newValue);
     };
 
@@ -49,7 +56,7 @@ export const HorizontalTabs: FC<Props> = ({ tabs }) => {
                                             (tab.Component && index === selectedTabIdx) ?
                                                 'nude' : tab.Component ?
                                                     'tertiary' : 'accent'}
-                                        > {tab.title}</Typography>
+                                        >{tab.title}</Typography>
                                     }
                                 />
                             ))

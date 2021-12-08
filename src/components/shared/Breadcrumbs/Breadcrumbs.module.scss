@@ -1,0 +1,32 @@
+.blockAdvantage{
+    display: flex;
+    margin: 40px 0 0 60px;
+}
+.img{
+    display: inline-block;
+    width: 100px;
+    height: 100px;
+}
+.text{
+    margin: 0 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-width: 430px;
+}
+.autoWidth {
+    min-width: auto;
+    margin: 0 10px;
+}
+.icon {
+    display: flex;
+    align-items: center;
+}
+.primaryItem{
+    color: #3D4550;
+    margin: 0 5px 0 0;
+}
+.secondaryItem{
+    color: #BDBDBD;
+    margin: 0 5px 0 0;
+}

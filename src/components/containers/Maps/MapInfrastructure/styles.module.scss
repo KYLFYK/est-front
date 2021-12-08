@@ -2,9 +2,10 @@
 @import '../../../../sass/resolutions.scss';
 @import '../../../../sass/scrollbars.scss';
 
-.wrapper {
+.mapWrapper {
+    margin: 20px 0 0 0;
     position: relative;
-    width: 900px; 
+    width: 1320px; 
     height: 700px;
 }
 
@@ -15,27 +16,7 @@
 }
 
 .container {
-    display: flex;
-    flex-direction: column;
-    color: $BLACK;
-    @include for-size(KT1) {
-        padding: 40px 10px 40px 10px;
-    }
-    @include for-size(KT2) {
-        padding: 40px 20px 40px 20px;
-    }
-    @include for-size(KT3) {
-        padding: 60px 24px 60px 24px;
-    }
-    @include for-size(KT4) {
-        padding: 60px 40px 60px 40px;
-    }
-    @include for-size(KT5) {
-        padding: 70px 30px 60px 30px;
-    }
-    @include for-size(KT6) {
-        padding: 80px 100px 60px 100px;
-    }
+    margin: 60px 0 0 60px;
 }
 
 .title {
