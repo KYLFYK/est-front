@@ -12,6 +12,7 @@ interface Props extends React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLIn
 }
 
 export const BaseInput: React.FC<Props> = ({ className = '', icon, label, classNameWrapper, isError, errorLabel = "Поле должно быть заполнено", ...props }) => {
+    
     return (
         <div className={classNameWrapper}>
             {label && <Typography className={s.label}>{label}</Typography>}

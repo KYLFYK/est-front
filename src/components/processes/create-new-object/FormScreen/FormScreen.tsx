@@ -21,7 +21,7 @@ interface Props {
     clearObjectType: () => void
 }
 
-const FormScreen: React.FC<Props> = observer(({ clearObjectType, objectType }) => {
+const FormScreen: React.FC<Props> = ({ clearObjectType, objectType }) => {
     const [activeTabIdx, setActiveTabIdx] = React.useState<number>(0)
     const [activeSubTabIdx, setActiveSubTabIdx] = React.useState<number>(0)
     const [tabsProp, setTabsProp] = React.useState<ICreateObjectTabs[]>([])
@@ -109,6 +109,6 @@ const FormScreen: React.FC<Props> = observer(({ clearObjectType, objectType }) =
 
         </div>
     )
-})
+}
 
 export default FormScreen

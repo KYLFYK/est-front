@@ -9,5 +9,8 @@ export const INFRASTRUCTURE_TAB_VIEW_OPTIONS: IOption[] = [
 ]
 
 
+export const INFO_TAB_HOUSE_TYPE: IOption[] = [
+    { value: "Монолитный", label: "Монолитный" },
+]
 
 

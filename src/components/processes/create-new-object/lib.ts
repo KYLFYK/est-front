@@ -109,7 +109,7 @@ export const getInitialStateInfoTab = (
     case ObjectTypes.TOWNHOUSE:
       return createObjectStore.townhouse.info;
     default:
-      break;
+      return createObjectStore.apartment.info;
   }
 };
 
@@ -227,6 +227,71 @@ export const isValidInputsInfrastructureTab = (
       return view && description;
     case ObjectTypes.LAND:
       return description;
+    default:
+      return false;
+  }
+};
+
+export const isValidInputsHouseDetailsTab = (
+objectType: Exclude<ObjectTypes, ObjectTypes.LAND>,
+  houseType: boolean,
+  fundament: boolean,
+  roof: boolean,
+  walls: boolean,
+  technicalComment: boolean,
+  waterPipe: boolean,
+  heating: boolean,
+  sewerage: boolean,
+  electricity: boolean,
+  vent: boolean,
+  internet: boolean,
+  engineeringComment: boolean,
+  parking: boolean,
+  parkingPrice: boolean
+): boolean => {
+  switch (objectType) {
+    case ObjectTypes.APARTMENTS:
+      return !!(
+        houseType &&
+        fundament &&
+        roof &&
+        walls &&
+        waterPipe &&
+        heating &&
+        sewerage &&
+        electricity &&
+        internet &&
+        parking &&
+        parkingPrice
+      );
+    case ObjectTypes.HOUSE:
+      return !!(
+        houseType &&
+        fundament &&
+        roof &&
+        walls &&
+        technicalComment &&
+        waterPipe &&
+        heating &&
+        sewerage &&
+        electricity &&
+        vent &&
+        internet &&
+        engineeringComment
+      );
+    case ObjectTypes.TOWNHOUSE:
+      return !!(
+        houseType &&
+        fundament &&
+        roof &&
+        walls &&
+        waterPipe &&
+        heating &&
+        sewerage &&
+        electricity &&
+        internet
+      );
+
     default:
       return false;
   }
