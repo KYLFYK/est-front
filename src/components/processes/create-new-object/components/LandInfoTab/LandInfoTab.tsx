@@ -1,4 +1,5 @@
 import { Divider } from "@material-ui/core"
+import { observer } from "mobx-react-lite"
 import React, { useEffect } from "react"
 import { useStores } from "../../../../../hooks/useStores"
 import { ICreateLandInfoTab } from "../../../../../mobx/types/CreateObjectStoresTypes/CreateLandStoreType"
@@ -15,7 +16,7 @@ interface Props extends ICreateObjectControls {
 }
 
 
-const LandInfoTab: React.FC<Props> = ({ onNextTab, onPrevTab, objectType }) => {
+const LandInfoTab: React.FC<Props> = observer(({ onNextTab, onPrevTab, objectType }) => {
     const { createObjectStore } = useStores()
     const [values, setValues] = React.useState<ICreateLandInfoTab>(createObjectStore.land.info)
     const [isValid, setIsValid] = React.useState<boolean>(true)
@@ -83,6 +84,6 @@ const LandInfoTab: React.FC<Props> = ({ onNextTab, onPrevTab, objectType }) => {
             </InputsGroup>
         </ButtonPanel>
     )
-}
+})
 
 export default LandInfoTab

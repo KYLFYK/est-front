@@ -1,4 +1,5 @@
 import classNames from "classnames"
+import { observer } from "mobx-react-lite"
 import React from "react"
 import { useState } from "react"
 import { useStores } from "../../../../../hooks/useStores"
@@ -18,7 +19,7 @@ interface Props extends ICreateObjectControls {
 
 const MAX_LENGTH = 250
 
-const HouseInfoDetailsTab: React.FC<Props> = ({ onNextTab, onPrevTab, objectType }) => {
+const HouseInfoDetailsTab: React.FC<Props> = observer(({ onNextTab, onPrevTab, objectType }) => {
     const { createObjectStore } = useStores()
     const [values, setValues] = useState<TInfoState>(getInitialStateInfoTab(objectType, createObjectStore))
     const [isValid, setIsValid] = useState<boolean>(true)
@@ -37,7 +38,7 @@ const HouseInfoDetailsTab: React.FC<Props> = ({ onNextTab, onPrevTab, objectType
     const isValidEngineeringComment = ("engineeringComment" in values && !!values.engineeringComment.length && values.engineeringComment.length < MAX_LENGTH)
     const isValidParking = ("parking" in values && !!values.parking.length)
     const isValidParkingPrice = ("parkingPrice" in values && !!values.parkingPrice)
-    
+
     const onChangeDropDown = (value: string, valueField: keyof TInfoState) => setValues({ ...values, [valueField]: value })
     const onChaneInput = (event: React.ChangeEvent<HTMLInputElement>, valueField: keyof TInfoState) => setValues({ ...values, [valueField]: event.target.value })
 
@@ -220,6 +221,6 @@ const HouseInfoDetailsTab: React.FC<Props> = ({ onNextTab, onPrevTab, objectType
             </InputsGroup>
         </ButtonPanel>
     )
-}
+});
 
 export default HouseInfoDetailsTab

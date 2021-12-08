@@ -1,5 +1,7 @@
-import { action, makeObservable, observable } from "mobx";
+import { action, flow, makeObservable, observable } from "mobx";
+import { INFO_TAB_HOUSE_FURNITURE } from "../../../components/processes/create-new-object/config";
 import { TAboutTabState, TGeneralInfoState, TInfoState, TInfrastructureState } from "../../../components/processes/create-new-object/lib";
+import { IOption } from "../../../utils/interfaces/general";
 import { ObjectTypes } from "../../../utils/interfaces/objects";
 import { ICreateApartmentAboutTab, ICreateApartsGeneralInfo, ICreateApartsInfoTab, ICreateApartsInfrastructure } from "../../types/CreateObjectStoresTypes/CreateApartmentStoreType";
 import { ICreateHouseAboutTab, ICreateHouseGeneralInfo, ICreateHouseInfoTab, ICreateHouseInfrastructure } from "../../types/CreateObjectStoresTypes/CreateHouseStoreType";
@@ -98,6 +100,13 @@ class CreateObjectStore implements ICreateObject {
         this.land.info = data
     }
 
+    // Fake request method for assigning options list in store in the future
+    *getFurnitureList(): Generator<Promise<IOption[]>, IOption[], IOption[]> {
+        const fakeRequest = () => new Promise<IOption[]>((res) => res(INFO_TAB_HOUSE_FURNITURE))
+        const data = yield fakeRequest()
+        return data
+    }
+
     constructor(rootStore: IRootStore) {
         makeObservable(this, {
             apartment: observable,
@@ -107,6 +116,9 @@ class CreateObjectStore implements ICreateObject {
             saveAboutTab: action,
             saveGeneralTab: action,
             saveInfrastructureTab: action,
+            saveHouseInfoTab: action,
+            saveLandInfoTab: action,
+            getFurnitureList: flow.bound
         })
 
     }

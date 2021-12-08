@@ -4,17 +4,15 @@ import classNames from "classnames";
 type CheckboxPropsType = {
     children: ReactNode
     className?: string,
-    onChange?: (value: boolean) => void
+    value?: string
+    isActive?: boolean,
+    onChange?: (value: string) => void
 }
 
-export const Checkbox: React.FC<CheckboxPropsType> = ({ children, className, onChange }) => {
-
-    const [edit, setEdit] = useState<boolean>(false)
+export const Checkbox: React.FC<CheckboxPropsType> = ({ children, className, value, isActive, onChange }) => {
     
     const handleEdit = () => {
-        const newValue = !edit
-        setEdit(newValue)
-        onChange && onChange(newValue)
+        onChange && onChange(value || '')
     }
 
     return (
@@ -23,6 +21,7 @@ export const Checkbox: React.FC<CheckboxPropsType> = ({ children, className, onC
                 type="checkbox"
                 className={css.check_input}
                 onClick={handleEdit}
+                checked={isActive}
             />
             <span className={css.check_box}></span>
             <div className={css.text}>
