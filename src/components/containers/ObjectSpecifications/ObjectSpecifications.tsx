@@ -26,20 +26,22 @@ interface Props {
 
 const ObjectSpecifications: React.FC<Props> = ({ specificationsLists, title }) => {
     return (
-        <HeadLine title={title}>
-            {specificationsLists.map((specList, idx) => {
-                return <div key={idx}>
-                    <Typography weight="bold" className={s.subTitle}>{specList.subtitle}</Typography>
-                    <div className={s.specsList}>
-                        {specList.specificationsItems.map((spec) =>
-                            <Advantage variant="secondary" text={spec.label.text} title={spec.label.title} key={spec.value}>
-                                {searchIconByValue(spec.value as string)}
-                            </Advantage>
-                        )}
+        <div className={s.container}>
+            <HeadLine title={title}>
+                {specificationsLists.map((specList, idx) => {
+                    return <div key={idx}>
+                        <Typography weight="bold" className={s.subTitle}>{specList.subtitle}</Typography>
+                        <div className={s.specsList}>
+                            {specList.specificationsItems.map((spec) =>
+                                <Advantage variant="secondary" text={spec.label.text} title={spec.label.title} key={spec.value}>
+                                    {searchIconByValue(spec.value as string)}
+                                </Advantage>
+                            )}
+                        </div>
                     </div>
-                </div>
-            })}
-        </HeadLine>
+                })}
+            </HeadLine>
+        </div>
     )
 }
 

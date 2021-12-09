@@ -13,6 +13,7 @@ import { OfferNews } from '../src/components/containers/OfferNews/offerNews'
 import OurOffice from '../src/components/containers/OurOffice/OurOffice'
 import { OurOfficeType } from '../src/components/containers/OurOffice/OurOffice'
 import { Footer } from '../src/components/widget/Footer/ui/Footer'
+import {ScrollUp} from '../src/components/shared/ScrollUp/ScrollUp'
 
 const city = ['Москва', 'Санкт-Петербург', 'Крым', 'Сочи', 'Нижний Новгород']
 const personalAccount = [{title: 'Личный кабинет', href: '/User', message: 0},
@@ -54,27 +55,14 @@ const Start: NextPage = () => {
     <div >
         <Header city={city} personalAccount={personalAccount}/>
         <HeadFilter />
-        <div style={{margin: '40px 0 0 0'}}>
-          <BestOffers tagsButton={tagsButton} bestOffers={estateOffers}/>
-        </div>
-        <div style={{margin: '60px 0 0 0'}}>
-          <DevelopersContainer title={'Застройщики и агества, которые нам доверяют'} developersInfo={mockDevelopers}/>
-        </div>
-        <div style={{margin: '40px 0 0 0'}}>
-          <AgentsContainer title={'Наши агенты к вашим услугам'} agents={mocAgent.Agents}/>
-        </div>
-        <div style={{margin: '60px 0 0 0'}}>
-          <Advantages advantages={mocAdvantages}/>
-        </div>
-        <div style={{margin: '50px 0 0 0'}}>
-          <OfferNews/>
-        </div>
-        <div style={{margin: '60px 0 0 0'}}>
-          <OurOffice ourOffice={ourOffice.ourOffice}/>
-        </div>
-        <div style={{margin: '100px 0 0 0'}}>
-          <Footer/>
-        </div>
+        <BestOffers tagsButton={tagsButton} bestOffers={estateOffers}/>
+        <DevelopersContainer title={'Застройщики и агества, которые нам доверяют'} developersInfo={mockDevelopers}/>
+        <AgentsContainer title={'Наши агенты к вашим услугам'} agents={mocAgent.Agents}/>
+        <Advantages advantages={mocAdvantages}/>
+        <OfferNews/>
+        <OurOffice ourOffice={ourOffice.ourOffice}/>
+        <Footer color={'accent'}/>
+        <ScrollUp/>
     </div>
   )
 }

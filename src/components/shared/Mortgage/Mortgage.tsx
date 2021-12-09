@@ -299,9 +299,9 @@ export const Mortgage: React.FC<Props> = ({}) => {
     }
 
     return (
-        <div>
+        <div className={s.wrap}>
             <Typography weight={"bold"} className={s.typoHeader}>
-                Срок окупаемости
+                Ипотечный калькулятор
             </Typography>
             <div className={s.block_container}>
                 <div className={s.container}>

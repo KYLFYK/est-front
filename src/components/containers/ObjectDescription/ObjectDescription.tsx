@@ -9,9 +9,11 @@ interface Props {
 
 const ObjectDescription: React.FC<Props> = ({items}) => {
     return (
-        <HeadLine title="Описание">
-            {items.map((item, idx) => <Typography key={idx} className={s.descriptionItem}> {item}</Typography>)}
-        </HeadLine>
+        <div className={s.container}>
+            <HeadLine title="Описание">
+                {items.map((item, idx) => <Typography key={idx} className={s.descriptionItem}> {item}</Typography>)}
+            </HeadLine>
+        </div>
     )
 }
 

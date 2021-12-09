@@ -42,6 +42,7 @@ import PaybackContainer from "../src/components/containers/PaybackContainer/Payb
 import VerticalTabs from '../src/components/shared/VerticalTabs/VerticalTabs'
 import MapFinder from "../src/components/containers/Maps/MapFinder/index"
 import { mapData } from '../src/components/containers/Maps/MapFinder/config'
+import {ScrollUp} from '../src/components/shared/ScrollUp/ScrollUp'
 
 export type ourOfficeType ={
   positionMap:{
@@ -85,10 +86,12 @@ const Online_tour = {
   }
 }
 
-const OPTION_DATA = [{label: 'option_1', value: "1"}, {label: 'option_2', value: "2"}, {
-  label: 'option_3',
-  value: "4"
-}, {label: 'option_4', value: "3"}]
+const OPTION_DATA = [
+  {label: 'option_1', value: "1"}, 
+  {label: 'option_2', value: "2"}, 
+  {label: 'option_3', value: "4"}, 
+  {label: 'option_4', value: "3"}
+]
 const emptyFunc = () => {
 }
 
@@ -228,7 +231,7 @@ return (
               personalAccount={personalAccount}
           />
           <h3>Footer :</h3>
-          <Footer/>
+          <Footer color={'accent'}/>
 
           <h3>TabsWrappedLabel :</h3>
           <HorizontalTabs tabs={tabs}/>
@@ -311,6 +314,7 @@ return (
       <PaybackContainer
           averagePrice={averagePrice}
       />
+      <ScrollUp/>
   </div>
 )
 }

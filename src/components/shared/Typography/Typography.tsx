@@ -6,7 +6,7 @@ interface Props extends IPropsGeneral {
     color?: "default" | "nude" | "accent" | "secondary" | "tertiary" | "red" | "green",
     size?: "default" | "subheader" | "header" | "small" | "medium" | "big" | "headerLow" | "subheaderBig",
     weight?: "light" | "regular" | "medium" | "bold",
-    icon?: JSX.Element | string,
+    icon?: JSX.Element | string | boolean,
     iconPosition?: "start" | "end"
     inline?: boolean,
 }
