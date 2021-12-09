@@ -1,11 +1,17 @@
-import React, {useState} from "react";
+import React, {FC, useState} from "react";
 import css  from './SearchOffice.module.scss'
 import BaseButton from "../../shared/BaseButton/BaseButtons";
 import {BaseInput} from "../../shared/BaseInput/Input";
 import { IconOption } from "../../../icons/SearchOffice/IconOption";
 
-export const SearchOffice = () => {
+type SearchOfficeType ={
+    type?:'active' | 'archive' | 'draft'
+    title?:string
+}
+
+export const SearchOffice :FC<SearchOfficeType> = ({type}) => {
     // const [value,setValue]=useState<string>('')
+
     return(
         <div className={css.search} >
             <div className={css.position}>
@@ -15,7 +21,13 @@ export const SearchOffice = () => {
 
                 <IconOption />
             </div>
-            <BaseButton type={"secondary"} isActive className={css.textButton} >Добавить объект</BaseButton>
+            <BaseButton
+                type={type!== 'archive' ? "secondary" : 'primary_light'}
+                isActive
+                className={css.textButton}
+            >
+                {type !== 'archive' ? 'Добавить объект' : 'Восстановить все'  }
+            </BaseButton>
         </div>
     )
 }

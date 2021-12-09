@@ -20,7 +20,13 @@
     font-weight: 500;
     border: 1px solid rgba(0,0,0,0);
 }
-
+.primary_light{
+    padding: 10px 20px;
+    color:$NUDE;
+    background-color: $WHITE;
+    font-weight: 500;
+    border: 1px solid $NUDE;
+}
 .tags{
     background-color: $WHITE;
     color: $BLACK;

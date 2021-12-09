@@ -26,7 +26,7 @@ const ObjectDeveloper: React.FC<Props> = ({ developerData }) => {
     return (
         <HeadLine title="Застройщик">
             <div className={s.infoBlock}>
-                <Advantage title={developerData.x} text={developerData.developerType} className={s.iconItem}>
+                <Advantage title={developerData.name} text={developerData.developerType} className={s.iconItem}>
                     <div className={s.imgContainer}>
                         <Image className={s.img} src={developerData.logo} alt="logo" layout="fill" loader={() => developerData.logo} />
                     </div>

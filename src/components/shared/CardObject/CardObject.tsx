@@ -11,7 +11,7 @@ const CardObject :FC<CardObjectType> = ({children,img}) => {
     return (
         <div className={css.card}>
             <Image src={img} height={126} width={229} className={css.image} />
-                <div>
+                <div style={{width:"100%"}}>
                     {
                         children
                     }

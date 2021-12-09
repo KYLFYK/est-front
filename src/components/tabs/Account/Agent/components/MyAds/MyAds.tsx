@@ -8,7 +8,7 @@ import Statistics from "./component/Statistics/Statistics";
 const MyAds = () => {
     return (
         <HorizontalTabs tabs={[
-            {title: "Активные", Component: <Active />},
+            {title: "Активные", Component: <Active  />},
             {title: "Архив", Component: <Archive />},
             {title: "Черновики", Component: <Drafts />},
             {title: "Статистика", Component: <Statistics />},

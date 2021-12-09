@@ -23,7 +23,7 @@ Card.args = {
     id:1,
     onDelete:()=>console.log(1),
     img:'https://www.publicdomainpictures.net/pictures/20000/velka/westminster-abbey-11297883825gkU.jpg',
-    x:'Emaar',
     description:'lorem ipsum',
     phone:'+7 000 222 11',
+    name:'Emaar'
 };

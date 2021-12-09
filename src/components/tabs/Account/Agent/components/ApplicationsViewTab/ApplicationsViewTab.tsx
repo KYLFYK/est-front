@@ -12,6 +12,7 @@ interface Props {
 
 const agents =[
     {
+        id:'1',
         name: "Евгений",
         email: 'evgeniy@mail.ru',
         phone: '+7 999 888 77 11',
@@ -27,6 +28,7 @@ const agents =[
         url: '123',
     },
     {
+        id:'2',
         name: "Евгений",
         email: 'evgeniy@mail.ru',
         phone: '+7 999 222 77 11',
@@ -68,11 +70,11 @@ const applicationsView :Array<{id:string
         theme:"Подборка коттеджа",
         message:[{message:'Здравстуйте Евгений',time:'11:00',date:'09.10.2021'}]
     },{
-        id:'2',
+        id:'1',
         type:'bell',
         statusOrDate:'Запланировано',
         statusLetter:'',
-        timeActive:'завтра в 11:00',
+        timeActive:'11:00',
         dateActive:'11.10.2021',
         phone:'89997772211',
         email:' zhenya71@yandex.ru',

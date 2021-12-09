@@ -40,10 +40,10 @@ const cardPlan3 ={
 }
 const typePlan = "Стандарт"
 
-const purchaseHistory =[
-    {date:'25.06.2021',tarif:'Стандарт',period:'1 месяц', sum:'150.00 руб.'},
-    {date:'25.05.2021',tarif:'Стандарт',period:'1 месяц', sum:'150.00 руб.'},
-]
+// const purchaseHistory =[
+//     {date:'25.06.2021',tarif:'Стандарт',period:'1 месяц', sum:'150.00 руб.'},
+//     {date:'25.05.2021',tarif:'Стандарт',period:'1 месяц', sum:'150.00 руб.'},
+// ]
 
 const MyPackages = () => {
     return (
@@ -72,29 +72,29 @@ const MyPackages = () => {
                     suggestions={cardPlan3.suggestions}
                 />
             </div>
-            <div>
-                <div className={css.tableBuy}>
-                    <Typography>Дата</Typography>
-                    <Typography>Покупка</Typography>
-                    <Typography>Период</Typography>
-                    <Typography>Сумма</Typography>
-                </div>
-                <hr color={'#EFEFEF'}/>
-                {
-                    purchaseHistory.map(({date,tarif,period,sum},index)=>(
-                        <div key={index}>
-                            <div className={css.tableInfo}>
-                                <Typography>{date}</Typography>
-                                <Typography>{tarif}</Typography>
-                                <Typography>{period}</Typography>
-                                <Typography>{sum}</Typography>
-                            </div>
-                            <hr color={'#EFEFEF'}/>
-                        </div>
+            {/*<div>*/}
+            {/*    <div className={css.tableBuy}>*/}
+            {/*        <Typography>Дата</Typography>*/}
+            {/*        <Typography>Покупка</Typography>*/}
+            {/*        <Typography>Период</Typography>*/}
+            {/*        <Typography>Сумма</Typography>*/}
+            {/*    </div>*/}
+            {/*    <hr color={'#EFEFEF'}/>*/}
+            {/*    {*/}
+            {/*        purchaseHistory.map(({date,tarif,period,sum},index)=>(*/}
+            {/*            <div key={index}>*/}
+            {/*                <div className={css.tableInfo}>*/}
+            {/*                    <Typography>{date}</Typography>*/}
+            {/*                    <Typography>{tarif}</Typography>*/}
+            {/*                    <Typography>{period}</Typography>*/}
+            {/*                    <Typography>{sum}</Typography>*/}
+            {/*                </div>*/}
+            {/*                <hr color={'#EFEFEF'}/>*/}
+            {/*            </div>*/}
 
-                    ))
-                }
-            </div>
+            {/*        ))*/}
+            {/*    }*/}
+            {/*</div>*/}
 
         </div>
     );

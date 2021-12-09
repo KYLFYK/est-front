@@ -9,7 +9,7 @@ import css from './Statistics.module.scss'
 interface Props {
 }
 
-const tableClosingByMonth = [
+const newApplicationsByTime = [
     {name: 'Январь 2021', price: '0'},
     {name: 'Февраль 2021', price: '15'},
     {name: 'Март 2021', price: '20'},
@@ -20,7 +20,8 @@ const tableClosingByMonth = [
     {name: 'Август 2021', price: '31'},
     {name: 'Сентябрь 2021', price: '52'},
 ]
-const tableRevenue = [
+
+const revenueMonth = [
     {name: 'Январь 2021', price: '0'},
     {name: 'Февраль 2021', price: '15'},
     {name: 'Март 2021', price: '20'},
@@ -31,7 +32,7 @@ const tableRevenue = [
     {name: 'Август 2021', price: '51'},
     {name: 'Сентябрь 2021', price: '60'},
 ]
-const agentsActivity = {
+const resultsPeriod = {
     month: 'Сентябрь 2021',
     monthActive: '6',
     monthNotActive: '12',
@@ -41,7 +42,8 @@ const agentsActivity = {
     yearNotActive:'12',
     allYear:'23'
 }
-const tableColumn = [
+
+const numberTransactions = [
     {
         name: 'Дома',
         продажа: 15,
@@ -64,16 +66,16 @@ const tableColumn = [
 const ApplicationsViewStatistics: React.FC<Props> = () => {
     return (
         <div className={css.grid} >
-            <ClosedApplicationsMonth table={tableClosingByMonth} title={"Новые заявки во времени"}/>
+            <ClosedApplicationsMonth table={newApplicationsByTime} title={"Новые заявки во времени"}/>
             <ActionPeriod
                 left={'Продано'}
                 center={'Активные объявления'}
                 right={'Архив'}
                 title={'Итоги по заявкам за период'}
-                agentActivity={agentsActivity}
+                agentActivity={resultsPeriod}
             />
-            <RevenueMonth table={tableRevenue} title={"Выручка по месяцам"}/>
-            <TableColumn tableColumn={tableColumn} title={"Количество заявок по типу объекта/сделки"}/>
+            <RevenueMonth table={revenueMonth} title={"Выручка по месяцам"}/>
+            <TableColumn tableColumn={numberTransactions} title={"Количество заявок по типу объекта/сделки"}/>
         </div>
     )
 }

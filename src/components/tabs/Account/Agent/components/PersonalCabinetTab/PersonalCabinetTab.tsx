@@ -8,7 +8,7 @@ import PersonalCabinetStatistics from "./components/Statistics/Statistics"
 import AccountEdit from "./components/AccountEdit/AccountEdit";
 import imgMoc from './components/AccountInfo/logoFalse.svg'
 
-type InfoAccountAgencyType = {
+export type InfoAccountAgencyType = {
     info:Array<{label:string,value:string}>
     id:string
     img:string

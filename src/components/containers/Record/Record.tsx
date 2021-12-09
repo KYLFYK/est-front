@@ -121,7 +121,7 @@ export const Record: FC<AgentRecordType> = ({Record}) => {
     }
 
     const onBlurHandler = (e: React.FocusEvent<HTMLInputElement, Element>) => {
-        switch (e.target.x) {
+        switch (e.target.value) {
             case 'name':
                 if (!e.target.value) setNameError('не указано имя')
                 setNameDirty(true)

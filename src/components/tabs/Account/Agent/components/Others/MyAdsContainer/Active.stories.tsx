@@ -1,5 +1,12 @@
 import React from 'react';
-import MyAdsContainer from "../../../Others/MyAdsContainer/MyAdsContainer";
+import { ComponentStory, ComponentMeta } from '@storybook/react';
+import Active from './MyAdsContainer';
+
+export default {
+    title: 'Tabs/Others',
+    component: Active,
+
+} as ComponentMeta<typeof Active>;
 
 const mocActive = [{
     id: '1',
@@ -11,7 +18,7 @@ const mocActive = [{
     agent: 'Виталий Панкратов',
     dateStart: '31/08/2021',
     dateEnd: '05/09/21',
-    status: 'Свободна',
+    status: 'Забронирован',
     address: 'Крым, Ялта'
 }, {
     id: '2',
@@ -35,17 +42,14 @@ const mocActive = [{
     agent: 'Виталий Панкратов',
     dateStart: '31/08/2021',
     dateEnd: '05/09/21',
-    status: 'Свободна',
+    status: 'Забронирован',
     address: 'Крым, Ялта'
 },
 ]
 
-const Drafts = () => {
-    return (
-        <div>
-            <MyAdsContainer objects={mocActive}  menu={'draft'} />
-        </div>
-    );
+const Template: ComponentStory<typeof Active> = (args) => <Active {...args} />;
+export const Active_ = Template.bind({});
+Active_.args = {
+    menu:'active',
+    objects:mocActive
 };
-
-export default Drafts;

@@ -4,7 +4,6 @@ import Map from '.';
 
 export default {
     title: 'Containers/OurOffice',
-    title: 'Containers/OurOffice',
     component: Map,
     argTypes: {
         test: {type: 'string', defaultValue: "teststr"}
