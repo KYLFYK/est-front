@@ -7,6 +7,7 @@ import css from './AccountEdit.module.scss'
 import BaseButton from "../../../../../../../shared/BaseButton/BaseButtons";
 import {Modal} from "../../../../../../../shared/Modal/Modal";
 import {LogoIcon} from "../../../../../../../../icons/Header/LogoIcon";
+import BackPage from "../../../Others/BackPage/BackPage";
 
 type AccountEditType ={
     onEdit:()=>void
@@ -56,15 +57,7 @@ const AccountEdit :FC<AccountEditType>= ({onEdit,infoAgency}) => {
 
     return (
         <div>
-            <div className={css.marginB_30}>
-                <div className={css.title} onClick={backPage}>
-                    <svg style={{marginRight:'4px'}} width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M20 11H7.83L13.42 5.41L12 4L4 12L12 20L13.41 18.59L7.83 13H20V11Z" fill="#3D4550"/>
-                    </svg>
-                    <Typography weight={'bold'}>Редактирование аккаунта агентства</Typography>
-                </div>
-                <hr color={'#F2F2F2'}/>
-            </div>
+            <BackPage onBackPage={backPage} title={'Редактирование аккаунта агентства'} />
             <div className={css.df_jc}>
                 <div>
                     <Typography weight={'bold'}>Аккаунт</Typography>

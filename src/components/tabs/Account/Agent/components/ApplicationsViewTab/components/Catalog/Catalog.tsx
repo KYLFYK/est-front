@@ -1,99 +1,99 @@
-import * as React from 'react';
-import Box from '@mui/material/Box';
-import Table from '@mui/material/Table';
-import TableBody from '@mui/material/TableBody';
-import TableCell from '@mui/material/TableCell';
-import TableContainer from '@mui/material/TableContainer';
-import TablePagination from '@mui/material/TablePagination';
-import TableRow from '@mui/material/TableRow';
-import Paper from '@mui/material/Paper';
-import Link from "next/link";
-import Button from "@mui/material/Button";
-import {getComparator, rows, stableSort} from "./Transformation";
+// тут описываем горизонтальный подтаб "Каталог заявок", который является частью таба "Заявки на просмотр"
+import * as React from "react";
+import {getComparator, rows, stableSort} from "../../../PersonalCabinetTab/components/Agents/Transformation";
+import Box from "@mui/material/Box";
+import TableContainer from "@mui/material/TableContainer";
+import Table from "@mui/material/Table";
+import TableBody from "@mui/material/TableBody";
+import TableRow from "@mui/material/TableRow";
+import TableCell from "@mui/material/TableCell";
+
+import TablePagination from "@mui/material/TablePagination";
+import {Order} from "../../../PersonalCabinetTab/components/Agents/AgentsTable";
+import {makeStyles} from "@material-ui/core";
 import TableHead from "@mui/material/TableHead";
 import TableSortLabel from "@mui/material/TableSortLabel";
+import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import {visuallyHidden} from "@mui/utils";
-import Toolbar from "@mui/material/Toolbar";
-import Tooltip from "@mui/material/Tooltip";
-import IconButton from "@mui/material/IconButton";
-import Typography from "@mui/material/Typography";
-import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
-import copy from './copy.svg'
-import Image from 'next/image'
-import DriveFileRenameOutlineIcon from '@mui/icons-material/DriveFileRenameOutline';
+import css from "./Catalog.module.scss";
+import Typography from "../../../../../../../shared/Typography/Typography";
 
-export type Order = 'asc' | 'desc';
-import css from './Agents.module.scss'
-import { FC } from 'react';
+type Data = {
+    name: string
+    convenientTime: string
+    applicationDate: string
+    agentName: string
+    typeContract: string
+    object: string
+    priceObject: string
+    status: string
+}
 type HeadCell = {
     disablePadding: boolean;
     id: keyof Data;
     label: string;
     numeric: boolean;
 }
-
-type Data ={
-    name: string
-    status: boolean
-    experience: string
-    phone:string
-    email:string
-    rating: string
-    url: string
-}
-
 const headCells: HeadCell[] = [
     {
-        id: 'name',
-        numeric: true,
-        disablePadding: true,
-        label: 'Имя',
+        id: 'name', numeric: true, disablePadding: false, label: 'Контакты',
     },
     {
-        id: 'status',
-        numeric: true,
-        disablePadding: false,
-        label: 'Статус',
+        id: 'convenientTime', numeric: true, disablePadding: false, label: 'Удобное время',
     },
     {
-        id: 'experience',
-        numeric: true,
-        disablePadding: false,
-        label: 'Стаж',
+        id: 'applicationDate', numeric: true, disablePadding: false, label: 'Дата заявки',
     },
     {
-        id: 'phone',
-        numeric: true,
-        disablePadding: false,
-        label: 'Контакты',
+        id: 'agentName', numeric: true, disablePadding: false, label: 'Агент',
     },
     {
-        id: 'rating',
-        numeric: true,
-        disablePadding: false,
-        label: 'Рейтинг',
+        id: 'typeContract', numeric: true, disablePadding: false, label: 'Тип сделки',
     },
     {
-        id: 'url',
-        numeric: true,
-        disablePadding: true,
-        label: 'Ссылка-преглашение',
+        id: 'object', numeric: true, disablePadding: true, label: 'Объекты',
+    },
+    {
+        id: 'priceObject', numeric: true, disablePadding: true, label: 'Цена объекта',
+    },
+    {
+        id: 'status', numeric: true, disablePadding: true, label: 'Статус',
     },
 ];
 
-type ActualObjectType={
-    agents:Array<{
-        name:string,
-        status:number,
-        experience:string,
-        phone:string,
-        email:string
-        rating:number,
-        url:string,
-        id:number}>
+export const useStyles = makeStyles(() => ({
+    grid: {
+        display: 'grid',
+        gridTemplateColumns: '1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr'
+    },
+    cursor:{
+        cursor:"pointer",
+        height: 80 ,
+
+    }
+}))
+type ActualObjectType = {
+    onClick?:(idOffers:string)=>void
+    agents: Array<{
+        name: string
+        phone: string
+        email: string
+        convenientTime: string
+        applicationDate: string
+        applicationTime: string
+        agentName: string
+        typeContract: string
+        object: string
+        priceObject: string
+        status: string
+        idOffers: string
+        url: string
+    }>
 }
 
-export const  ActualObject :FC<ActualObjectType> = ({agents}) => {
+const ApplicationsViewCatalog: React.FC<ActualObjectType> = ({agents,onClick}) => {
+
+    const classes = useStyles()
 
     const [order, setOrder] = React.useState<Order>('asc');
     const [orderBy, setOrderBy] = React.useState<keyof Data>('name');
@@ -109,7 +109,7 @@ export const  ActualObject :FC<ActualObjectType> = ({agents}) => {
         event: React.MouseEvent<unknown>,
         property: keyof Data,
     ) => {
-        if (property !== "phone") {
+        if (property !== "name") {
             const isAsc = orderBy === property && order === 'asc';
             setOrder(isAsc ? 'desc' : 'asc');
             setOrderBy(property);
@@ -160,8 +160,6 @@ export const  ActualObject :FC<ActualObjectType> = ({agents}) => {
                                 rowCount={agents.length}
                                 headCells={headCells}
                             />
-
-
                             <TableBody>
                                 {/* if you don't need to support IE11, you can replace the `stableSort` call with:
               rows.slice().sort(getComparator(order, orderBy)) */}
@@ -170,73 +168,88 @@ export const  ActualObject :FC<ActualObjectType> = ({agents}) => {
                                     .map((agent, index) => {
                                         const isItemSelected = isSelected(agent.name);
                                         const labelId = `enhanced-table-checkbox-${index}`;
+                                        const fullName = agent.agentName.split(' ')
+                                        const object =agent.object.split(' ')
                                         return (
                                             <TableRow
                                                 hover
                                                 role="checkbox"
                                                 aria-checked={isItemSelected}
                                                 tabIndex={-1}
-                                                key={agent.id}
+                                                key={agent.idOffers}
                                                 selected={isItemSelected}
+                                                onClick={()=>{
+                                                    onClick &&  onClick(agent.idOffers)
+                                                }}
+                                                className={classes.cursor}
                                             >
-                                                <div style={{width: '10px'}}></div>
                                                 <TableCell
                                                     component="th"
                                                     id={labelId}
                                                     scope="row"
                                                     padding="none"
-                                                    title={agent.name}
-                                                    width={'350px'}
+                                                    width={'165px'}
                                                 >
-                                                    <Typography className={css.heightTable} >
+                                                    <Typography className={css.heightTable} size={'small'}>
                                                         {agent.name}
+                                                    </Typography> <Typography className={css.heightTable}>
+                                                        {agent.email}
+                                                    </Typography> <Typography className={css.heightTable}>
+                                                        {agent.phone}
                                                     </Typography>
                                                 </TableCell>
                                                 <TableCell
-                                                    width={'100px'}
+                                                    width={'128px'}
                                                     title={agent.status.toString()}
                                                     align="left">
-                                                    <Typography className={css.heightTable} color={agent.status === 0 ? "red" :'green'} >
-                                                        {agent.status === 0 ? "Не в сети" : "Активен"}
+                                                    <Typography className={css.heightTable}>
+                                                        {agent.convenientTime}
                                                     </Typography>
                                                 </TableCell>
                                                 <TableCell
-                                                    width={'230px'}
-                                                    title={agent.experience.toString()}
+                                                    width={'114px'}
                                                     align="left">
                                                     <Typography className={css.heightTable}>
-                                                        {agent.experience}
+                                                        {agent.applicationDate}
+                                                    </Typography>
+                                                    <Typography className={css.heightTable}>
+                                                        {agent.applicationTime}
                                                     </Typography>
                                                 </TableCell>
                                                 <TableCell
-                                                    width={'230px'}
-                                                    title={agent.email.toString()}
-                                                    align="left">
-                                                    <div className={css.heightTableColumn} >
-                                                        <Typography >{agent.phone}</Typography>
-                                                        <Typography >{agent.email}</Typography>
-                                                    </div>
-
-                                                </TableCell>
-                                                <TableCell
-                                                    width={'100px'}
-                                                    title={agent.rating.toString()}
+                                                    width={'83px'}
                                                     align="left"
                                                 >
                                                     <Typography className={css.heightTable}>
-                                                        {agent.rating}
+                                                        {fullName[0]}
+                                                    </Typography>
+                                                    <Typography className={css.heightTable}>
+                                                        {fullName[1]}
                                                     </Typography>
                                                 </TableCell>
-                                                <TableCell >
-                                                    <div style={{display:"flex",alignItems:'center'}} className={css.heightTableNude}>
-                                                        <Typography color={'nude'}  className={css.heightTable}>
-                                                            {agent.url}
-                                                            <div className={css.marginImage}>
-                                                                <Image src={copy} width={'19'} height={'22'} />
-                                                            </div>
-                                                        </Typography>
-                                                        <DriveFileRenameOutlineIcon className={css.IconPosition}/>
-                                                    </div>
+                                                <TableCell
+                                                    width={'114px'}>
+                                                    <Typography className={css.heightTable}>
+                                                        {agent.typeContract}
+                                                    </Typography>
+                                                </TableCell>
+                                                <TableCell width={'102px'}>
+                                                    <Typography className={css.heightTable}>
+                                                        {object[0]}
+                                                    </Typography>
+                                                    <Typography className={css.heightTable}>
+                                                        {object[1]}
+                                                    </Typography>
+                                                </TableCell>
+                                                <TableCell width={'110px'}>
+                                                    <Typography className={css.heightTable}>
+                                                        {agent.priceObject}
+                                                    </Typography>
+                                                </TableCell>
+                                                <TableCell width={'110px'}>
+                                                    <Typography className={css.heightTable}>
+                                                        {agent.status}
+                                                    </Typography>
                                                 </TableCell>
                                             </TableRow>
                                         );
@@ -269,17 +282,25 @@ export const  ActualObject :FC<ActualObjectType> = ({agents}) => {
     );
 }
 
-type EnhancedTableProps ={
+type EnhancedTableProps = {
     numSelected?: number;
     onRequestSort: (event: React.MouseEvent<unknown>, property: keyof Data) => void;
     onSelectAllClick: (event: React.ChangeEvent<HTMLInputElement>) => void;
     order: Order;
     orderBy: string;
     rowCount: number;
-    headCells:HeadCell[]
+    headCells: HeadCell[]
 }
 
-const EnhancedTableHead :React.FC<EnhancedTableProps> = ({numSelected,onRequestSort,onSelectAllClick,order,orderBy,rowCount,headCells}) => {
+const EnhancedTableHead: React.FC<EnhancedTableProps> = ({
+                                                                    numSelected,
+                                                                    onRequestSort,
+                                                                    onSelectAllClick,
+                                                                    order,
+                                                                    orderBy,
+                                                                    rowCount,
+                                                                    headCells
+                                                                }) => {
 
     const createSortHandler =
         (property: keyof Data) => (event: React.MouseEvent<unknown>) => {
@@ -289,7 +310,6 @@ const EnhancedTableHead :React.FC<EnhancedTableProps> = ({numSelected,onRequestS
     return (
         <TableHead>
             <TableRow>
-                <div style={{width: '10px'}}></div>
                 {headCells.map((headCell) => (
                     <TableCell
                         key={headCell.id}
@@ -304,12 +324,12 @@ const EnhancedTableHead :React.FC<EnhancedTableProps> = ({numSelected,onRequestS
                             direction={orderBy === headCell.id ? order : 'asc'}
                             onClick={createSortHandler(headCell.id)}
                             IconComponent={() => {
-                               return <KeyboardArrowDownIcon fontSize={'small'}
-                                   style={{
-                                       color: orderBy===headCell.id ? '#C5A28E': '#96A2B5',
-                                       transform: order==='asc' && orderBy===headCell.id ?'rotate(180deg)':''
-                                   }}
-                               />
+                                return <KeyboardArrowDownIcon fontSize={'small'}
+                                                              style={{
+                                                                  color: orderBy === headCell.id ? '#C5A28E' : '#96A2B5',
+                                                                  transform: order === 'asc' && orderBy === headCell.id ? 'rotate(180deg)' : ''
+                                                              }}
+                                />
                             }}
                         >
                             <Typography>
@@ -329,3 +349,4 @@ const EnhancedTableHead :React.FC<EnhancedTableProps> = ({numSelected,onRequestS
     );
 }
 
+export default ApplicationsViewCatalog

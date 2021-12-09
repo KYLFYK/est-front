@@ -4,32 +4,14 @@ import {Card} from "../../../../../../../shared/Mortgage/Card";
 import css from './TableColumn.module.scss'
 import Typography from "../../../../../../../shared/Typography/Typography";
 
-const data = [
-    {
-        name: 'Дома',
-        продажа: 15,
-        аренда: 22,
-        amt: 2400,
-    },
-    {
-        name: '1к квартиры',
-        продажа: 35,
-        аренда: 38,
-        amt: 2210,
-    },
-    {
-        name: 'Таунхаусы',
-        продажа: 10,
-        аренда: 14,
-        amt: 2290,
-    },
-];
+
 
 type TableColumnType ={
     title:string
+    tableColumn:Array<{name:string,"продажа":number,"аренда":number,amt:number}>
 }
 
-const TableColumn :FC<TableColumnType> = ({title}) => {
+const TableColumn :FC<TableColumnType> = ({title,tableColumn}) => {
     return (
         <div>
             <Typography weight={'bold'} className={css.title}>
@@ -41,7 +23,7 @@ const TableColumn :FC<TableColumnType> = ({title}) => {
                     <BarChart
                         width={500}
                         height={300}
-                        data={data}
+                        data={tableColumn}
                         margin={{
                             top: 5,
                             right: 30,

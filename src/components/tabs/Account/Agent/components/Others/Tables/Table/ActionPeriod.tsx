@@ -40,19 +40,19 @@ const ActionPeriod :FC<ActionPeriodType> = ({title,agentActivity,left,center,rig
 
                 <div className={css.activeColumn}>
                     <Typography className={css.marginTypo} weight={"light"}>
-                        Активно
+                        {left}
                         <Typography color={"accent"} size={"subheaderBig"} className={css.marginTypo}>
                             {agentActivity.monthActive}
                         </Typography>
                     </Typography>
                     <Typography className={css.marginTypo} weight={"light"}>
-                        Неактивно
+                        {center}
                         <Typography color={"tertiary"} size={"subheaderBig"} className={css.marginTypo}>
                             {agentActivity.monthNotActive}
                         </Typography>
                     </Typography>
                     <Typography className={css.marginTypo} weight={"light"}>
-                        Общая выручка
+                        {right}
                         <Typography color={"nude"} size={"subheaderBig"} className={css.marginTypo}>
                             {agentActivity.monthAll}
                         </Typography>
@@ -71,19 +71,19 @@ const ActionPeriod :FC<ActionPeriodType> = ({title,agentActivity,left,center,rig
 
                 <div className={css.activeColumn}>
                     <Typography className={css.marginTop1} weight={"light"}>
-                        Активно
+                        {left}
                         <Typography color={"accent"} size={"subheaderBig"} className={css.marginTop1}>
                             {agentActivity.yearActive}
                         </Typography>
                     </Typography>
                     <Typography className={css.marginTop1} weight={"light"}>
-                        Неактивно
+                        {center}
                         <Typography color={"tertiary"} size={"subheaderBig"} className={css.marginTop1}>
                             {agentActivity.yearNotActive}
                         </Typography>
                     </Typography>
                     <Typography className={css.marginTop1} weight={"light"}>
-                        Общая выручка
+                        {right}
                         <Typography color={"nude"} size={"subheaderBig"} className={css.marginTop1}>
                             {agentActivity.yearNotActive}
                         </Typography>

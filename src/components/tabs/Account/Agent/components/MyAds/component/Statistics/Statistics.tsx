@@ -31,20 +31,6 @@ const tableRevenue = [
     {name: 'Сентябрь 2021', price: '60'},
 ]
 
-type fieldsType={
-    fieldsColumn:{
-        left:string
-        center:string
-        right:string
-    }
-}
-const fields:fieldsType = {
-    fieldsColumn: {
-        left: 'Активно',
-        center: 'Неактивно',
-        right: 'Общая выручка',
-    }
-}
 const agentsActivity = {
     month: 'Сентябрь 2021',
     monthActive: '6',
@@ -55,6 +41,28 @@ const agentsActivity = {
     yearNotActive:'12',
     allYear:'23'
 }
+
+const tableColumn = [
+    {
+        name: 'Дома',
+        продажа: 15,
+        аренда: 22,
+        amt: 2400,
+    },
+    {
+        name: '1к квартиры',
+        продажа: 35,
+        аренда: 38,
+        amt: 2210,
+    },
+    {
+        name: 'Таунхаусы',
+        продажа: 10,
+        аренда: 14,
+        amt: 2290,
+    },
+];
+
 const Statistics = () => {
     return (
         <div style={{display: 'grid', gridTemplateColumns: "1fr 1fr"}}>
@@ -65,14 +73,14 @@ const Statistics = () => {
                 </Card>
             </div>
             <ActionPeriod
-                left={'Продано'}
-                center={'Активные объявления'}
-                right={'Архив'}
+                left={'Новых заявок'}
+                center={'Заявок в работе'}
+                right={'Завершенных заявок'}
                 title={'Итоги по объектам за период'}
                 agentActivity={agentsActivity}
             />
             <RevenueMonth table={tableRevenue} title={'Выручка по месяцам'}/>
-            <TableColumn title={"Количество реализованных объектов по типу объекта/сделки"}/>
+            <TableColumn tableColumn={tableColumn} title={"Количество реализованных объектов по типу объекта/сделки"}/>
         </div>
     );
 };
