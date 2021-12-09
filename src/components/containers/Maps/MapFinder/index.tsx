@@ -6,8 +6,8 @@ interface Props {
   mapData: any
   location: 'finder' | 'start' | 'infrastructure' | 'payback'
   center: any
-  view: string
-  setView: any
+  view?: string
+  setView?: any
 }
 
 const MapModal: React.FC<Props> = ({mapData, location, center, view, setView}) => {
