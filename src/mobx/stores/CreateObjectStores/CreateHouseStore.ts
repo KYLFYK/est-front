@@ -61,7 +61,7 @@ class CreateHouseStore implements ICreateObjectHouse {
     vent: "",
   };
   legalPurity: ICreateObjectHouse["legalPurity"] = {
-    RealEstateRegister: {
+    realEstateRegister: {
       address: '',
       cadastralNumber: "",
       cadastralCost: "",
@@ -70,14 +70,16 @@ class CreateHouseStore implements ICreateObjectHouse {
     },
     currentFounder: {
       founderType: FoundersTypes.SINGLE,
-      founderNames: [],
+      firstFounderName: '',
+      secondFouderName: undefined,
       cadastralNumber: "",
       ownershipFrom: new Date(),
       ownershipTo: new Date(), 
     },
     previousFounder: {
       founderType: FoundersTypes.SINGLE,
-      founderNames: [],
+      firstFounderName: '',
+      secondFouderName: undefined,
       cadastralNumber: "",
       ownershipFrom: new Date(),
       ownershipTo: new Date(), 

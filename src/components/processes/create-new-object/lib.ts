@@ -3,23 +3,27 @@ import {
   ICreateApartsGeneralInfo,
   ICreateApartsInfoTab,
   ICreateApartsInfrastructure,
+  ICreateApartsLegalPurity,
 } from "../../../mobx/types/CreateObjectStoresTypes/CreateApartmentStoreType";
 import {
   ICreateHouseAboutTab,
   ICreateHouseGeneralInfo,
   ICreateHouseInfoTab,
   ICreateHouseInfrastructure,
+  ICreateHouseLegalPurity,
 } from "../../../mobx/types/CreateObjectStoresTypes/CreateHouseStoreType";
 import {
   ICreateLandAboutTab,
   ICreateLandGeneralInfo,
   ICreateLandInfrastructure,
+  ICreateLandLegalPurity,
 } from "../../../mobx/types/CreateObjectStoresTypes/CreateLandStoreType";
 import { ICreateObject } from "../../../mobx/types/CreateObjectStoresTypes/CreateObjectStoreType";
 import {
   ICreateTownhouseGeneralInfo,
   ICreateTownhouseInfoTab,
   ICreateTownhouseInfrastructure,
+  ICreateTownhouseLegalPurity,
 } from "../../../mobx/types/CreateObjectStoresTypes/CreateTownhouseStoreType";
 import { ObjectTypes } from "../../../utils/interfaces/objects";
 
@@ -41,6 +45,11 @@ export type TAboutTabState =
   | ICreateApartmentAboutTab
   | ICreateHouseAboutTab
   | ICreateLandAboutTab;
+export type TLegalPurityTabState =
+  | ICreateApartsLegalPurity
+  | ICreateHouseLegalPurity
+  | ICreateLandLegalPurity
+  | ICreateTownhouseLegalPurity;
 
 export const getInitStateAboutTab = (
   objectType: ObjectTypes,
@@ -110,6 +119,24 @@ export const getInitialStateInfoTab = (
       return createObjectStore.townhouse.info;
     default:
       return createObjectStore.apartment.info;
+  }
+};
+
+export const getInitialStateLegalPurityTab = (
+  objectType: ObjectTypes,
+  createObjectStore: ICreateObject
+) => {
+  switch (objectType) {
+    case ObjectTypes.APARTMENTS:
+      return createObjectStore.apartment.legalPurity;
+    case ObjectTypes.HOUSE:
+      return createObjectStore.house.legalPurity;
+    case ObjectTypes.TOWNHOUSE:
+      return createObjectStore.townhouse.legalPurity;
+    case ObjectTypes.LAND:
+      return createObjectStore.land.legalPurity;
+    default:
+      return createObjectStore.apartment.legalPurity;
   }
 };
 
@@ -233,7 +260,7 @@ export const isValidInputsInfrastructureTab = (
 };
 
 export const isValidInputsHouseDetailsTab = (
-objectType: Exclude<ObjectTypes, ObjectTypes.LAND>,
+  objectType: Exclude<ObjectTypes, ObjectTypes.LAND>,
   houseType: boolean,
   fundament: boolean,
   roof: boolean,
@@ -292,6 +319,37 @@ objectType: Exclude<ObjectTypes, ObjectTypes.LAND>,
         internet
       );
 
+    default:
+      return false;
+  }
+};
+
+export const isValidLegalPurityDetailsTab = (
+  objectType: ObjectTypes,
+  isValidAddress: boolean,
+  isValidCadastralNumber: boolean,
+  isValidCadastralCost: boolean,
+  isValidGeneralSquare: boolean,
+  isValidFloors: boolean
+): boolean => {
+  switch (objectType) {
+    case ObjectTypes.APARTMENTS:
+    case ObjectTypes.HOUSE:
+    case ObjectTypes.TOWNHOUSE:
+      return (
+        isValidAddress &&
+        isValidCadastralNumber &&
+        isValidCadastralCost &&
+        isValidGeneralSquare &&
+        isValidFloors
+      );
+    case ObjectTypes.LAND:
+      return (
+        isValidAddress &&
+        isValidCadastralNumber &&
+        isValidCadastralCost &&
+        isValidGeneralSquare
+      );
     default:
       return false;
   }

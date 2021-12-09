@@ -8,13 +8,14 @@ import ru from "date-fns/locale/ru";
 import s from './BaseDatePicker.module.scss'
 registerLocale('ru', ru)
 interface Props {
-    label?: string
+    label?: string,
+    startDate: Date,
+    endDate: Date,
+    onChangeStartDate: (date: Date) => void,
+    onChangeEndDate: (date: Date) => void
 }
 
-const BaseDatePicker: React.FC<Props> = ({ label }) => {
-    const [startDate, setStartDate] = useState(new Date());
-    const [endDate, setEndDate] = useState(new Date());
-    console.log(startDate > endDate)
+const BaseDatePicker: React.FC<Props> = ({ label, startDate, endDate, onChangeEndDate, onChangeStartDate }) => {
 
     return (
         <div>
@@ -24,7 +25,7 @@ const BaseDatePicker: React.FC<Props> = ({ label }) => {
                     locale="ru"
                     selected={startDate}
                     maxDate={endDate}
-                    onChange={(date: any) => setStartDate(date)}
+                    onChange={(date: Date) => onChangeStartDate(date)}
                     customInput={(
                         <BaseInput className={s.input} />
                     )}
@@ -35,7 +36,7 @@ const BaseDatePicker: React.FC<Props> = ({ label }) => {
                     locale="ru"
                     minDate={startDate}
                     selected={endDate}
-                    onChange={(date: any) => setEndDate(date)}
+                    onChange={(date: Date) => onChangeEndDate(date)}
                     customInput={(
                         <BaseInput className={s.input} />
                     )}

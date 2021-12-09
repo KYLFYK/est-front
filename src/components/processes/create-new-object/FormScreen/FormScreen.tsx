@@ -12,6 +12,8 @@ import HouseInfoDetailsTab from '../components/HouseInfoTab/HouseInfoDetailsTab'
 import HouseInfoInterierTab from '../components/HouseInfoTab/HouseInfoInterierTab'
 import InfrastructureTab from '../components/InfrastructureTab/InfrastructureTab'
 import LandInfoTab from '../components/LandInfoTab/LandInfoTab'
+import LegalPurityDetails from '../components/LegalPurityTab/LegalPurityDetails'
+import LegalPurityFounders from '../components/LegalPurityTab/LegalPurityFounders'
 import MultipleHorizontalTab, { ICreateObjectTabs } from '../components/MultipleHorizontalTab/MultipleHorizontalTab'
 import s from './FormScreen.module.scss'
 
@@ -72,7 +74,11 @@ const FormScreen: React.FC<Props> = ({ clearObjectType, objectType }) => {
                 {
                     isDone: activeTabIdx > 0,
                     label: "Об объекте",
-                    Components: [<AboutObject key={1} objectType={objectType} onNextTab={handleNextTab} onPrevTab={handlePrevTab} />],
+                    Components: [
+                        <LegalPurityDetails objectType={objectType} key={231} onNextTab={handleNextTab} onPrevTab={handlePrevTab} />,
+                        <LegalPurityFounders objectType={objectType} key={231} onNextTab={handleNextTab} onPrevTab={handlePrevTab} />
+                    ]
+                    // Components: [<AboutObject key={1} objectType={objectType} onNextTab={handleNextTab} onPrevTab={handlePrevTab} />],
                 },
                 {
                     isDone: activeTabIdx > 1, label: "Основная информация", Components: [
@@ -86,7 +92,12 @@ const FormScreen: React.FC<Props> = ({ clearObjectType, objectType }) => {
                         <InfrastructureTab objectType={objectType} key={231} onNextTab={handleNextTab} onPrevTab={handlePrevTab} />]
                 },
                 { isDone: activeTabIdx > 3, label: aboutTabLabel, Components: AboutTabComponents },
-                { isDone: activeTabIdx > 4, label: "Юридическая чистота", Components: [<div key={1} />, <div key={1} />] },
+                {
+                    isDone: activeTabIdx > 4, label: "Юридическая чистота", Components: [
+                        <LegalPurityDetails objectType={objectType} key={231} onNextTab={handleNextTab} onPrevTab={handlePrevTab} />,
+                        <LegalPurityFounders objectType={objectType} key={231} onNextTab={handleNextTab} onPrevTab={handlePrevTab} />
+                    ]
+                },
             ]
         )
     }, [handleNextTab, handlePrevTab, activeTabIdx, objectType])

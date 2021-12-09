@@ -17,3 +17,9 @@
     height: 1px;
     margin: 30px 0;
 }
+
+.inputsGroup {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}

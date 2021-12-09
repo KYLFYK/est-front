@@ -62,7 +62,7 @@ class CreateTownhouseStore implements ICreateObjectTownhouse {
   };
 
   legalPurity: ICreateObjectTownhouse["legalPurity"] = {
-    RealEstateRegister: {
+    realEstateRegister: {
       address: "",
       cadastralNumber: "",
       cadastralCost: "",
@@ -71,14 +71,16 @@ class CreateTownhouseStore implements ICreateObjectTownhouse {
     },
     currentFounder: {
       founderType: FoundersTypes.SINGLE,
-      founderNames: [],
+      firstFounderName: '',
+      secondFouderName: undefined,
       cadastralNumber: "",
       ownershipFrom: new Date(),
       ownershipTo: new Date(),
     },
     previousFounder: {
       founderType: FoundersTypes.SINGLE,
-      founderNames: [],
+      firstFounderName: '',
+      secondFouderName: undefined,
       cadastralNumber: "",
       ownershipFrom: new Date(),
       ownershipTo: new Date(),

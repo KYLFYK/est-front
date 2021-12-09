@@ -71,7 +71,7 @@ export interface ICreateTownhouseInfoTab {
 }
 
 export interface ICreateTownhouseLegalPurity {
-  RealEstateRegister: {
+  realEstateRegister: {
     address: string,
     cadastralNumber: string,
     cadastralCost: string,
@@ -80,14 +80,16 @@ export interface ICreateTownhouseLegalPurity {
   },
   currentFounder: {
     founderType: FoundersTypes,
-    founderNames: string[],
+    firstFounderName: string,
+    secondFouderName?: string,
     cadastralNumber: string,
     ownershipFrom: Date,
     ownershipTo: Date, 
   },
   previousFounder: {
     founderType: FoundersTypes,
-    founderNames: string[],
+    firstFounderName: string,
+    secondFouderName?: string,
     cadastralNumber: string,
     ownershipFrom: Date,
     ownershipTo: Date, 

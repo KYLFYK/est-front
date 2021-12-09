@@ -191,7 +191,6 @@ const GeneralInfoDataTab: React.FC<Props> = observer(({ onNextTab, onPrevTab, ob
             isValidLandStatus,
             isValidInteriorDescription
         )
-        console.warn(isValidInputs)
         if (isValidInputs) {
             createObjectStore.saveGeneralTab(values, objectType)
             onNextTab()

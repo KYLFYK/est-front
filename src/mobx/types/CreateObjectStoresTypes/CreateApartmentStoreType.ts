@@ -64,7 +64,7 @@ export interface ICreateApartsInfoTab {
 }
 
 export interface ICreateApartsLegalPurity {
-  RealEstateRegister: {
+  realEstateRegister: {
     address: string,
     cadastralNumber: string,
     cadastralCost: string,
@@ -73,14 +73,16 @@ export interface ICreateApartsLegalPurity {
   },
   currentFounder: {
     founderType: FoundersTypes,
-    founderNames: string[],
+    firstFounderName: string,
+    secondFouderName?: string,
     cadastralNumber: string,
     ownershipFrom: Date,
     ownershipTo: Date, 
   },
   previousFounder: {
     founderType: FoundersTypes,
-    founderNames: string[],
+    firstFounderName: string,
+    secondFouderName?: string,
     cadastralNumber: string,
     ownershipFrom: Date,
     ownershipTo: Date, 

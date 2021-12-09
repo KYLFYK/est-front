@@ -51,7 +51,7 @@ class CreateApartmentStore implements ICreateObjectAparts {
     parkingPrice: 0,
   };
   legalPurity: ICreateObjectAparts["legalPurity"] = {
-    RealEstateRegister: {
+    realEstateRegister: {
       address: '',
       cadastralNumber: "",
       cadastralCost: "",
@@ -60,14 +60,16 @@ class CreateApartmentStore implements ICreateObjectAparts {
     },
     currentFounder: {
       founderType: FoundersTypes.SINGLE,
-      founderNames: [],
+      firstFounderName: '',
+      secondFouderName: undefined,
       cadastralNumber: "",
       ownershipFrom: new Date(),
       ownershipTo: new Date(), 
     },
     previousFounder: {
       founderType: FoundersTypes.SINGLE,
-      founderNames: [],
+      firstFounderName: '',
+      secondFouderName: undefined,
       cadastralNumber: "",
       ownershipFrom: new Date(),
       ownershipTo: new Date(), 

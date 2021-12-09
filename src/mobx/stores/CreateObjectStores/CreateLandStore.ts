@@ -31,7 +31,7 @@ class CreateLandStore implements ICreateObjectLand {
   };
 
   legalPurity: ICreateObjectLand["legalPurity"] = {
-    RealEstateRegister: {
+    realEstateRegister: {
       address: '',
       cadastralNumber: "",
       cadastralCost: "",
@@ -39,14 +39,16 @@ class CreateLandStore implements ICreateObjectLand {
     },
     currentFounder: {
       founderType: FoundersTypes.SINGLE,
-      founderNames: [],
+      firstFounderName: '',
+      secondFouderName: undefined,
       cadastralNumber: "",
       ownershipFrom: new Date(),
       ownershipTo: new Date(), 
     },
     previousFounder: {
       founderType: FoundersTypes.SINGLE,
-      founderNames: [],
+      firstFounderName: '',
+      secondFouderName: undefined,
       cadastralNumber: "",
       ownershipFrom: new Date(),
       ownershipTo: new Date(), 

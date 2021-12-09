@@ -1,13 +1,13 @@
 import { action, flow, makeObservable, observable } from "mobx";
 import { INFO_TAB_HOUSE_FURNITURE } from "../../../components/processes/create-new-object/config";
-import { TAboutTabState, TGeneralInfoState, TInfoState, TInfrastructureState } from "../../../components/processes/create-new-object/lib";
+import { TAboutTabState, TGeneralInfoState, TInfoState, TInfrastructureState, TLegalPurityTabState } from "../../../components/processes/create-new-object/lib";
 import { IOption } from "../../../utils/interfaces/general";
 import { ObjectTypes } from "../../../utils/interfaces/objects";
-import { ICreateApartmentAboutTab, ICreateApartsGeneralInfo, ICreateApartsInfoTab, ICreateApartsInfrastructure } from "../../types/CreateObjectStoresTypes/CreateApartmentStoreType";
-import { ICreateHouseAboutTab, ICreateHouseGeneralInfo, ICreateHouseInfoTab, ICreateHouseInfrastructure } from "../../types/CreateObjectStoresTypes/CreateHouseStoreType";
-import { ICreateLandAboutTab, ICreateLandGeneralInfo, ICreateLandInfoTab, ICreateLandInfrastructure } from "../../types/CreateObjectStoresTypes/CreateLandStoreType";
+import { ICreateApartmentAboutTab, ICreateApartsGeneralInfo, ICreateApartsInfoTab, ICreateApartsInfrastructure, ICreateApartsLegalPurity } from "../../types/CreateObjectStoresTypes/CreateApartmentStoreType";
+import { ICreateHouseAboutTab, ICreateHouseGeneralInfo, ICreateHouseInfoTab, ICreateHouseInfrastructure, ICreateHouseLegalPurity } from "../../types/CreateObjectStoresTypes/CreateHouseStoreType";
+import { ICreateLandAboutTab, ICreateLandGeneralInfo, ICreateLandInfoTab, ICreateLandInfrastructure, ICreateLandLegalPurity } from "../../types/CreateObjectStoresTypes/CreateLandStoreType";
 import { ICreateObject } from "../../types/CreateObjectStoresTypes/CreateObjectStoreType";
-import { ICreateTownhouseAboutTab, ICreateTownhouseGeneralInfo, ICreateTownhouseInfoTab, ICreateTownhouseInfrastructure } from "../../types/CreateObjectStoresTypes/CreateTownhouseStoreType";
+import { ICreateTownhouseAboutTab, ICreateTownhouseGeneralInfo, ICreateTownhouseInfoTab, ICreateTownhouseInfrastructure, ICreateTownhouseLegalPurity } from "../../types/CreateObjectStoresTypes/CreateTownhouseStoreType";
 import { IRootStore } from "../RootStore";
 import CreateApartmentStore from "./CreateApartmentStore";
 import CreateHouseStore from "./CreateHouseStore";
@@ -100,6 +100,24 @@ class CreateObjectStore implements ICreateObject {
         this.land.info = data
     }
 
+    saveLegalPurityTab(data: TLegalPurityTabState, objectType: ObjectTypes) {
+        switch (objectType) {
+            case ObjectTypes.APARTMENTS:
+                this.apartment.legalPurity = data as ICreateApartsLegalPurity
+                break;
+            case ObjectTypes.HOUSE:
+                this.house.legalPurity = data as ICreateHouseLegalPurity
+                break;
+            case ObjectTypes.TOWNHOUSE:
+                this.townhouse.legalPurity = data as ICreateTownhouseLegalPurity
+                break;
+            case ObjectTypes.LAND:
+                this.land.legalPurity = data as ICreateLandLegalPurity
+            default:
+                break;
+        }
+    }
+
     // Fake request method for assigning options list in store in the future
     *getFurnitureList(): Generator<Promise<IOption[]>, IOption[], IOption[]> {
         const fakeRequest = () => new Promise<IOption[]>((res) => res(INFO_TAB_HOUSE_FURNITURE))
@@ -118,6 +136,7 @@ class CreateObjectStore implements ICreateObject {
             saveInfrastructureTab: action,
             saveHouseInfoTab: action,
             saveLandInfoTab: action,
+            saveLegalPurityTab: action,
             getFurnitureList: flow.bound
         })
 
