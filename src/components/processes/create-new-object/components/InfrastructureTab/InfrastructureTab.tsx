@@ -36,7 +36,7 @@ const InfrastructureTab: React.FC<Props> = observer(({ onNextTab, onPrevTab, obj
         const isValidInputs = isValidInputsInfrastructureTab(objectType, isValidDescription, isValidView)
         if (isValidInputs) {
             createObjectStore.saveInfrastructureTab(values, objectType)
-            onNextTab()
+            onNextTab && onNextTab()
         }
         else
             setIsValid(false)

@@ -193,7 +193,8 @@ const GeneralInfoDataTab: React.FC<Props> = observer(({ onNextTab, onPrevTab, ob
         )
         if (isValidInputs) {
             createObjectStore.saveGeneralTab(values, objectType)
-            onNextTab()
+            onNextTab && onNextTab()
+
         }
         else {
             setIsValid(isValidInputs)

@@ -46,7 +46,7 @@ const AboutObjectTab: React.FC<Props> = observer(({ onNextTab, onPrevTab, object
         )
         if (isValid) {
             saveAboutTab(values!, objectType)
-            onNextTab()
+            onNextTab && onNextTab()
         }
         else {
             setIsValid(isValid)

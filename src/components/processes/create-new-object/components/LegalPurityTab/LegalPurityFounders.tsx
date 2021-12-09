@@ -8,13 +8,14 @@ import BaseDatePicker from "../../../../shared/BaseDatePicker/BaseDatePicker"
 import { BaseDropDown } from "../../../../shared/BaseDropDown/BaseDropDown"
 import { LEGAL_PURITY_TAB_OWNER_TYPES } from "../../config"
 import { useStores } from "../../../../../hooks/useStores"
-import { getInitialStateLegalPurityTab, TLegalPurityTabState } from "../../lib"
+import { getActualObjectTypeData, getInitialStateLegalPurityTab, TLegalPurityTabState } from "../../lib"
 import { observer } from "mobx-react-lite"
+import { useRouter } from "next/dist/client/router"
 interface Props extends ICreateObjectControls {
     objectType: ObjectTypes
 }
 
-const LegalPurityFounders: React.FC<Props> = observer(({ onNextTab, onPrevTab, objectType }) => {
+const LegalPurityFounders: React.FC<Props> = observer(({ onPublish, onPrevTab, objectType }) => {
     const { createObjectStore } = useStores()
     const [values, setValues] = useState<TLegalPurityTabState>(getInitialStateLegalPurityTab(objectType, createObjectStore))
     const [isValid, setIsValid] = useState<boolean>(true)
@@ -76,7 +77,7 @@ const LegalPurityFounders: React.FC<Props> = observer(({ onNextTab, onPrevTab, o
         setValues({ ...values, currentFounder: { ...values.currentFounder, ownershipTo: value } })
     }
 
-    const handleNextTab = () => {
+    const handlePublish = async (): Promise<void> => {
         const isValidInputs = (
             isValidCurrentFounderNames &&
             isValidCurrentCadastralNumber &&
@@ -85,15 +86,25 @@ const LegalPurityFounders: React.FC<Props> = observer(({ onNextTab, onPrevTab, o
         )
         if (isValidInputs) {
             createObjectStore.saveLegalPurityTab(values, objectType)
-            onNextTab()
+            const dataToSend = getActualObjectTypeData(createObjectStore, objectType)
+            if (!dataToSend) return
+
+            console.log(dataToSend) 
+
+            const response = await createObjectStore.sendObjectData(dataToSend)
+            if (response && onPublish) onPublish(response) // Передаем сюда айди успешного объявления
+
         }
         else
             setIsValid(false)
     }
 
+    const handlePreview = () => {
+        console.log('preview feature in future')
+    }
 
     return (
-        <ButtonPanel onNextTab={handleNextTab} onPrevTab={onPrevTab}>
+        <ButtonPanel onPublish={handlePublish} onPreview={handlePreview} onPrevTab={onPrevTab}>
             <InputsGroup title="Текущие владельцы">
                 <BaseDropDown
                     value={currentFounder.founderType}

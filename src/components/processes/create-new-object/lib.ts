@@ -354,3 +354,22 @@ export const isValidLegalPurityDetailsTab = (
       return false;
   }
 };
+
+export const getActualObjectTypeData = (
+  createObjectStore: ICreateObject,
+  objectType: ObjectTypes
+) => {
+  switch (objectType) {
+    case ObjectTypes.APARTMENTS:
+      return createObjectStore.apartment;
+    case ObjectTypes.TOWNHOUSE:
+      return createObjectStore.townhouse;
+    case ObjectTypes.HOUSE:
+      return createObjectStore.house;
+    case ObjectTypes.LAND:
+      return createObjectStore.land;
+
+    default:
+      break;
+  }
+};

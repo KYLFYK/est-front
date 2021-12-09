@@ -62,7 +62,7 @@ const HouseInfoDetailsTab: React.FC<Props> = observer(({ onNextTab, onPrevTab, o
         )
         if (isValidInputs) {
             createObjectStore.saveHouseInfoTab(values, objectType)
-            onNextTab()
+            onNextTab && onNextTab()
         }
         else
             setIsValid(false)

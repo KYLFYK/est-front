@@ -44,7 +44,7 @@ const HouseInfoInterierTab: React.FC<Props> = observer(({ onNextTab, onPrevTab, 
         const isValidInputs = (isValidPlumbing && isValidRenovation)
         if (isValidInputs) {
             createObjectStore.saveHouseInfoTab(values, objectType)
-            onNextTab()
+            onNextTab && onNextTab()
         }
         else
             setIsValid(false)

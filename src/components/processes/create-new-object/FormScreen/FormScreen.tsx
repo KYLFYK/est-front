@@ -15,6 +15,7 @@ import LandInfoTab from '../components/LandInfoTab/LandInfoTab'
 import LegalPurityDetails from '../components/LegalPurityTab/LegalPurityDetails'
 import LegalPurityFounders from '../components/LegalPurityTab/LegalPurityFounders'
 import MultipleHorizontalTab, { ICreateObjectTabs } from '../components/MultipleHorizontalTab/MultipleHorizontalTab'
+import CreateObjectSuccessPage from '../components/SuccessPage/SuccessPage'
 import s from './FormScreen.module.scss'
 
 
@@ -27,6 +28,7 @@ const FormScreen: React.FC<Props> = ({ clearObjectType, objectType }) => {
     const [activeTabIdx, setActiveTabIdx] = React.useState<number>(0)
     const [activeSubTabIdx, setActiveSubTabIdx] = React.useState<number>(0)
     const [tabsProp, setTabsProp] = React.useState<ICreateObjectTabs[]>([])
+    const [succesAdvertisementId, setSuccesAdvertisementId] = React.useState<string | null>(null)
 
     const lastSubTabIdx = tabsProp[activeTabIdx]?.Components.length - 1
     const lastTabIdx = tabsProp.length - 1
@@ -60,7 +62,9 @@ const FormScreen: React.FC<Props> = ({ clearObjectType, objectType }) => {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [activeTabIdx, activeSubTabIdx])
 
-    const handlePublicate = () => { }
+    const handlePublish = (advertisementId: string) => {
+        setSuccesAdvertisementId(advertisementId)
+    }
 
     React.useEffect(() => {
 
@@ -74,11 +78,7 @@ const FormScreen: React.FC<Props> = ({ clearObjectType, objectType }) => {
                 {
                     isDone: activeTabIdx > 0,
                     label: "Об объекте",
-                    Components: [
-                        <LegalPurityDetails objectType={objectType} key={231} onNextTab={handleNextTab} onPrevTab={handlePrevTab} />,
-                        <LegalPurityFounders objectType={objectType} key={231} onNextTab={handleNextTab} onPrevTab={handlePrevTab} />
-                    ]
-                    // Components: [<AboutObject key={1} objectType={objectType} onNextTab={handleNextTab} onPrevTab={handlePrevTab} />],
+                    Components: [<AboutObject key={1} objectType={objectType} onNextTab={handleNextTab} onPrevTab={handlePrevTab} />],
                 },
                 {
                     isDone: activeTabIdx > 1, label: "Основная информация", Components: [
@@ -95,12 +95,29 @@ const FormScreen: React.FC<Props> = ({ clearObjectType, objectType }) => {
                 {
                     isDone: activeTabIdx > 4, label: "Юридическая чистота", Components: [
                         <LegalPurityDetails objectType={objectType} key={231} onNextTab={handleNextTab} onPrevTab={handlePrevTab} />,
-                        <LegalPurityFounders objectType={objectType} key={231} onNextTab={handleNextTab} onPrevTab={handlePrevTab} />
+                        <LegalPurityFounders objectType={objectType} key={231} onPrevTab={handlePrevTab} onPublish={handlePublish} />
                     ]
                 },
             ]
         )
     }, [handleNextTab, handlePrevTab, activeTabIdx, objectType])
+
+    if (succesAdvertisementId) return (
+        <div>
+            <div className={s.nav}>
+                <div className={s.navContent}>
+                    <Link href="/">
+                        <a className={s.link}>
+                            <Typography weight="medium" icon={<NavArrowIcon className={s.arrowIcon} />}>Вернуться в личный кабинет</Typography>
+                        </a>
+                    </Link>
+                </div>
+                <div className={s.divider} />
+            </div>
+            <CreateObjectSuccessPage advertisementId={succesAdvertisementId} />
+        </div>
+    )
+
     return (
         <div>
             <div className={s.nav}>
@@ -117,6 +134,7 @@ const FormScreen: React.FC<Props> = ({ clearObjectType, objectType }) => {
                 <div className={s.divider} />
             </div>
             <MultipleHorizontalTab activeSubTabIdx={activeSubTabIdx} activeTabIdx={activeTabIdx} tabs={tabsProp} />
+
 
         </div>
     )

@@ -87,15 +87,6 @@ class CreateHouseStore implements ICreateObjectHouse {
   };
 
   
-  constructor() {
-    makeObservable(this, {
-      about: observable,
-      generalInfo: observable,
-      info: observable,
-      infrastructure: observable,
-      legalPurity: observable
-    });
-  }
 }
 
 export default CreateHouseStore;

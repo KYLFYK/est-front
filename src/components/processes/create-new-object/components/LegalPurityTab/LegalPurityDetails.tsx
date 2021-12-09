@@ -39,7 +39,7 @@ const LegalPurityDetails: React.FC<Props> = observer(({ onNextTab, onPrevTab, ob
             isValidFloors)
         if (isValidInputs) {
             createObjectStore.saveLegalPurityTab(values, objectType)
-            onNextTab()
+            onNextTab && onNextTab()
         }
         else
             setIsValid(false)

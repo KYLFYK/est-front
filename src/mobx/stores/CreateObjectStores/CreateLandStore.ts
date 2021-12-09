@@ -55,15 +55,6 @@ class CreateLandStore implements ICreateObjectLand {
     }
   };
 
-  constructor() {
-    makeObservable(this, {
-      about: observable,
-      generalInfo: observable,
-      info: observable,
-      infrastructure: observable,
-      legalPurity: observable,
-    });
-  }
 }
 
 export default CreateLandStore;
