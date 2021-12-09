@@ -1,0 +1,33 @@
+.wrapper {
+    display: flex;
+    border: 1px #CAD1DA solid;
+    border-radius: 6px;
+    align-items: center;
+    width: 280px;
+    & input {
+        border: 0;
+    }
+    & > div {
+        max-width: 100px;
+    }
+}
+
+.divider {
+    min-width: 12px;
+    height: 1px;
+    background-color: #CAD1DA;
+}
+
+.input {
+    text-indent: 10px;
+}
+
+.icon {
+    margin-left: auto;
+    margin-right: 13px;
+}
+
+.label {
+    color: #CAD1DA;
+    margin-bottom: 5px;
+}

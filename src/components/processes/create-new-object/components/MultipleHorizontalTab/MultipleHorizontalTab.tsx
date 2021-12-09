@@ -18,7 +18,6 @@ interface Props {
 }
 
 const MultipleHorizontalTab: React.FC<Props> = ({ activeSubTabIdx, activeTabIdx, tabs }) => {
-    console.log("TABS", tabs)
     return (
         <div className={s.wrapper}>
             <div className={s.nav}>
@@ -46,7 +45,7 @@ const MultipleHorizontalTab: React.FC<Props> = ({ activeSubTabIdx, activeTabIdx,
                 <div className={s.divider} />
             </div>
             <div className={s.content}>
-                {tabs.length && tabs[activeTabIdx].Components[activeSubTabIdx]}
+                {!!tabs.length && tabs[activeTabIdx].Components[activeSubTabIdx]}
             </div>
         </div>
     )

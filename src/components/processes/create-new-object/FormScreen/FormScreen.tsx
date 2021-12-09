@@ -1,7 +1,6 @@
 import { observer } from 'mobx-react-lite'
 import Link from 'next/link'
 import React from 'react'
-import { useStores } from '../../../../hooks/useStores'
 import NavArrowIcon from '../../../../icons/NavArrow/NavArrow'
 import { ObjectTypes } from '../../../../utils/interfaces/objects'
 import Typography from '../../../shared/Typography/Typography'
@@ -13,7 +12,10 @@ import HouseInfoDetailsTab from '../components/HouseInfoTab/HouseInfoDetailsTab'
 import HouseInfoInterierTab from '../components/HouseInfoTab/HouseInfoInterierTab'
 import InfrastructureTab from '../components/InfrastructureTab/InfrastructureTab'
 import LandInfoTab from '../components/LandInfoTab/LandInfoTab'
+import LegalPurityDetails from '../components/LegalPurityTab/LegalPurityDetails'
+import LegalPurityFounders from '../components/LegalPurityTab/LegalPurityFounders'
 import MultipleHorizontalTab, { ICreateObjectTabs } from '../components/MultipleHorizontalTab/MultipleHorizontalTab'
+import CreateObjectSuccessPage from '../components/SuccessPage/SuccessPage'
 import s from './FormScreen.module.scss'
 
 
@@ -22,11 +24,11 @@ interface Props {
     clearObjectType: () => void
 }
 
-const FormScreen: React.FC<Props> = observer(({ clearObjectType, objectType }) => {
-
+const FormScreen: React.FC<Props> = ({ clearObjectType, objectType }) => {
     const [activeTabIdx, setActiveTabIdx] = React.useState<number>(0)
     const [activeSubTabIdx, setActiveSubTabIdx] = React.useState<number>(0)
     const [tabsProp, setTabsProp] = React.useState<ICreateObjectTabs[]>([])
+    const [succesAdvertisementId, setSuccesAdvertisementId] = React.useState<string | null>(null)
 
     const lastSubTabIdx = tabsProp[activeTabIdx]?.Components.length - 1
     const lastTabIdx = tabsProp.length - 1
@@ -60,13 +62,15 @@ const FormScreen: React.FC<Props> = observer(({ clearObjectType, objectType }) =
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [activeTabIdx, activeSubTabIdx])
 
-    const handlePublicate = () => { }
+    const handlePublish = (advertisementId: string) => {
+        setSuccesAdvertisementId(advertisementId)
+    }
 
     React.useEffect(() => {
 
         const AboutTabComponents: JSX.Element[] = objectType === ObjectTypes.LAND ?
-            [<LandInfoTab key={331} onNextTab={handleNextTab} onPrevTab={handlePrevTab} />] :
-            [<HouseInfoDetailsTab objectType={objectType} key={33} onNextTab={handleNextTab} onPrevTab={handlePrevTab} />, <HouseInfoInterierTab key={33} onNextTab={handleNextTab} onPrevTab={handlePrevTab} />]
+            [<LandInfoTab objectType={objectType} key={331} onNextTab={handleNextTab} onPrevTab={handlePrevTab} />] :
+            [<HouseInfoDetailsTab objectType={objectType} key={33} onNextTab={handleNextTab} onPrevTab={handlePrevTab} />, <HouseInfoInterierTab objectType={objectType} key={33} onNextTab={handleNextTab} onPrevTab={handlePrevTab} />]
         const aboutTabLabel = objectType === ObjectTypes.LAND ? "Об учатске" : "О доме"
 
         setTabsProp(
@@ -83,12 +87,37 @@ const FormScreen: React.FC<Props> = observer(({ clearObjectType, objectType }) =
                         <GeneralInfoDataTab objectType={objectType} key={51} onNextTab={handleNextTab} onPrevTab={handlePrevTab} />
                     ]
                 },
-                { isDone: activeTabIdx > 2, label: "Инфраструктура", Components: [<InfrastructureTab objectType={objectType} key={231} onNextTab={handleNextTab} onPrevTab={handlePrevTab} />] },
+                {
+                    isDone: activeTabIdx > 2, label: "Инфраструктура", Components: [
+                        <InfrastructureTab objectType={objectType} key={231} onNextTab={handleNextTab} onPrevTab={handlePrevTab} />]
+                },
                 { isDone: activeTabIdx > 3, label: aboutTabLabel, Components: AboutTabComponents },
-                { isDone: activeTabIdx > 4, label: "Юридическая чистота", Components: [<div key={1} />, <div key={1} />] },
+                {
+                    isDone: activeTabIdx > 4, label: "Юридическая чистота", Components: [
+                        <LegalPurityDetails objectType={objectType} key={231} onNextTab={handleNextTab} onPrevTab={handlePrevTab} />,
+                        <LegalPurityFounders objectType={objectType} key={231} onPrevTab={handlePrevTab} onPublish={handlePublish} />
+                    ]
+                },
             ]
         )
     }, [handleNextTab, handlePrevTab, activeTabIdx, objectType])
+
+    if (succesAdvertisementId) return (
+        <div>
+            <div className={s.nav}>
+                <div className={s.navContent}>
+                    <Link href="/">
+                        <a className={s.link}>
+                            <Typography weight="medium" icon={<NavArrowIcon className={s.arrowIcon} />}>Вернуться в личный кабинет</Typography>
+                        </a>
+                    </Link>
+                </div>
+                <div className={s.divider} />
+            </div>
+            <CreateObjectSuccessPage advertisementId={succesAdvertisementId} />
+        </div>
+    )
+
     return (
         <div>
             <div className={s.nav}>
@@ -106,8 +135,9 @@ const FormScreen: React.FC<Props> = observer(({ clearObjectType, objectType }) =
             </div>
             <MultipleHorizontalTab activeSubTabIdx={activeSubTabIdx} activeTabIdx={activeTabIdx} tabs={tabsProp} />
 
+
         </div>
     )
-})
+}
 
 export default FormScreen

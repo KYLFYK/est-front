@@ -6,12 +6,20 @@ import s from './ButtonsPanel.module.scss'
 
 export interface ICreateObjectControls {
     onPrevTab: () => void;
-    onNextTab: () => void;
+    onNextTab?: () => void;
+    onPublish?: (advertisementId: string) => void;
+    onPreview?: () => void;
+}
+
+interface Props {
+    onPrevTab: () => void;
+    onNextTab?: () => void;
     onPublish?: () => void;
     onPreview?: () => void;
 }
 
-const ButtonPanel: React.FC<ICreateObjectControls> = ({ children, onNextTab, onPrevTab, onPreview, onPublish }) => {
+const ButtonPanel: React.FC<Props> = ({ children, onNextTab, onPrevTab, onPreview, onPublish }) => {
+
     return (
         <div className={s.wrapper}>
             <div>

@@ -1,11 +1,10 @@
-import React from "react"
-import { ICreateApartsGeneralInfo } from "../../../../../mobx/types/CreateObjectStoresTypes/CreateApartmentStoreType"
-import { ICreateHouseGeneralInfo } from "../../../../../mobx/types/CreateObjectStoresTypes/CreateHouseStoreType"
-import { ICreateLandGeneralInfo } from "../../../../../mobx/types/CreateObjectStoresTypes/CreateLandStoreType"
-import { ICreateTownhouseGeneralInfo } from "../../../../../mobx/types/CreateObjectStoresTypes/CreateTownhouseStoreType"
+import { observer } from "mobx-react-lite"
+import React, { useState } from "react"
+import { useStores } from "../../../../../hooks/useStores"
 import { ObjectTypes } from "../../../../../utils/interfaces/objects"
 import { BaseTextarea } from "../../../../shared/BaseTextarea/BaseTextarea"
-import { getInitialStateGeneralInfoTab } from "../../lib"
+import Typography from "../../../../shared/Typography/Typography"
+import { getInitialStateGeneralInfoTab, TGeneralInfoState } from "../../lib"
 import ButtonPanel, { ICreateObjectControls } from "../ButtonsPanel/ButtonsPanel"
 import InputsGroup from "../InputsGroup/InputsGroup"
 import s from './GeneralInfoObjectTab.module.scss'
@@ -15,25 +14,43 @@ interface Props extends ICreateObjectControls {
     objectType: ObjectTypes
 }
 
-const GeneralInfoDescriptionTab: React.FC<Props> = ({ onNextTab, onPrevTab, objectType }) => {
-    const [description, setDescription] = React.useState<string>()
+const GeneralInfoDescriptionTab: React.FC<Props> = observer(({ onNextTab, onPrevTab, objectType }) => {
+    const { createObjectStore } = useStores()
+    const [isValid, setIsValid] = useState<boolean>(true)
+    const [values, setValues] = React.useState<TGeneralInfoState>(
+        getInitialStateGeneralInfoTab(objectType, createObjectStore)
+    )
 
-    React.useEffect(() => {
-        const initState = getInitialStateGeneralInfoTab(objectType)
-        setDescription(initState?.description)
-    }, [objectType])
+    const isValidDescription = !!values.description.length
 
     const onChangeDescription = (e: React.ChangeEvent & { target: HTMLTextAreaElement }) => {
-        setDescription(e.target.value)
+        setValues({ ...values, description: e.target.value })
+    }
+
+    const handleNextTab = () => {
+        if (isValidDescription) {
+            createObjectStore.saveGeneralTab(values, objectType)
+            onNextTab()
+        }
+        else {
+            setIsValid(isValidDescription)
+        }
     }
 
     return (
-        <ButtonPanel onNextTab={onNextTab} onPrevTab={onPrevTab}>
+        <ButtonPanel onNextTab={handleNextTab} onPrevTab={onPrevTab}>
             <InputsGroup title={"Описание"}>
-                <BaseTextarea className={s.textarea} label="Опишите сильные стороны вашего объекта" value={description} onChange={onChangeDescription} />
+                <BaseTextarea 
+                className={s.textarea} 
+                label="Опишите сильные стороны вашего объекта" 
+                value={values.description} 
+                onChange={onChangeDescription} 
+                isError={!isValidDescription && !isValid}
+                />
             </InputsGroup>
+
         </ButtonPanel>
     )
-}
+})
 
 export default GeneralInfoDescriptionTab

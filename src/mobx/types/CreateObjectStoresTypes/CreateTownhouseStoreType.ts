@@ -1,5 +1,6 @@
 import { ICustomFile } from "../../../components/processes/create-new-object/components/GeneralInfoObjectTab/GeneralInfoPhotosTab";
 import { IOption } from "../../../utils/interfaces/general";
+import { FoundersTypes } from "../../../utils/interfaces/objects";
 import { ICreateObjectModel } from "./CreateObjectStoreType";
 
 export interface ICreateObjectTownhouse
@@ -7,7 +8,8 @@ export interface ICreateObjectTownhouse
     ICreateTownhouseAboutTab,
     ICreateTownhouseGeneralInfo,
     ICreateTownhouseInfrastructure,
-    ICreateTownhouseInfoTab
+    ICreateTownhouseInfoTab,
+    ICreateTownhouseLegalPurity
   > {}
 
 export interface ICreateTownhouseAboutTab {
@@ -31,12 +33,12 @@ export interface ICreateTownhouseGeneralInfo {
   bathroom: string;
   kitchen: string;
   garage: {
-    has: boolean;
+    has: string;
     capacity: string;
     square: string;
   };
   pool: {
-    has: boolean;
+    has: string;
     square: string;
   };
   floors: {
@@ -67,3 +69,30 @@ export interface ICreateTownhouseInfoTab {
   renovation: string;
   furnitureList: string[];
 }
+
+export interface ICreateTownhouseLegalPurity {
+  realEstateRegister: {
+    address: string,
+    cadastralNumber: string,
+    cadastralCost: string,
+    generalSquare: string,
+    floors: string,
+  },
+  currentFounder: {
+    founderType: FoundersTypes,
+    firstFounderName: string,
+    secondFouderName?: string,
+    cadastralNumber: string,
+    ownershipFrom: Date,
+    ownershipTo: Date, 
+  },
+  previousFounder: {
+    founderType: FoundersTypes,
+    firstFounderName: string,
+    secondFouderName?: string,
+    cadastralNumber: string,
+    ownershipFrom: Date,
+    ownershipTo: Date, 
+  }
+}
+

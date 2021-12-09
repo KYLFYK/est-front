@@ -1,9 +1,10 @@
 import { action, makeObservable, observable } from "mobx";
+import { FoundersTypes } from "../../../utils/interfaces/objects";
 import { ICreateObjectAparts } from "../../types/CreateObjectStoresTypes/CreateApartmentStoreType";
 
 class CreateApartmentStore implements ICreateObjectAparts {
   about: ICreateObjectAparts["about"] = {
-    name: "baba",
+    name: "",
     country: "",
     city: "",
     address: "",
@@ -49,17 +50,32 @@ class CreateApartmentStore implements ICreateObjectAparts {
     parking: "",
     parkingPrice: 0,
   };
-  legalPurity: ICreateObjectAparts["legalPurity"] = {};
+  legalPurity: ICreateObjectAparts["legalPurity"] = {
+    realEstateRegister: {
+      address: '',
+      cadastralNumber: "",
+      cadastralCost: "",
+      generalSquare: "",
+      floors: "",
+    },
+    currentFounder: {
+      founderType: FoundersTypes.SINGLE,
+      firstFounderName: '',
+      secondFouderName: undefined,
+      cadastralNumber: "",
+      ownershipFrom: new Date(),
+      ownershipTo: new Date(), 
+    },
+    previousFounder: {
+      founderType: FoundersTypes.SINGLE,
+      firstFounderName: '',
+      secondFouderName: undefined,
+      cadastralNumber: "",
+      ownershipFrom: new Date(),
+      ownershipTo: new Date(), 
+    }
+  };
 
-  changeName(name: string) {
-    this.about.name = name;
-  }
-  constructor() {
-    makeObservable(this, {
-      about: observable,
-      changeName: action,
-    });
-  }
 }
 
 export default CreateApartmentStore;

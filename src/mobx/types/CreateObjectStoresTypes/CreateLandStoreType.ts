@@ -1,4 +1,5 @@
 import { ICustomFile } from "../../../components/processes/create-new-object/components/GeneralInfoObjectTab/GeneralInfoPhotosTab";
+import { FoundersTypes } from "../../../utils/interfaces/objects";
 import { ICreateObjectModel } from "./CreateObjectStoreType";
 
 export interface ICreateObjectLand
@@ -6,7 +7,8 @@ export interface ICreateObjectLand
     ICreateLandAboutTab,
     ICreateLandGeneralInfo,
     ICreateLandInfrastructure,
-    ICreateLandInfoTab
+    ICreateLandInfoTab,
+    ICreateLandLegalPurity
   > {}
 
 export interface ICreateLandAboutTab {
@@ -34,4 +36,30 @@ export interface ICreateLandInfoTab {
   heating: string;
   sewerage: string;
   buildings: string;
+}
+
+
+export interface ICreateLandLegalPurity {
+  realEstateRegister: {
+    address: string,
+    cadastralNumber: string,
+    cadastralCost: string,
+    generalSquare: string,
+  },
+  currentFounder: {
+    founderType: FoundersTypes,
+    firstFounderName: string,
+    secondFouderName?: string,
+    cadastralNumber: string,
+    ownershipFrom: Date,
+    ownershipTo: Date, 
+  },
+  previousFounder: {
+    founderType: FoundersTypes,
+    firstFounderName: string,
+    secondFouderName?: string,
+    cadastralNumber: string,
+    ownershipFrom: Date,
+    ownershipTo: Date, 
+  }
 }

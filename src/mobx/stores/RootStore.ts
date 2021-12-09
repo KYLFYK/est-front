@@ -8,6 +8,7 @@ export interface IRootStore {
 
 class RootStore implements IRootStore {
     createObjectStore: CreateObjectStore;
+    
 
     constructor () {
         this.createObjectStore = new CreateObjectStore(this)

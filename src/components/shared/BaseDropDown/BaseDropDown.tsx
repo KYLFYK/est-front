@@ -13,10 +13,12 @@ interface Props {
     placeholder: string,
     className?: string,
     classNameWrapper?: string,
+    isError?: boolean,
+    errorLabel?: string,
     onChange: (value: string) => void,
 }
 
-export const BaseDropDown: React.FC<Props> = ({ options, value, placeholder, className, label, classNameWrapper, onChange }) => {
+export const BaseDropDown: React.FC<Props> = ({ isError, errorLabel = "Выберите значение", options, value, placeholder, className, label, classNameWrapper, onChange }) => {
     const classes = useStyles()
     const handleOnChange = (event: React.ChangeEvent<{ name?: string | unknown, value: unknown }>) => {
         onChange(event.target.value as string)
@@ -34,7 +36,7 @@ export const BaseDropDown: React.FC<Props> = ({ options, value, placeholder, cla
         return _value ? _value : placeholder;
     };
     return (
-        <div className={classNameWrapper}>
+        <div className={classNames(classes.wrapper,classNameWrapper)}>
             {label && <Typography className={classes.label}>{label}</Typography>}
             <Select
                 IconComponent={({ className }) => <SmallArrowIcon className={classNames(className, classes.icon)} />}
@@ -46,6 +48,9 @@ export const BaseDropDown: React.FC<Props> = ({ options, value, placeholder, cla
             >
                 {options.map(({ value, label }) => <MenuItem key={value} value={value}>{label}</MenuItem>)}
             </Select>
+            {isError && (
+                <Typography size="small" color="red" className={classes.error}>{errorLabel}</Typography>
+            )}
         </div>
     )
 }

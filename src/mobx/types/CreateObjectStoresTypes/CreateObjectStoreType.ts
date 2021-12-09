@@ -3,7 +3,7 @@ import { ICreateObjectHouse } from "./CreateHouseStoreType";
 import { ICreateObjectLand } from "./CreateLandStoreType";
 import { ICreateObjectTownhouse } from "./CreateTownhouseStoreType";
 
-export interface ICreateObjectModel<A, B, C, D, E = {}> {
+export interface ICreateObjectModel<A, B, C, D, E> {
     about: A
     generalInfo: B,
     infrastructure: C,
@@ -13,7 +13,7 @@ export interface ICreateObjectModel<A, B, C, D, E = {}> {
 
 export interface ICreateObject {
     apartment: ICreateObjectAparts
-    land?: ICreateObjectLand
-    house?: ICreateObjectHouse
-    townhouse?: ICreateObjectTownhouse
+    land: ICreateObjectLand
+    house: ICreateObjectHouse
+    townhouse: ICreateObjectTownhouse
 }

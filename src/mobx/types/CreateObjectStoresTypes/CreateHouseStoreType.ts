@@ -1,5 +1,6 @@
 import { ICustomFile } from "../../../components/processes/create-new-object/components/GeneralInfoObjectTab/GeneralInfoPhotosTab";
 import { IOption } from "../../../utils/interfaces/general";
+import { FoundersTypes } from "../../../utils/interfaces/objects";
 import { ICreateObjectModel } from "./CreateObjectStoreType";
 
 export interface ICreateObjectHouse
@@ -7,7 +8,8 @@ export interface ICreateObjectHouse
     ICreateHouseAboutTab,
     ICreateHouseGeneralInfo,
     ICreateHouseInfrastructure,
-    ICreateHouseInfoTab
+    ICreateHouseInfoTab,
+    ICreateHouseLegalPurity
   > {}
 
 export interface ICreateHouseAboutTab {
@@ -30,12 +32,12 @@ export interface ICreateHouseGeneralInfo {
   bathroom: string;
   kitchen: string;
   garage: {
-    has: boolean;
+    has: string;
     capacity: string;
     square: string;
   };
   pool: {
-    has: boolean;
+    has: string;
     square: string;
   };
   floors: {
@@ -68,4 +70,30 @@ export interface ICreateHouseInfoTab {
   plumbing: string;
   renovation: string;
   furnitureList: string[];
+}
+
+export interface ICreateHouseLegalPurity {
+  realEstateRegister: {
+    address: string,
+    cadastralNumber: string,
+    cadastralCost: string,
+    generalSquare: string,
+    floors: string,
+  },
+  currentFounder: {
+    founderType: FoundersTypes,
+    firstFounderName: string,
+    secondFouderName?: string,
+    cadastralNumber: string,
+    ownershipFrom: Date,
+    ownershipTo: Date, 
+  },
+  previousFounder: {
+    founderType: FoundersTypes,
+    firstFounderName: string,
+    secondFouderName?: string,
+    cadastralNumber: string,
+    ownershipFrom: Date,
+    ownershipTo: Date, 
+  }
 }
