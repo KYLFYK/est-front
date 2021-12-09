@@ -12,9 +12,9 @@ export interface IPropsGeneral {
  * Interface for option value. 
  * Use for simple components as BaseDropDown, some listing and others
  */
- export interface IOption<T = string> {
-    value: string | number,
+ export interface IOption<T = string, G = string | number> {
     label: T,
+    value: G,
 }
 
 export interface IArticleGeneral {

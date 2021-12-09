@@ -1,4 +1,5 @@
 import { action, makeObservable, observable } from "mobx";
+import { FoundersTypes } from "../../../utils/interfaces/objects";
 import { ICreateObjectLand } from "../../types/CreateObjectStoresTypes/CreateLandStoreType";
 
 class CreateLandStore implements ICreateObjectLand {
@@ -29,7 +30,28 @@ class CreateLandStore implements ICreateObjectLand {
     buildings: "",
   };
 
-  legalPurity: ICreateObjectLand["legalPurity"] = {};
+  legalPurity: ICreateObjectLand["legalPurity"] = {
+    RealEstateRegister: {
+      address: '',
+      cadastralNumber: "",
+      cadastralCost: "",
+      generalSquare: "",
+    },
+    currentFounder: {
+      founderType: FoundersTypes.SINGLE,
+      founderNames: [],
+      cadastralNumber: "",
+      ownershipFrom: new Date(),
+      ownershipTo: new Date(), 
+    },
+    previousFounder: {
+      founderType: FoundersTypes.SINGLE,
+      founderNames: [],
+      cadastralNumber: "",
+      ownershipFrom: new Date(),
+      ownershipTo: new Date(), 
+    }
+  };
 
   constructor() {
     makeObservable(this, {

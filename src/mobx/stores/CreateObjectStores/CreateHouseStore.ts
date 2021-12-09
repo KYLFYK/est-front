@@ -1,4 +1,5 @@
 import { action, makeObservable, observable } from "mobx";
+import { FoundersTypes } from "../../../utils/interfaces/objects";
 import { ICreateObjectAparts } from "../../types/CreateObjectStoresTypes/CreateApartmentStoreType";
 import { ICreateObjectHouse } from "../../types/CreateObjectStoresTypes/CreateHouseStoreType";
 
@@ -59,7 +60,29 @@ class CreateHouseStore implements ICreateObjectHouse {
     engineeringComment: "",
     vent: "",
   };
-  legalPurity: ICreateObjectHouse["legalPurity"] = {};
+  legalPurity: ICreateObjectHouse["legalPurity"] = {
+    RealEstateRegister: {
+      address: '',
+      cadastralNumber: "",
+      cadastralCost: "",
+      generalSquare: "",
+      floors: "",
+    },
+    currentFounder: {
+      founderType: FoundersTypes.SINGLE,
+      founderNames: [],
+      cadastralNumber: "",
+      ownershipFrom: new Date(),
+      ownershipTo: new Date(), 
+    },
+    previousFounder: {
+      founderType: FoundersTypes.SINGLE,
+      founderNames: [],
+      cadastralNumber: "",
+      ownershipFrom: new Date(),
+      ownershipTo: new Date(), 
+    }
+  };
 
   
   constructor() {

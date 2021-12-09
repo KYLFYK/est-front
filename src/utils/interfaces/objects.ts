@@ -14,6 +14,11 @@ export enum NewObjectActionTypes {
     RENT
 }
 
+export enum FoundersTypes {
+    SINGLE = 'single',
+    PAIR = 'pair'
+}
+
 export enum ObjectTypes {
     APARTMENTS,
     HOUSE,

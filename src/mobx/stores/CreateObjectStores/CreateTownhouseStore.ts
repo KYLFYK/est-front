@@ -1,4 +1,5 @@
 import { action, makeObservable, observable } from "mobx";
+import { FoundersTypes } from "../../../utils/interfaces/objects";
 import { ICreateObjectTownhouse } from "../../types/CreateObjectStoresTypes/CreateTownhouseStoreType";
 
 class CreateTownhouseStore implements ICreateObjectTownhouse {
@@ -60,7 +61,29 @@ class CreateTownhouseStore implements ICreateObjectTownhouse {
     furnitureList: [],
   };
 
-  legalPurity: ICreateObjectTownhouse["legalPurity"] = {};
+  legalPurity: ICreateObjectTownhouse["legalPurity"] = {
+    RealEstateRegister: {
+      address: "",
+      cadastralNumber: "",
+      cadastralCost: "",
+      generalSquare: "",
+      floors: "",
+    },
+    currentFounder: {
+      founderType: FoundersTypes.SINGLE,
+      founderNames: [],
+      cadastralNumber: "",
+      ownershipFrom: new Date(),
+      ownershipTo: new Date(),
+    },
+    previousFounder: {
+      founderType: FoundersTypes.SINGLE,
+      founderNames: [],
+      cadastralNumber: "",
+      ownershipFrom: new Date(),
+      ownershipTo: new Date(),
+    },
+  };
 
   constructor() {
     makeObservable(this, {
