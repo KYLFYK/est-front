@@ -25,7 +25,7 @@ const ActionPeriod :FC<ActionPeriodType> = ({title,agentActivity,left,center,rig
     return (
         <div>
             <Typography weight={"bold"}>
-                {title}{left}{center}{right}
+                {title}
             </Typography>
             <Card className={css.marginCard}>
                 <div style={{display: 'flex',marginBottom:'10px'}}>

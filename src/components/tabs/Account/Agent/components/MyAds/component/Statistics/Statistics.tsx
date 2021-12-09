@@ -8,7 +8,7 @@ import css from "../../../PersonalCabinetTab/components/Statistics/Statistics.mo
 import {Chart} from "../../../../../../../shared/DynamicsPrice/Chart";
 import TableColumn from "../../../Others/Tables/TableColumn/TableColumn";
 
-const table = [
+const objectsSold = [
     {name: 'Январь 2021', price: '0'},
     {name: 'Февраль 2021', price: '15'},
     {name: 'Март 2021', price: '20'},
@@ -19,7 +19,7 @@ const table = [
     {name: 'Августь 2021', price: '31'},
     {name: 'Сентябрь 2021', price: '52'},
 ]
-const tableRevenue = [
+const revenueMonth = [
     {name: 'Январь 2021', price: '0'},
     {name: 'Февраль 2021', price: '15'},
     {name: 'Март 2021', price: '20'},
@@ -31,7 +31,7 @@ const tableRevenue = [
     {name: 'Сентябрь 2021', price: '60'},
 ]
 
-const agentsActivity = {
+const applicationResults = {
     month: 'Сентябрь 2021',
     monthActive: '6',
     monthNotActive: '12',
@@ -42,7 +42,7 @@ const agentsActivity = {
     allYear:'23'
 }
 
-const tableColumn = [
+const numberApplications = [
     {
         name: 'Дома',
         продажа: 15,
@@ -69,7 +69,7 @@ const Statistics = () => {
             <div>
                 <Typography weight={"bold"}>Поданные объекты (количество) во времени</Typography>
                 <Card className={css.cardStyle}>
-                    <Chart heightValue={0} language={'ru'} table={table} divider={10} height={244} width={497}/>
+                    <Chart heightValue={0} language={'ru'} table={objectsSold} divider={10} height={244} width={497}/>
                 </Card>
             </div>
             <ActionPeriod
@@ -77,10 +77,10 @@ const Statistics = () => {
                 center={'Заявок в работе'}
                 right={'Завершенных заявок'}
                 title={'Итоги по объектам за период'}
-                agentActivity={agentsActivity}
+                agentActivity={applicationResults}
             />
-            <RevenueMonth table={tableRevenue} title={'Выручка по месяцам'}/>
-            <TableColumn tableColumn={tableColumn} title={"Количество реализованных объектов по типу объекта/сделки"}/>
+            <RevenueMonth table={revenueMonth} title={'Выручка по месяцам'}/>
+            <TableColumn tableColumn={numberApplications} title={"Количество реализованных объектов по типу объекта/сделки"}/>
         </div>
     );
 };
