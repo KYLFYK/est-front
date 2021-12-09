@@ -161,6 +161,8 @@
 .desc {
     margin-top: 10px;
     overflow-y: scroll;
+    scrollbar-width: 1px;
+    @include MapScrollbar;
 
     color: $BLACK;
     @include for-size(KT1) {

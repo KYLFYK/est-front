@@ -7,6 +7,7 @@ import BaseButton from '../../shared/BaseButton/BaseButtons'
 import FavoriteIcon from '../../../icons/Favorite/Favorite'
 import {GridView} from '../../../icons/FinderPageIcon/GridView'
 import {MapView} from '../../../icons/FinderPageIcon/MapView'
+import { OpenCloseMapButton } from "../Maps/MapControls/OpenCloseMapButton";
 import s from './styles.module.scss'
 import { DROPDOWN_FILTER_OPTIONS, DROPDOWN_PLACEHOLDER, SORT_FILTER_OPTIONS, TOGGLE_BUTTONS_OPTIONS } from "../PlanningFilter/config"
 import { ToggleButtonsWithIcons } from '../../shared/ToggleButtonsWithIcons/ToggleButtonsWithIcons'
@@ -35,35 +36,43 @@ const useStyles = makeStyles(() => ({
 }))
 
 const CardContainer: React.FC<Props> = ({ mapData, view, setView }) => {
+
     const classes = useStyles()
     const toggleButtonOptions = [
         { icon: <GridView fill={view === 'gridView' ? '#96A2B5' : '#CAD1DA'}/>, onclick: () => setView('gridView') }, 
         { icon: <MapView fill={view === 'mapView' ? '#96A2B5' : '#CAD1DA'}/>, onclick: () => setView('mapView') },
     ]
     return (
-        <div>
-            <div>
-                <BaseDropDown 
-                    className={classes.sortDropdown}
-                    onChange={() => {}}
-                    placeholder={DROPDOWN_PLACEHOLDER}
-                    options={SORT_FILTER_OPTIONS}
-                    value={SORT_FILTER_OPTIONS[0].value as string} 
-                />
-                <BaseButton
-                    type={'secondary'}
-                    isActive={false}
-                    children={'Сохранить поиск'}
-                    icon={<FavoriteIcon />}
-                    iconActive={''}
-                />
-                <ToggleButtonsWithIcons
-                    items={toggleButtonOptions}
-                />
+        <div className={view === 'mapView' ? s.openContainer : s.closeContainer}>
+            <div className={s.finderControls}>
+                <div className={s.finderDropdown}>
+                    <BaseDropDown 
+                        className={classes.sortDropdown}
+                        onChange={() => {}}
+                        placeholder={DROPDOWN_PLACEHOLDER}
+                        options={SORT_FILTER_OPTIONS}
+                        value={SORT_FILTER_OPTIONS[0].value as string} 
+                    />
+                </div>
+                <div className={s.finderButtons}>
+                    <BaseButton
+                        type={'secondary'}
+                        isActive={false}
+                        children={'Сохранить поиск'}
+                        icon={<FavoriteIcon />}
+                        iconActive={''}
+                    />
+                    <div className={s.toggleButtonsWrap}>
+                        <ToggleButtonsWithIcons
+                            items={toggleButtonOptions}
+                        />
+                    </div>
+                </div>
             </div>
             <div className={s.content}>
                 {mapData.length && mapData.map((cp: any, i: number) => <div key={i} style={{padding:'5px'}}><ObjectCard key={i} houseData={cp}/></div>)}
             </div>
+            <OpenCloseMapButton view={view} setView={setView}/>
         </div>
     )
 }

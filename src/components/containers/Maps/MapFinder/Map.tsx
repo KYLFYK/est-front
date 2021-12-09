@@ -8,6 +8,7 @@ import { MappingCluster } from "../../../../lib/mapping/mapCluster";
 import BaseButton from "../../../shared/BaseButton/BaseButtons";
 import { CrossIcon } from "../../../../icons/MapControlsIcons/PlaceIcons/CrossIcon";
 import ObjectCard from "../../Card/index";
+import Typography from "../../../shared/Typography/Typography";
 import s from './styles.module.scss';
 
 interface Props {
@@ -15,9 +16,11 @@ interface Props {
   location: 'finder' | 'start' | 'infrastructure' | 'payback'
   viewport: any
   setViewport?: any
+  view: string
+  setView: any
 }
 
-const Map: React.FC<Props> = ({mapData, location, viewport, setViewport}) => {
+const Map: React.FC<Props> = ({mapData, location, viewport, setViewport, view, setView}) => {
 
   const center = {
     lat: 45.16,
@@ -70,7 +73,7 @@ const Map: React.FC<Props> = ({mapData, location, viewport, setViewport}) => {
   )}, [])
 
   return (
-    <div className={s.wrapper} ref={mapWrap}>
+    <div className={view==='mapView' ? s.openMapWrapper : s.closeMapWrapper} ref={mapWrap}>
         <MapGL
           {...viewport}
           mapboxApiAccessToken={'pk.eyJ1Ijoibmlja29sYXlhcmJ1em92IiwiYSI6ImNrdmdtYWQxYjd0enQybnM3bGR5b2Fnd2YifQ.IEtk0ClJ58f6dgZYa8hKpA'}
@@ -140,14 +143,15 @@ const Map: React.FC<Props> = ({mapData, location, viewport, setViewport}) => {
         <div className={s.dynamicBar}>
                         <div className={open && s.localbarActive || s.localbar}>
                           <div className={s.checkboxTitle}> 
-                            <div> {choosedPlaces.length} объектов </div>
+                            <Typography color={'tertiary'} weight={'light'}> {choosedPlaces.length} объектов </Typography>
                             <BaseButton className={s.button} onClick={() => { setOpen(!open) }}>
                                 <CrossIcon />
                             </BaseButton>
                           </div>
-                          {choosedPlaces.length && choosedPlaces.map((cp: any, i: number) => <div key={i} style={{padding:'5px'}}><ObjectCard key={i} houseData={cp.properties.prop}/></div>)}
-                        </div>
-                        
+                          <div className={s.list}>
+                            {choosedPlaces.length && choosedPlaces.map((cp: any, i: number) => <div key={i} style={{padding:'5px'}}><ObjectCard key={i} houseData={cp.properties.prop}/></div>)}
+                          </div>
+                        </div>     
         </div>
         <MapControls location={location} viewport={viewport} setViewport={setViewport} center={center} onsetFullscreen={onsetFullscreen}/>
     </div>

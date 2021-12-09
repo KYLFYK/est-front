@@ -11,7 +11,7 @@ export const ScrollUp: FC<Props> = ({refs}) => {
     const [visible, setVisible] = useState(false);
 
     const toggleVisible = () => {
-        window.pageYOffset > (refs && refs[1] ? refs[1].offsetTop - window.innerHeight + Math.floor(refs[1].clientHeight/2) + 60 : window.innerHeight) 
+        window.pageYOffset > (refs && refs[1] ? refs[1].offsetTop - window.innerHeight + Math.floor(refs[1].clientHeight/2) + 30 : window.innerHeight) 
                             ? setVisible(true) 
                             : setVisible(false);
     }

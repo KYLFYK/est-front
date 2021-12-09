@@ -3,6 +3,7 @@ import s from "./Place.module.scss";
 import { BackIcon } from '../../../../../icons/MapControlsIcons/PlaceIcons/BackIcon';
 import { ImagePlace } from './Image/Image';
 import Slider from "react-slick";
+import Typography from '../../../../shared/Typography/Typography';
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
@@ -41,9 +42,9 @@ export const Place = ({ places, placeClicked, setPlaceClicked, active, hidden, p
                         <button onClick={() => setPlaceClicked('')} className={s.button}>
                             <BackIcon />
                         </button>
-                        <span className={s.backTitle}>Назад к категориям</span>
+                        <Typography className={s.backTitle}>Назад к категориям</Typography>
                     </div>
-                    <div className={s.sliderCount}>{picSlider + 1}/{pics && pics.length}</div>
+                    <Typography className={s.sliderCount}>{picSlider + 1}/{pics && pics.length}</Typography>
                 </div>
 
                 {filtredPlace.length === 1 && <div>
@@ -64,13 +65,13 @@ export const Place = ({ places, placeClicked, setPlaceClicked, active, hidden, p
                     </div>
                 </div>}
 
-                <div className={s.title}>
+                <Typography className={s.title}>
                     {filtredPlace[0] && filtredPlace[0].name}
-                </div>
+                </Typography>
 
-                <div className={s.desc}>
+                <Typography className={s.desc}>
                     {filtredPlace[0] && filtredPlace[0].description}
-                </div>
+                </Typography>
                 {/*<Info place={filtredPlace}/>*/}
             </div>
         </div>

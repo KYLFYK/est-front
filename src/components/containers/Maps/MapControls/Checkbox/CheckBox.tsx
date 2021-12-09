@@ -3,6 +3,7 @@ import Image from 'next/image';
 import { OpenStreetIconsFactory } from '../../../../../lib/mapIcons/map';
 import { IOption } from './models/general';
 import { ObjectTypes } from './models/objects';
+import Typography from '../../../../shared/Typography/Typography';
 import s from './check.module.scss';
 
 interface Props {
@@ -28,8 +29,11 @@ export const CheckBox: React.FC<Props> = ({ uniqueTypesList, pressed, handlePres
     ))
 
     return (
-        <div className={s.list}>
-            {renderFilterLists()}
+        <div className={s.container}>
+            <Typography className={s.title} color={'accent'} weight={'bold'}>Категории</Typography>  
+            <div className={s.list}>
+                {renderFilterLists()}
+            </div>
         </div>
     )
 }
