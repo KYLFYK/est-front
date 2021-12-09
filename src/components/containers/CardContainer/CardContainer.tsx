@@ -7,7 +7,7 @@ import BaseButton from '../../shared/BaseButton/BaseButtons'
 import FavoriteIcon from '../../../icons/Favorite/Favorite'
 import {GridView} from '../../../icons/FinderPageIcon/GridView'
 import {MapView} from '../../../icons/FinderPageIcon/MapView'
-import { OpenCloseMapButton } from "../Maps/MapControls/OpenCloseMapButton";
+import { OpenCloseMapButton } from "./OpenCloseMapButton";
 import s from './styles.module.scss'
 import { DROPDOWN_FILTER_OPTIONS, DROPDOWN_PLACEHOLDER, SORT_FILTER_OPTIONS, TOGGLE_BUTTONS_OPTIONS } from "../PlanningFilter/config"
 import { ToggleButtonsWithIcons } from '../../shared/ToggleButtonsWithIcons/ToggleButtonsWithIcons'

@@ -16,8 +16,8 @@ interface Props {
   location: 'finder' | 'start' | 'infrastructure' | 'payback'
   viewport: any
   setViewport?: any
-  view: string
-  setView: any
+  view?: string
+  setView?: any
 }
 
 const Map: React.FC<Props> = ({mapData, location, viewport, setViewport, view, setView}) => {
