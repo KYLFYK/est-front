@@ -63,7 +63,7 @@ const Purse :FC<PurseType> = ({onClick,tariffPlan,payerType,resumePayment}) => {
             </DisappearingTitle>
 
             <hr color={'#F2F2F2'}/>
-            <DisappearingTitle title={'Выписки'} height={mocOperation.length}>
+            <DisappearingTitle title={'Выписки'} height={mocExtracts.length+1}>
                 <PurseTableExtracts extracts={mocExtracts} />
             </DisappearingTitle>
         </div>

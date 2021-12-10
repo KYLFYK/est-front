@@ -7,6 +7,7 @@ import PersonalCabinetTab from "./components/PersonalCabinetTab/PersonalCabinetT
 import MyAds from "./components/MyAds/MyAds";
 import AgentsNotifications from "./components/Notifications/Notifications";
 import PlacementRates from "./components/PlacementRates/PlacementRates";
+import ProfSearch from "./components/ProfSearch/ProfSearch";
 
 interface Props {
 }
@@ -26,7 +27,6 @@ const AgentRoleTabs: React.FC<Props> = () => {
         setNotification(newNotification)
     }
     const onRead = (number:number) => {
-        // const newNotification = notification.map(t=>t.id===number? {...t,read:true} : t  )
         const newNotification = notification.map((t,index)=>index===number? {...t,read:true} : t  )
         setNotification(newNotification)
     }
@@ -42,7 +42,7 @@ const AgentRoleTabs: React.FC<Props> = () => {
                 { title: "Заявки на просмотр", Component: <ApplicationsViewTab /> },
                 { title: "Мои объявления", Component: <MyAds /> },
                 { title: "Тарифы размещения", Component: <PlacementRates /> },
-                { title: "Профпоиск", Component: <div /> },
+                { title: "Профпоиск", Component: <ProfSearch /> },
                 { title: "Сообщения", Component: <div /> },
                 { title: "Уведомления", Component: <AgentsNotifications
                         onRead={onRead}
