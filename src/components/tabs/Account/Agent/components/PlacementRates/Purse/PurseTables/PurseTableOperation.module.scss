@@ -1,0 +1,36 @@
+.input{
+  width: 300px;
+}
+.df{
+  display: flex;
+  justify-content: space-between;
+}
+.heightTable{
+  height: 43px;
+  margin:13px 0;
+  display: flex;
+  align-items: flex-start;
+}
+.heightTableColumn{
+  height: 43px;
+  margin:13px 0;
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+}
+.marginImage{
+  padding-left:15px;
+}
+.heightTableNude{
+  display: flex;
+  align-items: flex-start;
+  height: 43px;
+  margin:13px 0;
+  color:#C5A28E !important;
+}
+.IconPosition{
+  margin-bottom: 20px;
+  margin-left: 35px;
+  color:#3D4550;
+  cursor: pointer;
+}

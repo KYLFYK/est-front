@@ -3,6 +3,9 @@ import Typography from "../../../../../../shared/Typography/Typography";
 import BaseButton from "../../../../../../shared/BaseButton/BaseButtons";
 import css from './Purse.module.scss'
 import DisappearingTitle from "../../../../../../shared/DisappearingTitle/DisappearingTitle";
+import PurseTableOperation from "./PurseTables/PurseTableOperation";
+import PurseTableExtracts from "./PurseTables/PurseTableExtracts";
+
 type PurseType={
     onClick:()=>void
     tariffPlan:string
@@ -11,16 +14,23 @@ type PurseType={
 }
 
 const mocOperation=[
-    {date:'29.03.2021 0:00',sum:'500,14 P',advertisement:'', typeDeal:'', comment:"assd"},
-     {date:'29.02.2021 0:00',sum:'500,14 P',advertisement:'', typeDeal:'', comment:"assd"},
-     {date:'29.02.2021 0:00',sum:'500,14 P',advertisement:'', typeDeal:'', comment:"assd"},
-     {date:'29.02.2021 0:00',sum:'500,14 P',advertisement:'', typeDeal:'', comment:"assd"},
-     {date:'29.02.2021 0:00',sum:'500,14 P',advertisement:'', typeDeal:'', comment:"assd"},
-     {date:'29.02.2021 0:00',sum:'500,14 P',advertisement:'', typeDeal:'', comment:"assd"},
-     {date:'29.02.2021 0:00',sum:'500,14 P',advertisement:'', typeDeal:'', comment:"assd"},
-     {date:'29.02.2021 0:00',sum:'500,14 P',advertisement:'', typeDeal:'', comment:"assd"},
-     {date:'29.02.2021 0:00',sum:'500,14 P',advertisement:'', typeDeal:'', comment:"assd"},
-     {date:'29.02.2021 0:00',sum:'500,14 P',advertisement:'', typeDeal:'', comment:"assd"},
+    {id:'1',date:'21.03.2023',time:' 0:00',sum:'501,14 P',ads:'', typeTransaction:'', comment:"assd"},
+    {id:'2',date:'23.02.2023',time:' 0:00',sum:'500,14 P',ads:'', typeTransaction:'', comment:"assd"},
+    {id:'3',date:'24.03.2023',time:' 0:00',sum:'540,14 P',ads:'', typeTransaction:'', comment:"assd"},
+    {id:'4',date:'25.03.2023',time:' 0:00',sum:'503,14 P',ads:'', typeTransaction:'', comment:"assd"},
+    {id:'5',date:'27.01.2023',time:' 0:00',sum:'500,14 P',ads:'', typeTransaction:'', comment:"assd"},
+    {id:'6',date:'28.03.2023',time:' 0:00',sum:'500,14 P',ads:'', typeTransaction:'', comment:"assd"},
+    {id:'7',date:'21.03.2023',time:' 0:00',sum:'505,14 P',ads:'', typeTransaction:'', comment:"assd"},
+    {id:'8',date:'29.03.2023',time:' 0:00',sum:'520,14 P',ads:'', typeTransaction:'', comment:"assd"},
+    {id:'9',date:'22.03.2023',time:' 0:00',sum:'500,14 P',ads:'', typeTransaction:'', comment:"assd"},
+    {id:'10',date:'23.03.2023',time:' 0:00',sum:'510,14 P',ads:'', typeTransaction:'', comment:"assd"},
+    {id:'11',date:'25.03.2023',time:' 0:00',sum:'500,14 P',ads:'', typeTransaction:'', comment:"assd"},
+]
+const mocExtracts=[
+    {number:'1',date:'21.03.2023',sum:'501,14 P'},
+    {number:'2',date:'23.02.2023',sum:'501,14 P'},
+    {number:'3',date:'24.03.2023',sum:'501,14 P'},
+    {number:'4',date:'25.03.2023',sum:'501,14 P'},
 ]
 
 const Purse :FC<PurseType> = ({onClick,tariffPlan,payerType,resumePayment}) => {
@@ -46,43 +56,17 @@ const Purse :FC<PurseType> = ({onClick,tariffPlan,payerType,resumePayment}) => {
                     <Typography className={css.margin_5px} color={'nude'}>{resumePayment? 'Включено' : 'Отключено' }</Typography>
                 </div>
             </div>
+
             <hr color={'#F2F2F2'}/>
             <DisappearingTitle title={'Операции'} height={mocOperation.length}>
-                <div className={css.table5}>
-                    <Typography className={css.text14px} >Дата</Typography>
-                    <Typography className={css.text14px}>Сумма</Typography>
-                    <Typography className={css.text14px}>Объявление</Typography>
-                    <Typography className={css.text14px}>Тип сделки</Typography>
-                    <Typography className={css.text14px}>Комментарий</Typography>
-                </div>
-                {
-                    mocOperation.map((operation,index)=>(
-                        <div key={index} className={css.table5}>
-                            <Typography className={css.text14px} >{operation.date}</Typography>
-                            <Typography className={css.text14px}>{operation.sum}</Typography>
-                            <Typography className={css.text14px}>{operation.advertisement}</Typography>
-                            <Typography className={css.text14px}>{operation.typeDeal}</Typography>
-                            <Typography className={css.text14px}>{operation.comment}</Typography>
-                        </div>
-                    ))
-                }
+                <PurseTableOperation operations={mocOperation} />
             </DisappearingTitle>
 
             <hr color={'#F2F2F2'}/>
-            <Typography weight={"bold"} className={css.marginTitle}>Выписки</Typography>
-            <div className={css.table3}>
-                <Typography className={css.text14px} >Номер</Typography>
-                <Typography className={css.text14px}>Дата</Typography>
-                <Typography className={css.text14px}>Сумма</Typography>
-            </div>
-            <hr color={'#F2F2F2'}/>
-            <div className={css.table3}>
-                <Typography className={css.text14px} >fddaf-20-20210-08</Typography>
-                <Typography className={css.text14px}>29.03.2021 0:00</Typography>
-                <Typography className={css.text14px}>23 000,00 P</Typography>
-            </div>
+            <DisappearingTitle title={'Выписки'} height={mocOperation.length}>
+                <PurseTableExtracts extracts={mocExtracts} />
+            </DisappearingTitle>
         </div>
-
     );
 };
 

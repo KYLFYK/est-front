@@ -6,19 +6,16 @@ import TableCell from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TablePagination from '@mui/material/TablePagination';
 import TableRow from '@mui/material/TableRow';
-import {getComparator, rows, stableSort} from "./Transformation";
 import TableHead from "@mui/material/TableHead";
 import TableSortLabel from "@mui/material/TableSortLabel";
 import {visuallyHidden} from "@mui/utils";
 import Typography from "@mui/material/Typography";
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
-import copy from './copy.svg'
-import Image from 'next/image'
-import DriveFileRenameOutlineIcon from '@mui/icons-material/DriveFileRenameOutline';
-
 export type Order = 'asc' | 'desc';
-import css from './Agents.module.scss'
+import css from './PurseTableOperation.module.scss'
 import { FC } from 'react';
+import {getComparator, rows, stableSort} from "../../../PersonalCabinetTab/components/Agents/Transformation";
+
 type HeadCell = {
     disablePadding: boolean;
     id: keyof Data;
@@ -27,70 +24,62 @@ type HeadCell = {
 }
 
 type Data ={
-    name: string
-    status: boolean
-    experience: string
-    phone:string
-    email:string
-    rating: string
-    url: string
+    date: string | number
+    sum: string
+    ads: string
+    typeTransaction:string
+    comment:string
 }
 
 const headCells: HeadCell[] = [
     {
-        id: 'name',
+        id: 'date',
         numeric: true,
         disablePadding: true,
-        label: 'Имя',
+        label: 'Дата',
     },
     {
-        id: 'status',
+        id: 'sum',
         numeric: true,
         disablePadding: false,
-        label: 'Статус',
+        label: 'Сумма',
     },
     {
-        id: 'experience',
+        id: 'ads',
         numeric: true,
         disablePadding: false,
-        label: 'Стаж',
+        label: 'Объявление',
     },
     {
-        id: 'phone',
+        id: 'typeTransaction',
         numeric: true,
         disablePadding: false,
-        label: 'Контакты',
+        label: 'Тип сделки',
     },
     {
-        id: 'rating',
+        id: 'comment',
         numeric: true,
         disablePadding: false,
-        label: 'Рейтинг',
-    },
-    {
-        id: 'url',
-        numeric: true,
-        disablePadding: true,
-        label: 'Ссылка-преглашение',
+        label: 'Комментарий',
     },
 ];
 
 type ActualObjectType={
-    agents:Array<{
-        name:string,
-        status:number,
-        experience:string,
-        phone:string,
-        email:string
-        rating:number,
-        url:string,
-        id:number}>
+    operations:Array<{
+        id:string
+        date:string
+        time:string
+        sum:string
+        ads:string
+        typeTransaction:string
+        comment:string
+       }>
 }
 
-export const  ActualObject :FC<ActualObjectType> = ({agents}) => {
+export const  PurseTableOperation :FC<ActualObjectType> = ({operations}) => {
 
     const [order, setOrder] = React.useState<Order>('asc');
-    const [orderBy, setOrderBy] = React.useState<keyof Data>('name');
+    const [orderBy, setOrderBy] = React.useState<keyof Data>('date');
     const [selected, setSelected] = React.useState<readonly string[]>([]);
     const [page, setPage] = React.useState(0);
     const [rowsPerPage, setRowsPerPage] = React.useState(12);
@@ -103,7 +92,7 @@ export const  ActualObject :FC<ActualObjectType> = ({agents}) => {
         event: React.MouseEvent<unknown>,
         property: keyof Data,
     ) => {
-        if (property !== "phone") {
+        if (property !== "typeTransaction") {
             const isAsc = orderBy === property && order === 'asc';
             setOrder(isAsc ? 'desc' : 'asc');
             setOrderBy(property);
@@ -151,7 +140,7 @@ export const  ActualObject :FC<ActualObjectType> = ({agents}) => {
                                 orderBy={orderBy}
                                 onSelectAllClick={handleSelectAllClick}
                                 onRequestSort={handleRequestSort}
-                                rowCount={agents.length}
+                                rowCount={operations.length}
                                 headCells={headCells}
                             />
 
@@ -159,10 +148,10 @@ export const  ActualObject :FC<ActualObjectType> = ({agents}) => {
                             <TableBody>
                                 {/* if you don't need to support IE11, you can replace the `stableSort` call with:
               rows.slice().sort(getComparator(order, orderBy)) */}
-                                {stableSort(agents, getComparator(order, orderBy))
+                                {stableSort(operations, getComparator(order, orderBy))
                                     .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                                    .map((agent, index) => {
-                                        const isItemSelected = isSelected(agent.name);
+                                    .map((operat, index) => {
+                                        const isItemSelected = isSelected(operat.date);
                                         const labelId = `enhanced-table-checkbox-${index}`;
                                         return (
                                             <TableRow
@@ -170,67 +159,46 @@ export const  ActualObject :FC<ActualObjectType> = ({agents}) => {
                                                 role="checkbox"
                                                 aria-checked={isItemSelected}
                                                 tabIndex={-1}
-                                                key={agent.id}
+                                                key={index}
                                                 selected={isItemSelected}
                                             >
-                                                <div style={{width: '10px'}}></div>
                                                 <TableCell
                                                     component="th"
                                                     id={labelId}
                                                     scope="row"
                                                     padding="none"
-                                                    title={agent.name}
                                                     width={'350px'}
                                                 >
                                                     <Typography className={css.heightTable} >
-                                                        {agent.name}
+                                                        {operat.date}
                                                     </Typography>
                                                 </TableCell>
                                                 <TableCell
                                                     width={'100px'}
-                                                    title={agent.status.toString()}
                                                     align="left">
-                                                    <Typography className={css.heightTable} color={agent.status === 0 ? "red" :'green'} >
-                                                        {agent.status === 0 ? "Не в сети" : "Активен"}
+                                                    <Typography className={css.heightTable}  >
+                                                        {operat.sum}
                                                     </Typography>
                                                 </TableCell>
                                                 <TableCell
                                                     width={'230px'}
-                                                    title={agent.experience.toString()}
                                                     align="left">
                                                     <Typography className={css.heightTable}>
-                                                        {agent.experience}
+                                                        {operat.ads}
                                                     </Typography>
                                                 </TableCell>
                                                 <TableCell
                                                     width={'230px'}
-                                                    title={agent.email.toString()}
                                                     align="left">
-                                                    <div className={css.heightTableColumn} >
-                                                        <Typography >{agent.phone}</Typography>
-                                                        <Typography >{agent.email}</Typography>
-                                                    </div>
-
+                                                    <Typography >{operat.typeTransaction}</Typography>
                                                 </TableCell>
                                                 <TableCell
                                                     width={'100px'}
-                                                    title={agent.rating.toString()}
                                                     align="left"
                                                 >
                                                     <Typography className={css.heightTable}>
-                                                        {agent.rating}
+                                                        {operat.comment}
                                                     </Typography>
-                                                </TableCell>
-                                                <TableCell >
-                                                    <div style={{display:"flex",alignItems:'center'}} className={css.heightTableNude}>
-                                                        <Typography color={'nude'}  className={css.heightTable}>
-                                                            {agent.url}
-                                                            <div className={css.marginImage}>
-                                                                <Image src={copy} width={'19'} height={'22'} />
-                                                            </div>
-                                                        </Typography>
-                                                        <DriveFileRenameOutlineIcon className={css.IconPosition}/>
-                                                    </div>
                                                 </TableCell>
                                             </TableRow>
                                         );
@@ -283,7 +251,6 @@ const EnhancedTableHead :React.FC<EnhancedTableProps> = ({numSelected,onRequestS
     return (
         <TableHead>
             <TableRow>
-                <div style={{width: '10px'}}></div>
                 {headCells.map((headCell) => (
                     <TableCell
                         key={headCell.id}
@@ -298,12 +265,12 @@ const EnhancedTableHead :React.FC<EnhancedTableProps> = ({numSelected,onRequestS
                             direction={orderBy === headCell.id ? order : 'asc'}
                             onClick={createSortHandler(headCell.id)}
                             IconComponent={() => {
-                               return <KeyboardArrowDownIcon fontSize={'small'}
-                                   style={{
-                                       color: orderBy===headCell.id ? '#C5A28E': '#96A2B5',
-                                       transform: order==='asc' && orderBy===headCell.id ?'rotate(180deg)':''
-                                   }}
-                               />
+                                return <KeyboardArrowDownIcon fontSize={'small'}
+                                                              style={{
+                                                                  color: orderBy===headCell.id ? '#C5A28E': '#96A2B5',
+                                                                  transform: order==='asc' && orderBy===headCell.id ?'rotate(180deg)':''
+                                                              }}
+                                />
                             }}
                         >
                             <Typography>
@@ -323,3 +290,5 @@ const EnhancedTableHead :React.FC<EnhancedTableProps> = ({numSelected,onRequestS
     );
 }
 
+
+export default PurseTableOperation;
