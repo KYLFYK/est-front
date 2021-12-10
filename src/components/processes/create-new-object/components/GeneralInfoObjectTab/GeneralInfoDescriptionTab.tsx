@@ -30,7 +30,7 @@ const GeneralInfoDescriptionTab: React.FC<Props> = observer(({ onNextTab, onPrev
     const handleNextTab = () => {
         if (isValidDescription) {
             createObjectStore.saveGeneralTab(values, objectType)
-            onNextTab()
+            onNextTab && onNextTab()
         }
         else {
             setIsValid(isValidDescription)
