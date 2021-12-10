@@ -29,7 +29,6 @@ export const ToggleButtonsWithIcons: React.FC<Props> = ({ items, activeValue, cl
                     type={'toggleButtonWithIcons'}
                     onClick={button.onclick}
                     isActive={false}
-                    children={''}
                     icon={button.icon}
                     iconActive={''}
                 />
