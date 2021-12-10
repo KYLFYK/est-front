@@ -58,10 +58,11 @@ const CardContainer: React.FC<Props> = ({ mapData, view, setView }) => {
                     <BaseButton
                         type={'secondary'}
                         isActive={false}
-                        children={'Сохранить поиск'}
                         icon={<FavoriteIcon />}
                         iconActive={''}
-                    />
+                    >
+                        Сохранить поиск
+                    </BaseButton>
                     <div className={s.toggleButtonsWrap}>
                         <ToggleButtonsWithIcons
                             items={toggleButtonOptions}
