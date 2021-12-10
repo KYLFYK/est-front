@@ -56,7 +56,7 @@ const GeneralInfoPhotosTab: React.FC<Props> = observer(({ onNextTab, onPrevTab, 
             return
         }
         createObjectStore.saveGeneralTab(values, objectType)
-        onNextTab()
+        onNextTab && onNextTab()
     }
 
     return (
