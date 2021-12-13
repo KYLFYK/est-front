@@ -1,0 +1,50 @@
+.column{
+  display: grid;
+  grid-template-columns: 300px 1fr;
+  gap:20px
+}
+.borderInfo{
+  border-radius: 6px;
+  border: 1px solid #F2F2F2;
+  padding: 10px 12px;
+  margin-bottom:10px;
+}
+.activeBorder{
+  background: #F2F2F2;
+}
+.textMargin{
+  margin: 5px 0 15px 0;
+}
+.borderChat{
+  border: 1px solid #F2F2F2;
+  border-radius: 6px 6px 0 0;
+  padding: 20px ;
+}
+.typographyCenter{
+  text-align: center;
+  margin:22px 0;
+}
+.borderChatMessage{
+  border: 1px solid #F2F2F2;
+  border-radius: 6px;
+  padding: 12px ;
+  margin-bottom: 10px;
+}
+.marginTopTime{
+  margin-top: 20px;
+}
+.statusMargin{
+  margin-top: 3px;
+  margin-bottom: 16px;
+}
+.textLength{
+  width: 270px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow:ellipsis;
+}
+.baseButton{
+  border-radius: 0 0 6px 6px;
+  border: 1px solid #F2F2F2;
+  border-top: 0;
+}

@@ -8,6 +8,7 @@ import MyAds from "./components/MyAds/MyAds";
 import AgentsNotifications from "./components/Notifications/Notifications";
 import PlacementRates from "./components/PlacementRates/PlacementRates";
 import ProfSearch from "./components/ProfSearch/ProfSearch";
+import Messages from "./components/Messages/Messages";
 
 interface Props {
 }
@@ -43,7 +44,7 @@ const AgentRoleTabs: React.FC<Props> = () => {
                 { title: "Мои объявления", Component: <MyAds /> },
                 { title: "Тарифы размещения", Component: <PlacementRates /> },
                 { title: "Профпоиск", Component: <ProfSearch /> },
-                { title: "Сообщения", Component: <div /> },
+                { title: "Сообщения", Component: <Messages /> },
                 { title: "Уведомления", Component: <AgentsNotifications
                         onRead={onRead}
                         onReadAll={onReadAll}
