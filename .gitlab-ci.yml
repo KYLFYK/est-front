@@ -4,11 +4,11 @@ stages:
 
 build app:
   stage: build-app
-  image: node:8
+  image: node:14.17.4
   script:
-    - yarn
-    - yarn lint
-    - yarn build
+    - yarn  install
+    - npm run storybook
+    #- yarn build
   cache:
     paths:
       - node_modules
