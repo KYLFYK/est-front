@@ -7,7 +7,7 @@ build app:
   image: node:14.17.4
   script:
     - yarn  install
-    - npm build-storybook
+    - npm build storybook
     #- yarn build
   cache:
     paths:
