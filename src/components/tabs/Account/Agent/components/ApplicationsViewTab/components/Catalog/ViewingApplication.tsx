@@ -97,7 +97,7 @@ type ViewingApplicationType = {
         theme:string
         message:Array<{message:string,date:string,time:string}>
     }>,
-    newAr:(a:{ id: string; type: string; statusOrDate: string; statusLetter: string;
+    onAddSchedule:(a:{ id: string; type: string; statusOrDate: string; statusLetter: string;
         timeActive: string; dateActive: string; phone: string; email: string; name: string;
         agentName: string; theme: string; message:Array<string> })=>void
     onAddMessage:(e:{ message: string, date: string, time: string },index:number)=>void
@@ -106,7 +106,7 @@ type ViewingApplicationType = {
 
 
 
-const ViewingApplication: FC<ViewingApplicationType> = ({onClick, applicationsView,newAr,onAddMessage}) => {
+const ViewingApplication: FC<ViewingApplicationType> = ({onClick, applicationsView,onAddSchedule,onAddMessage}) => {
 
     const date = new Date
     const functionZeroDate = (date:string) =>{
@@ -124,7 +124,7 @@ const ViewingApplication: FC<ViewingApplicationType> = ({onClick, applicationsVi
     const [valueTheme, setValueTheme] = useState<string>('')
     const [valueMessage, setValueMessage] = useState<string>('')
 
-    const callUser = () =>{
+    const addSchedule = () =>{
         const action ={
             id:'3',
             type:'bell',
@@ -139,7 +139,7 @@ const ViewingApplication: FC<ViewingApplicationType> = ({onClick, applicationsVi
             message:[],
             statusLetter:'',
         }
-        newAr(action)
+        onAddSchedule(action)
         setValueTime('')
     }
 
@@ -162,7 +162,7 @@ const ViewingApplication: FC<ViewingApplicationType> = ({onClick, applicationsVi
             message:[valueMessage],
             statusLetter:'',
         }
-        newAr(action)
+        onAddSchedule(action)
         setValueTheme('')
         setValueMessage('')
     }
@@ -232,7 +232,7 @@ const ViewingApplication: FC<ViewingApplicationType> = ({onClick, applicationsVi
                         </div>
                         <BaseButton
                             className={classes.buttonMargin}
-                            onClick={callUser}
+                            onClick={addSchedule}
                         >
                             Запланировать
                         </BaseButton>

@@ -85,13 +85,12 @@ const applicationsView :Array<{id:string
     }
 ]
 // mock only test
-const newArre = (a:any)=>{
+const addSchedule = (a:any)=>{
     applicationsView.unshift(a)
 }
 const addMessage = (e:{ message: string, date: string, time: string },index:number) => {
     applicationsView[index].message.push(e)
 }
-
 
 const ApplicationsViewTab: React.FC<Props> = () => {
     const [edit, setEdit] = useState<boolean>(false)
@@ -104,7 +103,7 @@ const ApplicationsViewTab: React.FC<Props> = () => {
                         {title: "Статистика", Component: <ApplicationsViewStatistics />}
                     ]}/>
                     : <ViewingApplication
-                        newAr={newArre}
+                        onAddSchedule={addSchedule}
                         onAddMessage={addMessage}
                         applicationsView={applicationsView}
                         onClick={()=>setEdit(false)}

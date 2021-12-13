@@ -6,7 +6,7 @@ const Messages = () => {
     return (
         <HorizontalTabs tabs={[
             {title: "Мои сообщения", Component: <MyMessages />},
-            {title: "Архив", Component: <div ><h2>Архив</h2></div>},
+            {title: "Архив", Component: <MyMessages archive={true}/>},
         ]}/>
     );
 };
