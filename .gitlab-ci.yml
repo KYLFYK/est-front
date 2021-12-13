@@ -16,10 +16,11 @@ build:
   script:
      - yarn install
      - npm run build
-     - npm run export
+     #- npm run export
      #- yarn run build
      - pwd
      - ls -la
+     - ls -la out
     #- ls -la dist
      #- cp -rf dist/* public
      - ls -la public
