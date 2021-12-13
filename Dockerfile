@@ -1,12 +1,25 @@
-FROM node:15.0
+FROM node:alpine AS runner
 WORKDIR /app
-COPY package*.json ./
-# install dependencies
-RUN yarn install
-# copy source files
-COPY . .
-# start app
-RUN npm run storybook
+
+ENV NODE_ENV production
+
+RUN addgroup -g 1001 -S nodejs
+RUN adduser -S nextjs -u 1001
+
+# You only need to copy next.config.js if you are NOT using the default configuration
+COPY --from=builder /next.config.js ./
+COPY --from=builder /public ./public
+COPY --from=builder /package.json ./package.json
+
+# Automatically leverage output traces to reduce image size 
+# https://nextjs.org/docs/advanced-features/output-file-tracing
+#COPY --from=builder --chown=nextjs:nodejs /app/.next/standalone ./
+#COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
+
+USER nextjs
+
 EXPOSE 6006
-ENTRYPOINT ["yarn"]
-CMD ["serve"]
+
+ENV PORT 6006
+
+CMD ["node", "server.js"]
