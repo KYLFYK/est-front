@@ -1,4 +1,4 @@
-FROM node:14.7.4
+FROM node:14.7
 WORKDIR /app
 COPY package*.json ./
 # install dependencies
