@@ -16,7 +16,7 @@ build:
   script:
      - yarn install
      - npm run build
-     - npm run start
+     - npm run export
      #- yarn run build
      - pwd
      - ls -la
