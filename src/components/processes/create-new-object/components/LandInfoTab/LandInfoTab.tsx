@@ -33,7 +33,7 @@ const LandInfoTab: React.FC<Props> = observer(({ onNextTab, onPrevTab, objectTyp
         const isValidInputs = (isValidWaterPipe && isValidHeating && isValidSewerage && isValidBuilding)
         if (isValidInputs) {
             createObjectStore.saveLandInfoTab(values)
-            onNextTab &&onNextTab()
+            onNextTab && onNextTab()
         }
         else {
             setIsValid(false)

@@ -40,8 +40,6 @@ import OurOffice from "../src/components/containers/OurOffice/OurOffice";
 import AverageMarketPrice from "../src/components/shared/AverageMarketPrice/AverageMarketPrice";
 import PaybackContainer from "../src/components/containers/PaybackContainer/PaybackContainer";
 import VerticalTabs from '../src/components/shared/VerticalTabs/VerticalTabs'
-import MapFinder from "../src/components/containers/Maps/MapFinder/index"
-import { mapData } from '../src/components/containers/Maps/MapFinder/config'
 import {ScrollUp} from '../src/components/shared/ScrollUp/ScrollUp'
 
 export type ourOfficeType ={
@@ -192,7 +190,6 @@ const Home: NextPage = () => {
 
 return (
   <div style={{ display: 'flex', gap: '15px', flexDirection: 'column' }}>
-    <MapFinder center={{lat: 45.16, lng: 36.90}} mapData={mapData} location={'finder'}/>
     <div style={{ display: 'flex', gap: '15px', alignItems: 'center' }}>
       <h3>Buttons:</h3>
       <BaseButton type="secondary" icon={<FavoriteIcon />}>Кнопка с иконкой</BaseButton>

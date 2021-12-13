@@ -1,11 +1,11 @@
 import type { NextPage } from 'next'
 import React, {useState} from 'react'
-import Header from '../src/components/widget/Header/Header'
-import {Breadcrumbs} from '../src/components/shared/Breadcrumbs/Breadcrumbs'
-import { Filter } from '../src/components/containers/Filter/Filter'
-import CardContainer from '../src/components/containers/CardContainer/CardContainer'
-import Map from '../src/components/containers/Maps/MapFinder/index'
-import { mapData } from '../src/components/containers/Maps/MapFinder/config';
+import Header from '../../components/widget/Header/Header'
+import {Breadcrumbs} from '../../components/shared/Breadcrumbs/Breadcrumbs'
+import { Filter } from '../../components/containers/Filter/Filter'
+import CardContainer from '../../components/containers/CardContainer/CardContainer'
+import Map from '../../components/containers/Maps/MapFinder/index'
+import { mapData } from '../../components/containers/Maps/MapFinder/config';
 
 const city = ['Москва', 'Санкт-Петербург', 'Крым', 'Сочи', 'Нижний Новгород']
 const personalAccount = [{title: 'Личный кабинет', href: '/User', message: 0},
