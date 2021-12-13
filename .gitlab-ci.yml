@@ -1,11 +1,11 @@
-image: docker:stable
+image: node:15.0
 
 services:
   - docker:dind
 
 stages:
   - build
-  - deploy
+#  - deploy
 variables:
   DOCKER_HOST: tcp://docker:2375
   DOCKER_DRIVER: overlay2
@@ -15,14 +15,13 @@ variables:
 
 build:
   stage: build
+  image: node:14.17.4
   script:
-    - docker pull $CI_REGISTRY_IMAGE:latest || true
-    - docker build --cache-from $CI_REGISTRY_IMAGE:latest
-      --tag $CI_REGISTRY_IMAGE:$CI_COMMIT_SHA
-      --tag $CI_REGISTRY_IMAGE:$CI_COMMIT_REF_NAME
-      --tag $CI_REGISTRY_IMAGE:latest
-      .
-    - docker push $CI_REGISTRY_IMAGE:$CI_COMMIT_SHA
-    - docker push $CI_REGISTRY_IMAGE:$CI_COMMIT_REF_NAME
-    - docker push $CI_REGISTRY_IMAGE:latest
+    #- yarn  install
+    - npm run build storybook
+    #- yarn build
 
+  artifacts:
+    paths:
+      - .next
+      - out
