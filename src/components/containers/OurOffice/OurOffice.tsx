@@ -1,6 +1,6 @@
 import React, {FC} from 'react';
 import HeadLine from "../../shared/HeadLine/HeadLine";
-import Map from "../MapStart";
+import Map from "../Maps/MapStart";
 import ContactOffice from "./ContactOffice";
 import css from './OurOffice.module.scss'
 
@@ -11,7 +11,7 @@ export type OurOfficeType ={
             lng: number
         },
         location:"finder" | "start" | "infrastructure" | "payback",
-        contactsOffice:Array<{title:string,value:string}>
+        contactsOffice:Array<{title: string, value: string, href?: string}>
         plotRoute:string
     }
 }
@@ -24,7 +24,7 @@ const OurOffice :FC<OurOfficeType> = ({ourOffice}) => {
                 <div className={css.position}>
                     <Map center={ourOffice.positionMap} location={ourOffice.location} />
                     <div className={css.marginContract}>
-                        <ContactOffice contactOffice={ourOffice.contactsOffice} link={ourOffice.plotRoute}/>
+                        <ContactOffice contactOffice={ourOffice.contactsOffice} link={ourOffice.plotRoute} destination={ourOffice.positionMap}/>
                     </div>
                 </div>
             </HeadLine>

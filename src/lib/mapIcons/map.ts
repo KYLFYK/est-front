@@ -1,4 +1,4 @@
-import { ObjectTypes } from '../../components/containers/MapControls/Checkbox/models/objects';
+import { ObjectTypes } from '../../components/containers/Maps/MapControls/Checkbox/models/objects';
 
 // иконки для карты
 import HomeMap from '../../icons/MapIcons/HomeIcon/HomeMap.svg';
@@ -48,14 +48,8 @@ import TheaterPressed from '../../icons/MapIcons/TheaterIcon/TheaterPressed.svg'
 import PalacePressed from '../../icons/MapIcons/PalaceIcon/PalacePressed.svg';
 import ShowPlacePressed from '../../icons/MapIcons/ShowPlaceIcon/ShowPlacePressed.svg';
 
-
-const renderPriceSubtext = (housePrice?: string | number | null) => {
-    if (!housePrice) return ''
-    return `<text x="0" y="70" fill="#C5A28E" class="icon-map-subtext">${housePrice.toLocaleString('ru-RU')} ₽</text>`
-}
-
 // т.к. используется различная расцветка иконок на карте и в чекбоксе, добавлены параметр callingLocation(где вызывается функция) и дополнительный набор иконок нужного цвета
-export const OpenStreetIconsFactory = (type: ObjectTypes, isActive: boolean, callingLocation: 'checkbox' | 'map', choosedHouseSrc?: string, housePrice?: string | number | null, returnAsIconObject?: boolean): | string => {
+export const OpenStreetIconsFactory = (type: any, isActive: boolean | undefined, callingLocation: 'checkbox' | 'map', choosedHouseSrc?: string, returnAsIconObject?: boolean): | string => {
 
     let iconUrl: string = '';
     switch (type) {

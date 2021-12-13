@@ -1,0 +1,43 @@
+@import '../../../app/styles/scrollbars.scss';
+
+.openContainer {
+    position: relative;
+    z-index: 10;
+    background-color: #FCFCFC;
+    padding: 0 0 0 0;
+    transition: all .2s;
+}
+.closeContainer {
+    position: relative;
+    z-index: 10;
+    background-color: #FCFCFC;
+    padding: 0 0 0 40px;
+    transition: all .2s;
+}
+
+.content {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    margin: 0 15px 0 15px;
+    height: 575px;
+    overflow-y: scroll;
+    scrollbar-width: 1px;
+    @include MapScrollbar;
+}
+.filterWrapper {
+    margin-bottom: 20px;
+}
+.finderControls {
+    display: flex;
+    justify-content: space-between;
+    margin: 20px;
+}
+
+.finderButtons{
+    display: flex;
+}
+
+.toggleButtonsWrap {
+    margin: 0 0 0 8px;
+}

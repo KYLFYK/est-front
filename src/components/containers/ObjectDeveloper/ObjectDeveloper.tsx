@@ -24,6 +24,7 @@ interface Props {
 
 const ObjectDeveloper: React.FC<Props> = ({ developerData }) => {
     return (
+        <div className={s.container}>
         <HeadLine title="Застройщик">
             <div className={s.infoBlock}>
                 <Advantage title={developerData.name} text={developerData.developerType} className={s.iconItem}>
@@ -45,6 +46,7 @@ const ObjectDeveloper: React.FC<Props> = ({ developerData }) => {
             </div>
             <DeveloperTabs tabsData={developerData.tabsData} />
         </HeadLine>
+        </div>
     )
 }
 

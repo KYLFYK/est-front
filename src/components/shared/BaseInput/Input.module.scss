@@ -1,14 +1,16 @@
 .input {
+    box-sizing: border-box;
     display: flex;
     justify-content: center;
     align-items: center;
     border: none;
     outline: none;
     width: 100%;
-    height: 38px;
+    min-height: 40px;
     border-radius: 8px;
     text-indent: 16px;
     border: 1px #CAD1DA solid;
+    font-family: "RobotoRegular", sans-serif;
     font-size: 16px;
     &::-webkit-outer-spin-button,
     &::-webkit-inner-spin-button {
@@ -23,7 +25,8 @@
 }
 
 .wrapper {
-    position: relative
+    position: relative;
+    width: 100%;
 }
 
 .icon {
@@ -32,4 +35,19 @@
     right: 12px;
     top: 50%;
     transform: translateY(-50%);
+}
+
+.label {
+    color: #CAD1DA;
+    margin-bottom: 5px;
+}
+
+.iconPadding {
+    padding-right: 30px;
+}
+
+.error {
+    margin-top: 4px;
+    font-size: 14px;
+    position: absolute;
 }

@@ -1,0 +1,26 @@
+@import "../../../../app/styles/helpers.scss";
+
+.link {
+  @include ResetLinkStyle;
+}
+
+.navContent {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.nav {
+  margin-bottom: 20px;
+}
+
+.divider {
+  height: 1px;
+  width: 100%;
+  background-color: #F2F2F2;
+}
+
+.arrowIcon {
+  margin-right: 5px;
+}
+

@@ -1,0 +1,54 @@
+@import "../../../../../app/styles/colours.scss";
+
+.navContent {
+  display: flex;
+  gap: 60px;
+  margin-bottom: 10px;
+}
+
+.nav {
+    margin-bottom: 30px;
+}
+
+.navItem {
+  position: relative;
+  display: flex;
+}
+.navUnderline {
+  position: absolute;
+  height: 2px;
+  width: 100%;
+  bottom: -10px;
+  display: flex;
+  gap: 3px;
+}
+
+.underlineItem {
+  background-color: #bdbdbd;
+  height: 100%;
+  &.active {
+    background-color: $ACCENT;
+  }
+}
+
+.divider {
+    height: 1px;
+    width: 100%;
+    background-color: #F2F2F2;
+  }
+
+.disabledTab {
+    color: #CAD1DA
+}
+
+.content {
+    min-height: 600px;
+}
+
+.doneIcon {
+    position: absolute;
+    right: -26px;
+    bottom: -4px;
+    margin-left: 4px;
+    transform: scale(0.8);
+}

@@ -1,0 +1,52 @@
+@import '../../../../app/styles/colours.scss';
+@import '../../../../app/styles/helpers.scss';
+
+.card {
+    transition: .3s all ease;
+    width: 250px;
+    height: 180px;
+    border: 1px #EFEFF2 solid;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    cursor: pointer;
+    &.active {
+        background-color: $ACCENT;
+        & * {
+            color: #fff;
+            fill: #fff
+        }
+    }
+    &:hover {
+        box-shadow: 0px 4px 8px rgba(26, 72, 98, 0.15);
+    }
+}
+
+.cardList {
+    display: flex;
+    gap: 30px
+}
+
+.row {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    align-items: center;
+}
+
+.content {
+    display: flex;
+    flex-direction: column;
+    gap: 50px;
+    margin-top: 40px;
+}
+
+.iconBlock {
+    min-height: 50px;
+}
+
+.link {
+    @include ResetLinkStyle
+}

@@ -1,0 +1,31 @@
+.openWrapper {
+    display: flex;
+    position: absolute;
+    bottom: 50%;
+    right: 100%;
+    transition: all .5s;
+    z-index: 11;
+}
+.closeWrapper {
+    display: flex;
+    position: absolute;
+    bottom: 50%;
+    right: 99%;
+    transition: all .5s;
+    z-index: 11;
+}
+
+.openButton {
+    width: 20px;
+    height: 40px;
+    border-radius: 8px 0 0 8px;
+    box-shadow: 0px 4px 8px rgba(26, 72, 98, 0.15);
+    transition: all .5s;
+}
+.closeButton {
+    width: 20px;
+    height: 40px;
+    border-radius: 0 8px 8px 0;
+    box-shadow: 0px 4px 8px rgba(26, 72, 98, 0.15);
+    transition: all .5s;
+}

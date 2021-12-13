@@ -1,0 +1,33 @@
+.buttonsGroup {
+    align-items: center;
+    gap: 13px;
+    display: flex;
+}
+
+.button {
+    cursor: pointer;
+    background-color: #fff;
+    width: 40px;
+    height: 40px;
+    border-radius: 6px;
+    font-size: 16px;
+    border: 1px solid #CAD1DA;
+}
+
+.minus {
+    width: 13px;
+    height: 1px;
+}
+
+.label {
+    margin-bottom: 5px;
+    color: #CAD1DA;
+}
+
+.wrapper {
+    position: relative;
+}
+
+.error {
+    position: absolute;
+}

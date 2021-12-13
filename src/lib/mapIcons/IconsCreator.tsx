@@ -1,6 +1,8 @@
 import React from "react";
+import Image from 'next/image';
 import Typography from "../../components/shared/Typography/Typography";
 import { HomeIcon } from "../../icons/MapIcons/HomeIcon/HomeIcon";
+import { OpenStreetIconsFactory } from "./map";
 import s from "./IconsCreator.module.scss";
 
 import { Denomination } from "./denomination";
@@ -10,11 +12,14 @@ interface Props {
     color?: string
     title?: string | number
     clusterPoints?: number
-    colorBody?: any
-    colorPath?: any
+    colorBody?: string
+    colorPath?: string
+    currentHouse?: any
+    type?: string
+    active?: boolean | undefined
 }
 
-export const IconsCreator: React.FC<Props> = ({locationProject, color, title, clusterPoints, colorBody, colorPath}) => {
+export const IconsCreator: React.FC<Props> = ({locationProject, color, title, clusterPoints, colorBody, colorPath, currentHouse, type, active}) => {
 
     return (
         <div className={s.wrapper}>
@@ -39,21 +44,36 @@ export const IconsCreator: React.FC<Props> = ({locationProject, color, title, cl
                 }
             </div>
 
-            { locationProject !== 'payback'
+            { locationProject === 'finder' 
                 ? <div
                     className={s.marker}
                     style={{backgroundColor: color}}
                   />
-                : <>
-                    <HomeIcon colorBody={colorBody} colorPath={colorPath}/>
-                    <div className={s.title}>
+                : <> 
+                    {
+                      type === 'apartment' 
+                        ? <div style={{width: '100px', height: '100px', backgroundColor: '#000', borderRadius: '100%', 
+                            border: `4px solid ${locationProject === 'payback' ? '#1A4862' : '#FFFFFF'}`, 
+                            backgroundSize: 'cover', position: 'relative', top: '-120px', left: '-55px',
+                            backgroundImage: `url(${currentHouse.images[1].url})`}}>
+
+                            <div style={{width: '20px', height: '20px', backgroundColor: `${locationProject === 'payback' ? '#1A4862' : '#FFFFFF'}`, 
+                                transform: 'rotate(45deg)', position: 'relative', top: '90px', left: '40px', zIndex: -1}}>
+                            </div>
+
+                        </div>
+                        : locationProject === 'infrastucture' 
+                            ? <Image src={OpenStreetIconsFactory(type, active, 'map')} width={50} height={50} />
+                            : <HomeIcon colorBody={colorBody} colorPath={colorPath}/>
+                    }
+                    { locationProject !== 'infrastucture' && type !== 'apartment' && <div className={s.title}>
                         <Typography
                             size={'small'}
                             color={'nude'}
                         >
                             {title}
                         </Typography>
-                    </div>
+                    </div> }
                 </>
             }
             

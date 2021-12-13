@@ -1,0 +1,192 @@
+@import '../../../../../sass/colours.scss';
+@import '../../../../../sass/resolutions.scss';
+@import '../../../../../sass/scrollbars.scss';
+
+.container {
+    display: flex;
+    flex-direction: column;
+    border-radius: 10px;
+    box-sizing: border-box;
+    transition: all .5s;
+    background-color: #ffffff;
+    opacity: 0;
+    @include for-size(KT1) {
+        position: absolute;
+        z-index: 0;
+        top: 700px;
+        height: 0px;
+        padding: 30px 10px 30px 10px;
+    }
+    @include for-size(KT2) {
+        position: relative;
+        top: 0px;
+        height: 660px;
+        margin: 0px 0px 0px -520px;
+        padding: 20px 20px 20px 20px;
+    }
+}
+
+.containerActive {
+    display: flex;
+    flex-direction: column;
+    border-radius: 10px;
+    box-sizing: border-box;
+    transition: all .5s;
+    background-color: #ffffff;
+    position: relative;
+    z-index: 10;
+    width: 100%;
+    z-index: 1000;
+    @include for-size(KT1) {
+        position: absolute;
+        top: 0px;
+        height: 100%;
+        margin: 0px 0px 0px 0px;
+        padding: 30px 5px 30px 10px;
+    }
+    @include for-size(KT2) {
+        height: 660px;
+        padding: 20px 5px 20px 20px;
+    }
+}
+
+.content {
+    flex-direction: column;
+    overflow: auto;
+    @include MapScrollbar;
+}
+
+.backbutton {
+    max-height: 24px;
+    position: relative;
+    left: -28px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.backTitle {
+
+    color: $ACCENT;
+    margin-left: -11px;
+    @include for-size(KT1) {
+        display: none;
+    }
+    @include for-size(KT2) {
+        display: flex;
+        align-items: center;
+    }
+}
+
+.backbuttonContainer {
+    @include for-size(KT1) {
+        display: none;
+    }
+    @include for-size(KT2) {
+        display: flex;
+        align-items: center;
+    }
+}
+
+.sliderCount {
+
+    font-size: 10px;
+    line-height: 12px;
+    color: $ACCENT;
+    position: absolute;
+    @include for-size(KT1) {
+        right: -20px;
+        top: 5px;
+    }
+    @include for-size(KT2) {
+        right: -20px;
+        top: 24px;
+    }
+}
+
+.button {
+    cursor: pointer;
+    border: none;
+    outline: none;
+    margin: 3px 20px;
+    background-color: transparent;
+}
+
+.image {
+    margin-top: 18px;
+    border-radius: 10px;
+    position: relative;
+    @include for-size(KT1) {
+        width: 260px;
+        height: 164px;
+    }
+    @include for-size(KT2) {
+        width: 275px;
+        height: 227px;
+    }
+    @include for-size(KT5) {
+        width: 291px;
+        height: 240px;
+    }
+}
+
+.leftSlideiIcon {
+    position: absolute;
+    top: 170px;
+    left: 0px;
+}
+
+.rightSlideiIcon {
+    position: absolute;
+    top: 170px;
+    right: 0px;
+}
+
+.title {
+    margin-top: 30px;
+
+    color: $BLACK;
+    @include for-size(KT1) {
+        width: 100%;
+    }
+    @include for-size(KT2) {
+        width: 275px;
+    }
+    @include for-size(KT5) {
+        width: 291px;
+    }
+}
+
+.desc {
+    margin-top: 10px;
+    overflow-y: scroll;
+    scrollbar-width: 1px;
+    @include MapScrollbar;
+
+    color: $BLACK;
+    @include for-size(KT1) {
+        width: 100%;
+    }
+    @include for-size(KT2) {
+        width: 275px;
+    }
+    @include for-size(KT5) {
+        width: 291px;
+    }
+}
+
+.slick {
+    @include for-size(KT1) {
+        width: 90vw;
+        height: 164px;
+    }
+    @include for-size(KT2) {
+        width: 275px;
+        height: 227px;
+    }
+    @include for-size(KT5) {
+        width: 291px;
+        height: 240px;
+    }
+}

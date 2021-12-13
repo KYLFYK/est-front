@@ -8,13 +8,14 @@ import Twitter from "../../../../icons/Footer/Twitter";
 import Youtube from "../../../../icons/Footer/Youtube";
 
 type FooterPropsType ={
-    className?:string
+    color: 'nude' | 'accent'
+    className?: string
 }
 
-export const Footer :FC<FooterPropsType>= ({className}) => {
+export const Footer :FC<FooterPropsType>= ({color, className}) => {
 
     return (
-        <div className={classNames(css.footer,className)}>
+        <div style={{backgroundColor: `${color==='nude' ? '#C5A28E' : '#1A4862'}`}} className={classNames(css.footer,className)}>
             <FooterCopyRight/>
             <div>
                 <FaceBook/>

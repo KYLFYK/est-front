@@ -1,0 +1,102 @@
+[
+  {
+    "object_id" : 1011,
+    "images" : [
+      {"url" : "https://cdn.pixabay.com/photo/2021/08/25/20/42/field-6574455__340.jpg", "id" : 0},
+      {"url" : "https://images.unsplash.com/photo-1541963463532-d68292c34b19?ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8Ym9va3xlbnwwfHwwfHw%3D&ixlib=rb-1.2.1&w=1000&q=80", "id" : 1},
+      {"url" : "https://images.ctfassets.net/hrltx12pl8hq/3MbF54EhWUhsXunc5Keueb/60774fbbff86e6bf6776f1e17a8016b4/04-nature_721703848.jpg?fit=fill&w=480&h=270", "id" : 2}
+    ],
+    "category" : "SPA",
+    "address" : {
+      "geo" : {
+        "lat" : "44.657258236761846",
+        "lng" : "34.38982476143941"
+      },
+      "street" : "Алушта, ул. Сусловой, д. 7"
+    },
+    "name" : "SPA-комплекс",
+    "description" : "Описание СПА-комплекса",
+    "website" : "https://kkdachi.ru",
+    "type" : "Spa"
+  },
+  {
+    "object_id" : 1012,
+    "images" : [
+      {"url" : "https://cdn.pixabay.com/photo/2021/08/25/20/42/field-6574455__340.jpg", "id" : 0},
+      {"url" : "https://images.unsplash.com/photo-1541963463532-d68292c34b19?ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8Ym9va3xlbnwwfHwwfHw%3D&ixlib=rb-1.2.1&w=1000&q=80", "id" : 1},
+      {"url" : "https://images.ctfassets.net/hrltx12pl8hq/3MbF54EhWUhsXunc5Keueb/60774fbbff86e6bf6776f1e17a8016b4/04-nature_721703848.jpg?fit=fill&w=480&h=270", "id" : 2}
+    ],
+    "category" : "SPA",
+    "address" : {
+      "geo" : {
+        "lat" : "44.657258236761846",
+        "lng" : "34.38982476143941"
+      },
+      "street" : "Алушта, ул. Сусловой, д. 7"
+    },
+    "name" : "SPA-комплекс",
+    "description" : "Описание СПА-комплекса",
+    "website" : "https://kkdachi.ru",
+    "type" : "Spa"
+  },
+  {
+    "object_id" : 1013,
+    "images" : [
+      {"url" : "https://cdn.pixabay.com/photo/2021/08/25/20/42/field-6574455__340.jpg", "id" : 0},
+      {"url" : "https://images.unsplash.com/photo-1541963463532-d68292c34b19?ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8Ym9va3xlbnwwfHwwfHw%3D&ixlib=rb-1.2.1&w=1000&q=80", "id" : 1},
+      {"url" : "https://images.ctfassets.net/hrltx12pl8hq/3MbF54EhWUhsXunc5Keueb/60774fbbff86e6bf6776f1e17a8016b4/04-nature_721703848.jpg?fit=fill&w=480&h=270", "id" : 2}
+    ],
+    "category" : "SPA",
+    "address" : {
+      "geo" : {
+        "lat" : "44.657258236761846",
+        "lng" : "34.38982476143941"
+      },
+      "street" : "Алушта, ул. Сусловой, д. 7"
+    },
+    "name" : "SPA-комплекс",
+    "description" : "Описание СПА-комплекса",
+    "website" : "https://kkdachi.ru",
+    "type" : "Spa"
+  },
+  {
+    "object_id" : 1014,
+    "images" : [
+      {"url" : "https://cdn.pixabay.com/photo/2021/08/25/20/42/field-6574455__340.jpg", "id" : 0},
+      {"url" : "https://images.unsplash.com/photo-1541963463532-d68292c34b19?ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8Ym9va3xlbnwwfHwwfHw%3D&ixlib=rb-1.2.1&w=1000&q=80", "id" : 1},
+      {"url" : "https://images.ctfassets.net/hrltx12pl8hq/3MbF54EhWUhsXunc5Keueb/60774fbbff86e6bf6776f1e17a8016b4/04-nature_721703848.jpg?fit=fill&w=480&h=270", "id" : 2}
+    ],
+    "category" : "SPA",
+    "address" : {
+      "geo" : {
+        "lat" : "44.657258236761846",
+        "lng" : "34.38982476143941"
+      },
+      "street" : "Алушта, ул. Сусловой, д. 7"
+    },
+    "name" : "SPA-комплекс",
+    "description" : "Описание СПА-комплекса",
+    "website" : "https://kkdachi.ru",
+    "type" : "Spa"
+  },
+  {
+    "object_id" : 1015,
+    "images" : [
+      {"url" : "https://cdn.pixabay.com/photo/2021/08/25/20/42/field-6574455__340.jpg", "id" : 0},
+      {"url" : "https://images.unsplash.com/photo-1541963463532-d68292c34b19?ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8Ym9va3xlbnwwfHwwfHw%3D&ixlib=rb-1.2.1&w=1000&q=80", "id" : 1},
+      {"url" : "https://images.ctfassets.net/hrltx12pl8hq/3MbF54EhWUhsXunc5Keueb/60774fbbff86e6bf6776f1e17a8016b4/04-nature_721703848.jpg?fit=fill&w=480&h=270", "id" : 2}
+    ],
+    "category" : "SPA",
+    "address" : {
+      "geo" : {
+        "lat" : "44.657258236761846",
+        "lng" : "34.38982476143941"
+      },
+      "street" : "Алушта, ул. Сусловой, д. 7"
+    },
+    "name" : "SPA-комплекс",
+    "description" : "Описание СПА-комплекса",
+    "website" : "https://kkdachi.ru",
+    "type" : "Spa"
+  }
+]

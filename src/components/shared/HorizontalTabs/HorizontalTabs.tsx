@@ -1,4 +1,4 @@
-import React, {FC, ReactNode, useState} from 'react';
+import React, { FC, useState } from 'react';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import Box from '@mui/material/Box';
@@ -12,11 +12,18 @@ interface ITabItem {
 }
 interface Props {
     tabs: ITabItem[]
+    refs?: any[]
 }
-export const HorizontalTabs: FC<Props> = ({ tabs }) => {
-    const [selectedTabIdx, setSelectedTabIdx] = useState(1);
+export const HorizontalTabs: FC<Props> = ({ tabs, refs }) => {
+    const [selectedTabIdx, setSelectedTabIdx] = useState(0);
 
     const handleChange = (event: React.SyntheticEvent, newValue: number) => {
+        if (refs) {
+            window.scrollTo({
+                top: refs[newValue].offsetTop,
+                behavior: 'smooth',
+            })
+        }
         setSelectedTabIdx(newValue);
     };
 
@@ -49,7 +56,7 @@ export const HorizontalTabs: FC<Props> = ({ tabs }) => {
                                             (tab.Component && index === selectedTabIdx) ?
                                                 'nude' : tab.Component ?
                                                     'tertiary' : 'accent'}
-                                        > {tab.title}</Typography>
+                                        >{tab.title}</Typography>
                                     }
                                 />
                             ))
