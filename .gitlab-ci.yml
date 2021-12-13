@@ -43,7 +43,7 @@ deploy:
      #- ls -la build
      #- ls -la build/static
      #- ssh deployer@$DEPLOY_SERVER "ls -la /data/estatum-front"
-     - scp -r public/* deployer@$DEPLOY_SERVER:/data/estatum-front/front 
+     - scp -r /builds/f-case/marketplace-front/* deployer@$DEPLOY_SERVER:/data/estatum-front/front 
   environment:
     name: production
   only:
