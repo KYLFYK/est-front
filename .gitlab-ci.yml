@@ -15,7 +15,9 @@ build:
      - node -v
   script:
      - yarn install
-     - yarn run build
+     - npm run build
+     - npm run start
+     #- yarn run build
      - pwd
      - ls -la
     #- ls -la dist
