@@ -1,16 +1,18 @@
 stages:
-  - deploy
-cache:
-  paths:
-    - node_modules/
-deploy:
-  image: docker:dind
-  stage: deploy
-  script:
-    - docker build -t app/blog .
-    - docker run -d -p 3000:3000 --rm --name next-blog app/blog
-  tags:
-    - docker
-  only:
-     - development
+  - build-app
+#  - build-image
 
+build app:
+  stage: build-app
+  image: node:8
+  script:
+    - yarn
+    - yarn lint
+    - yarn build
+  cache:
+    paths:
+      - node_modules
+  artifacts:
+    paths:
+      - .next
+      - build
