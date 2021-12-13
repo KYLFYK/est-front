@@ -18,7 +18,7 @@ build:
   image: node:14.17.4
   script:
     - yarn  install
-    - npm run build storybook
+    - yarn build-storybook
     #- yarn build
 
   artifacts:
