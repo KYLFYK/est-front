@@ -1,54 +1,16 @@
-image: node:14.17.4
-
 stages:
-   - build
-   - deploy
-variables:
-  # DEPLOY_FOLDER: /data/front #/data/test-sas-realestate-front/
- # DEPLOY_SERVER: 185.98.83.65  # 84.201.179.232 #185.98.83.65
-  #DEPLOY_USER: deployer
-  #DEPLOY_PORT: 20071 #22 #20064
-
-build:
-  stage: build
-  before_script:
-     - node -v
-  script:
-     - yarn install
-     - npm run build
-     #- npm run export
-     #- yarn run build
-     - pwd
-     - ls -la
-     - ls -la out
-    #- ls -la dist
-     #- cp -rf dist/* public
-     - ls -la public
-  artifacts:
-    paths:
-      - public
-
+  - deploy
+cache:
+  paths:
+    - node_modules/
 deploy:
+  image: docker:dind
   stage: deploy
-  dependencies:
-     - build
-  before_script: 
-     - ls -la public
-     - mkdir -p ~/.ssh     
-     - echo -e "$SSH_PRIVATE_KEY" > ~/.ssh/id_rsa     
-     - chmod 600 ~/.ssh/id_rsa     
-     - '[[ -f /.dockerenv ]] && echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config' 
-       
   script:
-  #    - ls -la
-    #  - ls -la src/app
-     #- ls -la public
-     #- ls -la build
-     #- ls -la build/static
-     #- ssh deployer@$DEPLOY_SERVER "ls -la /data/estatum-front"
-     - scp -r /builds/f-case/marketplace-front/* deployer@$DEPLOY_SERVER:/data/estatum-front/front 
-  environment:
-    name: production
+    - docker build -t app/blog .
+    - docker run -d -p 3000:3000 --rm --name next-blog app/blog
+  tags:
+    - docker
   only:
      - development
 
