@@ -1,7 +1,6 @@
 import React from 'react';
 import ActionPeriod from "../../../Others/Tables/Table/ActionPeriod";
 import RevenueMonth from "../../../Others/Tables/Table/RevenueMonth";
-import WorkloadWork from "../../../Others/Tables/Table/WorkloadWork";
 import Typography from "../../../../../../../shared/Typography/Typography";
 import {Card} from "../../../../../../../shared/Mortgage/Card";
 import css from "../../../PersonalCabinetTab/components/Statistics/Statistics.module.scss";

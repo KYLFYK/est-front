@@ -6,9 +6,8 @@ import css from './PaybackContainer.module.css'
 import DynamicsPriceTable from "../../shared/DynamicsPrice/DynamicsPriceTable";
 import AverageMarketPrice from "../../shared/AverageMarketPrice/AverageMarketPrice";
 import Map from "../../containers/Maps/MapPayback/index";
-import {currentHouse} from "../../containers/Maps/MapPayback/config";
-import {objects} from "../../containers/Maps/MapPayback/config";
 import Typography from "../../shared/Typography/Typography";
+import {currentHouse, objects} from "../Maps/MapPayback/config";
 
 type PaybackContainerType = {
     averagePrice:{

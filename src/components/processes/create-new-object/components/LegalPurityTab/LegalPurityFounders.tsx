@@ -10,7 +10,7 @@ import { LEGAL_PURITY_TAB_OWNER_TYPES } from "../../config"
 import { useStores } from "../../../../../hooks/useStores"
 import { getActualObjectTypeData, getInitialStateLegalPurityTab, TLegalPurityTabState } from "../../lib"
 import { observer } from "mobx-react-lite"
-import { useRouter } from "next/dist/client/router"
+
 interface Props extends ICreateObjectControls {
     objectType: ObjectTypes
 }

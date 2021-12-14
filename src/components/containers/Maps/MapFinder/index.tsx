@@ -1,6 +1,5 @@
 import React, {useState} from "react";
 import Map from './Map';
-import {Modal} from '../../../shared/Modal/Modal';
 
 interface Props {
   mapData: any

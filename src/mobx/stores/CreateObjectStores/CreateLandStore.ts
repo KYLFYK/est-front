@@ -1,4 +1,4 @@
-import { action, makeObservable, observable } from "mobx";
+// import { action, makeObservable, observable } from "mobx";
 import { FoundersTypes } from "../../../utils/interfaces/objects";
 import { ICreateObjectLand } from "../../types/CreateObjectStoresTypes/CreateLandStoreType";
 

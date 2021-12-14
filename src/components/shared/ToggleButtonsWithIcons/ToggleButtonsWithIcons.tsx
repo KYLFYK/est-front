@@ -1,7 +1,4 @@
-import classNames from 'classnames'
-import { IOption } from '../../../utils/interfaces/general'
 import BaseButton from '../BaseButton/BaseButtons'
-import FavoriteIcon from '../../../icons/Favorite/Favorite'
 import s from './ToggleButtons.module.scss'
 
 interface Props {
@@ -24,8 +21,8 @@ export const ToggleButtonsWithIcons: React.FC<Props> = ({ items, activeValue, cl
     return (
         <div className={s.wrapper}>
 
-            {items.map((button: any, idx: number) => <>
-                <BaseButton 
+            {items.map((button: any, idx: number) => <span key={idx}>
+                <BaseButton
                     type={'toggleButtonWithIcons'}
                     onClick={button.onclick}
                     isActive={false}
@@ -33,7 +30,7 @@ export const ToggleButtonsWithIcons: React.FC<Props> = ({ items, activeValue, cl
                     iconActive={''}
                 />
                 {idx !== items.length - 1 && <div className={s.divider}></div>}
-            </>)}
+            </span>)}
         </div>
     )
 }

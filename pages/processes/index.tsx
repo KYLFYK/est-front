@@ -12,7 +12,6 @@ import InputsGroup from '../../src/components/processes/create-new-object/compon
 import LandInfoTab from '../../src/components/processes/create-new-object/components/LandInfoTab/LandInfoTab'
 import LegalPurityDetails from '../../src/components/processes/create-new-object/components/LegalPurityTab/LegalPurityDetails'
 import LegalPurityFounders from '../../src/components/processes/create-new-object/components/LegalPurityTab/LegalPurityFounders'
-import MultipleHorizontalTab from '../../src/components/processes/create-new-object/components/MultipleHorizontalTab/MultipleHorizontalTab'
 import SuccessPage from '../../src/components/processes/create-new-object/components/SuccessPage/SuccessPage'
 import FormScreen from '../../src/components/processes/create-new-object/FormScreen/FormScreen'
 import StartScreen from '../../src/components/processes/create-new-object/StartScreen/StartScreen'

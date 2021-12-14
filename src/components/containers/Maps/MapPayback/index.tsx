@@ -1,7 +1,7 @@
 import React, {useState} from "react";
 import MapGL, {Marker} from "react-map-gl";
 import "mapbox-gl/dist/mapbox-gl.css";
-import { MapControls } from "../MapControls/Buttons/index";
+import { MapControls } from "../MapControls/Buttons";
 import { IconsCreator } from "../../../../lib/mapIcons/IconsCreator";
 import BaseButton from "../../../shared/BaseButton/BaseButtons";
 import s from './styles.module.scss';

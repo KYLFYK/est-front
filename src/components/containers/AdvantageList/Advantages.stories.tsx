@@ -1,6 +1,5 @@
 import { ComponentStory, ComponentMeta } from '@storybook/react';
-import { IconTypes } from '../../../utils/interfaces/icons';
-import { Advantages, IAdvantage } from './AdvantageList';
+import { Advantages } from './AdvantageList';
 import { mocAdvantages } from './config';
 
 export default {

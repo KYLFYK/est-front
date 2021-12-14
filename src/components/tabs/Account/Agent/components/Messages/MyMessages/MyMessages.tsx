@@ -76,69 +76,93 @@ const timeMin =timeIso.split(':')[1]
 const time3UTC =+timeHour+3+":"+timeMin
 
 const messages1: messagesType = {
-    idRoom: 'id',
+    idRoom: '1',
     messagesRoom: [
         {
-            date: date,
-            messages: [{from:'id',text: 'HelloHelloHelloHe', time: time3UTC}, {from:'id',text: 'Hello2', time: time3UTC}, {
-                from:'id',
-                text: 'Hello1',
-                time: '18:00'
-            }]
+            date: '18.10.2021',
+            messages: [
+                {from:'id',text: 'HelloHelloHelloHe', time:'17:58'},
+                {from:'id',text: 'Hello2', time: '17:58'},
+                {from:'id', text: 'Hello1', time: '18:00'}
+            ]
         },
         {
-            date:  date,
-            messages: [{from:'1',text: 'Hello', time: time3UTC}, {from:'1',text: 'Hello2', time: time3UTC}, {
-                from:'1',
-                text: 'Hello1',
-                time: '18:00'
-            }]
+            date:  '18.10.2021',
+            messages: [
+                {from:'1',text: 'Hello', time: '17:58'},
+                {from:'1',text: 'Hello2', time: '17:58'},
+                {from:'1', text: 'Hello1', time: '18:00'}
+            ]
         },
         {
-            date:  date,
-            messages: [{from:'1',text: 'Hello', time: time3UTC}, {from:'1',text: 'Hello2', time: time3UTC}, {
-                from:'1',
-                text: 'Hello1',
-                time: '18:00'
-            }]
+            date:  '18.10.2021',
+            messages: [
+                {from:'1',text: 'Hello', time: '17:58'},
+                {from:'1',text: 'Hello2', time: '17:58'},
+                {from:'1', text: 'Hello1', time: '18:00'}
+            ]
         },
 
 
     ]
 }
-const messages2 = {
+const messages2: messagesType = {
     idRoom: '2',
     messagesRoom: [
         {
             date: '18.10.2021',
-            messages: [{from:'1',text: 'salyt', time: '17:58'}, {from:'1',text: 'salyt', time: '17:59'}, {from:'1',text: 'salyt', time: '18:00'}]
+            messages: [
+                {from:'1',text: 'salyt', time: '17:58'},
+                {from:'1',text: 'salyt', time: '17:59'},
+                {from:'1',text: 'salyt', time: '18:00'}
+            ]
         },
         {
             date: '19.10.2021',
-            messages: [{from:'1',text: 'salyt', time: '17:58'}, {from:'1',text: 'salyt', time: '17:59'}, {from:'1',text: 'salyt', time: '18:00'}]
+            messages: [
+                {from:'1',text: 'salyt', time: '17:58'},
+                {from:'1',text: 'salyt', time: '17:59'},
+                {from:'1',text: 'salyt', time: '18:00'}
+            ]
         },
         {
             date: '20.10.2021',
-            messages: [{from:'1',text: 'salyt', time: '17:58'}, {from:'1',text: 'salyt', time: '17:59'}, {from:'1',text: 'salyt', time: '18:00'}]
+            messages: [
+                {from:'1',text: 'salyt', time: '17:58'},
+                {from:'1',text: 'salyt', time: '17:59'},
+                {from:'1',text: 'salyt', time: '18:00'}
+            ]
         },
 
 
     ]
 }
-const messages3 = {
+const messages3: messagesType = {
     idRoom: '3',
     messagesRoom: [
         {
             date: '18.10.2021',
-            messages: [{from:'1',text: 'bb', time: '17:58'}, {from:'1',text: 'bb', time: '17:59'}, {from:'1',text: 'bb', time: '18:00'}]
+            messages: [
+                {from:'1',text: 'bb', time: '17:58'},
+                {from:'1',text: 'bb', time: '17:59'},
+                {from:'1',text: 'bb', time: '18:00'}
+            ]
         },
         {
             date: '19.10.2021',
-            messages: [{from:'1',text: 'bb', time: '17:58'}, {from:'1',text: 'bb', time: '17:59'}, {from:'1',text: 'bb', time: '18:00'}]
+            messages: [
+                {from:'1',text: 'bb', time: '17:58'},
+                {from:'1',text: 'bb', time: '17:59'},
+                {from:'1',text: 'bb', time: '18:00'}
+            ]
         },
         {
             date: '20.10.2021',
-            messages: [{from:'1',text: 'bb', time: '17:58'}, {from:'1',text: 'bb', time: '17:59'}, {from:'1',text: 'bb', time: '18:00'}]
+            messages: [
+                {from:'1',text: 'bb', time: '17:58'},
+                {from:'1',text: 'bb', time: '17:59'},
+                {from:'1',text: 'bb', time: '18:00'}
+            ]
         },
     ]
 }
@@ -171,9 +195,10 @@ const MyMessages :FC<MyMessagesType> = ({archive=false}) => {
 
     const [active, setActive] = useState<number>(0) // vision click chat
     const [chat, setChat] = useState<messagesType>(arrayMessage[active])
+    debugger
     const [dMessage, setDMessage] = useState(dateMessage[active])
     const [messageValue, setMessageValue] = useState<string>('')
-
+    console.log(active)
     const [activeChat, setActiveChat] = useState<myMessagesType>(myMessages[active])
 
     useEffect(()=>{
@@ -335,6 +360,7 @@ const MyMessages :FC<MyMessagesType> = ({archive=false}) => {
 
                 <div >
                     <div className={css.borderChat} >
+
                         {
                             chat.messagesRoom.map((mes, index) => (
                                 <div key={index}>
