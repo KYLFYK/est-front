@@ -6,7 +6,7 @@ import s from './ToursContainer.module.scss'
 
 type ToursContainerType = {
     Online_tour:{
-        '3d_tour':{
+        threeD_tour:{
             url:string,
         },
         vr_tour:{
@@ -19,8 +19,8 @@ const ToursContainer :FC<ToursContainerType> = ({ Online_tour }) => {
     return (
         <div className={s.container}>
             <VerticalTabs className={s.padding} tabs={[
-                {title:'3D тур',Component:<ThreeDTour url={Online_tour["3d_tour"].url} />},
-                {title:'VR тур',Component:<VRTour url={Online_tour["vr_tour"].url} />},
+                {title:'3D тур',Component:<ThreeDTour url={Online_tour.threeD_tour.url} />},
+                {title:'VR тур',Component:<VRTour url={Online_tour.vr_tour.url} />},
             ]} />
         </div>
     );

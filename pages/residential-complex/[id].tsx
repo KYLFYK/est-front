@@ -1,24 +1,26 @@
 import type { NextPage } from 'next'
 import React, {useRef, useEffect, useState} from 'react'
+import { useRouter } from 'next/router'
 import Header from '../../src/components/widget/Header/Header'
 import {Breadcrumbs} from '../../src/components/shared/Breadcrumbs/Breadcrumbs'
 import {Views} from '../../src/components/shared/Views/Views'
 import {NameEstate} from '../../src/components/shared/NameEstate/NameEstate'
 import {AdressEstate} from '../../src/components/shared/AdressEstate/AdressEstate'
 import { HorizontalTabs } from '../../src/components/shared/HorizontalTabs/HorizontalTabs'
-import {IMAGES_SET, INFO_OPTIONS} from '../../src/components/containers/GeneralInfo/config'
+import {IMAGES_SET} from '../../src/components/containers/GeneralInfo/config'
 import GeneralInfo from '../../src/components/containers/GeneralInfo/GeneralInfo'
 import ObjectSpecifications from '../../src/components/containers/ObjectSpecifications/ObjectSpecifications'
-import { OBJECT_SPECS_MOCK, OBJECT_SPEC_WITHOUT_TEXT } from '../../src/components/containers/ObjectSpecifications/config'
+import { OBJECT_SPECS_MOCK } from '../../src/components/containers/ObjectSpecifications/config'
 import Planning from '../../src/components/containers/Planning/Planning/Plannings'
 import PlanningFilter from '../../src/components/containers/PlanningFilter/PlanningFilter'
 import Map from '../../src/components/containers/Maps/MapInfrastructure/index'
-import { currentHouse, infrastructura } from '../../src/components/containers/Maps/MapInfrastructure/config'
+import { infrastructura } from '../../src/components/containers/Maps/MapInfrastructure/config'
 import ObjectDeveloper from '../../src/components/containers/ObjectDeveloper/ObjectDeveloper'
-import {OBJECT_DEVELOPER_INFO} from '../../src/components/containers/ObjectDeveloper/config'
 import ConstructProgress from '../../src/components/containers/ConstructProgress/ConstructProgress'
 import { Footer } from '../../src/components/widget/Footer/ui/Footer'
 import {ScrollUp} from '../../src/components/shared/ScrollUp/ScrollUp'
+
+import {fullObjectData} from '../../src/pages/config'
 
 const city = ['Москва', 'Санкт-Петербург', 'Крым', 'Сочи', 'Нижний Новгород']
 const personalAccount = [{title: 'Личный кабинет', href: '/User', message: 0},
@@ -29,11 +31,6 @@ const personalAccount = [{title: 'Личный кабинет', href: '/User', m
   {title: 'Мои объекты', href: '/User', message: 0},
   {title: 'Проверка объекта', href: '/User', message: 0},
 ]
-
-const breadcrumbs = ['Крым', 'Купить участок', 'Участок в Троицком 30 соток']
-const views = ['12.06.2021', '389', 'Агентство: Лунный свет']
-const nameEstate = '1-комнатная квартира в центре Сочи'
-const adressEstate = 'Россия, Сочи, ул. Ленина, дом 36, квартира 21'
 
 const tabs = [{
     title: "Об объекте",
@@ -75,6 +72,11 @@ const OPTION_DATA = [
 ]
 
 const HousingComplex: NextPage = () => {
+  const router = useRouter()
+  const currentObject = fullObjectData.filter((fod) => fod.object_id === Number(router.query.id))[0]
+
+  const breadcrumbs = ['Крым', 'Купить участок', `${currentObject.name}`]
+  const views = ['12.06.2021', '389', 'Агентство: Лунный свет']
 
   const general = useRef(null)
   const specs = useRef(null)
@@ -93,11 +95,11 @@ const HousingComplex: NextPage = () => {
         <Header city={city} personalAccount={personalAccount}/>
         <Breadcrumbs items={breadcrumbs}/>
         <Views items={views}/>
-        <NameEstate item={nameEstate}/>
-        <AdressEstate item={adressEstate}/>
+        <NameEstate item={currentObject.name}/>
+        <AdressEstate item={currentObject.address}/>
         <HorizontalTabs tabs={tabs} refs={refs}/>
         <div ref={general}>
-          <GeneralInfo info={INFO_OPTIONS} price={300000} images={IMAGES_SET} />
+          <GeneralInfo info={currentObject.INFO_OPTIONS} price={currentObject.price} images={IMAGES_SET} />
         </div>
         <div ref={specs}>
           <ObjectSpecifications specificationsLists={Array(3).fill(OBJECT_SPECS_MOCK)} title={"Особенности"}/>
@@ -109,10 +111,10 @@ const HousingComplex: NextPage = () => {
           <Planning FilterComponent={plan.FilterComponent} planningList={plan.planningList}/>
         </div>
         <div ref={infra}>
-          <Map currentHouse={currentHouse} infrastructura={infrastructura} location={'infrastructure'}/>
+          <Map currentHouse={currentObject} infrastructura={infrastructura} location={'infrastructure'}/>
         </div>
         <div ref={developer}>
-          <ObjectDeveloper developerData={OBJECT_DEVELOPER_INFO}/>
+          <ObjectDeveloper developerData={currentObject.OBJECT_DEVELOPER_INFO}/>
         </div>
         <ConstructProgress images={IMAGES_SET} info={OPTION_DATA}/>
         <Footer color={'accent'}/>

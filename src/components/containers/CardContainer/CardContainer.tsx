@@ -36,7 +36,7 @@ const useStyles = makeStyles(() => ({
 }))
 
 const CardContainer: React.FC<Props> = ({ mapData, view, setView }) => {
-
+    
     const classes = useStyles()
     const toggleButtonOptions = [
         { icon: <GridView fill={view === 'gridView' ? '#96A2B5' : '#CAD1DA'}/>, onclick: () => setView('gridView') }, 

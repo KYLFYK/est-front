@@ -1,4 +1,5 @@
 import React, { FC } from "react"
+import Image from 'next/image'
 import css from './CardAgency.module.scss'
 import DeleteOutlinedIcon from '@mui/icons-material/DeleteOutlined';
 import Typography from "../Typography/Typography";
@@ -17,11 +18,10 @@ export const CardAgency: FC<CardAgencyType> = ({ name, description, id, img, onD
     return (
         <div className={css.card}>
             <div className={css.card_}>
-                <img
+                <Image
                     src={img}
                     alt={name}
-                    className={css.img}
-                    style={{ borderRadius: phone ? '50%' : '0', width: phone ? '80px' : '' }}
+                    className={phone ? css.imgwithPhone : css.img}
                 />
                 <hr color={'#F2F2F2'} style={{ width: '100%', height: '1px', margin: '14px 0' }} />
                 <div className={css.nameCompany}>
