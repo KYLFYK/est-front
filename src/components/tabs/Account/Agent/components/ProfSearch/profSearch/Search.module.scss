@@ -1,0 +1,41 @@
+.image{
+  border-radius: 8px 0 0 8px;
+}
+.paddingInfo{
+  padding: 10px 20px;
+  min-width: 850px;
+}
+.buttonPosition{
+  position:relative;
+  bottom: 120px;
+  left: 15px;
+}
+.border{
+  display: flex;
+  border: 1px solid #f2f2f2;
+  border-radius: 6px;
+  height: 126px;
+  margin:10px 0 20px 0;
+  &:hover{
+    box-shadow: 0 4px 8px 0 #1A486226;
+  }
+}
+.borderImage{
+  border-radius: 8px 0 0 8px;
+  min-width: 126px;
+}
+
+.grid_3T{
+  display: grid;
+  grid-template-columns: 1fr 240px 180px;
+  margin-top: 10px;
+}
+.grid_3{
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr 240px 180px;
+
+}
+.df{
+  display: flex;
+}

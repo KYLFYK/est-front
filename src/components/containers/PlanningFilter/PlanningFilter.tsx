@@ -48,7 +48,7 @@ const useStyles = makeStyles(() => ({
 }))
 
 // onSubmit and Filter Values will come from global state and observers
-// Active values should store in local state
+// MyAdsContainer values should store in local state
 
 const PlanningFilter: React.FC<Props> = () => {
     const classes = useStyles()

@@ -1,0 +1,45 @@
+.grid{
+  display: grid;
+  grid-template-columns: 170px 1fr 270px;
+  margin: 20px 0;
+}
+.grid_Messages{
+  display: grid;
+  grid-template-columns: 170px 1fr ;
+  margin: 20px 0;
+}
+.marginL_24{
+  margin-left: 24px;
+}
+.margin_5{
+  margin: 0 5px;
+}
+.df_ai{
+  display: flex;
+  align-items: center;
+}
+.cursor{
+  cursor: pointer;
+}
+.buttonWidth{
+  margin: 20px 0;
+  width: 100px;
+}
+.lineText{
+  width: 450px ;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.modal{
+  height: 200px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding-top: 40px;
+}
+.iconMargin{
+  margin: 10px 0
+}

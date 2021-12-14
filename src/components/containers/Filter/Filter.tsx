@@ -1,4 +1,5 @@
 import React, { ChangeEvent } from "react"
+import Link from "next/link"
 import { ISearchParamsModel } from "../../../utils/interfaces/search"
 import BaseButton from "../../shared/BaseButton/BaseButtons"
 import { BaseDropDown } from "../../shared/BaseDropDown/BaseDropDown"
@@ -71,7 +72,7 @@ export const Filter: React.FC<Props> = ({ initialValues }) => {
     const onChangeSearchValue = (e: ChangeEvent<HTMLInputElement>) => {
         setValues({...values, searchValue: e.target.value})
     }
-    console.log(values)
+
     return (
         <div className={s.wrapper}>
             <InputsUnion className={s.actionDropdownUnion}>
@@ -86,7 +87,9 @@ export const Filter: React.FC<Props> = ({ initialValues }) => {
             </InputsUnion>
             <BaseDropDown options={FILTER_BUILDING_TYPE_OPTIONS} value={values.secondaryType} onChange={onChangeBuildingType} placeholder="Выбрать тип здания" className={s.dropdown} />
             <BaseDropDown options={FILTER_FLOORS_OPTIONS} value={values.floors} onChange={onChangeFloors} placeholder="Выбрать этаж" className={s.dropdownFloor} />
-            <BaseButton className={s.submit} type="primary" onClick={onSubmit}>Показать объявления</BaseButton>
+            <Link href={'/search'}>
+                <BaseButton className={s.submit} type="primary" onClick={onSubmit}>Показать объявления</BaseButton>
+            </Link>
         </div>
     )
 }

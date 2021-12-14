@@ -3,7 +3,7 @@ import { ComponentStory, ComponentMeta } from '@storybook/react';
 import {SearchOffice}  from './SearchOffice';
 
 export default {
-    title: 'Components/SearchOffice',
+    title: 'Components/FilterCabinet',
     component: SearchOffice,
     argTypes: {
         onClick: {action: "onClick"},

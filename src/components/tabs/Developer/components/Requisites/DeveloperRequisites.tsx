@@ -1,4 +1,3 @@
-import classNames from 'classnames'
 import React from 'react'
 import { IArticleGeneral, IOption } from '../../../../../utils/interfaces/general'
 import Typography from '../../../../shared/Typography/Typography'

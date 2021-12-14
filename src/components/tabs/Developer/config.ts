@@ -1,5 +1,4 @@
 import { IArticleGeneral, IOption } from "../../../utils/interfaces/general";
-import { IDeveloperContactItem } from "./components/Contacts/Contacts";
 import { IDeveloperArticleItem } from "./components/MassMedia/DeveloperMassMedia";
 import { IDeveloperCompanyData } from "./components/Owners/DeveloperOwners";
 

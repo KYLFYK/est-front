@@ -23,11 +23,20 @@
   }
 }
 
-.img{
-  margin-top: 14px ;
-  width:153px;
-  height:72px;
+.img {
+  margin-top: 14px;
+  width: 153px;
+  height: 72px;
 }
+
+.imgwithPhone {
+  margin-top: 14px;
+  width: 153px;
+  height: 72px;
+  border-radius: 50%; 
+  width: 80px;
+}
+
 .nameCompany{
   box-sizing: border-box;
   font-size: 22px;

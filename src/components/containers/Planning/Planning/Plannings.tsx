@@ -29,7 +29,7 @@ const Planning: React.FC<Props> = ({ FilterComponent, planningList }) => {
                 </div>
                 <div className={s.content}>
                     {planningList.map(({ image, price, title, housing, deadline, floor }, idx) =>
-                        <Card key={idx} image={SampleImage} price={price} title={title} housing={housing} deadline={deadline} floor={floor} />)}
+                        <Card key={idx} image={'../assets/planning_sample.png'} price={price} title={title} housing={housing} deadline={deadline} floor={floor} />)}
                 </div>
             </HeadLine>
         </div>

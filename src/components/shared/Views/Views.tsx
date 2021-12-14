@@ -2,9 +2,6 @@ import React, { ReactNode } from 'react';
 import s from './Views.module.scss'
 import Typography from "../Typography/Typography";
 import ViewIcon from '../../../icons/ViewIcon/ViewIcon';
-import { IOption } from '../../../utils/interfaces/general';
-import classNames from 'classnames';
-
 
 type ViewsPropsType = {
     items: string[]

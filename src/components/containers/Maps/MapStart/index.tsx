@@ -1,4 +1,4 @@
-import React, {useState, useRef} from "react";
+import React, {useState} from "react";
 import MapGL, {Marker} from "react-map-gl";
 import "mapbox-gl/dist/mapbox-gl.css";
 import Image from 'next/image';
@@ -39,7 +39,7 @@ const Map: React.FC<Props> = ({center, location}) => {
             longitude={center.lng}
           > 
             <div style={{transform: 'scale(.5) translate(-100%, -150%)'}}>
-              <Image width={'100%'} height={'100%'} src={OfficeIcon} alt={'officeIcon'}/>
+              <Image loader={() => '../../../../icons/MapIcons/OfficeIcon/OfficeIcon.png'} unoptimized width={'100%'} height={'100%'} src={OfficeIcon} alt={'officeIcon'}/>
             </div>
           </Marker>
         </MapGL>

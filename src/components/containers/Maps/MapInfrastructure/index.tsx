@@ -1,7 +1,6 @@
 import React, {useState} from "react";
 import MapGL, {Marker} from "react-map-gl";
 import "mapbox-gl/dist/mapbox-gl.css";
-import { MapControls } from "../MapControls/Buttons/index";
 import { IconsCreator } from "../../../../lib/mapIcons/IconsCreator";
 import BaseButton from "../../../shared/BaseButton/BaseButtons";
 import { ArrowIcon } from "../../../../icons/MapControlsIcons/PlaceIcons/ArrowIcon";
@@ -9,6 +8,7 @@ import { CheckBox } from "../MapControls/Checkbox/CheckBox";
 import { Place } from "../MapControls/Place/Place";
 import HeadLine from "../../../shared/HeadLine/HeadLine";
 import Typography from '../../../shared/Typography/Typography';
+import {MapControls} from "../MapControls/Buttons";
 import s from './styles.module.scss';
 
 interface Props {

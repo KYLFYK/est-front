@@ -58,8 +58,8 @@ export const DeveloperDataModal: FC<DeveloperDataPropsType> = ({ img,  developer
                     </Typography>
                     {
                         developer.objectsDeveloper.map(({ nameObject,id}, index) => (
-                            <div key={index} >
-                                <Typography size={'default'} color={'nude'}>
+                            <div key={index} className={css.colorText}>
+                                <Typography size={'default'} color="nude">
                                     {nameObject}
                                 </Typography>
                             </div>

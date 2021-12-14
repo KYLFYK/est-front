@@ -6,9 +6,8 @@ import css from './PaybackContainer.module.css'
 import DynamicsPriceTable from "../../shared/DynamicsPrice/DynamicsPriceTable";
 import AverageMarketPrice from "../../shared/AverageMarketPrice/AverageMarketPrice";
 import Map from "../../containers/Maps/MapPayback/index";
-import {currentHouse} from "../../containers/Maps/MapPayback/config";
-import {objects} from "../../containers/Maps/MapPayback/config";
 import Typography from "../../shared/Typography/Typography";
+import {currentHouse, objects} from "../Maps/MapPayback/config";
 
 type PaybackContainerType = {
     averagePrice:{
@@ -20,6 +19,18 @@ type PaybackContainerType = {
         priceMetreEU:string
     }
 }
+const table = [
+    {name: 'Январь 2018', price: '50000'},
+    {name: 'Июль 2018', price: '55000'},
+    {name: 'Январь 2019', price: '56000'},
+    {name: 'Июль 2019', price: '61000'},
+    {name: 'Январь 2020', price: '62000'},
+    {name: 'Июль 2020', price: '67000'},
+    {name: 'Январь 2021', price: '68000'},
+    {name: 'Июль 2021', price: '71000'},
+]
+
+
 
 const PaybackContainer :FC<PaybackContainerType> = ({averagePrice}) => {
     return (
@@ -30,7 +41,7 @@ const PaybackContainer :FC<PaybackContainerType> = ({averagePrice}) => {
                     <DynamicsPrice/>
                 </div>
                 <div className={css.columnGrid_Bottom}>
-                    <DynamicsPriceTable/>
+                    <DynamicsPriceTable table={table} />
                     <AverageMarketPrice averagePrice={averagePrice} />
                 </div>
                 <div style={{margin: '30px 0 0 0'}}>

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, {FC, useState} from 'react';
 import css from './DynamicsPrice.module.scss'
 import {Card} from "../Mortgage/Card";
 import {Chart} from "./Chart";
@@ -6,7 +6,11 @@ import QuestionIcon from './QuestionIcon.svg';
 import Typography from "../Typography/Typography";
 import Image from 'next/image'
 
-const DynamicsPriceTable = () => {
+type DynamicsPriceTableType = {
+    table:Array<{name:string,price:string}> // name - x; price - y
+}
+
+const DynamicsPriceTable :FC<DynamicsPriceTableType> = ({table}) => {
     const [cardX, setCardX] = useState(0);
     const [cardhover, setCardhover] = useState<boolean[]>([false, false, false]);
     const [cardCoords, setCardcoords] = useState<[number, number]>([0, 0])
@@ -33,6 +37,7 @@ const DynamicsPriceTable = () => {
                         Динамика изменения стоимости за м² в этом районе
                         <Image
                             id={'2'}
+                            loader={() => QuestionIcon} unoptimized 
                             src={QuestionIcon}
                             height={20}
                             width={20}
@@ -43,7 +48,7 @@ const DynamicsPriceTable = () => {
                     </div>
                 </Typography>
                 <Card style={{ backgroundColor: '#FFF', border: 'solid 1px #F2F2F2', margin: '20px 0 0 0', padding: '0px' }} >
-                    <Chart heightValue={cardHeight} language={'ru'} />
+                    <Chart heightValue={cardHeight} language={'ru'} table={table} divider={5000} currency={true} />
                 </Card>
             </div>
         </div>

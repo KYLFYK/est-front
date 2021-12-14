@@ -1,0 +1,35 @@
+.columnGrid{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+.activeColumn{
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+}
+.marginCard{
+  margin:20px 0;
+  padding: 20px;
+}
+.marginTypo{
+  margin-top: 10px ;
+}
+.marginTop1{
+  margin-top: 10px;
+}
+.marginTop2{
+  margin-top: 20px;
+}
+.priceTable{
+  font-size: 12px;
+  position: relative;
+  top:10px;
+  left:20px;
+}
+.cardStyle{
+  padding: 0;
+  background: #FFFFFF;
+  border: 1px solid #F2F2F2;
+  margin: 20px 0;
+  margin-right: 20px;
+}

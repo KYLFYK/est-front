@@ -18,6 +18,7 @@ interface Props extends ICreateObjectControls {
 }
 
 const AboutObjectTab: React.FC<Props> = observer(({ onNextTab, onPrevTab, objectType }) => {
+
     const { createObjectStore } = useStores()
     const [values, setValues] = React.useState<TAboutTabState>(getInitStateAboutTab(objectType, createObjectStore))
     const [isValid, setIsValid] = useState<boolean>(true)

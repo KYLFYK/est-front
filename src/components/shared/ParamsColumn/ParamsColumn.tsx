@@ -10,7 +10,7 @@ const ParamsColumn :FC<ParamsColumnType>= ({title,value}) => {
     return (
         <div  className={css.column}>
             <Typography size={'default'} color="accent" weight="light">{title}</Typography>
-            <Typography size={'default'}> {value} </Typography>
+            <Typography className={css.padding_top} size={'default'}> {value} </Typography>
         </div>
     );
 };

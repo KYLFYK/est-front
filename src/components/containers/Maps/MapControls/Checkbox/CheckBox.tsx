@@ -13,13 +13,14 @@ interface Props {
 }
 
 export const CheckBox: React.FC<Props> = ({ uniqueTypesList, pressed, handlePressed }) => {
-
     const renderFilterLists = () => uniqueTypesList && uniqueTypesList.map((typeOption, index) => (
         <div key={index} className={s.elem}>
             <button onClick={() => handlePressed && handlePressed(typeOption.label)} className={`${s.elem} ${s.button}`}>
                 <div className={s.buttonContent}>
-                    {pressed && <Image width='50px' height='50px' alt='icon' 
-                                    src={OpenStreetIconsFactory(typeOption.value as ObjectTypes, pressed.indexOf(typeOption.label) >= 0, 'checkbox') as string} 
+                    {pressed && <Image loader={() => OpenStreetIconsFactory(typeOption.value as ObjectTypes, pressed.indexOf(typeOption.label) >= 0, 'checkbox') as string} 
+                                    unoptimized
+                                    src={OpenStreetIconsFactory(typeOption.value as ObjectTypes, pressed.indexOf(typeOption.label) >= 0, 'checkbox') as string}
+                                    width='50px' height='50px' alt='icon' 
                                 />
                     }
                     <div className={s.buttonTitle}>{Object.values(ObjectTypes).includes(typeOption.label as ObjectTypes) ? typeOption.label : typeOption.label}</div>
