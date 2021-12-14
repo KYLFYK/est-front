@@ -13,7 +13,6 @@ interface Props {
 }
 
 export const CheckBox: React.FC<Props> = ({ uniqueTypesList, pressed, handlePressed }) => {
-    console.log(OpenStreetIconsFactory(typeOption.value as ObjectTypes, pressed.indexOf(typeOption.label) >= 0, 'checkbox') as string)
     const renderFilterLists = () => uniqueTypesList && uniqueTypesList.map((typeOption, index) => (
         <div key={index} className={s.elem}>
             <button onClick={() => handlePressed && handlePressed(typeOption.label)} className={`${s.elem} ${s.button}`}>
