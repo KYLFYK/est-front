@@ -1,8 +1,6 @@
 import React from 'react'
 import Document, { Html, Head, Main, NextScript } from 'next/document'
 import { ServerStyleSheets } from '@material-ui/styles'
-import { createTheme, responsiveFontSizes } from '@material-ui/core/styles'
-
 
 class MyDocument extends Document {
   render() {

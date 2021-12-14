@@ -1,5 +1,4 @@
 import React, {useState} from 'react';
-
 import Link from 'next/link'
 import css from './SelectUser.module.scss'
 import { useOnOutsideClick } from '../../../../hooks/useOnOutsideClick';

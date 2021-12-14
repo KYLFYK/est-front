@@ -1,9 +1,6 @@
 import React, { ReactNode } from 'react';
 import s from './NameEstate.module.scss'
 import Typography from "../Typography/Typography";
-import { IOption } from '../../../utils/interfaces/general';
-import classNames from 'classnames';
-
 
 type NameEstatePropsType = {
     item: string

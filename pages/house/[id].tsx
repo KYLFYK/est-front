@@ -12,7 +12,7 @@ import ObjectDescription from '../../src/components/containers/ObjectDescription
 import {DESCRIPTION_ITEMS} from '../../src/components/containers/ObjectDescription/config'
 import ToursContainer from "../../src/components/containers/ToursContainer/ToursContainer"
 import ObjectSpecifications from '../../src/components/containers/ObjectSpecifications/ObjectSpecifications'
-import { OBJECT_SPECS_MOCK, OBJECT_SPEC_WITHOUT_TEXT } from '../../src/components/containers/ObjectSpecifications/config'
+import { OBJECT_SPECS_MOCK } from '../../src/components/containers/ObjectSpecifications/config'
 import Map from '../../src/components/containers/Maps/MapInfrastructure/index'
 import { currentHouse, infrastructura } from '../../src/components/containers/Maps/MapInfrastructure/config'
 import ObjectLegalPurity from '../../src/components/containers/ObjectLegalPurity/ObjectLegalPurity'

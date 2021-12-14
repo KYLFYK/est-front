@@ -30,14 +30,12 @@ import FavoriteIcon from '../src/icons/Favorite/Favorite'
 import { OfferNews } from '../src/components/containers/OfferNews/offerNews'
 import Header from '../src/components/widget/Header/Header'
 import { mocAdvantages } from '../src/components/containers/AdvantageList/config'
-import DeveloperTabs from '../src/components/tabs/Developer'
 import {Record} from "../src/components/containers/Record/Record";
 import {Mortgage} from "../src/components/shared/Mortgage/Mortgage";
 import ToursContainer from "../src/components/containers/ToursContainer/ToursContainer";
 import {ThreeDTour} from "../src/components/containers/ToursContainer/Tours/ThreeDTour/ThreeDTour";
 import {VRTour} from "../src/components/containers/ToursContainer/Tours/VRTour/VRTour";
 import OurOffice from "../src/components/containers/OurOffice/OurOffice";
-import AverageMarketPrice from "../src/components/shared/AverageMarketPrice/AverageMarketPrice";
 import PaybackContainer from "../src/components/containers/PaybackContainer/PaybackContainer";
 import VerticalTabs from '../src/components/shared/VerticalTabs/VerticalTabs'
 import {ScrollUp} from '../src/components/shared/ScrollUp/ScrollUp'

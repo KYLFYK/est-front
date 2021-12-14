@@ -1,9 +1,6 @@
 import React, { ReactNode } from 'react';
 import s from './AdressEstate.module.scss'
 import Typography from "../Typography/Typography";
-import { IOption } from '../../../utils/interfaces/general';
-import classNames from 'classnames';
-
 
 type AdressEstatePropsType = {
     item: string

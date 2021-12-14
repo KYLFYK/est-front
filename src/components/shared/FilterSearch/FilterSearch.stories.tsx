@@ -1,9 +1,6 @@
 import React from 'react';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 import FilterSearch from './FilterSearch';
-import { IMAGES_SET } from '../../containers/GeneralInfo/config';
-
-
 
 export default {
     title: 'Components/FilterCabinet',

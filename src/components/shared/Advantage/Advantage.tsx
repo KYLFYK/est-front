@@ -1,7 +1,6 @@
 import React, { ReactNode } from 'react';
 import css from './Advantage.module.scss'
 import Typography from "../Typography/Typography";
-import { IOption } from '../../../utils/interfaces/general';
 import classNames from 'classnames';
 
 
