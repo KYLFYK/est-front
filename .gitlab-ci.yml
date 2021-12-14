@@ -18,8 +18,8 @@ build:
   image: node:14.17.4
   script:
     - yarn  install
-    - yarn build-storybook
-    #- yarn build
+    #- yarn build-storybook
+    - yarn build
 
   artifacts:
     paths:
