@@ -1,4 +1,4 @@
-import { observer } from 'mobx-react-lite'
+// import { observer } from 'mobx-react-lite'
 import Link from 'next/link'
 import React from 'react'
 import NavArrowIcon from '../../../../icons/NavArrow/NavArrow'

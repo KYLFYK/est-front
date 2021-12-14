@@ -22,8 +22,8 @@ export const ToggleButtons: React.FC<Props> = ({ items, activeValue, classNameBu
     return (
         <div className={s.wrapper}>
 
-            {items.map((button, idx) => <>
-                <button key={idx} className={classNames(
+            {items.map((button, idx) => <span key={idx}>
+                <button  className={classNames(
                     s.button, 
                     checkIsActive(button.value) && s.activeButton,
                     classNameButton,
@@ -34,7 +34,7 @@ export const ToggleButtons: React.FC<Props> = ({ items, activeValue, classNameBu
                     }
                      )} value={button.value} onClick={() => onChange(button.value as string)}> {button.label} </button>
                 {idx !== items.length - 1 && !checkIsActive(button.value) && <div className={s.divider}></div>}
-            </>)}
+            </span>)}
         </div>
     )
 }

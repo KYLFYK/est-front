@@ -1,0 +1,46 @@
+.marginTitle{
+  margin-bottom: 10px;
+}
+.marginRight{
+  margin-right: 20px;
+}
+.marginLeft{
+  margin-left: 20px;
+}
+.card_base{
+  border: 1px solid #FCFCFC;
+  border-radius: 6px;
+  background: #FFFFFF;
+  padding: 27px 30px;
+}
+.card_standard{
+  border: 1px solid #1A4862;
+  border-radius: 6px;
+  background: #FFFFFF;
+  padding: 27px 30px;
+}
+.card_premium{
+  border: 1px solid #1A4862;
+  border-radius: 6px;
+  background: #1A4862;
+  padding: 27px 30px;
+}
+.textWhite{
+  color:#FFFFFF
+}
+.buttonStyle{
+  width: 100%;
+  margin-top: 10px;
+}
+.tableBuy{
+  display: grid;
+  grid-template-columns: 150px 1fr 130px 120px;
+  margin-top:30px;
+  margin-bottom: 15px;
+}
+.tableInfo{
+  display: grid;
+  grid-template-columns: 150px 1fr 130px 120px;
+  margin-top:15px;
+  margin-bottom: 15px;
+}

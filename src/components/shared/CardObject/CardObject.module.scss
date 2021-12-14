@@ -1,0 +1,11 @@
+.image {
+  border: 1px solid rgba(0, 0, 0, 0);
+  border-radius: 8px 0 0 8px;
+  height: 126px;
+  width: 229px;
+}
+.card{
+  display: grid;
+  grid-template-columns: 229px 1fr;
+}
+

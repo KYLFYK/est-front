@@ -2,8 +2,6 @@ import React from 'react';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 import {RecoveryMail} from './RecoveryMail';
 
-
-
 export default {
     title: 'Components/Header',
     component: RecoveryMail,

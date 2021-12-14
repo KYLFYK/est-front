@@ -1,0 +1,26 @@
+.column{
+  display: flex;
+  justify-content: space-between;
+}
+.df{
+  display: flex;
+}
+.df_w{
+  display: grid;
+  grid-template-columns: 2fr 2fr 5fr;
+}
+.margin{
+  margin:0 5px;
+  height: 40px ;
+}
+.card{
+  border: 1px solid #F2F2F2;
+  background: rgba( 0 ,0,0,0);
+  margin: 20px 0 20px 0;
+}
+.marginTextBlock{
+  padding-right: 20px;
+}
+.marginText{
+  margin: 10px 0;
+}

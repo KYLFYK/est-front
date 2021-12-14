@@ -1,0 +1,92 @@
+.column{
+  display: grid;
+  grid-template-columns: 300px 1fr;
+  gap:20px
+}
+.borderInfo{
+  border-radius: 6px;
+  border: 1px solid #F2F2F2;
+  padding: 10px 12px;
+  margin-bottom:10px;
+}
+.activeBorder{
+  background: #F2F2F2;
+}
+.textMargin{
+  margin: 5px 0 15px 0;
+}
+.borderChat{
+  border: 1px solid #F2F2F2;
+  border-radius: 6px 6px 0 0;
+  padding: 20px ;
+}
+.typographyCenter{
+  text-align: center;
+  margin:22px 0;
+}
+.borderChatMessage{
+  border: 1px solid #F2F2F2;
+  border-radius: 6px;
+  padding: 12px ;
+  margin-bottom: 10px;
+  min-width: 250px;
+}
+.marginTopTime{
+  margin-top: 16px;
+}
+.statusMargin{
+  margin-top: 3px;
+  margin-bottom: 16px;
+}
+.textLength{
+  width: 270px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow:ellipsis;
+}
+.baseButton{
+  border-radius: 0 0 6px 6px;
+  border: 1px solid #F2F2F2;
+  border-top: 0;
+}
+.recoverText{
+  padding: 30px 0;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid #F2F2F2;
+  border-radius: 0 0 6px 6px;
+  border-top: 0;
+  cursor: pointer;
+}
+.marginL_5{
+  margin-left: 5px;
+}
+.iconPosition{
+  margin-left: 5px;
+  height: 17px;
+  display: flex;
+}
+.iconMessageNumber{
+  position: relative;
+  top:4px;
+  font-size: 8px;
+  color:#9495A7;
+}
+.df{
+  display: flex;
+}
+.df_jc{
+  display: flex;
+  justify-content: space-between;
+}
+.df_ai{
+  display: flex;
+  align-items: center;
+}
+.df_ml_c{
+  display: flex;
+  margin-left: 8px;
+  cursor:pointer;
+}

@@ -7,7 +7,6 @@ import {Card} from './Card';
 import BaseButton from "../BaseButton/BaseButtons";
 import {BaseDropDown} from "../BaseDropDown/BaseDropDown";
 import {BaseInput} from "../BaseInput/Input";
-import {CloseOutlined} from "@mui/icons-material";
 import {
     EarlyPaymentButtonsTypes,
     IEarlyPaymentState,
@@ -307,9 +306,8 @@ export const Mortgage: React.FC<Props> = ({}) => {
                 <div className={s.container}>
                     {cardhover.map((c, index) => {
                         return (
-                            c === true
-                                ?
-                                <Card key={index}
+                            c
+                            && <Card key={index}
                                       style={{
                                           backgroundColor: '#FFFFFF',
                                           position: 'absolute',
@@ -326,8 +324,6 @@ export const Mortgage: React.FC<Props> = ({}) => {
                                         {descriptions[index]}
                                     </Typography>
                                 </Card>
-                                :
-                                <></>
                         )
                     })}
                     <Card>

@@ -1,0 +1,23 @@
+.title{
+  margin: 20px 0 20px 0;
+  cursor: pointer;
+}
+.block {
+  transform: translateY(-150%);
+  animation: ani 1s forwards;
+}
+
+@keyframes ani {
+  0% {transform: translateY(-150%);}
+  100% {transform: translateY(0);}
+}
+
+.hiddenBlock {
+  height: 0;
+  overflow: hidden;
+  transition: height 0.5s;
+}
+
+.hiddenBlock.is_active {
+  height: 150px;
+}

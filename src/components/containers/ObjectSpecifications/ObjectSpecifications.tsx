@@ -1,7 +1,4 @@
 import React from "react"
-import InfrastructureAnalysis from "../../../icons/Advantages/InfrastructureAnalysis"
-import FavoriteIcon from "../../../icons/Favorite/Favorite"
-import { HouseIcon } from "../../../icons/Specifications/House"
 import { searchIconByValue } from "../../../utils/general/icons"
 import { IOption } from "../../../utils/interfaces/general"
 import { Advantage } from "../../shared/Advantage/Advantage"
@@ -32,8 +29,8 @@ const ObjectSpecifications: React.FC<Props> = ({ specificationsLists, title }) =
                     return <div key={idx}>
                         <Typography weight="bold" className={s.subTitle}>{specList.subtitle}</Typography>
                         <div className={s.specsList}>
-                            {specList.specificationsItems.map((spec) =>
-                                <Advantage variant="secondary" text={spec.label.text} title={spec.label.title} key={spec.value}>
+                            {specList.specificationsItems.map((spec,index) =>
+                                <Advantage variant="secondary" text={spec.label.text} title={spec.label.title} key={index}>
                                     {searchIconByValue(spec.value as string)}
                                 </Advantage>
                             )}

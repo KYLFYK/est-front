@@ -1,4 +1,4 @@
-import React, {FC, useEffect, useState} from 'react';
+import React, {FC, useState} from 'react';
 import Link from 'next/link';
 import { SelectUser } from "./SelectUser/SelectUser";
 import LogoMain from '../../../icons/Header/LogoMain';

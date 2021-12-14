@@ -9,7 +9,7 @@ import { HorizontalTabs } from '../../components/shared/HorizontalTabs/Horizonta
 import {IMAGES_SET, INFO_OPTIONS} from '../../components/containers/GeneralInfo/config'
 import GeneralInfo from '../../components/containers/GeneralInfo/GeneralInfo'
 import ObjectSpecifications from '../../components/containers/ObjectSpecifications/ObjectSpecifications'
-import { OBJECT_SPECS_MOCK, OBJECT_SPEC_WITHOUT_TEXT } from '../../components/containers/ObjectSpecifications/config'
+import { OBJECT_SPECS_MOCK } from '../../components/containers/ObjectSpecifications/config'
 import Planning from '../../components/containers/Planning/Planning/Plannings'
 import PlanningFilter from '../../components/containers/PlanningFilter/PlanningFilter'
 import Map from '../../components/containers/Maps/MapInfrastructure/index'

@@ -1,6 +1,5 @@
 import React from 'react'
 import { makeStyles } from "@material-ui/core"
-import HeadLine from '../../shared/HeadLine/HeadLine'
 import ObjectCard from '../Card/index'
 import {BaseDropDown} from '../../shared/BaseDropDown/BaseDropDown'
 import BaseButton from '../../shared/BaseButton/BaseButtons'
@@ -9,7 +8,7 @@ import {GridView} from '../../../icons/FinderPageIcon/GridView'
 import {MapView} from '../../../icons/FinderPageIcon/MapView'
 import { OpenCloseMapButton } from "./OpenCloseMapButton";
 import s from './styles.module.scss'
-import { DROPDOWN_FILTER_OPTIONS, DROPDOWN_PLACEHOLDER, SORT_FILTER_OPTIONS, TOGGLE_BUTTONS_OPTIONS } from "../PlanningFilter/config"
+import {  DROPDOWN_PLACEHOLDER, SORT_FILTER_OPTIONS } from "../PlanningFilter/config"
 import { ToggleButtonsWithIcons } from '../../shared/ToggleButtonsWithIcons/ToggleButtonsWithIcons'
 
 // TODO: Take types from 'model' folder, when global state gets its types

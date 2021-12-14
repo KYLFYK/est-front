@@ -2,8 +2,6 @@ import React from 'react';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 import {Registration} from './Registration';
 
-
-
 export default {
     title: 'Components/Header',
     component: Registration,

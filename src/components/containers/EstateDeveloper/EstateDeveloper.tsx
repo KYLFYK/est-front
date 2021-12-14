@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { Modal } from '../../shared/Modal/Modal';
 import css from './EstateDevelopers.module.scss'
 import Typography from "../../shared/Typography/Typography";
 import { DeveloperDataModal } from '../DeveloperDataModal/DeveloperDataModal';

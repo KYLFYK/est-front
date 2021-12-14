@@ -1,12 +1,10 @@
-import { Divider } from "@material-ui/core"
 import { observer } from "mobx-react-lite"
-import React, { useEffect } from "react"
+import React from "react"
 import { useStores } from "../../../../../hooks/useStores"
 import { ICreateLandInfoTab } from "../../../../../mobx/types/CreateObjectStoresTypes/CreateLandStoreType"
 import { ObjectTypes } from "../../../../../utils/interfaces/objects"
 import { BaseDropDown } from "../../../../shared/BaseDropDown/BaseDropDown"
 import { INFO_TAB_HOUSE_TYPE } from "../../config"
-import { getInitialStateInfoTab } from "../../lib"
 import ButtonPanel, { ICreateObjectControls } from "../ButtonsPanel/ButtonsPanel"
 import InputsGroup from "../InputsGroup/InputsGroup"
 import s from './LandInfoTab.module.scss'
