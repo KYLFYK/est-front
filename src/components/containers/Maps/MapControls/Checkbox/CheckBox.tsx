@@ -17,7 +17,8 @@ export const CheckBox: React.FC<Props> = ({ uniqueTypesList, pressed, handlePres
         <div key={index} className={s.elem}>
             <button onClick={() => handlePressed && handlePressed(typeOption.label)} className={`${s.elem} ${s.button}`}>
                 <div className={s.buttonContent}>
-                    {pressed && <Image 
+                    {pressed && <Image loader={() => OpenStreetIconsFactory(typeOption.value as ObjectTypes, pressed.indexOf(typeOption.label) >= 0, 'checkbox') as string} 
+                                    unoptimized
                                     src={OpenStreetIconsFactory(typeOption.value as ObjectTypes, pressed.indexOf(typeOption.label) >= 0, 'checkbox') as string}
                                     width='50px' height='50px' alt='icon' 
                                 />

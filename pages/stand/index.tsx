@@ -76,7 +76,7 @@ const emunsArray = [{ title: 'цена', value: '5 000 000 ' }, { title: 'Тип
 const home = ['Москва', 'Санкт-Петербург', 'Крым', 'Нижний Новгород']
 
 const Online_tour = {
-  '3d_tour': {
+  threeD_tour: {
       url: 'https://www.youtube.com/embed/Ke3qyQYNob4',
   },
   vr_tour: {
@@ -190,6 +190,7 @@ const Home: NextPage = () => {
 
 return (
   <div style={{ display: 'flex', gap: '15px', flexDirection: 'column' }}>
+    {/*
     <div style={{ display: 'flex', gap: '15px', alignItems: 'center' }}>
       <h3>Buttons:</h3>
       <BaseButton type="secondary" icon={<FavoriteIcon />}>Кнопка с иконкой</BaseButton>
@@ -235,8 +236,8 @@ return (
 
           <h3>CustomSidebarTabs : ??</h3>
           <VerticalTabs tabs={[
-              {title: '3D тур', Component: <ThreeDTour url={Online_tour["3d_tour"].url}/>},
-              {title: 'VR тур', Component: <VRTour url={Online_tour["vr_tour"].url}/>}
+              {title: '3D тур', Component: <ThreeDTour url={Online_tour.threeD_tour.url}/>},
+              {title: 'VR тур', Component: <VRTour url={Online_tour.vr_tour.url}/>}
           ]}/>
 
     <hr color={'red'} style={{ width: '100%' }} />
@@ -261,6 +262,7 @@ return (
       }
     </EnumerationColumn>
     <h3>CardAgency :</h3>
+    {/*
     <CardAgency
       id={1}
       onDelete={() => console.log(1)}
@@ -269,6 +271,7 @@ return (
       description={'lorem ipsum'}
       phone={'+7 000 222 11'}
     />
+    
     <h3>EditingProfile :</h3>
     <EditingProfile title={'DEAL'} />
     <h3>UploadPhoto :</h3>
@@ -312,6 +315,7 @@ return (
           averagePrice={averagePrice}
       />
       <ScrollUp/>
+      */}
   </div>
 )
 }

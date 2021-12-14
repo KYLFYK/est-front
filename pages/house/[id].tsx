@@ -75,7 +75,7 @@ const averagePrice ={
 const House: NextPage = () => {
 
   const router = useRouter()
-  const currentObject = fullObjectData.filter((fod) => fod.object_id === Number(router.query.id))[0]
+  const currentObject = Number(router.query.id) ? fullObjectData.filter((fod) => fod.object_id === Number(router.query.id))[0] : fullObjectData[0]
 
   const breadcrumbs = ['Крым', 'Купить участок', `${currentObject.name}`]
   const views = ['12.06.2021', '389', 'Агентство: Лунный свет']

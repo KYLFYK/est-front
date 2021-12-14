@@ -152,6 +152,7 @@ const PaybackPeriod = () => {
                                     Арендные платежи
                                     <Image
                                         id={"0"}
+                                        loader={() => QuestionIcon} unoptimized
                                         src={QuestionIcon}
                                         onMouseEnter={onMouseCardhoverHandler}
                                         onMouseLeave={onMouseCardoutHandler}
@@ -174,6 +175,7 @@ const PaybackPeriod = () => {
                                     Чистый доход
                                     <Image
                                         id={"1"}
+                                        loader={() => QuestionIcon} unoptimized
                                         src={QuestionIcon}
                                         onMouseEnter={onMouseCardhoverHandler}
                                         onMouseLeave={onMouseCardoutHandler}

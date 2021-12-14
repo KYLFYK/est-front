@@ -5,20 +5,19 @@ import Typography from '../../../shared/Typography/Typography'
 import { formatNumbersToCurrency } from '../../../../utils/general'
 
 interface Props {
-    image: string | StaticImageData,
+    image: string,
     price: number,
     title: string,
     housing: number,
     floor: number,
     deadline: string
-
 }
 
 const Card: React.FC<Props> = ({ image, price, title, housing, floor, deadline }) => {
     return (
         <div className={s.wrapper}>
             <div className={s.imgContainer}>
-                <Image src={image} layout={'fill'} alt="Planning image" className={s.img} />
+                <Image loader={() => image} unoptimized src={image} layout={'fill'} alt="Planning image" className={s.img} />
             </div>
             <div className={s.content}>
                 <div className={s.contentRow}>

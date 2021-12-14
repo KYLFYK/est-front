@@ -59,7 +59,7 @@ const tabs = [{
 ]
 
 const Online_tour = {
-  '3d_tour': {
+  threeD_tour: {
       url: 'https://www.youtube.com/embed/Ke3qyQYNob4',
   },
   vr_tour: {
