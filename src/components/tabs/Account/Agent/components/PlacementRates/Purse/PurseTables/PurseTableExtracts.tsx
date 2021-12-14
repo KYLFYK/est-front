@@ -9,12 +9,12 @@ import TableRow from '@mui/material/TableRow';
 import TableHead from "@mui/material/TableHead";
 import TableSortLabel from "@mui/material/TableSortLabel";
 import {visuallyHidden} from "@mui/utils";
-import Typography from "@mui/material/Typography";
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 export type Order = 'asc' | 'desc';
 import css from './PurseTableOperation.module.scss'
 import { FC } from 'react';
 import {getComparator, rows, stableSort} from "../../../PersonalCabinetTab/components/Agents/Transformation";
+import Typography from "../../../../../../../shared/Typography/Typography";
 
 type HeadCell = {
     disablePadding: boolean;
@@ -24,20 +24,20 @@ type HeadCell = {
 }
 
 type Data ={
-    number: string
-    date: string
+    id: string
+    dateFrom: string
     sum: string
 }
 
 const headCells: HeadCell[] = [
     {
-        id: 'number',
+        id: 'id',
         numeric: true,
         disablePadding: true,
         label: 'Номер',
     },
     {
-        id: 'date',
+        id: 'dateFrom',
         numeric: true,
         disablePadding: false,
         label: 'Дата',
@@ -52,8 +52,9 @@ const headCells: HeadCell[] = [
 
 type  PurseTableExtractsType={
     extracts:Array<{
-        number:string
-        date:string
+        id:string
+        dateFrom:string
+        dateTo:string
         sum:string
     }>
 }
@@ -61,20 +62,16 @@ type  PurseTableExtractsType={
 export const  PurseTableExtracts :FC<PurseTableExtractsType> = ({extracts}) => {
 
     const [order, setOrder] = React.useState<Order>('asc');
-    const [orderBy, setOrderBy] = React.useState<keyof Data>('date');
+    const [orderBy, setOrderBy] = React.useState<keyof Data>('sum');
     const [selected, setSelected] = React.useState<readonly string[]>([]);
     const [page, setPage] = React.useState(0);
     const [rowsPerPage, setRowsPerPage] = React.useState(12);
-
-    // useEffect(() => {
-    //     dispatch(getObjects())
-    // }, [dispatch])
 
     const handleRequestSort = (
         event: React.MouseEvent<unknown>,
         property: keyof Data,
     ) => {
-        if (property !== "number") {
+        if (property !== "sum") {
             const isAsc = orderBy === property && order === 'asc';
             setOrder(isAsc ? 'desc' : 'asc');
             setOrderBy(property);
@@ -107,12 +104,12 @@ export const  PurseTableExtracts :FC<PurseTableExtractsType> = ({extracts}) => {
         page > 0 ? Math.max(0, (1 + page) * rowsPerPage - rows.length) : 0;
 
     return (
-        <Box sx={{width: '1440px'}}>
+        <Box sx={{ minWidth: 670 }}>
             <>
                 <div>
                     <TableContainer>
                         <Table
-                            sx={{width: '1420px'}}
+                            sx={{ minWidth: 650 }}
                             aria-labelledby="tableTitle"
                             size={'small'}
                         >
@@ -133,7 +130,7 @@ export const  PurseTableExtracts :FC<PurseTableExtractsType> = ({extracts}) => {
                                 {stableSort(extracts, getComparator(order, orderBy))
                                     .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                                     .map((extract, index) => {
-                                        const isItemSelected = isSelected(extract.date);
+                                        const isItemSelected = isSelected(extract.dateFrom);
                                         const labelId = `enhanced-table-checkbox-${index}`;
                                         return (
                                             <TableRow
@@ -157,8 +154,8 @@ export const  PurseTableExtracts :FC<PurseTableExtractsType> = ({extracts}) => {
                                                             <path d="M9.5 3V0L14 4.5H11C10.6022 4.5 10.2206 4.34196 9.93934 4.06066C9.65804 3.77936 9.5 3.39782 9.5 3Z" fill="#1A4862"/>
                                                             <path fillRule="evenodd" clipRule="evenodd" d="M5 11.5C5 11.3674 5.05268 11.2402 5.14645 11.1464C5.24021 11.0527 5.36739 11 5.5 11H7.5C7.63261 11 7.75979 11.0527 7.85355 11.1464C7.94732 11.2402 8 11.3674 8 11.5C8 11.6326 7.94732 11.7598 7.85355 11.8536C7.75979 11.9473 7.63261 12 7.5 12H5.5C5.36739 12 5.24021 11.9473 5.14645 11.8536C5.05268 11.7598 5 11.6326 5 11.5ZM5 9.5C5 9.36739 5.05268 9.24021 5.14645 9.14645C5.24021 9.05268 5.36739 9 5.5 9H10.5C10.6326 9 10.7598 9.05268 10.8536 9.14645C10.9473 9.24021 11 9.36739 11 9.5C11 9.63261 10.9473 9.75979 10.8536 9.85355C10.7598 9.94732 10.6326 10 10.5 10H5.5C5.36739 10 5.24021 9.94732 5.14645 9.85355C5.05268 9.75979 5 9.63261 5 9.5ZM5 7.5C5 7.36739 5.05268 7.24021 5.14645 7.14645C5.24021 7.05268 5.36739 7 5.5 7H10.5C10.6326 7 10.7598 7.05268 10.8536 7.14645C10.9473 7.24021 11 7.36739 11 7.5C11 7.63261 10.9473 7.75979 10.8536 7.85355C10.7598 7.94732 10.6326 8 10.5 8H5.5C5.36739 8 5.24021 7.94732 5.14645 7.85355C5.05268 7.75979 5 7.63261 5 7.5Z" fill="#1A4862"/>
                                                         </svg>
-                                                        <Typography  >
-                                                            {extract.number}
+                                                        <Typography size={"small"}  >
+                                                            {extract.id}
                                                         </Typography>
                                                     </div>
 
@@ -166,16 +163,18 @@ export const  PurseTableExtracts :FC<PurseTableExtractsType> = ({extracts}) => {
                                                 <TableCell
                                                     width={'100px'}
                                                     align="left">
-                                                    <Typography className={css.marginTypo}  >
-                                                        {extract.date}
-                                                    </Typography>
+                                                        <Typography size={"small"} className={css.marginTypo}   >
+                                                            {extract.dateFrom.substring(0,10).split('-').reverse().join('.')}-
+                                                            {extract.dateTo.substring(0,10).split('-').reverse().join('.')}
+
+                                                        </Typography>
                                                 </TableCell>
                                                 <TableCell
                                                     width={'100px'}
                                                     align="left">
-                                                    <Typography className={css.marginTypo}  >
-                                                        {extract.sum}
-                                                    </Typography>
+                                                        <Typography size={"small"} className={css.marginTypo}   >
+                                                            {extract.sum}
+                                                        </Typography>
                                                 </TableCell>
 
                                             </TableRow>

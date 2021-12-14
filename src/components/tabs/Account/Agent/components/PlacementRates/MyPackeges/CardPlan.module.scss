@@ -44,3 +44,20 @@
   margin-top:15px;
   margin-bottom: 15px;
 }
+.textCenterBlock{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.textMargin{
+  margin: 10px;
+  cursor: pointer;
+}
+.df_mb20{
+  display: flex;
+  margin-bottom: 20px;
+}
+.df_mb10{
+  display: flex;
+  margin-bottom: 10px;
+}

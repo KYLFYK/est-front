@@ -195,7 +195,6 @@ const MyMessages :FC<MyMessagesType> = ({archive=false}) => {
 
     const [active, setActive] = useState<number>(0) // vision click chat
     const [chat, setChat] = useState<messagesType>(arrayMessage[active])
-    debugger
     const [dMessage, setDMessage] = useState(dateMessage[active])
     const [messageValue, setMessageValue] = useState<string>('')
     console.log(active)

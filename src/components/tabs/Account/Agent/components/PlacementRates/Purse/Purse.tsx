@@ -1,45 +1,40 @@
-import React, {FC} from 'react';
+import React, {FC, useEffect, useState} from 'react';
 import Typography from "../../../../../../shared/Typography/Typography";
 import BaseButton from "../../../../../../shared/BaseButton/BaseButtons";
-import css from './Purse.module.scss'
 import DisappearingTitle from "../../../../../../shared/DisappearingTitle/DisappearingTitle";
 import PurseTableOperation from "./PurseTables/PurseTableOperation";
 import PurseTableExtracts from "./PurseTables/PurseTableExtracts";
+import css from './Purse.module.scss'
 
 type PurseType={
     onClick:()=>void
     tariffPlan:string
     payerType:string
     resumePayment:boolean
+    balance:string
+    operation:Array<{id:string,date:string,sum:string,ads:string,typeTransaction:string,comment:string}>
+    extractsContract:Array<{id:string,dateFrom:string,dateTo:string,sum:string}>
 }
 
-const mocOperation=[
-    {id:'1',date:'21.03.2023',time:' 0:00',sum:'501,14 P',ads:'', typeTransaction:'', comment:"assd"},
-    {id:'2',date:'23.02.2023',time:' 0:00',sum:'500,14 P',ads:'', typeTransaction:'', comment:"assd"},
-    {id:'3',date:'24.03.2023',time:' 0:00',sum:'540,14 P',ads:'', typeTransaction:'', comment:"assd"},
-    {id:'4',date:'25.03.2023',time:' 0:00',sum:'503,14 P',ads:'', typeTransaction:'', comment:"assd"},
-    {id:'5',date:'27.01.2023',time:' 0:00',sum:'500,14 P',ads:'', typeTransaction:'', comment:"assd"},
-    {id:'6',date:'28.03.2023',time:' 0:00',sum:'500,14 P',ads:'', typeTransaction:'', comment:"assd"},
-    {id:'7',date:'21.03.2023',time:' 0:00',sum:'505,14 P',ads:'', typeTransaction:'', comment:"assd"},
-    {id:'8',date:'29.03.2023',time:' 0:00',sum:'520,14 P',ads:'', typeTransaction:'', comment:"assd"},
-    {id:'9',date:'22.03.2023',time:' 0:00',sum:'500,14 P',ads:'', typeTransaction:'', comment:"assd"},
-    {id:'10',date:'23.03.2023',time:' 0:00',sum:'510,14 P',ads:'', typeTransaction:'', comment:"assd"},
-    {id:'11',date:'25.03.2023',time:' 0:00',sum:'500,14 P',ads:'', typeTransaction:'', comment:"assd"},
-]
-const mocExtracts=[
-    {number:'1',date:'21.03.2023',sum:'501,14 P'},
-    {number:'2',date:'23.02.2023',sum:'501,14 P'},
-    {number:'3',date:'24.03.2023',sum:'501,14 P'},
-    {number:'4',date:'25.03.2023',sum:'501,14 P'},
-]
+const date = new Date()
 
-const Purse :FC<PurseType> = ({onClick,tariffPlan,payerType,resumePayment}) => {
+const Purse :FC<PurseType> = ({onClick,tariffPlan,payerType,resumePayment,balance,operation,extractsContract}) => {
+
+    const [extracts, setExtracts]=useState<Array<{id:string,dateFrom:string,dateTo:string,sum:string}> >(extractsContract)
+    const [valueDateStart,setValueDateStart]=useState<Date>(date)
+    const [valueDateEnd,setValueDateEnd]=useState<Date>(date)
+
+    useEffect(()=>{
+        const filterExtracts = extractsContract.map(t=>t.dateFrom>=valueDateStart.toISOString()
+        &&  t.dateTo<=valueDateEnd.toISOString() ? t :{id:'',dateFrom:date.toISOString(),dateTo:date.toISOString(),sum:''}).filter(t=>t.id !=='')
+        setExtracts(filterExtracts)
+    },[valueDateStart,valueDateEnd])
     return (
         <div>
             <div className={css.df_jc_ai}>
                 <div className={css.df_ai}>
                     <Typography weight={"bold"} className={css.marginR_70}>Ваш баланс</Typography>
-                    <Typography size={'big'} weight={"medium"} color={"nude"}>500,14 P</Typography>
+                    <Typography size={'big'} weight={"medium"} color={"nude"}>{balance}</Typography>
                 </div>
                 <BaseButton isActive type={"secondary"} onClick={onClick}>Пополнить</BaseButton>
             </div>
@@ -58,13 +53,21 @@ const Purse :FC<PurseType> = ({onClick,tariffPlan,payerType,resumePayment}) => {
             </div>
 
             <hr color={'#F2F2F2'}/>
-            <DisappearingTitle title={'Операции'} height={mocOperation.length}>
-                <PurseTableOperation operations={mocOperation} />
+            <DisappearingTitle title={'Операции'} height={operation.length+1}>
+                <PurseTableOperation operations={operation} />
             </DisappearingTitle>
 
             <hr color={'#F2F2F2'}/>
-            <DisappearingTitle title={'Выписки'} height={mocExtracts.length+1}>
-                <PurseTableExtracts extracts={mocExtracts} />
+            <DisappearingTitle
+                title={'Выписки'}
+                height={extracts.length+1}
+                DatePicker={true}
+                valueDateStart={valueDateStart}
+                valueDateEnd={valueDateEnd}
+                onValueDateStart={setValueDateStart}
+                onValueDateEnd={setValueDateEnd}
+            >
+                <PurseTableExtracts extracts={extracts}  />
             </DisappearingTitle>
         </div>
     );

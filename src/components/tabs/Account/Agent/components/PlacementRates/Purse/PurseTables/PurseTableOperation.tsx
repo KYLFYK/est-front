@@ -9,12 +9,12 @@ import TableRow from '@mui/material/TableRow';
 import TableHead from "@mui/material/TableHead";
 import TableSortLabel from "@mui/material/TableSortLabel";
 import {visuallyHidden} from "@mui/utils";
-import Typography from "@mui/material/Typography";
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
-export type Order = 'asc' | 'desc';
-import css from './PurseTableOperation.module.scss'
 import { FC } from 'react';
 import {getComparator, rows, stableSort} from "../../../PersonalCabinetTab/components/Agents/Transformation";
+export type Order = 'asc' | 'desc';
+import Typography from "../../../../../../../shared/Typography/Typography";
+import css from './PurseTableOperation.module.scss'
 
 type HeadCell = {
     disablePadding: boolean;
@@ -68,7 +68,6 @@ type ActualObjectType={
     operations:Array<{
         id:string
         date:string
-        time:string
         sum:string
         ads:string
         typeTransaction:string
@@ -169,34 +168,39 @@ export const  PurseTableOperation :FC<ActualObjectType> = ({operations}) => {
                                                     padding="none"
                                                     width={'350px'}
                                                 >
-                                                    <Typography className={css.heightTable} >
-                                                        {operat.date}
+                                                    <Typography size={'small'} className={css.heightTable} >
+                                                        {operat.date.substring(0,10).split('-').reverse().join('.')}
+                                                        <div style={{marginLeft:"5px"}}>
+                                                            {operat.date.substring(11,16)}
+                                                        </div>
                                                     </Typography>
                                                 </TableCell>
                                                 <TableCell
                                                     width={'100px'}
                                                     align="left">
-                                                    <Typography className={css.heightTable}  >
+                                                    <Typography size={'small'} className={css.heightTable}  >
                                                         {operat.sum}
                                                     </Typography>
                                                 </TableCell>
                                                 <TableCell
                                                     width={'230px'}
                                                     align="left">
-                                                    <Typography className={css.heightTable}>
+                                                    <Typography size={'small'} className={css.heightTable}>
                                                         {operat.ads}
                                                     </Typography>
                                                 </TableCell>
                                                 <TableCell
                                                     width={'230px'}
                                                     align="left">
-                                                    <Typography >{operat.typeTransaction}</Typography>
+                                                    <Typography size={'small'} >
+                                                        {operat.typeTransaction}
+                                                    </Typography>
                                                 </TableCell>
                                                 <TableCell
                                                     width={'100px'}
                                                     align="left"
                                                 >
-                                                    <Typography className={css.heightTable}>
+                                                    <Typography size={'small'} className={css.heightTable}>
                                                         {operat.comment}
                                                     </Typography>
                                                 </TableCell>
