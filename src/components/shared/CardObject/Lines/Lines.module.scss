@@ -20,3 +20,24 @@
   cursor:pointer;
   margin: 0 3px
 }
+.lineGridV2{
+  height: 20px;
+  width: 860px;
+  display: grid;
+  grid-template-columns:1fr 215px 125px 40px ;
+  gap:22px;
+}
+.lineGridV3{
+  padding-top: 10px;
+  width: 860px;
+  display: grid;
+  grid-template-columns:1fr 215px 125px 40px ;
+  gap:22px;
+}
+.lineGridV5{
+  padding-top: 10px;
+  width: 860px;
+  display: grid;
+  grid-template-columns:1fr 1fr 215px 125px;
+  gap:22px;
+}

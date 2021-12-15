@@ -4,7 +4,7 @@ import FilterSearch from "../../../../../../shared/FilterSearch/FilterSearch";
 import CardObject from "../../../../../../shared/CardObject/CardObject";
 import Typography from "../../../../../../shared/Typography/Typography";
 import css from './Active.module.scss'
-import LinesV1 from "../../../../../../shared/CardObject/Lines/LinesV1";
+import LineV1 from "../../../../../../shared/CardObject/Lines/LineV1";
 import LineAddressV1 from "../../../../../../shared/CardObject/Lines/LineAddressV1";
 import LineArray from "../../../../../../shared/CardObject/Lines/LineArray";
 
@@ -61,7 +61,7 @@ const MyAdsContainer: FC<ActiveType> = ({menu,objects }) => {
                     <div key={home.id} className={css.borderCard}>
                         <CardObject img={home.img}>
                             <div className={css.paddingCard}>
-                                <LinesV1
+                                <LineV1
                                     id={home.id}
                                     onPublish={publish}
                                     onRecover={recover}

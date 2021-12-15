@@ -5,8 +5,7 @@ import {BaseInput} from "../../shared/BaseInput/Input";
 import { IconOption } from "../../../icons/SearchOffice/IconOption";
 
 type SearchOfficeType ={
-    type?:'active' | 'archive' | 'draft'
-    title?:string
+    type?:'active' | 'archive' | 'draft' | 'owner'
 }
 
 export const SearchOffice :FC<SearchOfficeType> = ({type}) => {
@@ -16,18 +15,20 @@ export const SearchOffice :FC<SearchOfficeType> = ({type}) => {
         <div className={css.search} >
             <div className={css.position}>
                 <div className={css.inputMargin}>
-                    <BaseInput  />
+                    <BaseInput />
                 </div>
-
                 <IconOption />
             </div>
-            <BaseButton
-                type={type!== 'archive' ? "secondary" : 'primary_light'}
-                isActive
-                className={css.textButton}
-            >
-                {type !== 'archive' ? 'Добавить объект' : 'Восстановить все'  }
-            </BaseButton>
+            {
+                type !== 'owner'
+                    && <BaseButton
+                        type={type!== 'archive' ? "secondary" : 'primary_light'}
+                        isActive
+                        className={css.textButton}
+                    >
+                        {type !== 'archive' ? 'Добавить объект' : 'Восстановить все'  }
+                    </BaseButton>
+            }
         </div>
     )
 }

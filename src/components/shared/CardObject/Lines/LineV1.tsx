@@ -16,7 +16,7 @@ type LinesV1Type = {
     typeMenu?:string
 }
 
-const LinesV1: FC<LinesV1Type> = ({price, name,onEdit ,onDelete,typeObject,type='editPlus',typeMenu,onPublish,id,onRecover}) => {
+const LineV1: FC<LinesV1Type> = ({price, name,onEdit ,onDelete,typeObject,type='editPlus',typeMenu,onPublish,id,onRecover}) => {
     return (
 
         <div  className={css.df_jc}>
@@ -84,4 +84,4 @@ const LinesV1: FC<LinesV1Type> = ({price, name,onEdit ,onDelete,typeObject,type=
     );
 };
 
-export default LinesV1;
+export default LineV1;
