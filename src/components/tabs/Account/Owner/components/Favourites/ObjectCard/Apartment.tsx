@@ -58,7 +58,6 @@ const Apartment :FC<ApartmentType> = ({objectInfo}) => {
                     ))
                 }
             </EnumerationColumn>
-            <FavoriteOffIcon onClick={favoriteOff}  id={'1'}/>
         </div>
     );
 };

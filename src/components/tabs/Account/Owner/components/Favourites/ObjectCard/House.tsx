@@ -21,9 +21,7 @@ type HouseType={
 }
 
 const House :FC<HouseType> = ({objectInfo}) => {
-    const favoriteOff = (id:string) =>{
-        console.log(id,"favoriteOff")
-    }
+
     return (
         <div>
             <div className={css.paddingInfo}>
@@ -50,7 +48,6 @@ const House :FC<HouseType> = ({objectInfo}) => {
                         ))
                     }
                 </EnumerationColumn>
-                <FavoriteOffIcon onClick={favoriteOff}  id={'1'}/>
             </div>
         </div>
     );

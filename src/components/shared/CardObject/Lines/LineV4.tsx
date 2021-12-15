@@ -1,6 +1,7 @@
 import React, {FC} from 'react';
 import css from "./Lines.module.scss";
 import Typography from "../../Typography/Typography";
+import FavoriteOffIcon from "../../FavoriteOffIcon/FavoriteOffIcon";
 
 type LineV4Type={
     developerName:string
@@ -9,6 +10,9 @@ type LineV4Type={
 }
 
 const LineV4 :FC<LineV4Type> = ({developerName,allApartment,developerCompany}) => {
+    const favoriteOff = (id:string) =>{
+        console.log(id,"favoriteOff")
+    }
     return (
         <div className={css.lineGridV2}>
             <div >
@@ -30,7 +34,7 @@ const LineV4 :FC<LineV4Type> = ({developerName,allApartment,developerCompany}) =
                     {developerCompany}
                 </Typography>
             </div>
-            <div>221</div>
+            <FavoriteOffIcon onClick={favoriteOff}  id={'1'}/>
 
         </div>
     );

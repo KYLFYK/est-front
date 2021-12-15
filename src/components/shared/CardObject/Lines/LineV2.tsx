@@ -1,6 +1,7 @@
 import React, {FC} from 'react';
 import css from "./Lines.module.scss";
 import Typography from "../../Typography/Typography";
+import FavoriteOffIcon from "../../FavoriteOffIcon/FavoriteOffIcon";
 
 type LinesV2Type={
     totalArea:string
@@ -10,6 +11,9 @@ type LinesV2Type={
 }
 
 const LineV2 :FC<LinesV2Type> = ({totalArea,name,datePublic,fromPublic}) => {
+    const favoriteOff = (id:string) =>{
+        console.log(id,"favoriteOff")
+    }
     return (
         <div className={css.lineGridV2}>
                 <div >
@@ -34,7 +38,7 @@ const LineV2 :FC<LinesV2Type> = ({totalArea,name,datePublic,fromPublic}) => {
                         {fromPublic}
                     </Typography>
                 </div>
-                <div>221</div>
+                <FavoriteOffIcon onClick={favoriteOff}  id={'1'}/>
 
         </div>
     );
