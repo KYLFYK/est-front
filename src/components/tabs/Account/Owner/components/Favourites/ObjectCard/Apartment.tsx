@@ -4,6 +4,7 @@ import LineV5 from "../../../../../../shared/CardObject/Lines/LineV5";
 import ParamsColumn from "../../../../../../shared/ParamsColumn/ParamsColumn";
 import css from "../CardOwner.module.scss";
 import EnumerationColumn from "../../../../../../shared/EnumerationColumn/EnumerationColumn";
+import FavoriteOffIcon from "../../../../../../shared/FavoriteOffIcon/FavoriteOffIcon";
 
 type ApartmentType={
     objectInfo:{
@@ -28,6 +29,11 @@ type ApartmentType={
 }
 
 const Apartment :FC<ApartmentType> = ({objectInfo}) => {
+
+    const favoriteOff = (id:string) =>{
+        console.log(id,"favoriteOff")
+    }
+
     return (
         <div>
            <LineV4
@@ -52,6 +58,7 @@ const Apartment :FC<ApartmentType> = ({objectInfo}) => {
                     ))
                 }
             </EnumerationColumn>
+            <FavoriteOffIcon onClick={favoriteOff}  id={'1'}/>
         </div>
     );
 };

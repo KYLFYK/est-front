@@ -4,6 +4,7 @@ import LineV2 from "../../../../../../shared/CardObject/Lines/LineV2";
 import LineV3 from "../../../../../../shared/CardObject/Lines/LineV3";
 import EnumerationColumn from "../../../../../../shared/EnumerationColumn/EnumerationColumn";
 import ParamsColumn from "../../../../../../shared/ParamsColumn/ParamsColumn";
+import FavoriteOffIcon from "../../../../../../shared/FavoriteOffIcon/FavoriteOffIcon";
 
 type HouseType={
     objectInfo:{
@@ -20,6 +21,9 @@ type HouseType={
 }
 
 const House :FC<HouseType> = ({objectInfo}) => {
+    const favoriteOff = (id:string) =>{
+        console.log(id,"favoriteOff")
+    }
     return (
         <div>
             <div className={css.paddingInfo}>
@@ -46,6 +50,7 @@ const House :FC<HouseType> = ({objectInfo}) => {
                         ))
                     }
                 </EnumerationColumn>
+                <FavoriteOffIcon onClick={favoriteOff}  id={'1'}/>
             </div>
         </div>
     );
