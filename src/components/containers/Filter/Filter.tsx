@@ -7,6 +7,7 @@ import { BaseInput } from "../../shared/BaseInput/Input"
 import { CompareInput } from "../../shared/CompareInput/CompareInput"
 import InputsUnion from "../../shared/InputsUnion/InputsUnion"
 import { ToggleButtons } from "../../shared/ToggleButtons/ToggleButtons"
+import Typography from "src/components/shared/Typography/Typography"
 import { FILTER_ACTIONS_OPTIONS, FILTER_BUILDING_TYPE_OPTIONS, FILTER_FLOORS_OPTIONS, FILTER_HOUSE_TYPE_OPTIONS, TOGGLE_BUTTONS_OPTIONS } from "./config"
 
 import s from './Filter.module.scss'
@@ -88,7 +89,7 @@ export const Filter: React.FC<Props> = ({ initialValues }) => {
             <BaseDropDown options={FILTER_BUILDING_TYPE_OPTIONS} value={values.secondaryType} onChange={onChangeBuildingType} placeholder="Выбрать тип здания" className={s.dropdown} />
             <BaseDropDown options={FILTER_FLOORS_OPTIONS} value={values.floors} onChange={onChangeFloors} placeholder="Выбрать этаж" className={s.dropdownFloor} />
             <Link href={'/search'}>
-                <BaseButton className={s.submit} type="primary" onClick={onSubmit}>Показать объявления</BaseButton>
+                <a className={s.link}><Typography className={s.linkTitle} color={'secondary'}>Показать объявления</Typography></a>
             </Link>
         </div>
     )

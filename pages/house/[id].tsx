@@ -12,13 +12,11 @@ import GeneralInfo from '../../src/components/containers/GeneralInfo/GeneralInfo
 import ObjectDescription from '../../src/components/containers/ObjectDescription/ObjectDescription'
 import ToursContainer from "../../src/components/containers/ToursContainer/ToursContainer"
 import ObjectSpecifications from '../../src/components/containers/ObjectSpecifications/ObjectSpecifications'
-import { OBJECT_SPECS_MOCK } from '../../src/components/containers/ObjectSpecifications/config'
 import Map from '../../src/components/containers/Maps/MapInfrastructure/index'
 import { infrastructura } from '../../src/components/containers/Maps/MapInfrastructure/config'
 import ObjectLegalPurity from '../../src/components/containers/ObjectLegalPurity/ObjectLegalPurity'
 import PaybackContainer from '../../src/components/containers/PaybackContainer/PaybackContainer'
 import ObjectDeveloper from '../../src/components/containers/ObjectDeveloper/ObjectDeveloper'
-import {OBJECT_DEVELOPER_INFO} from '../../src/components/containers/ObjectDeveloper/config'
 import {Mortgage} from '../../src/components/shared/Mortgage/Mortgage'
 import {Record} from '../../src/components/containers/Record/Record'
 import RecordAgent from '../../src/components/containers/Record/RecordAgent.json'

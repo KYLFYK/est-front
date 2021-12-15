@@ -23,14 +23,19 @@
    }
 }
 
+.elemWrap {
+    display: flex;
+}
+
 .divider {
     @include for-size(KT1) {
         width: 0px;
         background-color: #BDBDBD;
-        margin: 7px 0;
+        margin: 12px 0;
     }
     @include for-size(KT3) {
         width: 1px;
+        height: 20px;
     }
 
 }

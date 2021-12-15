@@ -5,6 +5,7 @@
 
 .wrapper {
     background-color: #fff;
+    display: flex;
     width: 75px;
     height: 40px;
     @include for-size(KT1) {
@@ -18,22 +19,25 @@
     }
    @include for-size(KT3) {
        flex-wrap: nowrap;
-       justify-content: flex-start;
        gap: 0px;
        padding: 0px;
    }
+}
+
+.elemWrap {
+    display: flex;
 }
 
 .divider {
     @include for-size(KT1) {
         width: 0px;
         background-color: #BDBDBD;
-        margin: 7px 0;
+        margin: 10px 0;
     }
     @include for-size(KT3) {
         width: 1px;
+        height: 20px;
     }
-
 }
 
 .button {

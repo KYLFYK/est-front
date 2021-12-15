@@ -21,7 +21,7 @@ export const ToggleButtonsWithIcons: React.FC<Props> = ({ items, activeValue, cl
     return (
         <div className={s.wrapper}>
 
-            {items.map((button: any, idx: number) => <span key={idx}>
+            {items.map((button: any, idx: number) => <span className={s.elemWrap} key={idx}>
                 <BaseButton
                     type={'toggleButtonWithIcons'}
                     onClick={button.onclick}
