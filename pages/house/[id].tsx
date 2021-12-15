@@ -78,7 +78,7 @@ const House: NextPage = () => {
   const currentObject = Number(router.query.id) ? fullObjectData.filter((fod) => fod.object_id === Number(router.query.id))[0] : fullObjectData[0]
 
   const breadcrumbs = ['Крым', 'Купить участок', `${currentObject.name}`]
-  const views = ['12.06.2021', '389', 'Агентство: Лунный свет']
+  const views = [currentObject.publish, currentObject.views, currentObject.agency]
 
   const general = useRef(null)
   const tours = useRef(null)
@@ -103,14 +103,14 @@ const House: NextPage = () => {
         <AdressEstate item={currentObject.address}/>
         <HorizontalTabs tabs={tabs} refs={refs}/>
         <div ref={general}>
-          <GeneralInfo info={currentObject.INFO_OPTIONS} price={currentObject.price} images={IMAGES_SET} />
+          <GeneralInfo info={currentObject.info_options} price={currentObject.price} images={IMAGES_SET} />
         </div>
-        <ObjectDescription items={currentObject.DESCRIPTION_ITEMS}/>
+        <ObjectDescription items={currentObject.description_items}/>
         <div ref={tours}>
-          <ToursContainer Online_tour={currentObject.Online_tour}/>
+          <ToursContainer Online_tour={currentObject.online_tour}/>
         </div>
         <div ref={architec}>
-          <ObjectSpecifications specificationsLists={Array(3).fill(OBJECT_SPECS_MOCK)} title={"Особенности"}/>
+          <ObjectSpecifications specificationsLists={currentObject.object_specs} title={"Особенности"}/>
         </div>
         <div ref={infra}>
           <Map currentHouse={currentObject} infrastructura={infrastructura} location={'infrastructure'}/>
@@ -122,7 +122,7 @@ const House: NextPage = () => {
           <PaybackContainer averagePrice={averagePrice}/>
         </div>
         <div ref={developer}>
-          <ObjectDeveloper developerData={currentObject.OBJECT_DEVELOPER_INFO}/>
+          <ObjectDeveloper developerData={currentObject.object_developer_info}/>
         </div>
         <Mortgage/>
         <div ref={record}>

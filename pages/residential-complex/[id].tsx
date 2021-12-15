@@ -52,31 +52,12 @@ const tabs = [{
   }
 ]
 
-const plan = {
-    FilterComponent: <PlanningFilter />,
-    planningList: Array(7).fill({
-        image: '',
-        price: 144444,
-        title: "Большой домина",
-        housing: 3,
-        deadline: "2 квартал 2023г",
-        floor: 4 
-    })
-}
-
-const OPTION_DATA = [
-  {label: 'Август 2021', value: '0', title: 'Продолжали работы на фасаде.'}, 
-  {label: 'Сентябрь 2021', value: '1', title: 'Завершили кладку кирпичных стен. Монтировали межкомнатные перегородки.'}, 
-  {label: 'Октябрь 2021', value: '2', title: 'Штукатурили стены. Монтировали окна и витражи.'}, 
-  {label: 'Ноябрь 2021', value: '3', title: 'Выполняли устройство сетей электроснабжения, отопления, водоснабжения, вентиляции и канализации.'}
-]
-
-const HousingComplex: NextPage = () => {
+const ResidentialComplex: NextPage = () => {
   const router = useRouter()
   const currentObject = Number(router.query.id) ? fullObjectData.filter((fod) => fod.object_id === Number(router.query.id))[0] : fullObjectData[0]
 
   const breadcrumbs = ['Крым', 'Купить участок', `${currentObject.name}`]
-  const views = ['12.06.2021', '389', 'Агентство: Лунный свет']
+  const views = [currentObject.publish, currentObject.views, currentObject.agency]
 
   const general = useRef(null)
   const specs = useRef(null)
@@ -99,31 +80,31 @@ const HousingComplex: NextPage = () => {
         <AdressEstate item={currentObject.address}/>
         <HorizontalTabs tabs={tabs} refs={refs}/>
         <div ref={general}>
-          <GeneralInfo info={currentObject.INFO_OPTIONS} price={currentObject.price} images={IMAGES_SET} />
+          <GeneralInfo info={currentObject.info_options} price={currentObject.price} images={IMAGES_SET} />
         </div>
         <div ref={specs}>
-          <ObjectSpecifications specificationsLists={Array(3).fill(OBJECT_SPECS_MOCK)} title={"Особенности"}/>
+          <ObjectSpecifications specificationsLists={currentObject.object_specs} title={"Особенности"}/>
         </div>
         <div ref={architec}>
-          <ObjectSpecifications specificationsLists={Array(3).fill(OBJECT_SPECS_MOCK)} title={"Особенности"}/>
+          <ObjectSpecifications specificationsLists={currentObject.object_specs} title={"Архитектурно-планировочные решения"}/>
         </div>
         <div ref={plansec}>
-          <Planning FilterComponent={plan.FilterComponent} planningList={plan.planningList}/>
+          <Planning FilterComponent={<PlanningFilter />} planningList={currentObject.planningList}/>
         </div>
         <div ref={infra}>
           <Map currentHouse={currentObject} infrastructura={infrastructura} location={'infrastructure'}/>
         </div>
         <div ref={developer}>
-          <ObjectDeveloper developerData={currentObject.OBJECT_DEVELOPER_INFO}/>
+          <ObjectDeveloper developerData={currentObject.object_developer_info}/>
         </div>
-        <ConstructProgress images={IMAGES_SET} info={OPTION_DATA}/>
+        <ConstructProgress images={IMAGES_SET} info={currentObject.schedule}/>
         <Footer color={'accent'}/>
         <ScrollUp refs={refs}/>
     </div>
   )
 }
 
-export default HousingComplex
+export default ResidentialComplex
 
 
 

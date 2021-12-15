@@ -6,12 +6,12 @@ import { ILegalPurityArticle } from "../../config"
 import s from './LegalPurityGeneralTab.module.scss'
 
 interface Props {
-    data: ILegalPurityArticle[]
+    data?: ILegalPurityArticle[]
 }
 
 const LegalPurityGeneralTab: React.FC<Props> = ({ data }) => (
     <div>
-        {data.map((group) => (
+        {data && data.map((group) => (
             <div key={group.value} className={s.group}>
                 <div className={s.groupTitle}>
                     <Typography weight="bold">{group.value}</Typography>

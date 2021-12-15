@@ -58,13 +58,13 @@ const tabs = [{
   }
 ]
 
-const Flat: NextPage = () => {
+const Apartment: NextPage = () => {
 
   const router = useRouter()
   const currentObject = Number(router.query.id) ? fullObjectData.filter((fod) => fod.object_id === Number(router.query.id))[0] : fullObjectData[0]
 
-  const breadcrumbs = ['Крым', 'Купить участок', `${currentObject.name}`]
-  const views = ['12.06.2021', '389', 'Агентство: Лунный свет']
+  const breadcrumbs = ['Крым', 'Купить участок', currentObject.name]
+  const views = [currentObject.publish, currentObject.views, currentObject.agency]
 
   const general = useRef(null)
   const tours = useRef(null)
@@ -88,14 +88,14 @@ const Flat: NextPage = () => {
         <AdressEstate item={currentObject.address}/>
         <HorizontalTabs refs={refs} tabs={tabs}/>
         <div ref={general}>
-          <GeneralInfo info={currentObject.INFO_OPTIONS} price={currentObject.price} images={IMAGES_SET} />
+          <GeneralInfo info={currentObject.info_options} price={currentObject.price} images={IMAGES_SET} />
         </div>
-        <ObjectDescription items={currentObject.DESCRIPTION_ITEMS}/>
+        <ObjectDescription items={currentObject.description_items}/>
         <div ref={tours}>
-          <ToursContainer Online_tour={currentObject.Online_tour}/>
+          <ToursContainer Online_tour={currentObject.online_tour}/>
         </div>
         <div ref={architec}>
-          <ObjectSpecifications specificationsLists={Array(3).fill(OBJECT_SPECS_MOCK)} title={"Особенности"}/>
+          <ObjectSpecifications specificationsLists={currentObject.object_specs} title={"Особенности"}/>
         </div>
         <div ref={infra}>
           <Map currentHouse={currentObject} infrastructura={infrastructura} location={'infrastructure'}/>
@@ -104,7 +104,7 @@ const Flat: NextPage = () => {
           <ObjectLegalPurity legalPurityData={currentObject.legalPurityData}/>
         </div>
         <div ref={develop}>
-          <ObjectDeveloper developerData={currentObject.OBJECT_DEVELOPER_INFO}/>
+          <ObjectDeveloper developerData={currentObject.object_developer_info}/>
         </div>
         <Mortgage/>
         <div ref={record}>
@@ -116,7 +116,7 @@ const Flat: NextPage = () => {
   )
 }
 
-export default Flat
+export default Apartment
 
 
 

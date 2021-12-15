@@ -1,52 +1,30 @@
-@import '../../../../sass/colours.scss';
-@import '../../../../sass/resolutions.scss';
-@import '../../../../sass/scrollbars.scss';
+@import '../../../../app/styles/colours.scss';
+@import '../../../../app/styles/resolutions.scss';
+@import '../../../../app/styles/scrollbars.scss';
 
+.container {
+    margin: 60px 0 0 60px;
+}
 .mapWrapper {
     margin: 20px 0 0 0;
     position: relative;
     width: 1320px; 
     height: 700px;
 }
-
+.infraMarker {
+    transform: translate(-50%, -50%);
+}
+.estateMarker {
+    transform: translate(-100%, -50%);
+}
 .button {
     padding: 0;
     border: 0;
     background-color: transparent;
 }
-
-.container {
-    margin: 60px 0 0 60px;
-}
-
-.title {
-
-}
-
-.text {
-
-    margin: 10px 0 30px 0;
-}
-
-.point {
-
-    margin: 10px 0 0 0;
-}
-
-.value {
-
-    font-weight: 300;
-    margin: 4px 0 0 0;
-}
-
-.map {
+.dynamicBar{
     display: flex;
-    justify-content: center;
-    width: 100%;
-    overflow: hidden;
-    position: relative;
 }
-
 .localbar {
     background-color: #ffffff;
     height: 0px;
@@ -71,7 +49,6 @@
         width: 343px;
     }
 }
-
 .localbarActive {
     background-color: #ffffff;
     height: 360px;
@@ -97,10 +74,6 @@
     @include for-size(KT5) {
         width: 343px;
     }
-}
-
-.dynamicBar{
-    display: flex;
 }
 .openButton {
     position: absolute;
@@ -145,26 +118,6 @@
         display: flex;
     }
 }
-.lowResButton {
-    position: absolute;
-    top: 10px; 
-    left: 10px;
-    width: 102px;
-    height: 40px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    cursor: pointer;
-    border: none;
-    outline: none;
-    background: #FFFFFF;
-    box-shadow: 0px 0px 16px rgba(0, 0, 0, 0.1);
-    border-radius: 10px;
-    @include for-size(KT2) {
-        display: none;
-    }
-}
-
 .openArrow {
     transition: all .5s;
     transform: rotateZ(270deg);
@@ -172,23 +125,4 @@
 .arrow {
     transition: all .5s;
     transform: rotateZ(90deg);
-}
-
-.controls {
-    position: absolute;
-    display: flex; 
-    @include for-size(KT1) {
-        transform: rotateZ(270deg);
-        bottom: 60px; 
-        right: -30px;
-    }
-    @include for-size(KT3) {
-        transform: rotateZ(0deg);
-        bottom: 20px; 
-        right: 20px;
-    }
-}
-
-.lowResCategory {
-    color: #7F96A3
 }

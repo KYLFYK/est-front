@@ -1,10 +1,3 @@
-import { IconTypes } from "../utils/interfaces/icons";
-import { OBJECT_LEGAL_PURITY_TABS_DATA } from '../../src/components/containers/ObjectLegalPurity/config'
-import { DEVELOPER_ABOUT_PARAGRAPHS, DEVELOPER_CONTACTS, DEVELOPER_MASS_MEDIA_ARTICLES, DEVELOPER_OWNERS_COMPANY, 
-  DEVELOPER_OWNER_GOVERMENT, DEVELOPER_PRIMARY_ACTIVITIES, DEVELOPER_REQUISITS, DEVELOPER_RISKS, 
-  DEVELOPER_SECONDARY_ACTIVITIES, DEVELOPER_STATISTICS } 
-  from "../components/tabs/Developer/config";
-
 export const fullObjectData = [
   {
     images : [
@@ -16,6 +9,7 @@ export const fullObjectData = [
     lang : "ru",
     name : "1-комнатная квартира, 52 м²",
     type : "apartment",
+    category: "Апартаменты",
     address : "ул. Ленина, д. 36, кв. 21",
     city : "Ялта",
     lat : 35.5,
@@ -28,7 +22,10 @@ export const fullObjectData = [
     floor : 3,
     total_floors : 15,
     favorite : false,
-    INFO_OPTIONS : [
+    publish : '12.06.2021',
+    views : '389',
+    agency : 'Агентство: Лунный свет',
+    info_options : [
       { label: "Общая площадь", value: "615 м²" },
       { label: "Площадь дома", value: "300 м²" },
       { label: "Жилая площадь", value: "150 м²" },
@@ -49,11 +46,11 @@ export const fullObjectData = [
         value: "2 спальни с индивидуальными душевыми и туалетами",
       },
     ],
-    DESCRIPTION_ITEMS : [
+    description_items : [
       "Из окон виллы открывается красивейший вид на древнюю гору-вулкан Аю-Даг, Гурзуфскую бухту и парки Артека, скалы Адалары и пристань для яхт и катеров.",
       "На террасе расположен бассейн с переливом в сторону моря и уникальными видовыми характеристиками.",
     ],
-    Online_tour : {
+    online_tour : {
       threeD_tour: {
           url: 'https://www.youtube.com/embed/Ke3qyQYNob4',
       },
@@ -61,19 +58,128 @@ export const fullObjectData = [
           url: 'https://3d-tur.ru/010/',
       }
     },
-    OBJECT_SPECS_MOCK : [{
+    object_specs : [{
       subtitle: "Строительно-техническая экспертиза",
       specificationsItems : [{
-        value: IconTypes.HOUSE_TYPE,
+        value: 'house_type',
+        label: { title: "Тип дома", text: "Монолитный" },
+      },{
+        value: 'house_type',
+        label: { title: "Тип дома", text: "Монолитный" },
+      },{
+        value: 'house_type',
+        label: { title: "Тип дома", text: "Монолитный" },
+      }]
+    },{
+      subtitle: "Строительно-техническая экспертиза",
+      specificationsItems : [{
+        value: 'house_type',
+        label: { title: "Тип дома", text: "Монолитный" },
+      },{
+        value: 'house_type',
+        label: { title: "Тип дома", text: "Монолитный" },
+      },{
+        value: 'house_type',
+        label: { title: "Тип дома", text: "Монолитный" },
+      }]
+    },{
+      subtitle: "Строительно-техническая экспертиза",
+      specificationsItems : [{
+        value: 'house_type',
+        label: { title: "Тип дома", text: "Монолитный" },
+      },{
+        value: 'house_type',
+        label: { title: "Тип дома", text: "Монолитный" },
+      },{
+        value: 'house_type',
         label: { title: "Тип дома", text: "Монолитный" },
       }]
     }],
     legalPurityData : {
       encumbrances: false,
       risks: false,
-      tabsData: OBJECT_LEGAL_PURITY_TABS_DATA
+      tabsData: {
+        general: [
+          {
+            value: "Данные из ЕГРН",
+            description: "Это всплывающая подсказка о данных из ЕГРН",
+            label: [
+              {
+                title: "Адрес",
+                text: "Респ. Крым, пгт Гурзуф,  ул. Ялтинская, д. 12К",
+              },
+              {
+                title: "Кадастровый номер",
+                text: "77:06:0009005:4567",
+              },
+              {
+                title: "Кадастровая стоимость",
+                text: "150 000 000 ₽",
+                description: "Это всплывающая подсказка о данных кадастровой стоимости",
+              },
+              {
+                title: "Общая площадь",
+                text: "615 м²",
+              },
+              {
+                title: "Этажность",
+                text: "3",
+              },
+            ],
+          },
+        ],
+        founders: [
+          {
+            value: "Текущие владельцы",
+            label: [
+              { title: "Единоличный собственник", text: "Иванов Филипп Васильевич" },
+              { title: "77-77-08/011/2021-0308", text: "03.08.2021" },
+            ],
+          },
+          {
+            value: "Предыдущие владельцы",
+            description: "Всплывающая подсказка предыдущих владельцев",
+            label: [
+              {
+                title: "2 владельца",
+                text: "Иванов Филипп Васильевич, Иванов Филипп Васильевич",
+              },
+              { title: "77-77-08/011/2021-0308", text: "03.08.2021" },
+            ],
+          },
+        ],
+        encumbrances: [
+          {
+            title: "Текущие владельцы",
+            encumbrances: [
+              {
+                status: 0,
+                description: "Description",
+                text: "Дом в ипотеке",
+              },
+              {
+                status: 1,
+                description: "Description",
+                text: "Записей об аренде не найдено",
+              },
+            ],
+          },
+        ],
+        recomendations: [
+          {
+            value: "Квартира меняла владельцев несколько раз за последние 3 года",
+            label:
+              "Внимательно изучите документы, по которым квартира перешла в собственность текущего владельца, узнайте больше о предыдущих собственниках и сделках. Лучше обратиться к специалистам для проверки и сопровождения сделки.",
+          },
+          {
+            value: "Квартира в собственности менее 5 лет",
+            label:
+              "При продаже продавец скорее всего должен будет заплатить налог с её продажи. Чтобы этого не делать, он может настаивать на занижении стоимости жилья в договоре купли-продажи. В таком случае вы рискуете: если что-то пойдёт не так, возместить можно будет только сумму, указанную в договоре, и вы не сможете полностью получить налоговый вычет за покупку квартиры.",
+          },
+        ]
+      }
     },
-    OBJECT_DEVELOPER_INFO : {
+    object_developer_info : {
       name: "Брусника",
       developerType: "Девелоперская компания",
       logo: "https://d3n32ilufxuvd1.cloudfront.net/55ad267d853a8ee05ba03cb2/226965/upload-9b246d20-77e5-11e5-a659-371ac3ded399.jpg",
@@ -81,23 +187,279 @@ export const fullObjectData = [
       leasedAmmount: "183 дома в 103 ЖК",
       inProgressAmmount: "5 домов в 3 ЖК",
       tabsData: {
-        about: DEVELOPER_ABOUT_PARAGRAPHS,
-        contacts: DEVELOPER_CONTACTS,
-        requisits: DEVELOPER_REQUISITS,
+        about: [
+          "Брусника — российская девелоперская компания. Специализируется на строительстве жилых многоэтажных домов. Основана в 2004 году. Штаб-квартира находится в Екатеринбурге. Сегодня Брусника строит современное демократичное жильё в крупных городах Урала и Сибири, в Москве и Московский области. Ежегодно это 6 000 новых квартир для российских семей.",
+          "Бизнес-идея Брусники основана на желании изменить жизнь к лучшему, предлагая демократичное жильё нового качества, простоту и надёжность покупки, комфорт и функциональность проживания.",
+          "В Бруснике понимают девелопмент как постоянный процесс преобразования города и пространства, в котором живут люди. Для компании важны детали, которые могут сделать жизнь лучше. Для сотрудников Брусники это ежедневный добросовестный труд.",
+        ],
+        contacts: [
+          { value: "tel", label: { title: "Телефон", text: "+7 (495) 023 76 29" } },
+          { value: "email", label: { title: "E-mail", text: "Сведения отсутствуют" } },
+          { value: "site", label: { title: "Сайт", text: "brusnika.ru" } },
+          {
+            value: "address",
+            label: {
+              title: "Адрес",
+              text:
+                "Московская область, Ленинский район, г. Видное, д. Сапроново, ул. Калиновая, 1",
+            },
+          },
+        ],
+        requisits: [
+          {
+            value: "fullName",
+            label: {
+              title: "Полное наименование организации",
+              text:
+                "ОБЩЕСТВО С ОГРАНИЧЕННОЙ ОТВЕТСТВЕННОСТЬЮ СПЕЦИАЛИЗИРОВАННЫЙ ЗАСТРОЙЩИК «ГАРАНТ-ЖИЛЬЕ»",
+            },
+          },
+          {
+            value: "address",
+            label: {
+              title: "Адрес",
+              text: "Смоленская обл., г. Смоленск, ул. 25 Сентября, д. 64",
+            },
+          },
+          {
+            value: "capital",
+            label: {
+              title: "Уставный капитал",
+              text: "40 010 000 ₽",
+            },
+          },
+          {
+            value: "okfs",
+            label: {
+              title: "ОКФС",
+              text: "Частная собственность",
+            },
+          },
+          {
+            value: "okopf",
+            label: {
+              text: "Общества с ограниченной ответственностью",
+              title: "ОКОПФ",
+            },
+          },
+          {
+            value: "okogu",
+            label: {
+              title: "ОКОГУ",
+              text:
+                "Организации, учрежденные юридическими лицами или гражданами, или юридическими лицами и гражданами совместно",
+            },
+          },
+          {
+            value: "inn",
+            label: {
+              title: "ИНН",
+              text: "6732076930",
+            },
+          },
+          {
+            value: "okato",
+            label: {
+              title: "ОКАТО",
+              text: "Смоленская область, Смоленск",
+            },
+          },
+          {
+            value: "ogrn",
+            label: {
+              title: "ОГРН",
+              text: "1146733013350",
+            },
+          },
+          {
+            value: "okpo",
+            label: {
+              title: "ОКПО",
+              text: "25769055",
+            },
+          },
+          {
+            value: "kpp",
+            label: {
+              title: "КПП",
+              text: "673201001",
+            },
+          },
+          {
+            value: "oktmo",
+            label: {
+              title: "ОКТМО",
+              text: "Смоленская область, г. Смоленск",
+            },
+          },
+        ],
         owners: {
-            company: DEVELOPER_OWNERS_COMPANY,
-            goverment: DEVELOPER_OWNER_GOVERMENT,
+            company: {
+              defaultInfo: [
+                {
+                  value: "status",
+                  label: {
+                    title: "Статус компании",
+                    text: "Статус компании",
+                  },
+                },
+                {
+                  value: "head",
+                  label: {
+                    title: "Руководитель",
+                    text: "Иванов Иван Иванович",
+                  },
+                },
+                {
+                  value: "owner",
+                  label: {
+                    title: "Учредители",
+                    text: "МЕНЕДЖМЕНТ-ЮБИКС, ООО, РЕБРИК НИКОЛАЙ ЮРЬЕВИЧ",
+                  },
+                },
+              ],
+              numericInfo: [
+                {
+                  value: "size",
+                  label: {
+                    title: "Размер предприятия",
+                    text: "60 человек",
+                  },
+                },
+                {
+                  value: "staffAmmount",
+                  label: {
+                    title: "Численность персонала",
+                    text: "60 человек",
+                  },
+                },
+                {
+                  value: "filials",
+                  label: {
+                    title: "Филиалы",
+                    text: "5",
+                  },
+                },
+                {
+                  value: "revenue",
+                  label: {
+                    title: "Выручка",
+                    text: "40 010 000 ₽ ",
+                  },
+                },
+                {
+                  value: "profit",
+                  label: {
+                    title: "Чистая прибыль",
+                    text: "40 010 000 ₽ ",
+                  },
+                },
+                {
+                  value: "assets",
+                  label: {
+                    title: "Чистые активы",
+                    text: "40 010 000 ₽",
+                  },
+                },
+              ],
+            },
+            goverment: [
+              {
+                value: "date",
+                label: { title: "Дата регистрации", text: "06.08.2014" },
+              },
+              {
+                value: "authority",
+                label: {
+                  title: "Регистрирующий орган",
+                  text: "Межрайонная ИФНС России № 5 по Смоленской области",
+                },
+              },
+              {
+                value: "authorityAddress",
+                label: {
+                  title: "Адрес регистрирующего органа",
+                  text: "214018, Смоленская обл, Смоленск г, Гагарина пр-кт, д 23В",
+                },
+              },
+              {
+                value: "authorityBusiness",
+                label: {
+                  title: "Регистрирующий орган, в котором находится регистрационное дело",
+                  text:
+                    "Межрайонная инспекция Федеральной налоговой службы № 5 по Смоленской области",
+                },
+              },
+            ],
         },
         activities: {
-            primary: DEVELOPER_PRIMARY_ACTIVITIES,
-            secondary: DEVELOPER_SECONDARY_ACTIVITIES,
+            primary: [
+              "Деятельность заказчика-застройщика, генерального подрядчика",
+            ],
+            secondary: [
+              "Передача электроэнергии и технологическое присоединение к распределительным электросетям",
+              "Покупка и продажа собственного недвижимого имущества",
+              "Подготовка к продаже собственного недвижимого имущества",
+              "Аренда и управление собственным или арендованным недвижимым имуществом",
+            ],
         },
-        news: DEVELOPER_MASS_MEDIA_ARTICLES,
-        statistics: DEVELOPER_STATISTICS,
-        risks: DEVELOPER_RISKS
+        news: [{
+          link: "",
+          date: new Date(),
+          title:
+            "«Брусника» выпустит облигации на 4 млрд ₽ ради земли и перевооружения",
+          description:
+            "Девелоперская компания Брусника объявила о дебютном выпуске облигаций объемом до 4 млрд руб. на...",
+          icon:
+            "https://pbs.twimg.com/profile_images/984033833900298245/5U8I3xfZ_400x400.jpg",
+          id: "1",
+        },],
+        statistics: [
+          {
+            value: "Арбитражные дела",
+            label: [{ title: "17", text: "Судебные дела" },],
+          },
+          {
+            value: "Исполнительные производства",
+            label: [{ title: "44", text: "Завершённые производства" },],
+          },
+          {
+            value: "Тендеры и госзакупки",
+            label: [{ title: "74", text: "Количество закупок" },],
+          },
+          {
+            value: "Существенные события",
+            label: [{ title: "7", text: "За всю историю компании" },],
+          },
+        ],
+        risks: [
+          {
+            value: "15",
+            label: {
+              title: "Индекс должной осмотрительности",
+              text:
+                "Оценка, показывающая вероятность того, что компания является «фирмой- однодневкой»",
+            },
+          },
+          {
+            value: "0",
+            label: {
+              title: "Индекс финансового риска",
+              text: "Оценка вероятности неплатежеспособности компании",
+            },
+          },
+          {
+            value: "11",
+            label: {
+              title: "Индекс платежной дисциплины",
+              text: "Показатель, отражающий своевременность оплаты компанией счетов",
+            },
+          },
+        ]
       }
     }
   },
+
   {
     images : [
       {url : "https://cdn.pixabay.com/photo/2021/08/25/20/42/field-6574455__340.jpg", id : 0},
@@ -106,8 +468,9 @@ export const fullObjectData = [
     ],
     object_id : 2,
     lang : "ru",
-    name : "2-комнатная квартира, 73 м²",
+    name : "ЖК District",
     type : "residential-complex",
+    category: "Жилищный комплекс",
     address : "ЖК Ленинский",
     city : "Ялта",
     lat : 35.6,
@@ -120,7 +483,10 @@ export const fullObjectData = [
     floor : 5,
     total_floors : 29,
     favorite : false,
-    INFO_OPTIONS : [
+    publish : '12.06.2021',
+    views : '389',
+    agency : 'Агентство: Лунный свет',
+    info_options : [
       { label: "Общая площадь", value: "615 м²" },
       { label: "Площадь дома", value: "300 м²" },
       { label: "Жилая площадь", value: "150 м²" },
@@ -141,31 +507,44 @@ export const fullObjectData = [
         value: "2 спальни с индивидуальными душевыми и туалетами",
       },
     ],
-    DESCRIPTION_ITEMS : [
-      "Из окон виллы открывается красивейший вид на древнюю гору-вулкан Аю-Даг, Гурзуфскую бухту и парки Артека, скалы Адалары и пристань для яхт и катеров.",
-      "На террасе расположен бассейн с переливом в сторону моря и уникальными видовыми характеристиками.",
-    ],
-    Online_tour : {
-      threeD_tour: {
-          url: 'https://www.youtube.com/embed/Ke3qyQYNob4',
-      },
-      vr_tour: {
-          url: 'https://3d-tur.ru/010/',
-      }
-    },
-    OBJECT_SPECS_MOCK : {
-      subtitle: "Строительно-техническая экспертиза",
-      specificationsItems : {
-        value: IconTypes.HOUSE_TYPE,
+    object_specs : [{
+      subtitle: "Объекты на  территории жилого комплекса",
+      specificationsItems : [{
+        value: 'house_type',
         label: { title: "Тип дома", text: "Монолитный" },
-      }
-    },
-    legalPurityData : {
-      encumbrances: false,
-      risks: false,
-      tabsData: OBJECT_LEGAL_PURITY_TABS_DATA
-    },
-    OBJECT_DEVELOPER_INFO : {
+      },{
+        value: 'house_type',
+        label: { title: "Тип дома", text: "Монолитный" },
+      },{
+        value: 'house_type',
+        label: { title: "Тип дома", text: "Монолитный" },
+      }]
+    },{
+      subtitle: "Безопасность",
+      specificationsItems : [{
+        value: 'house_type',
+        label: { title: "Тип дома", text: "Монолитный" },
+      },{
+        value: 'house_type',
+        label: { title: "Тип дома", text: "Монолитный" },
+      },{
+        value: 'house_type',
+        label: { title: "Тип дома", text: "Монолитный" },
+      }]
+    },{
+      subtitle: "Строительно-техническая экспертиза",
+      specificationsItems : [{
+        value: 'house_type',
+        label: { title: "Тип дома", text: "Монолитный" },
+      },{
+        value: 'house_type',
+        label: { title: "Тип дома", text: "Монолитный" },
+      },{
+        value: 'house_type',
+        label: { title: "Тип дома", text: "Монолитный" },
+      }]
+    }],
+    object_developer_info : {
       name: "Брусника",
       developerType: "Девелоперская компания",
       logo: "https://d3n32ilufxuvd1.cloudfront.net/55ad267d853a8ee05ba03cb2/226965/upload-9b246d20-77e5-11e5-a659-371ac3ded399.jpg",
@@ -173,115 +552,292 @@ export const fullObjectData = [
       leasedAmmount: "183 дома в 103 ЖК",
       inProgressAmmount: "5 домов в 3 ЖК",
       tabsData: {
-        about: DEVELOPER_ABOUT_PARAGRAPHS,
-        contacts: DEVELOPER_CONTACTS,
-        requisits: DEVELOPER_REQUISITS,
+        about: [
+          "Брусника — российская девелоперская компания. Специализируется на строительстве жилых многоэтажных домов. Основана в 2004 году. Штаб-квартира находится в Екатеринбурге. Сегодня Брусника строит современное демократичное жильё в крупных городах Урала и Сибири, в Москве и Московский области. Ежегодно это 6 000 новых квартир для российских семей.",
+          "Бизнес-идея Брусники основана на желании изменить жизнь к лучшему, предлагая демократичное жильё нового качества, простоту и надёжность покупки, комфорт и функциональность проживания.",
+          "В Бруснике понимают девелопмент как постоянный процесс преобразования города и пространства, в котором живут люди. Для компании важны детали, которые могут сделать жизнь лучше. Для сотрудников Брусники это ежедневный добросовестный труд.",
+        ],
+        contacts: [
+          { value: "tel", label: { title: "Телефон", text: "+7 (495) 023 76 29" } },
+          { value: "email", label: { title: "E-mail", text: "Сведения отсутствуют" } },
+          { value: "site", label: { title: "Сайт", text: "brusnika.ru" } },
+          {
+            value: "address",
+            label: {
+              title: "Адрес",
+              text:
+                "Московская область, Ленинский район, г. Видное, д. Сапроново, ул. Калиновая, 1",
+            },
+          },
+        ],
+        requisits: [
+          {
+            value: "fullName",
+            label: {
+              title: "Полное наименование организации",
+              text:
+                "ОБЩЕСТВО С ОГРАНИЧЕННОЙ ОТВЕТСТВЕННОСТЬЮ СПЕЦИАЛИЗИРОВАННЫЙ ЗАСТРОЙЩИК «ГАРАНТ-ЖИЛЬЕ»",
+            },
+          },
+          {
+            value: "address",
+            label: {
+              title: "Адрес",
+              text: "Смоленская обл., г. Смоленск, ул. 25 Сентября, д. 64",
+            },
+          },
+          {
+            value: "capital",
+            label: {
+              title: "Уставный капитал",
+              text: "40 010 000 ₽",
+            },
+          },
+          {
+            value: "okfs",
+            label: {
+              title: "ОКФС",
+              text: "Частная собственность",
+            },
+          },
+          {
+            value: "okopf",
+            label: {
+              text: "Общества с ограниченной ответственностью",
+              title: "ОКОПФ",
+            },
+          },
+          {
+            value: "okogu",
+            label: {
+              title: "ОКОГУ",
+              text:
+                "Организации, учрежденные юридическими лицами или гражданами, или юридическими лицами и гражданами совместно",
+            },
+          },
+          {
+            value: "inn",
+            label: {
+              title: "ИНН",
+              text: "6732076930",
+            },
+          },
+          {
+            value: "okato",
+            label: {
+              title: "ОКАТО",
+              text: "Смоленская область, Смоленск",
+            },
+          },
+          {
+            value: "ogrn",
+            label: {
+              title: "ОГРН",
+              text: "1146733013350",
+            },
+          },
+          {
+            value: "okpo",
+            label: {
+              title: "ОКПО",
+              text: "25769055",
+            },
+          },
+          {
+            value: "kpp",
+            label: {
+              title: "КПП",
+              text: "673201001",
+            },
+          },
+          {
+            value: "oktmo",
+            label: {
+              title: "ОКТМО",
+              text: "Смоленская область, г. Смоленск",
+            },
+          },
+        ],
         owners: {
-            company: DEVELOPER_OWNERS_COMPANY,
-            goverment: DEVELOPER_OWNER_GOVERMENT,
+            company: {
+              defaultInfo: [
+                {
+                  value: "status",
+                  label: {
+                    title: "Статус компании",
+                    text: "Статус компании",
+                  },
+                },
+                {
+                  value: "head",
+                  label: {
+                    title: "Руководитель",
+                    text: "Иванов Иван Иванович",
+                  },
+                },
+                {
+                  value: "owner",
+                  label: {
+                    title: "Учредители",
+                    text: "МЕНЕДЖМЕНТ-ЮБИКС, ООО, РЕБРИК НИКОЛАЙ ЮРЬЕВИЧ",
+                  },
+                },
+              ],
+              numericInfo: [
+                {
+                  value: "size",
+                  label: {
+                    title: "Размер предприятия",
+                    text: "60 человек",
+                  },
+                },
+                {
+                  value: "staffAmmount",
+                  label: {
+                    title: "Численность персонала",
+                    text: "60 человек",
+                  },
+                },
+                {
+                  value: "filials",
+                  label: {
+                    title: "Филиалы",
+                    text: "5",
+                  },
+                },
+                {
+                  value: "revenue",
+                  label: {
+                    title: "Выручка",
+                    text: "40 010 000 ₽ ",
+                  },
+                },
+                {
+                  value: "profit",
+                  label: {
+                    title: "Чистая прибыль",
+                    text: "40 010 000 ₽ ",
+                  },
+                },
+                {
+                  value: "assets",
+                  label: {
+                    title: "Чистые активы",
+                    text: "40 010 000 ₽",
+                  },
+                },
+              ],
+            },
+            goverment: [
+              {
+                value: "date",
+                label: { title: "Дата регистрации", text: "06.08.2014" },
+              },
+              {
+                value: "authority",
+                label: {
+                  title: "Регистрирующий орган",
+                  text: "Межрайонная ИФНС России № 5 по Смоленской области",
+                },
+              },
+              {
+                value: "authorityAddress",
+                label: {
+                  title: "Адрес регистрирующего органа",
+                  text: "214018, Смоленская обл, Смоленск г, Гагарина пр-кт, д 23В",
+                },
+              },
+              {
+                value: "authorityBusiness",
+                label: {
+                  title: "Регистрирующий орган, в котором находится регистрационное дело",
+                  text:
+                    "Межрайонная инспекция Федеральной налоговой службы № 5 по Смоленской области",
+                },
+              },
+            ],
         },
         activities: {
-            primary: DEVELOPER_PRIMARY_ACTIVITIES,
-            secondary: DEVELOPER_SECONDARY_ACTIVITIES,
+            primary: [
+              "Деятельность заказчика-застройщика, генерального подрядчика",
+            ],
+            secondary: [
+              "Передача электроэнергии и технологическое присоединение к распределительным электросетям",
+              "Покупка и продажа собственного недвижимого имущества",
+              "Подготовка к продаже собственного недвижимого имущества",
+              "Аренда и управление собственным или арендованным недвижимым имуществом",
+            ],
         },
-        news: DEVELOPER_MASS_MEDIA_ARTICLES,
-        statistics: DEVELOPER_STATISTICS,
-        risks: DEVELOPER_RISKS
+        news: [{
+          link: "",
+          date: new Date(),
+          title:
+            "«Брусника» выпустит облигации на 4 млрд ₽ ради земли и перевооружения",
+          description:
+            "Девелоперская компания Брусника объявила о дебютном выпуске облигаций объемом до 4 млрд руб. на...",
+          icon:
+            "https://pbs.twimg.com/profile_images/984033833900298245/5U8I3xfZ_400x400.jpg",
+          id: "1",
+        },],
+        statistics: [
+          {
+            value: "Арбитражные дела",
+            label: [{ title: "17", text: "Судебные дела" },],
+          },
+          {
+            value: "Исполнительные производства",
+            label: [{ title: "44", text: "Завершённые производства" },],
+          },
+          {
+            value: "Тендеры и госзакупки",
+            label: [{ title: "74", text: "Количество закупок" },],
+          },
+          {
+            value: "Существенные события",
+            label: [{ title: "7", text: "За всю историю компании" },],
+          },
+        ],
+        risks: [
+          {
+            value: "15",
+            label: {
+              title: "Индекс должной осмотрительности",
+              text:
+                "Оценка, показывающая вероятность того, что компания является «фирмой- однодневкой»",
+            },
+          },
+          {
+            value: "0",
+            label: {
+              title: "Индекс финансового риска",
+              text: "Оценка вероятности неплатежеспособности компании",
+            },
+          },
+          {
+            value: "11",
+            label: {
+              title: "Индекс платежной дисциплины",
+              text: "Показатель, отражающий своевременность оплаты компанией счетов",
+            },
+          },
+        ]
       }
-    }
+    },
+    schedule: [
+      {label: 'Август 2021', value: '0', title: 'Продолжали работы на фасаде.'}, 
+      {label: 'Сентябрь 2021', value: '1', title: 'Завершили кладку кирпичных стен. Монтировали межкомнатные перегородки.'}, 
+      {label: 'Октябрь 2021', value: '2', title: 'Штукатурили стены. Монтировали окна и витражи.'}, 
+      {label: 'Ноябрь 2021', value: '3', title: 'Выполняли устройство сетей электроснабжения, отопления, водоснабжения, вентиляции и канализации.'}
+    ],
+    planningList : [
+      { image: 'https://metrika.com/sites/default/files/debyut.png', price: 144444, title: "Большой домина", housing: 3, deadline: "2 квартал 2023г", floor: 4 },
+      { image: 'https://metrika.com/sites/default/files/debyut.png', price: 144444, title: "Большой домина", housing: 3, deadline: "2 квартал 2023г", floor: 4 },
+      { image: 'https://metrika.com/sites/default/files/debyut.png', price: 144444, title: "Большой домина", housing: 3, deadline: "2 квартал 2023г", floor: 4 },
+      { image: 'https://metrika.com/sites/default/files/debyut.png', price: 144444, title: "Большой домина", housing: 3, deadline: "2 квартал 2023г", floor: 4 },
+      { image: 'https://metrika.com/sites/default/files/debyut.png', price: 144444, title: "Большой домина", housing: 3, deadline: "2 квартал 2023г", floor: 4 },
+    ]
   },
-  {
-    images : [
-      {url : "https://cdn.pixabay.com/photo/2021/08/25/20/42/field-6574455__340.jpg", id : 0},
-      {url : "https://images.unsplash.com/photo-1541963463532-d68292c34b19?ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8Ym9va3xlbnwwfHwwfHw%3D&ixlib=rb-1.2.1&w=1000&q=80", id : 1},
-      {url : "https://images.ctfassets.net/hrltx12pl8hq/3MbF54EhWUhsXunc5Keueb/60774fbbff86e6bf6776f1e17a8016b4/04-nature_721703848.jpg?fit=fill&w=480&h=270", id : 2}
-    ],
-    object_id : 3,
-    lang : "ru",
-    name : "1-комнатная квартира, 52 м²",
-    type : "apartment",
-    address : "ул. Ленина, д. 36, кв. 21",
-    city : "Ялта",
-    lat : 35.3,
-    lng : 45.3,
-    price : 1860000,
-    sort : null,
-    planning : "1",
-    secondary_type : "Вторичное",
-    total_area : 52,
-    floor : 3,
-    total_floors : 15,
-    favorite : false,
-    INFO_OPTIONS : [
-      { label: "Общая площадь", value: "615 м²" },
-      { label: "Площадь дома", value: "300 м²" },
-      { label: "Жилая площадь", value: "150 м²" },
-      { label: "Участок", value: "10 соток" },
-      { label: "Комнат в доме", value: "5" },
-      { label: "Ванная комната", value: "10 м²" },
-      { label: "Кухня", value: "42 м²" },
-      {
-        label: "Первый этаж",
-        value: "Холл, кухня-гостиная, комната, кабинет, санузел",
-      },
-      {
-        label: "Второй этаж",
-        value: "Терраса, 2 спальни, 2 санузла, 2 гардеробных, холл, кладовая",
-      },
-      {
-        label: "Спец этаж",
-        value: "2 спальни с индивидуальными душевыми и туалетами",
-      },
-    ],
-    DESCRIPTION_ITEMS : [
-      "Из окон виллы открывается красивейший вид на древнюю гору-вулкан Аю-Даг, Гурзуфскую бухту и парки Артека, скалы Адалары и пристань для яхт и катеров.",
-      "На террасе расположен бассейн с переливом в сторону моря и уникальными видовыми характеристиками.",
-    ],
-    Online_tour : {
-      threeD_tour: {
-          url: 'https://www.youtube.com/embed/Ke3qyQYNob4',
-      },
-      vr_tour: {
-          url: 'https://3d-tur.ru/010/',
-      }
-    },
-    OBJECT_SPECS_MOCK : {
-      subtitle: "Строительно-техническая экспертиза",
-      specificationsItems : {
-        value: IconTypes.HOUSE_TYPE,
-        label: { title: "Тип дома", text: "Монолитный" },
-      }
-    },
-    legalPurityData : {
-      encumbrances: false,
-      risks: false,
-      tabsData: OBJECT_LEGAL_PURITY_TABS_DATA
-    },
-    OBJECT_DEVELOPER_INFO : {
-      name: "Брусника",
-      developerType: "Девелоперская компания",
-      logo: "https://d3n32ilufxuvd1.cloudfront.net/55ad267d853a8ee05ba03cb2/226965/upload-9b246d20-77e5-11e5-a659-371ac3ded399.jpg",
-      risks: false,
-      leasedAmmount: "183 дома в 103 ЖК",
-      inProgressAmmount: "5 домов в 3 ЖК",
-      tabsData: {
-        about: DEVELOPER_ABOUT_PARAGRAPHS,
-        contacts: DEVELOPER_CONTACTS,
-        requisits: DEVELOPER_REQUISITS,
-        owners: {
-            company: DEVELOPER_OWNERS_COMPANY,
-            goverment: DEVELOPER_OWNER_GOVERMENT,
-        },
-        activities: {
-            primary: DEVELOPER_PRIMARY_ACTIVITIES,
-            secondary: DEVELOPER_SECONDARY_ACTIVITIES,
-        },
-        news: DEVELOPER_MASS_MEDIA_ARTICLES,
-        statistics: DEVELOPER_STATISTICS,
-        risks: DEVELOPER_RISKS
-      }
-    }
-  },
+
   {
     images : [
       {url : "https://cdn.pixabay.com/photo/2021/08/25/20/42/field-6574455__340.jpg", id : 0},
@@ -290,8 +846,9 @@ export const fullObjectData = [
     ],
     object_id : 4,
     lang : "ru",
-    name : "2-комнатная квартира, 73 м²",
+    name : "Участок в Троицком 30 соток",
     type : "plat",
+    category: "Участок",
     address : "ЖК Ленинский",
     cit : "Ялта",
     lat : 35.4,
@@ -304,7 +861,10 @@ export const fullObjectData = [
     floor : 5,
     total_floors : 29,
     favorite : false,
-    INFO_OPTIONS : [
+    publish : '12.06.2021',
+    views : '389',
+    agency : 'Агентство: Лунный свет',
+    info_options : [
       { label: "Общая площадь", value: "615 м²" },
       { label: "Площадь дома", value: "300 м²" },
       { label: "Жилая площадь", value: "150 м²" },
@@ -325,55 +885,103 @@ export const fullObjectData = [
         value: "2 спальни с индивидуальными душевыми и туалетами",
       },
     ],
-    DESCRIPTION_ITEMS : [
+    description_items : [
       "Из окон виллы открывается красивейший вид на древнюю гору-вулкан Аю-Даг, Гурзуфскую бухту и парки Артека, скалы Адалары и пристань для яхт и катеров.",
       "На террасе расположен бассейн с переливом в сторону моря и уникальными видовыми характеристиками.",
     ],
-    Online_tour : {
-      threeD_tour: {
-          url: 'https://www.youtube.com/embed/Ke3qyQYNob4',
-      },
-      vr_tour: {
-          url: 'https://3d-tur.ru/010/',
-      }
-    },
-    OBJECT_SPECS_MOCK : {
+    object_specs : {
       subtitle: "Строительно-техническая экспертиза",
       specificationsItems : {
-        value: IconTypes.HOUSE_TYPE,
+        value: 'house_type',
         label: { title: "Тип дома", text: "Монолитный" },
       }
     },
     legalPurityData : {
       encumbrances: false,
       risks: false,
-      tabsData: OBJECT_LEGAL_PURITY_TABS_DATA
-    },
-    OBJECT_DEVELOPER_INFO : {
-      name: "Брусника",
-      developerType: "Девелоперская компания",
-      logo: "https://d3n32ilufxuvd1.cloudfront.net/55ad267d853a8ee05ba03cb2/226965/upload-9b246d20-77e5-11e5-a659-371ac3ded399.jpg",
-      risks: false,
-      leasedAmmount: "183 дома в 103 ЖК",
-      inProgressAmmount: "5 домов в 3 ЖК",
       tabsData: {
-        about: DEVELOPER_ABOUT_PARAGRAPHS,
-        contacts: DEVELOPER_CONTACTS,
-        requisits: DEVELOPER_REQUISITS,
-        owners: {
-            company: DEVELOPER_OWNERS_COMPANY,
-            goverment: DEVELOPER_OWNER_GOVERMENT,
-        },
-        activities: {
-            primary: DEVELOPER_PRIMARY_ACTIVITIES,
-            secondary: DEVELOPER_SECONDARY_ACTIVITIES,
-        },
-        news: DEVELOPER_MASS_MEDIA_ARTICLES,
-        statistics: DEVELOPER_STATISTICS,
-        risks: DEVELOPER_RISKS
+        general: [
+          {
+            value: "Данные из ЕГРН",
+            description: "Это всплывающая подсказка о данных из ЕГРН",
+            label: [
+              {
+                title: "Адрес",
+                text: "Респ. Крым, пгт Гурзуф,  ул. Ялтинская, д. 12К",
+              },
+              {
+                title: "Кадастровый номер",
+                text: "77:06:0009005:4567",
+              },
+              {
+                title: "Кадастровая стоимость",
+                text: "150 000 000 ₽",
+                description: "Это всплывающая подсказка о данных кадастровой стоимости",
+              },
+              {
+                title: "Общая площадь",
+                text: "615 м²",
+              },
+              {
+                title: "Этажность",
+                text: "3",
+              },
+            ],
+          },
+        ],
+        founders: [
+          {
+            value: "Текущие владельцы",
+            label: [
+              { title: "Единоличный собственник", text: "Иванов Филипп Васильевич" },
+              { title: "77-77-08/011/2021-0308", text: "03.08.2021" },
+            ],
+          },
+          {
+            value: "Предыдущие владельцы",
+            description: "Всплывающая подсказка предыдущих владельцев",
+            label: [
+              {
+                title: "2 владельца",
+                text: "Иванов Филипп Васильевич, Иванов Филипп Васильевич",
+              },
+              { title: "77-77-08/011/2021-0308", text: "03.08.2021" },
+            ],
+          },
+        ],
+        encumbrances: [
+          {
+            title: "Текущие владельцы",
+            encumbrances: [
+              {
+                status: 0,
+                description: "Description",
+                text: "Дом в ипотеке",
+              },
+              {
+                status: 1,
+                description: "Description",
+                text: "Записей об аренде не найдено",
+              },
+            ],
+          },
+        ],
+        recomendations: [
+          {
+            value: "Квартира меняла владельцев несколько раз за последние 3 года",
+            label:
+              "Внимательно изучите документы, по которым квартира перешла в собственность текущего владельца, узнайте больше о предыдущих собственниках и сделках. Лучше обратиться к специалистам для проверки и сопровождения сделки.",
+          },
+          {
+            value: "Квартира в собственности менее 5 лет",
+            label:
+              "При продаже продавец скорее всего должен будет заплатить налог с её продажи. Чтобы этого не делать, он может настаивать на занижении стоимости жилья в договоре купли-продажи. В таком случае вы рискуете: если что-то пойдёт не так, возместить можно будет только сумму, указанную в договоре, и вы не сможете полностью получить налоговый вычет за покупку квартиры.",
+          },
+        ]
       }
-    }
+    },
   },
+
   {
     images : [
       {url : "https://cdn.pixabay.com/photo/2021/08/25/20/42/field-6574455__340.jpg", id : 0},
@@ -384,6 +992,7 @@ export const fullObjectData = [
     lang : "ru",
     name : "1-комнатная квартира, 52 м²",
     type : "house",
+    category: "Дом",
     address : "ул. Ленина, д. 36, кв. 21",
     city : "Ялта",
     lat : 35.6,
@@ -396,7 +1005,10 @@ export const fullObjectData = [
     floor : 3,
     total_floors : 15,
     favorite : false,
-    INFO_OPTIONS : [
+    publish : '12.06.2021',
+    views : '389',
+    agency : 'Агентство: Лунный свет',
+    info_options : [
       { label: "Общая площадь", value: "615 м²" },
       { label: "Площадь дома", value: "300 м²" },
       { label: "Жилая площадь", value: "150 м²" },
@@ -417,11 +1029,11 @@ export const fullObjectData = [
         value: "2 спальни с индивидуальными душевыми и туалетами",
       },
     ],
-    DESCRIPTION_ITEMS : [
+    description_items : [
       "Из окон виллы открывается красивейший вид на древнюю гору-вулкан Аю-Даг, Гурзуфскую бухту и парки Артека, скалы Адалары и пристань для яхт и катеров.",
       "На террасе расположен бассейн с переливом в сторону моря и уникальными видовыми характеристиками.",
     ],
-    Online_tour : {
+    online_tour : {
       threeD_tour: {
           url: 'https://www.youtube.com/embed/Ke3qyQYNob4',
       },
@@ -429,19 +1041,98 @@ export const fullObjectData = [
           url: 'https://3d-tur.ru/010/',
       }
     },
-    OBJECT_SPECS_MOCK : {
+    object_specs : {
       subtitle: "Строительно-техническая экспертиза",
       specificationsItems : {
-        value: IconTypes.HOUSE_TYPE,
+        value: 'house_type',
         label: { title: "Тип дома", text: "Монолитный" },
       }
     },
     legalPurityData : {
       encumbrances: false,
       risks: false,
-      tabsData: OBJECT_LEGAL_PURITY_TABS_DATA
+      tabsData: {
+        general: [
+          {
+            value: "Данные из ЕГРН",
+            description: "Это всплывающая подсказка о данных из ЕГРН",
+            label: [
+              {
+                title: "Адрес",
+                text: "Респ. Крым, пгт Гурзуф,  ул. Ялтинская, д. 12К",
+              },
+              {
+                title: "Кадастровый номер",
+                text: "77:06:0009005:4567",
+              },
+              {
+                title: "Кадастровая стоимость",
+                text: "150 000 000 ₽",
+                description: "Это всплывающая подсказка о данных кадастровой стоимости",
+              },
+              {
+                title: "Общая площадь",
+                text: "615 м²",
+              },
+              {
+                title: "Этажность",
+                text: "3",
+              },
+            ],
+          },
+        ],
+        founders: [
+          {
+            value: "Текущие владельцы",
+            label: [
+              { title: "Единоличный собственник", text: "Иванов Филипп Васильевич" },
+              { title: "77-77-08/011/2021-0308", text: "03.08.2021" },
+            ],
+          },
+          {
+            value: "Предыдущие владельцы",
+            description: "Всплывающая подсказка предыдущих владельцев",
+            label: [
+              {
+                title: "2 владельца",
+                text: "Иванов Филипп Васильевич, Иванов Филипп Васильевич",
+              },
+              { title: "77-77-08/011/2021-0308", text: "03.08.2021" },
+            ],
+          },
+        ],
+        encumbrances: [
+          {
+            title: "Текущие владельцы",
+            encumbrances: [
+              {
+                status: 0,
+                description: "Description",
+                text: "Дом в ипотеке",
+              },
+              {
+                status: 1,
+                description: "Description",
+                text: "Записей об аренде не найдено",
+              },
+            ],
+          },
+        ],
+        recomendations: [
+          {
+            value: "Квартира меняла владельцев несколько раз за последние 3 года",
+            label:
+              "Внимательно изучите документы, по которым квартира перешла в собственность текущего владельца, узнайте больше о предыдущих собственниках и сделках. Лучше обратиться к специалистам для проверки и сопровождения сделки.",
+          },
+          {
+            value: "Квартира в собственности менее 5 лет",
+            label:
+              "При продаже продавец скорее всего должен будет заплатить налог с её продажи. Чтобы этого не делать, он может настаивать на занижении стоимости жилья в договоре купли-продажи. В таком случае вы рискуете: если что-то пойдёт не так, возместить можно будет только сумму, указанную в договоре, и вы не сможете полностью получить налоговый вычет за покупку квартиры.",
+          },
+        ]
+      }
     },
-    OBJECT_DEVELOPER_INFO : {
+    object_developer_info : {
       name: "Брусника",
       developerType: "Девелоперская компания",
       logo: "https://d3n32ilufxuvd1.cloudfront.net/55ad267d853a8ee05ba03cb2/226965/upload-9b246d20-77e5-11e5-a659-371ac3ded399.jpg",
@@ -449,20 +1140,275 @@ export const fullObjectData = [
       leasedAmmount: "183 дома в 103 ЖК",
       inProgressAmmount: "5 домов в 3 ЖК",
       tabsData: {
-        about: DEVELOPER_ABOUT_PARAGRAPHS,
-        contacts: DEVELOPER_CONTACTS,
-        requisits: DEVELOPER_REQUISITS,
+        about: [
+          "Брусника — российская девелоперская компания. Специализируется на строительстве жилых многоэтажных домов. Основана в 2004 году. Штаб-квартира находится в Екатеринбурге. Сегодня Брусника строит современное демократичное жильё в крупных городах Урала и Сибири, в Москве и Московский области. Ежегодно это 6 000 новых квартир для российских семей.",
+          "Бизнес-идея Брусники основана на желании изменить жизнь к лучшему, предлагая демократичное жильё нового качества, простоту и надёжность покупки, комфорт и функциональность проживания.",
+          "В Бруснике понимают девелопмент как постоянный процесс преобразования города и пространства, в котором живут люди. Для компании важны детали, которые могут сделать жизнь лучше. Для сотрудников Брусники это ежедневный добросовестный труд.",
+        ],
+        contacts: [
+          { value: "tel", label: { title: "Телефон", text: "+7 (495) 023 76 29" } },
+          { value: "email", label: { title: "E-mail", text: "Сведения отсутствуют" } },
+          { value: "site", label: { title: "Сайт", text: "brusnika.ru" } },
+          {
+            value: "address",
+            label: {
+              title: "Адрес",
+              text:
+                "Московская область, Ленинский район, г. Видное, д. Сапроново, ул. Калиновая, 1",
+            },
+          },
+        ],
+        requisits: [
+          {
+            value: "fullName",
+            label: {
+              title: "Полное наименование организации",
+              text:
+                "ОБЩЕСТВО С ОГРАНИЧЕННОЙ ОТВЕТСТВЕННОСТЬЮ СПЕЦИАЛИЗИРОВАННЫЙ ЗАСТРОЙЩИК «ГАРАНТ-ЖИЛЬЕ»",
+            },
+          },
+          {
+            value: "address",
+            label: {
+              title: "Адрес",
+              text: "Смоленская обл., г. Смоленск, ул. 25 Сентября, д. 64",
+            },
+          },
+          {
+            value: "capital",
+            label: {
+              title: "Уставный капитал",
+              text: "40 010 000 ₽",
+            },
+          },
+          {
+            value: "okfs",
+            label: {
+              title: "ОКФС",
+              text: "Частная собственность",
+            },
+          },
+          {
+            value: "okopf",
+            label: {
+              text: "Общества с ограниченной ответственностью",
+              title: "ОКОПФ",
+            },
+          },
+          {
+            value: "okogu",
+            label: {
+              title: "ОКОГУ",
+              text:
+                "Организации, учрежденные юридическими лицами или гражданами, или юридическими лицами и гражданами совместно",
+            },
+          },
+          {
+            value: "inn",
+            label: {
+              title: "ИНН",
+              text: "6732076930",
+            },
+          },
+          {
+            value: "okato",
+            label: {
+              title: "ОКАТО",
+              text: "Смоленская область, Смоленск",
+            },
+          },
+          {
+            value: "ogrn",
+            label: {
+              title: "ОГРН",
+              text: "1146733013350",
+            },
+          },
+          {
+            value: "okpo",
+            label: {
+              title: "ОКПО",
+              text: "25769055",
+            },
+          },
+          {
+            value: "kpp",
+            label: {
+              title: "КПП",
+              text: "673201001",
+            },
+          },
+          {
+            value: "oktmo",
+            label: {
+              title: "ОКТМО",
+              text: "Смоленская область, г. Смоленск",
+            },
+          },
+        ],
         owners: {
-            company: DEVELOPER_OWNERS_COMPANY,
-            goverment: DEVELOPER_OWNER_GOVERMENT,
+            company: {
+              defaultInfo: [
+                {
+                  value: "status",
+                  label: {
+                    title: "Статус компании",
+                    text: "Статус компании",
+                  },
+                },
+                {
+                  value: "head",
+                  label: {
+                    title: "Руководитель",
+                    text: "Иванов Иван Иванович",
+                  },
+                },
+                {
+                  value: "owner",
+                  label: {
+                    title: "Учредители",
+                    text: "МЕНЕДЖМЕНТ-ЮБИКС, ООО, РЕБРИК НИКОЛАЙ ЮРЬЕВИЧ",
+                  },
+                },
+              ],
+              numericInfo: [
+                {
+                  value: "size",
+                  label: {
+                    title: "Размер предприятия",
+                    text: "60 человек",
+                  },
+                },
+                {
+                  value: "staffAmmount",
+                  label: {
+                    title: "Численность персонала",
+                    text: "60 человек",
+                  },
+                },
+                {
+                  value: "filials",
+                  label: {
+                    title: "Филиалы",
+                    text: "5",
+                  },
+                },
+                {
+                  value: "revenue",
+                  label: {
+                    title: "Выручка",
+                    text: "40 010 000 ₽ ",
+                  },
+                },
+                {
+                  value: "profit",
+                  label: {
+                    title: "Чистая прибыль",
+                    text: "40 010 000 ₽ ",
+                  },
+                },
+                {
+                  value: "assets",
+                  label: {
+                    title: "Чистые активы",
+                    text: "40 010 000 ₽",
+                  },
+                },
+              ],
+            },
+            goverment: [
+              {
+                value: "date",
+                label: { title: "Дата регистрации", text: "06.08.2014" },
+              },
+              {
+                value: "authority",
+                label: {
+                  title: "Регистрирующий орган",
+                  text: "Межрайонная ИФНС России № 5 по Смоленской области",
+                },
+              },
+              {
+                value: "authorityAddress",
+                label: {
+                  title: "Адрес регистрирующего органа",
+                  text: "214018, Смоленская обл, Смоленск г, Гагарина пр-кт, д 23В",
+                },
+              },
+              {
+                value: "authorityBusiness",
+                label: {
+                  title: "Регистрирующий орган, в котором находится регистрационное дело",
+                  text:
+                    "Межрайонная инспекция Федеральной налоговой службы № 5 по Смоленской области",
+                },
+              },
+            ],
         },
         activities: {
-            primary: DEVELOPER_PRIMARY_ACTIVITIES,
-            secondary: DEVELOPER_SECONDARY_ACTIVITIES,
+            primary: [
+              "Деятельность заказчика-застройщика, генерального подрядчика",
+            ],
+            secondary: [
+              "Передача электроэнергии и технологическое присоединение к распределительным электросетям",
+              "Покупка и продажа собственного недвижимого имущества",
+              "Подготовка к продаже собственного недвижимого имущества",
+              "Аренда и управление собственным или арендованным недвижимым имуществом",
+            ],
         },
-        news: DEVELOPER_MASS_MEDIA_ARTICLES,
-        statistics: DEVELOPER_STATISTICS,
-        risks: DEVELOPER_RISKS
+        news: [{
+          link: "",
+          date: new Date(),
+          title:
+            "«Брусника» выпустит облигации на 4 млрд ₽ ради земли и перевооружения",
+          description:
+            "Девелоперская компания Брусника объявила о дебютном выпуске облигаций объемом до 4 млрд руб. на...",
+          icon:
+            "https://pbs.twimg.com/profile_images/984033833900298245/5U8I3xfZ_400x400.jpg",
+          id: "1",
+        },],
+        statistics: [
+          {
+            value: "Арбитражные дела",
+            label: [{ title: "17", text: "Судебные дела" },],
+          },
+          {
+            value: "Исполнительные производства",
+            label: [{ title: "44", text: "Завершённые производства" },],
+          },
+          {
+            value: "Тендеры и госзакупки",
+            label: [{ title: "74", text: "Количество закупок" },],
+          },
+          {
+            value: "Существенные события",
+            label: [{ title: "7", text: "За всю историю компании" },],
+          },
+        ],
+        risks: [
+          {
+            value: "15",
+            label: {
+              title: "Индекс должной осмотрительности",
+              text:
+                "Оценка, показывающая вероятность того, что компания является «фирмой- однодневкой»",
+            },
+          },
+          {
+            value: "0",
+            label: {
+              title: "Индекс финансового риска",
+              text: "Оценка вероятности неплатежеспособности компании",
+            },
+          },
+          {
+            value: "11",
+            label: {
+              title: "Индекс платежной дисциплины",
+              text: "Показатель, отражающий своевременность оплаты компанией счетов",
+            },
+          },
+        ]
       }
     }
   },

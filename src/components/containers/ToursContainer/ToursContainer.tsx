@@ -7,15 +7,15 @@ import s from './ToursContainer.module.scss'
 type ToursContainerType = {
     Online_tour:{
         threeD_tour:{
-            url:string,
+            url? :string,
         },
         vr_tour:{
-            url:string,
+            url? :string,
         }
     },
 }
 
-const ToursContainer :FC<ToursContainerType> = ({ Online_tour }) => {
+const ToursContainer :FC<any> = ({ Online_tour }) => {
     return (
         <div className={s.container}>
             <VerticalTabs className={s.padding} tabs={[

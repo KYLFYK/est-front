@@ -1,6 +1,6 @@
 
 type Props={
-    url:string
+    url?: string
 }
 
 export const VRTour: React.FC<Props> = ({url}) => {

@@ -53,7 +53,9 @@ export const OpenStreetIconsFactory = (type: any, isActive: boolean | undefined,
 
     let iconUrl: string = '';
     switch (type) {
-        case ObjectTypes.VILLA:
+        case ObjectTypes.HOUSE:
+        case ObjectTypes.RC:
+        case ObjectTypes.PLAT:
         case ObjectTypes.APARTMENTS:
             iconUrl = isActive ? HomePressed : callingLocation==='checkbox' ? HomeCheck : HomeMap
             break;

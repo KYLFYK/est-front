@@ -8,7 +8,7 @@ import { ILegalPurityData} from "./config"
 import s from './ObjectLegalPurity.module.scss'
 
 interface Props {
-    legalPurityData: ILegalPurityData
+    legalPurityData?: ILegalPurityData
 }
 
 const ObjectLegalPurity: React.FC<Props> = ({ legalPurityData }) => {
@@ -18,15 +18,15 @@ const ObjectLegalPurity: React.FC<Props> = ({ legalPurityData }) => {
             <div className={s.infoBlock}>
 
 
-                <Advantage title="Риски" text={legalPurityData.risks ? "Да" : "Нет"} className={s.iconItem}>
+                <Advantage title="Риски" text={legalPurityData && legalPurityData.risks ? "Да" : "Нет"} className={s.iconItem}>
                     <ExclamationMarkIcon />
                 </Advantage>
-                <Advantage title="Обременения" text={legalPurityData.encumbrances ? "Да" : "Нет"} className={s.iconItem}>
+                <Advantage title="Обременения" text={legalPurityData && legalPurityData.encumbrances ? "Да" : "Нет"} className={s.iconItem}>
                     <EncumbrancesIcon />
                 </Advantage>
             </div>
 
-            <LegalPurityTabs tabsData={legalPurityData.tabsData} />
+            <LegalPurityTabs tabsData={legalPurityData && legalPurityData.tabsData} />
         </HeadLine>
         </div>
     )

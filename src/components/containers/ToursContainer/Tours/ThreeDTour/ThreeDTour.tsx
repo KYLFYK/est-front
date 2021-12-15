@@ -1,6 +1,6 @@
 
 interface Props {
-    url: string
+    url?: string
 }
 
 export const ThreeDTour: React.FC<Props> = ({url}) => {

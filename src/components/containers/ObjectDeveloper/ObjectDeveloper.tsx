@@ -22,7 +22,7 @@ interface Props {
     developerData: IObjectDeveloperInfo
 }
 
-const ObjectDeveloper: React.FC<Props> = ({ developerData }) => {
+const ObjectDeveloper: React.FC<any> = ({ developerData }) => {
     return (
         <div className={s.container}>
         <HeadLine title="Застройщик">

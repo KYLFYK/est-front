@@ -21,15 +21,15 @@ interface Props {
     title: string
 }
 
-const ObjectSpecifications: React.FC<Props> = ({ specificationsLists, title }) => {
+const ObjectSpecifications: React.FC<any> = ({ specificationsLists, title }) => {
     return (
         <div className={s.container}>
             <HeadLine title={title}>
-                {specificationsLists.map((specList, idx) => {
+                {specificationsLists.map((specList:any, idx:number) => {
                     return <div key={idx}>
                         <Typography weight="bold" className={s.subTitle}>{specList.subtitle}</Typography>
                         <div className={s.specsList}>
-                            {specList.specificationsItems.map((spec,index) =>
+                            {specList.specificationsItems.map((spec:any,index:number) =>
                                 <Advantage variant="secondary" text={spec.label.text} title={spec.label.title} key={index}>
                                     {searchIconByValue(spec.value as string)}
                                 </Advantage>

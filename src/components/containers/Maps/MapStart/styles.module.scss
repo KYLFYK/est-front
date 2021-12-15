@@ -3,12 +3,9 @@
     width: 870px;
     height: 380px;
 }
-
-.button {
-    padding: 0;
-    border: 0;
-    background-color: transparent;
-}
 .border{
     border-radius: 6px;
+}
+.marker {
+    transform: scale(0.5) translate(-100%, -100%);
 }

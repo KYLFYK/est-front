@@ -51,7 +51,7 @@ export const IconsCreator: React.FC<Props> = ({locationProject, color, title, cl
                   />
                 : <> 
                     {
-                      type === 'apartment' 
+                      (type === 'house' || type === 'apartment' || type === 'residential-complex' || type === 'plat')
                         ? <div style={{width: '100px', height: '100px', backgroundColor: '#000', borderRadius: '100%', 
                             border: `4px solid ${locationProject === 'payback' ? '#1A4862' : '#FFFFFF'}`, 
                             backgroundSize: 'cover', position: 'relative', top: '-120px', left: '-55px',

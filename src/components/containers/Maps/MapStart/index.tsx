@@ -32,13 +32,14 @@ const Map: React.FC<Props> = ({center, location}) => {
           mapboxApiAccessToken={'pk.eyJ1Ijoibmlja29sYXlhcmJ1em92IiwiYSI6ImNrdmdtYWQxYjd0enQybnM3bGR5b2Fnd2YifQ.IEtk0ClJ58f6dgZYa8hKpA'}
           mapStyle="mapbox://styles/mapbox/streets-v9"
           onViewportChange={_onViewportChange}
-         className={s.border}
+          className={s.border}
         >
           <Marker 
             latitude={center.lat}
             longitude={center.lng}
+            className={s.marker}
           > 
-            <div style={{transform: 'scale(.5) translate(-100%, -150%)'}}>
+            <div style={{transform: 'translate(0%, -50%)'}}>
               <Image loader={() => '../../../../icons/MapIcons/OfficeIcon/OfficeIcon.png'} unoptimized width={'100%'} height={'100%'} src={OfficeIcon} alt={'officeIcon'}/>
             </div>
           </Marker>

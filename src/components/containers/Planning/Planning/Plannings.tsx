@@ -17,7 +17,7 @@ interface IObjectPlanningItem {
 
 interface Props {
     FilterComponent: JSX.Element,
-    planningList: IObjectPlanningItem[]
+    planningList?: IObjectPlanningItem[]
 }
 
 const Planning: React.FC<Props> = ({ FilterComponent, planningList }) => {
@@ -28,8 +28,8 @@ const Planning: React.FC<Props> = ({ FilterComponent, planningList }) => {
                     {FilterComponent}
                 </div>
                 <div className={s.content}>
-                    {planningList.map(({ image, price, title, housing, deadline, floor }, idx) =>
-                        <Card key={idx} image={'../assets/planning_sample.png'} price={price} title={title} housing={housing} deadline={deadline} floor={floor} />)}
+                    {planningList && planningList.map(({ image, price, title, housing, deadline, floor }, idx) =>
+                        <Card key={idx} image={image} price={price} title={title} housing={housing} deadline={deadline} floor={floor} />)}
                 </div>
             </HeadLine>
         </div>

@@ -13,7 +13,7 @@ interface Props {
 
 const ConstructProgress: React.FC<Props> = ({ images, info }) => {
     const [value, setValue] = useState<any>(0)
-
+    console.log(info)
     return (
         <div className={s.container}>
             <div className={s.sliderContainer}>

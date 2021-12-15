@@ -13,6 +13,7 @@ interface Props {
 }
 
 export const CheckBox: React.FC<Props> = ({ uniqueTypesList, pressed, handlePressed }) => {
+
     const renderFilterLists = () => uniqueTypesList && uniqueTypesList.map((typeOption, index) => (
         <div key={index} className={s.elem}>
             <button onClick={() => handlePressed && handlePressed(typeOption.label)} className={`${s.elem} ${s.button}`}>
@@ -28,7 +29,7 @@ export const CheckBox: React.FC<Props> = ({ uniqueTypesList, pressed, handlePres
             </button>
         </div>
     ))
-
+    
     return (
         <div className={s.container}>
             <Typography className={s.title} color={'accent'} weight={'bold'}>Категории</Typography>  
