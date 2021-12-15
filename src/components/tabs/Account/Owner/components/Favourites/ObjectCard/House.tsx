@@ -7,6 +7,7 @@ import ParamsColumn from "../../../../../../shared/ParamsColumn/ParamsColumn";
 import FavoriteOffIcon from "../../../../../../shared/FavoriteOffIcon/FavoriteOffIcon";
 
 type HouseType={
+    id:string
     objectInfo:{
         totalArea:string
         name:string
@@ -20,7 +21,7 @@ type HouseType={
     }
 }
 
-const House :FC<HouseType> = ({objectInfo}) => {
+const House :FC<HouseType> = ({objectInfo,id}) => {
 
     return (
         <div>
@@ -29,7 +30,9 @@ const House :FC<HouseType> = ({objectInfo}) => {
                     totalArea={objectInfo.totalArea}
                     name={objectInfo.name}
                     fromPublic={objectInfo.fromPublic}
-                    datePublic={objectInfo.datePublic}/>
+                    datePublic={objectInfo.datePublic}
+                    id={id}
+                />
                 <LineV3
                     country={objectInfo.country}
                     city={objectInfo.city}

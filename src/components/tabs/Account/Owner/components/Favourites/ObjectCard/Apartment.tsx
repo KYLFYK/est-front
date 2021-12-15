@@ -4,9 +4,9 @@ import LineV5 from "../../../../../../shared/CardObject/Lines/LineV5";
 import ParamsColumn from "../../../../../../shared/ParamsColumn/ParamsColumn";
 import css from "../CardOwner.module.scss";
 import EnumerationColumn from "../../../../../../shared/EnumerationColumn/EnumerationColumn";
-import FavoriteOffIcon from "../../../../../../shared/FavoriteOffIcon/FavoriteOffIcon";
 
 type ApartmentType={
+    id:string
     objectInfo:{
         typeObject: string
         totalArea: string
@@ -28,18 +28,16 @@ type ApartmentType={
     }
 }
 
-const Apartment :FC<ApartmentType> = ({objectInfo}) => {
-
-    const favoriteOff = (id:string) =>{
-        console.log(id,"favoriteOff")
-    }
+const Apartment :FC<ApartmentType> = ({objectInfo,id}) => {
 
     return (
         <div>
            <LineV4
                allApartment={objectInfo.allApartment}
                developerCompany={objectInfo.developerCompany}
-               developerName={objectInfo.developerName} />
+               developerName={objectInfo.developerName}
+               id={id}
+           />
             <LineV5
                 phone={objectInfo.phone}
                 city={objectInfo.city}

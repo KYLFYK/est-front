@@ -49,7 +49,7 @@ const objectInfo :CardOwnerTypeMoc={
 }
 const objectInfo1:CardOwnerTypeMoc ={
     url:'',
-    id:'1',
+    id:'2',
     image:'https://wallbox.ru/resize/800x480/wallpapers/main2/201728/14997845035964e5370c9756.49539791.jpg',
     objectInfo:{
         typeObject:'house',
@@ -97,6 +97,7 @@ const Favourites :FC<FavouritesType>= ({count=0}) => {
                 arrayObject.map((object,index)=>{
                         return <CardOwner
                             key={index}
+                            id={object.id}
                             url={object.url}
                             objectInfo={object.objectInfo}
                             image={object.image}/>

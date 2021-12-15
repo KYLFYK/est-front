@@ -7,9 +7,10 @@ type LineV4Type={
     developerName:string
     allApartment:string
     developerCompany:string
+    id:string
 }
 
-const LineV4 :FC<LineV4Type> = ({developerName,allApartment,developerCompany}) => {
+const LineV4 :FC<LineV4Type> = ({developerName,allApartment,developerCompany,id}) => {
     const favoriteOff = (id:string) =>{
         console.log(id,"favoriteOff")
     }
@@ -34,7 +35,7 @@ const LineV4 :FC<LineV4Type> = ({developerName,allApartment,developerCompany}) =
                     {developerCompany}
                 </Typography>
             </div>
-            <FavoriteOffIcon onClick={favoriteOff}  id={'1'}/>
+            <FavoriteOffIcon onClick={favoriteOff}  id={id}/>
 
         </div>
     );

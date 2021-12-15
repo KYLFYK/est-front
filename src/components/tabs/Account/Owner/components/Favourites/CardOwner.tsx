@@ -5,6 +5,7 @@ import House from "./ObjectCard/House";
 import Apartment from "./ObjectCard/Apartment";
 
 export type CardOwnerType = {
+    id:string
     url:string
     image: string
     objectInfo: ObjectInfoType
@@ -29,22 +30,22 @@ export type ObjectInfoType={
     params: Array<{ title: string, value: string }>
 }
 
-const searchTypeObject = (type: string,objectInfo:ObjectInfoType) => {
+const searchTypeObject = (type: string,objectInfo:ObjectInfoType ,id:string) => {
     switch (type) {
         case 'apartment':
-            return <Apartment objectInfo={objectInfo}/>
+            return <Apartment objectInfo={objectInfo} id={id}/>
         case 'house':
-            return <House objectInfo={objectInfo}/>
+            return <House objectInfo={objectInfo} id={id}/>
         case 'residentialComplex':
             return <div>1</div>
         case 'plotHouse':
             return <div>1</div>
         default :
-            return <House objectInfo={objectInfo}/>
+            return <House objectInfo={objectInfo} id={id}/>
     }
 }
 
-const CardOwner: FC<CardOwnerType> = ({image, objectInfo,url}) => {
+const CardOwner: FC<CardOwnerType> = ({image, objectInfo,url,id}) => {
     //URL LINK NEED
     return (
         <div className={css.cardBorder}>
@@ -56,7 +57,7 @@ const CardOwner: FC<CardOwnerType> = ({image, objectInfo,url}) => {
                     height={126}/>
             </div>
             {
-                searchTypeObject(objectInfo.typeObject,objectInfo)
+                searchTypeObject(objectInfo.typeObject,objectInfo,id)
             }
         </div>
     );

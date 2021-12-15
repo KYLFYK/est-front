@@ -8,9 +8,10 @@ type LinesV2Type={
     name:string
     datePublic:string
     fromPublic:string
+    id:string
 }
 
-const LineV2 :FC<LinesV2Type> = ({totalArea,name,datePublic,fromPublic}) => {
+const LineV2 :FC<LinesV2Type> = ({totalArea,name,datePublic,fromPublic,id}) => {
     const favoriteOff = (id:string) =>{
         console.log(id,"favoriteOff")
     }
@@ -38,7 +39,7 @@ const LineV2 :FC<LinesV2Type> = ({totalArea,name,datePublic,fromPublic}) => {
                         {fromPublic}
                     </Typography>
                 </div>
-                <FavoriteOffIcon onClick={favoriteOff}  id={'1'}/>
+                <FavoriteOffIcon onClick={favoriteOff}  id={id}/>
 
         </div>
     );
