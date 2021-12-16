@@ -3,7 +3,7 @@ import React from 'react';
 const SavedSearches = () => {
     return (
         <div>
-            SavedSearches
+            SavedSearches1
         </div>
     );
 };
