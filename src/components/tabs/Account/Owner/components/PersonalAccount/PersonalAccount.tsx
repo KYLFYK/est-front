@@ -15,7 +15,6 @@ type PersonalAccountType = {
         password:string
         image:string
     }
-
 }
 
 const PersonalAccount: FC<PersonalAccountType> = ({personalAccount}) => {
