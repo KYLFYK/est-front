@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useRef} from 'react';
 import {LineChart, XAxis, CartesianGrid, Line, YAxis} from 'recharts';
 import css from './Chart.module.scss'
 
@@ -14,32 +14,32 @@ interface Props {
 
 export const Chart: React.FC<Props> = ({heightValue,language,table,divider,currency=false, width = 900,height=204}) => {
 
-
-
+    let heightProps = useRef<any>(height)
+    let widthProps = useRef<any>(width)
 
     useEffect(()=>{
         if(window !== undefined){
             if (window.innerWidth < 768) {
-                height = 375
+                heightProps.current = 375
             }
 
             if (window.innerWidth >= 320){
-                width = window.innerWidth * 0.805;
+                widthProps.current = window.innerWidth * 0.805;
             }
             if (window.innerWidth >= 576){
-                width = window.innerWidth * 0.861;
+                widthProps.current = window.innerWidth * 0.861;
             }
             if (window.innerWidth >= 768){
-                width = window.innerWidth * 0.409;
+                widthProps.current = window.innerWidth * 0.409;
             }
             if (window.innerWidth >= 992){
-                width = window.innerWidth * 0.488;
+                widthProps.current = window.innerWidth * 0.488;
             }
             if (window.innerWidth >= 1200){
-                width = window.innerWidth * 0.6275;
+                widthProps.current = window.innerWidth * 0.6275;
             }
             if (window.innerWidth >= 1400){
-                width = 960;
+                widthProps.current = 960;
             }
         }
 

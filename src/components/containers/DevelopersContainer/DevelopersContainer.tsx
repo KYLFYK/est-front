@@ -30,27 +30,27 @@ const developerInfo = {
     objectsDeveloper:mockObjects
 }
 export  const mockDevelopers = [{
-    img: "https://hasadalingaz.com/wp-content/uploads/2020/03/client16-min.png",
+    img: "https://images.unsplash.com/photo-1541963463532-d68292c34b19?ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8Ym9va3xlbnwwfHwwfHw%3D&ixlib=rb-1.2.1&w=1000&q=80",
     title: 'EMMAR1',
     description:'lorem ipsum1',
     developerInfo:developerInfo
 },{
-    img: "https://hasadalingaz.com/wp-content/uploads/2020/03/client16-min.png",
+    img: "https://images.unsplash.com/photo-1541963463532-d68292c34b19?ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8Ym9va3xlbnwwfHwwfHw%3D&ixlib=rb-1.2.1&w=1000&q=80",
     title: 'EMMAR2',
     description:'lorem ipsum2',
     developerInfo:developerInfo
 },{
-    img: "https://hasadalingaz.com/wp-content/uploads/2020/03/client16-min.png",
+    img: "https://images.unsplash.com/photo-1541963463532-d68292c34b19?ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8Ym9va3xlbnwwfHwwfHw%3D&ixlib=rb-1.2.1&w=1000&q=80",
     title: 'EMMAR3',
     description:'lorem ipsum3',
     developerInfo:developerInfo
 },{
-    img: "https://hasadalingaz.com/wp-content/uploads/2020/03/client16-min.png",
+    img: "https://images.unsplash.com/photo-1541963463532-d68292c34b19?ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8Ym9va3xlbnwwfHwwfHw%3D&ixlib=rb-1.2.1&w=1000&q=80",
     title: 'EMMAR4',
     description:'lorem ipsum4',
     developerInfo:developerInfo
 },{
-    img: "https://hasadalingaz.com/wp-content/uploads/2020/03/client16-min.png",
+    img: "https://images.unsplash.com/photo-1541963463532-d68292c34b19?ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8Ym9va3xlbnwwfHwwfHw%3D&ixlib=rb-1.2.1&w=1000&q=80",
     title: 'EMMAR5',
     description:'lorem ipsum5',
     developerInfo:developerInfo
