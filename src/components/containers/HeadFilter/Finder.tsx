@@ -1,6 +1,7 @@
 import React from 'react';
 import s from './HeadFilter.module.scss';
 import { Filter } from '../Filter/Filter';
+import Typography from 'src/components/shared/Typography/Typography';
 import { useProgressiveImage } from '../../../hooks/useProgressiveLazyLoad';
 import * as imageSrc from './imageSrc';
 //import { Button } from '../../../../shared/UI/components/button/Button'; 
@@ -22,12 +23,13 @@ export const HeadFilter = () => {
     }*/
 
     return (
-        <div className={s.container} style={{backgroundImage: `url(${lazySrc || imageSrc.MAIN_PAGE_PLACEHOLDER_SRC})`}}>
+        <div className={s.container} style={{backgroundImage: `url(https://api.interior.ru/media/images/setka/2020_11_05/Paunic_22.jpg.webp)`}}>
             <div></div>
             <div className={s.contentContainer}>
                 <div className={s.title}>
                     <div className={s.containerTitle}>
-                        <div className={s.titleText}>Найдите дом своей мечты</div>
+                        <Typography size={'header'} color={'secondary'}>Найдите дом своей мечты</Typography>
+                        <Typography weight={'medium'} color={'secondary'} className={s.subTitle}>Здесь публикуются лучшие объекты недвижимости Крыма и Сочи</Typography>
                         {/*<div className={s.subtitleText}>Более 3000 предложений кварти и домов в Крыму и Сочи</div>
 
                         <Button 

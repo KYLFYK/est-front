@@ -50,3 +50,16 @@
 .dropdownFloor {
     width: 360px !important
 }
+
+.link {
+    background-color: $NUDE;
+    height: 40px;
+    border-radius: 6px;
+    outline: none;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.linkTitle{
+    margin: 10px;
+}

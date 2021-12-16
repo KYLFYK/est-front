@@ -1,7 +1,7 @@
 import React from 'react';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 import OurOffice from './OurOffice';
-import {ourOfficeType} from "../../../../pages";
+//import {ourOfficeType} from "./OurOffice";
 
 
 export default {
@@ -11,7 +11,7 @@ export default {
 
 const Template: ComponentStory<typeof OurOffice> = (args) => <OurOffice {...args} />;
 
-const ourOffice: ourOfficeType = {
+const ourOffice: any = {
     positionMap: {
         lat: 44.959975,
         lng: 34.109053

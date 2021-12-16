@@ -52,8 +52,10 @@ export interface IObjectTour {
 }
 
 export enum ObjectTypes {
-    VILLA = "villa",
+    HOUSE = "house",
     APARTMENTS = "apartment",
+    RC = "residential-complex",
+    PLAT = "plat",
     MUSEUM = "Museum",
     PARK = "Park",
     BEACH = "Beach",

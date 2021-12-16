@@ -8,17 +8,17 @@ import LegalPurityRecomendationsTab from "./components/Recomendations/LegalPurit
 
 
 interface Props {
-    tabsData: IObjectLegalPurityTabs
+    tabsData?: IObjectLegalPurityTabs
 }
 
 const LegalPurityTabs: React.FC<Props> = ({ tabsData }) => {
     return (
         <VerticalTabs
             tabs={[
-                { title: "Общие сведения", Component: <LegalPurityGeneralTab data={tabsData.general} /> },
-                { title: "Собственники", Component: <LegalPurityFoundersTab data={tabsData.founders} /> },
-                { title: "Обременения", Component: <LegalPurityEncumbrancesTab data={tabsData.encumbrances} /> },
-                { title: "Рекомендации", Component: <LegalPurityRecomendationsTab data={tabsData.recomendations} /> },
+                { title: "Общие сведения", Component: <LegalPurityGeneralTab data={tabsData && tabsData.general} /> },
+                { title: "Собственники", Component: <LegalPurityFoundersTab data={tabsData && tabsData.founders} /> },
+                { title: "Обременения", Component: <LegalPurityEncumbrancesTab data={tabsData && tabsData.encumbrances} /> },
+                { title: "Рекомендации", Component: <LegalPurityRecomendationsTab data={tabsData && tabsData.recomendations} /> },
             ]}
         />
     )

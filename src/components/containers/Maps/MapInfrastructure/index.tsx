@@ -96,8 +96,8 @@ const Map: React.FC<Props> = ({currentHouse, infrastructura, location}) => {
                 key={up.object_id}
                 latitude={up.lat ? up.lat : Number(up.address.geo.lat)}
                 longitude={up.lng ? up.lng : Number(up.address.geo.lng)}
+                className={(up.type === 'house' || up.type === 'apartment' || up.type === 'residential-complex' || up.type === 'plat') ? s.estateMarker : s.infraMarker}
             >
-              <div style={{transform: `${up.type !== 'apartment' ? 'translate(-50%, -50%)' : 'translate(0, 0)'}`}}>
                 <BaseButton className={s.button} onClick={() => {
                   setActivemarker(up.object_id)
                   setOpen(true)
@@ -111,7 +111,6 @@ const Map: React.FC<Props> = ({currentHouse, infrastructura, location}) => {
                     active={up.object_id === activeMarker}
                   />
                 </BaseButton>
-              </div>
             </Marker>
           )
         })}

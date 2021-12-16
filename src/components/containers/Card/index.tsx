@@ -27,7 +27,7 @@ const ObjectCard: React.FC<Props> = ({ houseData }) => {
                 <BaseSlider images={imagesUrls} height={200} withFavorite onClickFavorite={() => {}}/>
             </div>
 
-            <Link href={TEMP_LINK}>
+            <Link href={`${TEMP_LINK}${houseData.type}/${houseData.object_id}`}>
                 <a className={s.content}>
                     <Typography inline weight="bold" color="accent" className={s.title}>{houseData.name}</Typography>
                     <p className={s.subtitle}>

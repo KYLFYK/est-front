@@ -8,25 +8,29 @@ import Typography from '../../shared/Typography/Typography';
 
 interface Props {
     images: string[],
-    info: any
+    info?: any
 }
 
 const ConstructProgress: React.FC<Props> = ({ images, info }) => {
     const [value, setValue] = useState<any>(0)
-
-    return (
-        <div className={s.container}>
-            <div className={s.sliderContainer}>
-                <BaseSlider images={images} height={295} withArrows withFavorite={false} onClickFavorite={() => {}}/>
+    if (info) {
+        return (
+            <div className={s.container}>
+                <div className={s.sliderContainer}>
+                    <BaseSlider images={images} height={295} withArrows withFavorite={false} onClickFavorite={() => {}}/>
+                </div>
+                <div className={s.infoContainer}>
+                <BaseDropDown options={info} value={info[Number(value)].value} placeholder="Выбрерите опцию" onChange={(e) => {setValue(e)}} />
+                    <Typography>    
+                        {info[Number(value)].title}
+                    </Typography>
+                </div>
             </div>
-            <div className={s.infoContainer}>
-            <BaseDropDown options={info} value={info[Number(value)].value} placeholder="Выбрерите опцию" onChange={(e) => {setValue(e)}} />
-                <Typography>    
-                    {info[Number(value)].title}
-                </Typography>
-            </div>
-        </div>
-    )
+        )
+    }
+    else {
+        return <></>
+    }
 };
 
 export default ConstructProgress

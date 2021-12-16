@@ -51,7 +51,7 @@ export const IconsCreator: React.FC<Props> = ({locationProject, color, title, cl
                   />
                 : <> 
                     {
-                      type === 'apartment' 
+                      (type === 'house' || type === 'apartment' || type === 'residential-complex' || type === 'plat')
                         ? <div style={{width: '100px', height: '100px', backgroundColor: '#000', borderRadius: '100%', 
                             border: `4px solid ${locationProject === 'payback' ? '#1A4862' : '#FFFFFF'}`, 
                             backgroundSize: 'cover', position: 'relative', top: '-120px', left: '-55px',
@@ -63,7 +63,7 @@ export const IconsCreator: React.FC<Props> = ({locationProject, color, title, cl
 
                         </div>
                         : locationProject === 'infrastucture' 
-                            ? <Image src={OpenStreetIconsFactory(type, active, 'map')} width={50} height={50} />
+                            ? <Image loader={() => OpenStreetIconsFactory(type, active, 'map')} unoptimized src={OpenStreetIconsFactory(type, active, 'map')} width={50} height={50} />
                             : <HomeIcon colorBody={colorBody} colorPath={colorPath}/>
                     }
                     { locationProject !== 'infrastucture' && type !== 'apartment' && <div className={s.title}>

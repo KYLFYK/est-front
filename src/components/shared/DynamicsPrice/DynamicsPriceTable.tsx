@@ -37,6 +37,7 @@ const DynamicsPriceTable :FC<DynamicsPriceTableType> = ({table}) => {
                         Динамика изменения стоимости за м² в этом районе
                         <Image
                             id={'2'}
+                            loader={() => QuestionIcon} unoptimized 
                             src={QuestionIcon}
                             height={20}
                             width={20}

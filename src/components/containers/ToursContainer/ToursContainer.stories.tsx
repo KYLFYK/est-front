@@ -12,7 +12,7 @@ const Template: ComponentStory<typeof ToursContainer> = (args) => <ToursContaine
 export const ToursContainer_ = Template.bind({});
 ToursContainer_.args = {
      Online_tour:{
-        '3d_tour':{
+        threeD_tour:{
             url:'https://www.youtube.com/embed/Ke3qyQYNob4',
         },
         vr_tour:{

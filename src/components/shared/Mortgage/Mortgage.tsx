@@ -396,6 +396,7 @@ export const Mortgage: React.FC<Props> = ({}) => {
                                                 Кредит
                                                 <Image
                                                     id={"0"}
+                                                    loader={() => QuestionIcon} unoptimized
                                                     src={QuestionIcon}
                                                     onMouseEnter={onMouseCardhoverHandler}
                                                     onMouseLeave={onMouseCardoutHandler}
@@ -413,6 +414,7 @@ export const Mortgage: React.FC<Props> = ({}) => {
                                                 Проценты
                                                 <Image
                                                     id={"1"}
+                                                    loader={() => QuestionIcon} unoptimized
                                                     src={QuestionIcon}
                                                     onMouseEnter={onMouseCardhoverHandler}
                                                     onMouseLeave={onMouseCardoutHandler}
@@ -439,6 +441,7 @@ export const Mortgage: React.FC<Props> = ({}) => {
                                                 Проценты + Кредит
                                                 <Image
                                                     id={"2"}
+                                                    loader={() => QuestionIcon} unoptimized
                                                     src={QuestionIcon}
                                                     onMouseEnter={onMouseCardhoverHandler}
                                                     onMouseLeave={onMouseCardoutHandler}
@@ -465,6 +468,7 @@ export const Mortgage: React.FC<Props> = ({}) => {
                                                 Необходимый доход
                                                 <Image
                                                     id={"3"}
+                                                    loader={() => QuestionIcon} unoptimized
                                                     src={QuestionIcon}
                                                     onMouseEnter={onMouseCardhoverHandler}
                                                     onMouseLeave={onMouseCardoutHandler}

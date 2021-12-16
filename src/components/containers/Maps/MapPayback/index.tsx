@@ -46,8 +46,8 @@ const Map: React.FC<Props> = ({currentHouse, objects, location}) => {
                   key={md.object_id}
                   latitude={md.lat}
                   longitude={md.lng}
+                  className={md.type==='apartment' ? s.estateMarker : s.infraMarker}
               >
-                <div style={{transform: `${md.type !== 'apartment' ? 'translate(-50%, -50%)' : 'translate(0, 0)'}`}}>
                   <BaseButton className={s.button} onClick={() => {
                     setActivemarker(md.object_id)
                   }}>
@@ -61,7 +61,6 @@ const Map: React.FC<Props> = ({currentHouse, objects, location}) => {
                       active={md.object_id === activeMarker}
                     />
                   </BaseButton>
-                </div>
               </Marker>
             )
           })}
