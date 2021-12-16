@@ -62,7 +62,7 @@ export const Header: FC<HeaderPropsType> = ({ className,city,personalAccount,aut
     const [active, setActive] = useState<number>(0)
     return (
         <div className={classNames(css.header, className)}>
-            <Link href={'/'}>
+            <Link href={'/'} passHref>
                 <div style={{ cursor: 'pointer' }}>
                     <LogoMain />
                 </div>
@@ -80,7 +80,7 @@ export const Header: FC<HeaderPropsType> = ({ className,city,personalAccount,aut
                 </div>
                 {
                     moc.map(({ href, title }, index) => (
-                        <Link href={href} key={index}>
+                        <Link href={href} key={index} passHref>
                             <div
                                 className={css.menuName}
                                 onClick={() => setActive(0)}

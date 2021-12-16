@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import css from './EstateDevelopers.module.scss'
 import Typography from "../../shared/Typography/Typography";
 import { DeveloperDataModal } from '../DeveloperDataModal/DeveloperDataModal';
-
+import Image from 'next/image'
 
 type EstateDevelopersPropsType = {
     img: string
@@ -29,7 +29,9 @@ export const EstateDeveloper: React.FC<EstateDevelopersPropsType> = ({ title,des
                 isActive={edit}
             />
             <div onClick={() => setEdit(true)}>
-                <img
+                <Image
+                    width={200}
+                    height={80}
                     className={css.img}
                     src={img}
                     alt="emmar"

@@ -5,6 +5,7 @@ import Typography from "../../../shared/Typography/Typography";
 import { IconWhatsapp } from '../../../../icons/Agent/IconWhatsapp';
 import { IconTelegram } from '../../../../icons/Agent/IconTelegram';
 import { IconMail } from '../../../../icons/Agent/IconMail';
+import Image from 'next/image'
 import css from './AgentBlock.module.scss'
 
 type AgentBlockPropsType = {
@@ -42,7 +43,7 @@ export const AgentBlock: React.FC<AgentBlockPropsType> = ({ img,connection,infoA
 
     return (
         <div className={css.agentBlock}>
-            <img className={css.photoAgent} src={img} alt="agent" />
+            <Image className={css.photoAgent} src={img} alt="agent" height={200} width={200} />
             <div className={css.dataAgent}>
                 <div>
                     <Modal setActive={() => setEdit(false)} active={edit}>

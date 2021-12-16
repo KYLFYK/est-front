@@ -226,7 +226,7 @@ export const  ActualObject :FC<ActualObjectType> = ({agents}) => {
                                                         <Typography color={'nude'}  className={css.heightTable}>
                                                             {agent.url}
                                                             <div className={css.marginImage}>
-                                                                <Image src={copy} width={'19'} height={'22'} />
+                                                                <Image src={copy} width={'19'} height={'22'} alt={''} />
                                                             </div>
                                                         </Typography>
                                                         <DriveFileRenameOutlineIcon className={css.IconPosition}/>

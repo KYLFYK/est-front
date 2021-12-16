@@ -33,7 +33,7 @@ const PersonalCabinetAccountInfo: React.FC<PersonalCabinetAccountInfoType> = ({i
                 <div>
                     <Typography weight={"bold"}>Логитип</Typography>
                     <Card className={css.card}>
-                        <Image src={img ? img : imgMoc } width={88} height={88}/>
+                        <Image src={img ? img : imgMoc } width={88} height={88} alt={'photo'}/>
                     </Card>
                 </div>
                 <div className={css.df}>

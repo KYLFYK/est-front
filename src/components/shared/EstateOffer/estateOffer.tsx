@@ -14,7 +14,7 @@ const EstateOffer: React.FC<EstateOfferPropsType> = ({tags, img,url}) => {
 
     return (
         <div className={css.block}>
-            <Link href={url}>
+            <Link href={url} passHref >
                 <div>
                     <BaseSlider images={img} height={300}  />
                 </div>

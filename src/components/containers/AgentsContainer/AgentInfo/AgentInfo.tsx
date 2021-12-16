@@ -3,9 +3,9 @@ import { IconMail } from '../../../../icons/Agent/IconMail';
 import { IconTelegram } from '../../../../icons/Agent/IconTelegram';
 import { IconWhatsapp } from '../../../../icons/Agent/IconWhatsapp';
 import Typography from '../../../shared/Typography/Typography';
-import css from "./AgentInfo.module.scss";
 import {IconPhone} from "../../../../icons/Agent/IconPhone";
-
+import Image from 'next/image'
+import css from "./AgentInfo.module.scss";
 
 type AgentDataPropsType = {
     img: string
@@ -31,7 +31,7 @@ type AgentDataPropsType = {
 export const AgentInfo: React.FC<AgentDataPropsType> = ({ img,connection,infoAgent }) => {
     return (
         <>
-            <img className={css.photoAgent} src={img} alt="agent" />
+            <Image className={css.photoAgent} src={img} alt="agent" width={150} height={150} />
             <Typography size={'default'} color="accent" weight={'medium'} className={css.marginTop} >
                 {infoAgent.fullName}
             </Typography>

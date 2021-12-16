@@ -1,10 +1,11 @@
 import React, { FC } from 'react';
 import Typography from "../../shared/Typography/Typography";
-import css from './DeveloperData.module.scss'
 import { Modal } from '../../shared/Modal/Modal';
 import { IconLocation } from '../../../icons/Development/IconLocation';
 import { IconKey } from '../../../icons/Development/IconKey';
 import { IconDevelopmentObjects } from '../../../icons/Development/IconDevelopmentObjects';
+import Image from 'next/image'
+import css from './DeveloperData.module.scss'
 
 type DeveloperDataPropsType = {
     img: string
@@ -22,7 +23,7 @@ export const DeveloperDataModal: FC<DeveloperDataPropsType> = ({ img,  developer
     return (
 
         <Modal setActive={() => setActive(false)} active={isActive}>
-            <img
+            <Image
                 src={img}
                 width='174px' height='60px' alt="emmar" className={css.img}/>
             <Typography size={'default'} color="accent" className={css.title}>

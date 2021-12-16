@@ -13,7 +13,7 @@ const UploadImage :FC<UploadImageType> = ({image}) => {
             <div >
                 {
                     image !== ''
-                        ? <Image src={image} width={200} height={200} className={css.image}/>
+                        ? <Image src={image} width={200} height={200} className={css.image} alt={'photo'}/>
                         : <div className={css.image}></div>
                 }
             </div>

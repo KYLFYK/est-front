@@ -28,8 +28,8 @@ export const ScrollUp: FC<Props> = ({refs}) => {
 
         return () => {
             window.removeEventListener('scroll', toggleVisible);
-        }
-    }, [])
+        }  // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []) // 'toggleVisible' ??
 
     return (
         visible ? <div className={s.container} onClick={scrollingUp}><ScrollUPIcon /></div> : <></>

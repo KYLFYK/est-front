@@ -15,6 +15,8 @@ interface Props {
 export const Chart: React.FC<Props> = ({heightValue,language,table,divider,currency=false, width = 900,height=204}) => {
 
 
+
+
     useEffect(()=>{
         if(window !== undefined){
             if (window.innerWidth < 768) {
@@ -41,7 +43,7 @@ export const Chart: React.FC<Props> = ({heightValue,language,table,divider,curre
             }
         }
 
-    },[])
+    },[height,width])
 
 
     const customTickX = ({ x, y, payload }: {x: number, y: number, payload: any}) => {

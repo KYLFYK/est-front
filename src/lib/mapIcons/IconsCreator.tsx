@@ -63,7 +63,12 @@ export const IconsCreator: React.FC<Props> = ({locationProject, color, title, cl
 
                         </div>
                         : locationProject === 'infrastucture' 
-                            ? <Image loader={() => OpenStreetIconsFactory(type, active, 'map')} unoptimized src={OpenStreetIconsFactory(type, active, 'map')} width={50} height={50} />
+                            ? <Image
+                                  loader={() => OpenStreetIconsFactory(type, active, 'map')}
+                                  unoptimized src={OpenStreetIconsFactory(type, active, 'map')}
+                                  width={50} height={50}
+                                  alt={'icon'}
+                              />
                             : <HomeIcon colorBody={colorBody} colorPath={colorPath}/>
                     }
                     { locationProject !== 'infrastucture' && type !== 'apartment' && <div className={s.title}>

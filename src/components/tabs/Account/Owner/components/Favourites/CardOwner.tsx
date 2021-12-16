@@ -51,6 +51,7 @@ const CardOwner: FC<CardOwnerType> = ({image, objectInfo,url,id}) => {
         <div className={css.cardBorder}>
             <div className={css.image}>
                 <Image
+                    alt={'photo'}
                     className={css.image}
                     src={image}
                     width={126}
