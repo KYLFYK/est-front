@@ -1,22 +1,22 @@
 @font-face {
     font-family: 'RobotoRegular'; 
-    src: url('../fonts/Roboto-Regular.ttf'); 
+    src: url('../app/fonts/Roboto/Roboto-Regular.ttf');
 }
 
 @font-face {
     font-family: 'RobotoBold'; 
-    src: url('../fonts/Roboto-Medium.ttf'); 
+    src: url('../app/fonts/Roboto/Roboto-Medium.ttf');
 }
 
 @font-face {
     font-family: 'Montserrat';
-    src: url('../fonts/Montserrat-Bold.ttf');
+    src: url('../app/fonts/Montserrat/Montserrat-Bold.ttf');
 }
 
-@font-face {
-    font-family: 'Nunito Sans';
-    src: url('../fonts/NunitoSans-Regular.ttf');
-}
+//@font-face {
+//    font-family: 'Nunito Sans';
+//    src: url('../app/fonts/NunitoSans-Regular.ttf');
+//}
 
 @mixin MONTSERRATBOLD {
     font-family: 'Montserrat';

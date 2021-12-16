@@ -1,11 +1,11 @@
 // тут описываем горизонтальный подтаб "Аккаунт агенства", который является частью таба "Заявки на просмотр"
-import css from './AccountInfo.module.scss'
 import Typography from "../../../../../../../shared/Typography/Typography";
 import BaseButton from "../../../../../../../shared/BaseButton/BaseButtons";
 import Image from 'next/image'
 import imgMoc from './logoFalse.svg'
 import {Card} from "../../../../../../../shared/Mortgage/Card";
 import { FC } from 'react';
+import css from './AccountInfo.module.scss'
 
 type PersonalCabinetAccountInfoType = {
     img?:string

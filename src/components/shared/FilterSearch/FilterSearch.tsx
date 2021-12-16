@@ -1,9 +1,9 @@
 import React, {FC, useState} from 'react';
 import {BaseDropDown} from "../BaseDropDown/BaseDropDown";
-import css from './FilterSearch.module.scss'
 import {makeStyles} from "@material-ui/core";
 import BaseButton from "../BaseButton/BaseButtons";
 import FavoriteIcon from "../../../icons/Favorite/Favorite";
+import css from './FilterSearch.module.scss'
 
 //label - Отображение
 const option = [
