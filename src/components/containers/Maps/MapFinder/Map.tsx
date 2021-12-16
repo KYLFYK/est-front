@@ -70,7 +70,7 @@ const Map: React.FC<Props> = ({mapData, location, viewport, setViewport, view, s
       }
       setViewport({ ...viewport, width: "100%", height: "100%", transitionDuration: 100 });
     }
-  )}, [])
+  )}, [setViewport, viewport])
 
   return (
     <div className={view==='mapView' ? s.openMapWrapper : s.closeMapWrapper} ref={mapWrap}>
