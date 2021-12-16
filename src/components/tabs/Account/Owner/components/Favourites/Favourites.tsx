@@ -47,6 +47,7 @@ const objectInfo :CardOwnerTypeMoc={
         ]
     }
 }
+
 const objectInfo1:CardOwnerTypeMoc ={
     url:'',
     id:'2',
