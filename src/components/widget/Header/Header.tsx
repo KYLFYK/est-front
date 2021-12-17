@@ -11,12 +11,12 @@ import { Login } from '../Login/login/Login';
 import { Recovery } from '../Login/recovery/Recovery';
 import { Registration } from '../Login/registration/Registration';
 import classNames from 'classnames';
-import css from './Header.module.scss'
 import {AddressConfirmation} from "../Login/AddressConfirmation/AddressConfirmation";
 import {RecoveryMail} from "../Login/RecoveryMail/RecoveryMail";
 import {ThankRegistering} from "../Login/ThankRegistering/ThankRegistering";
 import NewPassword from "../Login/NewPassword/NewPassword";
 import {ConfirmationNewPassword} from "../Login/ConfirmationNewPassword/ConfirmationNewPassword";
+import css from './Header.module.scss'
 
 type HeaderPropsType = {
     className?: string
@@ -40,11 +40,6 @@ export const Header: FC<HeaderPropsType> = ({ className,city,personalAccount,aut
 
     const [edit, setEdit] =useState<string>('')
 
-    // useEffect(()=>{
-    //     setLogin(false)
-    //     if(edit!== '')setTimeout(()=>setLogin(true),200)
-    // },[edit])
-
     const searchModal = (menu:string) => {
         switch (menu){
             case 'login': return <Login onEdit={(e)=>setEdit(e)} />
@@ -55,7 +50,7 @@ export const Header: FC<HeaderPropsType> = ({ className,city,personalAccount,aut
             case 'thankRegistering':return <ThankRegistering  onEdit={(e)=>setEdit(e)} email={'vika@mail.ru'}/>
             case 'newPassword':return <NewPassword  onEdit={(e)=>setEdit(e)} account={'vika@Best'}/>
             case 'confirmationNewPassword':return <ConfirmationNewPassword  onEdit={(e)=>setEdit(e)} account={'vika@Best'}/>
-            default: return <div></div>
+            default: return <div>123</div>
         }
     }
 
@@ -74,9 +69,9 @@ export const Header: FC<HeaderPropsType> = ({ className,city,personalAccount,aut
                     style={{ color: '#C5A28E' }}
                 >
                     <IconLocation />
-                    <Typography size={'default'} color="nude">
-                        <SelectEstate params={'housingCondition'} options={city} />
-                    </Typography>
+                    <div className={css.textTypography} >
+                        <SelectEstate options={city} selectLeft={false} />
+                    </div>
                 </div>
                 {
                     moc.map(({ href, title }, index) => (

@@ -1,16 +1,14 @@
 import React, { useState } from 'react';
 import { useOnOutsideClick } from '../../../hooks/useOnOutsideClick';
-import Typography from "../Typography/Typography";
 import css from './SelectCustom.module.scss'
 
 type SelectPropsType = {
     options: Array<string>
     onChangeOption?: (option: any) => void
-    params: string
     selectLeft?: boolean
 }
 
-export const SelectEstate: React.FC<SelectPropsType> = ({ options, params, onChangeOption, selectLeft }) => {
+export const SelectEstate: React.FC<SelectPropsType> = ({ options,  selectLeft }) => {
 
     const [open, setOpen] = useState(false);
     const [edit, setEdit] = useState<string>('Крым')
@@ -23,25 +21,27 @@ export const SelectEstate: React.FC<SelectPropsType> = ({ options, params, onCha
                 className={selectLeft ? css.dropdown_btn_left : css.dropdown_btn}
                 onClick={() => setOpen(!open)}
             >
-                <Typography color={'nude'}>
+                <div className={css.textTypography}>
                     {edit}
-                </Typography>
+                </div>
             </div>
             {open && (
                 <div className={selectLeft ? css.dropdown_content_left : css.dropdown_content}>
-                    {options.map(option => {
+                    {options.map((option,index) => {
                         return <div
                             ref={innerBorderRef}
-                            key={option}
+                            key={index}
                             onClick={(e) => {
                                 setEdit(option);
                                 setOpen(false);
                             }}
                             className={selectLeft ? css.dropdown_item_left : css.dropdown_item}
                         >
-                            <Typography>
+                            <div>
                                 {option}
-                            </Typography>
+                            </div>
+
+
                         </div>
                     })}
                 </div>

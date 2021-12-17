@@ -2,7 +2,6 @@ import React, {useState, useRef, useEffect} from "react";
 import MapGL, {Marker} from "react-map-gl";
 import "mapbox-gl/dist/mapbox-gl.css";
 import useSupercluster from "use-supercluster";
-import { MapControls } from "../MapControls/Buttons/index";
 import { IconsCreator } from "../../../../lib/mapIcons/IconsCreator";
 import { MappingCluster } from "../../../../lib/mapping/mapCluster";
 import BaseButton from "../../../shared/BaseButton/BaseButtons";
@@ -10,6 +9,7 @@ import { CrossIcon } from "../../../../icons/MapControlsIcons/PlaceIcons/CrossIc
 import ObjectCard from "../../Card/index";
 import Typography from "../../../shared/Typography/Typography";
 import s from './styles.module.scss';
+import {MapControls} from "../MapControls/Buttons";
 
 interface Props {
   mapData: any
@@ -105,9 +105,9 @@ const Map: React.FC<Props> = ({mapData, location, viewport, setViewport, view, s
                     setActivemarker(cluster.id)
                     setChoosedplaces(supercluster.getLeaves(cluster.id, Infinity))
                     setOpen(true)
-                    
+
                   }}>
-                    <IconsCreator 
+                    <IconsCreator
                       locationProject={'finder'}
                       color={cluster.id === activeMarker ? '#C5A28E' : '#1A4862'}
                       title={Math.min(...supercluster.getLeaves(cluster.id, Infinity).map((sc: any) => sc.properties.prop.price))}
@@ -130,7 +130,7 @@ const Map: React.FC<Props> = ({mapData, location, viewport, setViewport, view, s
                   setChoosedplaces([cluster])
                   setOpen(true)
                 }}>
-                  <IconsCreator 
+                  <IconsCreator
                     locationProject={'finder'}
                     color={cluster.properties.prop.object_id === activeMarker ? '#C5A28E' : '#1A4862'}
                     title={cluster.properties.prop.price}
@@ -142,7 +142,7 @@ const Map: React.FC<Props> = ({mapData, location, viewport, setViewport, view, s
         </MapGL>
         <div className={s.dynamicBar}>
                         <div className={open && s.localbarActive || s.localbar}>
-                          <div className={s.checkboxTitle}> 
+                          <div className={s.checkboxTitle}>
                             <Typography color={'tertiary'} weight={'light'}> {choosedPlaces.length} объектов </Typography>
                             <BaseButton className={s.button} onClick={() => { setOpen(!open) }}>
                                 <CrossIcon />
@@ -151,7 +151,7 @@ const Map: React.FC<Props> = ({mapData, location, viewport, setViewport, view, s
                           <div className={s.list}>
                             {choosedPlaces.length && choosedPlaces.map((cp: any, i: number) => <div key={i} style={{padding:'5px'}}><ObjectCard key={i} houseData={cp.properties.prop}/></div>)}
                           </div>
-                        </div>     
+                        </div>
         </div>
         <MapControls location={location} viewport={viewport} setViewport={setViewport} center={center} onsetFullscreen={onsetFullscreen}/>
     </div>

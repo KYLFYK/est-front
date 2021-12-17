@@ -889,13 +889,13 @@ export const fullObjectData = [
       "Из окон виллы открывается красивейший вид на древнюю гору-вулкан Аю-Даг, Гурзуфскую бухту и парки Артека, скалы Адалары и пристань для яхт и катеров.",
       "На террасе расположен бассейн с переливом в сторону моря и уникальными видовыми характеристиками.",
     ],
-    object_specs : {
+    object_specs : [{
       subtitle: "Строительно-техническая экспертиза",
-      specificationsItems : {
+      specificationsItems : [{
         value: 'house_type',
         label: { title: "Тип дома", text: "Монолитный" },
-      }
-    },
+      }]
+    }],
     legalPurityData : {
       encumbrances: false,
       risks: false,
@@ -1041,13 +1041,13 @@ export const fullObjectData = [
           url: 'https://3d-tur.ru/010/',
       }
     },
-    object_specs : {
+    object_specs : [{
       subtitle: "Строительно-техническая экспертиза",
-      specificationsItems : {
+      specificationsItems : [{
         value: 'house_type',
         label: { title: "Тип дома", text: "Монолитный" },
-      }
-    },
+      }]
+    }],
     legalPurityData : {
       encumbrances: false,
       risks: false,
