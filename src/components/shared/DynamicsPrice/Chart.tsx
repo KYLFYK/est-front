@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { LineChart, XAxis, CartesianGrid, Line, YAxis } from "recharts";
 import css from "./Chart.module.scss";
 import s from "../../containers/ChartPayback/styles.module.scss";
@@ -26,13 +26,16 @@ export const Chart: React.FC<Props> = ({
   subtitle,
   overflowX,
 }) => {
+  const [newHeight, setNewHeight] = useState(height);
+
   useEffect(() => {
     if (window !== undefined) {
       if (window.innerWidth < 768) {
-        height = 375;
+        setNewHeight(375);
       }
 
       if (window.innerWidth >= 320) {
+        // eslint-disable-next-line react-hooks/exhaustive-deps
         width = window.innerWidth * 0.805;
       }
       if (window.innerWidth >= 576) {
@@ -173,7 +176,7 @@ export const Chart: React.FC<Props> = ({
       )}
       <LineChart
         width={width}
-        height={height}
+        height={newHeight}
         className={css.chart}
         // data={window.innerWidth >= 1200 ? data : lowResolutionData}
         data={table}
