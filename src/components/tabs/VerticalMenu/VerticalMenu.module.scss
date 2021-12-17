@@ -1,0 +1,44 @@
+@import "../../../app/styles/colours";
+@import "../../../app/styles/transitions";
+@import "../../../app/styles/typography";
+
+.wrapper {
+  padding: 8px 0;
+  width: 216px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.link {
+  padding: 0 12px;
+  text-decoration: none;
+  color: $BLACK;
+  transition: color $LinkHover;
+  display: flex;
+  justify-content: space-between;
+
+  @include ROBOTOMEDIUM16;
+
+  &.active {
+    color: $NUDE;
+  }
+
+  &:hover:not(.active) {
+    color: $GREY;
+  }
+
+  .menuMarker {
+    min-width: 17px;
+    line-height: 17px;
+    height: 17px;
+    text-align: center;
+    border-radius: 8.5px;
+    font-family: 'RobotoRegular';
+    padding: 0 6px;
+    font-size: 8px;
+    color: $WHITE;
+    background-color: $NUDE;
+    box-sizing: border-box;
+  }
+}

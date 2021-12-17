@@ -7,20 +7,90 @@
     width: 1320px; 
     height: 680px;
 }
-.infraMarker {
-    transform: translate(-50%, -50%);
-}
-.estateMarker {
-    transform: translate(-100%, -50%);
-}
+
 .button {
     padding: 0;
     border: 0;
     background-color: transparent;
 }
-.dynamicBar{
+
+.container {
     display: flex;
+    flex-direction: column;
+    color: $BLACK;
+    @include for-size(KT1) {
+        padding: 40px 10px 40px 10px;
+    }
+    @include for-size(KT2) {
+        padding: 40px 20px 40px 20px;
+    }
+    @include for-size(KT3) {
+        padding: 60px 24px 60px 24px;
+    }
+    @include for-size(KT4) {
+        padding: 60px 40px 60px 40px;
+    }
+    @include for-size(KT5) {
+        padding: 70px 30px 60px 30px;
+    }
+    @include for-size(KT6) {
+        padding: 80px 100px 60px 100px;
+    }
 }
+
+.title {
+
+}
+
+.text {
+
+    margin: 10px 0 30px 0;
+}
+
+.point {
+
+    margin: 10px 0 0 0;
+}
+
+.value {
+
+    font-weight: 300;
+    margin: 4px 0 0 0;
+}
+
+.map {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    overflow: hidden;
+    position: relative;
+}
+
+.localbar {
+    background-color: #ffffff;
+    height: 0px;
+    position: absolute;
+    opacity: 0;
+    top: 720px; 
+    transition: all .5s;
+    display: flex;
+    border-radius: 10px;
+    @include for-size(KT1) {
+        width: 95%;
+        flex-direction: column;
+    }
+    @include for-size(KT2) {
+        flex-direction: row;
+        top: 20px; 
+        left: -500px;
+        width: 323px;
+        height: 660px;
+    }
+    @include for-size(KT5) {
+        width: 343px;
+    }
+}
+
 .localbarActive {
     background-color: #ffffff;
     height: 245px;
@@ -36,6 +106,101 @@
         top: 455px; 
     }
 }
+
+.dynamicBar{
+    display: flex;
+}
+.openButton {
+    position: absolute;
+    top: 20px; 
+    width: 40px;
+    height: 64px;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    border: none;
+    outline: none;
+    background: #FFFFFF;
+    box-shadow: 0px 0px 16px rgba(0, 0, 0, 0.1);
+    border-radius: 0px 10px 10px 0px;
+    transition: all .5s;
+    @include for-size(KT2) {
+        left: 344px;
+        display: flex;
+    }
+    @include for-size(KT5) {
+        left: 364px;
+    }
+}
+.backButton {
+    position: absolute;
+    top: 20px; 
+    left: 20px;
+    width: 40px;
+    height: 64px;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    border: none;
+    outline: none;
+    background: #FFFFFF;
+    box-shadow: 0px 0px 16px rgba(0, 0, 0, 0.1);
+    border-radius: 0px 10px 10px 0px;
+    transition: all .5s;
+    @include for-size(KT2) {
+        display: flex;
+    }
+}
+.lowResButton {
+    position: absolute;
+    top: 10px; 
+    left: 10px;
+    width: 102px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    border: none;
+    outline: none;
+    background: #FFFFFF;
+    box-shadow: 0px 0px 16px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    @include for-size(KT2) {
+        display: none;
+    }
+}
+
+.openArrow {
+    transition: all .5s;
+    transform: rotateZ(270deg);
+}
+.arrow {
+    transition: all .5s;
+    transform: rotateZ(90deg);
+}
+
+.controls {
+    position: absolute;
+    display: flex; 
+    @include for-size(KT1) {
+        transform: rotateZ(270deg);
+        bottom: 60px; 
+        right: -30px;
+    }
+    @include for-size(KT3) {
+        transform: rotateZ(0deg);
+        bottom: 20px; 
+        right: 20px;
+    }
+}
+
+.lowResCategory {
+    color: #7F96A3
+}
+
 .card {
     width: 240px;
     box-sizing: border-box;
@@ -49,14 +214,17 @@
     box-sizing: border-box;
     border: 3px solid $NUDE;
 }
+
 .img {
     width: 240px;
     height: 135px;
     border-radius: 10px 10px 0 0;
 }
+
 .description {
     padding: 9px 0 14px 16px;
 }
+
 .price {
     color: $NUDE;
 }

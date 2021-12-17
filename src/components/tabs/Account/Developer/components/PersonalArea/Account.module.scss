@@ -1,0 +1,95 @@
+@import "src/app/styles/colours";
+@import "src/app/styles/typography";
+
+.tabsWrapper {
+  margin: 0 0 30px 0;
+}
+
+.wrapper {
+  display: flex;
+  gap: 30px;
+}
+
+.profile {
+  display: flex;
+  gap: 110px;
+
+  form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    flex-basis: 50%;
+    position: relative;
+  }
+}
+
+.input {
+  min-width: 290px;
+  width: 100%;
+
+  &Wrapper {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    width: 100%;
+
+    div {
+      width: fit-content;
+    }
+
+    p {
+      white-space: nowrap;
+      width: 154px;
+    }
+  }
+}
+
+.settings {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+
+  &Sec {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+    .title {
+      @include ROBOTOBOLD16;
+      color: $BLACK;
+    }
+
+    .inputWrapper {
+      width: fit-content;
+    }
+    
+    .add {
+      cursor: pointer;
+      color: #C4C4C4;
+      width: fit-content;
+
+      @include ROBOTOREGULAR16;
+    }
+
+    .phoneNumber {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+
+      .delete {
+        cursor: pointer;
+        width: 18px;
+        height: 18px;
+        text-align: center;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+    }
+
+    .save {
+      width: 290px;
+      margin-left: 174px;
+    }
+  }
+}
