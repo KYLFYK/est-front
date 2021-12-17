@@ -1,0 +1,77 @@
+@import "src/app/styles/typography";
+@import "src/app/styles/colours";
+
+.wrapper {
+  padding-top: 7px;
+
+  table {
+    @include ROBOTOREGULAR16;
+
+    color: $BLACK;
+    width: 100%;
+
+    th, td {
+      padding-bottom: 20px;
+      text-align: left;
+
+      &:first-of-type {
+        width: fit-content;
+
+        div {
+          width: fit-content;
+        }
+      }
+    }
+
+    th {
+      border-bottom: 1px solid #F2F2F2;
+      text-align: left;
+
+      &:last-of-type {
+        text-align: right;
+      }
+    }
+
+    td {
+      padding-top: 20px;
+      border-bottom: 1px solid #F2F2F2;
+    }
+
+    .readed {
+      color: #9495A7;
+    }
+
+    .flex {
+      display: flex;
+      align-items: center;
+    }
+    
+    .btn {
+      cursor: pointer;
+      color: $NUDE;
+      padding-left: 4px;
+    }
+
+    .marked {
+      position: relative;
+      display: flex;
+
+      &::before {
+        content: "";
+        display: block;
+        background-color: $GREY;
+        position: absolute;
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        left: -16px;
+        top: 50%;
+        transform: translateY(-50%);
+      }
+
+      &.new::before {
+        background-color: $NUDE;
+      }
+    }
+  }
+}

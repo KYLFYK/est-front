@@ -1,6 +1,5 @@
-
 @mixin MONTSERRATBOLD {
-    font-family: 'Montserrat';
+    font-family: 'Montserrat', sans-serif;
     font-style: normal;
     font-weight: bold;
     font-size: 40px;
@@ -9,7 +8,7 @@
 }
 
 @mixin MONTSERRATBOLD24 {
-    font-family: 'Montserrat';
+    font-family: 'Montserrat', sans-serif;
     font-style: normal;
     font-weight: bold;
     font-size: 24px;
@@ -18,7 +17,7 @@
 }
 
 @mixin MONTSERRATBOLD20 {
-    font-family: 'Montserrat';
+    font-family: 'Montserrat', sans-serif;
     font-style: normal;
     font-weight: bold;
     font-size: 20px;
@@ -27,7 +26,7 @@
 }
 
 @mixin MONTSERRATBOLD16 {
-    font-family: 'Montserrat';
+    font-family: 'Montserrat', sans-serif;
     font-style: normal;
     font-weight: bold;
     font-size: 16px;
@@ -35,8 +34,16 @@
     letter-spacing: 0.03em;
 }
 
+@mixin ROBOTOBOLD24 {
+    font-family: 'RobotoBold', sans-serif;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 24px;
+    line-height: 29px;
+}
+
 @mixin ROBOTOBOLD18 {
-    font-family: 'RobotoBold';
+    font-family: 'RobotoBold', sans-serif;
     font-style: normal;
     font-weight: bold;
     font-size: 18px;
@@ -44,7 +51,7 @@
 }
 
 @mixin ROBOTOBOLD16 {
-    font-family: 'RobotoBold';
+    font-family: 'RobotoBold', sans-serif;
     font-style: normal;
     font-weight: bold;
     font-size: 16px;
@@ -52,7 +59,7 @@
 }
 
 @mixin ROBOTOREGULAR {
-    font-family: 'RobotoRegular';
+    font-family: 'RobotoRegular', sans-serif;
     font-style: normal;
     font-weight: normal;
     font-size: 40px;
@@ -61,7 +68,7 @@
 }
 
 @mixin ROBOTOREGULAR18 {
-    font-family: 'RobotoRegular';
+    font-family: 'RobotoRegular', sans-serif;
     font-style: normal;
     font-weight: normal;
     font-size: 18px;
@@ -69,7 +76,7 @@
 }
 
 @mixin ROBOTOREGULAR16 {
-    font-family: 'RobotoRegular';
+    font-family: 'RobotoRegular', sans-serif;
     font-style: normal;
     font-weight: normal;
     font-size: 16px;
@@ -77,7 +84,7 @@
 }
 
 @mixin ROBOTOREGULAR14 {
-    font-family: 'RobotoRegular';
+    font-family: 'RobotoRegular', sans-serif;
     font-style: normal;
     font-weight: normal;
     font-size: 14px;
@@ -85,7 +92,7 @@
 }
 
 @mixin ROBOTOMEDIUM {
-    font-family: 'RobotoRegular';
+    font-family: 'RobotoMedium', sans-serif;
     font-style: normal;
     font-weight: 500;
     font-size: 40px;
@@ -94,7 +101,7 @@
 }
 
 @mixin ROBOTOMEDIUM16 {
-    font-family: 'RobotoRegular';
+    font-family: 'RobotoMedium', sans-serif;
     font-style: normal;
     font-weight: 500;
     font-size: 16px;
@@ -102,7 +109,7 @@
 }
 
 @mixin ROBOTOMEDIUM14 {
-    font-family: 'RobotoRegular';
+    font-family: 'RobotoRegular', sans-serif;
     font-style: normal;
     font-weight: normal;
     font-size: 14px;
