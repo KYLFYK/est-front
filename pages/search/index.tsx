@@ -34,7 +34,7 @@ const Finder: NextPage = () => {
         </div>
         <div style={{display: 'flex', width: '100%', margin: '20px 0 0 0'}}>
           <Map mapData={mapData} location={'finder'} center={center} view={view} setView={setView}/>
-          {/*<CardContainer mapData={mapData} view={view} setView={setView}/>*/}
+          <CardContainer mapData={mapData} view={view} setView={setView}/>
         </div>
     </div>
   )

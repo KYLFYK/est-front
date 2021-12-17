@@ -15,7 +15,7 @@ type ToursContainerType = {
     },
 }
 
-const ToursContainer :FC<any> = ({ Online_tour }) => {
+const ToursContainer :FC<ToursContainerType> = ({ Online_tour }) => {
     return (
         <div className={s.container}>
             <VerticalTabs className={s.padding} tabs={[
