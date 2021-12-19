@@ -1,7 +1,7 @@
 import React, {useRef, useState} from 'react';
 import { Card } from '../Mortgage/Card';
 import s from './Payback.module.scss'
-import {InputRange} from "../Mortgage/InputRange";
+import {InputRange} from "../Mortgage/Calculator/InputRange";
 import QuestionIcon from "../Mortgage/icons/QuestionIcon.svg";
 import Image from "next/image";
 import Typography from "../Typography/Typography";

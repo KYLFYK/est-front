@@ -2,12 +2,12 @@ import React from 'react';
 import s from './HeadFilter.module.scss';
 import { Filter } from '../Filter/Filter';
 import Typography from 'src/components/shared/Typography/Typography';
-import { useProgressiveImage } from '../../../hooks/useProgressiveLazyLoad';
-import * as imageSrc from './imageSrc';
+//import { useProgressiveImage } from '../../../hooks/useProgressiveLazyLoad';
+//import * as imageSrc from './imageSrc';
 //import { Button } from '../../../../shared/UI/components/button/Button'; 
 
 export const HeadFilter = () => {
-    const lazySrc = useProgressiveImage(imageSrc.MAIN_PAGE_SRC)
+    //const lazySrc = useProgressiveImage(imageSrc.MAIN_PAGE_SRC)
     /*const [hover, setHover] = useState(false)
     const [clicked, setClicked] = useState(false)
 
