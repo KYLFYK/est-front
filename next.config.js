@@ -1,15 +1,15 @@
 /** @type {import('next').NextConfig} */
 module.exports = {
   reactStrictMode: true,
+
   images: {
     domains: ['cdn.pixabay.com', 'images.unsplash.com', 'images.ctfassets.net'],
     loader: 'custom'
   },
-}
-module.exports = {
-  exportPathMap: async function (
-      defaultPathMap,
-      { dev, dir, outDir, distDir, buildId }
+
+  /*exportPathMap: async function (
+    defaultPathMap,
+    { dev, dir, outDir, distDir, buildId }
   ) {
     return {
       '/': { page: '/' },
@@ -18,5 +18,6 @@ module.exports = {
       '/p/learn-nextjs': { page: '/post', query: { title: 'learn-nextjs' } },
       '/p/deploy-nextjs': { page: '/post', query: { title: 'deploy-nextjs' } },
     }
-  },
+  },*/
+
 }

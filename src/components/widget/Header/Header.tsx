@@ -27,9 +27,9 @@ type HeaderPropsType = {
 
 const moc = [{ href: '/Buy', title: 'Купить' },
 { href: '/Take', title: 'Снять' },
-{ href: '/Mortgage', title: 'Ипотека' },
+{ href: '/calculator', title: 'Ипотека' },
 { href: '/Сonstruction', title: 'Строящиеся дома' },
-{ href: '/Contact', title: 'Контакты' }
+{ href: '/contacts', title: 'Контакты' }
 ]
 
 export const Header: FC<HeaderPropsType> = ({ className,city,personalAccount,auth = false }) => {

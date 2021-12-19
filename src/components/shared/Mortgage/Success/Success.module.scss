@@ -1,0 +1,46 @@
+@import '../../../../app/styles/colours.scss';
+
+.wrapper{
+  display: flex;
+  justify-content: center;
+}
+.successContainer{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 335px;
+  margin: 200px 0 80px 0;
+}
+.textFooter{
+  text-align: center;
+}
+.button{
+  height: 40px;
+  box-sizing: border-box;
+  border: 1px solid $ACCENT;
+  border-radius: 6px;
+  cursor: pointer;
+}
+.link:active, 
+.link:hover,
+.link{
+  outline: none;
+  text-decoration: none;
+  color: $NUDE;
+}
+.linkTitle{
+  margin: 10px 24px 10px 24px;
+}
+.rowAlign{
+  display: flex;
+}
+.marginTop10px{
+  margin: 10px 0 0 0;
+}
+.marginTop20px{
+  margin: 20px 0 0 0;
+}
+.marginTop116px{
+  margin: 116px 0 0 0;
+}

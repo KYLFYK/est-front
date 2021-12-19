@@ -6,7 +6,7 @@ export const ImagePlace = ({image}) => {
 
     return (
         <div className={s.bg}>
-            <Image width={290} height={240} src={image} alt='icon' className={s.image}/>
+            <Image width={290} height={240} src={image} loader={() => image} unoptimized alt='icon' className={s.image}/>
         </div>
     )
 };
