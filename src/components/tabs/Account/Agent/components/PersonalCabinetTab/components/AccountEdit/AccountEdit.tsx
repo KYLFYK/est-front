@@ -146,7 +146,7 @@ const AccountEdit :FC<AccountEditType>= ({onEdit,infoAgency}) => {
                     </Typography>
                     <div className={css.dashed}>
                         <div className={css.marginImage}>
-                            <Image src={importImage} width={200} height={200}  />
+                            <Image src={importImage} width={200} height={200} alt={'photo'} />
                         </div>
                     </div>
                 </div>

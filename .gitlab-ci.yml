@@ -17,9 +17,9 @@ build:
   stage: build
   image: node:14.17.4
   script:
-    - yarn  install
+    - npm install
     #- yarn build-storybook
-    - yarn build
+    - npm run build
 
   artifacts:
     paths:

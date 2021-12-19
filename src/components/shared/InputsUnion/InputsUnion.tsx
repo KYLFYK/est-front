@@ -1,4 +1,5 @@
 import classNames from 'classnames'
+import React from 'react'
 import s from './InputsUnion.module.scss'
 
 interface Props {
@@ -11,9 +12,9 @@ const InputsUnion: React.FC<Props> = ({ children, className }) => {
         <div className={classNames(s.unionInput, className)}>
             {children.map((Input, idx) => {
                 return (
-                    <> {Input}
+                    <React.Fragment key={idx}> {Input}
                         {((children.length - 1) !== idx) && <div className={s.divider}></div>}
-                    </>
+                    </React.Fragment>
                 )
             })}
         </div>

@@ -23,7 +23,8 @@ $slick-opacity-not-active: 0.25 !default;
 
 @function slick-image-url($url) {
     @if function-exists(image-url) {
-        @return image-url($url);
+        //@return image-url($url);
+        @return url($url);
     }
     @else {
         @return url($url);
@@ -32,7 +33,8 @@ $slick-opacity-not-active: 0.25 !default;
 
 @function slick-font-url($url) {
     @if function-exists(font-url) {
-        @return font-url($url);
+        //@return font-url($url);
+        @return url($url);
     }
     @else {
         @return url($slick-font-path + $url);
@@ -43,7 +45,8 @@ $slick-opacity-not-active: 0.25 !default;
 
 .slick-list {
     .slick-loading & {
-        background: #fff slick-image-url("https://upload.wikimedia.org/wikipedia/ru/archive/6/6b/20210505175821%21NyanCat.gif") center center no-repeat;
+        //background: #fff slick-image-url("https://upload.wikimedia.org/wikipedia/ru/archive/6/6b/20210505175821%21NyanCat.gif") center center no-repeat;
+        background: #fff slick-image-url("https://upload.wikimedia.org/wikipedia/ru/archive/6/6b/20210505175821%21NyanCat.gif") center ;
     }
 }
 

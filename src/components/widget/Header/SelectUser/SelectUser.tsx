@@ -39,7 +39,7 @@ export const SelectUser: React.FC<SelectPropsType> = ({options, params, onChange
                             }}
                             className={css.dropdown_item_left}
                         >
-                            <Link href={option.href}>
+                            <Link href={option.href} passHref>
                                 <div>
                                     <Typography>
                                         <div style={{display: 'flex', justifyContent: "space-between", width: '190px'}}>

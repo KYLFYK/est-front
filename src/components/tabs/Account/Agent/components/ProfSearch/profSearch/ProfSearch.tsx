@@ -70,7 +70,7 @@ const ProfSearch = () => {
                 professionalSearch.map((object,index)=>(
                     <div key={index} className={css.border}>
                         <div className={css.borderImage}>
-                            <Image src={object.img} className={css.image} width={126} height={126} />
+                            <Image src={object.img} className={css.image} width={126} height={126} alt={''} />
                             <div className={css.buttonPosition}>
                                 <BaseButton type={'secondary'} icon={<FavoriteIcon />} onClick={()=>click(object.id)} ></BaseButton>
                             </div>

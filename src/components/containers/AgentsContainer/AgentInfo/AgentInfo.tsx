@@ -3,9 +3,9 @@ import { IconMail } from '../../../../icons/Agent/IconMail';
 import { IconTelegram } from '../../../../icons/Agent/IconTelegram';
 import { IconWhatsapp } from '../../../../icons/Agent/IconWhatsapp';
 import Typography from '../../../shared/Typography/Typography';
-import css from "./AgentInfo.module.scss";
 import {IconPhone} from "../../../../icons/Agent/IconPhone";
-
+import Image from 'next/image'
+import css from "./AgentInfo.module.scss";
 
 type AgentDataPropsType = {
     img: string
@@ -29,9 +29,19 @@ type AgentDataPropsType = {
 }
 
 export const AgentInfo: React.FC<AgentDataPropsType> = ({ img,connection,infoAgent }) => {
+    const myLoader = ( src:string, width:number, quality?:number ) => {
+        return ` https://images.unsplash.com/photo-1541963463532-d68292c34b19?ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8Ym9va3xlbnwwfHwwfHw%3D&ixlib=rb-1.2.1&w=1000&q=&q=${quality || 75}`
+    }
     return (
         <>
-            <img className={css.photoAgent} src={img} alt="agent" />
+            <Image
+                className={css.photoAgent}
+                src={img}
+                alt="agent"
+                width={150}
+                height={150}
+                loader={e=>myLoader(e.src,e.width,e.quality)}
+            />
             <Typography size={'default'} color="accent" weight={'medium'} className={css.marginTop} >
                 {infoAgent.fullName}
             </Typography>

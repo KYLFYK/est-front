@@ -147,6 +147,7 @@ const ViewingBell: FC<ViewingBellType> = ({
                                 src={'https://test-estatum.f-case.ru/static/media/%D0%A0%D0%BE%D0%BC%D0%B0%D0%BD%D0%A1%D0%B0%D1%84%D0%BE%D0%BD%D0%BE%D0%B2.b38acd57.png'}
                                 width={'50px'}
                                 height={'50px'}
+                                alt={'photo'}
                             />
                         </div>
                     </div>

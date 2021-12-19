@@ -2,8 +2,8 @@
 import {BaseInput} from "../../../../../../../shared/BaseInput/Input";
 import BaseButton from "../../../../../../../shared/BaseButton/BaseButtons";
 import Typography from "../../../../../../../shared/Typography/Typography";
-import css from './Agents.module.scss'
 import {ActualObject} from "./AgentsTable";
+import css from './Agents.module.scss'
 
 type PersonalCabinetAgentsType = {
     agents:Array<{
