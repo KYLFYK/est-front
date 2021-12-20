@@ -18,13 +18,18 @@ const personalAccount = {
         image:'https://wallbox.ru/resize/800x480/wallpapers/main2/201728/14997845035964e5370c9756.49539791.jpg'
 }
 
+const mySearchMoc=[
+    {id:'1',nameObject:'Покупка, 3-этажный коттедж, Крым, до 10 000 000 Р',locations:'Крым, Ялта', ads:100,alertStatus:'none'},
+    {id:'2',nameObject:'Аренда, 2-комнатная квартира, Спб, до 40 000 Р',locations:'СПб, м.Лесная', ads:0,alertStatus:'day'},
+]
+
 const OwnerRoleTabs = () => {
     return (
         <VerticalTabs
             tabs={[
                 { title: "Личный кабинет", Component: <PersonalAccount personalAccount={personalAccount} /> },
                 { title: "Избранное", Component: <Favourites /> },
-                { title: "Сохранённые поиски", Component: <SavedSearches /> },
+                { title: "Сохранённые поиски", Component: <SavedSearches mySearch={mySearchMoc} /> },
                 { title: "Сообщения", Component: <Message /> },
                 { title: "Уведомления", Component: <Notification /> },
                 { title: "Мои объекты", Component: <MyObjects /> },
