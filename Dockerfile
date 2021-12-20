@@ -17,7 +17,9 @@ COPY ./ ./
 RUN npm run build
 
 # Expose the listening port
-EXPOSE 3000
+EXPOSE 6006
+
+ENV PORT 6006
 
 USER node
 
