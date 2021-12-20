@@ -8,7 +8,7 @@ WORKDIR /usr/app
 COPY ./package*.json ./
 
 # Install dependencies
-RUN npm install --production
+RUN npm install --save-dev typescript
 
 # Copy all files
 COPY ./ ./
