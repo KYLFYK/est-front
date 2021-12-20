@@ -1,0 +1,30 @@
+.column{
+  display: grid;
+  grid-template-columns: 200px 1fr 150px;
+  gap:30px;
+  padding-top: 30px;
+}
+.df{
+  display: flex;
+  margin: 10px 0;
+}
+.typographyWidth{
+  width: 140px;
+}
+.marginTop30{
+  margin-top: 30px;
+}
+.inputWidth{
+  width: 290px;
+}
+.image{
+  border: 1px solid #CAD1DA;
+  border-radius: 6px;
+  margin-bottom: 9px;
+  width: 200px;
+  height: 200px;
+}
+.buttonUpload{
+  width: 100%;
+  border: 1px solid #CAD1DA;
+}
