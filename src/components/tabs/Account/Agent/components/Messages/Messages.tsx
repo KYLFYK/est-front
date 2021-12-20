@@ -5,7 +5,7 @@ import MyMessages from "./MyMessages/MyMessages";
 const Messages = () => {
     return (
         <HorizontalTabs tabs={[
-            {title: "Мои сообщения", Component: <MyMessages />},
+            {title: "Мои сообщения", Component: <MyMessages  />},
             {title: "Архив", Component: <MyMessages archive={true}/>},
         ]}/>
     );

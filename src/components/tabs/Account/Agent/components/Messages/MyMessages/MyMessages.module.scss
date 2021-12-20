@@ -85,6 +85,31 @@
   display: flex;
   align-items: center;
 }
+
+.dropdown_left .dropdown_content_left {
+  position: absolute;
+  top: 130%;
+  right:1px;
+  padding: 10px;
+  background: #FFFFFF;
+  box-shadow: 3px 3px 10px 6px rgba(0, 0, 0, 0.06);
+  color: #333;
+  border-radius: 8px;
+}
+.dropdown_left .dropdown_content_left .dropdown_item_left {
+  display: flex;
+  padding: 4px;
+  cursor: pointer;
+  transition: all 0.3s;
+  min-width: 190px;
+}
+.dropdown_left .dropdown_content_left .dropdown_item_left:hover {
+  background: #F2F2F2;;
+  border-radius: 4px;
+}
+
+
+
 .df_ml_c{
   display: flex;
   margin-left: 8px;
