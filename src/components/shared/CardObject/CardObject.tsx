@@ -5,9 +5,10 @@ import css from "./CardObject.module.scss";
 type CardObjectType = {
   children: ReactNode;
   img: string;
+  className?:string
 };
 
-const CardObject: FC<CardObjectType> = ({ children, img }) => {
+const CardObject: FC<CardObjectType> = ({ children, img,className }) => {
   return (
     <div className={css.card}>
       <Image
@@ -17,7 +18,7 @@ const CardObject: FC<CardObjectType> = ({ children, img }) => {
         className={css.image}
         alt={"photo"}
       />
-      <div style={{ width: "100%" }}>{children}</div>
+      <div style={{ width: "100%" }} className={className}>{children}</div>
     </div>
   );
 };
