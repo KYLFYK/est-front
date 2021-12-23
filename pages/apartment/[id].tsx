@@ -1,4 +1,5 @@
 import type { NextPage } from 'next'
+import { observer } from "mobx-react-lite"
 import React, {useRef, useEffect, useState} from 'react'
 import { useRouter } from 'next/router'
 import Header from '../../src/components/widget/Header/Header'
@@ -23,6 +24,7 @@ import { Footer } from '../../src/components/widget/Footer/ui/Footer'
 import {ScrollUp} from '../../src/components/shared/ScrollUp/ScrollUp'
 
 import {fullObjectData} from '../../src/pages/config'
+import {useStore} from '../../src/mobx/stores/ApartmentStore'
 
 const city = ['Москва', 'Санкт-Петербург', 'Крым', 'Сочи', 'Нижний Новгород']
 const personalAccount = [{title: 'Личный кабинет', href: '/User', message: 0},
@@ -57,8 +59,8 @@ const tabs = [{
   }
 ]
 
-const Apartment: NextPage = () => {
-
+const Apartment: NextPage =  observer(() => {
+  const store = useStore()
   const router = useRouter()
   const currentObject = Number(router.query.id) ? fullObjectData.filter((fod) => fod.object_id === Number(router.query.id))[0] : fullObjectData[0]
 
@@ -75,15 +77,18 @@ const Apartment: NextPage = () => {
   const [refs, setRefs] = useState<any>([])
 
   useEffect(() => {
-    setRefs([general.current, tours.current, architec.current, infra.current, legal.current, develop.current, record.current])
+    setRefs([general.current, tours.current, architec.current, infra.current, legal.current, develop.current, record.current]);
+    //setTimeout(() => store.fetch(), 5000);
   }, [])
 
   return (
     <div >
+      <button onClick={() => store.fetch()}>fetch</button>
+      <button onClick={() => store.unfetch()}>unfetch</button>
         <Header city={city} personalAccount={personalAccount}/>
         <Breadcrumbs items={breadcrumbs}/>
         <Views items={views}/>
-        <NameEstate item={currentObject.name}/>
+        <NameEstate item={store.initialData.name}/>
         <AdressEstate item={currentObject.address}/>
         <HorizontalTabs refs={refs} tabs={tabs}/>
         <div ref={general}>
@@ -113,7 +118,7 @@ const Apartment: NextPage = () => {
         <ScrollUp/>
     </div>
   )
-}
+})
 
 export default Apartment
 

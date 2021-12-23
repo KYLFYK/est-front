@@ -48,7 +48,7 @@ const ContactOffice: FC<ContactOfficeType> = ({contactOffice, link, destination}
                 {
                     contactOffice.map((co, index) => (
                         co.href 
-                        ? <a href={`${co.href}${co.value}`} style={{textDecoration:'none'}}><Typography key={index} >
+                        ? <a key={index} href={`${co.href}${co.value}`} style={{textDecoration:'none'}}><Typography key={index} >
                                 <div className={css.position} style={{marginTop : index ===3? '40px':'' }}>
                                     {
                                         searchIcon(co.title)

@@ -25,6 +25,8 @@ import {ScrollUp} from '../../src/components/shared/ScrollUp/ScrollUp'
 
 import {fullObjectData} from '../../src/pages/config'
 
+import { useStores } from 'src/hooks/useStores'
+
 const city = ['Москва', 'Санкт-Петербург', 'Крым', 'Сочи', 'Нижний Новгород']
 const personalAccount = [{title: 'Личный кабинет', href: '/User', message: 0},
   {title: 'Избранное', href: '/User', message: 0},
@@ -72,12 +74,6 @@ const averagePrice ={
 
 const House: NextPage = () => {
 
-  const router = useRouter()
-  const currentObject = Number(router.query.id) ? fullObjectData.filter((fod) => fod.object_id === Number(router.query.id))[0] : fullObjectData[0]
-  console.log(currentObject)
-  const breadcrumbs = ['Крым', 'Купить участок', `${currentObject.name}`]
-  const views = [currentObject.publish, currentObject.views, currentObject.agency]
-
   const general = useRef(null)
   const tours = useRef(null)
   const architec = useRef(null)
@@ -88,8 +84,15 @@ const House: NextPage = () => {
   const record = useRef(null)
   const [refs, setRefs] = useState<any>([])
 
+  const router = useRouter()
+  const currentObject = Number(router.query.id) ? fullObjectData.filter((fod) => fod.object_id === Number(router.query.id))[0] : fullObjectData[0]
+
+  const breadcrumbs = ['Крым', 'Купить участок', `${currentObject.name}`]
+  const views = [currentObject.publish, currentObject.views, currentObject.agency]
+
   useEffect(() => {
     setRefs([general.current, tours.current, architec.current, infra.current, legal.current, payback.current, developer.current, record.current])
+
   }, [])
 
   return (

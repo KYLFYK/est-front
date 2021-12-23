@@ -16,6 +16,8 @@ import SuccessPage from '../../src/components/processes/create-new-object/compon
 import FormScreen from '../../src/components/processes/create-new-object/FormScreen/FormScreen'
 import StartScreen from '../../src/components/processes/create-new-object/StartScreen/StartScreen'
 
+import { useStores } from 'src/hooks/useStores'
+
 const Home: NextPage = () => {
 
   return (
