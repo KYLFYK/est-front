@@ -40,8 +40,5 @@ deploy:
        
   script:
      - ssh deployer@$DEPLOY_SERVER "cd /data/estatum-front && ./deploy.sh"
-
-  environment:
-    name: production
-
-
+  only:
+     - development
