@@ -39,6 +39,6 @@ deploy:
      - '[[ -f /.dockerenv ]] && echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config' 
        
   script:
-     - ssh deployer@$DEPLOY_SERVER "cd /data/estatum-front && ./deploy.sh"
+     - ssh deployer@$DEPLOY_SERVER "cd /data/marketplace-front && ./deploy.sh"
   only:
      - development
