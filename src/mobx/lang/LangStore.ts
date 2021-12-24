@@ -4,7 +4,6 @@ configure({enforceActions: "observed"})
 
 export interface IRootStore {
     PlatStore: PlatStore
-
 }
 
 class RootStore implements IRootStore {
