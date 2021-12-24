@@ -97,7 +97,7 @@ const Apartment: NextPage = () => {
           <ObjectSpecifications specificationsLists={currentObject.object_specs} title={"Особенности"}/>
         </div>
         <div ref={infra}>
-          <Map currentHouse={currentObject} infrastructura={infrastructura} location={'infrastructure'}/>
+          <Map currentHouse={currentObject} InfrastructureInfo={'la;kjdf;kljasd;fl'} infrastructura={infrastructura} location={'infrastructure'}/>
         </div>
         <div ref={legal}>
           <ObjectLegalPurity legalPurityData={currentObject.legalPurityData}/>

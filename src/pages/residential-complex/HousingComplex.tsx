@@ -109,7 +109,7 @@ const HousingComplex: NextPage = () => {
           <Planning FilterComponent={plan.FilterComponent} planningList={plan.planningList}/>
         </div>
         <div ref={infra}>
-          <Map currentHouse={currentHouse} infrastructura={infrastructura} location={'infrastructure'}/>
+          <Map InfrastructureInfo={'l;kjasdf'} currentHouse={currentHouse} infrastructura={infrastructura} location={'infrastructure'}/>
         </div>
         <div ref={developer}>
           <ObjectDeveloper developerData={OBJECT_DEVELOPER_INFO}/>

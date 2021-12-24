@@ -20,7 +20,6 @@ interface Props {
 }
 
 const StartScreen: React.FC<Props> = ({onChooseAction, onChooseObjectType, choosedAction, choosedObjectType}) => {
-
     const cardClassName = (cardValue: NewObjectActionTypes | ObjectTypes, choosedValue?: NewObjectActionTypes | ObjectTypes) => {
         return classNames(s.card, {[s.active]: cardValue === choosedValue})
     } 

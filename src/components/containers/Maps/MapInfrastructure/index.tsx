@@ -15,10 +15,13 @@ interface Props {
   currentHouse: any
   infrastructura: any
   location: 'finder' | 'start' | 'infrastructure' | 'payback'
+  InfrastructureInfo:string
 }
 
-const Map: React.FC<Props> = ({currentHouse, infrastructura, location}) => {
+const Map: React.FC<Props> = ({currentHouse, infrastructura, location,InfrastructureInfo}) => {
+
   const places = React.useMemo(() => [currentHouse, ...infrastructura], [currentHouse, infrastructura]);
+
   const getUniqueTypesOptions = React.useCallback((categoriesList: string[]) => {
     const uniqueSetTypes = Array.from(new Set(categoriesList));
     const optionsList: any = uniqueSetTypes.map((category) => {
@@ -31,8 +34,9 @@ const Map: React.FC<Props> = ({currentHouse, infrastructura, location}) => {
     })
     return optionsList
   }, [places])
-  
+
   const uniqueTypesList: any = React.useMemo(() => getUniqueTypesOptions(places.map((pl: any) => pl.category)), [places, getUniqueTypesOptions]);
+
   const [updatePlaces, setUpdatePlaces] = useState(places);
   const [pressed, setPressed] = useState<string[]>(uniqueTypesList.map((item: any) => item.label));
 
@@ -75,9 +79,8 @@ const Map: React.FC<Props> = ({currentHouse, infrastructura, location}) => {
   return (
     <div className={s.container}>
       <HeadLine title={'Инфраструктура'}>
-        <Typography weight="light"> 
-          В 15 минутах езды расположена Ялта со своей знаменитой набережной, театр Чехова, авквариум и дельфинарий. Знаменитые дворцы, парки, ботанические сады и винные заводы расположены в получасовой доступности. 
-          В Гурзуфе есть свой причал, откуда регулярно отправляются рейсы на Ялту, Никиту, Ласточкино гнездо, Алупку, Партенит и Алушту.
+        <Typography weight="light">
+            {InfrastructureInfo}
         </Typography>
       </HeadLine>
     <div className={s.mapWrapper}>

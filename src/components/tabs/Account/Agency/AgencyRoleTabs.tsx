@@ -1,5 +1,4 @@
 // Тут описываем вертикальный набор табов для роли "Агенс" с использованием дочерних компонентов из папки components
-
 import React from "react"
 import VerticalTabs from "../../../shared/VerticalTabs/VerticalTabs"
 import MyObjectsTab from "./components/MyObjectsTab/MyObjectsTab"

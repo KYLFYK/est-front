@@ -5,7 +5,7 @@ import MenuItem from '@mui/material/MenuItem';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import {makeStyles} from "@material-ui/core";
 import {FC} from "react";
-
+import Link from 'next/link'
 const ITEM_HEIGHT = 48;
 
 export const useStyles = makeStyles(() => ({
@@ -35,9 +35,9 @@ const LongMenu: FC<LongMenuType> = ({urlObject, urlUser, idChat,archive}) => {
     const switchActive = (title: string, active: string,archive:boolean) => {
         switch (title) {
             case 'Профиль':
-                return <a className={classes.link} href={active} target={"_blank"} rel="noopener">{title}</a>
+                return <Link  href={active} ><a href={active}  target={"_blank"} rel='noreferrer'>{title}</a></Link>
             case 'Посмотреть объект':
-                return <a className={classes.link} href={active} target={"_blank"} rel="noopener">{title}</a>
+                return <Link  href={active} ><a className={classes.link} href={active} target={"_blank"} rel="noreferrer">{title}</a></Link>
             case 'В архив':
                 return <div onClick={()=>console.log(active)}>{title}</div> //!archive?'В архив':'Восстановить чат'
             case 'Удалить переписку':

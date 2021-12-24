@@ -89,7 +89,7 @@ const Plot: NextPage = () => {
           <ObjectSpecifications specificationsLists={Array(3).fill(OBJECT_SPECS_MOCK)} title={"Особенности"}/>
         </div>
         <div ref={infra}>
-          <Map currentHouse={currentHouse} infrastructura={infrastructura} location={'infrastructure'}/>
+          <Map InfrastructureInfo={'asd;kj'} currentHouse={currentHouse} infrastructura={infrastructura} location={'infrastructure'}/>
         </div>
         <div ref={legal}>
           <ObjectLegalPurity legalPurityData={legalPurityData}/>

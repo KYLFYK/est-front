@@ -1,9 +1,9 @@
 export const fullObjectData = [
   {
     images : [
-      {url : "https://cdn.pixabay.com/photo/2021/08/25/20/42/field-6574455__340.jpg", id : 0},
-      {url : "https://images.unsplash.com/photo-1541963463532-d68292c34b19?ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8Ym9va3xlbnwwfHwwfHw%3D&ixlib=rb-1.2.1&w=1000&q=80", id : 1},
-      {url : "https://images.ctfassets.net/hrltx12pl8hq/3MbF54EhWUhsXunc5Keueb/60774fbbff86e6bf6776f1e17a8016b4/04-nature_721703848.jpg?fit=fill&w=480&h=270", id : 2}
+      "https://cdn.pixabay.com/photo/2021/08/25/20/42/field-6574455__340.jpg",
+      "https://images.unsplash.com/photo-1541963463532-d68292c34b19?ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8Ym9va3xlbnwwfHwwfHw%3D&ixlib=rb-1.2.1&w=1000&q=80",
+      "https://images.ctfassets.net/hrltx12pl8hq/3MbF54EhWUhsXunc5Keueb/60774fbbff86e6bf6776f1e17a8016b4/04-nature_721703848.jpg?fit=fill&w=480&h=270"
     ],
     object_id : 1,
     lang : "ru",
@@ -454,9 +454,9 @@ export const fullObjectData = [
 
   {
     images : [
-      {url : "https://cdn.pixabay.com/photo/2021/08/25/20/42/field-6574455__340.jpg", id : 0},
-      {url : "https://images.unsplash.com/photo-1541963463532-d68292c34b19?ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8Ym9va3xlbnwwfHwwfHw%3D&ixlib=rb-1.2.1&w=1000&q=80", id : 1},
-      {url : "https://images.ctfassets.net/hrltx12pl8hq/3MbF54EhWUhsXunc5Keueb/60774fbbff86e6bf6776f1e17a8016b4/04-nature_721703848.jpg?fit=fill&w=480&h=270", id : 2}
+      "https://cdn.pixabay.com/photo/2021/08/25/20/42/field-6574455__340.jpg",
+      "https://images.unsplash.com/photo-1541963463532-d68292c34b19?ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8Ym9va3xlbnwwfHwwfHw%3D&ixlib=rb-1.2.1&w=1000&q=80",
+      "https://images.ctfassets.net/hrltx12pl8hq/3MbF54EhWUhsXunc5Keueb/60774fbbff86e6bf6776f1e17a8016b4/04-nature_721703848.jpg?fit=fill&w=480&h=270"
     ],
     object_id : 2,
     lang : "ru",
@@ -825,20 +825,20 @@ export const fullObjectData = [
 
   {
     images : [
-      {url : "https://cdn.pixabay.com/photo/2021/08/25/20/42/field-6574455__340.jpg", id : 0},
-      {url : "https://images.unsplash.com/photo-1541963463532-d68292c34b19?ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8Ym9va3xlbnwwfHwwfHw%3D&ixlib=rb-1.2.1&w=1000&q=80", id : 1},
-      {url : "https://images.ctfassets.net/hrltx12pl8hq/3MbF54EhWUhsXunc5Keueb/60774fbbff86e6bf6776f1e17a8016b4/04-nature_721703848.jpg?fit=fill&w=480&h=270", id : 2}
+        "https://cdn.pixabay.com/photo/2021/08/25/20/42/field-6574455__340.jpg",
+       "https://images.unsplash.com/photo-1541963463532-d68292c34b19?ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8Ym9va3xlbnwwfHwwfHw%3D&ixlib=rb-1.2.1&w=1000&q=80",
+       "https://images.ctfassets.net/hrltx12pl8hq/3MbF54EhWUhsXunc5Keueb/60774fbbff86e6bf6776f1e17a8016b4/04-nature_721703848.jpg?fit=fill&w=480&h=270"
     ],
-    object_id : 4,
+    object_id : 3,
     lang : "ru",
     name : "Участок в Троицком 30 соток",
     type : "plat",
     category: "Участок",
-    address : "Россия, Троицкое, микрорайон Ясная Поляна",
-    cit : "Троицкое",
+    address : "Россия, Троицкое, микрорайон Ясная Поляна",  // `${country},${city},${address} `
+    cit : "Троицкое", // city
     lat : 35.4,
     lng : 45.2,
-    price : 2212000,
+    price : 2212000, // cost
     sort : null,
     planning : "2",
     secondary_type : "Новостройка",
@@ -854,7 +854,7 @@ export const fullObjectData = [
       { label: "Статус участка", value: "ИЖС" },
       { label: "Строения на участке", value: "Нет" },
     ],
-    description_items : [
+    description_items : [ // {description:''}
       "Участок расположен на границе с городом, прилегает к асфальту. Зона ОД-4 (общественного-деловая). Около участка электричество, газ.",
       "Рядом гаражный кооператив на 400 машиномест (70 продано), в процессе строительства 5 многоквартирных дома и торговый комплекс. Документы готовы, оформление через МФЦ.",
     ],
@@ -916,7 +916,7 @@ export const fullObjectData = [
           },
           {
             value: "Предыдущие владельцы",
-            description: "Всплывающая подсказка предыдущих владельцев",
+            description: "Всплывающая подсказка предыдущих владельцев", // ??
             label: [
               {
                 title: "2 владельца",
@@ -961,11 +961,11 @@ export const fullObjectData = [
 
   {
     images : [
-      {url : "https://cdn.pixabay.com/photo/2021/08/25/20/42/field-6574455__340.jpg", id : 0},
-      {url : "https://images.unsplash.com/photo-1541963463532-d68292c34b19?ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8Ym9va3xlbnwwfHwwfHw%3D&ixlib=rb-1.2.1&w=1000&q=80", id : 1},
-      {url : "https://images.ctfassets.net/hrltx12pl8hq/3MbF54EhWUhsXunc5Keueb/60774fbbff86e6bf6776f1e17a8016b4/04-nature_721703848.jpg?fit=fill&w=480&h=270", id : 2}
+      "https://cdn.pixabay.com/photo/2021/08/25/20/42/field-6574455__340.jpg",
+      "https://images.unsplash.com/photo-1541963463532-d68292c34b19?ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8Ym9va3xlbnwwfHwwfHw%3D&ixlib=rb-1.2.1&w=1000&q=80",
+      "https://images.ctfassets.net/hrltx12pl8hq/3MbF54EhWUhsXunc5Keueb/60774fbbff86e6bf6776f1e17a8016b4/04-nature_721703848.jpg?fit=fill&w=480&h=270"
     ],
-    object_id : 5,
+    object_id : 4,
     lang : "ru",
     name : "3-этажный коттедж",
     type : "house",
