@@ -2,9 +2,9 @@ import {makeAutoObservable} from "mobx"
 import {createContext, FC, useContext} from "react";
 
 
-type LegalPurityDataGeneralType = {
-    general: Array<LegalPurityInfoTabsDataType>
-}
+// type LegalPurityDataGeneralType = {
+//     general: Array<LegalPurityInfoTabsDataType>
+// }
 type LegalPurityInfoTabsDataType = {
     value: string
     description: string
@@ -74,8 +74,8 @@ type LangType = {
     },
     update?:(id:number)=>void
 }
-// const oneObje : LangType ={
-const oneObje ={
+
+const lang0 ={
     images : [
         "https://cdn.pixabay.com/photo/2021/08/25/20/42/field-6574455__340.jpg",
         "https://images.unsplash.com/photo-1541963463532-d68292c34b19?ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8Ym9va3xlbnwwfHwwfHw%3D&ixlib=rb-1.2.1&w=1000&q=80",
@@ -86,11 +86,11 @@ const oneObje ={
     name : "Участок на берегу Моря",
     type : "plat",
     category: "Участок",
-    address : "Крым, Ялта, ул.Советская 12",  // `${country},${city},${address} `
-    city : "Ялта", // city
+    address : "Крым, Ялта, ул.Советская 12",
+    city : "Ялта",
     lat : 35.4,
     lng : 45.2,
-    price : 4000000, // cost
+    price : 4000000,
     sort : null,
     planning : "2",
     secondary_type : "Новостройка",
@@ -212,7 +212,7 @@ const oneObje ={
         }
     },
 }
-const oneObje1 ={
+const lang1 ={
     images : [
         "https://cdn.pixabay.com/photo/2021/08/25/20/42/field-6574455__340.jpg",
         "https://images.unsplash.com/photo-1541963463532-d68292c34b19?ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8Ym9va3xlbnwwfHwwfHw%3D&ixlib=rb-1.2.1&w=1000&q=80",
@@ -348,7 +348,7 @@ const oneObje1 ={
         }
     },
 }
-const oneObje2 ={
+const lang2 ={
     images : [
         "https://cdn.pixabay.com/photo/2021/08/25/20/42/field-6574455__340.jpg",
         "https://images.unsplash.com/photo-1541963463532-d68292c34b19?ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8Ym9va3xlbnwwfHwwfHw%3D&ixlib=rb-1.2.1&w=1000&q=80",
@@ -484,7 +484,7 @@ const oneObje2 ={
         }
     },
 }
-const oneObje3 ={
+const lang3 ={
     images : [
         "https://cdn.pixabay.com/photo/2021/08/25/20/42/field-6574455__340.jpg",
         "https://images.unsplash.com/photo-1541963463532-d68292c34b19?ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8Ym9va3xlbnwwfHwwfHw%3D&ixlib=rb-1.2.1&w=1000&q=80",
@@ -621,7 +621,7 @@ const oneObje3 ={
         }
     },
 }
-const oneObje4 ={
+const lang4 ={
     images : [
         "https://cdn.pixabay.com/photo/2021/08/25/20/42/field-6574455__340.jpg",
         "https://images.unsplash.com/photo-1541963463532-d68292c34b19?ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8Ym9va3xlbnwwfHwwfHw%3D&ixlib=rb-1.2.1&w=1000&q=80",
@@ -757,7 +757,7 @@ const oneObje4 ={
         }
     },
 }
-const oneObje5 ={
+const lang5 ={
     images : [
         "https://cdn.pixabay.com/photo/2021/08/25/20/42/field-6574455__340.jpg",
         "https://images.unsplash.com/photo-1541963463532-d68292c34b19?ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8Ym9va3xlbnwwfHwwfHw%3D&ixlib=rb-1.2.1&w=1000&q=80",
@@ -955,12 +955,12 @@ class PlatStore  {
         },
     }
     fetch(id:string) {
-        if(id==='0')this.initialData = oneObje
-        if(id==='1')this.initialData = oneObje1
-        if(id==='2')this.initialData = oneObje2
-        if(id==='3')this.initialData = oneObje3
-        if(id==='4')this.initialData = oneObje4
-        if(id==='5')this.initialData = oneObje5
+        if(id==='0')this.initialData = lang0
+        if(id==='1')this.initialData = lang1
+        if(id==='2')this.initialData = lang2
+        if(id==='3')this.initialData = lang3
+        if(id==='4')this.initialData = lang4
+        if(id==='5')this.initialData = lang5
     }
     get() {
         console.log(JSON.parse(JSON.stringify({ ...this.initialData})))
