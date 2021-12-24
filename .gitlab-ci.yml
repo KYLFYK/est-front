@@ -1,48 +1,60 @@
-image: node:15.0
+image: docker:stable
 
 services:
   - docker:dind
 
 stages:
   - build
+ # - build-storybook
   - deploy
 variables:
   DOCKER_HOST: tcp://docker:2375
   DOCKER_DRIVER: overlay2
+  #KEYS_DIR: ${CI_PROJECT_DIR}/keys
+  #DEPLOY_HOST: 178.154.197.125
+  #DEPLOY_USER: deployer
+  #DEPLOY_PORT: 22
 
-#before_script:
-#  - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
+before_script:
+  - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
 
 build:
   stage: build
-  image: node:14.17.4
   script:
-    - npm install
-    #- yarn build-storybook
-    - npm run build
+    - docker pull $CI_REGISTRY_IMAGE:latest || true
+    - docker build --cache-from $CI_REGISTRY_IMAGE:latest
+      --tag $CI_REGISTRY_IMAGE:$CI_COMMIT_SHA
+      --tag $CI_REGISTRY_IMAGE:$CI_COMMIT_REF_NAME
+      --tag $CI_REGISTRY_IMAGE:latest
+      .
+    - docker push $CI_REGISTRY_IMAGE:$CI_COMMIT_SHA
+    - docker push $CI_REGISTRY_IMAGE:$CI_COMMIT_REF_NAME
+    - docker push $CI_REGISTRY_IMAGE:latest
 
-  artifacts:
-    paths:
-     # - storybook-static
-      - out
+#build-storybook:
+ # image: node:14
+  #stage: build-storybook
+#  script:
+ #   - yarn install
+  #  - npm run build
+   # - pwd
+#    - ls -la
+ #   - ls -la out
+  #  - ls -la public
+#  artifacts:
+ #   paths:
+  #    - public
+
 
 deploy:
   stage: deploy
-  dependencies:
-     - build
   before_script: 
-     - ls -la
-     #- ls -la storybook-static
-     - ls -la out
      - mkdir -p ~/.ssh     
      - echo -e "$SSH_PRIVATE_KEY" > ~/.ssh/id_rsa     
      - chmod 600 ~/.ssh/id_rsa     
      - '[[ -f /.dockerenv ]] && echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config' 
        
   script:
-    - ls -la
-    - scp -r /builds/f-case/marketplace-front/out/* deployer@$DEPLOY_SERVER:/data/estatum-front/front 
-  environment:
-    name: production
+     - ssh deployer@$DEPLOY_SERVER "cd /data/marketplace-front && ./deploy.sh"
   only:
      - development

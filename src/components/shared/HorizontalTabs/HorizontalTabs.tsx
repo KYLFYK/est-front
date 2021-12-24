@@ -1,4 +1,4 @@
-import React, { FC, useState } from "react";
+import React, { FC, useEffect, useRef, useState } from "react";
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 import Box from "@mui/material/Box";
@@ -17,6 +17,14 @@ interface Props {
 }
 export const HorizontalTabs: FC<Props> = ({ tabs, refs, wrapperClassName }) => {
   const [selectedTabIdx, setSelectedTabIdx] = useState(0);
+  const activeTabRef = useRef<any>(null);
+  const [activeTabMargin, setActiveTabMargin] = useState(30);
+
+  useEffect(() => {
+    if (activeTabRef && activeTabRef.current) {
+      setActiveTabMargin((activeTabRef.current.clientWidth - 50) / 2);
+    }
+  }, [activeTabRef, selectedTabIdx]);
 
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
     if (refs) {
@@ -45,7 +53,7 @@ export const HorizontalTabs: FC<Props> = ({ tabs, refs, wrapperClassName }) => {
               style: {
                 backgroundColor: "#C5A28E",
                 width: "50px",
-                marginLeft: "30px",
+                marginLeft: activeTabMargin,
               },
             }}
           >
@@ -55,6 +63,7 @@ export const HorizontalTabs: FC<Props> = ({ tabs, refs, wrapperClassName }) => {
                 value={index}
                 style={{ textTransform: "none" }}
                 onClick={tab.onClick}
+                ref={index === selectedTabIdx ? activeTabRef : null}
                 label={
                   <Typography
                     color={

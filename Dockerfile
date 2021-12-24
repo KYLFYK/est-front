@@ -1,25 +1,28 @@
-FROM node:alpine AS runner
-WORKDIR /app
+FROM node:alpine
 
-ENV NODE_ENV production
+# Set working directory
+WORKDIR /usr/app
 
-RUN addgroup -g 1001 -S nodejs
-RUN adduser -S nextjs -u 1001
+# Copy package.json and package-lock.json before other files
+# Utilise Docker cache to save re-installing dependencies if unchanged
+COPY ./package*.json ./
 
-# You only need to copy next.config.js if you are NOT using the default configuration
-COPY --from=builder /next.config.js ./
-COPY --from=builder /public ./public
-COPY --from=builder /package.json ./package.json
+# Install dependencies
+RUN npm install --save-dev typescript
 
-# Automatically leverage output traces to reduce image size 
-# https://nextjs.org/docs/advanced-features/output-file-tracing
-#COPY --from=builder --chown=nextjs:nodejs /app/.next/standalone ./
-#COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
+# Copy all files
+COPY ./ ./
 
-USER nextjs
+# Build app
+RUN npm run build
 
-EXPOSE 6006
+# Expose the listening port
+EXPOSE 3000
 
-ENV PORT 6006
+ENV PORT 3000
 
-CMD ["node", "server.js"]
+USER node
+
+# Run npm start script when container starts
+CMD [ "npm", "start" ]
+
