@@ -5,7 +5,7 @@ services:
 
 stages:
   - build
-  - build-storybook
+ # - build-storybook
   - deploy
 variables:
   DOCKER_HOST: tcp://docker:2375
@@ -31,19 +31,19 @@ build:
     - docker push $CI_REGISTRY_IMAGE:$CI_COMMIT_REF_NAME
     - docker push $CI_REGISTRY_IMAGE:latest
 
-build-storybook:
-  image: node:14
-  stage: build-storybook
-  script:
-    - yarn install
-    - npm run build
-    - pwd
-    - ls -la
-    - ls -la out
-    - ls -la public
-  artifacts:
-    paths:
-      - public
+#build-storybook:
+ # image: node:14
+  #stage: build-storybook
+#  script:
+ #   - yarn install
+  #  - npm run build
+   # - pwd
+#    - ls -la
+ #   - ls -la out
+  #  - ls -la public
+#  artifacts:
+ #   paths:
+  #    - public
 
 
 deploy:
