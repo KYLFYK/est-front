@@ -1,25 +1,30 @@
 import { makeAutoObservable } from "mobx";
 import { createContext, useContext, FC } from "react";
+import {ApartmensData} from "./ApartamentConfig";
 
 class ApartmentStore {
+    constructor() {
+      makeAutoObservable(this);
+    }
+    fetching = true
     initialData = {
-        images: [],
-        object_id: "",
+        images: [{url: "", id: 0},],
+        object_id: 0,
         lang: "ru",
         name: "",
         type: "apartment",
         category: "Апартаменты",
         address: "",
         city: "",
-        lat: 0,
-        lng: 0,
-        price: "",
+        lat: 1,
+        lng: 1,
+        price: 0,
         sort: null,
         planning: "",
         secondary_type: "",
-        total_area: "",
-        floor: "",
-        total_floors: "",
+        total_area: 0,
+        floor: 0,
+        total_floors: 0,
         favorite: false,
         publish: "",
         views: "",
@@ -95,7 +100,7 @@ class ApartmentStore {
             activities: {primary: [""], secondary: [""]},
             news: [{
               link: "",
-              date: "",
+              date: new Date(),
               title: "",
               description: "",
               icon: "",
@@ -105,18 +110,12 @@ class ApartmentStore {
             risks: [{value: "", label: {title: "", text: ""}}]
           }
         }
-      }
+    }
 
-  constructor() {
-    makeAutoObservable(this);
-  }
-
-  fetch() {
-    this.initialData.name = '111'
-  }
-  unfetch() {
-    this.initialData.name = ''
-  }
+    fetch(id: string | string[] | undefined) {
+      this.initialData = Number(id) > 0 ? ApartmensData.filter((fod) => fod.object_id === Number(id))[0] : this.initialData
+      this.fetching = false
+    }
 }
 
 const StoreContext = createContext<ApartmentStore>(new ApartmentStore());

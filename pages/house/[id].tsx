@@ -24,8 +24,7 @@ import { Footer } from '../../src/components/widget/Footer/ui/Footer'
 import {ScrollUp} from '../../src/components/shared/ScrollUp/ScrollUp'
 
 import {fullObjectData} from '../../src/pages/config'
-
-import { useStores } from 'src/hooks/useStores'
+import {useStore} from '../../src/mobx/stores/HouseStore/HouseStore'
 
 const city = ['Москва', 'Санкт-Петербург', 'Крым', 'Сочи', 'Нижний Новгород']
 const personalAccount = [{title: 'Личный кабинет', href: '/User', message: 0},
@@ -73,6 +72,7 @@ const averagePrice ={
 }
 
 const House: NextPage = () => {
+  const store = useStore()
 
   const general = useRef(null)
   const tours = useRef(null)
@@ -87,43 +87,43 @@ const House: NextPage = () => {
   const router = useRouter()
   const currentObject = Number(router.query.id) ? fullObjectData.filter((fod) => fod.object_id === Number(router.query.id))[0] : fullObjectData[0]
 
-  const breadcrumbs = ['Крым', 'Купить участок', `${currentObject.name}`]
-  const views = [currentObject.publish, currentObject.views, currentObject.agency]
+  const breadcrumbs = ['Крым', 'Купить участок', `${store.initialData.name}`]
+  const views = [store.initialData.publish, store.initialData.views, store.initialData.agency]
 
   useEffect(() => {
     setRefs([general.current, tours.current, architec.current, infra.current, legal.current, payback.current, developer.current, record.current])
-
-  }, [])
+    setTimeout(() => store.fetch(router.query.id), 5000);
+  }, [router.query.id])
 
   return (
     <div >
         <Header city={city} personalAccount={personalAccount}/>
         <Breadcrumbs items={breadcrumbs}/>
         <Views items={views}/>
-        <NameEstate item={currentObject.name}/>
-        <AdressEstate item={currentObject.address}/>
+        <NameEstate item={store.initialData.name}/>
+        <AdressEstate item={store.initialData.address}/>
         <HorizontalTabs tabs={tabs} refs={refs}/>
         <div ref={general}>
-          <GeneralInfo info={currentObject.info_options} price={currentObject.price} images={IMAGES_SET} />
+          <GeneralInfo info={store.initialData.info_options} price={store.initialData.price} images={IMAGES_SET} />
         </div>
-        <ObjectDescription items={currentObject.description_items}/>
+        <ObjectDescription items={store.initialData.description_items}/>
         <div ref={tours}>
-          <ToursContainer Online_tour={currentObject.online_tour}/>
+          <ToursContainer Online_tour={store.initialData.online_tour}/>
         </div>
         <div ref={architec}>
-          <ObjectSpecifications specificationsLists={currentObject.object_specs} title={"Особенности"}/>
+          <ObjectSpecifications specificationsLists={store.initialData.object_specs} title={"Особенности"}/>
         </div>
         <div ref={infra}>
-          <Map currentHouse={currentObject} infrastructura={infrastructura} location={'infrastructure'}/>
+          <Map currentHouse={JSON.parse(JSON.stringify(store.initialData))} infrastructura={infrastructura} location={'infrastructure'}/>
         </div>
         <div ref={legal}>
-          <ObjectLegalPurity legalPurityData={currentObject.legalPurityData}/>
+          <ObjectLegalPurity legalPurityData={store.initialData.legalPurityData}/>
         </div>
         <div ref={payback}>
           <PaybackContainer averagePrice={averagePrice}/>
         </div>
         <div ref={developer}>
-          <ObjectDeveloper developerData={currentObject.object_developer_info}/>
+          <ObjectDeveloper developerData={store.initialData.object_developer_info}/>
         </div>
         <Mortgage/>
         <div ref={record}>

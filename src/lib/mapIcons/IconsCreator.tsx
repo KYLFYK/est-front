@@ -55,7 +55,7 @@ export const IconsCreator: React.FC<Props> = ({locationProject, color, title, cl
                         ? <div style={{width: '100px', height: '100px', backgroundColor: '#000', borderRadius: '100%', 
                             border: `4px solid ${locationProject === 'payback' ? '#1A4862' : '#FFFFFF'}`, 
                             backgroundSize: 'cover', position: 'relative', top: '-120px', left: '-55px',
-                            backgroundImage: `url(${currentHouse.images[1].url})`}}>
+                            backgroundImage: `url(${currentHouse.images[1] ? currentHouse.images[1].url : ''})`}}>
 
                             <div style={{width: '20px', height: '20px', backgroundColor: `${locationProject === 'payback' ? '#1A4862' : '#FFFFFF'}`, 
                                 transform: 'rotate(45deg)', position: 'relative', top: '90px', left: '40px', zIndex: -1}}>

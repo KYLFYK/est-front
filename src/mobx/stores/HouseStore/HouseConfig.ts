@@ -5,16 +5,16 @@ export const fullObjectData = [
       {url : "https://images.unsplash.com/photo-1541963463532-d68292c34b19?ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8Ym9va3xlbnwwfHwwfHw%3D&ixlib=rb-1.2.1&w=1000&q=80", id : 1},
       {url : "https://images.ctfassets.net/hrltx12pl8hq/3MbF54EhWUhsXunc5Keueb/60774fbbff86e6bf6776f1e17a8016b4/04-nature_721703848.jpg?fit=fill&w=480&h=270", id : 2}
     ],
-    object_id : 1,
+    object_id : 10,
     lang : "ru",
-    name : "1-комнатная квартира в центре Сочи",
-    type : "apartment",
-    category: "Апартаменты",
-    address : "Россия, Сочи, ул. Ленина, дом 36, квартира 21",
-    city : "Сочи",
-    lat : 35.5,
-    lng : 45.2,
-    price : 12860000,
+    name : "2-этажный коттедж",
+    type : "house",
+    category: "Дом",
+    address : "Крым респ., Ялта городской округ, Гурзуф пгт,  ул. Ялтинская, 12К",
+    city : "Ялта",
+    lat : 35.6,
+    lng : 45.0,
+    price : 15160000,
     sort : null,
     planning : "1",
     secondary_type : "Вторичное",
@@ -26,21 +26,29 @@ export const fullObjectData = [
     views : '389',
     agency : 'Агентство: Лунный свет',
     info_options : [
-      { label: "Общая площадь", value: "40 м²" },
-      { label: "Жилая площадь", value: "36 м²" },
-      { label: "Высота потолков", value: "2,7 м" },
-      { label: "Этаж", value: "1/18" },
-      { label: "Комнат в квартире", value: "1" },
-      { label: "Ванная комната", value: "5 м²" },
-      { label: "Кухня", value: "12 м²" },
-      { label: "Комната", value: "24 м²" },
-      { label: "Интерьер", value: "Холл, кухня-гостиная, комната, санузел" },
-      { label: "Парковка", value: "Платная" },
-      { label: "ЖК", value: "ЖК Ленинский" },
-      { label: "Срок сдачи", value: "Сдан 19.05.2020" },
+      { label: "Общая площадь", value: "615 м²" },
+      { label: "Площадь дома", value: "300 м²" },
+      { label: "Жилая площадь", value: "150 м²" },
+      { label: "Участок", value: "10 соток" },
+      { label: "Комнат в доме", value: "5" },
+      { label: "Ванная комната", value: "10 м²" },
+      { label: "Кухня", value: "42 м²" },
+      {
+        label: "Первый этаж",
+        value: "Холл, кухня-гостиная, комната, кабинет, санузел",
+      },
+      {
+        label: "Второй этаж",
+        value: "Терраса, 2 спальни, 2 санузла, 2 гардеробных, холл, кладовая",
+      },
+      {
+        label: "Спец этаж",
+        value: "2 спальни с индивидуальными душевыми и туалетами",
+      },
     ],
     description_items : [
-      "Из окон виллы открывается красивейший вид на древнюю гору-вулкан Аю-Даг, Гурзуфскую бухту и парки Артека, скалы Адалары и пристань для яхт и катеров."
+      "Из окон виллы открывается красивейший вид на древнюю гору-вулкан Аю-Даг, Гурзуфскую бухту и парки Артека, скалы Адалары и пристань для яхт и катеров.",
+      "На террасе расположен бассейн с переливом в сторону моря и уникальными видовыми характеристиками.",
     ],
     online_tour : {
       threeD_tour: {
@@ -53,36 +61,6 @@ export const fullObjectData = [
     object_specs : [{
       subtitle: "Строительно-техническая экспертиза",
       specificationsItems : [{
-        value: 'house_type',
-        label: { title: "Тип дома", text: "Монолитный" },
-      },{
-        value: 'house_type',
-        label: { title: "Тип дома", text: "Монолитный" },
-      },{
-        value: 'house_type',
-        label: { title: "Тип дома", text: "Монолитный" },
-      }]
-    },{
-      subtitle: "Строительно-техническая экспертиза",
-      specificationsItems : [{
-        value: 'house_type',
-        label: { title: "Тип дома", text: "Монолитный" },
-      },{
-        value: 'house_type',
-        label: { title: "Тип дома", text: "Монолитный" },
-      },{
-        value: 'house_type',
-        label: { title: "Тип дома", text: "Монолитный" },
-      }]
-    },{
-      subtitle: "Строительно-техническая экспертиза",
-      specificationsItems : [{
-        value: 'house_type',
-        label: { title: "Тип дома", text: "Монолитный" },
-      },{
-        value: 'house_type',
-        label: { title: "Тип дома", text: "Монолитный" },
-      },{
         value: 'house_type',
         label: { title: "Тип дома", text: "Монолитный" },
       }]
@@ -458,77 +436,150 @@ export const fullObjectData = [
       {url : "https://images.unsplash.com/photo-1541963463532-d68292c34b19?ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8Ym9va3xlbnwwfHwwfHw%3D&ixlib=rb-1.2.1&w=1000&q=80", id : 1},
       {url : "https://images.ctfassets.net/hrltx12pl8hq/3MbF54EhWUhsXunc5Keueb/60774fbbff86e6bf6776f1e17a8016b4/04-nature_721703848.jpg?fit=fill&w=480&h=270", id : 2}
     ],
-    object_id : 2,
+    object_id : 11,
     lang : "ru",
-    name : "ЖК District",
-    type : "residential-complex",
-    category: "Жилищный комплекс",
-    address : "ЖК Ленинский",
+    name : "3-этажный коттедж",
+    type : "house",
+    category: "Дом",
+    address : "Крым респ., Ялта городской округ, Гурзуф пгт,  ул. Ялтинская, 12К",
     city : "Ялта",
     lat : 35.6,
-    lng : 45.1,
-    price : 22120000,
+    lng : 45.0,
+    price : 12160000,
     sort : null,
-    planning : "2",
-    secondary_type : "Новостройка",
-    total_area : 73,
-    floor : 5,
-    total_floors : 29,
+    planning : "1",
+    secondary_type : "Вторичное",
+    total_area : 52,
+    floor : 3,
+    total_floors : 15,
     favorite : false,
     publish : '12.06.2021',
     views : '389',
     agency : 'Агентство: Лунный свет',
     info_options : [
-      { label: "Адрес", value: "ул. Николая I" },
-      { label: "Срок сдачи", value: "III квартал 2022 года" },
-      { label: "Стоимость квартир", value: "от 9,6 млн руб." },
-      { label: "Площадь квартир", value: "33 — 81 м2" },
-      { label: "Всего квартир", value: "32 (Корпус 5)" },
-      { label: "Класс жилья", value: "Бизнес" },
-      { label: "Корпуса", value: "1 корпус" },
-      { label: "Этажность", value: "13 этажей" },
-      { label: "Тип дома", value: "Монолитный" },
-      { label: "Высота потолков", value: "3,3 м" },
-      { label: "Отделка", value: "Черновая" },
-      { label: "Парковка", value: "Подземный паркинг, автостоянка" },
+      { label: "Общая площадь", value: "615 м²" },
+      { label: "Площадь дома", value: "300 м²" },
+      { label: "Жилая площадь", value: "150 м²" },
+      { label: "Участок", value: "10 соток" },
+      { label: "Комнат в доме", value: "5" },
+      { label: "Ванная комната", value: "10 м²" },
+      { label: "Кухня", value: "42 м²" },
+      {
+        label: "Первый этаж",
+        value: "Холл, кухня-гостиная, комната, кабинет, санузел",
+      },
+      {
+        label: "Второй этаж",
+        value: "Терраса, 2 спальни, 2 санузла, 2 гардеробных, холл, кладовая",
+      },
+      {
+        label: "Спец этаж",
+        value: "2 спальни с индивидуальными душевыми и туалетами",
+      },
     ],
+    description_items : [
+      "Из окон виллы открывается красивейший вид на древнюю гору-вулкан Аю-Даг, Гурзуфскую бухту и парки Артека, скалы Адалары и пристань для яхт и катеров.",
+      "На террасе расположен бассейн с переливом в сторону моря и уникальными видовыми характеристиками.",
+    ],
+    online_tour : {
+      threeD_tour: {
+          url: 'https://www.youtube.com/embed/Ke3qyQYNob4',
+      },
+      vr_tour: {
+          url: 'https://3d-tur.ru/010/',
+      }
+    },
     object_specs : [{
-      subtitle: "Объекты на  территории жилого комплекса",
-      specificationsItems : [{
-        value: 'house_type',
-        label: { title: "Тип дома", text: "Монолитный" },
-      },{
-        value: 'house_type',
-        label: { title: "Тип дома", text: "Монолитный" },
-      },{
-        value: 'house_type',
-        label: { title: "Тип дома", text: "Монолитный" },
-      }]
-    },{
-      subtitle: "Безопасность",
-      specificationsItems : [{
-        value: 'house_type',
-        label: { title: "Тип дома", text: "Монолитный" },
-      },{
-        value: 'house_type',
-        label: { title: "Тип дома", text: "Монолитный" },
-      },{
-        value: 'house_type',
-        label: { title: "Тип дома", text: "Монолитный" },
-      }]
-    },{
       subtitle: "Строительно-техническая экспертиза",
       specificationsItems : [{
         value: 'house_type',
         label: { title: "Тип дома", text: "Монолитный" },
-      },{
-        value: 'house_type',
-        label: { title: "Тип дома", text: "Монолитный" },
-      },{
-        value: 'house_type',
-        label: { title: "Тип дома", text: "Монолитный" },
       }]
     }],
+    legalPurityData : {
+      encumbrances: false,
+      risks: false,
+      tabsData: {
+        general: [
+          {
+            value: "Данные из ЕГРН",
+            description: "Это всплывающая подсказка о данных из ЕГРН",
+            label: [
+              {
+                title: "Адрес",
+                text: "Респ. Крым, пгт Гурзуф,  ул. Ялтинская, д. 12К",
+              },
+              {
+                title: "Кадастровый номер",
+                text: "77:06:0009005:4567",
+              },
+              {
+                title: "Кадастровая стоимость",
+                text: "150 000 000 ₽",
+                description: "Это всплывающая подсказка о данных кадастровой стоимости",
+              },
+              {
+                title: "Общая площадь",
+                text: "615 м²",
+              },
+              {
+                title: "Этажность",
+                text: "3",
+              },
+            ],
+          },
+        ],
+        founders: [
+          {
+            value: "Текущие владельцы",
+            label: [
+              { title: "Единоличный собственник", text: "Иванов Филипп Васильевич" },
+              { title: "77-77-08/011/2021-0308", text: "03.08.2021" },
+            ],
+          },
+          {
+            value: "Предыдущие владельцы",
+            description: "Всплывающая подсказка предыдущих владельцев",
+            label: [
+              {
+                title: "2 владельца",
+                text: "Иванов Филипп Васильевич, Иванов Филипп Васильевич",
+              },
+              { title: "77-77-08/011/2021-0308", text: "03.08.2021" },
+            ],
+          },
+        ],
+        encumbrances: [
+          {
+            title: "Текущие владельцы",
+            encumbrances: [
+              {
+                status: 0,
+                description: "Description",
+                text: "Дом в ипотеке",
+              },
+              {
+                status: 1,
+                description: "Description",
+                text: "Записей об аренде не найдено",
+              },
+            ],
+          },
+        ],
+        recomendations: [
+          {
+            value: "Квартира меняла владельцев несколько раз за последние 3 года",
+            label:
+              "Внимательно изучите документы, по которым квартира перешла в собственность текущего владельца, узнайте больше о предыдущих собственниках и сделках. Лучше обратиться к специалистам для проверки и сопровождения сделки.",
+          },
+          {
+            value: "Квартира в собственности менее 5 лет",
+            label:
+              "При продаже продавец скорее всего должен будет заплатить налог с её продажи. Чтобы этого не делать, он может настаивать на занижении стоимости жилья в договоре купли-продажи. В таком случае вы рискуете: если что-то пойдёт не так, возместить можно будет только сумму, указанную в договоре, и вы не сможете полностью получить налоговый вычет за покупку квартиры.",
+          },
+        ]
+      }
+    },
     object_developer_info : {
       name: "Брусника",
       developerType: "Девелоперская компания",
@@ -807,20 +858,7 @@ export const fullObjectData = [
           },
         ]
       }
-    },
-    schedule: [
-      {label: 'Август 2021', value: '0', title: 'Продолжали работы на фасаде.'}, 
-      {label: 'Сентябрь 2021', value: '1', title: 'Завершили кладку кирпичных стен. Монтировали межкомнатные перегородки.'}, 
-      {label: 'Октябрь 2021', value: '2', title: 'Штукатурили стены. Монтировали окна и витражи.'}, 
-      {label: 'Ноябрь 2021', value: '3', title: 'Выполняли устройство сетей электроснабжения, отопления, водоснабжения, вентиляции и канализации.'}
-    ],
-    planningList : [
-      { image: 'https://metrika.com/sites/default/files/debyut.png', price: 144444, title: "Большой домина", housing: 3, deadline: "2 квартал 2023г", floor: 4 },
-      { image: 'https://metrika.com/sites/default/files/debyut.png', price: 144444, title: "Большой домина", housing: 3, deadline: "2 квартал 2023г", floor: 4 },
-      { image: 'https://metrika.com/sites/default/files/debyut.png', price: 144444, title: "Большой домина", housing: 3, deadline: "2 квартал 2023г", floor: 4 },
-      { image: 'https://metrika.com/sites/default/files/debyut.png', price: 144444, title: "Большой домина", housing: 3, deadline: "2 квартал 2023г", floor: 4 },
-      { image: 'https://metrika.com/sites/default/files/debyut.png', price: 144444, title: "Большой домина", housing: 3, deadline: "2 квартал 2023г", floor: 4 },
-    ]
+    }
   },
 
   {
@@ -829,152 +867,16 @@ export const fullObjectData = [
       {url : "https://images.unsplash.com/photo-1541963463532-d68292c34b19?ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8Ym9va3xlbnwwfHwwfHw%3D&ixlib=rb-1.2.1&w=1000&q=80", id : 1},
       {url : "https://images.ctfassets.net/hrltx12pl8hq/3MbF54EhWUhsXunc5Keueb/60774fbbff86e6bf6776f1e17a8016b4/04-nature_721703848.jpg?fit=fill&w=480&h=270", id : 2}
     ],
-    object_id : 4,
+    object_id : 12,
     lang : "ru",
-    name : "Участок в Троицком 30 соток",
-    type : "plat",
-    category: "Участок",
-    address : "Россия, Троицкое, микрорайон Ясная Поляна",
-    cit : "Троицкое",
-    lat : 35.4,
-    lng : 45.2,
-    price : 2212000,
-    sort : null,
-    planning : "2",
-    secondary_type : "Новостройка",
-    total_area : 73,
-    floor : 5,
-    total_floors : 29,
-    favorite : false,
-    publish : '12.06.2021',
-    views : '389',
-    agency : 'Агентство: Лунный свет',
-    info_options : [
-      { label: "Общая площадь", value: "30 соток" },
-      { label: "Статус участка", value: "ИЖС" },
-      { label: "Строения на участке", value: "Нет" },
-    ],
-    description_items : [
-      "Участок расположен на границе с городом, прилегает к асфальту. Зона ОД-4 (общественного-деловая). Около участка электричество, газ.",
-      "Рядом гаражный кооператив на 400 машиномест (70 продано), в процессе строительства 5 многоквартирных дома и торговый комплекс. Документы готовы, оформление через МФЦ.",
-    ],
-    object_specs : [{
-      subtitle: "Инженерные коммуникации",
-      specificationsItems : [{
-        value: 'house_type',
-        label: { title: "Водопровод", text: "Центральный" },
-      }, 
-      {
-        value: 'house_type',
-        label: { title: "Отопление", text: "Газовый котёл" },
-      },
-      {
-        value: 'house_type',
-        label: { title: "Канализация", text: "Центральная" },
-      }]
-    }],
-    legalPurityData : {
-      encumbrances: false,
-      risks: false,
-      tabsData: {
-        general: [
-          {
-            value: "Данные из ЕГРН",
-            description: "Это всплывающая подсказка о данных из ЕГРН",
-            label: [
-              {
-                title: "Адрес",
-                text: "Респ. Крым, пгт Гурзуф,  ул. Ялтинская, д. 12К",
-              },
-              {
-                title: "Кадастровый номер",
-                text: "77:06:0009005:4567",
-              },
-              {
-                title: "Кадастровая стоимость",
-                text: "150 000 000 ₽",
-                description: "Это всплывающая подсказка о данных кадастровой стоимости",
-              },
-              {
-                title: "Общая площадь",
-                text: "615 м²",
-              },
-              {
-                title: "Этажность",
-                text: "3",
-              },
-            ],
-          },
-        ],
-        founders: [
-          {
-            value: "Текущие владельцы",
-            label: [
-              { title: "Единоличный собственник", text: "Иванов Филипп Васильевич" },
-              { title: "77-77-08/011/2021-0308", text: "03.08.2021" },
-            ],
-          },
-          {
-            value: "Предыдущие владельцы",
-            description: "Всплывающая подсказка предыдущих владельцев",
-            label: [
-              {
-                title: "2 владельца",
-                text: "Иванов Филипп Васильевич, Иванов Филипп Васильевич",
-              },
-              { title: "77-77-08/011/2021-0308", text: "03.08.2021" },
-            ],
-          },
-        ],
-        encumbrances: [
-          {
-            title: "Текущие владельцы",
-            encumbrances: [
-              {
-                status: 0,
-                description: "Description",
-                text: "Дом в ипотеке",
-              },
-              {
-                status: 1,
-                description: "Description",
-                text: "Записей об аренде не найдено",
-              },
-            ],
-          },
-        ],
-        recomendations: [
-          {
-            value: "Квартира меняла владельцев несколько раз за последние 3 года",
-            label:
-              "Внимательно изучите документы, по которым квартира перешла в собственность текущего владельца, узнайте больше о предыдущих собственниках и сделках. Лучше обратиться к специалистам для проверки и сопровождения сделки.",
-          },
-          {
-            value: "Квартира в собственности менее 5 лет",
-            label:
-              "При продаже продавец скорее всего должен будет заплатить налог с её продажи. Чтобы этого не делать, он может настаивать на занижении стоимости жилья в договоре купли-продажи. В таком случае вы рискуете: если что-то пойдёт не так, возместить можно будет только сумму, указанную в договоре, и вы не сможете полностью получить налоговый вычет за покупку квартиры.",
-          },
-        ]
-      }
-    },
-  },
-
-  {
-    images : [
-      {url : "https://cdn.pixabay.com/photo/2021/08/25/20/42/field-6574455__340.jpg", id : 0},
-      {url : "https://images.unsplash.com/photo-1541963463532-d68292c34b19?ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8Ym9va3xlbnwwfHwwfHw%3D&ixlib=rb-1.2.1&w=1000&q=80", id : 1},
-      {url : "https://images.ctfassets.net/hrltx12pl8hq/3MbF54EhWUhsXunc5Keueb/60774fbbff86e6bf6776f1e17a8016b4/04-nature_721703848.jpg?fit=fill&w=480&h=270", id : 2}
-    ],
-    object_id : 5,
-    lang : "ru",
-    name : "3-этажный коттедж",
+    name : "4-этажный коттедж",
     type : "house",
     category: "Дом",
     address : "Крым респ., Ялта городской округ, Гурзуф пгт,  ул. Ялтинская, 12К",
     city : "Ялта",
     lat : 35.6,
     lng : 45.0,
-    price : 2160000,
+    price : 21600000,
     sort : null,
     planning : "1",
     secondary_type : "Вторичное",

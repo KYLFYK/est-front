@@ -18,6 +18,7 @@ interface Props {
 }
 
 const Map: React.FC<Props> = ({currentHouse, infrastructura, location}) => {
+  console.log(currentHouse)
   const places = React.useMemo(() => [currentHouse, ...infrastructura], [currentHouse, infrastructura]);
   const getUniqueTypesOptions = React.useCallback((categoriesList: string[]) => {
     const uniqueSetTypes = Array.from(new Set(categoriesList));
