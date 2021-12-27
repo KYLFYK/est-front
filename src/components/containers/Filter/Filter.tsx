@@ -1,7 +1,6 @@
 import React, { ChangeEvent } from "react"
 import Link from "next/link"
 import { ISearchParamsModel } from "../../../utils/interfaces/search"
-import BaseButton from "../../shared/BaseButton/BaseButtons"
 import { BaseDropDown } from "../../shared/BaseDropDown/BaseDropDown"
 import { BaseInput } from "../../shared/BaseInput/Input"
 import { CompareInput } from "../../shared/CompareInput/CompareInput"

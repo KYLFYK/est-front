@@ -9,10 +9,11 @@ type LinesV1Type = {
   id: string;
   // type?: 'Забронирован' | 'Свободна' | 'Архив' | "Черновик"
   type?: string;
-  onEdit: (id: string) => void;
-  onDelete: (id: string) => void;
-  onPublish: (id: string) => void;
-  onRecover: (id: string) => void;
+  onEdit?: (id: string) => void;
+  onDelete?: (id: string) => void;
+  onPublish?: (id: string) => void;
+  onRecover?: (id: string) => void;
+  onBook?: (id: string) => void;
   typeMenu?: string;
 };
 
@@ -27,6 +28,7 @@ const LineV1: FC<LinesV1Type> = ({
   onPublish,
   id,
   onRecover,
+  onBook
 }) => {
   return (
     <div className={css.df_jc}>
@@ -47,7 +49,7 @@ const LineV1: FC<LinesV1Type> = ({
       {type === "Свободна" && typeMenu === "active" && (
         <div>
           <svg
-            onClick={() => onEdit(id)}
+            onClick={() => onEdit && onEdit(id)}
             className={css.svg}
             width="24"
             height="24"
@@ -62,7 +64,7 @@ const LineV1: FC<LinesV1Type> = ({
           </svg>
 
           <svg
-            onClick={() => onDelete(id)}
+            onClick={() =>onDelete && onDelete(id)}
             className={css.svg}
             width="24"
             height="24"
@@ -80,7 +82,7 @@ const LineV1: FC<LinesV1Type> = ({
       {type === "Свободна" && typeMenu === "draft" && (
         <div style={{ display: "flex" }}>
           <svg
-            onClick={() => onEdit(id)}
+            onClick={() => onEdit && onEdit(id)}
             className={css.svg}
             width="24"
             height="24"
@@ -95,7 +97,7 @@ const LineV1: FC<LinesV1Type> = ({
           </svg>
 
           <svg
-            onClick={() => onDelete(id)}
+            onClick={() => onDelete && onDelete(id)}
             className={css.svg}
             width="24"
             height="24"
@@ -108,7 +110,7 @@ const LineV1: FC<LinesV1Type> = ({
               fill="#EB5757"
             />
           </svg>
-          <div onClick={() => onPublish(id)}>
+          <div onClick={() => onPublish && onPublish(id)}>
             <Typography color={"nude"} className={css.cursor}>
               Опубликовать
             </Typography>
@@ -116,19 +118,28 @@ const LineV1: FC<LinesV1Type> = ({
         </div>
       )}
       {type === "Архив" && (
-        <div onClick={() => onRecover(id)}>
+        <div onClick={() => onRecover && onRecover(id)}>
           <Typography color={"nude"} className={css.cursor}>
             Восстановить
           </Typography>
         </div>
       )}
       {type === "Черновик" && (
-        <div onClick={() => onPublish(id)}>
+        <div onClick={() => onPublish && onPublish(id)}>
           <Typography color={"nude"} className={css.cursor}>
             Опубликовать
           </Typography>
         </div>
       )}
+      {
+        type === "Забронировать" && (
+            <div style={{marginRight:'30px'}} onClick={() => onBook && onBook(id)}>
+              <Typography color={"nude"} className={css.cursor}>
+                Забронивароть
+              </Typography>
+            </div>
+        )
+      }
     </div>
   );
 };

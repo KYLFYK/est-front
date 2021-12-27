@@ -21,10 +21,10 @@ const AboutObjectTab: React.FC<Props> = observer(({ onNextTab, onPrevTab, object
 
     console.log(useStores().createObjectStore)
     const { createObjectStore } = useStores()
-    const [values, setValues] = React.useState<TAboutTabState>(getInitStateAboutTab(objectType, createObjectStore))
+    const [values, setValues] = React.useState<TAboutTabState>(getInitStateAboutTab(objectType, createObjectStore)) // 1-type Object  2-
     const [isValid, setIsValid] = useState<boolean>(true)
     const saveAboutTab = createObjectStore.saveAboutTab.bind(createObjectStore)
-
+    console.log(createObjectStore)
     const isValidName = (("name" in values) && !!values.name.length) // REPLACE BY VALIDATION SERVICE
     const isValidType = (("type" in values) && !!values.type.length) // REPLACE BY VALIDATION SERVICE
     const isValidComplexName = (("complexName" in values) && !!values.complexName.length) // REPLACE BY VALIDATION SERVICE

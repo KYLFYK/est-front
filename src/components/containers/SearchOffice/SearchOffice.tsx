@@ -11,8 +11,15 @@ interface Props {
   placeholder?: string;
 }
 
-export const SearchOffice: FC<Props> = ({ type, hideButton, placeholder }) => {
-  // const [value,setValue]=useState<string>('')
+export const SearchOffice: FC<Props> = ({ type = 'active', hideButton, placeholder }) => {
+  
+  const searchTitle = (type:string) =>{
+    switch(type){
+      case 'archive':return "Восстановить все"
+      case 'draft':return "Добавить объект"
+      case 'active':return "Добавить объект"
+    }
+  }
 
   return (
     <div className={css.search}>
@@ -24,11 +31,13 @@ export const SearchOffice: FC<Props> = ({ type, hideButton, placeholder }) => {
       </div>
       {type !== "owner" && !hideButton && (
         <BaseButton
-          type={type !== "archive" ? "secondary" : "primary_light"}
+          type={type === "active" ? "secondary" : "primary_light"}
           isActive
           className={css.textButton}
         >
-          {type !== "archive" ? "Добавить объект" : "Восстановить все"}
+          {
+            searchTitle(type)
+          }
         </BaseButton>
       )}
     </div>

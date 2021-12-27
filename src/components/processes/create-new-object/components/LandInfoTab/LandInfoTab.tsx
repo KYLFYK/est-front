@@ -15,6 +15,7 @@ interface Props extends ICreateObjectControls {
 
 
 const LandInfoTab: React.FC<Props> = observer(({ onNextTab, onPrevTab, objectType }) => {
+
     const { createObjectStore } = useStores()
     const [values, setValues] = React.useState<ICreateLandInfoTab>(createObjectStore.land.info)
     const [isValid, setIsValid] = React.useState<boolean>(true)

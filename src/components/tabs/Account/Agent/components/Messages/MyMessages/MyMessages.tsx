@@ -3,9 +3,18 @@ import Typography from "../../../../../../shared/Typography/Typography";
 import classNames from "classnames";
 import css from './MyMessages.module.scss'
 import {BaseInput} from "../../../../../../shared/BaseInput/Input";
+import {SelectEstate} from "../../../../../../shared/SelectCustom/SelectCustom";
+import {SelectUser} from "../../../../../../widget/Header/SelectUser/SelectUser";
+import Link from "next/link";
+import CountMessage from "../../../../../../../icons/Header/CountMessage";
+import {useOnOutsideClick} from "../../../../../../../hooks/useOnOutsideClick";
+import LongMenu from "./Menu";
 
 type myMessagesType = {
     idChat: string
+    urlObject:string
+    urlAgent:string
+    urlUser:string
     nameObject: string
     unreadMessages: number
     totalAreaObject: string
@@ -19,9 +28,13 @@ type myMessagesType = {
 
 type myMessagesAType = Array<myMessagesType>
 
+// const myMessages: myMessagesAType = [
 const myMessages: myMessagesAType = [
     {
         idChat: '1',
+        urlObject:'google.com',
+        urlAgent:'google.com',
+        urlUser:'google.com',
         nameObject: '2-эт. коттедж',
         unreadMessages: 0,
         totalAreaObject: '300 м2',
@@ -34,6 +47,9 @@ const myMessages: myMessagesAType = [
     },
     {
         idChat: '2',
+        urlObject:'google.com',
+        urlAgent:'google.com',
+        urlUser:'google.com',
         nameObject: '2-эт. коттедж',
         unreadMessages: 5,
         totalAreaObject: '200 м2',
@@ -46,6 +62,9 @@ const myMessages: myMessagesAType = [
     },
     {
         idChat: '3',
+        urlObject:'google.com',
+        urlAgent:'google.com',
+        urlUser:'google.com',
         nameObject: '3-эт. коттедж',
         unreadMessages: 15,
         totalAreaObject: '400 м2',
@@ -65,7 +84,7 @@ type messagesType = {
         messages: Array<{from:string, text: string, time: string }>
     }>
 }
-
+// профиль, посмотреть объект, в архив, удалить переписку
 
 const today = new Date();
 const date = today.toISOString().substring(0, 10).split('-').reverse().join('.')
@@ -197,7 +216,7 @@ const MyMessages :FC<MyMessagesType> = ({archive=false}) => {
     const [chat, setChat] = useState<messagesType>(arrayMessage[active])
     const [dMessage, setDMessage] = useState(dateMessage[active])
     const [messageValue, setMessageValue] = useState<string>('')
-    console.log(active)
+
     const [activeChat, setActiveChat] = useState<myMessagesType>(myMessages[active])
 
     useEffect(()=>{
@@ -245,7 +264,6 @@ const MyMessages :FC<MyMessagesType> = ({archive=false}) => {
                     const a = {text: messageValue, time: time,from:'1'}
                     const ind: any = search[0]
                     arrayMessage[active].messagesRoom[ind].messages.push(a)
-                    // messages1.messages[active].message.push({value: messageValue, time: time})
                     setActiveChat(myMessages[active])
                 } else {
                     const mS = dMessage
@@ -262,20 +280,44 @@ const MyMessages :FC<MyMessagesType> = ({archive=false}) => {
         }
     }
     const addMessage = () => {
-        const date = new Date
-        const day = date.getDate()
-        const year = date.getFullYear()
-        const month = date.getMonth()
-        const minutes = date.getMinutes()
-        const hours = date.getHours()
-        const messageTest = {
-            message: messageValue,
-            date: `${lengthZero(day)}.${lengthZero(month + 1)}.${lengthZero(year)}`,
-            time: `${lengthZero(hours)}:${lengthZero(minutes)}`
+            const date = new Date
+            const day = date.getDate()
+            const year = date.getFullYear()
+            const month = date.getMonth()
+            const minutes = date.getMinutes()
+            const hours = date.getHours()
+
+            const dateMock = `${lengthZero(day)}.${lengthZero(month + 1)}.${lengthZero(year)}`
+
+            const time = `${lengthZero(hours)}:${lengthZero(minutes)}`
+
+            const search = dMessage.map((t, index) => t.date === dateMock ? index : '-').filter(t => t !== '-')
+            if (search.length > 0) {
+                const a = {text: messageValue, time: time ,from:'1'}
+                const ind: any = search[0]
+                arrayMessage[active].messagesRoom[ind].messages.push(a)
+                const mS = dMessage
+                mS.push({date: dateMock})
+            } else {
+                const search = dMessage.map((t, index) => t.date === dateMock ? index : '-').filter(t => t !== '-')
+                if (search.length > 0) {
+                    const a = {text: messageValue, time: time,from:'1'}
+                    const ind: any = search[0]
+                    arrayMessage[active].messagesRoom[ind].messages.push(a)
+                    setActiveChat(myMessages[active])
+                } else {
+                    const mS = dMessage
+                    mS.push({date: dateMock})
+                    setDMessage(mS)
+                    arrayMessage[active].messagesRoom.push(
+                        {date: dateMock, messages: [{text: messageValue, time: time,from:'1'}]}
+                    )
+                    setActiveChat(myMessages[active])
+                }
+
+            }
+            setMessageValue('')
         }
-        console.log(messageTest)
-        setMessageValue('')
-    }
 
     const recover = (active:number) =>{
         console.log(active,'recover')
@@ -324,20 +366,19 @@ const MyMessages :FC<MyMessagesType> = ({archive=false}) => {
                     ))
                 }
             </div>
-
             <div>
                 <div className={css.df_jc}>
                     <div>
                         <div className={css.df_ai}>
-                            <Typography>{activeChat.nameOwner}</Typography>
-                            <div className={css.df_ml_c}>
-                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
-                                     xmlns="http://www.w3.org/2000/svg">
-                                    <path
-                                        d="M6 10C4.9 10 4 10.9 4 12C4 13.1 4.9 14 6 14C7.1 14 8 13.1 8 12C8 10.9 7.1 10 6 10ZM18 10C16.9 10 16 10.9 16 12C16 13.1 16.9 14 18 14C19.1 14 20 13.1 20 12C20 10.9 19.1 10 18 10ZM12 10C10.9 10 10 10.9 10 12C10 13.1 10.9 14 12 14C13.1 14 14 13.1 14 12C14 10.9 13.1 10 12 10Z"
-                                        fill="#C5A28E"/>
-                                </svg>
-                            </div>
+                            <Typography>
+                                {activeChat.nameOwner}
+                            </Typography>
+                            <LongMenu
+                                archive={archive}
+                                urlObject={myMessages[active].urlObject}
+                                idChat={myMessages[active].idChat}
+                                urlUser={myMessages[active].urlUser}
+                            />
                         </div>
                         <Typography
                             weight={"light"}
@@ -356,7 +397,6 @@ const MyMessages :FC<MyMessagesType> = ({archive=false}) => {
                         </Typography>
                     </div>
                 </div>
-
                 <div >
                     <div className={css.borderChat} >
 
@@ -384,17 +424,14 @@ const MyMessages :FC<MyMessagesType> = ({archive=false}) => {
                                                     </Typography>
                                                 </div>
                                             </div>
-
                                         ))
                                     }
                                 </div>
                             ))
                         }
-
                     </div>
                 </div>
-
-                <div style={{marginRight:!archive? '6px':'2px'}}>
+                <div style={{marginRight:!archive? '0px':'2px'}}>
                     {
                         !archive?
                         <BaseInput
@@ -421,9 +458,7 @@ const MyMessages :FC<MyMessagesType> = ({archive=false}) => {
                                 </Typography>
                             </div>
                     }
-
                 </div>
-
             </div>
         </div>
     );

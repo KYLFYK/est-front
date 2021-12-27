@@ -1,0 +1,21 @@
+version: '3.7'
+
+networks:
+  webnet:
+services:
+  main:
+    container_name: estatum-front
+    build: 
+      context: .
+      dockerfile: Dockerfile
+    networks:
+      - webnet
+    restart: always
+    volumes:
+      - .keys:/app/keys
+      - .env:/app/env
+    command: npm run start:prod
+    env_file:
+      - .prod.env
+    ports:
+      - 3002:3000

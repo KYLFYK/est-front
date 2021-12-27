@@ -1,4 +1,19 @@
+.title{
+  margin-bottom: 30px;
+}
 .card{
   border: 1px solid #F2F2F2;
   border-radius: 6px;
+  padding: 10px 12px;
+  margin-bottom: 26px;
+}
+.margin10{
+  margin: 10px 0;
+}
+.marginT10{
+  margin-top: 10px;
+}
+.df_jc{
+  display: flex;
+  justify-content: space-between;
 }

@@ -3,7 +3,7 @@ import React from 'react';
 const CheckingObject = () => {
     return (
         <div>
-            CheckingObject
+            CheckingObject1
         </div>
     );
 };

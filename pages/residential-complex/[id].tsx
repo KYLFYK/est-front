@@ -68,6 +68,10 @@ const ResidentialComplex: NextPage = observer(() => {
   const breadcrumbs = ['Крым', 'Купить участок', `${store.initialData.name}`]
   const views = [store.initialData.publish, store.initialData.views, store.initialData.agency]
 
+    useEffect(()=>{
+        ResidentialComplex.fetch(id ? id.toString() : '0')
+    },[ResidentialComplex,id])
+
   useEffect(() => {
     setRefs([general.current, specs.current, architec.current, plansec.current, infra.current, developer.current])
     setTimeout(() => store.fetch(router.query.id), 2000);

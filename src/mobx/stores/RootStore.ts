@@ -1,5 +1,6 @@
-import { configure } from "mobx";
+import {configure} from "mobx";
 import CreateObjectStore from "./CreateObjectStores/CreateObjectStore";
+
 configure({enforceActions: "observed"})
 
 export interface IRootStore {
@@ -9,7 +10,7 @@ export interface IRootStore {
 class RootStore implements IRootStore {
     createObjectStore: CreateObjectStore;
 
-    constructor () {
+    constructor() {
         this.createObjectStore = new CreateObjectStore(this)
     }
 }
