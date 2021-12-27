@@ -3,6 +3,10 @@ import { createContext, useContext, FC } from "react";
 import {fullObjectData} from "./PlatConfig";
 
 class PlatStore {
+    constructor() {
+      makeAutoObservable(this);
+    }
+    fetching = true
     initialData = {
         images: [{url: "", id: 0},],
         object_id: 0,
@@ -73,12 +77,10 @@ class PlatStore {
         }
       }
 
-  constructor() {
-    makeAutoObservable(this);
-  }
 
   fetch(id: string | string[] | undefined) {
     this.initialData = Number(id) > 0 ? fullObjectData.filter((fod) => fod.object_id === Number(id))[0] : this.initialData
+    this.fetching = false
   }
 }
 

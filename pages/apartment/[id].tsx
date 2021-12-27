@@ -23,7 +23,6 @@ import RecordAgent from '../../src/components/containers/Record/RecordAgent.json
 import { Footer } from '../../src/components/widget/Footer/ui/Footer'
 import {ScrollUp} from '../../src/components/shared/ScrollUp/ScrollUp'
 
-import {fullObjectData} from '../../src/pages/config'
 import {useStore} from '../../src/mobx/stores/ApartamentStore/ApartmentStore'
 
 const city = ['Москва', 'Санкт-Петербург', 'Крым', 'Сочи', 'Нижний Новгород']
@@ -62,12 +61,6 @@ const tabs = [{
 const Apartment: NextPage =  observer(() => {
   const store = useStore()
 
-  const router = useRouter()
-  const currentObject = Number(router.query.id) ? fullObjectData.filter((fod) => fod.object_id === Number(router.query.id))[0] : fullObjectData[0]
-
-  const breadcrumbs = ['Крым', 'Купить участок', store.initialData.name]
-  const views = [store.initialData.publish, store.initialData.views, store.initialData.agency]
-
   const general = useRef(null)
   const tours = useRef(null)
   const architec = useRef(null)
@@ -77,10 +70,15 @@ const Apartment: NextPage =  observer(() => {
   const record = useRef(null)
   const [refs, setRefs] = useState<any>([])
 
+  const router = useRouter()
+
+  const breadcrumbs = ['Крым', 'Купить участок', store.initialData.name]
+  const views = [store.initialData.publish, store.initialData.views, store.initialData.agency]
+
   useEffect(() => {
     setRefs([general.current, tours.current, architec.current, infra.current, legal.current, develop.current, record.current]);
-    setTimeout(() => store.fetch(router.query.id), 5000);
-  }, [router.query.id])
+    setTimeout(() => store.fetch(router.query.id), 1000);
+  }, [router.query.id, store])
 
   return (
     !store.fetching ?

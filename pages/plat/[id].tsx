@@ -1,4 +1,5 @@
 import type { NextPage } from 'next'
+import { observer } from "mobx-react-lite"
 import React, {useRef, useEffect, useState} from 'react'
 import { useRouter } from 'next/router'
 import Header from '../../src/components/widget/Header/Header'
@@ -20,7 +21,7 @@ import RecordAgent from '../../src/components/containers/Record/RecordAgent.json
 import { Footer } from '../../src/components/widget/Footer/ui/Footer'
 import {ScrollUp} from '../../src/components/shared/ScrollUp/ScrollUp'
 
-import {fullObjectData} from '../../src/pages/config'
+import {useStore} from '../../src/mobx/stores/PlatStore/PlatStore'
 
 const city = ['Москва', 'Санкт-Петербург', 'Крым', 'Сочи', 'Нижний Новгород']
 const personalAccount = [{title: 'Личный кабинет', href: '/User', message: 0},
@@ -49,12 +50,8 @@ const tabs = [{
   },
 ]
 
-const Plat: NextPage = () => {
-  const router = useRouter()
-  const currentObject = Number(router.query.id) ? fullObjectData.filter((fod) => fod.object_id === Number(router.query.id))[0] : fullObjectData[0]
-
-  const breadcrumbs = ['Крым', 'Купить участок', `${currentObject.name}`]
-  const views = [currentObject.publish, currentObject.views, currentObject.agency]
+const Plat: NextPage = observer(() => {
+  const store = useStore()
 
   const general = useRef(null)
   const specs = useRef(null)
@@ -62,31 +59,38 @@ const Plat: NextPage = () => {
   const legal = useRef(null)
   const record = useRef(null)
   const [refs, setRefs] = useState<any>([])
+  
+  const router = useRouter()
+
+  const breadcrumbs = ['Крым', 'Купить участок', `${store.initialData.name}`]
+  const views = [store.initialData.publish, store.initialData.views, store.initialData.agency]
 
   useEffect(() => {
     setRefs([general.current, specs.current, infra.current, legal.current, record.current])
-  }, [])
+    setTimeout(() => store.fetch(router.query.id), 2000);
+  }, [router.query.id, store])
 
   return (
+    !store.fetching ?
     <div >
         <Header city={city} personalAccount={personalAccount}/>
         <Breadcrumbs items={breadcrumbs}/>
         <Views items={views}/>
-        <NameEstate item={currentObject.name}/>
-        <AdressEstate item={currentObject.address}/>
+        <NameEstate item={store.initialData.name}/>
+        <AdressEstate item={store.initialData.address}/>
         <HorizontalTabs tabs={tabs} refs={refs}/>
         <div ref={general}>
-          <GeneralInfo info={currentObject.info_options} price={currentObject.price} images={IMAGES_SET} />
+          <GeneralInfo info={store.initialData.info_options} price={store.initialData.price} images={IMAGES_SET} />
         </div>
-        <ObjectDescription items={currentObject.description_items}/>
+        <ObjectDescription items={store.initialData.description_items}/>
         <div ref={specs}>
-          <ObjectSpecifications specificationsLists={currentObject.object_specs} title={"Особенности"}/>
+          <ObjectSpecifications specificationsLists={store.initialData.object_specs} title={"Особенности"}/>
         </div>
         <div ref={infra}>
-          <Map currentHouse={currentObject} infrastructura={infrastructura} location={'infrastructure'}/>
+          <Map currentHouse={store.initialData} infrastructura={infrastructura} location={'infrastructure'}/>
         </div>
         <div ref={legal}>
-          <ObjectLegalPurity legalPurityData={currentObject.legalPurityData}/>
+          <ObjectLegalPurity legalPurityData={store.initialData.legalPurityData}/>
         </div>
         <Mortgage/>
         <div ref={record}>
@@ -95,8 +99,9 @@ const Plat: NextPage = () => {
         <Footer color={'nude'}/>
         <ScrollUp/>
     </div>
+    : <h1>Loading...</h1>
   )
-}
+})
 
 export default Plat
 
