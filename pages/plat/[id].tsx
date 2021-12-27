@@ -8,6 +8,7 @@ import {Views} from '../../src/components/shared/Views/Views'
 import {NameEstate} from '../../src/components/shared/NameEstate/NameEstate'
 import {AdressEstate} from '../../src/components/shared/AdressEstate/AdressEstate'
 import { HorizontalTabs } from '../../src/components/shared/HorizontalTabs/HorizontalTabs'
+import {IMAGES_SET} from '../../src/components/containers/GeneralInfo/config'
 import GeneralInfo from '../../src/components/containers/GeneralInfo/GeneralInfo'
 import ObjectDescription from '../../src/components/containers/ObjectDescription/ObjectDescription'
 import ObjectSpecifications from '../../src/components/containers/ObjectSpecifications/ObjectSpecifications'
@@ -49,6 +50,8 @@ const tabs = [{
   },
 ]
 
+const infrastructureInfo = 'В 15 минутах езды расположена Ялта со своей знаменитой набережной, театр Чехова, авквариум и дельфинарий. Знаменитые дворцы, парки, ботанические сады и винные заводы расположены в получасовой доступности.'
+
 const Plat: NextPage = observer(() => {
   const store = useStore()
 
@@ -64,16 +67,11 @@ const Plat: NextPage = observer(() => {
   const breadcrumbs = ['Крым', 'Купить участок', `${store.initialData.name}`]
   const views = [store.initialData.publish, store.initialData.views, store.initialData.agency]
 
-    useEffect(()=>{
-        PlatStore.fetch(id ? id.toString() : '0')
-    },[PlatStore,id])
-
   useEffect(() => {
     setRefs([general.current, specs.current, infra.current, legal.current, record.current])
     setTimeout(() => store.fetch(router.query.id), 2000);
   }, [router.query.id, store])
 
-    console.log(PlatStore.initialData)
   return (
     !store.fetching ?
     <div >
@@ -91,7 +89,7 @@ const Plat: NextPage = observer(() => {
           <ObjectSpecifications specificationsLists={store.initialData.object_specs} title={"Особенности"}/>
         </div>
         <div ref={infra}>
-          <Map currentHouse={store.initialData} infrastructura={infrastructura} location={'infrastructure'}/>
+          <Map currentHouse={store.initialData} infrastructura={infrastructura} location={'infrastructure'} InfrastructureInfo={infrastructureInfo}/>
         </div>
         <div ref={legal}>
           <ObjectLegalPurity legalPurityData={store.initialData.legalPurityData}/>

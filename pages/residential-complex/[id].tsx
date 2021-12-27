@@ -52,6 +52,8 @@ const tabs = [{
   }
 ]
 
+const infrastructureInfo = 'В 15 минутах езды расположена Ялта со своей знаменитой набережной, театр Чехова, авквариум и дельфинарий. Знаменитые дворцы, парки, ботанические сады и винные заводы расположены в получасовой доступности.'
+
 const ResidentialComplex: NextPage = observer(() => {
   const store = useStore()
 
@@ -67,10 +69,6 @@ const ResidentialComplex: NextPage = observer(() => {
 
   const breadcrumbs = ['Крым', 'Купить участок', `${store.initialData.name}`]
   const views = [store.initialData.publish, store.initialData.views, store.initialData.agency]
-
-    useEffect(()=>{
-        ResidentialComplex.fetch(id ? id.toString() : '0')
-    },[ResidentialComplex,id])
 
   useEffect(() => {
     setRefs([general.current, specs.current, architec.current, plansec.current, infra.current, developer.current])
@@ -99,7 +97,7 @@ const ResidentialComplex: NextPage = observer(() => {
           <Planning FilterComponent={<PlanningFilter />} planningList={store.initialData.planningList}/>
         </div>
         <div ref={infra}>
-          <Map currentHouse={store.initialData} infrastructura={infrastructura} location={'infrastructure'}/>
+          <Map currentHouse={store.initialData} infrastructura={infrastructura} location={'infrastructure'} InfrastructureInfo={infrastructureInfo}/>
         </div>
         <div ref={developer}>
           <ObjectDeveloper developerData={store.initialData.object_developer_info}/>

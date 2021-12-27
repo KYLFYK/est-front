@@ -58,6 +58,8 @@ const tabs = [{
   }
 ]
 
+const infrastructureInfo = 'В 15 минутах езды расположена Ялта со своей знаменитой набережной, театр Чехова, авквариум и дельфинарий. Знаменитые дворцы, парки, ботанические сады и винные заводы расположены в получасовой доступности.'
+
 const Apartment: NextPage =  observer(() => {
   const store = useStore()
 
@@ -100,7 +102,7 @@ const Apartment: NextPage =  observer(() => {
           <ObjectSpecifications specificationsLists={store.initialData.object_specs} title={"Особенности"}/>
         </div>
         <div ref={infra}>
-          <Map currentHouse={JSON.parse(JSON.stringify(store.initialData))} infrastructura={infrastructura} location={'infrastructure'}/>
+          <Map currentHouse={JSON.parse(JSON.stringify(store.initialData))} infrastructura={infrastructura} location={'infrastructure'} InfrastructureInfo={infrastructureInfo}/>
         </div>
         <div ref={legal}>
           <ObjectLegalPurity legalPurityData={store.initialData.legalPurityData}/>
