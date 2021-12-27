@@ -19,6 +19,7 @@ import DriveFileRenameOutlineIcon from "@mui/icons-material/DriveFileRenameOutli
 export type Order = "asc" | "desc";
 import css from "./Agents.module.scss";
 import { FC } from "react";
+import {myLoader} from "../../../../../../../../utils/image/image";
 type HeadCell = {
   disablePadding: boolean;
   id: keyof Data;
@@ -239,6 +240,7 @@ export const ActualObject: FC<ActualObjectType> = ({ agents }) => {
                               {agent.url}
                               <div className={css.marginImage}>
                                 <Image
+                                    loader={(e)=>myLoader(e.src,e.width,e.quality)}
                                   src={copy}
                                   width={"19"}
                                   height={"22"}

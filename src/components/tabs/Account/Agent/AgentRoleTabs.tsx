@@ -19,7 +19,7 @@ const notifications =[
     {date:'20.03.2021',time:'11:30',message:'Автоматическое возобновление публикаций выключено', read:true},
 ]
 
-const AgentRoleTabs: React.FC<Props> = () => {
+const AgentRoleTabs  = () => {
     const [notification,setNotification]=useState<Array<{date:string, time:string,message:string, read:boolean}>>(notifications)
 
     const onReadAll = () => {

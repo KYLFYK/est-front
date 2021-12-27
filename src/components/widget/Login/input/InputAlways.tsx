@@ -6,12 +6,14 @@ import { IconExclam } from "../../../../icons/Login/IconExclam";
 type InputAlwaysPropsType = {
     title:string
     className?:string
+    value:string
+    onChange:(e:string)=>void
 }
 
-export const InputAlways :React.FC<InputAlwaysPropsType>  = ({title,className}) => {
+export const InputAlways :React.FC<InputAlwaysPropsType>  = ({title,className,value,onChange}) => {
 
     const [error, setError] = useState<boolean>(false)
-    const [value, setValue] = useState<string>('')
+    // const [value, setValue] = useState<string>('')
 
     return (
 
@@ -23,7 +25,7 @@ export const InputAlways :React.FC<InputAlwaysPropsType>  = ({title,className}) 
                 placeholder=" "
                 onBlur={() => setError(true)}
                 value={value}
-                onChange={(e) => setValue(e.currentTarget.value)}
+                onChange={(e) => onChange(e.currentTarget.value)}
             />
             <label htmlFor=""  className={css.form__label}>
                 <Typography size={'small'} color={error && !value ? 'red' : 'default'} >

@@ -8,7 +8,8 @@ class AxiosHttpClient {
   public constructor(version: 0 | 1 = 0) {
     this.instance = axios.create({
       withCredentials: false,
-      baseURL: `${BASE_API_URL}api/v${version}/`,
+      // baseURL: `${BASE_API_URL}api/v${version}/`,
+      baseURL: `${BASE_API_URL}/`,
       headers: {
         "Content-Type": "multipart/form-data"
       },

@@ -1,15 +1,19 @@
-import React, {useState} from 'react';
+import React, {FC, useState} from 'react';
 import { IconExclam } from '../../../../icons/Login/IconExclam';
 import { IconEye } from '../../../../icons/Login/IconEye';
 import Typography from '../../../shared/Typography/Typography';
 import css from "../registration/Registration.module.scss";
 
+type InputPasswordType={
+    value:string
+    onChange:(e:string)=>void
+}
 
-export const InputPassword = () => {
+export const InputPassword :FC<InputPasswordType> = ({value, onChange}) => {
 
     const [error, setError] = useState<boolean>(false)
     const [type, setType] = useState<boolean>(true)
-    const [value, setValue] = useState<string>('')
+    // const [value, setValue] = useState<string>('')
 
     return (
 
@@ -21,7 +25,7 @@ export const InputPassword = () => {
                 placeholder=" "
                 onBlur={() => setError(true)}
                 value={value}
-                onChange={(e) => setValue(e.currentTarget.value)}
+                onChange={(e) => onChange(e.currentTarget.value)}
             />
             <label htmlFor="" className={css.form__label}>
                 <Typography size={'small'} color={error && !value ? 'red' : 'default'} >

@@ -8,6 +8,7 @@ import Image from 'next/image'
 import css from './Search.module.scss'
 import BaseButton from "../../../../../../shared/BaseButton/BaseButtons";
 import FavoriteIcon from "../../../../../../../icons/Favorite/Favorite";
+import {myLoader} from "../../../../../../../utils/image/image";
 
 const professionalSearch =[
     {
@@ -70,7 +71,11 @@ const ProfSearch = () => {
                 professionalSearch.map((object,index)=>(
                     <div key={index} className={css.border}>
                         <div className={css.borderImage}>
-                            <Image src={object.img} className={css.image} width={126} height={126} alt={''} />
+                            <Image
+                                src={object.img}
+                                className={css.image}
+                                loader={(e)=>myLoader(e.src,e.width,e.quality)}
+                                width={126} height={126} alt={''} />
                             <div className={css.buttonPosition}>
                                 <BaseButton type={'secondary'} icon={<FavoriteIcon />} onClick={()=>click(object.id)} ></BaseButton>
                             </div>

@@ -6,6 +6,7 @@ import imgMoc from './logoFalse.svg'
 import {Card} from "../../../../../../../shared/Mortgage/Card";
 import { FC } from 'react';
 import css from './AccountInfo.module.scss'
+import { myLoader } from "src/utils/image/image";
 
 type PersonalCabinetAccountInfoType = {
     img?:string
@@ -27,13 +28,17 @@ const PersonalCabinetAccountInfo: React.FC<PersonalCabinetAccountInfoType> = ({i
     const apiStatus = () => {
         console.log('apiStatus')
     }
+
     return (
         <div>
             <div className={css.column}>
                 <div>
                     <Typography weight={"bold"}>Логитип</Typography>
                     <Card className={css.card}>
-                        <Image src={img ? img : imgMoc } width={88} height={88} alt={'photo'}/>
+                        <Image
+                            src={img ? img : imgMoc }
+                            loader={(e)=>myLoader(e.src,e.width,e.quality)}
+                            width={88} height={88} alt={'photo'}/>
                     </Card>
                 </div>
                 <div className={css.df}>

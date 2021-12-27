@@ -10,7 +10,7 @@ const AgencyRoleTabs: React.FC<Props> = () => {
     return (
         <VerticalTabs
             tabs={[
-                { title: "Профиль", Component: <div /> },
+                { title: "Аккаунт Агентства", Component: <div /> },
                 { title: "Избранное", Component: <div /> },
                 { title: "Сохранённые поиски", Component: <div /> },
                 { title: "Сообщения", Component: <div /> },

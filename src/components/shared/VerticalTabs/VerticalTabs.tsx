@@ -1,8 +1,10 @@
-import React, { useState } from 'react';
+import React, {useEffect, useState} from 'react';
 import Typography from '../Typography/Typography';
-import css from './VerticalTabs.module.scss'
-import classNames from "classnames";
 
+import classNames from "classnames";
+import css from './VerticalTabs.module.scss'
+import {useRouter} from "next/router";
+import {searchNamePage} from "../../../utils/routes";
 interface ITabItem {
     title: string,
     Component: JSX.Element
@@ -13,28 +15,38 @@ interface Props {
 }
 
 const VerticalTabs: React.FC<Props> = ({tabs,className}) => {
-    const [active, setActive] = useState<number>(1)
+
+    const tabsUrl = tabs.map(tab=>searchNamePage(tab.title))
+
+    const router = useRouter()
+    const movePage = (page:number) => {
+        router.push(tabsUrl[page])
+    }
+    const tabsVision = tabs.filter(tab=>searchNamePage(tab.title) === router.asPath.substr(1,15))
+
     return (
         <div className={css.body}>
-            <MenuUser active={active} onActive={setActive} menu={tabs.map((tab) => tab.title)} />
+            <MenuUser  onActive={movePage} menu={tabs.map((tab) => tab.title)} />
             <div className={classNames(css.information,className)}>
                 {
-                   tabs[active].Component
+                    tabsVision[0].Component
                 }
             </div>
-
         </div>
     );
 };
 
 
 type MenuUserType = {
-    active: number
     onActive: (num: number) => void
     menu: Array<string>
 }
 
-const MenuUser: React.FC<MenuUserType> = ({ active, onActive, menu }) => {
+const MenuUser: React.FC<MenuUserType> = ({  onActive, menu }) => {
+    const router = useRouter()
+
+    useEffect(()=>{
+    },[router.pathname])
 
     return (
         <div className={css.menu}>
@@ -43,10 +55,10 @@ const MenuUser: React.FC<MenuUserType> = ({ active, onActive, menu }) => {
                     <div
                         key={index}
                         className={css.menuItem}
-                        style={{ color: active === index ? '#C5A28E' : '' }}
+                        style={{ color: router.asPath === searchNamePage(name) ? '#C5A28E' : '' }}
                         onClick={() => onActive(index)}
                     >
-                        <Typography size={'default'} color={active === index ? 'nude' : 'tertiary'} weight="bold">
+                        <Typography size={'default'} color={router.pathname.substr(1,15) === searchNamePage(name) ? 'nude' : 'tertiary'} weight="bold">
                             {name}
                         </Typography>
                     </div>
@@ -55,6 +67,5 @@ const MenuUser: React.FC<MenuUserType> = ({ active, onActive, menu }) => {
         </div>
     );
 };
-
 
 export default VerticalTabs;
