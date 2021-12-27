@@ -1,4 +1,5 @@
 import type { NextPage } from 'next'
+import { observer } from "mobx-react-lite"
 import React, {useRef, useEffect, useState} from 'react'
 import { useRouter } from 'next/router'
 import Header from '../../src/components/widget/Header/Header'
@@ -18,9 +19,8 @@ import ObjectDeveloper from '../../src/components/containers/ObjectDeveloper/Obj
 import ConstructProgress from '../../src/components/containers/ConstructProgress/ConstructProgress'
 import { Footer } from '../../src/components/widget/Footer/ui/Footer'
 import {ScrollUp} from '../../src/components/shared/ScrollUp/ScrollUp'
-import {useStoreResidentialComplex} from "../../src/mobx/residentialСomplex/complex/complex";
-import {fullObjectData} from '../../src/pages/config'
-import {observer} from "mobx-react-lite";
+
+import {useStore} from '../../src/mobx/stores/ComplexStore/ComplexStore'
 
 const city = ['Москва', 'Санкт-Петербург', 'Крым', 'Сочи', 'Нижний Новгород']
 const personalAccount = [{title: 'Личный кабинет', href: '/User', message: 0},
@@ -53,14 +53,7 @@ const tabs = [{
 ]
 
 const ResidentialComplex: NextPage = observer(() => {
-    const ResidentialComplex = useStoreResidentialComplex()
-    const router = useRouter();
-    const { id } = router.query;
-
-  const currentObject = Number(router.query.id) ? fullObjectData.filter((fod) => fod.object_id === Number(router.query.id))[0] : fullObjectData[0]
-
-  const breadcrumbs = ['Крым', 'Купить', `${ResidentialComplex.initialData.name}`]
-  const views = [ResidentialComplex.initialData.publish, ResidentialComplex.initialData.views, ResidentialComplex.initialData.agency]
+  const store = useStore()
 
   const general = useRef(null)
   const specs = useRef(null)
@@ -69,6 +62,11 @@ const ResidentialComplex: NextPage = observer(() => {
   const infra = useRef(null)
   const developer = useRef(null)
   const [refs, setRefs] = useState<any>([])
+  
+  const router = useRouter()
+
+  const breadcrumbs = ['Крым', 'Купить участок', `${store.initialData.name}`]
+  const views = [store.initialData.publish, store.initialData.views, store.initialData.agency]
 
     useEffect(()=>{
         ResidentialComplex.fetch(id ? id.toString() : '0')
@@ -76,38 +74,41 @@ const ResidentialComplex: NextPage = observer(() => {
 
   useEffect(() => {
     setRefs([general.current, specs.current, architec.current, plansec.current, infra.current, developer.current])
-  }, [])
+    setTimeout(() => store.fetch(router.query.id), 2000);
+  }, [router.query.id, store])
 
   return (
+    !store.fetching ?
     <div >
         <Header city={city} personalAccount={personalAccount}/>
         <Breadcrumbs items={breadcrumbs}/>
         <Views items={views}/>
-        <NameEstate item={ResidentialComplex.initialData.name}/>
-        <AdressEstate item={ResidentialComplex.initialData.address}/>
+        <NameEstate item={store.initialData.name}/>
+        <AdressEstate item={store.initialData.address}/>
         <HorizontalTabs tabs={tabs} refs={refs}/>
         <div ref={general}>
-          <GeneralInfo info={ResidentialComplex.initialData.info_options} price={ResidentialComplex.initialData.price} images={IMAGES_SET} />
+          <GeneralInfo info={store.initialData.info_options} price={store.initialData.price} images={IMAGES_SET} />
         </div>
         <div ref={specs}>
-          <ObjectSpecifications specificationsLists={ResidentialComplex.initialData.object_specs} title={"Особенности"}/>
+          <ObjectSpecifications specificationsLists={store.initialData.object_specs} title={"Особенности"}/>
         </div>
         <div ref={architec}>
-          <ObjectSpecifications specificationsLists={ResidentialComplex.initialData.object_specs} title={"Архитектурно-планировочные решения"}/>
+          <ObjectSpecifications specificationsLists={store.initialData.object_specs} title={"Архитектурно-планировочные решения"}/>
         </div>
         <div ref={plansec}>
-          <Planning FilterComponent={<PlanningFilter />} planningList={ResidentialComplex.initialData.planningList}/>
+          <Planning FilterComponent={<PlanningFilter />} planningList={store.initialData.planningList}/>
         </div>
         <div ref={infra}>
-          <Map InfrastructureInfo={ResidentialComplex.initialData.infrastructureInfo} currentHouse={ResidentialComplex.initialData} infrastructura={infrastructura} location={'infrastructure'}/>
+          <Map currentHouse={store.initialData} infrastructura={infrastructura} location={'infrastructure'}/>
         </div>
         <div ref={developer}>
-          <ObjectDeveloper developerData={ResidentialComplex.initialData.object_developer_info}/>
+          <ObjectDeveloper developerData={store.initialData.object_developer_info}/>
         </div>
-        <ConstructProgress images={IMAGES_SET} info={ResidentialComplex.initialData.schedule}/>
+        <ConstructProgress images={IMAGES_SET} info={store.initialData.schedule}/>
         <Footer color={'accent'}/>
         <ScrollUp refs={refs}/>
     </div>
+    : <h1>Loading...</h1>
   )
 })
 
