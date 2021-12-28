@@ -18,7 +18,7 @@ interface Props {
   InfrastructureInfo:string
 }
 
-const Map: React.FC<Props> = ({currentHouse, infrastructura, location,InfrastructureInfo}) => {
+const Map: React.FC<Props> = ({currentHouse, infrastructura, location, InfrastructureInfo}) => {
 
   const places = React.useMemo(() => [currentHouse, ...infrastructura], [currentHouse, infrastructura]);
 

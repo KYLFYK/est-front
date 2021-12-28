@@ -1,5 +1,6 @@
 import type { NextPage } from 'next'
-import React, {useRef, useEffect, useState, FC} from 'react'
+import { observer } from "mobx-react-lite"
+import React, {useRef, useEffect, useState} from 'react'
 import { useRouter } from 'next/router'
 import Header from '../../src/components/widget/Header/Header'
 import {Breadcrumbs} from '../../src/components/shared/Breadcrumbs/Breadcrumbs'
@@ -7,6 +8,7 @@ import {Views} from '../../src/components/shared/Views/Views'
 import {NameEstate} from '../../src/components/shared/NameEstate/NameEstate'
 import {AdressEstate} from '../../src/components/shared/AdressEstate/AdressEstate'
 import { HorizontalTabs } from '../../src/components/shared/HorizontalTabs/HorizontalTabs'
+import {IMAGES_SET} from '../../src/components/containers/GeneralInfo/config'
 import GeneralInfo from '../../src/components/containers/GeneralInfo/GeneralInfo'
 import ObjectDescription from '../../src/components/containers/ObjectDescription/ObjectDescription'
 import ObjectSpecifications from '../../src/components/containers/ObjectSpecifications/ObjectSpecifications'
@@ -18,8 +20,8 @@ import {Record} from '../../src/components/containers/Record/Record'
 import RecordAgent from '../../src/components/containers/Record/RecordAgent.json'
 import { Footer } from '../../src/components/widget/Footer/ui/Footer'
 import {ScrollUp} from '../../src/components/shared/ScrollUp/ScrollUp'
-import {observer} from "mobx-react-lite";
-import { useStoreLang} from "../../src/mobx/lang/storeLand/storeLang";
+
+import {useStore} from '../../src/mobx/stores/PlatStore/PlatStore'
 
 const city = ['Москва', 'Санкт-Петербург', 'Крым', 'Сочи', 'Нижний Новгород']
 const personalAccount = [{title: 'Личный кабинет', href: '/User', message: 0},
@@ -48,14 +50,10 @@ const tabs = [{
   },
 ]
 
-const Plat: NextPage =  observer(() => {
-    // enableStaticRendering(true)
-    const PlatStore = useStoreLang()
-    const router = useRouter();
-    const { id } = router.query;
+const infrastructureInfo = 'В 15 минутах езды расположена Ялта со своей знаменитой набережной, театр Чехова, авквариум и дельфинарий. Знаменитые дворцы, парки, ботанические сады и винные заводы расположены в получасовой доступности.'
 
-  const breadcrumbs = ['Крым', 'Купить участок', `${PlatStore.initialData.name}`]
-  const views = [PlatStore.initialData.publish, PlatStore.initialData.views, PlatStore.initialData.agency]
+const Plat: NextPage = observer(() => {
+  const store = useStore()
 
   const general = useRef(null)
   const specs = useRef(null)
@@ -63,43 +61,38 @@ const Plat: NextPage =  observer(() => {
   const legal = useRef(null)
   const record = useRef(null)
   const [refs, setRefs] = useState<any>([])
+  
+  const router = useRouter()
 
-    useEffect(()=>{
-        PlatStore.fetch(id ? id.toString() : '0')
-    },[PlatStore,id])
+  const breadcrumbs = ['Крым', 'Купить участок', `${store.initialData.name}`]
+  const views = [store.initialData.publish, store.initialData.views, store.initialData.agency]
 
   useEffect(() => {
     setRefs([general.current, specs.current, infra.current, legal.current, record.current])
-  }, [])
+    setTimeout(() => store.fetch(router.query.id), 2000);
+  }, [router.query.id, store])
 
   return (
+    !store.fetching ?
     <div >
         <Header city={city} personalAccount={personalAccount}/>
         <Breadcrumbs items={breadcrumbs}/>
         <Views items={views}/>
-        <NameEstate item={PlatStore.initialData.name}/>
-        <AdressEstate item={PlatStore.initialData.address}/>
+        <NameEstate item={store.initialData.name}/>
+        <AdressEstate item={store.initialData.address}/>
         <HorizontalTabs tabs={tabs} refs={refs}/>
         <div ref={general}>
-          <GeneralInfo
-              info={PlatStore.initialData.info_options}
-              price={PlatStore.initialData.price}
-              images={PlatStore.initialData.images} />
+          <GeneralInfo info={store.initialData.info_options} price={store.initialData.price} images={IMAGES_SET} />
         </div>
-        <ObjectDescription items={PlatStore.initialData.description_items}/>
+        <ObjectDescription items={store.initialData.description_items}/>
         <div ref={specs}>
-          <ObjectSpecifications specificationsLists={PlatStore.initialData.object_specs} title={"Особенности"}/>
+          <ObjectSpecifications specificationsLists={store.initialData.object_specs} title={"Особенности"}/>
         </div>
         <div ref={infra}>
-          <Map
-              currentHouse={PlatStore.initialData}
-              InfrastructureInfo={PlatStore.initialData.infrastructureInfo}
-              infrastructura={infrastructura}
-              location={'infrastructure'}
-          />
+          <Map currentHouse={store.initialData} infrastructura={infrastructura} location={'infrastructure'} InfrastructureInfo={infrastructureInfo}/>
         </div>
         <div ref={legal}>
-          <ObjectLegalPurity legalPurityData={PlatStore.initialData.legalPurityData}/>
+          <ObjectLegalPurity legalPurityData={store.initialData.legalPurityData}/>
         </div>
         <Mortgage/>
         <div ref={record}>
@@ -108,6 +101,7 @@ const Plat: NextPage =  observer(() => {
         <Footer color={'nude'}/>
         <ScrollUp/>
     </div>
+    : <h1>Loading...</h1>
   )
 })
 
