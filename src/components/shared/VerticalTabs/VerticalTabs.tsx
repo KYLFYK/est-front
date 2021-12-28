@@ -12,16 +12,21 @@ interface ITabItem {
 interface Props {
     tabs: ITabItem[]
     className?:string
+    link?:boolean
 }
 
-const VerticalTabs: React.FC<Props> = ({tabs,className}) => {
+const VerticalTabs: React.FC<Props> = ({tabs,className,link=false}) => {
 
+    const [active,setActive]=useState<number>(0)
     const tabsUrl = tabs.map(tab=>searchNamePage(tab.title))
 
     const router = useRouter()
 
     const movePage = (page:number) => {
-        router.push(tabsUrl[page])
+        if ( link){
+            router.push(tabsUrl[page])
+        }
+        setActive(page)
     }
 
     const tabsVision = tabs.filter(tab=>searchNamePage(tab.title) === router.asPath.substr(1,15))
@@ -31,7 +36,9 @@ const VerticalTabs: React.FC<Props> = ({tabs,className}) => {
             <MenuUser  onActive={movePage} menu={tabs.map((tab) => tab.title)} />
             <div className={classNames(css.information,className)}>
                 {
-                    tabsVision[0].Component
+                    link
+                        ? tabsVision[0].Component
+                        : tabs[active].Component
                 }
             </div>
         </div>

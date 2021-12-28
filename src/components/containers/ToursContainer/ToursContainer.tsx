@@ -5,6 +5,7 @@ import {VRTour} from "./Tours/VRTour/VRTour";
 import s from './ToursContainer.module.scss'
 
 type ToursContainerType = {
+    link?:boolean
     Online_tour?:{
         threeD_tour:{
             url :string,
@@ -15,7 +16,7 @@ type ToursContainerType = {
     },
 }
 
-const ToursContainer :FC<ToursContainerType> = ({ Online_tour }) => {
+const ToursContainer :FC<ToursContainerType> = ({ Online_tour,link=false }) => {
     return (
         <div className={s.container}>
             <VerticalTabs className={s.padding} tabs={[
