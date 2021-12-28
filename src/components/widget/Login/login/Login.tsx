@@ -23,8 +23,15 @@ export const Login: React.FC<LoginPropsType> = ({recoveryPass, registration,onEd
      const [valueAccount ,setValueAccount]=useState<string>('admin@mail.ru')
      const [valuePassword ,setValuePassword]=useState<string>('123')
     const login = async () => {
-        await AuthApi.login(valueAccount,valuePassword)
+        // await AuthApi.login(valueAccount,valuePassword)
+        await AuthApi.me()
+        // await fetch('https://estatum.f-case.ru/api/auth/login',{
+        //     method:'POST',
+        //     // headers:{'Content-Type':'application/json'},
+        //     body:JSON.stringify({valueAccount,valuePassword})
+        // })
     }
+
 
 
     return (

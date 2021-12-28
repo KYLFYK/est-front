@@ -1,5 +1,5 @@
 import css from './recovery.module.scss'
-import React from "react";
+import React, { useState } from "react";
 import {InputAlways} from "../input/InputAlways";
 import { LogoIcon } from '../../../../icons/Header/LogoIcon';
 import Typography from '../../../shared/Typography/Typography';
@@ -11,6 +11,7 @@ type RecoveryPropsType = {
 }
 
 export const Recovery :React.FC<RecoveryPropsType> = ({recoveryPassword,onEdit}) => {
+    const [value ,setValue]=useState<string>('')
     const backRecovery = () =>{
         recoveryPassword && recoveryPassword()
     }
@@ -21,7 +22,7 @@ export const Recovery :React.FC<RecoveryPropsType> = ({recoveryPassword,onEdit})
                 Чтобы восстановить пароль, напишите email, с которым вы регистрировались
             </Typography>
             <div className={css.margin}>
-                <InputAlways title={'Email*'} className={css.widthInput}/>
+                <InputAlways value={value}  onChange={setValue} title={'Email*'} className={css.widthInput}/>
             </div>
             <BaseButton type="secondary" isActive className={css.widthButton}>Восстанивить пароль</BaseButton>
             {/*<div onClick={backRecovery} className={css.widthButton}>*/}

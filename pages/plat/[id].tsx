@@ -72,7 +72,6 @@ const Plat: NextPage =  observer(() => {
     setRefs([general.current, specs.current, infra.current, legal.current, record.current])
   }, [])
 
-    console.log(PlatStore.initialData)
   return (
     <div >
         <Header city={city} personalAccount={personalAccount}/>

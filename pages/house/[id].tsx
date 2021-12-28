@@ -74,7 +74,7 @@ const House: NextPage = () => {
 
   const router = useRouter()
   const currentObject = Number(router.query.id) ? fullObjectData.filter((fod) => fod.object_id === Number(router.query.id))[0] : fullObjectData[0]
-  console.log(currentObject)
+
   const breadcrumbs = ['Крым', 'Купить участок', `${currentObject.name}`]
   const views = [currentObject.publish, currentObject.views, currentObject.agency]
 

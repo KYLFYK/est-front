@@ -19,7 +19,7 @@ const Cabinet = () =>{
     return(
         <div>
             {
-                searchCabinet('Agent')
+                searchCabinet('Agency')
             }
         </div>
     )

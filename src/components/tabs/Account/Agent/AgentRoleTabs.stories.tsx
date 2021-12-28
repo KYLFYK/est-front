@@ -9,7 +9,7 @@ export default {
 } as ComponentMeta<typeof AgentRoleTabs>;
 
 
-const Template: ComponentStory<typeof AgentRoleTabs> = (args) => <AgentRoleTabs {...args} />;
+const Template: ComponentStory<typeof AgentRoleTabs> = (args) => <AgentRoleTabs  />;
 export const InitialCard = Template.bind({});
 InitialCard.args = {
 };

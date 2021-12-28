@@ -13,15 +13,18 @@ export const InputContainerRegistration = () => {
         {value:'Банк', label:'Банк'},
     ]
     const [selectChange , setSelectChange]=useState<string>(option[0].value)
+    const [valueLogin, setValueLogin]=useState<string>('')
+    const [valueEmail, setValueEmail]=useState<string>('')
+    const [valuePassword, setValuePassword]=useState<string>('')
 
 
     return (
         <div className={css.lForm}>
             <div className={css.form}>
                 <BaseDropDown className={css.selectStyle} options={option} placeholder={selectChange} onChange={e=>setSelectChange(e)}/>
-                <InputAlways title={'Логин *'}/>
-                <InputAlways title={'Email *'}/>
-                <InputPassword />
+                <InputAlways value={valueLogin} onChange={setValueLogin} title={'Логин *'}/>
+                <InputAlways value={valueEmail} onChange={setValueEmail} title={'Email *'}/>
+                <InputPassword value={valuePassword} onChange={setValuePassword}  />
                 <InputOptional title={'Имя'} />
                 <InputOptional title={'Телефон'} />
             </div>

@@ -1,4 +1,4 @@
-import React, {FC} from 'react';
+import React, {FC, useState} from 'react';
 import css from "./NewPassword.module.scss";
 import {LogoIcon} from "../../../../icons/Header/LogoIcon";
 import {InputAlways} from "../input/InputAlways";
@@ -11,6 +11,7 @@ type NewPasswordType={
 }
 
 const NewPassword :FC<NewPasswordType> = ({account,onEdit}) => {
+    const [value , setValue]=useState<string>('')
     return (
         <div className={css.recovery}>
             <LogoIcon/>
@@ -19,7 +20,7 @@ const NewPassword :FC<NewPasswordType> = ({account,onEdit}) => {
                 <span className={css.nude}> {account} </span>
             </Typography>
             <div className={css.margin}>
-                <InputAlways title={'Пароль'} className={css.widthInput}/>
+                <InputAlways value={value} onChange={setValue} title={'Пароль'} className={css.widthInput}/>
             </div>
             <BaseButton onClick={()=>onEdit('confirmationNewPassword')} type="secondary" isActive className={css.widthButton}>Сохранить</BaseButton>
             <div className={css.widthButton}>

@@ -19,9 +19,11 @@ const VerticalTabs: React.FC<Props> = ({tabs,className}) => {
     const tabsUrl = tabs.map(tab=>searchNamePage(tab.title))
 
     const router = useRouter()
+
     const movePage = (page:number) => {
         router.push(tabsUrl[page])
     }
+
     const tabsVision = tabs.filter(tab=>searchNamePage(tab.title) === router.asPath.substr(1,15))
 
     return (
