@@ -96,6 +96,7 @@ const House: NextPage = observer(() => {
     setTimeout(() => store.fetch(router.query.id), 2000);
   }, [router.query.id, store])
 
+
   return (
     <div >
         <Header city={city} personalAccount={personalAccount}/>
