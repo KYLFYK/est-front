@@ -3,14 +3,15 @@ import AgencyRoleTabs from "../../src/components/tabs/Account/Agency/AgencyRoleT
 import AgentRoleTabs from "../../src/components/tabs/Account/Agent/AgentRoleTabs";
 import OwnerRoleTabs from "../../src/components/tabs/Account/Owner/OwnerRoleTabs";
 import {DeveloperRoleTabs} from "../../src/components/tabs/Account/Developer/DeveloperRoleTabs";
+import {getLocalStorage} from '../../src/lib/localStorage/localStorage';
 
 const ProffSearch = () => {
-    const searchCabinet = (type:string) => {
+    const searchCabinet = (type: string | null) => {
         switch (type) {
-            case 'Agency':return <AgencyRoleTabs/>
-            case 'Agent':return <AgentRoleTabs/>
-            case 'Owner':return <OwnerRoleTabs />
-            case 'Developer':return <DeveloperRoleTabs/>
+            case 'agency':return <AgencyRoleTabs/>
+            case 'agent':return <AgentRoleTabs/>
+            case 'owner':return <OwnerRoleTabs />
+            case 'developer':return <DeveloperRoleTabs/>
             case 'admin':return 'admin'
             case 'bank':return 'bank'
         }
@@ -19,7 +20,7 @@ const ProffSearch = () => {
     return(
         <div>
             {
-                searchCabinet('Agent')
+                searchCabinet(getLocalStorage())
             }
         </div>
     )
