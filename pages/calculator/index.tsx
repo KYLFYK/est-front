@@ -16,6 +16,7 @@ const personalAccount = [{title: 'Личный кабинет', href: '/User', m
 ]
 
 const Calculator: NextPage = () => {
+
   return (
     <div >
         <Header city={city} personalAccount={personalAccount}/>
