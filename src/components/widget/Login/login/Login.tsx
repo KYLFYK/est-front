@@ -52,8 +52,6 @@ export const Login: React.FC<LoginPropsType> = ({recoveryPass, registration,onEd
                     </Typography>
                 </div>
             </div>
-
-
         </div>
     );
 };
