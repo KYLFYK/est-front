@@ -46,6 +46,7 @@ const OwnerRoleTabs = () => {
     }
     return (
         <VerticalTabs
+            link={false}
             tabs={[
                 { title: "Личный кабинет", Component: <PersonalAccount personalAccount={personalAccount} /> },
                 { title: "Избранное", Component: <Favourites /> },

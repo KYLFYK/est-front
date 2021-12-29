@@ -33,6 +33,7 @@ interface Props {
 const DeveloperTabs: React.FC<Props> = ({ tabsData: { news, statistics, risks, activities, owners, requisits, contacts, about } }) => {
     return (
         <VerticalTabs
+            link={false}
             tabs={[
                 { title: "О застройщике", Component: <DeveloperAbout paragraphs={about} /> },
                 { title: "Контакты", Component: <DeveloperContacts items={contacts} /> },

@@ -1,6 +1,4 @@
-import AxiosHttpClient from "../base";
 import axios from "axios";
-import {json} from "stream/consumers";
 
 export enum UrlAuth  {
     registration = 'auth/register', //          post
@@ -12,19 +10,37 @@ export enum UrlAuth  {
     changePassword = 'auth/change-password' //  patch
 }
 // "proxy": "https://estatum.f-case.ru/",
+const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQG1haWwucnUiLCJyb2xlIjoiYWRtaW4iLCJpZCI6MSwiaWF0IjoxNjQwNzczNjMzLCJleHAiOjE2NDA4NjAwMzN9.PepqZY16_PKxJX6keNG_4Ft9NIrTAskNiWn-rJEVOFk'
+
 const instance = axios.create({
-    baseURL: 'api/',
-    // headers:{'Content-Type':'application/json'},
+    baseURL: 'https://estatum.f-case.ru/api/',
+    // baseURL: 'api/',
+    headers:{
+        authorization: `Bearer ${token}`,
+    }
 });
 // const axios = new AxiosHttpClient()
 
 export const AuthApi  = {
     login: async (publicKey:string, privateKey:string) =>{
-        const res = await instance.post(`${UrlAuth.login}`,{publicKey,privateKey})
-        console.log(res)
+        try{
+            const res = await instance.post(`${UrlAuth.login}`,{publicKey,privateKey})
+            console.log(res)
+        }
+        catch (e){
+            console.log(e)
+        }
     },
     me:async ()=>{
         const res = await instance.get(`${UrlAuth.me}`)
         console.log(res)
+        console.log(instance)
+    },
+    check:async(token:string)=>{
+        const res = await instance.get(`${UrlAuth.check}`,{headers:{token:token}})
+        console.log(res)
     }
 }
+
+
+

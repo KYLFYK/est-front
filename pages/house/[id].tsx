@@ -112,7 +112,7 @@ const House: NextPage = observer(() => {
 
 
         <div ref={tours}>
-         <ToursContainer link={false} Online_tour={store.initialData.online_tour}/>
+         <ToursContainer  Online_tour={store.initialData.online_tour}/>
         </div>
 
 

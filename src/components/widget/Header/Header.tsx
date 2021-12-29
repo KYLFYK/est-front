@@ -81,8 +81,6 @@ const personalAcc = [
 
 export const Header: FC<HeaderPropsType> = ({className, city, personalAccount, auth = false}) => {
 
-
-
     const [authorization, setAuthorization] = useState<boolean>(auth)
 
     const [login, setLogin] = useState<boolean>(false)

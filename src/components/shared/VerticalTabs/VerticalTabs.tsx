@@ -15,29 +15,33 @@ interface Props {
     link?:boolean
 }
 
-const VerticalTabs: React.FC<Props> = ({tabs,className,link=false}) => {
-
-    const [active,setActive]=useState<number>(0)
-    const tabsUrl = tabs.map(tab=>searchNamePage(tab.title))
+const VerticalTabs: React.FC<Props> = ({tabs,className,link}) => {
 
     const router = useRouter()
+    // search index ( tabs - title - color ) : number
+    const searchColor = tabs.map((tab,index)=>searchNamePage(tab.title) === router.asPath.substr(1,15) ? index : 0 ).sort().pop()
+
+    const tabsVision = tabs.filter(tab=>searchNamePage(tab.title) === router.asPath.substr(1,15))
+
+
+    const [active,setActive]=useState<number>(searchColor?searchColor:0)
+    const tabsUrl = tabs.map(tab=>searchNamePage(tab.title))
 
     const movePage = (page:number) => {
-        if ( link){
+
+        if (link){
             router.push(tabsUrl[page])
         }
         setActive(page)
     }
 
-    const tabsVision = tabs.filter(tab=>searchNamePage(tab.title) === router.asPath.substr(1,15))
-
     return (
         <div className={css.body}>
-            <MenuUser  onActive={movePage} menu={tabs.map((tab) => tab.title)} />
+            <MenuUser  active={active} onActive={movePage}  menu={ tabs.map((tab) => tab.title)} />
             <div className={classNames(css.information,className)}>
                 {
-                    link
-                        ? tabsVision[0].Component
+                    link === undefined
+                        ? tabsVision.length > 0 && tabsVision[0].Component
                         : tabs[active].Component
                 }
             </div>
@@ -49,29 +53,34 @@ const VerticalTabs: React.FC<Props> = ({tabs,className,link=false}) => {
 type MenuUserType = {
     onActive: (num: number) => void
     menu: Array<string>
+    active?:number
+    link?:boolean
 }
 
-const MenuUser: React.FC<MenuUserType> = ({  onActive, menu }) => {
-    const router = useRouter()
+const MenuUser: React.FC<MenuUserType> = ({active =0,  onActive, menu,link }) => {
 
-    useEffect(()=>{
-    },[router.pathname])
+    const router = useRouter()
 
     return (
         <div className={css.menu}>
             {
-                menu.map((name, index) => (
-                    <div
+                menu.map((name, index) => {
+
+                   return <div
                         key={index}
                         className={css.menuItem}
-                        style={{ color: router.asPath === searchNamePage(name) ? '#C5A28E' : '' }}
+                        style={{color: router.asPath === searchNamePage(name) ? '#C5A28E' : ''}}
                         onClick={() => onActive(index)}
                     >
-                        <Typography size={'default'} color={router.pathname.substr(1,15) === searchNamePage(name) ? 'nude' : 'tertiary'} weight="bold">
+                        <Typography size={'default'} color={
+                            link !== undefined
+                                ? router.pathname.substr(1, 15) === searchNamePage(name) ? 'nude' : 'tertiary'
+                                : name === menu[active] ? 'nude' : 'tertiary'}
+                                    weight="bold">
                             {name}
                         </Typography>
                     </div>
-                ))
+                })
             }
         </div>
     );

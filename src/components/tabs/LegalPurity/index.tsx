@@ -14,6 +14,7 @@ interface Props {
 const LegalPurityTabs: React.FC<Props> = ({ tabsData }) => {
     return (
         <VerticalTabs
+            link={false}
             tabs={[
                 { title: "Общие сведения", Component: <LegalPurityGeneralTab data={tabsData && tabsData.general} /> },
                 { title: "Собственники", Component: <LegalPurityFoundersTab data={tabsData && tabsData.founders} /> },

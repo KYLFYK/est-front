@@ -1,10 +1,10 @@
+import React from 'react';
 import AgencyRoleTabs from "../../src/components/tabs/Account/Agency/AgencyRoleTabs";
 import AgentRoleTabs from "../../src/components/tabs/Account/Agent/AgentRoleTabs";
-import {DeveloperRoleTabs} from "../../src/components/tabs/Account/Developer/DeveloperRoleTabs";
 import OwnerRoleTabs from "../../src/components/tabs/Account/Owner/OwnerRoleTabs";
+import {DeveloperRoleTabs} from "../../src/components/tabs/Account/Developer/DeveloperRoleTabs";
 
-const Cabinet = () =>{
-
+const Messages = () => {
     const searchCabinet = (type:string) => {
         switch (type) {
             case 'Agency':return <AgencyRoleTabs/>
@@ -19,9 +19,10 @@ const Cabinet = () =>{
     return(
         <div>
             {
-                searchCabinet('Owner')
+                searchCabinet('Agent')
             }
         </div>
     )
-}
-export default Cabinet
+};
+
+export default Messages;

@@ -9,6 +9,7 @@ interface Props {
 const AgencyRoleTabs: React.FC<Props> = () => {
     return (
         <VerticalTabs
+            link={true}
             tabs={[
                 { title: "Аккаунт Агентства", Component: <div /> },
                 { title: "Избранное", Component: <div /> },

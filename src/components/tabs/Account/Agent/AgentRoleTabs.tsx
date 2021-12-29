@@ -37,6 +37,7 @@ const AgentRoleTabs  = () => {
 
     return (
         <VerticalTabs
+            link={true}
             tabs={[
                 { title: "Личный кабинет", Component: <PersonalCabinetTab /> },
                 { title: "Заявки на просмотр", Component: <ApplicationsViewTab /> },
