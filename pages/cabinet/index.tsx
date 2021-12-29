@@ -5,7 +5,7 @@ import OwnerRoleTabs from "../../src/components/tabs/Account/Owner/OwnerRoleTabs
 import {getLocalStorage} from '../../src/lib/localStorage/localStorage';
 
 const Cabinet = () =>{
-    console.log(getLocalStorage())
+
     const searchCabinet = (type: string | null) => {
         switch (type) {
             case 'agency':return <AgencyRoleTabs/>

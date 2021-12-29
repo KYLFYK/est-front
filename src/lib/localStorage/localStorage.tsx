@@ -1,6 +1,18 @@
 export const setLocalStorage = (role: string) => {
-    localStorage.setItem('role', role)
+
+    if(typeof window !== 'undefined') {
+        localStorage.setItem('role', role)
+    }
+
 }
+
 export const getLocalStorage = () => {
-    return localStorage.getItem('role')
+
+    if(typeof window !== 'undefined') {
+        return localStorage.getItem('role')
+    }
+    else {
+        return 'cabinet'
+    }
+    
 }

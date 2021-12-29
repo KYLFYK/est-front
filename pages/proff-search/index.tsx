@@ -6,6 +6,7 @@ import {DeveloperRoleTabs} from "../../src/components/tabs/Account/Developer/Dev
 import {getLocalStorage} from '../../src/lib/localStorage/localStorage';
 
 const ProffSearch = () => {
+    
     const searchCabinet = (type: string | null) => {
         switch (type) {
             case 'agency':return <AgencyRoleTabs/>

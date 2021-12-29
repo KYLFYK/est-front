@@ -4,7 +4,7 @@ import OwnerRoleTabs from "../../src/components/tabs/Account/Owner/OwnerRoleTabs
 import {DeveloperRoleTabs} from "../../src/components/tabs/Account/Developer/DeveloperRoleTabs";
 import {getLocalStorage} from '../../src/lib/localStorage/localStorage';
 
-const Ads = () =>{
+const SavedSearches = () =>{
 
     const searchCabinet = (type: string | null) => {
         switch (type) {
@@ -26,4 +26,4 @@ const Ads = () =>{
     )
 }
 
-export default Ads
+export default SavedSearches
