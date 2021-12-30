@@ -8,8 +8,8 @@ import css from "./FilterSearch.module.scss";
 //label - Отображение
 const option = [
   { value: "По умолчанию", label: "По умочанию" },
-  { value: "Цене - убиванию", label: "Цене - убиванию" },
-  { value: "Цене - возростанию", label: "Цене - возростанию" },
+  { value: "Цене - убыванию", label: "Цене - убыванию" },
+  { value: "Цене - возрастанию", label: "Цене - возрастанию" },
 ];
 
 export const useStyles = makeStyles(() => ({

@@ -83,7 +83,6 @@ const personalAcc = [
     ],
 ]
 
-
 export const Header: FC<HeaderPropsType> = ({className, city, personalAccount, modalActive, auth = false}) => {
 
     const router =useRouter()
