@@ -265,7 +265,6 @@ export const Header: FC<HeaderPropsType> = ({className, city, personalAccount, m
                     </Modal>
                 }
 
-
                 {/*<button onClick={()=>searchLoginMoc('agency')}>agency</button>}
                 {<button onClick={()=>searchLoginMoc('agent')}>agent</button>}
                 {<button onClick={()=>searchLoginMoc('owner')}>owner</button>}
