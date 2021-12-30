@@ -20,6 +20,7 @@ import css from './Header.module.scss'
 import {AuthApi} from "../../../api/auth/auth";
 import {EmailConformation} from "../Login/EmailConfirmation/EmailConfirmation";
 import {useRouter} from "next/router";
+import {setLocalStorage} from '../../../lib/localStorage/localStorage';
 
 type HeaderPropsType = {
     className?: string
@@ -29,7 +30,8 @@ type HeaderPropsType = {
     modalActive?: string
 }
 
-const moc = [{href: '/Buy', title: 'Купить'},
+const moc = [
+    {href: '/Buy', title: 'Купить'},
     {href: '/Take', title: 'Снять'},
     {href: '/calculator', title: 'Ипотека'},
     {href: '/Сonstruction', title: 'Строящиеся дома'},
@@ -265,12 +267,12 @@ export const Header: FC<HeaderPropsType> = ({className, city, personalAccount, m
                 }
 
 
-                {/*<button onClick={()=>searchLoginMoc('agency')}>agency</button>*/}
-                {/*<button onClick={()=>searchLoginMoc('agent')}>agent</button>*/}
-                {/*<button onClick={()=>searchLoginMoc('owner')}>owner</button>*/}
-                {/*<button onClick={()=>searchLoginMoc('developer')}>developer</button>*/}
-                {/*<button onClick={()=>searchLoginMoc('admin')}>admin</button>*/}
-                {/*<button onClick={()=>searchLoginMoc('bank')}>bank</button>*/}
+                {/*<button onClick={()=>searchLoginMoc('agency')}>agency</button>}
+                {<button onClick={()=>searchLoginMoc('agent')}>agent</button>}
+                {<button onClick={()=>searchLoginMoc('owner')}>owner</button>}
+                {<button onClick={()=>searchLoginMoc('developer')}>developer</button>}
+                {<button onClick={()=>searchLoginMoc('admin')}>admin</button>}
+                {<button onClick={()=>searchLoginMoc('bank')}>bank</button>*/}
 
             </div>
         </div>

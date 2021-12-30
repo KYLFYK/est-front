@@ -3,7 +3,7 @@ import Typography from '../Typography/Typography';
 
 import classNames from "classnames";
 import css from './VerticalTabs.module.scss'
-import {useRouter} from "next/router";
+import {Router, useRouter} from "next/router";
 import {searchNamePage} from "../../../utils/routes";
 interface ITabItem {
     title: string,
@@ -19,16 +19,15 @@ const VerticalTabs: React.FC<Props> = ({tabs,className,link}) => {
 
     const router = useRouter()
     // search index ( tabs - title - color ) : number
-    const searchColor = tabs.map((tab,index)=>searchNamePage(tab.title) === router.asPath.substr(1,15) ? index : 0 ).sort().pop()
+    const searchColor = tabs.map((tab,index)=>searchNamePage(tab.title) === router.asPath.substr(1) ? index : 0 ).sort().pop()
 
-    const tabsVision = tabs.filter(tab=>searchNamePage(tab.title) === router.asPath.substr(1,15))
+    const tabsVision = tabs.filter(tab=>searchNamePage(tab.title) === router.asPath.substr(1))
 
 
     const [active,setActive]=useState<number>(searchColor?searchColor:0)
     const tabsUrl = tabs.map(tab=>searchNamePage(tab.title))
 
     const movePage = (page:number) => {
-
         if (link){
             router.push(tabsUrl[page])
         }
