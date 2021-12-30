@@ -155,6 +155,7 @@ export const Header: FC<HeaderPropsType> = ({className, city, personalAccount, m
            setEdit('confirmationNewPassword')
            setActiveModal(true)
        }
+        // eslint-disable-next-line
     },[router]) // if dependency searchModal - no update Modal active (date)
 
     const [active, setActive] = useState<number>(0)
