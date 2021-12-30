@@ -11,9 +11,10 @@ type LoginPropsType = {
     recoveryPass?: () => void
     registration?: () => void
     onEdit:(menu:string)=>void
+    setActive?:()=>void
 }
 
-export const Login: React.FC<LoginPropsType> = ({recoveryPass, registration,onEdit}) => {
+export const Login: React.FC<LoginPropsType> = ({recoveryPass, registration,onEdit, setActive}) => {
     const recoveryPassword = () => {
         recoveryPass && recoveryPass()
     }
@@ -23,9 +24,17 @@ export const Login: React.FC<LoginPropsType> = ({recoveryPass, registration,onEd
      const [valueAccount ,setValueAccount]=useState<string>('admin@mail.ru')
      const [valuePassword ,setValuePassword]=useState<string>('123')
     const login = async () => {
-        // await AuthApi.login(valueAccount,valuePassword)
-        await AuthApi.me()
+        try{
+            await AuthApi.login(valueAccount,valuePassword)
+            setActive && setActive()
+        }catch (e){
+
+        }
+
+
+        // await AuthApi.me()
     }
+
 
     return (
         <div className={css.loginContainer}>
