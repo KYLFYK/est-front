@@ -26,7 +26,7 @@ const StartScreen: React.FC<Props> = ({onChooseAction, onChooseObjectType, choos
 
     return (
         <div>
-            <Link href="/">
+            <Link href="/ads">
                 <a className={s.link}>
                     <Typography weight="medium" icon={<NavArrowIcon />}>Новый объект</Typography>
                 </a>

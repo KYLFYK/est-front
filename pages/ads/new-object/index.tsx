@@ -1,8 +1,8 @@
 import { NextPage } from "next"
 import React from "react"
-import FormScreen from "../../src/components/processes/create-new-object/FormScreen/FormScreen"
-import StartScreen from "../../src/components/processes/create-new-object/StartScreen/StartScreen"
-import { NewObjectActionTypes, ObjectTypes } from "../../src/utils/interfaces/objects"
+import FormScreen from "../../../src/components/processes/create-new-object/FormScreen/FormScreen"
+import StartScreen from "../../../src/components/processes/create-new-object/StartScreen/StartScreen"
+import { NewObjectActionTypes, ObjectTypes } from "../../../src/utils/interfaces/objects"
 import s from './index.module.scss'
 
 const NewObjectPage: NextPage = () => {

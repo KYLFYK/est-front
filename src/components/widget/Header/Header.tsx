@@ -187,12 +187,12 @@ export const Header: FC<HeaderPropsType> = ({className, city, personalAccount, a
                 }
 
 
-                {/*<button onClick={()=>searchLoginMoc('agency')}>agency</button>}
+                {<button onClick={()=>searchLoginMoc('agency')}>agency</button>}
                 {<button onClick={()=>searchLoginMoc('agent')}>agent</button>}
                 {<button onClick={()=>searchLoginMoc('owner')}>owner</button>}
                 {<button onClick={()=>searchLoginMoc('developer')}>developer</button>}
                 {<button onClick={()=>searchLoginMoc('admin')}>admin</button>}
-                {<button onClick={()=>searchLoginMoc('bank')}>bank</button>*/}
+                {<button onClick={()=>searchLoginMoc('bank')}>bank</button>}
 
             </div>
         </div>

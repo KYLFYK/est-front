@@ -26,7 +26,6 @@ interface Props {
 
 const FormScreen: React.FC<Props> = ({clearObjectType, objectType}) => {
     const { createObjectStore } = useStores()
-    console.log(createObjectStore)
 
     const [activeTabIdx, setActiveTabIdx] = React.useState<number>(0)
     const [activeSubTabIdx, setActiveSubTabIdx] = React.useState<number>(0)
@@ -119,7 +118,7 @@ const FormScreen: React.FC<Props> = ({clearObjectType, objectType}) => {
         <div>
             <div className={s.nav}>
                 <div className={s.navContent}>
-                    <Link href="/">
+                    <Link href="/ads">
                         <a className={s.link}>
                             <Typography weight="medium" icon={<NavArrowIcon className={s.arrowIcon}/>}>Вернуться в
                                 личный кабинет</Typography>

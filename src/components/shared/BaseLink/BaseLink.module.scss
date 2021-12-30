@@ -1,0 +1,79 @@
+@import '../../../app/styles/colours.scss';
+
+.baseLink {
+    cursor: pointer;
+    color: $WHITE;
+    padding: 10px 10px;
+    border-radius: 6px;
+    border: 0;
+    font-weight: 400;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.primary {
+    padding: 10px 20px;
+    background-color: $NUDE;
+    font-weight: 500;
+    border: 1px solid rgba(0,0,0,0);
+}
+.primary_light{
+    padding: 10px 20px;
+    color:$NUDE;
+    background-color: $WHITE;
+    font-weight: 500;
+    border: 1px solid $NUDE;
+}
+.tags{
+    background-color: $WHITE;
+    color: $BLACK;
+    border: 1px solid #F2F2F2;
+    &.active {
+        background-color: #96A2B5;
+        color: $WHITE;
+        border: 1px solid rgba(0,0,0,0);
+    }
+}
+
+.secondary {
+    background-color: $WHITE;
+    color: $BLACK;
+    border: 1px solid #F2F2F2;
+    &.active {
+        background-color: $ACCENT;
+        color: $WHITE;
+        border: 1px solid rgba(22, 18, 18, 0);
+    }
+}
+
+.blank {
+    background-color: $WHITE;
+    color: $ACCENT;
+    border: 1px solid $ACCENT;
+    font-size: 14px;
+}
+
+.iconWrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: auto;
+}
+.iconSpace {
+    padding-left: 8px;
+}
+.toggleButtonWithIcons {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: auto;
+    background-color: $WHITE;
+    border: none; 
+    outline: none;
+}
+.startIcon {
+    margin-right: 8px;
+}

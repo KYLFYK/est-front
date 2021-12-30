@@ -1,9 +1,11 @@
 import React, { FC } from "react";
 import BaseButton from "../../shared/BaseButton/BaseButtons";
+import BaseLink from "../../shared/BaseLink/BaseLink";
 import { BaseInput } from "../../shared/BaseInput/Input";
 import { IconOption } from "../../../icons/SearchOffice/IconOption";
 
 import css from "./SearchOffice.module.scss";
+import Typography from "src/components/shared/Typography/Typography";
 
 interface Props {
   type?: "active" | "archive" | "draft" | "owner";
@@ -30,15 +32,17 @@ export const SearchOffice: FC<Props> = ({ type = 'active', hideButton, placehold
         <IconOption />
       </div>
       {type !== "owner" && !hideButton && (
-        <BaseButton
+        <BaseLink
+          href="/ads/new-object"
           type={type === "active" ? "secondary" : "primary_light"}
           isActive
-          className={css.textButton}
         >
-          {
-            searchTitle(type)
-          }
-        </BaseButton>
+          <Typography size="small">
+            {
+              searchTitle(type)
+            }
+          </Typography>
+        </BaseLink>
       )}
     </div>
   );
