@@ -94,7 +94,6 @@ export const Header: FC<HeaderPropsType> = ({className, city, personalAccount, m
     // http://localhost:3000/?text=email-conformation
     // http://localhost:3000/?text=reset-password
 
-
     // const [modalSearch, setModalSearch]=useState(modalActive)
     const [authorization, setAuthorization] = useState<boolean>(auth)
     const [activeModal, setActiveModal] = useState<boolean>(false)
