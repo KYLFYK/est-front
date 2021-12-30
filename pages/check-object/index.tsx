@@ -1,11 +1,10 @@
-import React from 'react';
 import AgencyRoleTabs from "../../src/components/tabs/Account/Agency/AgencyRoleTabs";
 import AgentRoleTabs from "../../src/components/tabs/Account/Agent/AgentRoleTabs";
-import OwnerRoleTabs from "../../src/components/tabs/Account/Owner/OwnerRoleTabs";
 import {DeveloperRoleTabs} from "../../src/components/tabs/Account/Developer/DeveloperRoleTabs";
+import OwnerRoleTabs from "../../src/components/tabs/Account/Owner/OwnerRoleTabs";
 import {getLocalStorage} from '../../src/lib/localStorage/localStorage';
 
-const ProffSearch = () => {
+const CheckObject = () =>{
     
     const searchCabinet = (type: string | null) => {
         switch (type) {
@@ -25,6 +24,5 @@ const ProffSearch = () => {
             }
         </div>
     )
-};
-
-export default ProffSearch;
+}
+export default CheckObject

@@ -135,7 +135,7 @@ const FormScreen: React.FC<Props> = ({clearObjectType, objectType}) => {
         <div>
             <div className={s.nav}>
                 <div className={s.navContent}>
-                    <Link href="/new-object">
+                    <Link href="/ads">
                         <a className={s.link}>
                             <Typography weight="medium" icon={<NavArrowIcon/>}>Новый объект</Typography>
                         </a>

@@ -9,7 +9,7 @@ export const setLocalStorage = (role: string) => {
 export const getLocalStorage = () => {
 
     if(typeof window !== 'undefined') {
-        return localStorage.getItem('role')
+        return localStorage.getItem('roleEstatum')
     }
     else {
         return 'cabinet'

@@ -58,14 +58,14 @@ const personalAcc = [
         {title: 'Сообщения', href: '/messages', message: 0},
         {title: 'Уведомления', href: '/notification', message: 0},
     ],
-    [        //'owner'
+    [        //'owner'(customer)
         {title: 'Личный кабинет', href: '/cabinet', message: 0},
         {title: 'Избранное', href: '/favorites', message: 0},
         {title: 'Сохраненые поиски', href: '/saved-searches', message: 0},
         {title: 'Сообщения', href: '/messages', message: 12},
         {title: 'Уведомления', href: '/notifications', message: 3},
         {title: 'Мои объекты', href: '/ads', message: 0},
-        {title: 'Проверка объекта', href: '/new', message: 0},
+        {title: 'Проверка объекта', href: '/check-object', message: 0},
     ],
     [        //'developer'
         {title: 'Личный кабинет', href: '/cabinet', message: 0},
@@ -86,7 +86,7 @@ const personalAcc = [
 export const Header: FC<HeaderPropsType> = ({className, city, personalAccount, modalActive, auth = false}) => {
 
     const router =useRouter()
-
+    
     // for test modal
     // http://localhost:3000/?text=confirmationNewPassword
     // http://localhost:3000/?text=login
@@ -161,6 +161,7 @@ export const Header: FC<HeaderPropsType> = ({className, city, personalAccount, m
 
     const [mocAccountMenu, setMocAccountMenu] = useState<Array<{ title: string, href: string, message: number }>>(personalAcc[0])
     const searchLoginMoc = (role: string | null) => {
+
         if (role === 'agency') {
             setAuthorization(true)
             setMocAccountMenu(personalAcc[0])
@@ -169,7 +170,7 @@ export const Header: FC<HeaderPropsType> = ({className, city, personalAccount, m
             setAuthorization(true)
             setMocAccountMenu(personalAcc[1])
         }
-        if (role === 'owner') {
+        if (role === 'customer') {
             setAuthorization(true)
             setMocAccountMenu(personalAcc[2])
         }
@@ -205,7 +206,7 @@ export const Header: FC<HeaderPropsType> = ({className, city, personalAccount, m
             console.log('error')
         }
     }, [])
-
+    
     return (
         <div className={classNames(css.header, className)}>
             <Link href={'/'} passHref>

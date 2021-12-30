@@ -10,7 +10,7 @@ const Tariff = () => {
         switch (type) {
             case 'agency':return <AgencyRoleTabs/>
             case 'agent':return <AgentRoleTabs/>
-            case 'owner':return <OwnerRoleTabs />
+            case 'customer':return <OwnerRoleTabs />
             case 'developer':return <DeveloperRoleTabs/>
             case 'admin':return 'admin'
             case 'bank':return 'bank'

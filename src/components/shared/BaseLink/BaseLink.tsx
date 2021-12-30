@@ -43,7 +43,7 @@ const BaseLink: React.FC<Props> = ({
 }) => {
   const styles = s as IStyles;
   return (
-    <Link href={href}>
+    <Link href={href} passHref>
       <div className={classNames(
         styles.baseLink,
         styles[type],
