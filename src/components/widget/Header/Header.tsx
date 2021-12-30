@@ -17,6 +17,7 @@ import {ThankRegistering} from "../Login/ThankRegistering/ThankRegistering";
 import NewPassword from "../Login/NewPassword/NewPassword";
 import {ConfirmationNewPassword} from "../Login/ConfirmationNewPassword/ConfirmationNewPassword";
 import css from './Header.module.scss'
+import {setLocalStorage} from '../../../lib/localStorage/localStorage';
 
 type HeaderPropsType = {
     className?: string
@@ -25,7 +26,8 @@ type HeaderPropsType = {
     auth?: boolean
 }
 
-const moc = [{href: '/Buy', title: 'Купить'},
+const moc = [
+    {href: '/Buy', title: 'Купить'},
     {href: '/Take', title: 'Снять'},
     {href: '/calculator', title: 'Ипотека'},
     {href: '/Сonstruction', title: 'Строящиеся дома'},
@@ -80,7 +82,6 @@ const personalAcc = [
 
 
 export const Header: FC<HeaderPropsType> = ({className, city, personalAccount, auth = false}) => {
-
     const [authorization, setAuthorization] = useState<boolean>(auth)
 
     const [login, setLogin] = useState<boolean>(false)
@@ -114,7 +115,9 @@ export const Header: FC<HeaderPropsType> = ({className, city, personalAccount, a
 
 
     const [mocAccountMenu , setMocAccountMenu]=useState<Array<{title:string, href:string,message:number}>>(personalAcc[0])
+
     const searchLoginMoc = (role: string) => {
+        setLocalStorage(role)
         if(role === 'agency') setMocAccountMenu(personalAcc[0])
         if(role === 'agent') setMocAccountMenu(personalAcc[1])
         if(role === 'owner') setMocAccountMenu(personalAcc[2])
@@ -184,12 +187,12 @@ export const Header: FC<HeaderPropsType> = ({className, city, personalAccount, a
                 }
 
 
-                {/*<button onClick={()=>searchLoginMoc('agency')}>agency</button>*/}
-                {/*<button onClick={()=>searchLoginMoc('agent')}>agent</button>*/}
-                {/*<button onClick={()=>searchLoginMoc('owner')}>owner</button>*/}
-                {/*<button onClick={()=>searchLoginMoc('developer')}>developer</button>*/}
-                {/*<button onClick={()=>searchLoginMoc('admin')}>admin</button>*/}
-                {/*<button onClick={()=>searchLoginMoc('bank')}>bank</button>*/}
+                {/*<button onClick={()=>searchLoginMoc('agency')}>agency</button>}
+                {<button onClick={()=>searchLoginMoc('agent')}>agent</button>}
+                {<button onClick={()=>searchLoginMoc('owner')}>owner</button>}
+                {<button onClick={()=>searchLoginMoc('developer')}>developer</button>}
+                {<button onClick={()=>searchLoginMoc('admin')}>admin</button>}
+                {<button onClick={()=>searchLoginMoc('bank')}>bank</button>*/}
 
             </div>
         </div>
