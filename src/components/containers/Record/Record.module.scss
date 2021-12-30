@@ -1,7 +1,15 @@
 @import './all.scss';
 
+.divImage{
+    width: 100px;
+    height: 100px;
+    border-radius: 100px;
+    margin-left: 30px;
+}
 
-
+.margin_40_20{
+    margin:40px 0 20px 0;
+}
 
 .paddingInput{
     padding: 0;
@@ -175,7 +183,7 @@
 }
 
 .bold {
-    //@include ROBOTOMEDIUM16;
+   margin-left: 5px;
 }
 
 .buttonTitle {
@@ -245,6 +253,7 @@
 }
 .portfolioPosition {
     display: flex;
+    align-items: center;
     @include for-size(KT1) {
         flex-direction: row;
         margin: 10px 0 0 0;

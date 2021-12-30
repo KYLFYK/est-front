@@ -19,6 +19,7 @@
     "axios": "^0.24.0",
     "classnames": "^2.3.1",
     "css-loader": "^5.2.7",
+    "jwt-decode": "^3.1.2",
     "mobx": "^6.3.6",
     "mobx-react": "^7.2.1",
     "mobx-react-lite": "^3.2.2",

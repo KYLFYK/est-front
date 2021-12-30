@@ -157,10 +157,10 @@ export const Record: FC<AgentRecordType> = ({Record}) => {
         <div className={s.container}>
             <ContentContainer>
                 <div className={s.title}>
-                    <Typography size={'big'} color='secondary'> Хотите посмотреть Объект?</Typography>
+                    <Typography size={'headerLow'} color='secondary'> Хотите посмотреть Объект?</Typography>
                 </div>
                 <div className={s.subTitle}>
-                    <Typography color='secondary'> Запишитесь на просмотр. Мы перезвоним Вам для уточнения даты и
+                    <Typography color='secondary' weight={"bold"}> Запишитесь на просмотр. Мы перезвоним Вам для уточнения даты и
                         времени встречи</Typography>
                 </div>
                 <div className={s.blockInputButton}>
@@ -236,9 +236,14 @@ export const Record: FC<AgentRecordType> = ({Record}) => {
                         && <div className={s.unselectable}>не заполнена форма</div>}
                     </div>
                 </div>
+                <div className={s.margin_40_20}>
+                    <Typography color='secondary' weight={"bold"}>
+                        За домом закреплён агент
+                    </Typography>
+                </div>
                 <div className={s.card}>
                     <div className={s.avatar}>
-                        <div style={{width: '100px', height: '100px', borderRadius: '100px', marginLeft: '30px'}}>
+                        <div className={s.divImage}>
                             <Image unoptimized src={RomanSafonov} width={100} height={100} className={s.image}
                                    alt={`property agent`}
                                    loader={() => '../../../Pics/persons/РоманСафонов.png'}/>
@@ -249,7 +254,7 @@ export const Record: FC<AgentRecordType> = ({Record}) => {
                                     {Record.fullName}
                                 </Typography>
                             </div>
-                            <div>
+                            <div style={{marginLeft:'5px'}}>
                                 <Typography>
                                     {Record.heldPost}
                                 </Typography>
@@ -292,7 +297,7 @@ export const Record: FC<AgentRecordType> = ({Record}) => {
                                             <div style={{marginRight: '8px'}}>{
                                                 searchIcon(i.title)
                                             }</div>
-                                            <Typography size={'small'}> {i.value}</Typography>
+                                            <Typography > {i.value}</Typography>
                                         </div>
                                     </a>
                                 ))

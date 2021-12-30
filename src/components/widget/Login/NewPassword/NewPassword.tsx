@@ -8,10 +8,12 @@ import BaseButton from "../../../shared/BaseButton/BaseButtons";
 type NewPasswordType={
     account:string
     onEdit:(menu:string)=>void
+    tokenReset?:string
 }
 
-const NewPassword :FC<NewPasswordType> = ({account,onEdit}) => {
+const NewPassword :FC<NewPasswordType> = ({account,onEdit,tokenReset}) => {
     const [value , setValue]=useState<string>('')
+    console.log('NewPassword',tokenReset)
     return (
         <div className={css.recovery}>
             <LogoIcon/>

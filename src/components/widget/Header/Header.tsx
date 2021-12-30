@@ -1,4 +1,4 @@
-import React, {FC, useState} from 'react';
+import React, {FC, useEffect, useState} from 'react';
 import Link from 'next/link';
 import {SelectUser} from "./SelectUser/SelectUser";
 import LogoMain from '../../../icons/Header/LogoMain';
@@ -17,6 +17,9 @@ import {ThankRegistering} from "../Login/ThankRegistering/ThankRegistering";
 import NewPassword from "../Login/NewPassword/NewPassword";
 import {ConfirmationNewPassword} from "../Login/ConfirmationNewPassword/ConfirmationNewPassword";
 import css from './Header.module.scss'
+import {AuthApi} from "../../../api/auth/auth";
+import {EmailConformation} from "../Login/EmailConfirmation/EmailConfirmation";
+import {useRouter} from "next/router";
 import {setLocalStorage} from '../../../lib/localStorage/localStorage';
 
 type HeaderPropsType = {
@@ -24,6 +27,7 @@ type HeaderPropsType = {
     city: Array<string>
     personalAccount: Array<{ title: string, href: string, message: number }>
     auth?: boolean
+    modalActive?: string
 }
 
 const moc = [
@@ -79,19 +83,31 @@ const personalAcc = [
     ],
 ]
 
+export const Header: FC<HeaderPropsType> = ({className, city, personalAccount, modalActive, auth = false}) => {
 
+    const router =useRouter()
 
-export const Header: FC<HeaderPropsType> = ({className, city, personalAccount, auth = false}) => {
+    // for test modal
+    // http://localhost:3000/?text=confirmationNewPassword
+    // http://localhost:3000/?text=login
+    // http://localhost:3000/?text=email-conformation
+    // http://localhost:3000/?text=reset-password
+
+    // const [modalSearch, setModalSearch]=useState(modalActive)
     const [authorization, setAuthorization] = useState<boolean>(auth)
+    const [activeModal, setActiveModal] = useState<boolean>(false)
+    const [edit, setEdit] = useState<string>(modalActive ? modalActive : '')
 
-    const [login, setLogin] = useState<boolean>(false)
+    // console.log(tokenReset)
+    // console.log(edit)
+    // console.log(router)
 
-    const [edit, setEdit] = useState<string>('')
+    const tokenConformation = router.asPath.split('=')[2]
 
     const searchModal = (menu: string) => {
         switch (menu) {
             case 'login':
-                return <Login onEdit={(e) => setEdit(e)}/>
+                return <Login onEdit={(e) => setEdit(e)} setActive={loginActive}/>
             case 'recovery':
                 return <Recovery onEdit={(e) => setEdit(e)}/>
             case 'registration':
@@ -102,30 +118,93 @@ export const Header: FC<HeaderPropsType> = ({className, city, personalAccount, a
                 return <RecoveryMail onEdit={(e) => setEdit(e)} email={'vika@mail.ru'}/>
             case 'thankRegistering':
                 return <ThankRegistering onEdit={(e) => setEdit(e)} email={'vika@mail.ru'}/>
-            case 'newPassword':
-                return <NewPassword onEdit={(e) => setEdit(e)} account={'vika@Best'}/>
+            case 'reset-password':
+                return <NewPassword tokenReset={tokenConformation} onEdit={closeModal} account={'vika@Best'}/>
             case 'confirmationNewPassword':
-                return <ConfirmationNewPassword onEdit={(e) => setEdit(e)} account={'vika@Best'}/>
+                return <ConfirmationNewPassword onEdit={e=>setEdit(e)} account={'vika@Best'}/>
+            case 'email-conformation':
+                return  <EmailConformation onEdit={(e)=>setEdit(e)} tokenConformationEmail={tokenConformation} />
             default:
-                return <div>123</div>
+                return <div> </div>
         }
     }
 
+    const closeModal = (e:string) => {
+        setEdit(e)
+        setActiveModal(false)
+    }
+
+    useEffect(()=>{
+        if(router.asPath.split('=')[1]==='login'){
+            searchModal('login')
+            setEdit('login')
+            setActiveModal(true)
+        }
+       if(router.asPath.split('=')[1]==='email-conformation'){
+           searchModal('email-conformation')
+           setEdit('email-conformation')
+           setActiveModal(true)
+       }
+       if(router.asPath.split('=')[1]==='reset-password'){
+           searchModal('reset-password')
+           setEdit('reset-password')
+           setActiveModal(true)
+       } if(router.asPath.split('=')[1]==='confirmationNewPassword'){
+           searchModal('confirmationNewPassword')
+           setEdit('confirmationNewPassword')
+           setActiveModal(true)
+       }
+        // eslint-disable-next-line
+    },[router]) // if dependency searchModal - no update Modal active (date)
+
     const [active, setActive] = useState<number>(0)
 
-
-    const [mocAccountMenu , setMocAccountMenu]=useState<Array<{title:string, href:string,message:number}>>(personalAcc[0])
-
-    const searchLoginMoc = (role: string) => {
-        setLocalStorage(role)
-        if(role === 'agency') setMocAccountMenu(personalAcc[0])
-        if(role === 'agent') setMocAccountMenu(personalAcc[1])
-        if(role === 'owner') setMocAccountMenu(personalAcc[2])
-        if(role === 'developer') setMocAccountMenu(personalAcc[3])
-        if(role === 'admin') setMocAccountMenu(personalAcc[4])
-        if(role === 'bank') setMocAccountMenu(personalAcc[5])
-        setAuthorization(true)
+    const [mocAccountMenu, setMocAccountMenu] = useState<Array<{ title: string, href: string, message: number }>>(personalAcc[0])
+    const searchLoginMoc = (role: string | null) => {
+        if (role === 'agency') {
+            setAuthorization(true)
+            setMocAccountMenu(personalAcc[0])
+        }
+        if (role === 'agent') {
+            setAuthorization(true)
+            setMocAccountMenu(personalAcc[1])
+        }
+        if (role === 'owner') {
+            setAuthorization(true)
+            setMocAccountMenu(personalAcc[2])
+        }
+        if (role === 'developer') {
+            setAuthorization(true)
+            setMocAccountMenu(personalAcc[3])
+        }
+        if (role === 'admin') {
+            setAuthorization(true)
+            setMocAccountMenu(personalAcc[4])
+        }
+        if (role === 'bank') {
+            setAuthorization(true)
+            setMocAccountMenu(personalAcc[5])
+        }
     }
+    const logout = () => {
+        localStorage.clear()
+        setAuthorization(false)
+    }
+
+    const loginActive = () => {
+        setActiveModal(!activeModal)
+        searchLoginMoc(localStorage.getItem('roleEstatum'))
+    }
+
+    useEffect(() => {
+        try {
+            AuthApi.me()
+            // AuthApi.check()
+            searchLoginMoc(localStorage.getItem('roleEstatum'))
+        } catch (e) {
+            console.log('error')
+        }
+    }, [])
 
     return (
         <div className={classNames(css.header, className)}>
@@ -163,7 +242,7 @@ export const Header: FC<HeaderPropsType> = ({className, city, personalAccount, a
                 {
                     !authorization
                         ? <div className={css.menuName} onClick={() => {
-                            setLogin(true)
+                            setActiveModal(true)
                             setEdit('login')
                         }}>
                             <LoginIcon/>
@@ -174,25 +253,24 @@ export const Header: FC<HeaderPropsType> = ({className, city, personalAccount, a
                                     params={'housingCondition'}
                                     // options={personalAccount}
                                     options={mocAccountMenu}
-                                    onChangeOption={() => setAuthorization(false)}
+                                    onChangeOption={logout}
                                 />
                             </Typography>
                         </div>
 
                 }
                 {
-                    <Modal setActive={() => setLogin(!login)} active={login}>
-                        {searchModal(edit)}
+                    <Modal setActive={() => setActiveModal(!activeModal)} active={activeModal}>
+                        {searchModal(modalActive? modalActive :edit)}
                     </Modal>
                 }
 
-
-                {<button onClick={()=>searchLoginMoc('agency')}>agency</button>}
+                {/*<button onClick={()=>searchLoginMoc('agency')}>agency</button>}
                 {<button onClick={()=>searchLoginMoc('agent')}>agent</button>}
                 {<button onClick={()=>searchLoginMoc('owner')}>owner</button>}
                 {<button onClick={()=>searchLoginMoc('developer')}>developer</button>}
                 {<button onClick={()=>searchLoginMoc('admin')}>admin</button>}
-                {<button onClick={()=>searchLoginMoc('bank')}>bank</button>}
+                {<button onClick={()=>searchLoginMoc('bank')}>bank</button>*/}
 
             </div>
         </div>
