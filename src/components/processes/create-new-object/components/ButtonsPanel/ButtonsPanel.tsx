@@ -24,7 +24,6 @@ const ButtonPanel: React.FC<Props> = ({ children, onNextTab, onPrevTab, onPrevie
     const { createObjectStore } = useStores()
 
     const onNextTab1 =()=>{
-        console.log(createObjectStore.house)
         onNextTab &&onNextTab()
     }
 

@@ -23,8 +23,6 @@ const HouseInfoInterierTab: React.FC<Props> = observer(({ onNextTab, onPrevTab, 
     const [values, setValues] = useState<TInfoState>(getInitialStateInfoTab(objectType, createObjectStore))
     const [isValid, setIsValid] = useState<boolean>(true)
 
-    console.log(createObjectStore)
-
     const isValidPlumbing = ("plumbing" in values && !!values.plumbing.length)
     const isValidRenovation = ("renovation" in values && !!values.renovation.length)
     const onChangeCheckbox = (value: string) => {
