@@ -2,6 +2,7 @@ import React, {FC, useState} from 'react';
 import css from "./NewPassword.module.scss";
 import {LogoIcon} from "../../../../icons/Header/LogoIcon";
 import {InputAlways} from "../input/InputAlways";
+import {InputPassword} from "../input/InputPassword";
 import Typography from "../../../shared/Typography/Typography";
 import BaseButton from "../../../shared/BaseButton/BaseButtons";
 
@@ -22,7 +23,7 @@ const NewPassword :FC<NewPasswordType> = ({account,onEdit,tokenReset}) => {
                 <span className={css.nude}> {account} </span>
             </Typography>
             <div className={css.margin}>
-                <InputAlways value={value} onChange={setValue} title={'Пароль'} className={css.widthInput}/>
+                <InputPassword value={value} onChange={setValue}/>
             </div>
             <BaseButton onClick={()=>onEdit('confirmationNewPassword')} type="secondary" isActive className={css.widthButton}>Сохранить</BaseButton>
             <div className={css.widthButton}>

@@ -13,7 +13,7 @@ export default {
 const Template: ComponentStory<typeof Card> = (args) => <Card {...args} />;
 export const InitialCard = Template.bind({});
 InitialCard.args = {
-    image: '../assets/planning_sample.png',
+    image: SampleImage,
     floor: 5,
     housing: 2,
     deadline: "3 квартал 2022",

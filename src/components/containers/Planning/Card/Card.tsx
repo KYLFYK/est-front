@@ -5,7 +5,7 @@ import Typography from '../../../shared/Typography/Typography'
 import { formatNumbersToCurrency } from '../../../../utils/general'
 
 interface Props {
-    image: string,
+    image: any,
     price: number,
     title: string,
     housing: number,

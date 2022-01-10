@@ -19,5 +19,5 @@ export const DROPDOWN_PLACEHOLDER = 'Выберите опцию'
 export const SORT_FILTER_OPTIONS: IOption[] = [
     {label: "Сортировать: по умолчанию", value: "default" },
     {label: "Сортировать: по возрастанию", value: "bigger" },
-    {label: "Сортировать: по уменьшению", value: "smaller" },
+    {label: "Сортировать: по убыванию", value: "smaller" },
 ]
