@@ -20,5 +20,5 @@ const Template: ComponentStory<typeof NewPassword> = (args) => <NewPassword {...
 
 export const NewPassword_ = Template.bind({});
 NewPassword_.args = {
-    account:'linaPark'
+    account: 'lunaPark'
 };

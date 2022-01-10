@@ -14,11 +14,7 @@ export const ConfirmationNewPassword :FC<ConfirmationNewPasswordType> = ({accoun
         <div className={css.container}>
             <LogoIcon/>
             <div className={css.margin}>
-                <Typography size={'small'} >
-                   Новый пароль для аккаунта
-                    <span className={css.nude}> {account} </span>
-                    сохранён
-                </Typography>
+                Новый пароль для аккаунта <span className={css.separate}>{account}</span> сохранён
             </div>
             <BaseButton onClick={()=>onEdit('login')} type="secondary" isActive className={css.width}>
                 <Typography size={'small'} color={'secondary'} >Войти</Typography>

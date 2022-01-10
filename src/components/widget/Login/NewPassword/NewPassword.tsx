@@ -18,10 +18,9 @@ const NewPassword :FC<NewPasswordType> = ({account,onEdit,tokenReset}) => {
     return (
         <div className={css.recovery}>
             <LogoIcon/>
-            <Typography size={'small'} className={css.marginTypo}>
-                Придумайте новый пароль для аккаунта
-                <span className={css.nude}> {account} </span>
-            </Typography>
+            <div className={css.marginTypo}>
+                Придумайте новый пароль для аккаунта <span className={css.separate}>{account}</span>
+            </div>
             <div className={css.margin}>
                 <InputPassword value={value} onChange={setValue}/>
             </div>

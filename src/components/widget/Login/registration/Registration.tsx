@@ -18,17 +18,13 @@ export const Registration :React.FC<RegistrationPropsType>= ({enterLogin,onEdit}
             <LogoIcon/>
             <InputContainerRegistration/>
             <Checkbox className={css.checkBoxMargin}>
-                <div>
-                    <Typography size={'small'} color={'nude'} >
-                    <span className={css.highlighting}>Принимаю </span>
-                    Пользовательское соглашение, Политику конфеденциальности,
-                    <span className={css.highlighting}> даю </span>
-                    согласие на обработку персоальных данных.
-                    </Typography>
+                <div className={css.agreement}>
+                    Принимаю <span className={css.color}>Пользовательское соглашение, Политику конфеденциальности</span>
+                    , даю <span className={css.color}>согласие на обработку персональных данных</span>
                 </div>
             </Checkbox>
 
-            <div style={{width:'100%',display:"flex",justifyContent:'center',margin:'20px 0'}}>
+            <div style={{width:'100%',display:"flex",justifyContent:'center',margin:'30px 0 20px 0'}}>
                 <BaseButton className={css.marginButton} type={'secondary'} isActive>Зарегистрироваться</BaseButton>
             </div>
 
@@ -41,7 +37,7 @@ export const Registration :React.FC<RegistrationPropsType>= ({enterLogin,onEdit}
 
                 {/*<div onClick={()=>enterLogin()}>*/}
                 <div onClick={()=>onEdit('login')}>
-                    <Typography size={'small'} color={'nude'} >Войти</Typography>
+                    <Typography className={css.enter} size={'small'} color={'nude'} >Войти</Typography>
                 </div>
             </div>
         </div>
