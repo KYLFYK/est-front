@@ -1,5 +1,6 @@
 import axios from "axios";
 import jwt_decode from "jwt-decode";
+import {instance} from "../instance";
 
 export enum UrlAuth  {
     registration = 'auth/register', //          post
@@ -11,13 +12,6 @@ export enum UrlAuth  {
     changePassword = 'auth/change-password' //  patch
 }
 
-const instance = axios.create({
-    baseURL: 'https://estatum.f-case.ru/api/',
-    // baseURL: 'api/',
-    headers:{
-        authorization: `Bearer ''`,
-    }
-});
 // const axios = new AxiosHttpClient()
 type TokenType ={
     adminProperty: number

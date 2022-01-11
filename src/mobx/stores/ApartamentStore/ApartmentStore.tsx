@@ -1,5 +1,6 @@
 import { makeAutoObservable } from "mobx";
 import { createContext, useContext, FC } from "react";
+import { ApartmentApi } from "src/api/obj/apartment";
 import {ApartmensData} from "./ApartamentConfig";
 
 class ApartmentStore {
@@ -113,6 +114,8 @@ class ApartmentStore {
     }
 
     fetch(id: string | string[] | undefined) {
+      ApartmentApi.getAllApartment(0, 1)
+      ApartmentApi.getApartmentById(id)
       this.initialData = Number(id) > 0 ? ApartmensData.filter((fod) => fod.object_id === Number(id))[0] : this.initialData
       this.fetching = false
     }
