@@ -51,12 +51,12 @@ export const Login: React.FC<LoginPropsType> = ({recoveryPass, registration,onEd
             </div>
             <BaseButton type="secondary" onClick={login} isActive className={css.width}>Войти</BaseButton>
             <div className={css.margin}>
-                <Typography size={'small'} className={css.textFooter}>
+                <Typography size={'small'}>
                     Еще не зарегистрировались?
                 </Typography>
                 {/*<div onClick={() => newUser()}>*/}
                 <div onClick={() => onEdit('registration')}>
-                    <Typography size={'small'} color={'nude'} className={css.textFooter} >
+                    <Typography size={'small'} color={'nude'} className={css.enter}>
                         Зарегистрироваться
                     </Typography>
                 </div>

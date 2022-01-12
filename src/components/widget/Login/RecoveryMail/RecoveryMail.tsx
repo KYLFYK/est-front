@@ -15,15 +15,7 @@ export const RecoveryMail :FC<RecoveryMailType>  = ({email,onEdit}) => {
         <div className={css.container}>
             <LogoIcon/>
             <div className={css.margin}>
-                <Typography size={'small'} >
-                    <div>
-                        Мы отправили Вам письмо для восстановления пароля на почту
-                        <span className={css.color} >
-                        {email}
-                    </span>
-                    </div>
-                </Typography>
-
+                Мы отправили Вам письмо для восстановления пароля на почту <span className={css.separate}>{email}</span>
             </div>
             <BaseButton onClick={()=>onEdit('')} type="secondary" isActive className={css.width}>
                 <Typography size={'small'} color={'secondary'} >Хорошо</Typography>

@@ -15,17 +15,9 @@ export const ThankRegistering :FC<ThankRegisteringType> = ({email,onEdit}) => {
         <div className={css.container}>
             <LogoIcon/>
             <div className={css.text}>
-                <Typography size={'small'} >
-                    Спасибо за регистрацию!
-                </Typography>
-                <Typography size={'small'}  >
-                    <div>
-                        Мы отправили вас письмо  дальнейших действиях
-                        <span className={css.nude}> {email} </span>
-                    </div>
-                </Typography>
+                <span>Спасибо за регистрацию! </span>
+                <span>Мы отправили вас письмо  дальнейших действиях <span className={css.nude}>{email}</span></span>
             </div>
-
             <BaseButton onClick={()=>onEdit('')} type="secondary" isActive className={css.width}>
                 <Typography size={'small'} color={'secondary'}>Хорошо</Typography>
             </BaseButton>

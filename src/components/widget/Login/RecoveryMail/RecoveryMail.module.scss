@@ -1,3 +1,5 @@
+@import '../../../../app/styles/colours.scss';
+
 .container{
   display: flex;
   flex-direction: column;
@@ -6,13 +8,15 @@
   width: 328px;
 }
 .margin{
-  margin:30px 0;
+  margin: 30px 0;
+  color: $BLACK;
+  font-family: "RobotoRegular";
   text-align: center;
 }
 .width{
   width: 100%;
 }
-.color{
-  margin: 0 5px;
-  color:#C5A28E;
+.separate{
+  margin: 0 5px 0 5px;
+  color: $NUDE;
 }

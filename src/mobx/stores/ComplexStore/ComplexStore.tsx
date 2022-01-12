@@ -1,5 +1,6 @@
 import { makeAutoObservable } from "mobx";
 import { createContext, useContext, FC } from "react";
+import { ComplexApi } from "src/api/obj/complex";
 import {fullObjectData} from "./ComplexConfig";
 
 class ComplexStore {
@@ -74,6 +75,8 @@ class ComplexStore {
 
 
   fetch(id: string | string[] | undefined) {
+    ComplexApi.getAllComplex(0, 1)
+    ComplexApi.getComplexById(id)
     this.initialData = Number(id) > 0 ? fullObjectData.filter((fod) => fod.object_id === Number(id))[0] : this.initialData
     this.fetching = false
   }

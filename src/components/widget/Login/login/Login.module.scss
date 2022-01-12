@@ -15,6 +15,9 @@
 }
 .margin{
   margin:20px 0 0 0;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
 }
 .cursor{
   position:relative;
@@ -37,7 +40,6 @@
 .text{
   margin-bottom: 15px;
 }
-.textFooter{
-  display: flex;
-  justify-content: center;
+.enter{
+  margin: 5px 0 0 0;
 }

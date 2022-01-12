@@ -1,5 +1,6 @@
 import axios from "axios";
 import jwt_decode from "jwt-decode";
+import {instance} from "../instance";
 
 export enum UrlAuth  {
     registration = 'auth/register', //          post
@@ -40,6 +41,7 @@ export const AuthApi  = {
             localStorage.setItem('accessEstatum',res.data.access)
             localStorage.setItem('refreshEstatum',res.data.refresh)
             localStorage.setItem('roleEstatum',token.role)
+            console.log("res",res)
         }
         catch (e){
             console.log('error',e)
@@ -58,12 +60,14 @@ export const AuthApi  = {
     },
     check:async()=>{ // error server need post  ( get - no body params)
         try{
+            console.log('token1',localStorage.getItem('accessEstatum'))
             await instance.get(`${UrlAuth.check}`,{headers:
                     // { authorization:`Bearer ${localStorage.getItem('accessEstatum')}`}})
                     { token:`${localStorage.getItem('accessEstatum')}`}})
         }
         catch (e){
             try{
+                console.log('token2',localStorage.getItem('accessEstatum'))
                 await instance.get(`${UrlAuth.check}`,{headers:
                         // { authorization:`Bearer ${localStorage.getItem('refreshEstatum')}`}})
                         { token:`Bearer ${localStorage.getItem('refreshEstatum')}`}})
