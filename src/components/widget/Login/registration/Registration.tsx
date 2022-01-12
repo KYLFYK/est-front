@@ -71,13 +71,17 @@ export const Registration: React.FC<RegistrationPropsType> = ({enterLogin, onEdi
                     , даю <span className={css.color}>согласие на обработку персональных данных</span>
                 </div>
             </Checkbox>
-            <div style={{width: '100%', display: "flex", justifyContent: 'center', margin: '20px 0'}}>
-                <BaseButton onClick={infoRegistration} className={css.marginButton} type={'secondary'}
-                            isActive>Зарегистрироваться</BaseButton>
-                <div style={{width: '100%', display: "flex", justifyContent: 'center', margin: '30px 0 20px 0'}}>
-                    <BaseButton className={css.marginButton} type={'secondary'} isActive>Зарегистрироваться</BaseButton>
-                </div>
 
+                <div style={{width:'100%',display:"flex",justifyContent:'center',margin:'30px 0 20px 0'}}>
+                    <BaseButton
+                        onClick={infoRegistration}
+                        className={css.marginButton}
+                        type={'secondary'}
+                        isActive
+                    >
+                        Зарегистрироваться
+                    </BaseButton>
+                </div>
                 <div className={css.marginFooter}>
                     <div>
                         <Typography size={'small'}>
@@ -88,7 +92,6 @@ export const Registration: React.FC<RegistrationPropsType> = ({enterLogin, onEdi
                         <Typography className={css.enter} size={'small'} color={'nude'}>Войти</Typography>
                     </div>
                 </div>
-            </div>
         </div>
     );
 };

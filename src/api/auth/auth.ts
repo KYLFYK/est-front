@@ -1,6 +1,5 @@
 import axios from "axios";
 import jwt_decode from "jwt-decode";
-import {instance} from "../instance";
 
 export enum UrlAuth  {
     registration = 'auth/register', //          post
