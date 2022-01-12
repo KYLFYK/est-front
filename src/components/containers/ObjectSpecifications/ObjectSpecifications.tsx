@@ -22,7 +22,7 @@ interface Props {
 }
 
 const ObjectSpecifications: React.FC<Props> = ({ specificationsLists, title }) => {
-    console.log("specificationsLists",specificationsLists)
+
     return (
         <div className={s.container}>
             <HeadLine title={title}>

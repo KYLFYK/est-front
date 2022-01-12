@@ -36,8 +36,6 @@ export const HorizontalTabs: FC<Props> = ({ tabs, refs, wrapperClassName }) => {
     setSelectedTabIdx(newValue);
   };
 
-  console.log(tabs)
-
   return (
     <div>
       <div

@@ -46,7 +46,6 @@ const useStyles = makeStyles(() => ({
         flexWrap: 'wrap'
     }
 }))
-
 // onSubmit and Filter Values will come from global state and observers
 // MyAdsContainer values should store in local state
 

@@ -155,7 +155,7 @@ export const Header: FC<HeaderPropsType> = ({className, city, personalAccount, m
            searchModal('confirmationNewPassword')
            setEdit('confirmationNewPassword')
            setActiveModal(true)
-       }
+       }    // eslint-disable-next-line
     },[router]) // if dependency searchModal - no update Modal active (date)
 
     useEffect(()=>{ // overflow - scroll vertical (off / on) for modal
