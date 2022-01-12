@@ -15,4 +15,7 @@ const Template: ComponentStory<typeof LineV1> = (args) => <LineV1 {...args} />;
 
 export const LinesV1_ = Template.bind({});
 LinesV1_.args = {
+    id:'1',
+    name:'estatum',
+    typeObject:'estatum',
 };

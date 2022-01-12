@@ -42,26 +42,23 @@ export const fullObjectData = [
     object_specs : [{
       subtitle: "Объекты на  территории жилого комплекса",
       specificationsItems : [{
-        value: 'house_type',
-        label: { title: "Тип дома", text: "Монолитный" },
+        value: 'children_playground',
+        label: { title: "Детская площадка", text: "Монолитный" },
       },{
-        value: 'house_type',
-        label: { title: "Тип дома", text: "Монолитный" },
-      },{
-        value: 'house_type',
-        label: { title: "Тип дома", text: "Монолитный" },
+        value: 'relax_place',
+        label: { title: "Места для отдыха", text: "Монолитный" },
       }]
     },{
       subtitle: "Безопасность",
       specificationsItems : [{
-        value: 'house_type',
-        label: { title: "Тип дома", text: "Монолитный" },
+        value: 'video_surveillance',
+        label: { title: "Видеонаблюдение", text: "Монолитный" },
       },{
-        value: 'house_type',
-        label: { title: "Тип дома", text: "Монолитный" },
+        value: 'fire_protection',
+        label: { title: "Противопожарная система", text: "Монолитный" },
       },{
-        value: 'house_type',
-        label: { title: "Тип дома", text: "Монолитный" },
+        value: 'concierge',
+        label: { title: "Консьерж", text: "Монолитный" },
       }]
     },{
       subtitle: "Строительно-техническая экспертиза",
@@ -69,11 +66,14 @@ export const fullObjectData = [
         value: 'house_type',
         label: { title: "Тип дома", text: "Монолитный" },
       },{
-        value: 'house_type',
-        label: { title: "Тип дома", text: "Монолитный" },
+        value: 'foundation',
+        label: { title: "Фундамент", text: "Ленточный" },
       },{
-        value: 'house_type',
-        label: { title: "Тип дома", text: "Монолитный" },
+        value: 'roof',
+        label: { title: "Кровля", text: "Черепица" },
+      },{
+        value: 'walls',
+        label: { title: "Стены", text: "Кирпич" },
       }]
     }],
     object_developer_info : {

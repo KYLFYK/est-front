@@ -1,3 +1,4 @@
+
 @font-face {
     font-family: "MontserratRegular";
     font-weight: 400;
@@ -53,4 +54,9 @@
 .recharts-cartesian-axis-tick-line{
   display: none;
 }
+body{
+  margin: 0;
+}
+
+
 

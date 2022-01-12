@@ -16,15 +16,21 @@ const ConstructProgress: React.FC<Props> = ({ images, info }) => {
     if (info) {
         return (
             <div className={s.container}>
-                <div className={s.sliderContainer}>
-                    <BaseSlider images={images} height={295} withArrows withFavorite={false} onClickFavorite={() => {}}/>
+                <Typography className={s.title} size={"subheader"}>
+                    Ход строительства
+                </Typography>
+                <div className={s.df}>
+                    <div className={s.sliderContainer}>
+                        <BaseSlider images={images} height={295} withArrows withFavorite={false} onClickFavorite={() => {}}/>
+                    </div>
+                    <div className={s.infoContainer}>
+                        <BaseDropDown options={info} value={info[Number(value)].value} placeholder="Выбрерите опцию" onChange={(e) => {setValue(e)}} />
+                        <Typography>
+                            {info[Number(value)].title}
+                        </Typography>
+                    </div>
                 </div>
-                <div className={s.infoContainer}>
-                <BaseDropDown options={info} value={info[Number(value)].value} placeholder="Выбрерите опцию" onChange={(e) => {setValue(e)}} />
-                    <Typography>    
-                        {info[Number(value)].title}
-                    </Typography>
-                </div>
+
             </div>
         )
     }

@@ -9,9 +9,7 @@ export default {
     },
 } as ComponentMeta<typeof Plot>;
 
-const Template: ComponentStory<typeof Plot> = (args) => <Plot {...args} />;
+const Template: ComponentStory<typeof Plot> = (args) => <Plot  />;
 
 export const PlotPage = Template.bind({});
-PlotPage.args = {
 
-};

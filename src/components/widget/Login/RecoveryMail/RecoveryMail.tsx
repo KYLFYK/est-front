@@ -16,11 +16,14 @@ export const RecoveryMail :FC<RecoveryMailType>  = ({email,onEdit}) => {
             <LogoIcon/>
             <div className={css.margin}>
                 <Typography size={'small'} >
-                    Мы отправили Вам письмо для восстановления пароля на почту
+                    <div>
+                        Мы отправили Вам письмо для восстановления пароля на почту
+                        <span className={css.color} >
+                        {email}
+                    </span>
+                    </div>
                 </Typography>
-                <Typography size={'small'} color={'nude'} >
-                    {email}
-                </Typography>
+
             </div>
             <BaseButton onClick={()=>onEdit('')} type="secondary" isActive className={css.width}>
                 <Typography size={'small'} color={'secondary'} >Хорошо</Typography>

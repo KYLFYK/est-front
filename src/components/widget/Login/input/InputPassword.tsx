@@ -27,10 +27,8 @@ export const InputPassword :FC<InputPasswordType> = ({value, onChange}) => {
                 value={value}
                 onChange={(e) => onChange(e.currentTarget.value)}
             />
-            <label htmlFor="" className={css.form__label}>
-                <Typography size={'small'} color={error && !value ? 'red' : 'default'} >
+            <label htmlFor="" className={css.form__label} style={{ color:error && !value ? 'red' : ''}}>
                     Пароль*
-                </Typography>
             </label>
             <button
                 onClick={() => setType(!type)}

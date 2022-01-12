@@ -3,30 +3,49 @@ import {InputAlways} from "../input/InputAlways";
 import {InputPassword} from "../input/InputPassword";
 import {InputOptional} from "../input/InputOptional";
 import {BaseDropDown} from "../../../shared/BaseDropDown/BaseDropDown";
-import {useState} from "react";
+import {FC, useState} from "react";
 
-export const InputContainerRegistration = () => {
-    const option = [{value:'Выберите роль *', label:'Выберите роль *'},
-        {value:'Агентство', label:'Агентство'},
-        {value:'Собственник', label:'Собственник'},
-        {value:'Застройщик', label:'Застройщик'},
-        {value:'Банк', label:'Банк'},
-    ]
-    const [selectChange , setSelectChange]=useState<string>(option[0].value)
-    const [valueLogin, setValueLogin]=useState<string>('')
-    const [valueEmail, setValueEmail]=useState<string>('')
-    const [valuePassword, setValuePassword]=useState<string>('')
+type InputContainerRegistrationType={
+    valueLogin:string
+    valueEmail:string
+    valuePassword:string
+    valueName:string
+    valuePhone:string
+    onValueLogin:(e:string)=>void
+    onValueEmail:(e:string)=>void
+    onValuePassword:(e:string)=>void
+    onValueName:(e:string)=>void
+    onValuePhone:(e:string)=>void
+    option:Array<{value:string,label:string}>
+    selectChange:string
+    onSelectChange:(e:string)=>void
+}
 
+export const InputContainerRegistration :FC<InputContainerRegistrationType> = ({
+                                                                                   valueLogin,
+                                                                                   valueEmail,
+                                                                                   valuePassword,
+                                                                                   valueName,
+                                                                                   valuePhone,
+                                                                                   onValueLogin,
+                                                                                   onValueEmail,
+                                                                                   onValuePassword,
+                                                                                   onValueName,
+                                                                                   onValuePhone,
+                                                                                   option,
+                                                                                   selectChange,
+                                                                                   onSelectChange
+                                                                               }) => {
 
     return (
         <div className={css.lForm}>
-            <div className={css.form}>
-                <BaseDropDown className={css.selectStyle} options={option} placeholder={selectChange} onChange={e=>setSelectChange(e)}/>
-                <InputAlways value={valueLogin} onChange={setValueLogin} title={'Логин *'}/>
-                <InputAlways value={valueEmail} onChange={setValueEmail} title={'Email *'}/>
-                <InputPassword value={valuePassword} onChange={setValuePassword}  />
-                <InputOptional title={'Имя'} />
-                <InputOptional title={'Телефон'} />
+            <div className={css.form} >
+                <BaseDropDown className={css.selectStyle} value={selectChange} options={option} placeholder={selectChange} onChange={e=>onSelectChange(e)}/>
+                <InputAlways  value={valueLogin} onChange={onValueLogin} title={'Логин *'}/>
+                <InputAlways value={valueEmail} onChange={onValueEmail} title={'Email *'}/>
+                <InputPassword value={valuePassword} onChange={onValuePassword}  />
+                <InputOptional value={valueName} onChange={onValueName} title={'Имя'} />
+                <InputOptional value={valuePhone} onChange={onValuePhone} title={'Телефон'} />
             </div>
         </div>
     );

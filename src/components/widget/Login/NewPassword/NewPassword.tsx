@@ -10,11 +10,16 @@ type NewPasswordType={
     account:string
     onEdit:(menu:string)=>void
     tokenReset?:string
+    password:string
+    onPassword:(e:string)=>void
 }
 
-const NewPassword :FC<NewPasswordType> = ({account,onEdit,tokenReset}) => {
-    const [value , setValue]=useState<string>('')
-    console.log('NewPassword',tokenReset)
+const NewPassword :FC<NewPasswordType> = ({account,onEdit,tokenReset,password,onPassword}) => {
+
+    const newPassword = () =>{
+        onEdit('confirmationNewPassword')
+    }
+
     return (
         <div className={css.recovery}>
             <LogoIcon/>
@@ -23,11 +28,11 @@ const NewPassword :FC<NewPasswordType> = ({account,onEdit,tokenReset}) => {
                 <span className={css.nude}> {account} </span>
             </Typography>
             <div className={css.margin}>
-                <InputPassword value={value} onChange={setValue}/>
+                <InputPassword value={password} onChange={onPassword}/>
             </div>
-            <BaseButton onClick={()=>onEdit('confirmationNewPassword')} type="secondary" isActive className={css.widthButton}>Сохранить</BaseButton>
+            <BaseButton onClick={newPassword} type="secondary" isActive className={css.widthButton}>Сохранить</BaseButton>
             <div className={css.widthButton}>
-                <BaseButton onClick={()=>onEdit('')} type="secondary" className={css.widthButton}>Отмена</BaseButton>
+                <BaseButton onClick={newPassword} type="secondary" className={css.widthButton}>Отмена</BaseButton>
             </div>
 
         </div>

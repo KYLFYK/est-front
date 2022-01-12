@@ -15,7 +15,7 @@ export const SectionComponent = Template.bind({});
 SectionComponent.args = {
     FilterComponent: <PlanningFilter />,
     planningList: Array(7).fill({
-        image: '',
+        image: 'https://cdn.pixabay.com/photo/2021/08/25/20/42/field-6574455__340.jpg',
         price: 144444,
         title: "Большой домина",
         housing: 3,

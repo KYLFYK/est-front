@@ -20,9 +20,10 @@ type AgentRecordType = {
         completed: string
         connection: Array<{ title: string, value: string, url: string }>
     }
+    title?: string
 }
 
-export const Record: FC<AgentRecordType> = ({Record}) => {
+export const Record: FC<AgentRecordType> = ({Record, title}) => {
 
     const [name, setName] = useState('')
     const [mail, setMail] = useState('')
@@ -143,13 +144,18 @@ export const Record: FC<AgentRecordType> = ({Record}) => {
         }
     }
 
-    const searchIcon = (title:string) => {
+    const searchIcon = (title: string) => {
         switch (title) {
-            case "telegram": return <IconTelegram/>
-            case "phone": return <IconPhone/>
-            case "email": return <IconMail/>
-            case "whatsApp": return <IconWhatsapp/>
-            default:return <IconPhone/>
+            case "telegram":
+                return <IconTelegram/>
+            case "phone":
+                return <IconPhone/>
+            case "email":
+                return <IconMail/>
+            case "whatsApp":
+                return <IconWhatsapp/>
+            default:
+                return <IconPhone/>
         }
     }
 
@@ -157,10 +163,12 @@ export const Record: FC<AgentRecordType> = ({Record}) => {
         <div className={s.container}>
             <ContentContainer>
                 <div className={s.title}>
-                    <Typography size={'headerLow'} color='secondary'> Хотите посмотреть Объект?</Typography>
+                    <Typography size={'headerLow'} color='secondary'> Хотите
+                        посмотреть {title ? title : "Объект"}?</Typography>
                 </div>
                 <div className={s.subTitle}>
-                    <Typography color='secondary' weight={"bold"}> Запишитесь на просмотр. Мы перезвоним Вам для уточнения даты и
+                    <Typography color='secondary' weight={"bold"}> Запишитесь на просмотр. Мы перезвоним Вам для
+                        уточнения даты и
                         времени встречи</Typography>
                 </div>
                 <div className={s.blockInputButton}>
@@ -254,7 +262,7 @@ export const Record: FC<AgentRecordType> = ({Record}) => {
                                     {Record.fullName}
                                 </Typography>
                             </div>
-                            <div style={{marginLeft:'5px'}}>
+                            <div style={{marginLeft: '5px'}}>
                                 <Typography>
                                     {Record.heldPost}
                                 </Typography>
@@ -297,7 +305,7 @@ export const Record: FC<AgentRecordType> = ({Record}) => {
                                             <div style={{marginRight: '8px'}}>{
                                                 searchIcon(i.title)
                                             }</div>
-                                            <Typography > {i.value}</Typography>
+                                            <Typography> {i.value}</Typography>
                                         </div>
                                     </a>
                                 ))

@@ -15,7 +15,8 @@ export const FILTER_ACTIONS_OPTIONS: IOption[] = [
 ]
 
 export const FILTER_HOUSE_TYPE_OPTIONS: IOption[] = [
-    {value: "villa", label: "Вилла"},
+    {value: "apartment", label: "Квартиру"},
+    {value: "villa", label: "Виллу"},
     {value: "aparts", label: "Апартаменты"},
     {value: "place", label: "Участок"}
 ]

@@ -19,9 +19,14 @@ const Calculator: NextPage = () => {
 
   return (
     <div >
-        <Header city={city} personalAccount={personalAccount}/>
-        <Mortgage/>
-        <Footer color={'accent'}/>
+        <div style={{display:'flex',justifyContent:"space-between",flexDirection:"column",height: "100vh"}}>
+            <Header city={city} personalAccount={personalAccount}/>
+            <div style={{display:'flex',alignItems:"flex-start",height:"100%"}}>
+                <Mortgage/>
+            </div>
+
+            <Footer color={'accent'}/>
+        </div>
         <ScrollUp/>
     </div>
   )

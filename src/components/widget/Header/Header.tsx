@@ -20,7 +20,6 @@ import css from './Header.module.scss'
 import {AuthApi} from "../../../api/auth/auth";
 import {EmailConformation} from "../Login/EmailConfirmation/EmailConfirmation";
 import {useRouter} from "next/router";
-import {setLocalStorage} from '../../../lib/localStorage/localStorage';
 
 type HeaderPropsType = {
     className?: string
@@ -86,21 +85,23 @@ const personalAcc = [
 export const Header: FC<HeaderPropsType> = ({className, city, personalAccount, modalActive, auth = false}) => {
 
     const router =useRouter()
-    
+
+    const [email, setEmail]=useState<string>('')
+
     // for test modal
     // http://localhost:3000/?text=confirmationNewPassword
     // http://localhost:3000/?text=login
+
+
+
     // http://localhost:3000/?text=email-conformation
     // http://localhost:3000/?text=reset-password
 
     // const [modalSearch, setModalSearch]=useState(modalActive)
     const [authorization, setAuthorization] = useState<boolean>(auth)
     const [activeModal, setActiveModal] = useState<boolean>(false)
+    const [newPassword, setNewPassword] = useState<string>('')
     const [edit, setEdit] = useState<string>(modalActive ? modalActive : '')
-
-    // console.log(tokenReset)
-    // console.log(edit)
-    // console.log(router)
 
     const tokenConformation = router.asPath.split('=')[2]
 
@@ -109,17 +110,17 @@ export const Header: FC<HeaderPropsType> = ({className, city, personalAccount, m
             case 'login':
                 return <Login onEdit={(e) => setEdit(e)} setActive={loginActive}/>
             case 'recovery':
-                return <Recovery onEdit={(e) => setEdit(e)}/>
+                return <Recovery email={email} onValueEmail={setEmail} onEdit={(e) => setEdit(e)}/>
+            case 'recoveryMail':
+                return <RecoveryMail onEdit={recoveryMail} email={email}/>
+            // case 'thankRegistering':
+            //     return <ThankRegistering onEdit={(e) => setEdit(e)} email={email}/>
             case 'registration':
-                return <Registration onEdit={(e) => setEdit(e)}/>
+                return <Registration onEdit={(e) => setEdit(e)} onEmail={setEmail}/>
             case 'addressConfirmation':
                 return <AddressConfirmation onEdit={(e) => setEdit(e)}/>
-            case 'recoveryMail':
-                return <RecoveryMail onEdit={(e) => setEdit(e)} email={'vika@mail.ru'}/>
-            case 'thankRegistering':
-                return <ThankRegistering onEdit={(e) => setEdit(e)} email={'vika@mail.ru'}/>
             case 'reset-password':
-                return <NewPassword tokenReset={tokenConformation} onEdit={closeModal} account={'vika@Best'}/>
+                return <NewPassword  onPassword={setNewPassword}  password={newPassword} tokenReset={tokenConformation} onEdit={(e)=>setEdit(e)} account={'vika@Best'}/>
             case 'confirmationNewPassword':
                 return <ConfirmationNewPassword onEdit={e=>setEdit(e)} account={'vika@Best'}/>
             case 'email-conformation':
@@ -129,17 +130,17 @@ export const Header: FC<HeaderPropsType> = ({className, city, personalAccount, m
         }
     }
 
-    const closeModal = (e:string) => {
+    const recoveryMail = (e:string) =>{
         setEdit(e)
         setActiveModal(false)
     }
 
     useEffect(()=>{
-        if(router.asPath.split('=')[1]==='login'){
-            searchModal('login')
-            setEdit('login')
-            setActiveModal(true)
-        }
+        // if(router.asPath.split('=')[1]==='login'){
+        //     searchModal('login')
+        //     setEdit('login')
+        //     setActiveModal(true)
+        // }
        if(router.asPath.split('=')[1]==='email-conformation'){
            searchModal('email-conformation')
            setEdit('email-conformation')
@@ -149,13 +150,23 @@ export const Header: FC<HeaderPropsType> = ({className, city, personalAccount, m
            searchModal('reset-password')
            setEdit('reset-password')
            setActiveModal(true)
-       } if(router.asPath.split('=')[1]==='confirmationNewPassword'){
+       }
+       if(router.asPath.split('=')[1]==='confirmationNewPassword'){
            searchModal('confirmationNewPassword')
            setEdit('confirmationNewPassword')
            setActiveModal(true)
        }
-        // eslint-disable-next-line
     },[router]) // if dependency searchModal - no update Modal active (date)
+
+    useEffect(()=>{ // overflow - scroll vertical (off / on) for modal
+        if(activeModal && document.body.style.overflow !=='hidden' ){
+                document.body.style.overflow = "hidden"
+        }
+        if(!activeModal && document.body.style.overflow ==='hidden' ){
+                document.body.style.overflow = "auto"
+        }
+    },[activeModal])
+
 
     const [active, setActive] = useState<number>(0)
 

@@ -13,12 +13,11 @@ export default {
 
 const Template: ComponentStory<typeof FormScreen> = (args) =>{
     const [objectType, setObjectType] = React.useState<ObjectTypes>(1)
+
     return(
-        <FormScreen objectType={objectType} clearObjectType={()=>setObjectType(1)} />
+        <FormScreen objectType={objectType} clearObjectType={()=>setObjectType(0)} />
         )
 } ;
 
 export const FormScreenProcess = Template.bind({});
 
-FormScreenProcess.args = {
-};

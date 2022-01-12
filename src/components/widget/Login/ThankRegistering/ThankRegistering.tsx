@@ -19,8 +19,10 @@ export const ThankRegistering :FC<ThankRegisteringType> = ({email,onEdit}) => {
                     Спасибо за регистрацию!
                 </Typography>
                 <Typography size={'small'}  >
-                    Мы отправили вас письмо  дальнейших действиях
-                    <span className={css.nude}> {email} </span>
+                    <div>
+                        Мы отправили вас письмо  дальнейших действиях
+                        <span className={css.nude}> {email} </span>
+                    </div>
                 </Typography>
             </div>
 

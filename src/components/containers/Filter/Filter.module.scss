@@ -16,7 +16,7 @@
 }
 
 .input {
-    width: 73px
+    width: 73px;
 }
 
 .submit {
@@ -35,12 +35,14 @@
 }
 
 .toggleButton {
+    height: 40px;
     padding: 12px;
     width: auto;
 }
 
 .inputsUnion {
     max-width: 478px;
+    height: 38px;
 }
 
 .searchInput {

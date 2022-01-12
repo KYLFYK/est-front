@@ -12,5 +12,6 @@ export default {
 const Template: ComponentStory<typeof AgencyRoleTabs> = (args) => <AgencyRoleTabs {...args} />;
 export const InitialCard = Template.bind({});
 InitialCard.args = {
+    storybook:true
 };
 

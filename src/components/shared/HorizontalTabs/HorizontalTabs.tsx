@@ -36,6 +36,8 @@ export const HorizontalTabs: FC<Props> = ({ tabs, refs, wrapperClassName }) => {
     setSelectedTabIdx(newValue);
   };
 
+  console.log(tabs)
+
   return (
     <div>
       <div
@@ -74,7 +76,10 @@ export const HorizontalTabs: FC<Props> = ({ tabs, refs, wrapperClassName }) => {
                         : "accent"
                     }
                   >
-                    {tab.title}
+                    <div style={{color: tab.title === "Записаться на просмотр" ? '#C5A28E':''}}>
+                      {tab.title}
+                    </div>
+
                   </Typography>
                 }
               />

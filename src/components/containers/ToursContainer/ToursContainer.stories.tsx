@@ -9,14 +9,14 @@ export default {
 } as ComponentMeta<typeof ToursContainer>;
 
 const Template: ComponentStory<typeof ToursContainer> = (args) => <ToursContainer {...args} />;
-export const ToursContainer_ = Template.bind({});
-ToursContainer_.args = {
-     Online_tour:{
-        threeD_tour:{
-            url:'https://www.youtube.com/embed/Ke3qyQYNob4',
+export const RenderToursContainer = Template.bind({});
+RenderToursContainer.args={
+    Online_tour: {
+        threeD_tour: {
+            url: 'https://www.youtube.com/embed/Ke3qyQYNob4',
         },
-        vr_tour:{
-            url:'https://3d-tur.ru/010/',
+        vr_tour: {
+            url: 'https://3d-tur.ru/010/',
         }
     }
-};
+}

@@ -27,10 +27,8 @@ export const InputAlways :React.FC<InputAlwaysPropsType>  = ({title,className,va
                 value={value}
                 onChange={(e) => onChange(e.currentTarget.value)}
             />
-            <label htmlFor=""  className={css.form__label}>
-                <Typography size={'small'} color={error && !value ? 'red' : 'default'} >
-                    {title}
-                </Typography>
+            <label htmlFor=""  className={css.form__label} style={{color:error && !value ? 'red' : ''}}>
+                {title}
             </label>
 
             {

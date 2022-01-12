@@ -6,6 +6,7 @@ module.exports = {
     "@storybook/addon-links",
     "@storybook/addon-essentials",
     "@storybook/preset-scss",
+    // "storybook-addon-next-router", // for storybook ?
   ],
   webpackFinal: async (config) => {
     config.resolve.plugins = [

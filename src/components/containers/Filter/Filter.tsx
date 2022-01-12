@@ -11,14 +11,41 @@ import { FILTER_ACTIONS_OPTIONS, FILTER_BUILDING_TYPE_OPTIONS, FILTER_FLOORS_OPT
 
 import s from './Filter.module.scss'
 
+import {makeStyles} from "@material-ui/core";
+
 interface Props {
     initialValues?: ISearchParamsModel
 }
 
+export const useStyles = makeStyles(() => ({
+    root: {
+        marginBottom: 1,
+        backgroundColor: "#fff",
+        width: 200,
+        borderRadius: 8,
+        border: '0px solid #CAD1DA',
+        "&::before": {
+            display: 'none'
+        },
+        "&.MuiInput-underline::after": {
+            display: 'none'
+        },
+        "& > .MuiSelect-root": {
+            padding: '10px 15px 10px 12px !important',
+            "&:focus": {
+                backgroundColor: 'inherit'
+            }
+        }
+    }
+}
+))
+
 export const Filter: React.FC<Props> = ({ initialValues }) => {
 
+    const classes = useStyles()
+
     const [values, setValues] = React.useState<ISearchParamsModel>({
-        objectType: undefined,
+        objectType: FILTER_HOUSE_TYPE_OPTIONS[0].label,
         secondaryType: undefined,
         floors: undefined,
         priceFrom: undefined,
@@ -26,7 +53,7 @@ export const Filter: React.FC<Props> = ({ initialValues }) => {
         squareFrom: undefined,
         squareTo: undefined,
         planning: undefined,
-        actionType: undefined,
+        actionType: FILTER_ACTIONS_OPTIONS[0].label,
         searchValue: undefined,
     })
 
@@ -76,8 +103,8 @@ export const Filter: React.FC<Props> = ({ initialValues }) => {
     return (
         <div className={s.wrapper}>
             <InputsUnion className={s.actionDropdownUnion}>
-                <BaseDropDown options={FILTER_ACTIONS_OPTIONS} value={values.actionType} onChange={onChangeActionType} placeholder="Выбрать действие" className={s.dropdown} />
-                <BaseDropDown options={FILTER_HOUSE_TYPE_OPTIONS} value={values.objectType} onChange={onChangeHouseType} placeholder="Тип дома" className={s.dropdown} />
+                <BaseDropDown options={FILTER_ACTIONS_OPTIONS} value={values.actionType} onChange={onChangeActionType} placeholder={FILTER_ACTIONS_OPTIONS[0].label} className={classes.root} />
+                <BaseDropDown options={FILTER_HOUSE_TYPE_OPTIONS} value={values.objectType} onChange={onChangeHouseType} placeholder={FILTER_HOUSE_TYPE_OPTIONS[0].label} className={classes.root} />
             </InputsUnion>
             <ToggleButtons classNameButton={s.toggleButton} items={TOGGLE_BUTTONS_OPTIONS} activeValue={values.planning} onChange={onChangePlanning} multiple />
             <BaseInput type="text" placeholder="Поиск" className={s.searchInput} onChange={onChangeSearchValue}/>

@@ -117,7 +117,7 @@ const House: NextPage = observer(() => {
 
 
         <div ref={architec}>
-          <ObjectSpecifications specificationsLists={store.initialData.object_specs} title={"Особенности"}/>
+          <ObjectSpecifications specificationsLists={store.initialData.object_specs} title={"Архитектурно-планировочные решения"}/>
         </div>
         <div ref={infra}>
           <Map currentHouse={JSON.parse(JSON.stringify(store.initialData))} infrastructura={infrastructura} location={'infrastructure'} InfrastructureInfo={infrastructureInfo}/>
@@ -141,7 +141,7 @@ const House: NextPage = observer(() => {
 
         <Mortgage/>
         <div ref={record}>
-          <Record Record={RecordAgent.Record}/>
+          <Record Record={RecordAgent.Record} title={'дом'}/>
         </div>
         <Footer color={'nude'}/>
         <ScrollUp/>

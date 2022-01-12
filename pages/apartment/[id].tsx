@@ -99,7 +99,7 @@ const Apartment: NextPage =  observer(() => {
           <ToursContainer Online_tour={store.initialData.online_tour}/>
         </div>
         <div ref={architec}>
-          <ObjectSpecifications specificationsLists={store.initialData.object_specs} title={"Особенности"}/>
+          <ObjectSpecifications specificationsLists={store.initialData.object_specs} title={"Архитектурно-планировочные решения"}/>
         </div>
         <div ref={infra}>
           <Map currentHouse={JSON.parse(JSON.stringify(store.initialData))} infrastructura={infrastructura} location={'infrastructure'} InfrastructureInfo={infrastructureInfo}/>
@@ -112,7 +112,7 @@ const Apartment: NextPage =  observer(() => {
         </div>
         <Mortgage/>
         <div ref={record}>
-          <Record Record={RecordAgent.Record}/>
+          <Record Record={RecordAgent.Record} title={'квартиру'}/>
         </div>
         <Footer color={'nude'}/>
         <ScrollUp/>

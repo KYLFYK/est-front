@@ -4,5 +4,41 @@ export const enum IconTypes {
     PURITY_ANALYSIS = 'purity_analysis',
     TOURS = 'tours',
     HOUSE_TYPE = 'house_type',
-    REST = 'rest'
+    REST = 'rest',
+
+    // resident complex - особенности
+    CHILDREN='children_playground',
+    RELAX_PLACE='relax_place',
+    VIDEO_SURVEILLANCE='video_surveillance',
+    FIRE_PROTECTION='fire_protection',
+    CONCIERGE='concierge',
+
+    // Архитектурно-планировочные решения
+    // Строительная экспертиза
+    foundation='foundation',
+    roof='roof',
+    walls='walls',
+    // Инженерные коммуникации
+    water_supply='water_supply',
+    heating='heating',
+    sewage_system='sewage_system',
+    electricity='electricity',
+    internet='internet',
+
+    // interior and exterior
+    swimming_pool='swimming_pool',
+    garage='garage',
+    bedrooms='bedrooms',
+    showers='showers',
+    bathroom='bathroom',
+    repair='repair',
+
+    // furniture
+
+    fridge='fridge',
+    washing_machine='washing_machine',
+    dishwasher='dishwasher',
+    conditioner='conditioner',
+    TV='TV',
+    furniture_rooms='furniture_rooms',
 }

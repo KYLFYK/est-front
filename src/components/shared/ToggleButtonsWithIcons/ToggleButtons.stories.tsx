@@ -1,6 +1,10 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 import { ToggleButtonsWithIcons } from './ToggleButtonsWithIcons';
+import {GridView} from "../../../icons/FinderPageIcon/GridView";
+import {MapView} from "../../../icons/FinderPageIcon/MapView";
+import {ZoomIn} from "../../../icons/MapControlsIcons/ZoomIn";
+import {ZoomOut} from "../../../icons/MapControlsIcons/ZoomOut";
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {
@@ -8,25 +12,20 @@ export default {
     component: ToggleButtonsWithIcons,
 } as ComponentMeta<typeof ToggleButtonsWithIcons>;
 
-const OPTION_DATA = [{ label: 'option_1', value: "1" }, { label: 'option_2', value: "2" }, { label: 'option_3', value: "3" }, { label: 'option_4', value: "4" }]
-
 // More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
-const Template: ComponentStory<typeof ToggleButtonsWithIcons> = (args) => <ToggleButtonsWithIcons {...args} />;
+const Template: ComponentStory<typeof ToggleButtonsWithIcons> = () =>{
+    const [view, setView] = useState('mapView')
+
+    const toggleButtonOptions = [
+        { icon: <GridView fill={view === 'gridView' ? '#96A2B5' : '#CAD1DA'}/>, onclick: () => setView('gridView') },
+        { icon: <MapView fill={view === 'mapView' ? '#96A2B5' : '#CAD1DA'}/>, onclick: () => setView('mapView') },
+    ]
+    return(
+        <div style={{margin:'10px'}}>
+            <ToggleButtonsWithIcons items={toggleButtonOptions}  />
+        </div>
+        )
+}
 
 export const WithoutActiveElement = Template.bind({});
-WithoutActiveElement.args = {
-    items: OPTION_DATA
-};
 
-export const OneActiveElement = Template.bind({});
-OneActiveElement.args = {
-    items: OPTION_DATA,
-    activeValue: OPTION_DATA[2].value
-};
-
-export const MultipleActiveElements = Template.bind({});
-MultipleActiveElements.args = {
-    items: OPTION_DATA,
-    activeValue: [OPTION_DATA[0].value, OPTION_DATA[1].value].join(','),
-    multiple: true
-};

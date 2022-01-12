@@ -11,15 +11,15 @@ export const mocAdvantages: IAdvantage[] = [
     },
     {
         title: {
-            label: 'Анализ инфраструктуры',
-            value: IconTypes.INFRASTRUCTURE_ANALYSIS
+            label: 'VR и 3D туры',
+            value: IconTypes.TOURS
         },
         text: 'Оцените главные преимущества выбранного дома'
     },
     {
         title: {
-            label: 'VR и 3D туры',
-            value: IconTypes.TOURS
+            label: 'Анализ инфраструктуры',
+            value: IconTypes.INFRASTRUCTURE_ANALYSIS
         },
         text: 'Оцените главные преимущества выбранного дома'
     },

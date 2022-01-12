@@ -3,13 +3,15 @@ import React from "react"
 import VerticalTabs from "../../../shared/VerticalTabs/VerticalTabs"
 import MyObjectsTab from "./components/MyObjectsTab/MyObjectsTab"
 
-interface Props {
+type Props = {
+    storybook?:boolean
 }
 
-const AgencyRoleTabs: React.FC<Props> = () => {
+const AgencyRoleTabs: React.FC<Props> = ({storybook }) => {
     return (
         <VerticalTabs
             link={true}
+            storybook={storybook}
             tabs={[
                 { title: "Аккаунт Агентства", Component: <div /> },
                 { title: "Избранное", Component: <div /> },

@@ -8,8 +8,7 @@
 }
 
 .container {
-    display: flex;
-    width: 100%;
+    width: 90%;
     margin: 60px 0 60px 60px;
 }
 .infoContainer {
@@ -18,7 +17,7 @@
     flex-direction: column;
     gap: 20px;
     max-width: 600px;
-    width: 29%;
+    //width: 29%;
 }
 .infoItem {
     display: flex;
@@ -31,5 +30,11 @@
 .infoValue {
     margin-left: 40px;
     width: 60%;
+}
+.df{
+    display: flex;
+}
+.title{
+    margin-bottom: 30px;
 }
 

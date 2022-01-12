@@ -13,12 +13,11 @@ export enum UrlAuth  {
 
 const instance = axios.create({
     baseURL: 'https://estatum.f-case.ru/api/',
-    // baseURL: 'api/',
     headers:{
         authorization: `Bearer ''`,
     }
 });
-// const axios = new AxiosHttpClient()
+
 type TokenType ={
     adminProperty: number
     agencyProperty: null
@@ -75,7 +74,43 @@ export const AuthApi  = {
                 console.log('ERROR',e)
             }
         }
-    }
+    },
+    registration:async (registration:RegistrationType)=>{
+        try{
+            await instance.post(`${UrlAuth.registration}`,registration)
+        }catch (e){
+
+        }
+    },
+    refreshToken:async (token:any)=>{
+        try{
+            await instance.post(`${UrlAuth.refresh}`,token)
+        }catch (e) {
+            console.log(e)
+        }
+    },
+    resetPassword:async (email:any)=> {
+        try {
+            await instance.post(`${UrlAuth.resetPassword}`, {email:email})
+        } catch (e) {
+            console.log(e)
+        }
+    },
+    resetPasswordGet:async (token:any)=> {
+        try {
+            await instance.get(`${UrlAuth.resetPassword}`, token)
+        } catch (e) {
+            console.log(e)
+        }
+    },
+    changePassword:async (newPassword:string,accountId :string, token:string)=> {
+        try {
+            await instance.patch(`${UrlAuth.changePassword}`, {newPassword,accountId,token})
+        } catch (e) {
+            console.log(e)
+        }
+    },
+
 }
 
 export const testApi ={
@@ -89,5 +124,12 @@ export const testApi ={
     }
 }
 
-
+type RegistrationType={
+    publicKey: string
+    privateKey: string
+    role: string
+    // name:string
+    // phone:string
+    // email:string
+}
 

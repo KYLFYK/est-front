@@ -22,5 +22,5 @@ const mock = ['EMAAR','EMAAR','EMAAR','EMAAR','EMAAR',]
 export const DevelopersContainer_ = Template.bind({});
 DevelopersContainer_.args = {
     title:'Developers',
-    developersInfo:mockDevelopers
+    developersInfo:mockDevelopers,
 };
