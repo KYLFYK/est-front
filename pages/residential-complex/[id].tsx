@@ -23,6 +23,7 @@ import {ScrollUp} from '../../src/components/shared/ScrollUp/ScrollUp'
 import {useStore} from '../../src/mobx/stores/ComplexStore/ComplexStore'
 
 const city = ['Москва', 'Санкт-Петербург', 'Крым', 'Сочи', 'Нижний Новгород']
+
 const personalAccount = [{title: 'Личный кабинет', href: '/User', message: 0},
   {title: 'Избранное', href: '/User', message: 0},
   {title: 'Сохраненные поиски', href: '/User', message: 0},
