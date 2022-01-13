@@ -19,6 +19,16 @@ import WatterSupply from "../../icons/Specifications/ArchitecturalPlanningSoluti
 import Heating from "../../icons/Specifications/ArchitecturalPlanningSolutions/Heating";
 import SewageSystem from "../../icons/Specifications/ArchitecturalPlanningSolutions/SewageSystem";
 import Electricity from "../../icons/Specifications/ArchitecturalPlanningSolutions/Electricity";
+import Bedrooms from "../../icons/Specifications/InteriorExterior/Bedrooms";
+import Showers from "../../icons/Specifications/InteriorExterior/Showers";
+import Bathroom from "../../icons/Specifications/InteriorExterior/Bathroom";
+import Repair from "../../icons/Specifications/InteriorExterior/Repair";
+import ParkingSpace from "../../icons/Specifications/InteriorExterior/ParkingSpace";
+import Fridge from "../../icons/Specifications/InteriorExterior/Fridge";
+import WashingMachine from "../../icons/Specifications/InteriorExterior/WashingMachine";
+import Dishwasher from "../../icons/Specifications/InteriorExterior/Dishwasher";
+import Conditioner from "../../icons/Specifications/InteriorExterior/Conditioner";
+import FurnitureRooms from "../../icons/Specifications/InteriorExterior/FurnitureRooms";
 
 export const searchIconByValue = (value: IconTypes | string): JSX.Element => {
   switch (value) {
@@ -64,6 +74,29 @@ export const searchIconByValue = (value: IconTypes | string): JSX.Element => {
     case IconTypes.electricity:
       return  <Electricity/>
 
+    // Interior and Exterior
+
+    case  IconTypes.bedrooms:
+      return <Bedrooms/>
+    case  IconTypes.showers:
+      return <Showers/>
+    case  IconTypes.bathroom:
+      return <Bathroom/>
+    case  IconTypes.repair:
+      return <Repair/>
+    case  IconTypes.parking_space:
+      return <ParkingSpace/>
+
+    case  IconTypes.fridge:
+      return <Fridge/>
+    case  IconTypes.washing_machine:
+      return <WashingMachine/>
+    case  IconTypes.dishwasher:
+      return <Dishwasher/>
+    case  IconTypes.conditioner:
+      return <Conditioner/>
+    case  IconTypes.furniture_rooms:
+      return <FurnitureRooms/>
 
     default:
       return <Mortgage />;

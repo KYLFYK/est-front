@@ -13,13 +13,13 @@ import {Registration} from '../Login/registration/Registration';
 import classNames from 'classnames';
 import {AddressConfirmation} from "../Login/AddressConfirmation/AddressConfirmation";
 import {RecoveryMail} from "../Login/RecoveryMail/RecoveryMail";
-import {ThankRegistering} from "../Login/ThankRegistering/ThankRegistering";
 import NewPassword from "../Login/NewPassword/NewPassword";
 import {ConfirmationNewPassword} from "../Login/ConfirmationNewPassword/ConfirmationNewPassword";
 import css from './Header.module.scss'
 import {AuthApi} from "../../../api/auth/auth";
 import {EmailConformation} from "../Login/EmailConfirmation/EmailConfirmation";
 import {useRouter} from "next/router";
+import { ThankRegistering } from '../Login/ThankRegistering/ThankRegistering';
 
 type HeaderPropsType = {
     className?: string
@@ -103,26 +103,27 @@ export const Header: FC<HeaderPropsType> = ({className, city, personalAccount, m
     const [newPassword, setNewPassword] = useState<string>('')
     const [edit, setEdit] = useState<string>(modalActive ? modalActive : '')
 
-    const tokenConformation = router.asPath.split('=')[2]
+    const tokenConformation  = router.query.token && router.query.token
 
+    console.log(tokenConformation)
     const searchModal = (menu: string) => {
         switch (menu) {
             case 'login':
                 return <Login onEdit={(e) => setEdit(e)} setActive={loginActive}/>
-            case 'recovery':
+            case 'recovery': // password
                 return <Recovery email={email} onValueEmail={setEmail} onEdit={(e) => setEdit(e)}/>
             case 'recoveryMail':
-                return <RecoveryMail onEdit={recoveryMail} email={email}/>
-            // case 'thankRegistering':
-            //     return <ThankRegistering onEdit={(e) => setEdit(e)} email={email}/>
+                return <RecoveryMail onEdit={activeEdit} email={email}/>
+            case 'thankRegistering':
+                return <ThankRegistering onEdit={activeEdit} email={email}/>
             case 'registration':
                 return <Registration onEdit={(e) => setEdit(e)} onEmail={setEmail}/>
             case 'addressConfirmation':
                 return <AddressConfirmation onEdit={(e) => setEdit(e)}/>
             case 'reset-password':
-                return <NewPassword  onPassword={setNewPassword}  password={newPassword} tokenReset={tokenConformation} onEdit={(e)=>setEdit(e)} account={'vika@Best'}/>
+                return <NewPassword  onPassword={setNewPassword}  password={newPassword} tokenReset={tokenConformation} onEdit={(e)=>setEdit(e)}/>
             case 'confirmationNewPassword':
-                return <ConfirmationNewPassword onEdit={e=>setEdit(e)} account={'vika@Best'}/>
+                return <ConfirmationNewPassword onEdit={e=>setEdit(e)} token={tokenConformation}/>
             case 'email-conformation':
                 return  <EmailConformation onEdit={(e)=>setEdit(e)} tokenConformationEmail={tokenConformation} />
             default:
@@ -130,28 +131,23 @@ export const Header: FC<HeaderPropsType> = ({className, city, personalAccount, m
         }
     }
 
-    const recoveryMail = (e:string) =>{
+    const activeEdit = (e:string) =>{
         setEdit(e)
         setActiveModal(false)
     }
-
+    console.log(router)
     useEffect(()=>{
-        // if(router.asPath.split('=')[1]==='login'){
-        //     searchModal('login')
-        //     setEdit('login')
-        //     setActiveModal(true)
-        // }
-       if(router.asPath.split('=')[1]==='email-conformation'){
+       if(router.query.text ==='email-conformation'){
            searchModal('email-conformation')
            setEdit('email-conformation')
            setActiveModal(true)
        }
-       if(router.asPath.split('=')[1]==='reset-password'){
+       if(router.query.text==='reset-password'){
            searchModal('reset-password')
            setEdit('reset-password')
            setActiveModal(true)
        }
-       if(router.asPath.split('=')[1]==='confirmationNewPassword'){
+       if(router.query.text==='confirmationNewPassword'){
            searchModal('confirmationNewPassword')
            setEdit('confirmationNewPassword')
            setActiveModal(true)
@@ -172,7 +168,7 @@ export const Header: FC<HeaderPropsType> = ({className, city, personalAccount, m
 
     const [mocAccountMenu, setMocAccountMenu] = useState<Array<{ title: string, href: string, message: number }>>(personalAcc[0])
     const searchLoginMoc = (role: string | null) => {
-
+        console.log('role',role)
         if (role === 'agency') {
             setAuthorization(true)
             setMocAccountMenu(personalAcc[0])
@@ -210,9 +206,11 @@ export const Header: FC<HeaderPropsType> = ({className, city, personalAccount, m
 
     useEffect(() => {
         try {
-            AuthApi.me()
-            // AuthApi.check()
-            searchLoginMoc(localStorage.getItem('roleEstatum'))
+            const  res  =async ()=>{
+                await AuthApi.check()
+                searchLoginMoc(localStorage.getItem('roleEstatum'))
+            }
+            res()
         } catch (e) {
             console.log('error')
         }

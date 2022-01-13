@@ -92,7 +92,7 @@ const ResidentialComplex: NextPage = observer(() => {
           <ObjectSpecifications specificationsLists={store.initialData.object_specs} title={"Особенности"}/>
         </div>
         <div ref={architec}>
-          <ObjectSpecifications specificationsLists={store.initialData.object_specs} title={"Архитектурно-планировочные решения"}/>
+          <ObjectSpecifications specificationsLists={store.initialData.object_specs_expertise} title={"Архитектурно-планировочные решения"}/>
         </div>
         <div ref={plansec}>
           <Planning FilterComponent={<PlanningFilter />} planningList={store.initialData.planningList}/>

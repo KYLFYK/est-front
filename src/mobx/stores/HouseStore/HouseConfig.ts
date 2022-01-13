@@ -58,13 +58,92 @@ export const fullObjectData = [
           url: 'https://3d-tur.ru/010/',
       }
     },
-    object_specs : [{
+    object_specs: [{
       subtitle: "Строительно-техническая экспертиза",
-      specificationsItems : [{
+      specificationsItems: [{
         value: 'house_type',
-        label: { title: "Тип дома", text: "Монолитный" },
+        label: {title: "Тип дома", text: "Монолитный"},
+      }, {
+        value: 'foundation',
+        label: {title: "Фундамент", text: "Ленточный"},
+      }, {
+        value: 'roof',
+        label: {title: "Кровля", text: "Черепица"},
+      }, {
+        value: 'walls',
+        label: {title: "Стены", text: "Кирпич"},
       }]
-    }],
+    }, {
+      subtitle: "Инженерные коммуникации",
+      specificationsItems: [{
+        value: 'water_supply',
+        label: {title: "Водопровод", text: "Центральный"},
+      }, {
+        value: 'heating',
+        label: {title: "Отопление", text: "Газовый котёл"},
+      }, {
+        value: 'sewage_system',
+        label: {title: "Канализация", text: "Центральная"},
+      }, {
+        value: 'electricity',
+        label: {title: "Электричество", text: "Генератор"},
+      }, {
+        value: 'internet',
+        label: {title: "Интернет", text: "wi-fi"},
+      }]
+    }, {
+      subtitle: "Особенности стоительства",
+      specificationsItems: [{
+        value: 'house_type',
+        label: {
+          title: "Натуральные отделочные материалы позволяют дому дышать, согревают его зимой и создают прохладу летом",
+          text: ""
+        },
+      }, {
+        value: 'foundation',
+        label: {
+          title: "Дом построен с учетом сейсмической безопасности и климатических особенностей южного берега Крыма",
+          text: ""
+        },
+      }]
+    }, {
+      subtitle: "Интерьер и экстерьер",
+      specificationsItems: [{
+        value: 'bedrooms',
+        label: {title: "Спальни", text: "1"},
+      }, {
+        value: 'showers',
+        label: {title: "Душевые", text: "1"},
+      }, {
+        value: 'bathroom',
+        label: {title: "Санузел", text: "2,раздельный"},
+      }, {
+        value: 'repair',
+        label: {title: "Ремонт", text: "Косметический"},
+      }, {
+        value: 'parking_space',
+        label: {title: "Парковка", text: "Платная"},
+      }]
+    },
+      {
+        subtitle: "Мебель",
+        specificationsItems: [{
+          value: 'fridge',
+          label: {title: "Холодильник", text: ""},
+        }, {
+          value: 'washing_machine',
+          label: {title: "Стиральная машина", text: ""},
+        }, {
+          value: 'dishwasher',
+          label: {title: "Посудомоечная машина", text: ""},
+        }, {
+          value: 'conditioner',
+          label: {title: "Кондиционер", text: ""},
+        }, {
+          value: 'furniture_rooms',
+          label: {title: "Мебель в комнатах", text: ""},
+        }]
+      }],
     legalPurityData : {
       encumbrances: false,
       risks: false,
@@ -489,13 +568,92 @@ export const fullObjectData = [
           url: 'https://3d-tur.ru/010/',
       }
     },
-    object_specs : [{
+    object_specs: [{
       subtitle: "Строительно-техническая экспертиза",
-      specificationsItems : [{
+      specificationsItems: [{
         value: 'house_type',
-        label: { title: "Тип дома", text: "Монолитный" },
+        label: {title: "Тип дома", text: "Монолитный"},
+      }, {
+        value: 'foundation',
+        label: {title: "Фундамент", text: "Ленточный"},
+      }, {
+        value: 'roof',
+        label: {title: "Кровля", text: "Черепица"},
+      }, {
+        value: 'walls',
+        label: {title: "Стены", text: "Кирпич"},
       }]
-    }],
+    }, {
+      subtitle: "Инженерные коммуникации",
+      specificationsItems: [{
+        value: 'water_supply',
+        label: {title: "Водопровод", text: "Центральный"},
+      }, {
+        value: 'heating',
+        label: {title: "Отопление", text: "Газовый котёл"},
+      }, {
+        value: 'sewage_system',
+        label: {title: "Канализация", text: "Центральная"},
+      }, {
+        value: 'electricity',
+        label: {title: "Электричество", text: "Генератор"},
+      }, {
+        value: 'internet',
+        label: {title: "Интернет", text: "wi-fi"},
+      }]
+    }, {
+      subtitle: "Особенности стоительства",
+      specificationsItems: [{
+        value: 'house_type',
+        label: {
+          title: "Натуральные отделочные материалы позволяют дому дышать, согревают его зимой и создают прохладу летом",
+          text: ""
+        },
+      }, {
+        value: 'foundation',
+        label: {
+          title: "Дом построен с учетом сейсмической безопасности и климатических особенностей южного берега Крыма",
+          text: ""
+        },
+      }]
+    }, {
+      subtitle: "Интерьер и экстерьер",
+      specificationsItems: [{
+        value: 'bedrooms',
+        label: {title: "Спальни", text: "1"},
+      }, {
+        value: 'showers',
+        label: {title: "Душевые", text: "1"},
+      }, {
+        value: 'bathroom',
+        label: {title: "Санузел", text: "2,раздельный"},
+      }, {
+        value: 'repair',
+        label: {title: "Ремонт", text: "Косметический"},
+      }, {
+        value: 'parking_space',
+        label: {title: "Парковка", text: "Платная"},
+      }]
+    },
+      {
+        subtitle: "Мебель",
+        specificationsItems: [{
+          value: 'fridge',
+          label: {title: "Холодильник", text: ""},
+        }, {
+          value: 'washing_machine',
+          label: {title: "Стиральная машина", text: ""},
+        }, {
+          value: 'dishwasher',
+          label: {title: "Посудомоечная машина", text: ""},
+        }, {
+          value: 'conditioner',
+          label: {title: "Кондиционер", text: ""},
+        }, {
+          value: 'furniture_rooms',
+          label: {title: "Мебель в комнатах", text: ""},
+        }]
+      }],
     legalPurityData : {
       encumbrances: false,
       risks: false,
@@ -920,13 +1078,92 @@ export const fullObjectData = [
           url: 'https://3d-tur.ru/010/',
       }
     },
-    object_specs : [{
+    object_specs: [{
       subtitle: "Строительно-техническая экспертиза",
-      specificationsItems : [{
+      specificationsItems: [{
         value: 'house_type',
-        label: { title: "Тип дома", text: "Монолитный" },
+        label: {title: "Тип дома", text: "Монолитный"},
+      }, {
+        value: 'foundation',
+        label: {title: "Фундамент", text: "Ленточный"},
+      }, {
+        value: 'roof',
+        label: {title: "Кровля", text: "Черепица"},
+      }, {
+        value: 'walls',
+        label: {title: "Стены", text: "Кирпич"},
       }]
-    }],
+    }, {
+      subtitle: "Инженерные коммуникации",
+      specificationsItems: [{
+        value: 'water_supply',
+        label: {title: "Водопровод", text: "Центральный"},
+      }, {
+        value: 'heating',
+        label: {title: "Отопление", text: "Газовый котёл"},
+      }, {
+        value: 'sewage_system',
+        label: {title: "Канализация", text: "Центральная"},
+      }, {
+        value: 'electricity',
+        label: {title: "Электричество", text: "Генератор"},
+      }, {
+        value: 'internet',
+        label: {title: "Интернет", text: "wi-fi"},
+      }]
+    }, {
+      subtitle: "Особенности стоительства",
+      specificationsItems: [{
+        value: 'house_type',
+        label: {
+          title: "Натуральные отделочные материалы позволяют дому дышать, согревают его зимой и создают прохладу летом",
+          text: ""
+        },
+      }, {
+        value: 'foundation',
+        label: {
+          title: "Дом построен с учетом сейсмической безопасности и климатических особенностей южного берега Крыма",
+          text: ""
+        },
+      }]
+    }, {
+      subtitle: "Интерьер и экстерьер",
+      specificationsItems: [{
+        value: 'bedrooms',
+        label: {title: "Спальни", text: "1"},
+      }, {
+        value: 'showers',
+        label: {title: "Душевые", text: "1"},
+      }, {
+        value: 'bathroom',
+        label: {title: "Санузел", text: "2,раздельный"},
+      }, {
+        value: 'repair',
+        label: {title: "Ремонт", text: "Косметический"},
+      }, {
+        value: 'parking_space',
+        label: {title: "Парковка", text: "Платная"},
+      }]
+    },
+      {
+        subtitle: "Мебель",
+        specificationsItems: [{
+          value: 'fridge',
+          label: {title: "Холодильник", text: ""},
+        }, {
+          value: 'washing_machine',
+          label: {title: "Стиральная машина", text: ""},
+        }, {
+          value: 'dishwasher',
+          label: {title: "Посудомоечная машина", text: ""},
+        }, {
+          value: 'conditioner',
+          label: {title: "Кондиционер", text: ""},
+        }, {
+          value: 'furniture_rooms',
+          label: {title: "Мебель в комнатах", text: ""},
+        }]
+      }],
     legalPurityData : {
       encumbrances: false,
       risks: false,

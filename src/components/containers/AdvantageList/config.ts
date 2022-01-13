@@ -14,7 +14,7 @@ export const mocAdvantages: IAdvantage[] = [
             label: 'VR и 3D туры',
             value: IconTypes.TOURS
         },
-        text: 'Оцените главные преимущества выбранного дома'
+        text: 'Погрузитесь в атмосферу будущей квартиры'
     },
     {
         title: {

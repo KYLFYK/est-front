@@ -15,12 +15,21 @@ type RegistrationPropsType = {
 
 export const Registration: React.FC<RegistrationPropsType> = ({enterLogin, onEdit, onEmail}) => {
 
-    const option = [{value: 'Выберите роль *', label: 'Выберите роль *'},
+    const option = [{value: '', label: 'Выберите роль *'},
         {value: 'agency', label: 'Агентство'},
+        {value: 'agent', label: 'Агент'},
         {value: 'customer', label: 'Собственник'},
         {value: 'developer', label: 'Застройщик'},
         {value: 'bank', label: 'Банк'},
+        {value: 'admin', label: 'Администратор'},
     ]
+
+    // agency - агентства
+    // agent - агенты
+    // developer - застройщики
+    // customer - пользователи, клиенты
+    // admin - администратор
+
     const [selectChange, setSelectChange] = useState<string>(option[0].value)
     const [confirmation, setConfirmation] = useState<boolean>(false)
     const [valueLogin, setValueLogin] = useState<string>('')
@@ -29,23 +38,27 @@ export const Registration: React.FC<RegistrationPropsType> = ({enterLogin, onEdi
     const [valueName, setValueName] = useState<string>('')
     const [valuePhone, setValuePhone] = useState<string>('')
 
-
     const infoRegistration = async () => {
         console.log(valueLogin, valueEmail, valuePassword, valueName, valuePhone, confirmation, selectChange)
-        const res = await AuthApi.registration({
-            privateKey: valuePassword,
-            publicKey: valueEmail,
-            role: selectChange
-            // publicKey:valueLogin,
-            // email:valueEmail,
-            // name:valueName,
-            // phone:valuePhone,
-        })
-        onEmail(valueEmail)
-        onEdit('thankRegistering')
+        const valid= [valueLogin, valueEmail, valuePassword, valueName, valuePhone, selectChange]
+        const error = valid.every(t=>t.trim() !== '')
+        if(error){
+            const res = await AuthApi.registration({
+                privateKey: valuePassword,
+                publicKey: valueEmail,
+                role: selectChange,
+                // publicKey:valueLogin,
+                // email:valueEmail,
+                // name:valueName,
+                phone:valuePhone,
+            })
+            onEmail(valueEmail)
+            onEdit('thankRegistering')
+        }else {
+            alert('Выберите роль и заполните поля')
+        }
 
     }
-
 
     return (
         <div className={css.registrationContainer}>

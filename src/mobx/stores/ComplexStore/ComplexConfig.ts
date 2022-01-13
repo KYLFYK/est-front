@@ -43,39 +43,42 @@ export const fullObjectData = [
       subtitle: "Объекты на  территории жилого комплекса",
       specificationsItems : [{
         value: 'children_playground',
-        label: { title: "Детская площадка", text: "Монолитный" },
+        label: { title: "Детская площадка", text: "" },
       },{
         value: 'relax_place',
-        label: { title: "Места для отдыха", text: "Монолитный" },
+        label: { title: "Места для отдыха", text: "" },
       }]
     },{
       subtitle: "Безопасность",
       specificationsItems : [{
         value: 'video_surveillance',
-        label: { title: "Видеонаблюдение", text: "Монолитный" },
+        label: { title: "Видеонаблюдение", text: "" },
       },{
         value: 'fire_protection',
-        label: { title: "Противопожарная система", text: "Монолитный" },
+        label: { title: "Противопожарная система", text: "" },
       },{
         value: 'concierge',
-        label: { title: "Консьерж", text: "Монолитный" },
-      }]
-    },{
-      subtitle: "Строительно-техническая экспертиза",
-      specificationsItems : [{
-        value: 'house_type',
-        label: { title: "Тип дома", text: "Монолитный" },
-      },{
-        value: 'foundation',
-        label: { title: "Фундамент", text: "Ленточный" },
-      },{
-        value: 'roof',
-        label: { title: "Кровля", text: "Черепица" },
-      },{
-        value: 'walls',
-        label: { title: "Стены", text: "Кирпич" },
+        label: { title: "Консьерж", text: "" },
       }]
     }],
+    object_specs_expertise :[
+      {
+        subtitle: "Строительно-техническая экспертиза",
+        specificationsItems : [{
+          value: 'house_type',
+          label: { title: "Тип дома", text: "Монолитный" },
+        },{
+          value: 'foundation',
+          label: { title: "Фундамент", text: "Ленточный" },
+        },{
+          value: 'roof',
+          label: { title: "Кровля", text: "Черепица" },
+        },{
+          value: 'walls',
+          label: { title: "Стены", text: "Кирпич" },
+        }]
+      }
+    ],
     object_developer_info : {
       name: "Брусника",
       developerType: "Девелоперская компания",
@@ -413,40 +416,43 @@ export const fullObjectData = [
     object_specs : [{
       subtitle: "Объекты на  территории жилого комплекса",
       specificationsItems : [{
-        value: 'house_type',
-        label: { title: "Тип дома", text: "Монолитный" },
+        value: 'children_playground',
+        label: { title: "Детская площадка", text: "" },
       },{
-        value: 'house_type',
-        label: { title: "Тип дома", text: "Монолитный" },
-      },{
-        value: 'house_type',
-        label: { title: "Тип дома", text: "Монолитный" },
+        value: 'relax_place',
+        label: { title: "Места для отдыха", text: "" },
       }]
     },{
       subtitle: "Безопасность",
       specificationsItems : [{
-        value: 'house_type',
-        label: { title: "Тип дома", text: "Монолитный" },
+        value: 'video_surveillance',
+        label: { title: "Видеонаблюдение", text: "" },
       },{
-        value: 'house_type',
-        label: { title: "Тип дома", text: "Монолитный" },
+        value: 'fire_protection',
+        label: { title: "Противопожарная система", text: "" },
       },{
-        value: 'house_type',
-        label: { title: "Тип дома", text: "Монолитный" },
-      }]
-    },{
-      subtitle: "Строительно-техническая экспертиза",
-      specificationsItems : [{
-        value: 'house_type',
-        label: { title: "Тип дома", text: "Монолитный" },
-      },{
-        value: 'house_type',
-        label: { title: "Тип дома", text: "Монолитный" },
-      },{
-        value: 'house_type',
-        label: { title: "Тип дома", text: "Монолитный" },
+        value: 'concierge',
+        label: { title: "Консьерж", text: "" },
       }]
     }],
+    object_specs_expertise :[
+      {
+        subtitle: "Строительно-техническая экспертиза",
+        specificationsItems : [{
+          value: 'house_type',
+          label: { title: "Тип дома", text: "Монолитный" },
+        },{
+          value: 'foundation',
+          label: { title: "Фундамент", text: "Ленточный" },
+        },{
+          value: 'roof',
+          label: { title: "Кровля", text: "Черепица" },
+        },{
+          value: 'walls',
+          label: { title: "Стены", text: "Кирпич" },
+        }]
+      }
+    ],
     object_developer_info : {
       name: "Брусника",
       developerType: "Девелоперская компания",
@@ -784,40 +790,43 @@ export const fullObjectData = [
     object_specs : [{
       subtitle: "Объекты на  территории жилого комплекса",
       specificationsItems : [{
-        value: 'house_type',
-        label: { title: "Тип дома", text: "Монолитный" },
+        value: 'children_playground',
+        label: { title: "Детская площадка", text: "" },
       },{
-        value: 'house_type',
-        label: { title: "Тип дома", text: "Монолитный" },
-      },{
-        value: 'house_type',
-        label: { title: "Тип дома", text: "Монолитный" },
+        value: 'relax_place',
+        label: { title: "Места для отдыха", text: "" },
       }]
     },{
       subtitle: "Безопасность",
       specificationsItems : [{
-        value: 'house_type',
-        label: { title: "Тип дома", text: "Монолитный" },
+        value: 'video_surveillance',
+        label: { title: "Видеонаблюдение", text: "" },
       },{
-        value: 'house_type',
-        label: { title: "Тип дома", text: "Монолитный" },
+        value: 'fire_protection',
+        label: { title: "Противопожарная система", text: "" },
       },{
-        value: 'house_type',
-        label: { title: "Тип дома", text: "Монолитный" },
-      }]
-    },{
-      subtitle: "Строительно-техническая экспертиза",
-      specificationsItems : [{
-        value: 'house_type',
-        label: { title: "Тип дома", text: "Монолитный" },
-      },{
-        value: 'house_type',
-        label: { title: "Тип дома", text: "Монолитный" },
-      },{
-        value: 'house_type',
-        label: { title: "Тип дома", text: "Монолитный" },
+        value: 'concierge',
+        label: { title: "Консьерж", text: "" },
       }]
     }],
+    object_specs_expertise :[
+      {
+        subtitle: "Строительно-техническая экспертиза",
+        specificationsItems : [{
+          value: 'house_type',
+          label: { title: "Тип дома", text: "Монолитный" },
+        },{
+          value: 'foundation',
+          label: { title: "Фундамент", text: "Ленточный" },
+        },{
+          value: 'roof',
+          label: { title: "Кровля", text: "Черепица" },
+        },{
+          value: 'walls',
+          label: { title: "Стены", text: "Кирпич" },
+        }]
+      }
+    ],
     object_developer_info : {
       name: "Брусника",
       developerType: "Девелоперская компания",

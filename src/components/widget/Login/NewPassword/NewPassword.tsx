@@ -1,22 +1,26 @@
-import React, {FC, useState} from 'react';
+import React, {FC} from 'react';
 import css from "./NewPassword.module.scss";
 import {LogoIcon} from "../../../../icons/Header/LogoIcon";
-import {InputAlways} from "../input/InputAlways";
 import {InputPassword} from "../input/InputPassword";
-import Typography from "../../../shared/Typography/Typography";
 import BaseButton from "../../../shared/BaseButton/BaseButtons";
+import jwt_decode from "jwt-decode";
+import {AuthApi} from "../../../../api/auth/auth";
 
 type NewPasswordType={
-    account:string
     onEdit:(menu:string)=>void
-    tokenReset?:string
+    tokenReset?:any
     password:string
     onPassword:(e:string)=>void
 }
 
-const NewPassword :FC<NewPasswordType> = ({account,onEdit,tokenReset,password,onPassword}) => {
+const NewPassword :FC<NewPasswordType> = ({onEdit,tokenReset,password,onPassword}) => {
 
-    const newPassword = () =>{
+
+    const nameAccount : {email:string , id:number, role:string} =  jwt_decode(tokenReset)
+    console.log(nameAccount.email)
+
+    const newPassword = async () =>{
+        await AuthApi.changePassword(password,nameAccount.id,tokenReset)
         onEdit('confirmationNewPassword')
     }
 
@@ -24,7 +28,7 @@ const NewPassword :FC<NewPasswordType> = ({account,onEdit,tokenReset,password,on
         <div className={css.recovery}>
             <LogoIcon/>
             <div className={css.marginTypo}>
-                Придумайте новый пароль для аккаунта <span className={css.separate}>{account}</span>
+                Придумайте новый пароль для аккаунта <span className={css.separate}>{nameAccount.email}</span>
             </div>
             <div className={css.margin}>
                 <InputPassword value={password} onChange={onPassword}/>

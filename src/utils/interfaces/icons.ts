@@ -27,7 +27,7 @@ export const enum IconTypes {
 
     // interior and exterior
     swimming_pool='swimming_pool',
-    garage='garage',
+    parking_space='parking_space',
     bedrooms='bedrooms',
     showers='showers',
     bathroom='bathroom',

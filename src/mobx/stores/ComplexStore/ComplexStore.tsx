@@ -38,6 +38,13 @@ class ComplexStore {
             label: { title: "", text: "" },
           }]
         }],
+        object_specs_expertise: [{
+            subtitle: "",
+            specificationsItems: [{
+                value: "",
+                label: { title: "", text: "" },
+            }]
+        }],
         object_developer_info: {
           name: "",
           developerType: "",
