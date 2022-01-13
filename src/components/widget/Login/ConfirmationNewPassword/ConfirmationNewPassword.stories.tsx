@@ -18,5 +18,4 @@ const Template: ComponentStory<typeof ConfirmationNewPassword> = (args) => <Conf
 
 export const ConfirmationNewPassword_ = Template.bind({});
 ConfirmationNewPassword_.args = {
-    account: 'lunaPark'
 };
