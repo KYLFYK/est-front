@@ -24,6 +24,7 @@ import { Footer } from '../../src/components/widget/Footer/ui/Footer'
 import {ScrollUp} from '../../src/components/shared/ScrollUp/ScrollUp'
 
 import {useStore} from '../../src/mobx/stores/ApartamentStore/ApartmentStore'
+import {instance, UrlObj} from '../../src/api/instance'
 
 const city = ['Москва', 'Санкт-Петербург', 'Крым', 'Сочи', 'Нижний Новгород']
 const personalAccount = [{title: 'Личный кабинет', href: '/User', message: 0},
@@ -60,7 +61,8 @@ const tabs = [{
 
 const infrastructureInfo = 'В 15 минутах езды расположена Ялта со своей знаменитой набережной, театр Чехова, авквариум и дельфинарий. Знаменитые дворцы, парки, ботанические сады и винные заводы расположены в получасовой доступности.'
 
-const Apartment: NextPage =  observer(() => {
+const Apartment: NextPage =  observer((props: any) => {
+
   const store = useStore()
 
   const general = useRef(null)
@@ -74,22 +76,21 @@ const Apartment: NextPage =  observer(() => {
 
   const router = useRouter()
 
-  const breadcrumbs = ['Крым', 'Купить участок', store.initialData.name]
-  const views = [store.initialData.publish, store.initialData.views, store.initialData.agency]
+  const breadcrumbs = ['Крым', 'Купить участок', props.name]
+  const views = [props.publish, props.views, store.initialData.agency]
 
   useEffect(() => {
     setRefs([general.current, tours.current, architec.current, infra.current, legal.current, develop.current, record.current]);
-    setTimeout(() => store.fetch(router.query.id), 1000);
+    store.fetch(router.query.id)
   }, [router.query.id, store])
 
   return (
-    !store.fetching ?
     <div >
         <Header city={city} personalAccount={personalAccount}/>
         <Breadcrumbs items={breadcrumbs}/>
         <Views items={views}/>
-        <NameEstate item={store.initialData.name}/>
-        <AdressEstate item={store.initialData.address}/>
+        <NameEstate item={props.name}/>
+        <AdressEstate item={props.address}/>
         <HorizontalTabs refs={refs} tabs={tabs}/>
         <div ref={general}>
           <GeneralInfo info={store.initialData.info_options} price={store.initialData.price} images={IMAGES_SET} />
@@ -117,11 +118,16 @@ const Apartment: NextPage =  observer(() => {
         <Footer color={'nude'}/>
         <ScrollUp/>
     </div>
-    : <h1>Loading...</h1>
   )
 })
 
 export default Apartment
 
-
+export async function getServerSideProps({params}: any) {
+  const res = await fetch(`https://estatum.f-case.ru/api/${UrlObj.apartment}/${params.id}`)
+  const object = await res.json()
+  return {
+      props: object,
+  }
+}
 
