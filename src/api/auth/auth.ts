@@ -41,7 +41,7 @@ export const AuthApi = {
             localStorage.setItem('accessEstatum', res.data.access)
             localStorage.setItem('refreshEstatum', res.data.refresh)
             localStorage.setItem('roleEstatum', token.role)
-            return res
+            return res.status
         } catch (e:any) {
             return( e.response.status)
         }
@@ -134,7 +134,7 @@ type RegistrationType = {
     privateKey: string
     role: string
     phone: string
-    // name:string
+    name:string
     // email:string
 }
 

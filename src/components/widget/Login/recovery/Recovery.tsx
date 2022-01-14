@@ -17,7 +17,7 @@ export const Recovery :React.FC<RecoveryPropsType> = ({onEdit,email,onValueEmail
     const backRecovery = async () =>{
 
         const res = await AuthApi.resetPassword(email)
-        if (res ===200){
+        if (res ===201){
             onEdit('recoveryMail')
         }else{
             alert('Ошибка в названии email')

@@ -50,10 +50,10 @@ export const Registration: React.FC<RegistrationPropsType> = ({enterLogin, onEdi
                 role: selectChange,
                 // publicKey:valueLogin,
                 // email:valueEmail,
-                // name:valueName,
+                name:valueName,
                 phone:valuePhone,
             })
-            if (res === 200){
+            if (res === 201){
                 onEmail(valueEmail)
                 onEdit('thankRegistering')
             }else{
