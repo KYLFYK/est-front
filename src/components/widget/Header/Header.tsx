@@ -105,7 +105,6 @@ export const Header: FC<HeaderPropsType> = ({className, city, personalAccount, m
 
     const tokenConformation  = router.query.token && router.query.token
 
-    console.log(tokenConformation)
     const searchModal = (menu: string) => {
         switch (menu) {
             case 'login':
@@ -135,7 +134,7 @@ export const Header: FC<HeaderPropsType> = ({className, city, personalAccount, m
         setEdit(e)
         setActiveModal(false)
     }
-    console.log(router)
+
     useEffect(()=>{
        if(router.query.text ==='email-conformation'){
            searchModal('email-conformation')

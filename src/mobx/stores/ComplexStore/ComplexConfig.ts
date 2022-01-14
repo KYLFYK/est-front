@@ -77,7 +77,22 @@ export const fullObjectData = [
           value: 'walls',
           label: { title: "Стены", text: "Кирпич" },
         }]
-      }
+      },{
+            subtitle: "Инженерные коммуникации",
+            specificationsItems : [{
+                value: 'water_supply',
+                label: { title: "Водопровод", text: "Центральный" },
+            },{
+                value: 'heating',
+                label: { title: "Отопление", text: "Центральное" },
+            },{
+                value: 'sewage_system',
+                label: { title: "Канализация", text: "Центральная" },
+            },{
+                value: 'electricity',
+                label: { title: "Элетричество", text: "Генератор" },
+            }]
+        }
     ],
     object_developer_info : {
       name: "Брусника",
@@ -359,9 +374,9 @@ export const fullObjectData = [
       }
     },
     schedule: [
-      {label: 'Август 2021', value: '0', title: 'Продолжали работы на фасаде.'}, 
-      {label: 'Сентябрь 2021', value: '1', title: 'Завершили кладку кирпичных стен. Монтировали межкомнатные перегородки.'}, 
-      {label: 'Октябрь 2021', value: '2', title: 'Штукатурили стены. Монтировали окна и витражи.'}, 
+      {label: 'Август 2021', value: '0', title: 'Продолжали работы на фасаде.'},
+      {label: 'Сентябрь 2021', value: '1', title: 'Завершили кладку кирпичных стен. Монтировали межкомнатные перегородки.'},
+      {label: 'Октябрь 2021', value: '2', title: 'Штукатурили стены. Монтировали окна и витражи.'},
       {label: 'Ноябрь 2021', value: '3', title: 'Выполняли устройство сетей электроснабжения, отопления, водоснабжения, вентиляции и канализации.'}
     ],
     planningList : [
@@ -451,7 +466,22 @@ export const fullObjectData = [
           value: 'walls',
           label: { title: "Стены", text: "Кирпич" },
         }]
-      }
+      },{
+            subtitle: "Инженерные коммуникации",
+            specificationsItems : [{
+                value: 'water_supply',
+                label: { title: "Водопровод", text: "Центральный" },
+            },{
+                value: 'heating',
+                label: { title: "Отопление", text: "Центральное" },
+            },{
+                value: 'sewage_system',
+                label: { title: "Канализация", text: "Центральная" },
+            },{
+                value: 'electricity',
+                label: { title: "Элетричество", text: "Генератор" },
+            }]
+        }
     ],
     object_developer_info : {
       name: "Брусника",
@@ -733,9 +763,9 @@ export const fullObjectData = [
       }
     },
     schedule: [
-      {label: 'Август 2021', value: '0', title: 'Продолжали работы на фасаде.'}, 
-      {label: 'Сентябрь 2021', value: '1', title: 'Завершили кладку кирпичных стен. Монтировали межкомнатные перегородки.'}, 
-      {label: 'Октябрь 2021', value: '2', title: 'Штукатурили стены. Монтировали окна и витражи.'}, 
+      {label: 'Август 2021', value: '0', title: 'Продолжали работы на фасаде.'},
+      {label: 'Сентябрь 2021', value: '1', title: 'Завершили кладку кирпичных стен. Монтировали межкомнатные перегородки.'},
+      {label: 'Октябрь 2021', value: '2', title: 'Штукатурили стены. Монтировали окна и витражи.'},
       {label: 'Ноябрь 2021', value: '3', title: 'Выполняли устройство сетей электроснабжения, отопления, водоснабжения, вентиляции и канализации.'}
     ],
     planningList : [
@@ -825,6 +855,22 @@ export const fullObjectData = [
           value: 'walls',
           label: { title: "Стены", text: "Кирпич" },
         }]
+        },
+        {
+            subtitle: "Инженерные коммуникации",
+            specificationsItems : [{
+                value: 'water_supply',
+                label: { title: "Водопровод", text: "Центральный" },
+            },{
+                value: 'heating',
+                label: { title: "Отопление", text: "Центральное" },
+            },{
+                value: 'sewage_system',
+                label: { title: "Канализация", text: "Центральная" },
+            },{
+                value: 'electricity',
+                label: { title: "Элетричество", text: "Генератор" },
+            }]
       }
     ],
     object_developer_info : {
@@ -1107,9 +1153,9 @@ export const fullObjectData = [
       }
     },
     schedule: [
-      {label: 'Август 2021', value: '0', title: 'Продолжали работы на фасаде.'}, 
-      {label: 'Сентябрь 2021', value: '1', title: 'Завершили кладку кирпичных стен. Монтировали межкомнатные перегородки.'}, 
-      {label: 'Октябрь 2021', value: '2', title: 'Штукатурили стены. Монтировали окна и витражи.'}, 
+      {label: 'Август 2021', value: '0', title: 'Продолжали работы на фасаде.'},
+      {label: 'Сентябрь 2021', value: '1', title: 'Завершили кладку кирпичных стен. Монтировали межкомнатные перегородки.'},
+      {label: 'Октябрь 2021', value: '2', title: 'Штукатурили стены. Монтировали окна и витражи.'},
       {label: 'Ноябрь 2021', value: '3', title: 'Выполняли устройство сетей электроснабжения, отопления, водоснабжения, вентиляции и канализации.'}
     ],
     planningList : [

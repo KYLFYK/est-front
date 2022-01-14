@@ -15,7 +15,8 @@ type RegistrationPropsType = {
 
 export const Registration: React.FC<RegistrationPropsType> = ({enterLogin, onEdit, onEmail}) => {
 
-    const option = [{value: '', label: 'Выберите роль *'},
+    const option = [
+        {value: '', label: 'Выберите роль *'},
         {value: 'agency', label: 'Агентство'},
         {value: 'agent', label: 'Агент'},
         {value: 'customer', label: 'Собственник'},
@@ -42,7 +43,7 @@ export const Registration: React.FC<RegistrationPropsType> = ({enterLogin, onEdi
         console.log(valueLogin, valueEmail, valuePassword, valueName, valuePhone, confirmation, selectChange)
         const valid= [valueLogin, valueEmail, valuePassword, valueName, valuePhone, selectChange]
         const error = valid.every(t=>t.trim() !== '')
-        if(error){
+        if(error && confirmation){
             const res = await AuthApi.registration({
                 privateKey: valuePassword,
                 publicKey: valueEmail,
@@ -52,8 +53,13 @@ export const Registration: React.FC<RegistrationPropsType> = ({enterLogin, onEdi
                 // name:valueName,
                 phone:valuePhone,
             })
-            onEmail(valueEmail)
-            onEdit('thankRegistering')
+            if (res === 200){
+                onEmail(valueEmail)
+                onEdit('thankRegistering')
+            }else{
+                alert(res)
+            }
+
         }else {
             alert('Выберите роль и заполните поля')
         }
@@ -78,7 +84,7 @@ export const Registration: React.FC<RegistrationPropsType> = ({enterLogin, onEdi
                 onValueName={setValueName}
                 onValuePhone={setValuePhone}
             />
-            <Checkbox className={css.checkBoxMargin}>
+            <Checkbox className={css.checkBoxMargin} isActive={confirmation} onChange={()=>setConfirmation(!confirmation)} >
                 <div className={css.agreement}>
                     Принимаю <span className={css.color}>Пользовательское соглашение, Политику конфеденциальности</span>
                     , даю <span className={css.color}>согласие на обработку персональных данных</span>

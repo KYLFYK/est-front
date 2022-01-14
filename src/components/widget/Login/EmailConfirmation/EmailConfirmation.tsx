@@ -1,4 +1,4 @@
-import React, {FC, useEffect} from "react";
+import React, {FC, useEffect, useState} from "react";
 import css from "../ConfirmationNewPassword/ConfirmationNewPassword.module.scss";
 import {LogoIcon} from "../../../../icons/Header/LogoIcon";
 import Typography from "../../../shared/Typography/Typography";
@@ -11,14 +11,14 @@ type ConfirmationNewPasswordType ={
 }
 
 export const EmailConformation :FC<ConfirmationNewPasswordType> = ({onEdit,tokenConformationEmail}) => {
-
-    // get tokenConformation axios NEED
-    console.log(tokenConformationEmail)
+    let res
+    const [error,setError]=useState<string>('')
 
     const emailConformation = async (e:any) =>{
-        console.log(e)
-        const res = await AuthApi.confirmEmail(e)
-        console.log('res',res)
+         res = await AuthApi.confirmEmail(e)
+        if(res ===400){
+            setError('Истекло время отправления запроса.')
+        }
     }
 
     useEffect(()=>{
@@ -29,7 +29,11 @@ export const EmailConformation :FC<ConfirmationNewPasswordType> = ({onEdit,token
             <LogoIcon/>
             <div className={css.margin}>
                 <Typography size={'small'} >
-                   Адрес электронной почты подтвержден
+                    {
+                        error === ''
+                            ?<div>Адрес электронной почты подтвержден</div>
+                            : <div>{error}</div>
+                    }
                 </Typography>
             </div>
             <BaseButton onClick={()=>onEdit('login')} type="secondary" isActive className={css.width}>

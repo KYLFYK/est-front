@@ -41,9 +41,9 @@ export const AuthApi = {
             localStorage.setItem('accessEstatum', res.data.access)
             localStorage.setItem('refreshEstatum', res.data.refresh)
             localStorage.setItem('roleEstatum', token.role)
-            console.log("res", res)
-        } catch (e) {
-            console.log('error', e)
+            return res
+        } catch (e:any) {
+            return( e.response.status)
         }
     },
     me: async () => {
@@ -78,16 +78,18 @@ export const AuthApi = {
     },
     registration: async (registration: RegistrationType) => {
         try {
-            await instance.post(`${UrlAuth.registration}`, registration)
-        } catch (e) {
-
+           const res = await instance.post(`${UrlAuth.registration}`, registration)
+            return res.request.status
+        } catch (e:any) {
+            return e.response.data.message
         }
     },
     resetPassword: async (email: any) => {
         try {
-            await instance.post(`${UrlAuth.resetPassword}`, {email: email})
-        } catch (e) {
-            console.log(e)
+            const res = await instance.post(`${UrlAuth.resetPassword}`, {email: email})
+            return res.request.status
+        } catch (e:any) {
+            return e.request.status
         }
     },
     resetPasswordGet: async (token: any) => {
@@ -98,17 +100,19 @@ export const AuthApi = {
         }
     },
     changePassword: async (newPassword: string, accountId: number, token: string) => {
+       let res
         try {
-            await instance.patch(`${UrlAuth.changePassword}?newPassword=${newPassword}&accountId=${accountId}&token=${token}`)
-        } catch (e) {
-            console.log(e)
+           return res = await instance.patch(`${UrlAuth.changePassword}?newPassword=${newPassword}&accountId=${accountId}&token=${token}`)
+        } catch (e:any) {
+            return res = e.response.status
         }
     },
     confirmEmail: async (token: any) => {
+        let res
         try {
             await instance.patch(`${UrlAuth.confirmEmail}/${token}`, token)
-        } catch (e) {
-            console.log(e)
+        } catch (e:any) {
+            return e.response.status
         }
 
     }

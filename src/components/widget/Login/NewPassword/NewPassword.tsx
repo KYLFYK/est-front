@@ -20,8 +20,15 @@ const NewPassword :FC<NewPasswordType> = ({onEdit,tokenReset,password,onPassword
     console.log(nameAccount.email)
 
     const newPassword = async () =>{
-        await AuthApi.changePassword(password,nameAccount.id,tokenReset)
-        onEdit('confirmationNewPassword')
+        if(password.trim() !== ''){
+            const res =  await AuthApi.changePassword(password,nameAccount.id,tokenReset)
+            if(res===403){
+                alert('Истекло время обновления пароля')
+            } else{
+                onEdit('confirmationNewPassword')
+            }
+        }
+
     }
 
     return (

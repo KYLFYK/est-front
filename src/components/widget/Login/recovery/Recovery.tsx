@@ -15,10 +15,15 @@ type RecoveryPropsType = {
 export const Recovery :React.FC<RecoveryPropsType> = ({onEdit,email,onValueEmail}) => {
 
     const backRecovery = async () =>{
-        console.log(email)
-        onEdit('recoveryMail')
-        await AuthApi.resetPassword(email)
+
+        const res = await AuthApi.resetPassword(email)
+        if (res ===200){
+            onEdit('recoveryMail')
+        }else{
+            alert('Ошибка в названии email')
+        }
     }
+
     return (
         <div className={css.recovery}>
             <LogoIcon/>

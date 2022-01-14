@@ -75,7 +75,7 @@ const ContactOffice: FC<ContactOfficeType> = ({contactOffice, link, destination}
                 <a href={`https://yandex.by/maps/?ll=${destination.lng}%2C${destination.lat}&mode=routes&rtext=${currentLocation?.coords.latitude}%2C${currentLocation?.coords.longitude}~44.962107%2C34.104277&rtt=auto&ruri=~&z=7`} 
                     style={{textDecoration:'none'}} target={'_blank'} rel={'noreferrer'}>
                     <Typography color={'nude'} weight={'bold'}>
-                        Проложить маршрут
+                        Проложить маршрут до офиса
                     </Typography>
                 </a>
             </Link>
