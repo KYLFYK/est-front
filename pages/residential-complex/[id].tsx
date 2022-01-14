@@ -1,4 +1,5 @@
 import type { NextPage } from 'next'
+import Head from "next/head"
 import { observer } from "mobx-react-lite"
 import React, {useRef, useEffect, useState} from 'react'
 import { useRouter } from 'next/router'
@@ -21,6 +22,7 @@ import { Footer } from '../../src/components/widget/Footer/ui/Footer'
 import {ScrollUp} from '../../src/components/shared/ScrollUp/ScrollUp'
 
 import {useStore} from '../../src/mobx/stores/ComplexStore/ComplexStore'
+import {instance, UrlObj} from '../../src/api/instance'
 
 const city = ['Москва', 'Санкт-Петербург', 'Крым', 'Сочи', 'Нижний Новгород']
 const personalAccount = [{title: 'Личный кабинет', href: '/User', message: 0},
@@ -54,8 +56,10 @@ const tabs = [{
 
 const infrastructureInfo = 'В 15 минутах езды расположена Ялта со своей знаменитой набережной, театр Чехова, авквариум и дельфинарий. Знаменитые дворцы, парки, ботанические сады и винные заводы расположены в получасовой доступности.'
 
-const ResidentialComplex: NextPage = observer(() => {
+const ResidentialComplex: NextPage = observer((props: any) => {
+
   const store = useStore()
+  const router = useRouter()
 
   const general = useRef(null)
   const specs = useRef(null)
@@ -64,25 +68,26 @@ const ResidentialComplex: NextPage = observer(() => {
   const infra = useRef(null)
   const developer = useRef(null)
   const [refs, setRefs] = useState<any>([])
-  
-  const router = useRouter()
 
-  const breadcrumbs = ['Крым', 'Купить участок', `${store.initialData.name}`]
-  const views = [store.initialData.publish, store.initialData.views, store.initialData.agency]
+  const breadcrumbs = ['Крым', 'Купить участок', `${props.name}`]
+  const views = [props.createAt, props.views]
 
   useEffect(() => {
     setRefs([general.current, specs.current, architec.current, plansec.current, infra.current, developer.current])
-    setTimeout(() => store.fetch(router.query.id), 2000);
+    store.fetch(router.query.id)
   }, [router.query.id, store])
 
   return (
-    !store.fetching ?
     <div >
+        <Head>
+          <meta name="keywords" content={props.name}></meta>
+          <title>{props.name}</title>
+        </Head>
         <Header city={city} personalAccount={personalAccount}/>
         <Breadcrumbs items={breadcrumbs}/>
         <Views items={views}/>
-        <NameEstate item={store.initialData.name}/>
-        <AdressEstate item={store.initialData.address}/>
+        <NameEstate item={props.name}/>
+        <AdressEstate item={props.address}/>
         <HorizontalTabs tabs={tabs} refs={refs}/>
         <div ref={general}>
           <GeneralInfo info={store.initialData.info_options} price={store.initialData.price} images={IMAGES_SET} />
@@ -94,10 +99,10 @@ const ResidentialComplex: NextPage = observer(() => {
           <ObjectSpecifications specificationsLists={store.initialData.object_specs} title={"Архитектурно-планировочные решения"}/>
         </div>
         <div ref={plansec}>
-          <Planning FilterComponent={<PlanningFilter />} planningList={store.initialData.planningList}/>
+          <Planning FilterComponent={<PlanningFilter />} planningList={props.planningList}/>
         </div>
         <div ref={infra}>
-          <Map currentHouse={store.initialData} infrastructura={infrastructura} location={'infrastructure'} InfrastructureInfo={infrastructureInfo}/>
+          <Map currentHouse={store.initialData} infrastructura={infrastructura} location={'infrastructure'} InfrastructureInfo={props.property.infrastructure}/>
         </div>
         <div ref={developer}>
           <ObjectDeveloper developerData={store.initialData.object_developer_info}/>
@@ -106,11 +111,15 @@ const ResidentialComplex: NextPage = observer(() => {
         <Footer color={'accent'}/>
         <ScrollUp refs={refs}/>
     </div>
-    : <h1>Loading...</h1>
   )
 })
 
 export default ResidentialComplex
 
-
-
+export async function getServerSideProps({params}: any) {
+  const res = await fetch(`https://estatum.f-case.ru/api/${UrlObj.complex}/${params.id}`)
+  const object = await res.json()
+  return {
+      props: object,
+  }
+}
