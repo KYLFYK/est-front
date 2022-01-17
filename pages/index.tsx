@@ -1,6 +1,6 @@
 import type { NextPage } from 'next'
 import React from 'react'
-import Header from '../src/components/widget/Header/Header'
+import { MainContainer } from 'src/components/containers/MainContainer/MainContainer'
 import {HeadFilter} from '../src/components/containers/HeadFilter/Finder'
 import { BestOffers } from '../src/components/containers/BestOffers/bestOffers'
 import {IMAGES_SET} from '../src/components/containers/GeneralInfo/config'
@@ -12,8 +12,6 @@ import { mocAdvantages } from '../src/components/containers/AdvantageList/config
 import { OfferNews } from '../src/components/containers/OfferNews/offerNews'
 import OurOffice from '../src/components/containers/OurOffice/OurOffice'
 import { OurOfficeType } from '../src/components/containers/OurOffice/OurOffice'
-import { Footer } from '../src/components/widget/Footer/ui/Footer'
-import {ScrollUp} from '../src/components/shared/ScrollUp/ScrollUp'
 
 const city = ['Москва', 'Санкт-Петербург', 'Крым', 'Сочи', 'Нижний Новгород']
 const personalAccount = [{title: 'Личный кабинет', href: '/User', message: 0},
@@ -30,7 +28,7 @@ const estateOffers = [{id: 1, url: 'www.google.com', img: IMAGES_SET, tags: ["П
   {id: 3, url: 'www.google.com', img: IMAGES_SET, tags: ["Покупка", 'Таунхаус', 'Новостройка']}
 ]
 
-const tagsButton = ['Покупка', 'Аренда', 'Дом', 'Коммерческая недвижимость', 'Новостройка', 'Вторичное жилье',
+const tagsButton = ['Покупка', 'Аренда', 'Дом', 'Коммерческая недвижимость', 'Новостройка', 'Вторичноежилье',
   'Строящийся дом', 'От собственника']
 
 const ourOffice: OurOfficeType = {
@@ -54,19 +52,17 @@ const ourOffice: OurOfficeType = {
 }
 
 const Start: NextPage = () => {
+
   return (
-    <div >
-        <Header city={city} personalAccount={personalAccount}/>
+    <MainContainer keywords={"Главная"} title={"Главная"} city={city} personalAccount={personalAccount} footerColor='accent'>
         <HeadFilter />
         <BestOffers tagsButton={tagsButton} bestOffers={estateOffers}/>
-        <DevelopersContainer title={'Застройщики и агентства, которые нам доверяют'} developersInfo={mockDevelopers}/>
+        <DevelopersContainer title={'Застройщики и агества, которые нам доверяют'} developersInfo={mockDevelopers}/>
         <AgentsContainer title={'Наши агенты к вашим услугам'} agents={mocAgent.Agents}/>
         <Advantages advantages={mocAdvantages}/>
         <OfferNews/>
         <OurOffice ourOffice={ourOffice.ourOffice}/>
-        <Footer color={'accent'}/>
-        <ScrollUp/>
-    </div>
+    </MainContainer>
   )
 }
 

@@ -1,6 +1,6 @@
 import type { NextPage } from 'next'
 import React, {useState} from 'react'
-import Header from '../../src/components/widget/Header/Header'
+import { MainContainer } from 'src/components/containers/MainContainer/MainContainer'
 import {Breadcrumbs} from '../../src/components/shared/Breadcrumbs/Breadcrumbs'
 import { Filter } from '../../src/components/containers/Filter/Filter'
 import CardContainer from '../../src/components/containers/CardContainer/CardContainer'
@@ -8,7 +8,6 @@ import Map from '../../src/components/containers/Maps/MapFinder/index'
 import { mapData } from '../../src/components/containers/Maps/MapFinder/config';
 
 const city = ['Москва', 'Санкт-Петербург', 'Крым', 'Сочи', 'Нижний Новгород']
-
 
 const personalAccount = [{title: 'Личный кабинет', href: '/User', message: 0},
   {title: 'Избранное', href: '/User', message: 0},
@@ -28,8 +27,7 @@ const Finder: NextPage = () => {
   const [view, setView] = useState('mapView')
 
   return (
-    <div>
-        <Header city={city} personalAccount={personalAccount}/>
+    <MainContainer keywords={"Поиск"} title={"Поиск"} city={city} personalAccount={personalAccount} >
         <Breadcrumbs items={breadcrumbs}/>
         <div style={{margin: '20px 0 0 0'}}>
           <Filter/>
@@ -38,7 +36,7 @@ const Finder: NextPage = () => {
           <Map mapData={mapData} location={'finder'} center={center} view={view} setView={setView}/>
           <CardContainer mapData={mapData} view={view} setView={setView}/>
         </div>
-    </div>
+    </MainContainer>
   )
 }
 

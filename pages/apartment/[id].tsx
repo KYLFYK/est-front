@@ -2,7 +2,7 @@ import type { NextPage } from 'next'
 import { observer } from "mobx-react-lite"
 import React, {useRef, useEffect, useState} from 'react'
 import { useRouter } from 'next/router'
-import Header from '../../src/components/widget/Header/Header'
+import { MainContainer } from 'src/components/containers/MainContainer/MainContainer'
 import {Breadcrumbs} from '../../src/components/shared/Breadcrumbs/Breadcrumbs'
 import {Views} from '../../src/components/shared/Views/Views'
 import {NameEstate} from '../../src/components/shared/NameEstate/NameEstate'
@@ -21,7 +21,6 @@ import {Mortgage} from '../../src/components/shared/Mortgage/Mortgage'
 import {Record} from '../../src/components/containers/Record/Record'
 import RecordAgent from '../../src/components/containers/Record/RecordAgent.json'
 import { Footer } from '../../src/components/widget/Footer/ui/Footer'
-import {ScrollUp} from '../../src/components/shared/ScrollUp/ScrollUp'
 
 import {useStore} from '../../src/mobx/stores/ApartamentStore/ApartmentStore'
 import {instance, UrlObj} from '../../src/api/instance'
@@ -62,7 +61,6 @@ const tabs = [{
 const infrastructureInfo = 'В 15 минутах езды расположена Ялта со своей знаменитой набережной, театр Чехова, авквариум и дельфинарий. Знаменитые дворцы, парки, ботанические сады и винные заводы расположены в получасовой доступности.'
 
 const Apartment: NextPage =  observer((props: any) => {
-
   const store = useStore()
 
   const general = useRef(null)
@@ -85,8 +83,7 @@ const Apartment: NextPage =  observer((props: any) => {
   }, [router.query.id, store])
 
   return (
-    <div >
-        <Header city={city} personalAccount={personalAccount}/>
+    <MainContainer keywords={props.name} title={props.name} city={city} personalAccount={personalAccount} refs={refs}>
         <Breadcrumbs items={breadcrumbs}/>
         <Views items={views}/>
         <NameEstate item={props.name}/>
@@ -100,7 +97,7 @@ const Apartment: NextPage =  observer((props: any) => {
           <ToursContainer Online_tour={store.initialData.online_tour}/>
         </div>
         <div ref={architec}>
-          <ObjectSpecifications specificationsLists={store.initialData.object_specs} title={"Архитектурно-планировочные решения"}/>
+          <ObjectSpecifications specificationsLists={store.initialData.object_specs} title={"Особенности"}/>
         </div>
         <div ref={infra}>
           <Map currentHouse={JSON.parse(JSON.stringify(store.initialData))} infrastructura={infrastructura} location={'infrastructure'} InfrastructureInfo={infrastructureInfo}/>
@@ -113,11 +110,10 @@ const Apartment: NextPage =  observer((props: any) => {
         </div>
         <Mortgage/>
         <div ref={record}>
-          <Record Record={RecordAgent.Record} title={'квартиру'}/>
+          <Record Record={RecordAgent.Record}/>
         </div>
         <Footer color={'nude'}/>
-        <ScrollUp/>
-    </div>
+    </MainContainer>
   )
 })
 

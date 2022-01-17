@@ -20,7 +20,7 @@ function MyApp({ Component, pageProps }: AppProps) {
   return (
     <StoreProvider store={RootStore}>
       <MuiThemeProvider theme={theme}>
-        {loading ? <h1>LOADING...</h1> : <Component {...pageProps} />}
+        {loading ? <h1>LOADING...</h1> : <Component {...pageProps}/>}
       </MuiThemeProvider>
     </StoreProvider>
   )

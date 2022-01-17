@@ -1,9 +1,8 @@
 import type { NextPage } from 'next'
-import Head from "next/head"
 import { observer } from "mobx-react-lite"
 import React, {useRef, useEffect, useState} from 'react'
 import { useRouter } from 'next/router'
-import Header from '../../src/components/widget/Header/Header'
+import { MainContainer } from 'src/components/containers/MainContainer/MainContainer'
 import {Breadcrumbs} from '../../src/components/shared/Breadcrumbs/Breadcrumbs'
 import {Views} from '../../src/components/shared/Views/Views'
 import {NameEstate} from '../../src/components/shared/NameEstate/NameEstate'
@@ -18,14 +17,11 @@ import Map from '../../src/components/containers/Maps/MapInfrastructure/index'
 import { infrastructura } from '../../src/components/containers/Maps/MapInfrastructure/config'
 import ObjectDeveloper from '../../src/components/containers/ObjectDeveloper/ObjectDeveloper'
 import ConstructProgress from '../../src/components/containers/ConstructProgress/ConstructProgress'
-import { Footer } from '../../src/components/widget/Footer/ui/Footer'
-import {ScrollUp} from '../../src/components/shared/ScrollUp/ScrollUp'
 
 import {useStore} from '../../src/mobx/stores/ComplexStore/ComplexStore'
 import {instance, UrlObj} from '../../src/api/instance'
 
 const city = ['Москва', 'Санкт-Петербург', 'Крым', 'Сочи', 'Нижний Новгород']
-
 const personalAccount = [{title: 'Личный кабинет', href: '/User', message: 0},
   {title: 'Избранное', href: '/User', message: 0},
   {title: 'Сохраненные поиски', href: '/User', message: 0},
@@ -55,8 +51,6 @@ const tabs = [{
   }
 ]
 
-const infrastructureInfo = 'В 15 минутах езды расположена Ялта со своей знаменитой набережной, театр Чехова, авквариум и дельфинарий. Знаменитые дворцы, парки, ботанические сады и винные заводы расположены в получасовой доступности.'
-
 const ResidentialComplex: NextPage = observer((props: any) => {
 
   const store = useStore()
@@ -79,12 +73,7 @@ const ResidentialComplex: NextPage = observer((props: any) => {
   }, [router.query.id, store])
 
   return (
-    <div >
-        <Head>
-          <meta name="keywords" content={props.name}></meta>
-          <title>{props.name}</title>
-        </Head>
-        <Header city={city} personalAccount={personalAccount}/>
+    <MainContainer keywords={props.name} title={props.name} city={city} personalAccount={personalAccount} footerColor={'accent'} refs={refs}>
         <Breadcrumbs items={breadcrumbs}/>
         <Views items={views}/>
         <NameEstate item={props.name}/>
@@ -97,7 +86,7 @@ const ResidentialComplex: NextPage = observer((props: any) => {
           <ObjectSpecifications specificationsLists={store.initialData.object_specs} title={"Особенности"}/>
         </div>
         <div ref={architec}>
-          <ObjectSpecifications specificationsLists={store.initialData.object_specs_expertise} title={"Архитектурно-планировочные решения"}/>
+          <ObjectSpecifications specificationsLists={store.initialData.object_specs} title={"Архитектурно-планировочные решения"}/>
         </div>
         <div ref={plansec}>
           <Planning FilterComponent={<PlanningFilter />} planningList={props.planningList}/>
@@ -109,9 +98,7 @@ const ResidentialComplex: NextPage = observer((props: any) => {
           <ObjectDeveloper developerData={store.initialData.object_developer_info}/>
         </div>
         <ConstructProgress images={IMAGES_SET} info={store.initialData.schedule}/>
-        <Footer color={'accent'}/>
-        <ScrollUp refs={refs}/>
-    </div>
+    </MainContainer>
   )
 })
 
