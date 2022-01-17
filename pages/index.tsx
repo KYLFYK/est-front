@@ -28,7 +28,7 @@ const estateOffers = [{id: 1, url: 'www.google.com', img: IMAGES_SET, tags: ["П
   {id: 3, url: 'www.google.com', img: IMAGES_SET, tags: ["Покупка", 'Таунхаус', 'Новостройка']}
 ]
 
-const tagsButton = ['Покупка', 'Аренда', 'Дом', 'Коммерческая недвижимость', 'Новостройка', 'Вторичноежилье',
+const tagsButton = ['Покупка', 'Аренда', 'Дом', 'Коммерческая недвижимость', 'Новостройка', 'Вторичное жилье',
   'Строящийся дом', 'От собственника']
 
 const ourOffice: OurOfficeType = {
@@ -57,7 +57,7 @@ const Start: NextPage = () => {
     <MainContainer keywords={"Главная"} title={"Главная"} city={city} personalAccount={personalAccount} footerColor='accent'>
         <HeadFilter />
         <BestOffers tagsButton={tagsButton} bestOffers={estateOffers}/>
-        <DevelopersContainer title={'Застройщики и агества, которые нам доверяют'} developersInfo={mockDevelopers}/>
+        <DevelopersContainer title={'Застройщики и агенства, которые нам доверяют'} developersInfo={mockDevelopers}/>
         <AgentsContainer title={'Наши агенты к вашим услугам'} agents={mocAgent.Agents}/>
         <Advantages advantages={mocAdvantages}/>
         <OfferNews/>

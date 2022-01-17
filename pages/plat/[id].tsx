@@ -36,7 +36,7 @@ const tabs = [{
     title: "Общая информация",
   },
   {
-    title: "Об уастке",
+    title: "Об участке",
   },
   {
     title: "Инфраструктура",
@@ -83,7 +83,7 @@ const Plat: NextPage = observer((props: any) => {
         </div>
         <ObjectDescription items={store.initialData.description_items}/>
         <div ref={specs}>
-          <ObjectSpecifications specificationsLists={store.initialData.object_specs} title={"Особенности"}/>
+          <ObjectSpecifications specificationsLists={store.initialData.object_specs} title={"Об участке"}/>
         </div>
         <div ref={infra}>
           <Map currentHouse={store.initialData} infrastructura={infrastructura} location={'infrastructure'} InfrastructureInfo={infrastructureInfo}/>
@@ -93,7 +93,7 @@ const Plat: NextPage = observer((props: any) => {
         </div>
         <Mortgage/>
         <div ref={record}>
-          <Record Record={RecordAgent.Record}/>
+          <Record Record={RecordAgent.Record} title={'участок'}/>
         </div>
     </MainContainer>
   )
