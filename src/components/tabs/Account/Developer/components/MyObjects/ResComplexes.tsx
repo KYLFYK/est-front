@@ -33,7 +33,11 @@ const Data = {
   ],
 };
 
-export const ResComplexes: FC = () => {
+type ResComplexesType ={
+  onComplex:()=>void
+}
+
+export const ResComplexes: FC<ResComplexesType> = ({onComplex}) => {
   const recover = (id: string) => {
     console.log(id, "recover");
   };
@@ -48,7 +52,7 @@ export const ResComplexes: FC = () => {
   };
 
   return (
-    <div className={styles.wrapper}>
+    <div className={styles.wrapper} onClick={onComplex}>
       <SearchOffice hideButton placeholder={"Поиск"} />
       <FilterSearch className={styles.filter} type="agent" />
       <div className={styles.objectsList}>

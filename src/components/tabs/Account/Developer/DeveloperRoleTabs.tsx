@@ -7,7 +7,7 @@ import { MyObjects } from "./components/MyObjects";
 export const DeveloperRoleTabs: FC = () => {
   return (
     <VerticalTabs
-        link={false}
+        link={true}
       tabs={[
         { title: "Личный кабинет", Component: <PersonalArea /> },
         { title: "Мои объекты", Component: <MyObjects /> },

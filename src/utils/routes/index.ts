@@ -7,7 +7,7 @@ export const searchNamePage = (page:string) => {
         case 'Объявления': return 'ads'
         case 'Мои объекты': return 'ads'
         case 'Мои объявления': return 'ads'
-        case 'Уведомления': return 'notification'
+        case 'Уведомления': return 'notifications'
         case 'Тарифы размещения': return 'tariff'
         case 'Профпоиск': return 'proff-search'
         case 'Сообщения': return 'messages'
