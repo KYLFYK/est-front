@@ -4,6 +4,7 @@ import {Card} from "../../../../../../../../shared/Mortgage/Card";
 import Image from "next/image";
 import {BaseInput} from "../../../../../../../../shared/BaseInput/Input";
 import {makeStyles} from "@material-ui/core";
+import {myLoader} from "../../../../../../../../../utils/image/image";
 
 export const useStyles = makeStyles(() => ({
         card: {
@@ -159,6 +160,7 @@ const ViewingLetter: FC<ViewingLetterType> = ({
                                 width={'50px'}
                                 height={'50px'}
                                 alt={'photo'}
+                                loader={e=>myLoader(e.src,e.width,e.quality)}
                             />
                         </div>
                     </div>

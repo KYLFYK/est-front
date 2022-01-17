@@ -40,8 +40,8 @@ const moc = [
 
 const personalAcc = [
     [           //'agency'
-        {title: 'Аккаунт Агентства', href: '/cabinet', message: 0},
-        {title: 'Каталог заявок на просмотр', href: '/requests', message: 0},
+        {title: 'Личный кабинет', href: '/cabinet', message: 0},
+        {title: 'Заявки на просмотр', href: '/requests', message: 0},
         {title: 'Мои объявления', href: '/ads', message: 0},
         {title: 'Тарифы размещения', href: '/tariff', message: 12},
         {title: 'Профпоиск', href: '/search', message: 3},
@@ -214,7 +214,14 @@ export const Header: FC<HeaderPropsType> = ({className, city, personalAccount, m
             console.log('error')
         }
     }, [])
-    
+
+
+    const mocRole  =(role:string)=>{
+        searchLoginMoc(role)
+        localStorage.setItem('roleEstatum',role)
+    }
+
+
     return (
         <div className={classNames(css.header, className)}>
             <Link href={'/'} passHref>
@@ -274,12 +281,12 @@ export const Header: FC<HeaderPropsType> = ({className, city, personalAccount, m
                     </Modal>
                 }
 
-                {/*<button onClick={()=>searchLoginMoc('agency')}>agency</button>}
-                {<button onClick={()=>searchLoginMoc('agent')}>agent</button>}
-                {<button onClick={()=>searchLoginMoc('owner')}>owner</button>}
-                {<button onClick={()=>searchLoginMoc('developer')}>developer</button>}
-                {<button onClick={()=>searchLoginMoc('admin')}>admin</button>}
-                {<button onClick={()=>searchLoginMoc('bank')}>bank</button>*/}
+                <button onClick={()=>mocRole('agency')}>agency</button>
+                <button onClick={()=>mocRole('agent')}>agent</button>
+                <button onClick={()=>mocRole('customer')}>owner</button>
+                <button onClick={()=>mocRole('developer')}>developer</button>
+                <button onClick={()=>mocRole('admin')}>admin</button>
+                <button onClick={()=>mocRole('bank')}>bank</button>
 
             </div>
         </div>
