@@ -1,8 +1,6 @@
 import {createContext, FC, useContext} from "react";
 import {makeAutoObservable} from "mobx";
 
-
-
 class DeveloperCabinetStore  {
     constructor() {
         makeAutoObservable(this);
