@@ -1,0 +1,55 @@
+@import "src/app/styles/typography";
+@import "src/app/styles/colours";
+
+.wrapper {
+  background: #FFFFFF;
+  border: 1px solid #F2F2F2;
+  box-sizing: border-box;
+  border-radius: 8px;
+  width: calc(25% - 15px);
+  transition: border-color .3s ease-out, box-shadow .3s ease-out;
+
+  &:hover {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+    border-color: transparent;
+  }
+
+  .image {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #F2F2F2;
+  }
+
+  .content {
+    position: relative;
+    padding: 17px 20px 20px 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+
+    .name {
+      text-decoration: none;
+      color: #1A4862;
+      width: fit-content;
+
+      @include ROBOTOMEDIUM16;
+    }
+
+    .des {
+      @include ROBOTOREGULAR16;
+
+      color: #3D4550;
+    }
+
+    .button {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      cursor: pointer;
+      width: fit-content;
+    }
+  }
+}

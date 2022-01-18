@@ -100,12 +100,25 @@
     letter-spacing: 0.01em;
 }
 
+@mixin ROBOTOMEDIUM24 {
+    font-family: 'RobotoMedium', sans-serif;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 24px;
+    line-height: 28px;
+}
+
 @mixin ROBOTOMEDIUM16 {
     font-family: 'RobotoMedium', sans-serif;
     font-style: normal;
     font-weight: 500;
     font-size: 16px;
     line-height: 19px;
+}
+
+@mixin ROBOTOMEDIUM16L {
+    @include ROBOTOMEDIUM16;
+    line-height: 24px;
 }
 
 @mixin ROBOTOMEDIUM14 {

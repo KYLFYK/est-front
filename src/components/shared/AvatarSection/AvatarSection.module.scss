@@ -18,6 +18,11 @@
   box-sizing: border-box;
   border-radius: 6px;
   overflow: hidden;
+
+  img {
+    height: auto !important;
+    min-height: 0 !important;
+  }
 }
 
 .button {

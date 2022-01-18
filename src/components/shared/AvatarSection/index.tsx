@@ -7,7 +7,7 @@ import styles from "./AvatarSection.module.scss";
 import {myLoader} from "../../../utils/image/image";
 
 interface Props {
-  src: string;
+  src?: string | StaticImageData;
   changeable?: boolean;
   buttonText?: string;
   onChange?: (value: FormData) => void;
@@ -21,7 +21,7 @@ export const AvatarSection: FC<Props> = ({
 }) => {
   const labelId = changeable ? uuidv4() : "";
 
-  const [fileSrc, setFileSrc] = useState(src);
+  const [fileSrc, setFileSrc] = useState(src ? src : "");
 
   const handleFile = (file: File) => {
     if (onChange) {

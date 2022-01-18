@@ -20,25 +20,58 @@
     &:focus{
         outline: none;
     }
-    font-family: RobotoRegular;
+
+    &.textArea {
+        width: 100%;
+        padding-top: 12px;
+        box-sizing: border-box;
+        height: 200px;
+    }
 }
 
-.wrapper {
-    position: relative;
-    width: 100%;
+.textAreaWrapper {
+    width: 100% !important;
 }
 
 .icon {
     color: #000;
     position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     right: 12px;
     top: 50%;
     transform: translateY(-50%);
 }
 
+.wrapper {
+    position: relative;
+    width: 100%;
+
+    &.altIcon {
+        .icon {
+            right: unset;
+            left: 12px;
+        }
+
+        .input {
+            padding-left: 30px;
+        }
+
+        .iconPadding {
+            padding-right: 0;
+        }
+    }
+}
+
 .label {
     color: #CAD1DA;
     margin-bottom: 5px;
+
+    &.textArea {
+        align-items: unset !important;
+        padding-top: 10px;
+    }
 }
 
 .iconPadding {
