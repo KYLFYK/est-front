@@ -29,7 +29,7 @@
 
   &Wrapper {
     display: flex;
-    justify-content: space-between;
+    //justify-content: space-between;
     gap: 20px;
     width: 100%;
 
@@ -44,6 +44,43 @@
   }
 }
 
+.baseTextarea {
+  min-width: 490px;
+  width: 100%;
+  display: flex;
+  align-items: flex-start;
+  gap: 20px;
+  height: 150px;
+
+  div {
+    width: fit-content;
+  }
+
+  p {
+    white-space: nowrap;
+    width: 154px;
+  }
+}
+//.baseTextarea{
+//  min-width: 290px;
+//  width: 100%;
+//
+//  &Wrapper {
+//    display: flex;
+//    justify-content: space-between;
+//    gap: 20px;
+//    width: 100%;
+//
+//    div {
+//      width: fit-content;
+//    }
+//
+//    p {
+//      white-space: nowrap;
+//      width: 154px;
+//    }
+//  }
+//}
 .settings {
   display: flex;
   flex-direction: column;
@@ -62,7 +99,7 @@
     .inputWrapper {
       width: fit-content;
     }
-    
+
     .add {
       cursor: pointer;
       color: #C4C4C4;

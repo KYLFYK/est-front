@@ -3,6 +3,7 @@ import { BaseInput } from "../../../../../shared/BaseInput/Input";
 
 import styles from "./Account.module.scss";
 import BaseButton from "../../../../../shared/BaseButton/BaseButtons";
+import {useStoreDeveloperCabinet} from "../../../../../../mobx/role/developer/cabinet/DeveloperCabinet";
 
 interface IForm {
   phoneNumber: string;
@@ -54,13 +55,16 @@ const IconVis: FC<IconVisProps> = ({ passwordVis, setPasswordVis, type }) => {
 };
 
 export const Settings: FC = () => {
+
+  const store = useStoreDeveloperCabinet()
+
   const [formValues, setFormValues] = useState<IForm>({
-    phoneNumber: "+7 (123) 456-78-90",
-    login: "brusnika",
-    oldPassword: "12345678",
-    newPassword: "1234567890",
-    noticePhone: "+7 (123) 456-78-90",
-    noticeEmail: "email@email.ru",
+    phoneNumber: store.initialData.setting.phoneNumber,
+    login: store.initialData.setting.login,
+    oldPassword: store.initialData.setting.oldPassword,
+    newPassword: store.initialData.setting.newPassword,
+    noticePhone: store.initialData.setting.noticePhone,
+    noticeEmail: store.initialData.setting.noticeEmail,
   });
 
   const [numbersCount, setNumbersCount] = useState<string[]>(["phoneNumber"]);
