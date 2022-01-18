@@ -30,10 +30,10 @@ type HeaderPropsType = {
 }
 
 const moc = [
-    {href: '/Buy', title: 'Купить'},
-    {href: '/Take', title: 'Снять'},
+    {href: '/buy', title: 'Купить'},
+    {href: '/take', title: 'Снять'},
     {href: '/calculator', title: 'Ипотека'},
-    {href: '/Сonstruction', title: 'Строящиеся дома'},
+    {href: '/construction', title: 'Строящиеся дома'},
     {href: '/contacts', title: 'Контакты'}
 ]
 

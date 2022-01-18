@@ -7,7 +7,7 @@ import {MainContainer} from "../../../containers/MainContainer/MainContainer";
 
 export const DeveloperRoleTabs: FC = () => {
     return (
-        <MainContainer>
+        <MainContainer footerColor={"accent"}>
             <VerticalTabs
                 link={true}
                 tabs={[

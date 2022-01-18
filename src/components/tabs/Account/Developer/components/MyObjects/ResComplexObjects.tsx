@@ -4,6 +4,7 @@ import Typography from "../../../../../shared/Typography/Typography";
 import {BaseDropDown} from "../../../../../shared/BaseDropDown/BaseDropDown";
 import css from './ResComplexes.module.scss'
 import ResApartment from "./ResApartment";
+import {useStoreDeveloperMyObjectStore} from "../../../../../../mobx/role/developer/myObject/DeveloperMyObject";
 
 type ResComplexObjectsType={
     onComplex:()=>void
@@ -41,6 +42,9 @@ const infoObject2={
     status: {'Статус':'Бронь до 12/11/21'},
 }
 const ResComplexObjects :FC<ResComplexObjectsType> = ({onComplex}) => {
+
+    const store=useStoreDeveloperMyObjectStore()
+
     const [corpus, setCompus]=useState<string>(optionCorpus[0].label)
     return (
         <div >
@@ -53,12 +57,17 @@ const ResComplexObjects :FC<ResComplexObjectsType> = ({onComplex}) => {
                 <BaseDropDown options={optionFloor} placeholder={optionFloor[0].label} onChange={setCompus} value={corpus} />
             </div>
             <div className={css.grid4}>
-                <ResApartment name={'1-комнатная квартира'} price={'12 860 000'} info={infoObject}  />
-                <ResApartment name={'1-комнатная квартира'} price={'12 860 000'} info={infoObject1}  />
-                <ResApartment name={'1-комнатная квартира'} price={'12 860 000'} info={infoObject2}  />
-                <ResApartment name={'1-комнатная квартира'} price={'12 860 000'} info={infoObject2}  />
-                <ResApartment name={'1-комнатная квартира'} price={'12 860 000'} info={infoObject1}  />
-                <ResApartment name={'1-комнатная квартира'} price={'12 860 000'} info={infoObject}  />
+                {
+                    store.initialData.complexObjects.map(object=>(
+                        <ResApartment key={object.id} name={object.name} price={object.price} info={object.infoObject}  />
+                    ))
+                }
+                {/*<ResApartment name={'1-комнатная квартира'} price={'12 860 000'} info={infoObject}  />*/}
+                {/*<ResApartment name={'1-комнатная квартира'} price={'12 860 000'} info={infoObject1}  />*/}
+                {/*<ResApartment name={'1-комнатная квартира'} price={'12 860 000'} info={infoObject2}  />*/}
+                {/*<ResApartment name={'1-комнатная квартира'} price={'12 860 000'} info={infoObject2}  />*/}
+                {/*<ResApartment name={'1-комнатная квартира'} price={'12 860 000'} info={infoObject1}  />*/}
+                {/*<ResApartment name={'1-комнатная квартира'} price={'12 860 000'} info={infoObject}  />*/}
             </div>
         </div>
     );
