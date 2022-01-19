@@ -2,7 +2,6 @@ import React, {FC, useState} from "react";
 import VerticalTabs from "../../../shared/VerticalTabs/VerticalTabs";
 import {PersonalArea} from "./components/PersonalArea";
 import {MyObjects} from "./components/MyObjects";
-import {MainContainer} from "../../../containers/MainContainer/MainContainer";
 import AgentsNotifications from "../Agent/components/Notifications/Notifications";
 import {useStoreDeveloperNotificationsStore} from "../../../../mobx/role/developer/notifications/notifications";
 
@@ -24,18 +23,21 @@ export const DeveloperRoleTabs: FC = () => {
         setNotification(newNotification)
     }
     return (
+        <div>
             <VerticalTabs
                 link={true}
                 tabs={[
                     {title: "Личный кабинет", Component: <PersonalArea/>},
                     {title: "Мои объекты", Component: <MyObjects/>},
                     {title: "Уведомления", Component: <AgentsNotifications
-                        onRead={onRead}
-                        onReadAll={onReadAll}
-                        notification={notification}
-                        onDelete={deleteNotification}
-                    />},
+                            onRead={onRead}
+                            onReadAll={onReadAll}
+                            notification={notification}
+                            onDelete={deleteNotification}
+                        />},
                 ]}
             />
+        </div>
+
     );
 };

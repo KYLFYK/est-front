@@ -8,16 +8,6 @@ import MyObjects from "./components/MyObjects/MyObjects";
 import CheckingObject from "./components/CheckingObject/CheckingObject";
 import AgentsNotifications from "../Agent/components/Notifications/Notifications";
 
-const personalAccount = {
-        firstName:'Иван',
-        secondName:'Иванов',
-        dateBirth:'10.12.1994',
-        phone:'+7 999 888 66 11',
-        email:'ivanov@estatum.com',
-        password:'lsadf21kf',
-        image:'https://wallbox.ru/resize/800x480/wallpapers/main2/201728/14997845035964e5370c9756.49539791.jpg'
-}
-
 const mySearchMoc=[
     {id:'1',nameObject:'Покупка, 3-этажный коттедж, Крым, до 10 000 000 Р',locations:'Крым, Ялта', ads:100,alertStatus:'none'},
     {id:'2',nameObject:'Аренда, 2-комнатная квартира, Спб, до 40 000 Р',locations:'СПб, м.Лесная', ads:0,alertStatus:'day'},
@@ -48,7 +38,7 @@ const OwnerRoleTabs = () => {
         <VerticalTabs
             link={true}
             tabs={[
-                { title: "Личный кабинет", Component: <PersonalAccount personalAccount={personalAccount} /> },
+                { title: "Личный кабинет", Component: <PersonalAccount  /> },
                 { title: "Избранное", Component: <Favourites /> },
                 { title: "Сохранённые поиски", Component: <SavedSearches mySearch={mySearchMoc} /> },
                 { title: "Сообщения", Component: <Message /> },

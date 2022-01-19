@@ -31,6 +31,7 @@ export type ObjectInfoType={
 }
 
 const searchTypeObject = (type: string,objectInfo:ObjectInfoType ,id:string) => {
+    //need plot card
     switch (type) {
         case 'apartment':
             return <Apartment objectInfo={objectInfo} id={id}/>
