@@ -17,6 +17,7 @@ const CheckObject = () =>{
             case 'bank':return 'bank'
         }
     }
+
     return(
         <MainContainer footerColor={"accent"} cabinetStyle={true}>
             {
