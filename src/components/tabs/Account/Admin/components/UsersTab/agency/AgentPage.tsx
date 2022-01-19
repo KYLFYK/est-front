@@ -14,7 +14,7 @@ export const AgentPage: FC<Props> = () => {
   return (
     <div className={styles.pageWrapper}>
       <div className={styles.header}>
-        <Link href={"/"}>
+        <Link href={"/cabinet"}>
           <a className={styles.link}>
             <BackIcon width={24} height={24} color={"#3D4550"} />
             <span>Редактирование профиля агентства</span>

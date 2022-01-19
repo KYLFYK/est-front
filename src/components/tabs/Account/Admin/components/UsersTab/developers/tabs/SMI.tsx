@@ -8,6 +8,7 @@ import moment from "moment";
 
 import styles from "./SMI.module.scss";
 import rbkPic from "../../../../../../../../Pics/card-images/rbk.png";
+import { myLoader } from "../../../../../../../../utils/image/image";
 
 interface NewsItem {
   pic: StaticImageData;
@@ -96,7 +97,13 @@ export const SMI: FC = () => {
                 </div>
               </div>
               <div className={styles.img}>
-                <Image src={el.pic} width={35} height={35} alt={""} />
+                <Image
+                  loader={(e) => myLoader(e.src, e.width, e.quality)}
+                  src={el.pic}
+                  width={35}
+                  height={35}
+                  alt={""}
+                />
               </div>
               <Link href={el.link}>
                 <a className={styles.title}>{el.title}</a>

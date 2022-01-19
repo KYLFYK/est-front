@@ -4,7 +4,7 @@ import BaseButton from "../BaseButton/BaseButtons";
 import { v4 as uuidv4 } from "uuid";
 
 import styles from "./AvatarSection.module.scss";
-import {myLoader} from "../../../utils/image/image";
+import { myLoader } from "../../../utils/image/image";
 
 interface Props {
   src?: string | StaticImageData;
@@ -35,7 +35,12 @@ export const AvatarSection: FC<Props> = ({
   return (
     <div className={styles.wrapper}>
       <div className={styles.image}>
-        <Image alt={"Аватар пользователя"} src={fileSrc} layout={"fill"} loader={(e)=>myLoader(e.src,e.width,e.quality)} />
+        <Image
+          alt={"Аватар пользователя"}
+          src={fileSrc}
+          layout={"fill"}
+          loader={(e) => myLoader(e.src, e.width, e.quality)}
+        />
       </div>
       {changeable && (
         <>

@@ -5,6 +5,7 @@ import { Trash } from "../../../../../../../icons/Trash";
 
 import styles from "./AgencyTab.module.scss";
 import image from "../../../../../../../Pics/VillaTour.png";
+import { myLoader } from "../../../../../../../utils/image/image";
 
 export interface IObject {
   name: string;
@@ -45,7 +46,12 @@ export const AdItem: FC<Props> = ({
   return (
     <div className={styles.item}>
       <div className={styles.image}>
-        <Image src={image} alt={""} layout={"fill"} />
+        <Image
+          loader={(e) => myLoader(e.src, e.width, e.quality)}
+          src={image}
+          alt={""}
+          layout={"fill"}
+        />
       </div>
       <div className={styles.content}>
         <div className={styles.header}>

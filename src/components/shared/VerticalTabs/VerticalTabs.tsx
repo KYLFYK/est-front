@@ -68,7 +68,7 @@ type MenuUserType = {
   link?: boolean;
 };
 
-const MenuUser: React.FC<MenuUserType> = ({
+export const MenuUser: React.FC<MenuUserType> = ({
   active = 0,
   onActive,
   menu,

@@ -57,6 +57,8 @@ const AgencyList = [
 ];
 
 export const DevelopersTab: FC = () => {
+  const hrefPrefix = "/developers/";
+
   return (
     <div className={commonStyles.wrapper}>
       <PageFilter />
@@ -64,6 +66,7 @@ export const DevelopersTab: FC = () => {
         {AgencyList.map((agent, index) => (
           <AgentCard
             key={index}
+            hrefPrefix={hrefPrefix}
             description={agent.description}
             title={agent.title}
             imgUrl={agent.img}

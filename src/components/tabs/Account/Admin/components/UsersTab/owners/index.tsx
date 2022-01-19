@@ -13,60 +13,62 @@ const ownersList = [
     phone: "+7 999 249 86 49",
     name: "Иван Иванов",
     img: avatar,
-    link: "/",
+    id: "1",
   },
   {
     email: "ivanivanov@inbox.ru",
     phone: "+7 999 249 86 49",
     name: "Иван Иванов",
     img: avatar,
-    link: "/",
+    id: "2",
   },
   {
     email: "ivanivanov@inbox.ru",
     phone: "+7 999 249 86 49",
     name: "Иван Иванов",
     img: avatar,
-    link: "/",
+    id: "3",
   },
   {
     email: "ivanivanov@inbox.ru",
     phone: "+7 999 249 86 49",
     name: "Иван Иванов",
     img: avatar,
-    link: "/",
+    id: "4",
   },
   {
     email: "ivanivanov@inbox.ru",
     phone: "+7 999 249 86 49",
     name: "Иван Иванов",
     img: avatar,
-    link: "/",
+    id: "5",
   },
   {
     email: "ivanivanov@inbox.ru",
     phone: "+7 999 249 86 49",
     name: "Иван Иванов",
     img: avatar,
-    link: "/",
+    id: "6",
   },
   {
     email: "ivanivanov@inbox.ru",
     phone: "+7 999 249 86 49",
     name: "Иван Иванов",
     img: avatar,
-    link: "/",
+    id: "7",
   },
   {
     email: "ivanivanov@inbox.ru",
     phone: "+7 999 249 86 49",
     name: "Иван Иванов",
     img: avatar,
-    link: "/",
+    id: "8",
   },
 ];
 
 export const OwnersTab: FC = () => {
+  const hrefPrefix = "/owners/";
+
   return (
     <div className={commonStyles.wrapper}>
       <PageFilter />
@@ -75,10 +77,11 @@ export const OwnersTab: FC = () => {
           <OwnerCard
             key={index}
             avatar={elem.img}
-            link={elem.link}
+            id={elem.id}
             name={elem.name}
             email={elem.email}
             phone={elem.phone}
+            hrefPrefix={hrefPrefix}
           />
         ))}
       </div>
