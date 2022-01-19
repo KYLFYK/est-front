@@ -1,0 +1,47 @@
+@import "src/app/styles/typography";
+@import "src/app/styles/colours";
+
+.wrapper {
+  display: flex;
+  align-items: center;
+
+  .label {
+    @include ROBOTOREGULAR16;
+
+    display: inline-block;
+  }
+
+  .calc {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+
+    @include ROBOTOREGULAR16;
+
+    .value {
+      display: inline-block;
+      width: 30px;
+      text-align: center;
+    }
+
+    .button {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid #CAD1DA;
+      box-sizing: border-box;
+      border-radius: 6px;
+      width: 40px;
+      height: 40px;
+      cursor: pointer;
+      user-select: none;
+      transition: background-color .3s ease-out, color .3s ease-out, border-color .3s ease-out;
+
+      &:hover {
+        color: white;
+        background-color: $ACCENT;
+        border-color: transparent;
+      }
+    }
+  }
+}

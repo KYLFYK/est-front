@@ -51,6 +51,18 @@
     }
 }
 
+.danger {
+    background-color: $WHITE;
+    color: $RED;
+    border: 1px solid $RED;
+
+    &.active {
+        background-color: $RED;
+        color: $WHITE;
+        border: 1px solid $RED;
+    }
+}
+
 .blank {
     background-color: $WHITE;
     color: $ACCENT;
@@ -73,7 +85,7 @@
     justify-content: center;
     margin-left: auto;
     background-color: $WHITE;
-    border: none; 
+    border: none;
     outline: none;
 }
 .startIcon {

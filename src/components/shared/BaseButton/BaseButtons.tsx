@@ -1,6 +1,7 @@
 import classNames from "classnames";
 import { IPropsGeneral } from "../../../utils/interfaces/general";
 import s from "./BaseButtons.module.scss";
+import { FC } from "react";
 
 export type TBaseButtonType =
   | "primary"
@@ -8,7 +9,8 @@ export type TBaseButtonType =
   | "blank"
   | "tags"
   | "primary_light"
-  | "toggleButtonWithIcons";
+  | "toggleButtonWithIcons"
+  | "danger";
 interface Props extends IPropsGeneral {
   type?: TBaseButtonType;
   icon?: JSX.Element | string;
@@ -29,7 +31,7 @@ interface IStyles {
   [key: string]: string;
 }
 
-const BaseButton: React.FC<Props> = ({
+const BaseButton: FC<Props> = ({
   children,
   type = "blank",
   className,

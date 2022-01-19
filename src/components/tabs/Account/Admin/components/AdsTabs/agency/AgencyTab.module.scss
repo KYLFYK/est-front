@@ -1,0 +1,199 @@
+@import "src/app/styles/typography";
+@import "src/app/styles/colours";
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.horizontalTabs {
+  margin: 0 0 10px 0;
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.item {
+  display: flex;
+  gap: 20px;
+  background: #FFFFFF;
+  border: 1px solid #F2F2F2;
+  box-sizing: border-box;
+  border-radius: 6px;
+  overflow: hidden;
+  height: 126px;
+
+  .image {
+    width: 230px;
+    min-width: 230px;
+    height: 126px;
+    position: relative;
+  }
+
+  .content {
+    display: flex;
+    flex-direction: column;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-right: 10px;
+    gap: 15px;
+    width: 100%;
+
+    .header {
+      display: flex;
+      justify-content: space-between;
+
+      .mainInfo {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        flex-basis: 50%;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        padding-right: 15px;
+
+        &.lg {
+          flex: 1;
+        }
+
+        .name {
+          @include ROBOTOMEDIUM16;
+          color: #3D4550;
+        }
+
+        .key, .value {
+          @include ROBOTOREGULAR16;
+
+          color: #3D4550;
+        }
+
+        .key {
+          font-weight: 300;
+        }
+      }
+
+      .additionalInfo {
+        flex-basis: calc(50% - 15px);
+        display: flex;
+        justify-content: space-between;
+
+        .keys {
+          display: flex;
+          flex-direction: column;
+          gap: 6px;
+        }
+
+        &.sm {
+          width: 228px;
+          flex-basis: unset;
+          justify-content: flex-end;
+
+          .keys {
+            flex: 1;
+          }
+        }
+
+        .key, .value {
+          @include ROBOTOREGULAR16;
+
+          color: #9495A7;
+        }
+
+        .key {
+          font-weight: 300;
+        }
+
+        .keys.alt {
+          div {
+            gap: 10px;
+            flex-direction: column;
+            display: flex;
+          }
+
+          .key, .value {
+            @include ROBOTOREGULAR16;
+
+            color: #3D4550;
+          }
+
+          .key {
+            color: #C5A28E;
+          }
+        }
+
+        .buttons {
+          display: flex;
+          gap: 4px;
+        }
+
+        .icon {
+          cursor: pointer;
+        }
+
+        .textButton {
+          @include ROBOTOREGULAR16;
+
+          color: #C5A28E;
+          cursor: pointer;
+          height: fit-content;
+        }
+      }
+    }
+
+    .footer {
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+
+      .footerBtn {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+
+        .btn {
+          @include ROBOTOREGULAR16;
+          color: #C5A28E;
+          cursor: pointer;
+        }
+      }
+
+      .keys {
+        display: flex;
+        gap: 30px;
+
+        .elem {
+          display: flex;
+          flex-direction: column;
+          gap: 5px;
+          @include ROBOTOREGULAR16;
+          color: #3D4550;
+        }
+
+        .key {
+          font-weight: 300;
+        }
+      }
+
+      &Info {
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+        width: 228px;
+
+        .infoElem {
+          @include ROBOTOREGULAR16;
+
+          color: #9495A7;
+
+          .key {
+            font-weight: 300;
+          }
+        }
+      }
+    }
+  }
+}

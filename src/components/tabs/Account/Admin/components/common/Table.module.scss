@@ -1,0 +1,46 @@
+@import "src/app/styles/typography";
+@import "src/app/styles/colours";
+
+.select {
+  border: none !important;
+  color: $ACCENT !important;
+  width: auto !important;
+  padding-right: 20px;
+
+  &.paid {
+    color: #27AE60 !important;
+  }
+
+  &.expired {
+    color: #EB5757 !important;
+  }
+
+  &.waiting {
+    color: #F2994A !important;
+  }
+}
+
+.table {
+  @include ROBOTOREGULAR16;
+  white-space: nowrap;
+  margin-top: 20px;
+
+  th {
+    border-bottom: 1px solid #EFEFF2;
+    padding-bottom: 20px;
+    text-align: left;
+  }
+
+  td {
+    padding-top: 4px;
+    padding-bottom: 4px;
+    border-bottom: 1px solid #EFEFF2;
+    padding-right: 60px;
+
+    .select {
+      div {
+        padding: 10px 15px 10px 0 !important;
+      }
+    }
+  }
+}

@@ -1,0 +1,399 @@
+@import "src/app/styles/typography";
+@import "src/app/styles/colours";
+
+.wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.card {
+  flex-basis: calc(25% - 20px);
+  display: flex;
+  flex-direction: column;
+  background: #FFFFFF;
+  box-shadow: 0 4px 8px transparent;
+  border-radius: 8px;
+  border: 1px solid #F2F2F2;
+  transition: box-shadow .3s ease-out, border-color .3s ease-out;
+
+  &:hover {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+    border-color: transparent;
+  }
+
+  &Image {
+    border-bottom: 1px solid #F2F2F2;
+    height: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    cursor: pointer;
+
+    img {
+      width: auto !important;
+      height: 90% !important;
+      min-width: unset !important;
+      max-width: unset !important;
+      min-height: unset !important;
+      max-height: unset !important;
+    }
+  }
+
+  &Content {
+    padding: 10px 10px 20px 20px;
+
+    .head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .icon {
+      cursor: pointer;
+    }
+
+    .title {
+      @include ROBOTOMEDIUM16;
+
+      color: $ACCENT;
+      text-transform: uppercase;
+    }
+
+    p {
+      @include ROBOTOREGULAR16;
+
+      margin: 12px 0 0 0;
+      padding-right: 10px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      display: -webkit-box;
+      -webkit-box-orient: vertical;
+      -webkit-line-clamp: 2;
+      line-height: 19px;
+      max-height: 38px;
+      word-break: break-word;
+    }
+  }
+}
+
+.pageWrapper {
+  color: $BLACK;
+
+  .header {
+    @include ROBOTOMEDIUM16;
+
+    border-bottom: 1px solid #F2F2F2;
+    padding-bottom: 7px;
+
+    .link {
+      display: flex;
+      align-items: center;
+      width: fit-content;
+      gap: 8px;
+      text-decoration: none;
+      color: $BLACK;
+    }
+  }
+
+  .content {
+    &Header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-top: 20px;
+      margin-bottom: 30px;
+      height: 60px;
+
+      &.littleMargin {
+        margin-bottom: 10px;
+      }
+
+      .title {
+        @include ROBOTOMEDIUM24;
+      }
+
+      .rightSide {
+        display: flex;
+        align-items: center;
+        gap: 20px;
+      }
+
+      .unsaved {
+        @include ROBOTOREGULAR16;
+
+        color: #9495A7;
+      }
+    }
+  }
+}
+
+.form {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+
+  section {
+    .inputWrapper, .largeWrapper, .smallWrapper, .mediumWrapper, .mediumHWrapper {
+      &:not(:last-of-type) {
+        margin-bottom: 10px;
+      }
+
+      p {
+        color: $BLACK;
+      }
+    }
+
+    &.vertical {
+      .inputWrapper, .largeWrapper, .smallWrapper, .mediumWrapper, .mediumHWrapper {
+        &:not(:last-of-type) {
+          margin-bottom: 20px;
+        }
+      }
+    }
+  }
+
+  .input {
+    min-width: 290px;
+    width: 100%;
+
+    &Wrapper {
+      display: flex;
+      gap: 20px;
+      width: 100%;
+
+      div {
+        width: fit-content;
+      }
+
+      p {
+        white-space: nowrap;
+        width: 154px;
+        min-width: 154px;
+      }
+    }
+  }
+
+  .mediumH {
+    min-width: 290px;
+    width: 100%;
+
+    &Wrapper {
+      display: flex;
+      gap: 20px;
+      width: 100%;
+
+      div {
+        width: fit-content;
+      }
+
+      p {
+        white-space: nowrap;
+        width: 285px;
+        min-width: 285px;
+      }
+    }
+  }
+
+  .subSection {
+    margin-top: 20px;
+  }
+
+  .large {
+    min-width: 290px;
+    width: 100%;
+
+    &Wrapper {
+      display: flex;
+      gap: 20px;
+      width: 100%;
+
+      p {
+        white-space: nowrap;
+        width: 233px;
+        min-width: 233px;
+      }
+    }
+  }
+
+  .small {
+    min-width: 290px;
+    width: 100%;
+
+    &Wrapper {
+      display: flex;
+      gap: 20px;
+      width: 100%;
+
+      div {
+        width: fit-content;
+      }
+
+      p {
+        white-space: nowrap;
+        width: 60px;
+        min-width: 60px;
+      }
+    }
+  }
+
+  .medium {
+    min-width: 290px;
+    width: 100%;
+
+    &Wrapper {
+      display: flex;
+      gap: 20px;
+      width: 100%;
+
+      div {
+        width: fit-content;
+      }
+
+      p {
+        white-space: nowrap;
+        width: 233px;
+        min-width: 233px;
+      }
+    }
+  }
+
+  .vertical {
+    .largeWrapper {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+  }
+
+  &Wrapper {
+    display: flex;
+    gap: 30px;
+  }
+
+  &SubTitle {
+    @include ROBOTOMEDIUM16L;
+    display: inline-block;
+    margin-bottom: 10px;
+  }
+}
+
+.addNumber {
+  @include ROBOTOREGULAR16;
+
+  color: #C4C4C4;
+  display: inline-block;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  cursor: pointer;
+}
+
+.iconDelete {
+  cursor: pointer;
+  width: 18px;
+  height: 18px;
+}
+
+.select {
+  border: none !important;
+  color: $ACCENT !important;
+  width: auto !important;
+  padding-right: 20px;
+}
+
+.selectDiv {
+  display: flex;
+  gap: 40px;
+
+  .selectElem {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .selectTitle {
+    @include ROBOTOREGULAR16;
+
+    display: inline-block;
+    padding-bottom: 6px;
+  }
+
+  .selectRow {
+    display: flex;
+    align-items: center;
+  }
+}
+
+.accordion {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  width: fit-content;
+  margin-bottom: 10px;
+  cursor: pointer;
+
+  .formSubTitle {
+    margin-bottom: 0 !important;
+  }
+
+  .revert {
+    transform: rotate(180deg) translateY(-2px);
+  }
+}
+
+.ident {
+  display: flex;
+  flex-direction: column;
+
+  &Select {
+    display: flex;
+    align-items: center;
+
+    &Title {
+      display: inline-block;
+      padding-bottom: 8px;
+
+      @include ROBOTOREGULAR16;
+    }
+
+    .select {
+      color: $SECONDARYBUTTONHOVER !important;
+    }
+  }
+
+  &List {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  &Item {
+    display: flex;
+    gap: 6px;
+    align-items: center;
+
+    .name {
+      @include ROBOTOREGULAR16;
+
+      color: #1C1C1C;
+    }
+
+    .icon {
+      cursor: pointer;
+    }
+  }
+}
+
+.buttons {
+  padding-top: 20px;
+  padding-bottom: 30px;
+}
+
+.tabs {
+  margin: 0 !important;
+
+  &Wrapper {
+
+  }
+}
