@@ -4,6 +4,7 @@ import BaseButton from "../../../../../shared/BaseButton/BaseButtons";
 import {BaseInput} from "../../../../../shared/BaseInput/Input";
 import css from './PersonalAccount.module.scss'
 import UploadImage from "./UploadImage";
+import {useStoreOwnerCabinet} from "../../../../../../mobx/role/owner/cabinet/OwnerCabinet";
 
 type PersonalAccountType = {
     personalAccount:{
@@ -19,14 +20,18 @@ type PersonalAccountType = {
 
 const PersonalAccount: FC<PersonalAccountType> = ({personalAccount}) => {
 
+    const store = useStoreOwnerCabinet()
+
     const [valueNewPassword, setValueNewPassword]=useState<string>('')
+
+    console.log(store.get())
 
     return (
         <div>
-            <Typography weight={"bold"}>{personalAccount.firstName} {personalAccount.secondName}</Typography>
+            <Typography weight={"bold"}>{store.initialData.firstName} {store.initialData.secondName}</Typography>
             <div className={css.column}>
                 <div>
-                    <UploadImage image={personalAccount.image}/>
+                    <UploadImage image={store.initialData.image}/>
                 </div>
                 <div>
                     <Typography weight={"bold"}>
@@ -37,7 +42,7 @@ const PersonalAccount: FC<PersonalAccountType> = ({personalAccount}) => {
                            Имя
                         </Typography>
                         <BaseInput
-                            value={personalAccount.firstName}
+                            value={store.initialData.firstName}
                             className={css.inputWidth}
                         />
                     </div>
@@ -46,7 +51,7 @@ const PersonalAccount: FC<PersonalAccountType> = ({personalAccount}) => {
                             Фамилия
                         </Typography>
                         <BaseInput
-                            value={personalAccount.secondName}
+                            value={store.initialData.secondName}
                             className={css.inputWidth}
                         />
                     </div>
@@ -55,7 +60,7 @@ const PersonalAccount: FC<PersonalAccountType> = ({personalAccount}) => {
                             Дата рождения
                         </Typography>
                         <BaseInput
-                            value={personalAccount.dateBirth}
+                            value={store.initialData.dateBirth}
                             className={css.inputWidth}
                         />
                     </div>
@@ -67,7 +72,7 @@ const PersonalAccount: FC<PersonalAccountType> = ({personalAccount}) => {
                             Номер телефона
                         </Typography>
                         <BaseInput
-                            value={personalAccount.phone}
+                            value={store.initialData.phone}
                             className={css.inputWidth}
                         />
                     </div>
@@ -75,7 +80,7 @@ const PersonalAccount: FC<PersonalAccountType> = ({personalAccount}) => {
                         <Typography className={css.typographyWidth}>
                             Email
                         </Typography>
-                        <BaseInput value={personalAccount.email} className={css.inputWidth}/>
+                        <BaseInput value={store.initialData.email} className={css.inputWidth}/>
                     </div>
                     <Typography weight={"bold"} className={css.marginTop30}>
                         Сменить пароль

@@ -3,6 +3,7 @@ import AgentRoleTabs from "../../src/components/tabs/Account/Agent/AgentRoleTabs
 import {DeveloperRoleTabs} from "../../src/components/tabs/Account/Developer/DeveloperRoleTabs";
 import OwnerRoleTabs from "../../src/components/tabs/Account/Owner/OwnerRoleTabs";
 import {getLocalStorage} from '../../src/lib/localStorage/localStorage';
+import {MainContainer} from "../../src/components/containers/MainContainer/MainContainer";
 
 const CheckObject = () =>{
     
@@ -18,11 +19,11 @@ const CheckObject = () =>{
     }
 
     return(
-        <div>
+        <MainContainer footerColor={"accent"} cabinetStyle={true}>
             {
                 searchCabinet(getLocalStorage())
             }
-        </div>
+        </MainContainer>
     )
 }
 export default CheckObject

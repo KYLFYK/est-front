@@ -16,8 +16,7 @@ export const searchNamePage = (page:string) => {
         case 'Сохранённые поиски': return 'saved-searches'
         case 'Проверка объекта': return 'check-object'
         case 'Заявки на ипотеку': return 'mortgage-applications'
-        case 'Избранное': return 'favorites'
-        case 'Сохранённые поиски': return 'saved-searches'
+
 
         default: return 'cabinet'
     }

@@ -1,7 +1,6 @@
 import React, {FC, useState} from "react";
 import VerticalTabs from "../../../shared/VerticalTabs/VerticalTabs";
 import {PersonalArea} from "./components/PersonalArea";
-import {Notifications} from "./components/Notifications";
 import {MyObjects} from "./components/MyObjects";
 import {MainContainer} from "../../../containers/MainContainer/MainContainer";
 import AgentsNotifications from "../Agent/components/Notifications/Notifications";
@@ -25,7 +24,6 @@ export const DeveloperRoleTabs: FC = () => {
         setNotification(newNotification)
     }
     return (
-        <MainContainer footerColor={"accent"}>
             <VerticalTabs
                 link={true}
                 tabs={[
@@ -39,6 +37,5 @@ export const DeveloperRoleTabs: FC = () => {
                     />},
                 ]}
             />
-        </MainContainer>
     );
 };

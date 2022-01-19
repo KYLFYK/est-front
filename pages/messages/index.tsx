@@ -4,6 +4,7 @@ import AgentRoleTabs from "../../src/components/tabs/Account/Agent/AgentRoleTabs
 import OwnerRoleTabs from "../../src/components/tabs/Account/Owner/OwnerRoleTabs";
 import {DeveloperRoleTabs} from "../../src/components/tabs/Account/Developer/DeveloperRoleTabs";
 import {getLocalStorage} from '../../src/lib/localStorage/localStorage';
+import { MainContainer } from 'src/components/containers/MainContainer/MainContainer';
 
 const Messages = () => {
     
@@ -19,11 +20,11 @@ const Messages = () => {
     }
 
     return(
-        <div>
+        <MainContainer footerColor={"accent"} cabinetStyle={true}>
             {
                 searchCabinet(getLocalStorage())
             }
-        </div>
+        </MainContainer>
     )
 };
 
