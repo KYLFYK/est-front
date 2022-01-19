@@ -24,8 +24,6 @@ const PersonalAccount: FC<PersonalAccountType> = ({personalAccount}) => {
 
     const [valueNewPassword, setValueNewPassword]=useState<string>('')
 
-    console.log(store.get())
-
     return (
         <div>
             <Typography weight={"bold"}>{store.initialData.firstName} {store.initialData.secondName}</Typography>
