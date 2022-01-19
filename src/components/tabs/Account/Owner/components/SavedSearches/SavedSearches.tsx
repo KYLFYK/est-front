@@ -4,23 +4,20 @@ import css from './SavedSearches.module.scss'
 import FavoriteOffIcon from "../../../../../shared/FavoriteOffIcon/FavoriteOffIcon";
 import {BaseDropDown} from "../../../../../shared/BaseDropDown/BaseDropDown";
 import {makeStyles} from "@material-ui/core";
+import {useStoreOwnerSaveSearch} from "../../../../../../mobx/role/owner/saveSearch/saveSearch";
 
 type SavedSearchesType = {
-    mySearch: Array<{
-        id: string
-        nameObject: string
-        locations: string
-        ads: number
-        alertStatus: string
-    }>
 }
 
-const SavedSearches: FC<SavedSearchesType> = ({mySearch}) => {
+const SavedSearches: FC<SavedSearchesType> = ({}) => {
+
+    const store = useStoreOwnerSaveSearch()
+
     return (
         <div>
             <Typography weight={"bold"} className={css.title}>Мои поиски</Typography>
             {
-                mySearch.map((search) => (
+                store.initialData.search.map((search) => (
                     <CardObjectSaveSearch
                         nameObject={search.nameObject}
                         id={search.id}
