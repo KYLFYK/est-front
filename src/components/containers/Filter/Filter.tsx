@@ -1,19 +1,24 @@
 import React, { ChangeEvent } from "react"
 import Link from "next/link"
+import { useRouter } from 'next/router'
 import { ISearchParamsModel } from "../../../utils/interfaces/search"
 import { BaseDropDown } from "../../shared/BaseDropDown/BaseDropDown"
 import { BaseInput } from "../../shared/BaseInput/Input"
+import BaseButton from "../../shared/BaseButton/BaseButtons"
 import { CompareInput } from "../../shared/CompareInput/CompareInput"
 import InputsUnion from "../../shared/InputsUnion/InputsUnion"
 import { ToggleButtons } from "../../shared/ToggleButtons/ToggleButtons"
 import Typography from "src/components/shared/Typography/Typography"
 import { FILTER_ACTIONS_OPTIONS, FILTER_BUILDING_TYPE_OPTIONS, FILTER_FLOORS_OPTIONS, FILTER_HOUSE_TYPE_OPTIONS, TOGGLE_BUTTONS_OPTIONS } from "./config"
+import { getValue, getProp } from "src/lib/mapping/filterProps"
 
 import s from './Filter.module.scss'
 
 import {makeStyles} from "@material-ui/core";
+import { SearchApi } from "src/api/search/search"
 
 interface Props {
+    location?: 'start' | 'search'
     initialValues?: ISearchParamsModel
 }
 
@@ -40,12 +45,14 @@ export const useStyles = makeStyles(() => ({
 }
 ))
 
-export const Filter: React.FC<Props> = ({ initialValues }) => {
+export const Filter: React.FC<Props> = ({ location, initialValues }) => {
+
+    const router = useRouter()
 
     const classes = useStyles()
 
-    const [values, setValues] = React.useState<ISearchParamsModel>({
-        objectType: FILTER_HOUSE_TYPE_OPTIONS[0].label,
+    const [values, setValues] = React.useState<any>({
+        objectType: FILTER_HOUSE_TYPE_OPTIONS[0].value,
         secondaryType: undefined,
         floors: undefined,
         priceFrom: undefined,
@@ -53,23 +60,53 @@ export const Filter: React.FC<Props> = ({ initialValues }) => {
         squareFrom: undefined,
         squareTo: undefined,
         planning: undefined,
-        actionType: FILTER_ACTIONS_OPTIONS[0].label,
+        actionType: FILTER_ACTIONS_OPTIONS[0].value,
         searchValue: undefined,
     })
 
+    const params: any = Object.entries(values).reduce((acc, cur, i): any => {
+        if(cur[1]) {
+            //@ts-expect-error
+            acc[`${getValue(cur[0])}`] = cur[1]    
+        } 
+        return acc
+    }, {})
+
+
     React.useEffect(() => {
-        initialValues && setValues(initialValues)
+        if(initialValues) {
+            const mappedInitialValues: any = Object.entries(initialValues).reduce((acc, cur, i): any => {
+                if(cur[1]) {
+                    //@ts-expect-error
+                    acc[`${getProp(cur[0])}`] = cur[1]    
+                } 
+                return acc
+            }, {})
+            setValues(mappedInitialValues)
+        } 
     }, [initialValues])
 
-
     const onSubmit = () => {
-        console.log(values)
+        if(location === 'start') {
+            router.push(
+            {
+              pathname: '/search',
+              query: params,
+            })
+        }
+        if(location === 'search') {
+            router.replace(
+            {
+                pathname: '/search',
+                query: params,
+            }, undefined, {shallow: true})
+            SearchApi.getFilteredObj(params)
+        }
     }
 
     const onChangeActionType = (value: string) => {
         setValues({...values, actionType: value})
     }
-
     const onChangeHouseType = (value: string) => {
         setValues({ ...values, objectType: value })
     }
@@ -114,9 +151,12 @@ export const Filter: React.FC<Props> = ({ initialValues }) => {
             </InputsUnion>
             <BaseDropDown options={FILTER_BUILDING_TYPE_OPTIONS} value={values.secondaryType} onChange={onChangeBuildingType} placeholder="Выбрать тип здания" className={s.dropdown} />
             <BaseDropDown options={FILTER_FLOORS_OPTIONS} value={values.floors} onChange={onChangeFloors} placeholder="Выбрать этаж" className={s.dropdownFloor} />
-            <Link href={'/search'}>
-                <a className={s.link}><Typography className={s.linkTitle} color={'secondary'}>Показать объявления</Typography></a>
-            </Link>
+            {
+                (location === 'start' || location === 'search')
+                ? <BaseButton className={s.submit} type="primary" onClick={onSubmit}>Показать объявления</BaseButton>
+                : <BaseButton className={s.submit} type="primary" onClick={onSubmit}>Искать</BaseButton>
+            }
+            
         </div>
     )
 }

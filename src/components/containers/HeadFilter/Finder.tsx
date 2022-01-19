@@ -46,7 +46,7 @@ export const HeadFilter = () => {
 
                 </div>
                 <div className={s.filterWrapper}>
-                    <Filter />
+                    <Filter location={'start'}/>
                 </div>
             </div>
         </div>

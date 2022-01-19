@@ -18,7 +18,11 @@ export const MainContainer = ({children, keywords, title, city, personalAccount,
     return (
         <>
             <Head>
-                <meta name="keywords" content={keywords}></meta>
+                <meta name="keywords" content={keywords}/>
+                <meta
+                    name="viewport"
+                    content="minimum-scale=1, initial-scale=1, width=device-width, shrink-to-fit=no"
+                />
                 <title>{title}</title>
                 <link rel="icon" type="image/svg+xml" href="%PUBLIC_URL%/LogoIcon.svg" />
             </Head>
