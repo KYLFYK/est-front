@@ -7,6 +7,7 @@ import MyObjectApplications from "./MyObjectApplications/MyObjectApplications";
 import css from './MyObject.module.scss'
 
 const MyObjects = () => {
+
     return (
         <HorizontalTabs wrapperClassName={css.wrapper} tabs={[
             {title: "Активные", Component: <MyObjectActive />},

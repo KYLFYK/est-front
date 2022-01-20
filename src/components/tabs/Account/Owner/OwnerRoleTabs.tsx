@@ -9,8 +9,6 @@ import CheckingObject from "./components/CheckingObject/CheckingObject";
 import AgentsNotifications from "../Agent/components/Notifications/Notifications";
 import {useStoreDeveloperNotificationsStore} from "../../../../mobx/role/developer/notifications/notifications";
 
-
-
 const OwnerRoleTabs = () => {
 
     const store = useStoreDeveloperNotificationsStore()
