@@ -6,19 +6,11 @@ import css from './PersonalAccount.module.scss'
 import UploadImage from "./UploadImage";
 import {useStoreOwnerCabinet} from "../../../../../../mobx/role/owner/cabinet/OwnerCabinet";
 
+
 type PersonalAccountType = {
-    personalAccount:{
-        firstName:string
-        secondName:string
-        dateBirth:string
-        phone:string
-        email:string
-        password:string
-        image:string
-    }
 }
 
-const PersonalAccount: FC<PersonalAccountType> = ({personalAccount}) => {
+const PersonalAccount: FC<PersonalAccountType> = () => {
 
     const store = useStoreOwnerCabinet()
 
@@ -88,7 +80,7 @@ const PersonalAccount: FC<PersonalAccountType> = ({personalAccount}) => {
                             Старый пароль
                         </Typography>
                         <BaseInput
-                            value={personalAccount.password}
+                            value={store.initialData.password}
                             className={css.inputWidth}
                         />
                     </div>

@@ -9,6 +9,7 @@ import Link from "next/link";
 import CountMessage from "../../../../../../../icons/Header/CountMessage";
 import {useOnOutsideClick} from "../../../../../../../hooks/useOnOutsideClick";
 import LongMenu from "./Menu";
+import {useStoreOwnerMessages} from "../../../../../../../mobx/role/owner/messages/OwnerMessages";
 
 type myMessagesType = {
     idChat: string
@@ -76,24 +77,6 @@ const myMessages: myMessagesAType = [
         subjectMessage: 'Аренда дома',
     },
 ]
-
-type messagesType = {
-    idRoom: string,
-    messagesRoom: Array<{
-        date: string,
-        messages: Array<{from:string, text: string, time: string }>
-    }>
-}
-// профиль, посмотреть объект, в архив, удалить переписку
-
-const today = new Date();
-const date = today.toISOString().substring(0, 10).split('-').reverse().join('.')
-// time
-const timeIso = today.toISOString().substring(11, 16).split('-').reverse().join('.')
-const timeHour =timeIso.split(':')[0]
-const timeMin =timeIso.split(':')[1]
-const time3UTC =+timeHour+3+":"+timeMin
-
 const messages1: messagesType = {
     idRoom: '1',
     messagesRoom: [
@@ -121,8 +104,6 @@ const messages1: messagesType = {
                 {from:'1', text: 'Hello1', time: '18:00'}
             ]
         },
-
-
     ]
 }
 const messages2: messagesType = {
@@ -203,6 +184,24 @@ const dateMessage3 = [
 ]
 const dateMessage=[dateMessage1,dateMessage2,dateMessage3]
 const arrayMessage: Array<messagesType> = [messages1, messages2, messages3]
+type messagesType = {
+    idRoom: string,
+    messagesRoom: Array<{
+        date: string,
+        messages: Array<{from:string, text: string, time: string }>
+    }>
+}
+// профиль, посмотреть объект, в архив, удалить переписку
+
+const today = new Date();
+const date = today.toISOString().substring(0, 10).split('-').reverse().join('.')
+// time
+const timeIso = today.toISOString().substring(11, 16).split('-').reverse().join('.')
+const timeHour =timeIso.split(':')[0]
+const timeMin =timeIso.split(':')[1]
+const time3UTC =+timeHour+3+":"+timeMin
+
+
 
 type MyMessagesType={
     archive?:boolean
@@ -210,24 +209,26 @@ type MyMessagesType={
 
 const MyMessages :FC<MyMessagesType> = ({archive=false}) => {
 
+    const store = useStoreOwnerMessages()
+
     const id = '2' // userId
 
     const [active, setActive] = useState<number>(0) // vision click chat
-    const [chat, setChat] = useState<messagesType>(arrayMessage[active])
-    const [dMessage, setDMessage] = useState(dateMessage[active])
+    const [chat, setChat] = useState<messagesType>(store.initialData.messagesRooms[active])
+    const [dMessage, setDMessage] = useState(store.initialData.dateMessages[active])
     const [messageValue, setMessageValue] = useState<string>('')
 
-    const [activeChat, setActiveChat] = useState<myMessagesType>(myMessages[active])
+    const [activeChat, setActiveChat] = useState<myMessagesType>(store.initialData.messages[active])
 
     useEffect(()=>{
-        setDMessage(dateMessage[active])
+        setDMessage(store.initialData.dateMessages[active])
     },[active])
 
     const choiceChat = (id: string, index: number) => {
-        const newMessages = arrayMessage.filter(t => t.idRoom === id)
-        myMessages[index].unreadMessages = 0   // переделать на id - после подключения данных с сервера
+        const newMessages = store.initialData.messagesRooms.filter(t => t.idRoom === id)
+        store.initialData.messages[index].unreadMessages = 0   // переделать на id - после подключения данных с сервера
         setActive(index)
-        setActiveChat(myMessages[index])
+        setActiveChat(store.initialData.messages[index])
         setChat(newMessages[0])
     }
 
@@ -255,7 +256,7 @@ const MyMessages :FC<MyMessagesType> = ({archive=false}) => {
             if (search.length > 0) {
                 const a = {text: messageValue, time: time ,from:'1'}
                 const ind: any = search[0]
-                arrayMessage[active].messagesRoom[ind].messages.push(a)
+                store.initialData.messagesRooms[active].messagesRoom[ind].messages.push(a)
                 const mS = dMessage
                 mS.push({date: dateMock})
             } else {
@@ -263,16 +264,16 @@ const MyMessages :FC<MyMessagesType> = ({archive=false}) => {
                 if (search.length > 0) {
                     const a = {text: messageValue, time: time,from:'1'}
                     const ind: any = search[0]
-                    arrayMessage[active].messagesRoom[ind].messages.push(a)
-                    setActiveChat(myMessages[active])
+                    store.initialData.messagesRooms[active].messagesRoom[ind].messages.push(a)
+                    setActiveChat(store.initialData.messages[active])
                 } else {
                     const mS = dMessage
                     mS.push({date: dateMock})
                     setDMessage(mS)
-                    arrayMessage[active].messagesRoom.push(
+                    store.initialData.messagesRooms[active].messagesRoom.push(
                         {date: dateMock, messages: [{text: messageValue, time: time,from:'1'}]}
                     )
-                    setActiveChat(myMessages[active])
+                    setActiveChat(store.initialData.messages[active])
                 }
 
             }
@@ -295,7 +296,7 @@ const MyMessages :FC<MyMessagesType> = ({archive=false}) => {
             if (search.length > 0) {
                 const a = {text: messageValue, time: time ,from:'1'}
                 const ind: any = search[0]
-                arrayMessage[active].messagesRoom[ind].messages.push(a)
+                store.initialData.messagesRooms[active].messagesRoom[ind].messages.push(a)
                 const mS = dMessage
                 mS.push({date: dateMock})
             } else {
@@ -303,16 +304,16 @@ const MyMessages :FC<MyMessagesType> = ({archive=false}) => {
                 if (search.length > 0) {
                     const a = {text: messageValue, time: time,from:'1'}
                     const ind: any = search[0]
-                    arrayMessage[active].messagesRoom[ind].messages.push(a)
-                    setActiveChat(myMessages[active])
+                    store.initialData.messagesRooms[active].messagesRoom[ind].messages.push(a)
+                    setActiveChat(store.initialData.messages[active])
                 } else {
                     const mS = dMessage
                     mS.push({date: dateMock})
                     setDMessage(mS)
-                    arrayMessage[active].messagesRoom.push(
+                    store.initialData.messagesRooms[active].messagesRoom.push(
                         {date: dateMock, messages: [{text: messageValue, time: time,from:'1'}]}
                     )
-                    setActiveChat(myMessages[active])
+                    setActiveChat(store.initialData.messages[active])
                 }
 
             }
@@ -327,7 +328,7 @@ const MyMessages :FC<MyMessagesType> = ({archive=false}) => {
         <div className={css.column}>
             <div>
                 {
-                    myMessages.map((mess, index) => (
+                    store.initialData.messages.map((mess, index) => (
                         <div key={index} className={classNames(css.borderInfo, active === index && css.activeBorder)}
                              onClick={() => choiceChat(mess.idChat, index)}>
                             <div style={{display: 'flex'}}
@@ -375,9 +376,9 @@ const MyMessages :FC<MyMessagesType> = ({archive=false}) => {
                             </Typography>
                             <LongMenu
                                 archive={archive}
-                                urlObject={myMessages[active].urlObject}
-                                idChat={myMessages[active].idChat}
-                                urlUser={myMessages[active].urlUser}
+                                urlObject={store.initialData.messages[active].urlObject}
+                                idChat={store.initialData.messages[active].idChat}
+                                urlUser={store.initialData.messages[active].urlUser}
                             />
                         </div>
                         <Typography

@@ -23,18 +23,21 @@ export const DeveloperRoleTabs: FC = () => {
         setNotification(newNotification)
     }
     return (
+        <div>
             <VerticalTabs
                 link={true}
                 tabs={[
                     {title: "Личный кабинет", Component: <PersonalArea/>},
                     {title: "Мои объекты", Component: <MyObjects/>},
                     {title: "Уведомления", Component: <AgentsNotifications
-                        onRead={onRead}
-                        onReadAll={onReadAll}
-                        notification={notification}
-                        onDelete={deleteNotification}
-                    />},
+                            onRead={onRead}
+                            onReadAll={onReadAll}
+                            notification={notification}
+                            onDelete={deleteNotification}
+                        />},
                 ]}
             />
+        </div>
+
     );
 };
