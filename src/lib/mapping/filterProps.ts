@@ -1,5 +1,5 @@
 const compare = [['objectType', 'object-type'], ['secondaryType', 'building-type'], ['floors', 'floor'], ['priceFrom', 'price-from'],
-                    ['priceTo', 'price-to'], ['square-from', 'squareFrom'], ['square-to', 'squareTo'], ['planning', 'rooms'], 
+                    ['priceTo', 'price-to'], ['squareFrom', 'square-from'], ['squareTo', 'square-to'], ['planning', 'rooms'], 
                     ['actionType', 'order-type'], ['searchValue', '']]
 
 const optionsMapMemo = () => {

@@ -1,5 +1,5 @@
 import React, { ChangeEvent } from "react"
-import Link from "next/link"
+import { observer } from "mobx-react-lite"
 import { useRouter } from 'next/router'
 import { ISearchParamsModel } from "../../../utils/interfaces/search"
 import { BaseDropDown } from "../../shared/BaseDropDown/BaseDropDown"
@@ -11,11 +11,11 @@ import { ToggleButtons } from "../../shared/ToggleButtons/ToggleButtons"
 import Typography from "src/components/shared/Typography/Typography"
 import { FILTER_ACTIONS_OPTIONS, FILTER_BUILDING_TYPE_OPTIONS, FILTER_FLOORS_OPTIONS, FILTER_HOUSE_TYPE_OPTIONS, TOGGLE_BUTTONS_OPTIONS } from "./config"
 import { getValue, getProp } from "src/lib/mapping/filterProps"
+import { useStore } from "src/mobx/stores/SearchStore/SearchStore"
 
 import s from './Filter.module.scss'
 
 import {makeStyles} from "@material-ui/core";
-import { SearchApi } from "src/api/search/search"
 
 interface Props {
     location?: 'start' | 'search'
@@ -45,10 +45,10 @@ export const useStyles = makeStyles(() => ({
 }
 ))
 
-export const Filter: React.FC<Props> = ({ location, initialValues }) => {
+export const Filter: React.FC<Props> = observer(({ location, initialValues }) => {
 
     const router = useRouter()
-
+    const store = useStore()
     const classes = useStyles()
 
     const [values, setValues] = React.useState<any>({
@@ -100,10 +100,10 @@ export const Filter: React.FC<Props> = ({ location, initialValues }) => {
                 pathname: '/search',
                 query: params,
             }, undefined, {shallow: true})
-            SearchApi.getFilteredObj(params)
+            store.fetch()
         }
     }
-
+    
     const onChangeActionType = (value: string) => {
         setValues({...values, actionType: value})
     }
@@ -139,6 +139,7 @@ export const Filter: React.FC<Props> = ({ location, initialValues }) => {
 
     return (
         <div className={s.wrapper}>
+            {store.initialData.map((i: any) => <div>{i.createAt}</div>)}
             <InputsUnion className={s.actionDropdownUnion}>
                 <BaseDropDown options={FILTER_ACTIONS_OPTIONS} value={values.actionType} onChange={onChangeActionType} placeholder={FILTER_ACTIONS_OPTIONS[0].label} className={classes.root} />
                 <BaseDropDown options={FILTER_HOUSE_TYPE_OPTIONS} value={values.objectType} onChange={onChangeHouseType} placeholder={FILTER_HOUSE_TYPE_OPTIONS[0].label} className={classes.root} />
@@ -159,4 +160,4 @@ export const Filter: React.FC<Props> = ({ location, initialValues }) => {
             
         </div>
     )
-}
+})
