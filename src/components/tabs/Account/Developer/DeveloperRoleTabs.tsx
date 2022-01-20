@@ -2,7 +2,6 @@ import React, {FC, useState} from "react";
 import VerticalTabs from "../../../shared/VerticalTabs/VerticalTabs";
 import {PersonalArea} from "./components/PersonalArea";
 import {MyObjects} from "./components/MyObjects";
-import {MainContainer} from "../../../containers/MainContainer/MainContainer";
 import AgentsNotifications from "../Agent/components/Notifications/Notifications";
 import {useStoreDeveloperNotificationsStore} from "../../../../mobx/role/developer/notifications/notifications";
 

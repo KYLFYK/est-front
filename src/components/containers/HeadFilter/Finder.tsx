@@ -26,7 +26,7 @@ export const HeadFilter = () => {
     <div
       className={s.container}
       style={{
-        backgroundImage: `url(https://api.interior.ru/media/images/setka/2020_11_05/Paunic_22.jpg.webp)`,
+        // backgroundImage: `url(https://api.interior.ru/media/images/setka/2020_11_05/Paunic_22.jpg.webp)`,
       }}
     >
       <div></div>
