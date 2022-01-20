@@ -7,7 +7,9 @@ import {useStoreDeveloperNotificationsStore} from "../../../../mobx/role/develop
 
 
 export const DeveloperRoleTabs: FC = () => {
+
     const store = useStoreDeveloperNotificationsStore()
+
     const [notification,setNotification]=useState<Array<{id:string,date:string, time:string,message:string, read:boolean}>>(store.initialData.notifications)
 
     const onReadAll = () => {
