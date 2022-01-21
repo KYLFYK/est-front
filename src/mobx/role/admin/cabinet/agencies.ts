@@ -24,42 +24,42 @@ class AgenciesList {
     this.list = [
       {
         id: "1",
-        description: "Агенство элитной недвижимости",
+        description: "Агентство элитной недвижимости",
         agencyName: "Deal",
       },
       {
         id: "2",
-        description: "Агенство элитной недвижимости",
+        description: "Агентство элитной недвижимости",
         agencyName: "Deal",
       },
       {
         id: "3",
-        description: "Агенство элитной недвижимости",
+        description: "Агентство элитной недвижимости",
         agencyName: "Deal",
       },
       {
         id: "4",
-        description: "Агенство элитной недвижимости",
+        description: "Агентство элитной недвижимости",
         agencyName: "Deal",
       },
       {
         id: "5",
-        description: "Агенство элитной недвижимости",
+        description: "Агентство элитной недвижимости",
         agencyName: "Deal",
       },
       {
         id: "6",
-        description: "Агенство элитной недвижимости",
+        description: "Агентство элитной недвижимости",
         agencyName: "Deal",
       },
       {
         id: "7",
-        description: "Агенство элитной недвижимости",
+        description: "Агентство элитной недвижимости",
         agencyName: "Deal",
       },
       {
         id: "8",
-        description: "Агенство элитной недвижимости",
+        description: "Агентство элитной недвижимости",
         agencyName: "Deal",
       },
     ];

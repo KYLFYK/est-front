@@ -39,7 +39,7 @@ export const Recovery :React.FC<RecoveryPropsType> = ({onEdit,email,onValueEmail
                 isActive
                 className={css.widthButton}
             >
-                Восстанивить пароль
+                Восстановить пароль
             </BaseButton>
             {/*<div onClick={backRecovery} className={css.widthButton}>*/}
             <div onClick={()=>onEdit('login')} className={css.widthButton}>

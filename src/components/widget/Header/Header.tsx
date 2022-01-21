@@ -136,17 +136,16 @@ export const Header: FC<HeaderPropsType> = ({
       case "reset-password":
         return (
           <NewPassword
+            onBack={() => setEdit('login')}
             onPassword={setNewPassword}
             password={newPassword}
-            tokenReset={tokenConformation}
-            onEdit={(e) => setEdit(e)}
+            onEdit={() => setEdit('confirmationNewPassword')}
           />
         );
       case "confirmationNewPassword":
         return (
           <ConfirmationNewPassword
-            onEdit={(e) => setEdit(e)}
-            token={tokenConformation}
+            onEdit={() => setEdit('login')}
           />
         );
       case "email-conformation":
@@ -164,7 +163,7 @@ export const Header: FC<HeaderPropsType> = ({
   const activeEdit = (e: string) => {
     setEdit(e);
     setActiveModal(false);
-  };
+  }
 
   useEffect(() => {
     if (router.query.text === "email-conformation") {
