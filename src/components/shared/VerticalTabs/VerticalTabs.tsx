@@ -52,7 +52,7 @@ const VerticalTabs: React.FC<Props> = ({ tabs, className, link }) => {
         onActive={movePage}
         menu={tabs.map((tab) => tab.title)}
       />
-      <div className={classNames(css.information, className)}>
+      <div className={`${css.information}${className ? ` ${className}` : ""}`}>
         {link === undefined
           ? tabsVision.length > 0 && tabsVision[0].Component
           : tabs[active].Component}

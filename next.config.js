@@ -1,4 +1,5 @@
 /** @type {import('next').NextConfig} */
+
 module.exports = {
   reactStrictMode: true,
 
@@ -24,5 +25,4 @@ module.exports = {
       '/p/deploy-nextjs': { page: '/post', query: { title: 'deploy-nextjs' } },
     }
   },*/
-
-}
+};

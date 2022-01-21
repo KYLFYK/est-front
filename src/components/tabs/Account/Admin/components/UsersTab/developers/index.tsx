@@ -1,79 +1,40 @@
-import React, { FC } from "react";
+import React, { FC, useEffect } from "react";
 import { PageFilter } from "../../common/PageFilter";
 import { AgentCard } from "../agency/AgentCard";
+import { observer } from "mobx-react-lite";
+import { DevelopersListStore } from "../../../../../../../mobx/role/admin/cabinet/developers";
 
 import commonStyles from "../../../AdminRoleStyles.module.scss";
 import styles from "../agency/agency.module.scss";
 
-const AgencyList = [
-  {
-    id: "1",
-    description: "Девелоперская компания",
-    title: "Брусника",
-    img: undefined,
-  },
-  {
-    id: "2",
-    description: "Девелоперская компания",
-    title: "Брусника",
-    img: undefined,
-  },
-  {
-    id: "3",
-    description: "Девелоперская компания",
-    title: "Брусника",
-    img: undefined,
-  },
-  {
-    id: "4",
-    description: "Девелоперская компания",
-    title: "Брусника",
-    img: undefined,
-  },
-  {
-    id: "5",
-    description: "Инвестиционная строительная компания",
-    title: "EMAAR",
-    img: undefined,
-  },
-  {
-    id: "6",
-    description: "Инвестиционная строительная компания",
-    title: "EMAAR",
-    img: undefined,
-  },
-  {
-    id: "7",
-    description: "Инвестиционная строительная компания",
-    title: "EMAAR",
-    img: undefined,
-  },
-  {
-    id: "8",
-    description: "Инвестиционная строительная компания",
-    title: "EMAAR",
-    img: undefined,
-  },
-];
-
-export const DevelopersTab: FC = () => {
+export const DevelopersTab: FC = observer(() => {
   const hrefPrefix = "/developers/";
 
-  return (
+  const { list, loaded, uploadList, errorOnLoad } = DevelopersListStore;
+
+  useEffect(() => {
+    if (!loaded && !errorOnLoad) {
+      uploadList();
+    }
+  }, [loaded, errorOnLoad, uploadList]);
+
+  return list !== null ? (
     <div className={commonStyles.wrapper}>
       <PageFilter />
       <div className={styles.wrapper}>
-        {AgencyList.map((agent, index) => (
+        {list.map((agent, index) => (
           <AgentCard
             key={index}
             hrefPrefix={hrefPrefix}
             description={agent.description}
-            title={agent.title}
-            imgUrl={agent.img}
+            title={agent.developerName}
+            imgUrl={agent.imgUrl}
             id={agent.id}
           />
         ))}
       </div>
     </div>
+  ) : (
+    <>Loading</>
   );
-};
+});

@@ -22,7 +22,7 @@ export const searchCabinet = (type: string | null) => {
     case "bank":
       return "bank";
     default:
-      return <AgencyRoleTabs />;
+      return "admin";
   }
 };
 
