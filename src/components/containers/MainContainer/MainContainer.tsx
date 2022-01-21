@@ -15,6 +15,7 @@ type MainContainerType = {
   cabinetStyle?: boolean;
   className?: string;
 };
+const cityMoc = ['Москва', 'Санкт-Петербург', 'Крым', 'Сочи', 'Нижний Новгород']
 
 export const MainContainer = ({
   children,
@@ -38,7 +39,7 @@ export const MainContainer = ({
           href="%PUBLIC_URL%/LogoIcon.svg"
         />
       </Head>
-      <Header city={city} personalAccount={personalAccount} />
+      <Header city={city ? city : cityMoc} personalAccount={personalAccount} />
       <div className={classNames(cabinetStyle ? css.cabinet : "", className)}>
         {children}
       </div>
