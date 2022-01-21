@@ -228,6 +228,7 @@ export const Header: FC<HeaderPropsType> = ({
   const logout = () => {
     localStorage.clear();
     setAuthorization(false);
+    router.push('/')
   };
 
   const loginActive = () => {
