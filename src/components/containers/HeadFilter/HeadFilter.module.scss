@@ -10,6 +10,7 @@
     justify-content: center;
     background-size: cover;
     color: #FFF;
+    background-image:url("./../../../Pics/Paunic_22.jpg.webp") ;
     @include for-size(KT1) {
         min-height: 503px;
         background-position-x: 90%;

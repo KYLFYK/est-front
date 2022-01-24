@@ -32,8 +32,11 @@ export const ToggleButtons: React.FC<Props> = ({ items, activeValue, classNameBu
                         [s.lastButton]: idx === items.length - 1 && items.length > 1,
                         [s.roundedButton]: items.length === 1
                     }
-                     )} value={button.value} onClick={() => onChange(button.value as string)}> {button.label} </button>
-                {idx !== items.length - 1 && !checkIsActive(button.value) && <div className={s.divider}></div>}
+                     )} value={button.value} onClick={() => onChange(button.value as string)}> <div className={ checkIsActive(button.value) ? s.color : s.colorPlus}>{button.label}</div>  </button>
+                { idx !== items.length - 1 &&<div className={s.divider}></div>}
+
+                {/*{idx !== items.length - 1 && !checkIsActive(button.value) && <div className={s.divider}></div>}*/}
+
             </span>)}
         </div>
     )

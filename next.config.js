@@ -1,10 +1,11 @@
 /** @type {import('next').NextConfig} */
+
 module.exports = {
   reactStrictMode: true,
 
   images: {
-    domains: ['cdn.pixabay.com', 'images.unsplash.com', 'images.ctfassets.net'],
-    loader: 'custom'
+    domains: ["cdn.pixabay.com", "images.unsplash.com", "images.ctfassets.net"],
+    loader: "custom",
   },
 
   eslint: {
@@ -24,5 +25,4 @@ module.exports = {
       '/p/deploy-nextjs': { page: '/post', query: { title: 'deploy-nextjs' } },
     }
   },*/
-
-}
+};

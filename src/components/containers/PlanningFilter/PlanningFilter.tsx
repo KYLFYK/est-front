@@ -7,7 +7,7 @@ import InputsUnion from "../../shared/InputsUnion/InputsUnion"
 import { ToggleButtons } from "../../shared/ToggleButtons/ToggleButtons"
 import Typography from "../../shared/Typography/Typography"
 import { DROPDOWN_FILTER_OPTIONS, DROPDOWN_PLACEHOLDER, SORT_FILTER_OPTIONS, TOGGLE_BUTTONS_OPTIONS } from "./config"
-
+import css from './PlanningFilter.module.css'
 
 interface Props {}
 
@@ -64,8 +64,7 @@ const PlanningFilter: React.FC<Props> = () => {
                     placeholder={DROPDOWN_PLACEHOLDER}
                     options={DROPDOWN_FILTER_OPTIONS}
                     value={DROPDOWN_FILTER_OPTIONS[0].value as string} />
-
-                <ToggleButtons activeValue={TOGGLE_BUTTONS_OPTIONS[0].value as string} items={TOGGLE_BUTTONS_OPTIONS} onChange={() => { }} />
+                <ToggleButtons classNameButton={css.toggleButton} activeValue={TOGGLE_BUTTONS_OPTIONS[0].value as string} items={TOGGLE_BUTTONS_OPTIONS} onChange={() => { }} />
                 <div className={classes.container}>
                     <InputsUnion className={classes.inputUnion}>
                         <CompareInput classNameInput={classes.inputs} placeholderFrom="Цена от" placeholderTo="до" valueFrom={""} valueTo={""} onChangeFrom={tempFunc} onChangeTo={tempFunc} Icon={"₽"} />

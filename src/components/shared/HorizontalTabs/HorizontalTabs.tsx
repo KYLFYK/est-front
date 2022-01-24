@@ -15,9 +15,10 @@ interface Props {
   refs?: any[];
   wrapperClassName?: string;
 }
+
 export const HorizontalTabs: FC<Props> = ({ tabs, refs, wrapperClassName }) => {
   const [selectedTabIdx, setSelectedTabIdx] = useState(0);
-  const activeTabRef = useRef<any>(null);
+  const activeTabRef = useRef<HTMLDivElement | null>(null);
   const [activeTabMargin, setActiveTabMargin] = useState(30);
 
   useEffect(() => {
@@ -74,10 +75,16 @@ export const HorizontalTabs: FC<Props> = ({ tabs, refs, wrapperClassName }) => {
                         : "accent"
                     }
                   >
-                    <div style={{color: tab.title === "Записаться на просмотр" ? '#C5A28E':''}}>
+                    <div
+                      style={{
+                        color:
+                          tab.title === "Записаться на просмотр"
+                            ? "#C5A28E"
+                            : "",
+                      }}
+                    >
                       {tab.title}
                     </div>
-
                   </Typography>
                 }
               />

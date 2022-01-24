@@ -1,0 +1,20 @@
+@import "src/app/styles/typography";
+@import "src/app/styles/colours";
+
+.formSubTitle {
+  @include ROBOTOMEDIUM16L;
+  display: inline-block;
+  margin-bottom: 10px;
+}
+
+.section {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 20px;
+
+  .row {
+    display: flex;
+    gap: 30px;
+  }
+}

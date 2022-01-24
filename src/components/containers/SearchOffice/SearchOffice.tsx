@@ -1,5 +1,4 @@
 import React, { FC } from "react";
-import BaseButton from "../../shared/BaseButton/BaseButtons";
 import BaseLink from "../../shared/BaseLink/BaseLink";
 import { BaseInput } from "../../shared/BaseInput/Input";
 import { IconOption } from "../../../icons/SearchOffice/IconOption";
@@ -11,23 +10,39 @@ interface Props {
   type?: "active" | "archive" | "draft" | "owner";
   hideButton?: boolean;
   placeholder?: string;
+  buttonText?: string;
+  inputIcon?: JSX.Element | string;
+  inputIconPlacement?: "right" | "left";
 }
 
-export const SearchOffice: FC<Props> = ({ type = 'active', hideButton, placeholder }) => {
-  
-  const searchTitle = (type:string) =>{
-    switch(type){
-      case 'archive':return "Восстановить все"
-      case 'draft':return "Добавить объект"
-      case 'active':return "Добавить объект"
+export const SearchOffice: FC<Props> = ({
+  type = "active",
+  hideButton,
+  placeholder,
+  buttonText,
+  inputIcon,
+  inputIconPlacement,
+}) => {
+  const searchTitle = (type: string) => {
+    switch (type) {
+      case "archive":
+        return "Восстановить все";
+      case "draft":
+        return "Добавить объект";
+      case "active":
+        return "Добавить объект";
     }
-  }
+  };
 
   return (
     <div className={css.search}>
       <div className={css.position}>
         <div className={css.inputMargin}>
-          <BaseInput placeholder={placeholder} />
+          <BaseInput
+            icon={inputIcon}
+            iconPlacement={inputIconPlacement}
+            placeholder={placeholder}
+          />
         </div>
         <IconOption />
       </div>
@@ -37,10 +52,8 @@ export const SearchOffice: FC<Props> = ({ type = 'active', hideButton, placehold
           type={type === "active" ? "secondary" : "primary_light"}
           isActive
         >
-          <Typography size="small">
-            {
-              searchTitle(type)
-            }
+          <Typography size="small" color={"secondary"}>
+            {buttonText ? buttonText : searchTitle(type)}
           </Typography>
         </BaseLink>
       )}

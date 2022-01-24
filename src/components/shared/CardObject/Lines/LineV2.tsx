@@ -1,6 +1,8 @@
 import React, { FC } from "react";
 import css from "./Lines.module.scss";
 import Typography from "../../Typography/Typography";
+import FavoriteOffIcon from "../../FavoriteOffIcon/FavoriteOffIcon";
+
 
 type LinesV2Type = {
   totalArea: string;
@@ -17,9 +19,9 @@ const LineV2: FC<LinesV2Type> = ({
   fromPublic,
   id,
 }) => {
-  // const favoriteOff = (id: string) => {
-  //   console.log(id, "favoriteOff");
-  // };
+  const favoriteOff = (id: string) => {
+    console.log(id, "favoriteOff");
+  };
 
   return (
     <div className={css.lineGridV2}>
@@ -30,15 +32,17 @@ const LineV2: FC<LinesV2Type> = ({
       </div>
 
       <div className={css.df}>
-        <Typography weight={"light"} color={"tertiary"}>
+        <Typography weight={"light"} color={"tertiary"} className={css.paddingRight_5} >
           Дата публикации:
         </Typography>
-        <Typography color={"tertiary"}>{datePublic}</Typography>
+        <Typography color={"tertiary"} >
+            {datePublic}
+        </Typography>
       </div>
       <div>
-        <Typography>{fromPublic}</Typography>
+        <Typography color={"accent"}>{fromPublic}</Typography>
       </div>
-      {/*<FavoriteOffIcon onClick={favoriteOff} id={id} />*/}
+      <FavoriteOffIcon onClick={favoriteOff} id={id} />
     </div>
   );
 };

@@ -4,9 +4,10 @@ import BaseButton from "../BaseButton/BaseButtons";
 import { v4 as uuidv4 } from "uuid";
 
 import styles from "./AvatarSection.module.scss";
+import { myLoader } from "../../../utils/image/image";
 
 interface Props {
-  src: string;
+  src?: string | StaticImageData;
   changeable?: boolean;
   buttonText?: string;
   onChange?: (value: FormData) => void;
@@ -20,7 +21,7 @@ export const AvatarSection: FC<Props> = ({
 }) => {
   const labelId = changeable ? uuidv4() : "";
 
-  const [fileSrc, setFileSrc] = useState(src);
+  const [fileSrc, setFileSrc] = useState(src ? src : "");
 
   const handleFile = (file: File) => {
     if (onChange) {
@@ -34,7 +35,12 @@ export const AvatarSection: FC<Props> = ({
   return (
     <div className={styles.wrapper}>
       <div className={styles.image}>
-        <Image alt={"Аватар пользователя"} src={fileSrc} layout={"fill"} />
+        <Image
+          alt={"Аватар пользователя"}
+          src={fileSrc}
+          layout={"fill"}
+          loader={(e) => myLoader(e.src, e.width, e.quality)}
+        />
       </div>
       {changeable && (
         <>

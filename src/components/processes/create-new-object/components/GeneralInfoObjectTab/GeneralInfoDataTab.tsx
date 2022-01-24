@@ -356,7 +356,7 @@ const GeneralInfoDataTab: React.FC<Props> = observer(({ onNextTab, onPrevTab, ob
                             <BaseInput
                                 value={values.pool.square}
                                 onChange={onChangePoolSquare}
-                                type="text"
+                                type="number"
                                 label="Площадь бассейна"
                                 isError={!isValid && !isValidPoolSquare}
                                 className={s.inputSm}

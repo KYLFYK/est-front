@@ -18,7 +18,9 @@ const Contacts: NextPage = () => {
   return (
     <div >
         <Header city={city} personalAccount={personalAccount}/>
-        <h1>Контакты</h1>
+        <h1 style={{display:'flex',justifyContent:"center",alignItems:"center",height:'90vh'}}>
+            Страница Контакты в разработке
+        </h1>
         <Footer color={'accent'}/>
         <ScrollUp/>
     </div>

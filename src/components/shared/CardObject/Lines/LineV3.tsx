@@ -26,7 +26,7 @@ const LineV3 :FC<LinesV3Type> = ({city,country,dateUpdate,phone}) => {
                 </Typography>
             </div>
                 <div className={css.df}>
-                    <Typography weight={"light"} color={"tertiary"}>
+                    <Typography weight={"light"} color={"tertiary"} className={css.paddingRight_5}>
                         Дата обновления:
                     </Typography>
                     <Typography color={"tertiary"} >

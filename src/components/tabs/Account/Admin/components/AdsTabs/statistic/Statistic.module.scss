@@ -1,0 +1,21 @@
+@import "src/app/styles/typography";
+@import "src/app/styles/colours";
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+
+  .row {
+    display: flex;
+    gap: 20px;
+  }
+}
+
+.green {
+  color: #27AE60 !important;
+}
+
+.gray {
+  color: #9495A7 !important;
+}

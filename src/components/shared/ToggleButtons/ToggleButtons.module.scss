@@ -51,20 +51,43 @@
     border: 0;
     @include ROBOTOREGULAR16;
     cursor: pointer;
+    &:hover{
+        color:$NUDE;
+    }
 }
 
 .firstButton {
     border-radius: 8px 0px 0px 8px;
+    //padding: 7px 4px;
 }
 
 .lastButton {
     border-radius: 0px 8px 8px 0px;
+    //padding: 7px 4px;
 }
 .roundedButton {
     border-radius: 8px;
+    //padding: 7px 4px;
 }
 
 .activeButton {
-    background-color: $NUDE;
-    color: #fff;
+    border-radius:4px;
+}
+.color{
+    display: flex;
+    align-items: center;
+    position: relative;
+    border-radius: 4px;
+    background-color: #F2F2F2;
+    text-align: center;
+    padding: 0 8px 2px 8px;
+    height: 100%;
+}
+.colorPlus{
+    display: flex;
+    //align-items: center;
+    position: relative;
+    border-radius: 4px;
+    text-align: center;
+    padding: 2px 8px 2px 8px;
 }

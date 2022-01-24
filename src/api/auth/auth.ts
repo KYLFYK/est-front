@@ -70,10 +70,12 @@ export const AuthApi = {
                 }
                 if (!res.data.isActive && res.data.isActive!==undefined ){
                     localStorage.clear()
+                    return res.data.isActive
                 }
             }
         } catch (e) {
             localStorage.clear()
+            return false
         }
     },
     registration: async (registration: RegistrationType) => {

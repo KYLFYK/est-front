@@ -29,7 +29,7 @@ export const Login: React.FC<LoginPropsType> = ({recoveryPass, registration, onE
             if (res === 201){
                 setActive && setActive()
             }else{
-                alert('Ошибка вообда данных')
+                alert('Ошибка ввода данных')
             }
         } catch (e) {
 

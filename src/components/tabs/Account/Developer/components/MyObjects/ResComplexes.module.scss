@@ -20,3 +20,28 @@
     padding-top: 10px;
   }
 }
+.marginB_20{
+  margin-bottom: 20px;
+}
+.marginR_10{
+  margin-right: 10px;
+}
+.grid4{
+  margin-top: 20px;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  gap: 20px;
+}
+.apartmentBorder{
+  border: 1px solid #F2F2F2;
+  border-radius: 6px;
+  padding: 10px 12px;
+}
+.df_jc{
+  display: flex;
+  justify-content: space-between;
+  margin-top: 5px;
+}
+.marginT_5{
+  margin-top: 5px;
+}

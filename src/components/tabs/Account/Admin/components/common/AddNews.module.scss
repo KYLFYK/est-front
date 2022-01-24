@@ -1,0 +1,41 @@
+@import "src/app/styles/typography";
+@import "src/app/styles/colours";
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 30px;
+
+  .title {
+    @include ROBOTOMEDIUM16;
+  }
+
+  .fields {
+    display: flex;
+    gap: 12px;
+  }
+
+  .button, .field {
+    width: 290px;
+    max-width: 290px;
+    height: 40px;
+    border: 1px solid #CAD1DA;
+    box-sizing: border-box;
+    border-radius: 6px;
+    outline: none;
+
+    @include ROBOTOREGULAR16;
+  }
+
+  .field {
+    padding-left: 12px;
+  }
+
+  .button {
+    border-color: #1A4862;
+    color: #1A4862;
+    background-color: transparent;
+    cursor: pointer;
+  }
+}

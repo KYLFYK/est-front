@@ -4,6 +4,7 @@ import BaseButton from '../../shared/BaseButton/BaseButtons';
 import EstateOffer from '../../shared/EstateOffer/estateOffer';
 import HeadLine from '../../shared/HeadLine/HeadLine';
 import css from './bestOffers.module.css'
+import Typography from "../../shared/Typography/Typography";
 
 type BestOffersType = {
     bestOffers:Array<{id:number,url:string,img:Array<string>,tags:Array<string>}>
@@ -27,7 +28,9 @@ export const BestOffers :FC<BestOffersType> = ({bestOffers,tagsButton}) => {
                         type="secondary"
                         className={css.margin}
                     >
-                        Показать еще
+                        <Typography color={"accent"}>
+                            Показать еще
+                        </Typography>
                     </BaseButton>
                 </div>
 

@@ -28,7 +28,7 @@ export const EmailConformation :FC<ConfirmationNewPasswordType> = ({onEdit,token
         <div className={css.container}>
             <LogoIcon/>
             <div className={css.margin}>
-                <Typography size={'small'} >
+                <Typography >
                     {
                         error === ''
                             ?<div>Адрес электронной почты подтвержден</div>

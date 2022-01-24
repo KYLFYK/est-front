@@ -5,15 +5,15 @@
     font-style: normal;
     src: url("../src/app/fonts/Montserrat/Montserrat-Regular.ttf")
   }
-  
-  
+
+
   @font-face {
     font-family: "MontserratBold";
     font-weight: 700;
     font-style: normal;
     src: url("../src/app/fonts/Montserrat/Montserrat-Bold.ttf")
   }
-  
+
   @font-face {
     font-family: "MontserratLight";
     font-weight: 300;
@@ -34,7 +34,7 @@
     font-style: normal;
     src: url("../src/app/fonts/Roboto/Roboto-Bold.ttf")
   }
-  
+
   @font-face {
     font-family: "RobotoMedium";
     font-weight: 500;
@@ -58,5 +58,10 @@ body{
   margin: 0;
 }
 
+#__next {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
 
 

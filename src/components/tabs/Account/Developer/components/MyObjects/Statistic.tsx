@@ -5,6 +5,7 @@ import { BaseDropDown } from "../../../../../shared/BaseDropDown/BaseDropDown";
 import { BarChartElem } from "./BarChartElem";
 
 import styles from "./MyObjects.module.scss";
+import {useStoreDeveloperMyObjectStore} from "../../../../../../mobx/role/developer/myObject/DeveloperMyObject";
 
 const Data = {
   byMonth: [
@@ -86,6 +87,9 @@ const Data = {
 };
 
 export const Statistic: FC = () => {
+
+  const store = useStoreDeveloperMyObjectStore()
+
   const [selectedMonth, setSelectedMonth] = useState("Сентябрь 2021");
   const [selectedObj, setSelectedObj] = useState("ЖК Ленинский");
 
@@ -97,7 +101,7 @@ export const Statistic: FC = () => {
           chartSubTitle={"Прибыль млн. ₽"}
           title={"Выручка по месяцам"}
           overflowX={"auto"}
-          table={Data.byMonth}
+          table={store.initialData.statistics.byMonth}
         />
       </div>
       <div className={styles.statItem}>
@@ -113,38 +117,38 @@ export const Statistic: FC = () => {
           <div className={styles.statObjectCard}>
             <div className={styles.criteria}>
               <span className={styles.subTitle}>За месяц:</span>
-              <span className={styles.title}> Сентябрь 2021</span>
+              <span className={styles.title}> {store.initialData.statistics.revenueMonth.date}</span>
             </div>
             <div className={styles.elemList}>
               <div className={styles.elem}>
                 <span className={styles.name}>ЖК</span>
-                <span className={styles.value}>25 млн ₽</span>
+                <span className={styles.value}>{store.initialData.statistics.revenueMonth.complex}</span>
               </div>
               <div className={styles.elem}>
                 <span className={styles.name}>Дома</span>
-                <span className={styles.value}>5,2 млн ₽</span>
+                <span className={styles.value}>{store.initialData.statistics.revenueMonth.house}</span>
               </div>
               <div className={styles.elem}>
                 <span className={styles.name}>Общая выручка</span>
-                <span className={styles.value}>30 млн ₽</span>
+                <span className={styles.value}>{store.initialData.statistics.revenueMonth.allRevenue}</span>
               </div>
             </div>
             <div className={styles.criteria}>
               <span className={styles.subTitle}>За год:</span>
-              <span className={styles.title}> 2021</span>
+              <span className={styles.title}>{store.initialData.statistics.revenueYear.date}</span>
             </div>
             <div className={styles.elemList}>
               <div className={styles.elem}>
                 <span className={styles.name}>ЖК</span>
-                <span className={styles.value}>25 млн ₽</span>
+                <span className={styles.value}>{store.initialData.statistics.revenueYear.complex}</span>
               </div>
               <div className={styles.elem}>
                 <span className={styles.name}>Дома</span>
-                <span className={styles.value}>5,2 млн ₽</span>
+                <span className={styles.value}>{store.initialData.statistics.revenueYear.house}</span>
               </div>
               <div className={styles.elem}>
                 <span className={styles.name}>Общая выручка</span>
-                <span className={styles.value}>30 млн ₽</span>
+                <span className={styles.value}>{store.initialData.statistics.revenueYear.allRevenue}</span>
               </div>
             </div>
           </div>
@@ -159,7 +163,7 @@ export const Statistic: FC = () => {
                 setSelectedMonth(month);
               }}
               className={styles.select}
-              options={Data.options.dates}
+              options={store.initialData.statistics.option.dates}
               placeholder="Выберите период"
               value={selectedMonth}
             />
@@ -171,7 +175,7 @@ export const Statistic: FC = () => {
                 setSelectedObj(obj);
               }}
               className={styles.select}
-              options={Data.options.objects}
+              options={store.initialData.statistics.option.objects}
               placeholder="Выберите ЖК"
               value={selectedObj}
             />
@@ -190,24 +194,7 @@ export const Statistic: FC = () => {
             width={600}
             tooltipText={"Кол-во бронирований"}
             overflowX={"auto"}
-            chartData={[
-              {
-                name: "Студии",
-                value: 55,
-              },
-              {
-                name: "1к квартиры",
-                value: 35,
-              },
-              {
-                name: "2к квартиры",
-                value: 26,
-              },
-              {
-                name: "3к квартиры",
-                value: 18,
-              },
-            ]}
+            chartData={store.initialData.statistics.chartDataBookings}
           />
         </Card>
       </div>
@@ -220,7 +207,7 @@ export const Statistic: FC = () => {
                 setSelectedMonth(month);
               }}
               className={styles.select}
-              options={Data.options.dates}
+              options={store.initialData.statistics.option.dates}
               placeholder="Выберите период"
               value={selectedMonth}
             />
@@ -232,7 +219,7 @@ export const Statistic: FC = () => {
                 setSelectedObj(obj);
               }}
               className={styles.select}
-              options={Data.options.objects}
+              options={store.initialData.statistics.option.objects}
               placeholder="Выберите ЖК"
               value={selectedObj}
             />
@@ -251,24 +238,7 @@ export const Statistic: FC = () => {
             width={600}
             tooltipText={"Кол-во покупок"}
             overflowX={"auto"}
-            chartData={[
-              {
-                name: "Студии",
-                value: 55,
-              },
-              {
-                name: "1к квартиры",
-                value: 35,
-              },
-              {
-                name: "2к квартиры",
-                value: 26,
-              },
-              {
-                name: "3к квартиры",
-                value: 18,
-              },
-            ]}
+            chartData={store.initialData.statistics.chartDataPurchases}
           />
         </Card>
       </div>

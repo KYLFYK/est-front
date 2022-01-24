@@ -9,6 +9,7 @@ import CardObject from "../../../../../shared/CardObject/CardObject";
 
 import styles from "./ResComplexes.module.scss";
 import css from "../../../Agent/components/Others/MyAdsContainer/Active.module.scss";
+import {useStoreDeveloperMyObjectStore} from "../../../../../../mobx/role/developer/myObject/DeveloperMyObject";
 
 const Data = {
   objects: [
@@ -33,7 +34,14 @@ const Data = {
   ],
 };
 
-export const ResComplexes: FC = () => {
+type ResComplexesType ={
+  onComplex:()=>void
+}
+
+export const ResComplexes: FC<ResComplexesType> = ({onComplex}) => {
+
+  const store =useStoreDeveloperMyObjectStore()
+
   const recover = (id: string) => {
     console.log(id, "recover");
   };
@@ -48,11 +56,12 @@ export const ResComplexes: FC = () => {
   };
 
   return (
-    <div className={styles.wrapper}>
+    <div className={styles.wrapper} onClick={onComplex}>
       <SearchOffice hideButton placeholder={"Поиск"} />
       <FilterSearch className={styles.filter} type="agent" />
       <div className={styles.objectsList}>
-        {Data.objects.map((home, index) => (
+        {/*{Data.objects.map((home, index) => (*/}
+        {store.initialData.complex.map((home, index) => (
           <div className={styles.object} key={index}>
             <CardObject img={home.img}>
               <div className={css.paddingCard}>
