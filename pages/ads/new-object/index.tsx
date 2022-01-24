@@ -7,6 +7,7 @@ import s from './index.module.scss'
 import {MainContainer} from "../../../src/components/containers/MainContainer/MainContainer";
 
 const NewObjectPage: NextPage = () => {
+
     const [action, setAction] = React.useState<NewObjectActionTypes>()
     const [objectType, setObjectType] = React.useState<ObjectTypes>()
 
