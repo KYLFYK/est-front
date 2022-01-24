@@ -1,49 +1,42 @@
-import { FC } from "react";
+import { FC, useEffect, useRef, useState } from "react";
 import DynamicsPriceTable from "../../../../../../shared/DynamicsPrice/DynamicsPriceTable";
 import { Card } from "../../../../../../shared/Mortgage/Card";
+import { observer } from "mobx-react-lite";
+import { UsersStatisticsStore } from "../../../../../../../mobx/role/admin/users/statistics";
+import moment from "moment";
 
 import commonStyles from "../../../AdminRoleStyles.module.scss";
 import styles from "../../../../Developer/components/MyObjects/MyObjects.module.scss";
 
-const Data = {
-  byMonth: [
-    {
-      name: "Январь 2018",
-      price: "50000",
-    },
-    {
-      name: "Июль 2018",
-      price: "55000",
-    },
-    {
-      name: "Январь 2019",
-      price: "56000",
-    },
-    {
-      name: "Июль 2019",
-      price: "61000",
-    },
-    {
-      name: "Январь 2020",
-      price: "62000",
-    },
-    {
-      name: "Июль 2020",
-      price: "67000",
-    },
-    {
-      name: "Январь 2021",
-      price: "68000",
-    },
-    {
-      name: "Июль 2021",
-      price: "71000",
-    },
-  ],
-};
+export const StatisticsTab: FC = observer(() => {
+  const { loaded, errorOnLoad, uploadData, data } = UsersStatisticsStore;
+  const chartWrapperRef = useRef<HTMLDivElement | null>(null);
 
-export const StatisticsTab: FC = () => {
-  return (
+  const [chartWidth, setChartWidth] = useState<number>(0);
+
+  useEffect(() => {
+    if (!loaded && !errorOnLoad) {
+      uploadData();
+    }
+  }, [loaded, errorOnLoad, uploadData]);
+
+  useEffect(() => {
+    const listener = () => {
+      if (chartWrapperRef && chartWrapperRef.current) {
+        setChartWidth(chartWrapperRef.current.clientWidth - 40);
+      }
+    };
+
+    listener();
+
+    window.addEventListener("resize", listener);
+
+    return () => {
+      window.removeEventListener("resize", listener);
+    };
+  }, [chartWrapperRef, loaded]);
+
+  return data !== null ? (
     <div
       className={commonStyles.wrapper}
       style={{
@@ -51,13 +44,16 @@ export const StatisticsTab: FC = () => {
         flexDirection: "row",
       }}
     >
-      <div className={styles.statItem}>
+      <div className={styles.statItem} ref={chartWrapperRef}>
         <DynamicsPriceTable
           hideQuestion
+          width={chartWidth}
           chartSubTitle={"Прибыль млн. ₽"}
           title={"Выручка по месяцам"}
-          overflowX={"auto"}
-          table={Data.byMonth}
+          table={data.revenueChart.map((el) => ({
+            price: el.price,
+            name: moment(el.month).format("MMMM"),
+          }))}
         />
       </div>
       <div
@@ -79,43 +75,63 @@ export const StatisticsTab: FC = () => {
           <div className={styles.statObjectCard}>
             <div className={styles.criteria}>
               <span className={styles.subTitle}>За месяц:</span>
-              <span className={styles.title}> Сентябрь 2021</span>
+              <span className={styles.title}>
+                {" "}
+                {moment(data.revenueByObjects.month).format("MMMM YYYY")}
+              </span>
             </div>
             <div className={styles.elemList}>
               <div className={styles.elem}>
                 <span className={styles.name}>Агентства</span>
-                <span className={styles.value}>25 млн ₽</span>
+                <span className={styles.value}>
+                  {data.revenueByObjects.objectsByMonth.agencies} млн ₽
+                </span>
               </div>
               <div className={styles.elem}>
                 <span className={styles.name}>Застройщики</span>
-                <span className={styles.value}>5,2 млн ₽</span>
+                <span className={styles.value}>
+                  {data.revenueByObjects.objectsByMonth.developers} млн ₽
+                </span>
               </div>
               <div className={styles.elem}>
                 <span className={styles.name}>Собственники</span>
-                <span className={styles.value}>30 млн ₽</span>
+                <span className={styles.value}>
+                  {data.revenueByObjects.objectsByMonth.owners} млн ₽
+                </span>
               </div>
             </div>
             <div className={styles.criteria}>
               <span className={styles.subTitle}>За год:</span>
-              <span className={styles.title}> 2021</span>
+              <span className={styles.title}>
+                {" "}
+                {moment(data.revenueByObjects.year).format("YYYY")}
+              </span>
             </div>
             <div className={styles.elemList}>
               <div className={styles.elem}>
                 <span className={styles.name}>Агентства</span>
-                <span className={styles.value}>25 млн ₽</span>
+                <span className={styles.value}>
+                  {data.revenueByObjects.objectsByYear.agencies} млн ₽
+                </span>
               </div>
               <div className={styles.elem}>
                 <span className={styles.name}>Застройщики</span>
-                <span className={styles.value}>5,2 млн ₽</span>
+                <span className={styles.value}>
+                  {data.revenueByObjects.objectsByYear.developers} млн ₽
+                </span>
               </div>
               <div className={styles.elem}>
                 <span className={styles.name}>Собственники</span>
-                <span className={styles.value}>30 млн ₽</span>
+                <span className={styles.value}>
+                  {data.revenueByObjects.objectsByYear.owners} млн ₽
+                </span>
               </div>
             </div>
           </div>
         </Card>
       </div>
     </div>
+  ) : (
+    <>Loading</>
   );
-};
+});

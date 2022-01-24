@@ -4,6 +4,7 @@ import { useRouter } from "next/router";
 import Typography from "../../../shared/Typography/Typography";
 import Link from "next/link";
 import { MainContainer } from "../../../containers/MainContainer/MainContainer";
+import "moment/locale/ru";
 
 interface LinkProps {
   href: string;

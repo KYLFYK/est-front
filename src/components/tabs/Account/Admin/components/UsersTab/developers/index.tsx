@@ -2,7 +2,7 @@ import React, { FC, useEffect } from "react";
 import { PageFilter } from "../../common/PageFilter";
 import { AgentCard } from "../agency/AgentCard";
 import { observer } from "mobx-react-lite";
-import { DevelopersListStore } from "../../../../../../../mobx/role/admin/cabinet/developers";
+import { DevelopersListStore } from "../../../../../../../mobx/role/admin/users/developers";
 
 import commonStyles from "../../../AdminRoleStyles.module.scss";
 import styles from "../agency/agency.module.scss";
