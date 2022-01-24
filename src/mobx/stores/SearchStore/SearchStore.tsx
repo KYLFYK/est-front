@@ -7,21 +7,22 @@ class SearchStore {
     makeAutoObservable(this);
   }
   fetching = true
-  params = {
-    objectType: 'apartment', 
-    actionType: 'sale', 
-    secondaryType: 'secondary', 
-    planning: 'free_plan',
-  }
+  params = {}
   initialData: any = []
+  
+  setParams(newParams: any) {
+    this.params = newParams
+  }
+
+  get() {
+    return JSON.parse(JSON.stringify({ ...this.initialData}))
+  }
+
   async fetch() {
-    const res = SearchApi.getFilteredObj({
-      'object-type': 'apartment', 
-      'order-type': 'sale', 
-      'building-type': 'secondary', 
-      'rooms': 'free_plan',
-    })
+    this.fetching = true
+    const res = SearchApi.getFilteredObj(this.params)
     this.initialData = await res
+    this.fetching = false
   }
 }
 

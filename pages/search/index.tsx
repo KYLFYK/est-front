@@ -26,7 +26,6 @@ const center = {lat: 45.16, lng: 36.90}
 const Finder: NextPage = () => {
 
   const router = useRouter()
-
   const [view, setView] = useState('mapView')
 
   return (
