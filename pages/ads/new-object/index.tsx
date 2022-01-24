@@ -11,6 +11,7 @@ const NewObjectPage: NextPage = () => {
     const [action, setAction] = React.useState<NewObjectActionTypes>()
     const [objectType, setObjectType] = React.useState<ObjectTypes>()
 
+
     return (
         <MainContainer className={s.wrapper} cabinetStyle={true} footerColor={'accent'}>
             {(action !== undefined && objectType !== undefined) ?
