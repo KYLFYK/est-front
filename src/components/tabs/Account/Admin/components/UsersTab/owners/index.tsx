@@ -1,90 +1,39 @@
-import React, { FC } from "react";
+import React, { FC, useEffect } from "react";
 import { PageFilter } from "../../common/PageFilter";
 import { OwnerCard } from "./OwnerCard";
+import { OwnersListStore } from "../../../../../../../mobx/role/admin/users/owners";
+import { observer } from "mobx-react-lite";
 
+import avatar from "../../../../../../../Pics/persons/exampleAvatar.png";
 import commonStyles from "../../../AdminRoleStyles.module.scss";
 import styles from "../agency/agency.module.scss";
 
-import avatar from "../../../../../../../Pics/persons/exampleAvatar.png";
-
-const ownersList = [
-  {
-    email: "ivanivanov@inbox.ru",
-    phone: "+7 999 249 86 49",
-    name: "Иван Иванов",
-    img: avatar,
-    id: "1",
-  },
-  {
-    email: "ivanivanov@inbox.ru",
-    phone: "+7 999 249 86 49",
-    name: "Иван Иванов",
-    img: avatar,
-    id: "2",
-  },
-  {
-    email: "ivanivanov@inbox.ru",
-    phone: "+7 999 249 86 49",
-    name: "Иван Иванов",
-    img: avatar,
-    id: "3",
-  },
-  {
-    email: "ivanivanov@inbox.ru",
-    phone: "+7 999 249 86 49",
-    name: "Иван Иванов",
-    img: avatar,
-    id: "4",
-  },
-  {
-    email: "ivanivanov@inbox.ru",
-    phone: "+7 999 249 86 49",
-    name: "Иван Иванов",
-    img: avatar,
-    id: "5",
-  },
-  {
-    email: "ivanivanov@inbox.ru",
-    phone: "+7 999 249 86 49",
-    name: "Иван Иванов",
-    img: avatar,
-    id: "6",
-  },
-  {
-    email: "ivanivanov@inbox.ru",
-    phone: "+7 999 249 86 49",
-    name: "Иван Иванов",
-    img: avatar,
-    id: "7",
-  },
-  {
-    email: "ivanivanov@inbox.ru",
-    phone: "+7 999 249 86 49",
-    name: "Иван Иванов",
-    img: avatar,
-    id: "8",
-  },
-];
-
-export const OwnersTab: FC = () => {
+export const OwnersTab: FC = observer(() => {
   const hrefPrefix = "/owners/";
+  const { list, loaded, errorOnLoad, uploadList } = OwnersListStore;
+
+  useEffect(() => {
+    if (!loaded && !errorOnLoad) {
+      uploadList();
+    }
+  }, [loaded, errorOnLoad, uploadList, list]);
 
   return (
     <div className={commonStyles.wrapper}>
       <PageFilter />
       <div className={styles.wrapper}>
-        {ownersList.map((elem, index) => (
+        {list?.map((elem, index) => (
           <OwnerCard
             key={index}
-            avatar={elem.img}
+            avatar={avatar}
             id={elem.id}
-            name={elem.name}
+            name={`${elem.firstName} ${elem.lastName}`}
             email={elem.email}
-            phone={elem.phone}
+            phone={elem.phoneHumber}
             hrefPrefix={hrefPrefix}
           />
         ))}
       </div>
     </div>
   );
-};
+});

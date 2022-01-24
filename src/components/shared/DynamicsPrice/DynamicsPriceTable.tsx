@@ -12,6 +12,7 @@ interface Props {
   chartSubTitle?: string;
   title?: string;
   overflowX?: "auto";
+  width?: number;
 }
 
 const DynamicsPriceTable: FC<Props> = ({
@@ -20,11 +21,12 @@ const DynamicsPriceTable: FC<Props> = ({
   chartSubTitle,
   title,
   overflowX,
+  width,
 }) => {
-  const [cardX, setCardX] = useState(0);
+  const [, setCardX] = useState(0);
   const [cardhover, setCardhover] = useState<boolean[]>([false, false, false]);
-  const [cardCoords, setCardcoords] = useState<[number, number]>([0, 0]);
-  const [cardHeight, setCardHeight] = useState(0);
+  const [, setCardcoords] = useState<[number, number]>([0, 0]);
+  const [cardHeight] = useState(0);
 
   const onMouseCardhoverHandler = (e: any) => {
     if (window.innerWidth - e.nativeEvent.layerX < 320) {
@@ -77,6 +79,7 @@ const DynamicsPriceTable: FC<Props> = ({
             table={table}
             divider={5000}
             currency={true}
+            width={width}
             overflowX={overflowX}
           />
         </Card>
