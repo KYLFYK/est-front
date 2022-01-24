@@ -6,6 +6,8 @@ import { getLocalStorage } from "../../src/lib/localStorage/localStorage";
 import { MainContainer } from "../../src/components/containers/MainContainer/MainContainer";
 import { AdminCabinetWrapper } from "../../src/components/tabs/Account/Admin/AdminCabinetWrapper";
 import { UsersTab } from "../../src/components/tabs/Account/Admin/components/UsersTab/UsersTab";
+import Typography from './../../src/components/shared/Typography/Typography'
+
 
 export const searchCabinet = (type: string | null) => {
   switch (type) {
@@ -22,7 +24,7 @@ export const searchCabinet = (type: string | null) => {
     case "bank":
       return "bank";
     default:
-      return "admin";
+      return <Typography weight={"bold"}> Время Авторизации истекло, повторно авторизируйтесь.</Typography>;
   }
 };
 

@@ -3,7 +3,7 @@ import { FoundersTypes } from "../../../utils/interfaces/objects";
 
 
 export const INFRASTRUCTURE_TAB_VIEW_OPTIONS: IOption[] = [
-    { value: "park", label: "Двор, Парк" },
+    { value: "park", label: "Двор, парк" },
     { value: "sea", label: "Набережная, море" },
     { value: "downtown", label: "Центр города, историческая застройка" }
 ]

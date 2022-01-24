@@ -199,7 +199,6 @@ export const Header: FC<HeaderPropsType> = ({
     Array<{ title: string; href: string; message: number }>
   >(personalAcc[0]);
   const searchLoginMoc = (role: string | null) => {
-    console.log("role", role);
     if (role === "agency") {
       setAuthorization(true);
       setMocAccountMenu(personalAcc[0]);
@@ -228,6 +227,7 @@ export const Header: FC<HeaderPropsType> = ({
   const logout = () => {
     localStorage.clear();
     setAuthorization(false);
+    if(router.asPath === '/search' ) return 1
     router.push('/')
   };
 
@@ -244,7 +244,7 @@ export const Header: FC<HeaderPropsType> = ({
       };
       res();
     } catch (e) {
-      console.log("error");
+      console.log('error - throw',e)
     }
   }, []);
 
