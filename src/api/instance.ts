@@ -21,3 +21,7 @@ export enum UrlObj  {
     house = 'house', 
     land = 'land',
 }
+
+export enum UrlSearch  {
+    search = 'search', 
+}

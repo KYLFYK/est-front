@@ -54,10 +54,14 @@ export const HeadFilter = () => {
                         >
                             <div className={s.buttonTitle}>Перейти к поиску</div>
                         </Button>*/}
-          </div>
-        </div>
-        <div className={s.filterWrapper}>
-          <Filter />
+
+                    </div>
+
+                </div>
+                <div className={s.filterWrapper}>
+                    <Filter location={'start'}/>
+                </div>
+            </div>
         </div>
       </div>
     </div>

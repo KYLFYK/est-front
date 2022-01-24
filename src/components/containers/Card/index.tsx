@@ -6,20 +6,21 @@ import Link from 'next/link'
 import { APIObject } from '../../../api';
 import BaseSlider from '../../shared/BaseSlider/BaseSlider';
 import Typography from '../../shared/Typography/Typography';
-
+import {mapData} from '../CardContainer/config'
 
 interface Props {
     houseData: APIObject.types.IObjectEntry,
+    data?: any
 }
 
 const TEMP_LINK = '/'
 const MAX_SLIDERS_AMMOUNT = 7
 
-const ObjectCard: React.FC<Props> = ({ houseData }) => {
+const ObjectCard: React.FC<Props> = ({ houseData, data }) => {
 
-    const houseImages = houseData.images.length > MAX_SLIDERS_AMMOUNT ? houseData.images.slice(0, MAX_SLIDERS_AMMOUNT) : houseData.images
+    //const houseImages = houseData.images.length > MAX_SLIDERS_AMMOUNT ? houseData.images.slice(0, MAX_SLIDERS_AMMOUNT) : houseData.images
+    const houseImages = mapData[0].images
     const imagesUrls = houseImages.map((image) => image.url)
-
 
     return (
         <div className={s.wrapper}>
@@ -27,17 +28,17 @@ const ObjectCard: React.FC<Props> = ({ houseData }) => {
                 <BaseSlider images={imagesUrls} height={200} withFavorite onClickFavorite={() => {}}/>
             </div>
 
-            <Link href={`${TEMP_LINK}${houseData.type}/${houseData.object_id}`}>
+            <Link href={`${TEMP_LINK}${'apartment'}/${data.id}`}>
                 <a className={s.content}>
-                    <Typography inline weight="bold" color="accent" className={s.title}>{houseData.name}</Typography>
+                    <Typography inline weight="bold" color="accent" className={s.title}>{data.name}</Typography>
                     <p className={s.subtitle}>
-                        <Typography inline weight="light" color="tertiary"> Адрес: </Typography> {houseData.address}
+                        <Typography inline weight="light" color="tertiary"> Адрес: </Typography> {data.address}
                     </p>
                     <p className={s.subtitle}>
-                        <Typography inline weight="light" color="tertiary">Этаж:</Typography> {houseData.floor} / {houseData.total_floors}
+                        <Typography inline weight="light" color="tertiary">Этаж:</Typography> {data.property.floor} / {houseData.total_floors}
                     </p>
                     <p className={s.price}>
-                        {houseData.price} ₽
+                        {data.price} ₽
                     </p>
                 </a>
             </Link>
