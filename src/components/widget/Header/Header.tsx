@@ -313,12 +313,12 @@ export const Header: FC<HeaderPropsType> = ({
           </Modal>
         }
 
-        <button onClick={() => mocRole("agency")}>agency</button>
-        <button onClick={() => mocRole("agent")}>agent</button>
-        <button onClick={() => mocRole("customer")}>owner</button>
-        <button onClick={() => mocRole("developer")}>developer</button>
-        <button onClick={() => mocRole("admin")}>admin</button>
-        <button onClick={() => mocRole("bank")}>bank</button>
+        {/*<button onClick={() => mocRole("agency")}>agency</button>*/}
+        {/*<button onClick={() => mocRole("agent")}>agent</button>*/}
+        {/*<button onClick={() => mocRole("customer")}>owner</button>*/}
+        {/*<button onClick={() => mocRole("developer")}>developer</button>*/}
+        {/*<button onClick={() => mocRole("admin")}>admin</button>*/}
+        {/*<button onClick={() => mocRole("bank")}>bank</button>*/}
       </div>
     </div>
   );
