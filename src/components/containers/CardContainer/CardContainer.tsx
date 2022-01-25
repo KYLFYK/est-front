@@ -1,4 +1,6 @@
 import React from 'react'
+import { observer } from "mobx-react-lite"
+import { useStore } from "../../../mobx/stores/SearchStore/SearchStore"
 import { makeStyles } from "@material-ui/core"
 import ObjectCard from '../Card/index'
 import {BaseDropDown} from '../../shared/BaseDropDown/BaseDropDown'
@@ -8,7 +10,7 @@ import {GridView} from '../../../icons/FinderPageIcon/GridView'
 import {MapView} from '../../../icons/FinderPageIcon/MapView'
 import { OpenCloseMapButton } from "./OpenCloseMapButton";
 import s from './styles.module.scss'
-import {  DROPDOWN_PLACEHOLDER, SORT_FILTER_OPTIONS } from "../PlanningFilter/config"
+import { DROPDOWN_PLACEHOLDER, SORT_FILTER_OPTIONS } from "../PlanningFilter/config"
 import { ToggleButtonsWithIcons } from '../../shared/ToggleButtonsWithIcons/ToggleButtonsWithIcons'
 
 // TODO: Take types from 'model' folder, when global state gets its types
@@ -34,8 +36,8 @@ const useStyles = makeStyles(() => ({
     }
 }))
 
-const CardContainer: React.FC<Props> = ({ mapData, view, setView }) => {
-    
+const CardContainer: React.FC<Props> = observer(({ mapData, view, setView }) => {
+    const store = useStore()
     const classes = useStyles()
     const toggleButtonOptions = [
         { icon: <GridView fill={view === 'gridView' ? '#96A2B5' : '#CAD1DA'}/>, onclick: () => setView('gridView') }, 
@@ -70,11 +72,20 @@ const CardContainer: React.FC<Props> = ({ mapData, view, setView }) => {
                 </div>
             </div>
             <div className={s.content}>
-                {mapData.length && mapData.map((cp: any, i: number) => <div key={i} style={{padding:'5px'}}><ObjectCard key={i} houseData={cp}/></div>)}
+                {store.fetching 
+                    ? <h1>Loading...</h1>
+                    : store.initialData && store.initialData.length 
+                        ? store.initialData.map((i: any, id: number) => {
+                            return(<>
+                                <div key={id} style={{padding:'5px'}}><ObjectCard houseData={mapData[0]} data={i} /></div>
+                            </>)
+                        })
+                        : <h1>Объекты отсутствуют</h1>
+                }
             </div>
             <OpenCloseMapButton view={view} setView={setView}/>
         </div>
     )
-}
+})
 
 export default CardContainer

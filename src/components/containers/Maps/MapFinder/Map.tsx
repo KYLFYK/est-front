@@ -1,9 +1,11 @@
 import React, {useState, useRef, useEffect} from "react";
+import { observer } from "mobx-react-lite"
+import { useStore } from "../../../../mobx/stores/SearchStore/SearchStore"
 import MapGL, {Marker} from "react-map-gl";
 import "mapbox-gl/dist/mapbox-gl.css";
 import useSupercluster from "use-supercluster";
 import { IconsCreator } from "../../../../lib/mapIcons/IconsCreator";
-import { MappingCluster } from "../../../../lib/mapping/mapCluster";
+import { MappingCluster, storeDatatoMapData } from "../../../../lib/mapping/mapCluster";
 import BaseButton from "../../../shared/BaseButton/BaseButtons";
 import { CrossIcon } from "../../../../icons/MapControlsIcons/PlaceIcons/CrossIcon";
 import ObjectCard from "../../Card/index";
@@ -20,8 +22,9 @@ interface Props {
   setView?: any
 }
 
-const Map: React.FC<Props> = ({mapData, location, viewport, setViewport, view, setView}) => {
-
+const Map: React.FC<Props> = observer(({mapData, location, viewport, setViewport, view, setView}) => {
+  const store = useStore()
+  const data = store.get()
   const center = {
     lat: 45.16,
     lng: 36.90
@@ -39,8 +42,9 @@ const Map: React.FC<Props> = ({mapData, location, viewport, setViewport, view, s
   if (mapRef.current) {
     bounds = mapRef.current.getMap().getBounds().toArray().flat()
   }
-  
-  const points = MappingCluster(mapData);
+
+  const points = MappingCluster(storeDatatoMapData(data));
+
   const { clusters, supercluster } = useSupercluster({
     points,
     bounds,
@@ -55,9 +59,11 @@ const Map: React.FC<Props> = ({mapData, location, viewport, setViewport, view, s
   const onsetFullscreen = () => {
     if (!fullscreen && mapWrap.current) {
       mapWrap.current.requestFullscreen();
+      setFullscreen(true);
     } 
     else if (fullscreen) {
       document.exitFullscreen();
+      setFullscreen(false);
     }
   }
 
@@ -120,19 +126,19 @@ const Map: React.FC<Props> = ({mapData, location, viewport, setViewport, view, s
 
             return (
               <Marker
-                key={cluster.properties.prop.object_id}
+                key={cluster.properties.prop.id}
                 latitude={latitude}
                 longitude={longitude}
                 className={s.marker}
               >
                 <BaseButton className={s.button} onClick={() => {
-                  setActivemarker(cluster.properties.prop.object_id)
+                  setActivemarker(cluster.properties.prop.id)
                   setChoosedplaces([cluster])
                   setOpen(true)
                 }}>
                   <IconsCreator
                     locationProject={'finder'}
-                    color={cluster.properties.prop.object_id === activeMarker ? '#C5A28E' : '#1A4862'}
+                    color={cluster.properties.prop.id === activeMarker ? '#C5A28E' : '#1A4862'}
                     title={cluster.properties.prop.price}
                   />
                 </BaseButton>
@@ -149,14 +155,13 @@ const Map: React.FC<Props> = ({mapData, location, viewport, setViewport, view, s
                             </BaseButton>
                           </div>
                           <div className={s.list}>
-                            {choosedPlaces.length && choosedPlaces.map((cp: any, i: number) => <div key={i} style={{padding:'5px'}}><ObjectCard key={i} houseData={cp.properties.prop}/></div>)}
+                            {choosedPlaces.length && choosedPlaces.map((cp: any, i: number) => <div key={i} style={{padding:'5px'}}><ObjectCard key={i} houseData={cp.properties.prop} data={cp.properties.prop}/></div>)}
                           </div>
                         </div>
         </div>
         <MapControls location={location} viewport={viewport} setViewport={setViewport} center={center} onsetFullscreen={onsetFullscreen}/>
     </div>
   );
-};
+})
 
 export default Map;
-

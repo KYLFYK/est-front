@@ -1,4 +1,5 @@
 import type { NextPage } from 'next'
+import { useRouter } from 'next/router'
 import React, {useState} from 'react'
 import { MainContainer } from 'src/components/containers/MainContainer/MainContainer'
 import {Breadcrumbs} from '../../src/components/shared/Breadcrumbs/Breadcrumbs'
@@ -24,15 +25,16 @@ const center = {lat: 45.16, lng: 36.90}
 
 const Finder: NextPage = () => {
 
+  const router = useRouter()
   const [view, setView] = useState('mapView')
 
   return (
     <MainContainer keywords={"Поиск"} title={"Поиск"} city={city} personalAccount={personalAccount} >
         <Breadcrumbs items={breadcrumbs}/>
         <div style={{margin: '20px 0 0 0'}}>
-          <Filter/>
+          <Filter location={'search'} initialValues={router.query}/>
         </div>
-        <div style={{display: 'flex', width: '100%', margin: '20px 0 0 0'}}>
+        <div style={{display: 'grid', gridTemplateColumns: view==='mapView' ? '1fr 1fr' : '1fr', width: '100%', margin: '20px 0 0 0'}}>
           <Map mapData={mapData} location={'finder'} center={center} view={view} setView={setView}/>
           <CardContainer mapData={mapData} view={view} setView={setView}/>
         </div>
