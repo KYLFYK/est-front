@@ -59,7 +59,7 @@ const agentsActivity = {
     monthActive: '6',
     monthNotActive: '12',
     monthAll: '30 млн.₽',
-    year: '2021,',
+    year: '2021',
     yearActive:'6',
     yearNotActive:'12',
     allYear:'71 млн.₽'
@@ -108,7 +108,7 @@ const PersonalCabinetStatistics: React.FC<Props> = () => {
                     title={"Активность агентов за период"}
                 />
                 <RevenueMonth table={tableRevenue} title={"Выручка по месяцам"}/>
-                <WorkloadWork  table={tableActiveDay} title={"Загруженность в течении дня"}/>
+                <WorkloadWork  table={tableActiveDay} title={"Загруженность в течение дня"}/>
             </div>
         </div>
 

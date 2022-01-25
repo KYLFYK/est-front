@@ -95,7 +95,7 @@ const Start :React.FC<FetchMainType> = observer(({agents, developersArray}) => {
             <HeadFilter/>
             <BestOffers tagsButton={tagsButton} bestOffers={estateOffers}/>
             <DevelopersContainer
-                title={"Застройщики и агенства, которые нам доверяют"}
+                title={"Застройщики и агентства, которые нам доверяют"}
                 developersInfo={developersArray}
             />
             <AgentsContainer

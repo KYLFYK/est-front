@@ -72,7 +72,7 @@ const headCells: HeadCell[] = [
     id: "url",
     numeric: true,
     disablePadding: true,
-    label: "Ссылка-преглашение",
+    label: "Ссылка-приглашение",
   },
 ];
 

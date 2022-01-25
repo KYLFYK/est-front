@@ -2,6 +2,7 @@ import React, { FC } from 'react';
 import Typography from "../../../../../../../shared/Typography/Typography";
 import css from '../../../PersonalCabinetTab/components/Statistics/Statistics.module.scss'
 import {Card} from "../../../../../../../shared/Mortgage/Card";
+import classNames from "classnames";
 
 type ActionPeriodType ={
     left:string
@@ -33,7 +34,7 @@ const ActionPeriod :FC<ActionPeriodType> = ({title,agentActivity,left,center,rig
                         За месяц:
                     </Typography>
 
-                    <Typography weight={"bold"}>
+                    <Typography weight={"bold"} className={css.marginL_5}>
                         {agentActivity.month}
                     </Typography>
                 </div>
@@ -41,30 +42,30 @@ const ActionPeriod :FC<ActionPeriodType> = ({title,agentActivity,left,center,rig
                 <div className={css.activeColumn}>
                     <Typography className={css.marginTypo} weight={"light"}>
                         {left}
-                        <Typography color={"accent"} size={"subheaderBig"} className={css.marginTypo}>
+                        <Typography color={"accent"} size={"subheaderBig"} className={css.marginTB_10} >
                             {agentActivity.monthActive}
                         </Typography>
                     </Typography>
-                    <Typography className={css.marginTypo} weight={"light"}>
+                    <Typography className={css.marginTypo} weight={"light"} >
                         {center}
-                        <Typography color={"tertiary"} size={"subheaderBig"} className={css.marginTypo}>
+                        <Typography color={"tertiary"} size={"subheaderBig"} className={css.marginTB_10} >
                             {agentActivity.monthNotActive}
                         </Typography>
                     </Typography>
                     <Typography className={css.marginTypo} weight={"light"}>
                         {right}
-                        <Typography color={"nude"} size={"subheaderBig"} className={css.marginTypo}>
+                        <Typography color={"nude"} size={"subheaderBig"} className={css.marginTB_10}  >
                             {agentActivity.monthAll}
                         </Typography>
                     </Typography>
                 </div>
 
-                <div style={{display: 'flex',marginBottom:'10px',marginTop:'10px'}}>
+                <div style={{display: 'flex',marginBottom:'10px',marginTop:'10px',alignItems:'self-start' }}>
                     <Typography className={css.marginTypo}>
                         За год:
                     </Typography>
 
-                    <Typography weight={"bold"} className={css.marginTypo}>
+                    <Typography weight={"bold"} className={classNames(css.marginTypo,css.marginL_5)}>
                         {agentActivity.year}
                     </Typography>
                 </div>
@@ -72,19 +73,19 @@ const ActionPeriod :FC<ActionPeriodType> = ({title,agentActivity,left,center,rig
                 <div className={css.activeColumn}>
                     <Typography className={css.marginTop1} weight={"light"}>
                         {left}
-                        <Typography color={"accent"} size={"subheaderBig"} className={css.marginTop1}>
+                        <Typography color={"accent"} size={"subheaderBig"} className={css.marginTB_10} >
                             {agentActivity.yearActive}
                         </Typography>
                     </Typography>
                     <Typography className={css.marginTop1} weight={"light"}>
                         {center}
-                        <Typography color={"tertiary"} size={"subheaderBig"} className={css.marginTop1}>
+                        <Typography color={"tertiary"} size={"subheaderBig"} className={css.marginTB_10} >
                             {agentActivity.yearNotActive}
                         </Typography>
                     </Typography>
                     <Typography className={css.marginTop1} weight={"light"}>
                         {right}
-                        <Typography color={"nude"} size={"subheaderBig"} className={css.marginTop1}>
+                        <Typography color={"nude"} size={"subheaderBig"} className={css.marginTB_10}>
                             {agentActivity.yearNotActive}
                         </Typography>
                     </Typography>

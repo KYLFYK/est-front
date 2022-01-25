@@ -7,15 +7,27 @@
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
 }
+.marginL_5{
+  margin-left: 5px;
+}
+.marginTB_10{
+  margin: 10px 0;
+}
 .marginCard{
   margin:20px 0;
   padding: 20px;
 }
 .marginTypo{
   margin-top: 10px ;
+  display: flex;
+  flex-direction: column;
+  align-items: self-start;
 }
 .marginTop1{
   margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: self-start;
 }
 .marginTop2{
   margin-top: 20px;
