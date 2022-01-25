@@ -15,7 +15,7 @@ export interface IObject {
   altHeadKeys?: boolean;
   footerMainElems?: {
     key: string;
-    value: string;
+    value: string | number;
   }[];
   footerElems?: {
     key: string;

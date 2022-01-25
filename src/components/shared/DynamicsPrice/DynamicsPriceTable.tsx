@@ -13,6 +13,8 @@ interface Props {
   title?: string;
   overflowX?: "auto";
   width?: number;
+  divider?: number;
+  currency?: boolean;
 }
 
 const DynamicsPriceTable: FC<Props> = ({
@@ -22,6 +24,8 @@ const DynamicsPriceTable: FC<Props> = ({
   title,
   overflowX,
   width,
+  divider,
+  currency,
 }) => {
   const [, setCardX] = useState(0);
   const [cardhover, setCardhover] = useState<boolean[]>([false, false, false]);
@@ -77,8 +81,8 @@ const DynamicsPriceTable: FC<Props> = ({
             language={"ru"}
             subtitle={chartSubTitle}
             table={table}
-            divider={5000}
-            currency={true}
+            divider={divider ? divider : 5000}
+            currency={currency !== undefined ? currency : true}
             width={width}
             overflowX={overflowX}
           />
