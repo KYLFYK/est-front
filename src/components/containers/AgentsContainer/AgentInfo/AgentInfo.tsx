@@ -6,6 +6,7 @@ import Typography from '../../../shared/Typography/Typography';
 import {IconPhone} from "../../../../icons/Agent/IconPhone";
 import Image from 'next/image'
 import css from "./AgentInfo.module.scss";
+import {years} from "../../../../utils/years/years";
 
 type AgentDataPropsType = {
     img: string
@@ -54,7 +55,7 @@ export const AgentInfo: React.FC<AgentDataPropsType> = ({ img,connection,infoAge
                         Работает
                     </Typography>
                     <Typography size={'default'} color="accent" weight={'medium'} >
-                        {infoAgent.professionalExperience}
+                        {years(infoAgent.professionalExperience)}
                     </Typography>
                 </div>
                 <div className={css.marginWork}>

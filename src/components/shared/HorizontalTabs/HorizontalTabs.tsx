@@ -62,7 +62,7 @@ export const HorizontalTabs: FC<Props> = ({ tabs, refs, wrapperClassName }) => {
               <Tab
                 key={index}
                 value={index}
-                style={{ textTransform: "none" }}
+                style={{ textTransform: "none",padding:'12px 16px' }}
                 onClick={tab.onClick}
                 ref={index === selectedTabIdx ? activeTabRef : null}
                 label={

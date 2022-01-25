@@ -6,6 +6,7 @@ import { IconKey } from '../../../icons/Development/IconKey';
 import { IconDevelopmentObjects } from '../../../icons/Development/IconDevelopmentObjects';
 import Image from 'next/image'
 import css from './DeveloperData.module.scss'
+import { myLoader } from 'src/utils/image/image';
 
 type DeveloperDataPropsType = {
     img: string
@@ -21,12 +22,9 @@ type DeveloperDataPropsType = {
 
 export const DeveloperDataModal: FC<DeveloperDataPropsType> = ({ img,  developer,isActive, setActive }) => {
 
-    const myLoader = ( src:string, width:number, quality?:number ) => {
-        return ` https://images.unsplash.com/photo-1541963463532-d68292c34b19?ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8Ym9va3xlbnwwfHwwfHw%3D&ixlib=rb-1.2.1&w=1000&q=&q=${quality || 75}`
-    }
     return (
 
-        <Modal setActive={() => setActive(false)} active={isActive}>
+        <Modal setActive={() => setActive(false)} active={isActive} >
             <Image
                 src={img}
                 width='174px' height='60px' alt="emmar" className={css.img}
@@ -42,7 +40,7 @@ export const DeveloperDataModal: FC<DeveloperDataPropsType> = ({ img,  developer
                         Место расположения
                     </Typography>
                     <div>
-                        <Typography size={'default'} color="accent" weight={'regular'}>
+                        <Typography size={'default'} color="accent" weight={'medium'}>
                             {developer.location}
                         </Typography>
                     </div>
@@ -53,7 +51,7 @@ export const DeveloperDataModal: FC<DeveloperDataPropsType> = ({ img,  developer
                         Сдано
                     </Typography>
                     <div>
-                        <Typography size={'default'} color="accent" weight={'regular'}>
+                        <Typography size={'default'} color="accent" weight={'medium'}>
                             {developer.passed}
                         </Typography>
                     </div>

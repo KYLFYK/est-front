@@ -13,9 +13,11 @@
 .title{
     width: 300px;
     text-align: center;
-    margin-bottom: 15px;
+    margin-bottom: 30px;
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
 }
-
 .img {
     object-fit: cover;
 }

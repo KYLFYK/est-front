@@ -18,7 +18,7 @@ type DevelopersContainerType = {
     }>
 }
 
-const mockObjects = [{nameObject:'EMAAR1',id:'1'},
+export const mockObjects = [{nameObject:'EMAAR1',id:'1'},
     {nameObject:'EMAAR2',id:'1'},
     {nameObject:'EMAAR3',id:'1'},
     {nameObject:'EMAAR4',id:'1'},
@@ -62,7 +62,7 @@ const DevelopersContainer :FC<DevelopersContainerType> = ({title,developersInfo}
             <HeadLine title={title} >
                 <div className={css.containerDevelopers}>
                     {
-                        developersInfo.map(({developerInfo,title,img,description},index)=>(
+                        developersInfo && developersInfo.map(({developerInfo,title,img,description},index)=>(
                             <EstateDeveloper
                                 key={index}
                                 developerInfo={developerInfo}

@@ -19,17 +19,19 @@ type AgentsContainerType = {
             whatsApp:string,
             telegram:string,
             phone:string,
-            email:string}
+            email:string
+        }
     }>
 }
 
 export const AgentsContainer: FC<AgentsContainerType> = ({ agents, title }) => {
+
     return (
         <div className={css.containerAgentsBlock}>
             <HeadLine title={title}>
                 <div className={css.block}>
                     {
-                        agents.map(({ infoAgent, connection, img }, index) => (
+                        agents && agents.map(({ infoAgent, connection, img }, index) => (
                             <AgentBlock
                                 key={index}
                                 img={img}
