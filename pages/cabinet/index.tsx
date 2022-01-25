@@ -8,7 +8,6 @@ import { AdminCabinetWrapper } from "../../src/components/tabs/Account/Admin/Adm
 import { UsersTab } from "../../src/components/tabs/Account/Admin/components/UsersTab/UsersTab";
 import Typography from './../../src/components/shared/Typography/Typography'
 
-
 export const searchCabinet = (type: string | null) => {
   switch (type) {
     case "agency":
