@@ -88,7 +88,7 @@ export const Filter: React.FC<Props> = observer(({ location, initialValues }) =>
             {
                 pathname: '/search',
                 query: params,
-            }, undefined, {shallow: true})
+            }, undefined, {})
             store.setParams(params)
             store.fetch()
         }

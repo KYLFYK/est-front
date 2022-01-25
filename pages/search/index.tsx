@@ -34,7 +34,7 @@ const Finder: NextPage = () => {
         <div style={{margin: '20px 0 0 0'}}>
           <Filter location={'search'} initialValues={router.query}/>
         </div>
-        <div style={{display: 'flex', width: '100%', margin: '20px 0 0 0'}}>
+        <div style={{display: 'grid', gridTemplateColumns: view==='mapView' ? '1fr 1fr' : '1fr', width: '100%', margin: '20px 0 0 0'}}>
           <Map mapData={mapData} location={'finder'} center={center} view={view} setView={setView}/>
           <CardContainer mapData={mapData} view={view} setView={setView}/>
         </div>
