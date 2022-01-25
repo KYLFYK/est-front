@@ -4,7 +4,12 @@ import { useStores } from "../../../../../hooks/useStores"
 import { ICreateLandInfoTab } from "../../../../../mobx/types/CreateObjectStoresTypes/CreateLandStoreType"
 import { ObjectTypes } from "../../../../../utils/interfaces/objects"
 import { BaseDropDown } from "../../../../shared/BaseDropDown/BaseDropDown"
-import { INFO_TAB_HOUSE_TYPE } from "../../config"
+import {
+    INFO_TAB_HEATING_TYPE,
+    INFO_TAB_HOUSE_TYPE,
+    INFO_TAB_SEWAGE_SYSTEM_TYPE,
+    INFO_TAB_WATER_SUPPLY_TYPE
+} from "../../config"
 import ButtonPanel, { ICreateObjectControls } from "../ButtonsPanel/ButtonsPanel"
 import InputsGroup from "../InputsGroup/InputsGroup"
 import s from './LandInfoTab.module.scss'
@@ -45,7 +50,7 @@ const LandInfoTab: React.FC<Props> = observer(({ onNextTab, onPrevTab, objectTyp
                     value={values.waterPipe}
                     className={s.dropdownSm}
                     label="Водопровод"
-                    options={INFO_TAB_HOUSE_TYPE}
+                    options={INFO_TAB_WATER_SUPPLY_TYPE}
                     placeholder="Водопровод"
                     onChange={(value) => onChangeDropDown(value, 'waterPipe')}
                     isError={!isValid && !isValidWaterPipe}
@@ -54,7 +59,7 @@ const LandInfoTab: React.FC<Props> = observer(({ onNextTab, onPrevTab, objectTyp
                     value={values.heating}
                     className={s.dropdownSm}
                     label="Отопление"
-                    options={INFO_TAB_HOUSE_TYPE}
+                    options={INFO_TAB_HEATING_TYPE}
                     placeholder="Отопление"
                     onChange={(value) => onChangeDropDown(value, 'heating')}
                     isError={!isValid && !isValidHeating}
@@ -63,7 +68,7 @@ const LandInfoTab: React.FC<Props> = observer(({ onNextTab, onPrevTab, objectTyp
                     value={values.sewerage}
                     className={s.dropdownSm}
                     label="Канализация"
-                    options={INFO_TAB_HOUSE_TYPE}
+                    options={INFO_TAB_SEWAGE_SYSTEM_TYPE}
                     placeholder="Канализация"
                     onChange={(value) => onChangeDropDown(value, 'sewerage')}
                     isError={!isValid && !isValidSewerage}

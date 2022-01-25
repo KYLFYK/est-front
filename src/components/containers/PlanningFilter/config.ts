@@ -4,6 +4,16 @@ export const DROPDOWN_FILTER_OPTIONS: IOption[] = [
     {label: "Купить", value: "buy"},
     {label: "Продать", value: "sell"}
 ]
+export const DROPDOWN_COUNTRY_OPTIONS: IOption[] = [
+    {label: "Россия", value: "Russia"}
+]
+export const DROPDOWN_CITY_OPTIONS: IOption[] = [
+    {label: "Сочи", value: "Sochi"},
+    {label: "Крым", value: "Crimea"},
+    {label: "Москва", value: "Moscow"}
+]
+
+
 
 export const TOGGLE_BUTTONS_OPTIONS: IOption[] = [
     {label: "Студия", value: "studio"},

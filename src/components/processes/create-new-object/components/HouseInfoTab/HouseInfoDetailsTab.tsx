@@ -7,7 +7,13 @@ import { ObjectTypes } from "../../../../../utils/interfaces/objects"
 import { BaseDropDown } from "../../../../shared/BaseDropDown/BaseDropDown"
 import { BaseInput } from "../../../../shared/BaseInput/Input"
 import Typography from "../../../../shared/Typography/Typography"
-import { INFO_TAB_HOUSE_TYPE } from "../../config"
+import {
+    INFO_TAB_ELECTRICITY_TYPE, INFO_TAB_foundation_TYPE,
+    INFO_TAB_HEATING_TYPE,
+    INFO_TAB_HOUSE_TYPE, INFO_TAB_internet_TYPE, INFO_TAB_roof_TYPE,
+    INFO_TAB_SEWAGE_SYSTEM_TYPE, INFO_TAB_ventilation_TYPE, INFO_TAB_wall_TYPE,
+    INFO_TAB_WATER_SUPPLY_TYPE
+} from "../../config"
 import { getInitialStateInfoTab, isValidInputsHouseDetailsTab, TInfoState } from "../../lib"
 import ButtonPanel, { ICreateObjectControls } from "../ButtonsPanel/ButtonsPanel"
 import InputsGroup from "../InputsGroup/InputsGroup"
@@ -84,7 +90,7 @@ const HouseInfoDetailsTab: React.FC<Props> = observer(({ onNextTab, onPrevTab, o
                     value={values.fundament}
                     className={s.dropdownSm}
                     label="Фундамент"
-                    options={INFO_TAB_HOUSE_TYPE}
+                    options={INFO_TAB_foundation_TYPE}
                     placeholder="Фундамент"
                     onChange={(value) => onChangeDropDown(value, 'fundament')}
                     isError={!isValid && !isValidFundament}
@@ -92,7 +98,7 @@ const HouseInfoDetailsTab: React.FC<Props> = observer(({ onNextTab, onPrevTab, o
                 <BaseDropDown
                     value={values.roof}
                     className={s.dropdownSm}
-                    label="Кровля" options={INFO_TAB_HOUSE_TYPE}
+                    label="Кровля" options={INFO_TAB_roof_TYPE}
                     placeholder="Кровля"
                     onChange={(value) => onChangeDropDown(value, 'roof')}
                     isError={!isValid && !isValidRoof}
@@ -100,7 +106,7 @@ const HouseInfoDetailsTab: React.FC<Props> = observer(({ onNextTab, onPrevTab, o
                 <BaseDropDown
                     value={values.walls}
                     className={s.dropdownSm}
-                    label="Стены" options={INFO_TAB_HOUSE_TYPE}
+                    label="Стены" options={INFO_TAB_wall_TYPE}
                     placeholder="Стены"
                     onChange={(value) => onChangeDropDown(value, 'walls')}
                     isError={!isValid && !isValidWalls}
@@ -126,7 +132,7 @@ const HouseInfoDetailsTab: React.FC<Props> = observer(({ onNextTab, onPrevTab, o
                     value={values.waterPipe}
                     className={s.dropdownSm}
                     label="Водопровод"
-                    options={INFO_TAB_HOUSE_TYPE}
+                    options={INFO_TAB_WATER_SUPPLY_TYPE}
                     placeholder="Водопровод"
                     onChange={(value) => onChangeDropDown(value, 'waterPipe')}
                     isError={!isValid && !isValidWaterPipe}
@@ -135,7 +141,7 @@ const HouseInfoDetailsTab: React.FC<Props> = observer(({ onNextTab, onPrevTab, o
                     value={values.heating}
                     className={s.dropdownSm}
                     label="Отопление"
-                    options={INFO_TAB_HOUSE_TYPE}
+                    options={INFO_TAB_HEATING_TYPE}
                     placeholder="Отопление"
                     onChange={(value) => onChangeDropDown(value, 'heating')}
                     isError={!isValid && !isValidHeating}
@@ -144,7 +150,7 @@ const HouseInfoDetailsTab: React.FC<Props> = observer(({ onNextTab, onPrevTab, o
                     value={values.sewerage}
                     className={s.dropdownSm}
                     label="Канализация"
-                    options={INFO_TAB_HOUSE_TYPE}
+                    options={INFO_TAB_SEWAGE_SYSTEM_TYPE}
                     placeholder="Канализация"
                     onChange={(value) => onChangeDropDown(value, 'sewerage')}
                     isError={!isValid && !isValidSewerage}
@@ -153,7 +159,7 @@ const HouseInfoDetailsTab: React.FC<Props> = observer(({ onNextTab, onPrevTab, o
                     value={values.electricity}
                     className={s.dropdownSm}
                     label="Электричество"
-                    options={INFO_TAB_HOUSE_TYPE}
+                    options={INFO_TAB_ELECTRICITY_TYPE}
                     placeholder="Электричество"
                     onChange={(value) => onChangeDropDown(value, 'electricity')}
                     isError={!isValid && !isValidElectricity}
@@ -163,7 +169,7 @@ const HouseInfoDetailsTab: React.FC<Props> = observer(({ onNextTab, onPrevTab, o
                         value={values.vent}
                         className={s.dropdownSm}
                         label="Вентиляция"
-                        options={INFO_TAB_HOUSE_TYPE}
+                        options={INFO_TAB_ventilation_TYPE}
                         placeholder="Вентиляция"
                         onChange={(value) => onChangeDropDown(value, 'vent' as keyof TInfoState)}
                         isError={!isValid && !isValidVent}
@@ -172,7 +178,7 @@ const HouseInfoDetailsTab: React.FC<Props> = observer(({ onNextTab, onPrevTab, o
                 <BaseDropDown value={values.internet}
                     isError={!isValid && !isValidInternet}
                     className={s.dropdownSm} label="Интернет"
-                    options={INFO_TAB_HOUSE_TYPE}
+                    options={INFO_TAB_internet_TYPE}
                     placeholder="Интернет"
                     onChange={(value) => onChangeDropDown(value, 'internet')}
                 />

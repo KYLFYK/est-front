@@ -3,7 +3,11 @@ import React, { useState } from "react"
 import { useStores } from "../../../../../hooks/useStores"
 import { ICreateHouseAboutTab } from "../../../../../mobx/types/CreateObjectStoresTypes/CreateHouseStoreType"
 import { ObjectTypes } from "../../../../../utils/interfaces/objects"
-import { DROPDOWN_FILTER_OPTIONS } from "../../../../containers/PlanningFilter/config"
+import {
+    DROPDOWN_CITY_OPTIONS,
+    DROPDOWN_COUNTRY_OPTIONS,
+    DROPDOWN_FILTER_OPTIONS
+} from "../../../../containers/PlanningFilter/config"
 import { BaseDropDown } from "../../../../shared/BaseDropDown/BaseDropDown"
 import { BaseInput } from "../../../../shared/BaseInput/Input"
 import CounterButtons from "../../../../shared/CounterButtons/CounterButtons"
@@ -103,7 +107,7 @@ const AboutObjectTab: React.FC<Props> = observer(({ onNextTab, onPrevTab, object
                     <>
                         <BaseDropDown
                             className={s.inputSm}
-                            options={DROPDOWN_FILTER_OPTIONS}
+                            options={DROPDOWN_COUNTRY_OPTIONS}
                             placeholder={"Тип жилья"}
                             value={values.type}
                             onChange={onChangeType}
@@ -141,7 +145,7 @@ const AboutObjectTab: React.FC<Props> = observer(({ onNextTab, onPrevTab, object
                 <BaseDropDown
                     value={values.country}
                     className={s.inputMd}
-                    options={DROPDOWN_FILTER_OPTIONS}
+                    options={DROPDOWN_COUNTRY_OPTIONS}
                     placeholder={"Страна"}
                     onChange={onChangeCountry}
                     label="Страна"
@@ -152,7 +156,7 @@ const AboutObjectTab: React.FC<Props> = observer(({ onNextTab, onPrevTab, object
                 <BaseDropDown
                     value={values.city}
                     className={s.inputMd}
-                    options={DROPDOWN_FILTER_OPTIONS}
+                    options={DROPDOWN_CITY_OPTIONS}
                     placeholder={"Город"}
                     onChange={onChangeCity}
                     label="Город"
