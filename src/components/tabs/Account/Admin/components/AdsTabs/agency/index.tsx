@@ -1,157 +1,162 @@
-import React, { FC } from "react";
+import React, { FC, useEffect } from "react";
 import { PageFilter } from "../../common/PageFilter";
 import FilterSearch from "../../../../../../shared/FilterSearch/FilterSearch";
-import { AdItem, IObject } from "./AdItem";
+import { AdItem } from "./AdItem";
+import { AgenciesAdsStore } from "../../../../../../../mobx/role/admin/ads/agencies";
+import { observer } from "mobx-react-lite";
+import moment from "moment";
 
 import styles from "./AgencyTab.module.scss";
 
-const elems: IObject[] = [
-  {
-    name: "Аренда, 3-этажный коттедж, 600 м²",
-    address: "Крым, Ялта",
-    headerElems: [
-      {
-        key: "Агент:",
-        value: "Виталий Панкратов",
-      },
-      {
-        key: "Дата публикации:",
-        value: "31.08.2021",
-      },
-    ],
-    footerMainElems: [
-      {
-        key: "Цена",
-        value: "10 000 000 ₽",
-      },
-      {
-        key: "Тип объекта",
-        value: "Коттедж",
-      },
-      {
-        key: "Жилая площадь",
-        value: "100 м²",
-      },
-      {
-        key: "Этажность",
-        value: "3 этажа",
-      },
-      {
-        key: "Бассейн",
-        value: "Есть",
-      },
-      {
-        key: "Гараж",
-        value: "50 м²",
-      },
-      {
-        key: "Терраса",
-        value: "20 м²",
-      },
-    ],
-  },
-  {
-    name: "Аренда, 1-комнатная квартира в центре Сочи",
-    address: "Сочи, улица Ленина, дом 36",
-    textButton: "Опубликовать",
-    headerElems: [
-      {
-        key: "Агент:",
-        value: "Виталий Панкратов",
-      },
-      {
-        key: "Изменено:",
-        value: "31.08.2021",
-      },
-    ],
-    footerMainElems: [
-      {
-        key: "Цена",
-        value: "15 000 000 ₽",
-      },
-      {
-        key: "Тип объекта",
-        value: "Квартира",
-      },
-      {
-        key: "Жилая площадь",
-        value: "100 м²",
-      },
-      {
-        key: "Комнат",
-        value: "1",
-      },
-      {
-        key: "Площадь",
-        value: "40 м²",
-      },
-      {
-        key: "ЖК",
-        value: "Знаменский",
-      },
-      {
-        key: "Этаж",
-        value: "1/18",
-      },
-      {
-        key: "Тип дома",
-        value: "Кирпичный",
-      },
-    ],
-  },
-  {
-    name: "Продажа, Участок в Троицком 30 соток, 600 м²",
-    address: "Троицкое, микрорайон Ясная Поляна",
-    textButton: "Восстановить",
-    headerElems: [
-      {
-        key: "Агент:",
-        value: "Виталий Панкратов",
-      },
-      {
-        key: "В архиве с:",
-        value: "31.08.2021",
-      },
-    ],
-    footerMainElems: [
-      {
-        key: "Цена",
-        value: "5 000 000 ₽",
-      },
-      {
-        key: "Тип объекта",
-        value: "Участок",
-      },
-      {
-        key: "Площадь",
-        value: "30 соток",
-      },
-      {
-        key: "Статус",
-        value: "ИЖС",
-      },
-      {
-        key: "Строения",
-        value: "Нет",
-      },
-      {
-        key: "Коммуникации",
-        value: "Есть",
-      },
-    ],
-  },
-];
+export const AgencyTab: FC = observer(() => {
+  const { loaded, errorOnLoad, list, uploadList } = AgenciesAdsStore;
 
-export const AgencyTab: FC = () => {
-  return (
+  useEffect(() => {
+    if (!loaded && !errorOnLoad) {
+      uploadList();
+    }
+  }, [loaded, errorOnLoad, uploadList]);
+
+  return list !== null ? (
     <div className={styles.wrapper}>
       <PageFilter buttonText={"Добавить объект"} />
       <FilterSearch />
       <div className={styles.list}>
-        {elems.map((element, index) => (
-          <AdItem {...element} key={index} />
-        ))}
+        {list.map((object, index) => {
+          const textButton =
+            object.published && !object.archived
+              ? undefined
+              : object.archived
+              ? "Восстановить"
+              : "Опубликовать";
+
+          const headerElems = [
+            {
+              key: "Агент:",
+              value: object.agentFullName,
+            },
+          ];
+
+          const footerMainElems: {
+            key: string;
+            value: string | number;
+          }[] = [
+            {
+              key: "Цена",
+              value: object.price,
+            },
+            {
+              key: "Тип объекта",
+              value: object.objectType,
+            },
+          ];
+
+          if (object.archived && object.archivedAt) {
+            headerElems.push({
+              key: "В архиве с:",
+              value: moment(object.archivedAt).format("DD.MM.YYYY"),
+            });
+          } else if (object.published && object.createAt) {
+            headerElems.push({
+              key: "Дата публикации:",
+              value: moment(object.createAt).format("DD.MM.YYYY"),
+            });
+          } else {
+            headerElems.push({
+              key: "Изменено:",
+              value: moment(object.editAt).format("DD.MM.YYYY"),
+            });
+          }
+
+          object.livingYardage !== null &&
+            footerMainElems.push({
+              key: "Жилая площадь",
+              value: `${object.livingYardage} м²`,
+            });
+          object.numberOfStoreys !== null &&
+            footerMainElems.push({
+              key: "Этажность",
+              value: `${object.numberOfStoreys} этажа`,
+            });
+          object.haveSwimmingPool !== null &&
+            footerMainElems.push({
+              key: "Бассейн",
+              value: object.haveSwimmingPool ? "Есть" : "Нет",
+            });
+          object.garage !== null &&
+            footerMainElems.push({
+              key: "Гараж",
+              value: object.garage
+                ? typeof object.garage === "boolean"
+                  ? "Есть"
+                  : `${object.garage} м²`
+                : "Нет",
+            });
+          object.terrace !== null &&
+            footerMainElems.push({
+              key: "Терраса",
+              value: object.terrace
+                ? typeof object.terrace === "boolean"
+                  ? ""
+                  : `${object.terrace} м²`
+                : "Нет",
+            });
+          object.communications !== null &&
+            footerMainElems.push({
+              key: "Коммуникации",
+              value: object.communications ? "Есть" : "Нет",
+            });
+          object.buildings !== null &&
+            footerMainElems.push({
+              key: "Строения",
+              value: object.buildings ? "Есть" : "Нет",
+            });
+          object.areaStatus !== null &&
+            footerMainElems.push({
+              key: "Статус",
+              value: object.areaStatus,
+            });
+          object.houseType !== null &&
+            footerMainElems.push({
+              key: "Тип дома",
+              value: object.houseType,
+            });
+          object.numberOfStoreysOfHouse !== null &&
+            object.storeysOfHouse !== null &&
+            footerMainElems.push({
+              key: "Этаж",
+              value: `${object.storeysOfHouse}/${object.numberOfStoreysOfHouse}`,
+            });
+          object.resComplexName !== null &&
+            footerMainElems.push({
+              key: "ЖК",
+              value: "Знаменский",
+            });
+          object.roomsCount !== null &&
+            footerMainElems.push({
+              key: "Комнат",
+              value: object.roomsCount,
+            });
+          object.yardage !== null &&
+            footerMainElems.push({
+              key: "Площадь",
+              value: `${object.yardage} соток`,
+            });
+
+          return (
+            <AdItem
+              name={object.name}
+              address={object.address}
+              textButton={textButton}
+              headerElems={headerElems}
+              footerMainElems={footerMainElems}
+              key={index}
+            />
+          );
+        })}
       </div>
     </div>
+  ) : (
+    <>Loading</>
   );
-};
+});

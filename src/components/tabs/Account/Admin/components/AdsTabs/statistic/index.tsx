@@ -1,52 +1,44 @@
-import React, { FC } from "react";
+import React, { FC, useEffect, useRef, useState } from "react";
 import DynamicsPriceTable from "../../../../../../shared/DynamicsPrice/DynamicsPriceTable";
 import { Card } from "../../../../../../shared/Mortgage/Card";
 import { Bar, BarChart, CartesianGrid, Tooltip, XAxis, YAxis } from "recharts";
+import { AdsStatisticsStore } from "../../../../../../../mobx/role/admin/ads/statistics";
+import moment from "moment";
+import { observer } from "mobx-react-lite";
 
 import statStyles from "./Statistic.module.scss";
 import styles from "../../../../Developer/components/MyObjects/MyObjects.module.scss";
 import css from "../../../../../../shared/DynamicsPrice/Chart.module.scss";
 
-const Data = {
-  byMonth: [
-    {
-      name: "Январь 2018",
-      price: "50000",
-    },
-    {
-      name: "Июль 2018",
-      price: "55000",
-    },
-    {
-      name: "Январь 2019",
-      price: "56000",
-    },
-    {
-      name: "Июль 2019",
-      price: "61000",
-    },
-    {
-      name: "Январь 2020",
-      price: "62000",
-    },
-    {
-      name: "Июль 2020",
-      price: "67000",
-    },
-    {
-      name: "Январь 2021",
-      price: "68000",
-    },
-    {
-      name: "Июль 2021",
-      price: "71000",
-    },
-  ],
-};
-
-export const Statistic: FC = () => {
-  const width = 600;
+export const Statistic: FC = observer(() => {
   const height = 260;
+
+  const { loaded, errorOnLoad, uploadList, list } = AdsStatisticsStore;
+
+  const chartWrapperRef = useRef<HTMLDivElement | null>(null);
+  const [chartWidth, setChartWidth] = useState<number>(0);
+
+  useEffect(() => {
+    if (!loaded && !errorOnLoad) {
+      uploadList();
+    }
+  }, [loaded, errorOnLoad, uploadList]);
+
+  useEffect(() => {
+    const listener = () => {
+      if (chartWrapperRef && chartWrapperRef.current) {
+        setChartWidth(chartWrapperRef.current.clientWidth - 50);
+      }
+    };
+
+    listener();
+
+    window.addEventListener("resize", listener);
+
+    return () => {
+      window.removeEventListener("resize", listener);
+    };
+  }, [chartWrapperRef, list, loaded]);
 
   const customTickX = ({
     x,
@@ -64,15 +56,15 @@ export const Statistic: FC = () => {
 
     return (
       <svg
-        x={width > 500 ? x - 30 : x - 10}
-        y={width > 500 ? y : y - 10}
+        x={chartWidth > 500 ? x - 30 : x - 10}
+        y={chartWidth > 500 ? y : y - 10}
         width="100"
         height="50"
         viewBox="0 0 100 50"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
       >
-        {width > 500 ? (
+        {chartWidth > 500 ? (
           <text
             style={{
               textAlign: "center",
@@ -104,15 +96,26 @@ export const Statistic: FC = () => {
     );
   };
 
-  return (
+  return list !== null ? (
     <div className={statStyles.wrapper}>
       <div className={statStyles.row}>
-        <div className={styles.statItem}>
+        <div className={styles.statItem} ref={chartWrapperRef}>
           <DynamicsPriceTable
+            currency={false}
             hideQuestion
+            divider={Math.round(
+              Math.max.apply(
+                null,
+                list.countByPeriod.map((el) => el.count)
+              ) * 0.3
+            )}
             title={"Проданные объекты (количество) во времени"}
             overflowX={"auto"}
-            table={Data.byMonth}
+            table={list.countByPeriod.map((el) => ({
+              name: moment(el.month).format("MMMM YYYY"),
+              price: el.count.toString(),
+            }))}
+            width={chartWidth}
           />
         </div>
         <div className={styles.statItem}>
@@ -130,45 +133,55 @@ export const Statistic: FC = () => {
             <div className={styles.statObjectCard}>
               <div className={styles.criteria}>
                 <span className={styles.subTitle}>За месяц:</span>
-                <span className={styles.title}> Сентябрь 2021</span>
+                <span className={styles.title}>
+                  {" "}
+                  {moment(list.currentMonthStats.month).format("MMMM YYYY")}
+                </span>
               </div>
               <div className={styles.elemList}>
                 <div className={styles.elem}>
                   <span className={styles.name}>Агентства</span>
-                  <span className={styles.value}>10</span>
+                  <span className={styles.value}>
+                    {list.currentMonthStats.agents}
+                  </span>
                 </div>
                 <div className={styles.elem}>
                   <span className={styles.name}>Застройщики</span>
                   <span className={`${styles.value} ${statStyles.green}`}>
-                    12
+                    {list.currentMonthStats.agents}
                   </span>
                 </div>
                 <div className={styles.elem}>
                   <span className={styles.name}>Собственники</span>
                   <span className={`${styles.value} ${statStyles.gray}`}>
-                    6
+                    {list.currentMonthStats.owners}
                   </span>
                 </div>
               </div>
               <div className={styles.criteria}>
                 <span className={styles.subTitle}>За год:</span>
-                <span className={styles.title}> 2021</span>
+                <span className={styles.title}>
+                  {" "}
+                  {moment(list.currentYearStats.year).format("YYYY")}
+                </span>
               </div>
               <div className={styles.elemList}>
                 <div className={styles.elem}>
                   <span className={styles.name}>Агентства</span>
-                  <span className={styles.value}>33</span>
+                  <span className={styles.value}>
+                    {list.currentYearStats.agents}
+                  </span>
                 </div>
                 <div className={styles.elem}>
                   <span className={styles.name}>Застройщики</span>
                   <span className={`${styles.value} ${statStyles.green}`}>
-                    35
+                    {list.currentYearStats.developers}
                   </span>
                 </div>
                 <div className={styles.elem}>
                   <span className={styles.name}>Собственники</span>
                   <span className={`${styles.value} ${statStyles.gray}`}>
-                    54
+                    {list.currentYearStats.owners}
                   </span>
                 </div>
               </div>
@@ -182,7 +195,11 @@ export const Statistic: FC = () => {
             hideQuestion
             title={"Выручка по месяцам"}
             overflowX={"auto"}
-            table={Data.byMonth}
+            table={list.revenuePerMonth.map((el) => ({
+              name: moment(el.month).format("MMMM YYYY"),
+              price: el.revenue.toString(),
+            }))}
+            width={chartWidth}
           />
         </div>
         <div className={styles.statItem}>
@@ -194,22 +211,22 @@ export const Statistic: FC = () => {
             data={[
               {
                 name: "Дома",
-                value: 55,
-                value2: 49,
+                value: list.soldObjectsStats.houses.sale,
+                value2: list.soldObjectsStats.houses.purchase,
               },
               {
                 name: "1к квартиры",
-                value: 35,
-                value2: 31,
+                value: list.soldObjectsStats.flats_1.sale,
+                value2: list.soldObjectsStats.flats_1.purchase,
               },
               {
                 name: "Таунхаусы",
-                value: 26,
-                value2: 23,
+                value: list.soldObjectsStats.townhouses.sale,
+                value2: list.soldObjectsStats.townhouses.purchase,
               },
             ]}
             height={height}
-            width={width}
+            width={chartWidth}
             style={{
               paddingTop: 20,
               overflowX: "auto",
@@ -231,5 +248,7 @@ export const Statistic: FC = () => {
         </div>
       </div>
     </div>
+  ) : (
+    <>Loading</>
   );
-};
+});
