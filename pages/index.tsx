@@ -278,7 +278,6 @@ type DeveloperType = {
         objectsDeveloper: Array<{nameObject:string, id:string}>
     },
 }
-
 type FetchMainType={
     agents: Array<AgentsType>
     developersArray:  Array<DeveloperType>
