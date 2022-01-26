@@ -276,8 +276,9 @@ type DeveloperType = {
         location: string
         passed: string
         objectsDeveloper: Array<{nameObject:string, id:string}>
-    },
+    }
 }
+
 type FetchMainType={
     agents: Array<AgentsType>
     developersArray:  Array<DeveloperType>

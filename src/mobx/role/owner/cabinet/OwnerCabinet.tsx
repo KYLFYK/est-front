@@ -1,21 +1,27 @@
 import {createContext, FC, useContext} from "react";
 import {makeAutoObservable} from "mobx";
+import {cabinetAPI, CabinetDeveloperType} from "../../../../api/cabinet/cabinet";
 
 class OwnerCabinetStore  {
     constructor() {
         makeAutoObservable(this);
     }
     initialData =  {
-        firstName:'Иван',
-        secondName:'Иванов',
-        dateBirth:'10.12.1994',
-        phone:'+7 999 888 66 11',
-        email:'ivanov@estatum.com',
-        password:'lsadf21kf',
+        firstName:'',
+        secondName:'',
+        dateBirth:'',
+        phone:'',
+        email:'',
+        password:'',
         image:'https://wallbox.ru/resize/800x480/wallpapers/main2/201728/14997845035964e5370c9756.49539791.jpg'
     }
-    fetch(id:string) {
-        console.log("DeveloperCabinetStore",id)
+    async fetch() {
+        const res :CabinetDeveloperType = await cabinetAPI.getCabinetDeveloper()
+        this.initialData.firstName = res.data.email
+        this.initialData.secondName = ''
+        this.initialData.email = res.data.email
+        this.initialData.phone = res.data.phone
+
     }
     get() {
         console.log(JSON.parse(JSON.stringify({ ...this.initialData})))
