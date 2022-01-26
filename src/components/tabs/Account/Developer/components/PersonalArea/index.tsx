@@ -22,7 +22,9 @@ const PersonalAreaTabs: ITabItem[] = [
 ];
 
 export const PersonalArea: FC = observer(() => {
+
   const store = useStoreDeveloperCabinet()
+
   useEffect(()=>{
     store.fetch()
   },[])
