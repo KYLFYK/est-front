@@ -9,6 +9,7 @@ import { UsersTab } from "../../src/components/tabs/Account/Admin/components/Use
 import Typography from './../../src/components/shared/Typography/Typography'
 
 export const searchCabinet = (type: string | null) => {
+
   switch (type) {
     case "agency":
       return <AgencyRoleTabs />;
