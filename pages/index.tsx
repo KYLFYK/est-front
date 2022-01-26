@@ -82,8 +82,6 @@ const ourOffice: OurOfficeType = {
 
 const Start :React.FC<FetchMainType> = observer(({agents, developersArray}) => {
 
-    // console.log('developersArray',developersArray)
-    // console.log('agentArray', agents)
     return (
         <MainContainer
             keywords={"Главная"}
