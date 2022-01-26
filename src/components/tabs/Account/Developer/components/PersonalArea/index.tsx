@@ -27,7 +27,7 @@ export const PersonalArea: FC = observer(() => {
 
   useEffect(()=>{
     store.fetch()
-  },[])
+  },[store])
 
   return (
     <HorizontalTabs
