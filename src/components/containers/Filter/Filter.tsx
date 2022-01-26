@@ -129,11 +129,11 @@ export const Filter: React.FC<Props> = observer(({ location, initialValues }) =>
     const onChangeSquareTo = (value: string) => {
         setValues({ ...values, 'square-to': value })
     }
-    const onChangeSearchValue = (e: ChangeEvent<HTMLInputElement>) => {
+    /*const onChangeSearchValue = (e: ChangeEvent<HTMLInputElement>) => {
         setValues({...values, searchValue: e.target.value})
-    }
+    }*/
     const onChangePrivateType = (value: string) => {
-        setValues({...values, searchValue: value})
+        setValues({...values, privateType: value})
     }
     const onChangePrivateFloorFrom = (value: string) => {
         setValues({...values, 'floor-from': value})
@@ -193,7 +193,7 @@ export const Filter: React.FC<Props> = observer(({ location, initialValues }) =>
                 multiple 
             />}
 
-            <BaseInput type="text" placeholder="Поиск" className={s.searchInput} onChange={onChangeSearchValue}/>
+            {/*<BaseInput type="text" placeholder="Поиск" className={s.searchInput} onChange={onChangeSearchValue}/>*/}
 
             <InputsUnion className={s.inputsUnion}>
                 <CompareInput 
