@@ -18,6 +18,7 @@ export const useStyles = makeStyles(() => ({
     width: 300,
     borderRadius: 6,
     height: 40,
+    overflow: "hidden",
   },
 }));
 
