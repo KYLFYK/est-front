@@ -114,7 +114,7 @@ const FormScreen: React.FC<Props> = ({clearObjectType, objectType}) => {
         )
     }, [handleNextTab, handlePrevTab, activeTabIdx, objectType])
 
-    if (succesAdvertisementId) return (
+    if (succesAdvertisementId) return (  // Ваше объявление опубликовано CreateObjectSuccessPage
         <div>
             <div className={s.nav}>
                 <div className={s.navContent}>
@@ -127,7 +127,7 @@ const FormScreen: React.FC<Props> = ({clearObjectType, objectType}) => {
                 </div>
                 <div className={s.divider}/>
             </div>
-            <CreateObjectSuccessPage advertisementId={succesAdvertisementId}/>
+            <CreateObjectSuccessPage typeObjectCreate={objectType} advertisementId={succesAdvertisementId}/>
         </div>
     )
 

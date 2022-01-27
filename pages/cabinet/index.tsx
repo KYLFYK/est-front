@@ -24,7 +24,7 @@ export const searchCabinet = (type: string | null) => {
     case "bank":
       return "bank";
     default:
-      return <Typography weight={"bold"}> Время Авторизации истекло, необходима повторная авторизация.</Typography>;
+      return <Typography weight={"bold"}> Время авторизации истекло, необходима повторная авторизация.</Typography>;
   }
 };
 
