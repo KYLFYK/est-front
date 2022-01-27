@@ -4,6 +4,7 @@ import {BaseInput} from "../../../../../shared/BaseInput/Input";
 import styles from "./Account.module.scss";
 import BaseButton from "../../../../../shared/BaseButton/BaseButtons";
 import {BaseTextarea} from "../../../../../shared/BaseTextarea/BaseTextarea";
+import {observer} from "mobx-react-lite";
 
 interface FormValues {
     name: string;
@@ -27,7 +28,7 @@ type ProfileFormType = {
     };
 }
 
-export const ProfileForm: FC<ProfileFormType> = ({profileForm}) => {
+export const ProfileForm: FC<ProfileFormType> = observer( ({profileForm}) => {
     const [formValues, setFormValues] = useState<FormValues>({
         name: profileForm.name,
         type: profileForm.type,
@@ -148,4 +149,4 @@ export const ProfileForm: FC<ProfileFormType> = ({profileForm}) => {
             </div>
         </div>
     );
-};
+})

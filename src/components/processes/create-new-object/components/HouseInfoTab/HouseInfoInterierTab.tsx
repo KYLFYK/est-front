@@ -8,7 +8,7 @@ import { BaseDropDown } from "../../../../shared/BaseDropDown/BaseDropDown"
 import CounterButtons from "../../../../shared/CounterButtons/CounterButtons"
 import Typography from "../../../../shared/Typography/Typography"
 import { Checkbox } from "../../../../widget/Login/registration/checkbox/Checkbox"
-import { INFO_TAB_HOUSE_FURNITURE, INFO_TAB_HOUSE_TYPE } from "../../config"
+import {INFO_TAB_bathroom_TYPE, INFO_TAB_HOUSE_FURNITURE, INFO_TAB_HOUSE_TYPE, INFO_TAB_repair_TYPE} from "../../config"
 import { getInitialStateInfoTab, TInfoState } from "../../lib"
 import ButtonPanel, { ICreateObjectControls } from "../ButtonsPanel/ButtonsPanel"
 import InputsGroup from "../InputsGroup/InputsGroup"
@@ -74,7 +74,7 @@ const HouseInfoInterierTab: React.FC<Props> = observer(({ onNextTab, onPrevTab, 
                 <BaseDropDown
                     value={values.plumbing}
                     className={classNames(s.dropdownSm, s.extraSpace)}
-                    options={INFO_TAB_HOUSE_TYPE}
+                    options={INFO_TAB_bathroom_TYPE}
                     onChange={(value) => onChangeDropDown(value, 'plumbing')}
                     placeholder="Сан. узел"
                     label="Сан. узел"
@@ -83,7 +83,7 @@ const HouseInfoInterierTab: React.FC<Props> = observer(({ onNextTab, onPrevTab, 
                 <BaseDropDown
                     className={s.dropdownSm}
                     value={values.renovation}
-                    options={INFO_TAB_HOUSE_TYPE}
+                    options={INFO_TAB_repair_TYPE}
                     onChange={(value) => onChangeDropDown(value, 'renovation')}
                     placeholder="Ремонт"
                     label="Ремонт"

@@ -2,6 +2,14 @@
     position: relative;
     width: 870px;
     height: 380px;
+    @media  (max-width: 1300px) {
+        width: 670px;
+        height: 280px;
+    }
+    @media  (max-width: 750px) {
+        width: 470px;
+        height: 200px;
+    }
 }
 .border{
     border-radius: 6px;

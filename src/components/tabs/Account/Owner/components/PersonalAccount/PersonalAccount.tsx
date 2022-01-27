@@ -1,18 +1,23 @@
-import React, {FC, useState} from 'react';
+import React, {FC, useEffect, useState} from 'react';
 import Typography from "../../../../../shared/Typography/Typography";
 import BaseButton from "../../../../../shared/BaseButton/BaseButtons";
 import {BaseInput} from "../../../../../shared/BaseInput/Input";
 import css from './PersonalAccount.module.scss'
 import UploadImage from "./UploadImage";
 import {useStoreOwnerCabinet} from "../../../../../../mobx/role/owner/cabinet/OwnerCabinet";
+import {observer} from "mobx-react-lite";
 
 
 type PersonalAccountType = {
 }
 
-const PersonalAccount: FC<PersonalAccountType> = () => {
+const PersonalAccount: FC<PersonalAccountType> = observer(() => {
 
     const store = useStoreOwnerCabinet()
+
+    useEffect(()=>{
+        store.fetch()
+    },[store])
 
     const [valueNewPassword, setValueNewPassword]=useState<string>('')
 
@@ -104,6 +109,6 @@ const PersonalAccount: FC<PersonalAccountType> = () => {
             </div>
         </div>
     );
-};
+})
 
 export default PersonalAccount;

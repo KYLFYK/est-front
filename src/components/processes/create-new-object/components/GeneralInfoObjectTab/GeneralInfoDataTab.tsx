@@ -205,7 +205,7 @@ const GeneralInfoDataTab: React.FC<Props> = observer(({ onNextTab, onPrevTab, ob
         <ButtonPanel onNextTab={handleNextTab} onPrevTab={onPrevTab}>
             <InputsGroup title="Размеры объекта">
                 {("generalSquare" in values) && <BaseInput
-                    type="text"
+                    type="number"
                     onChange={onChangeGeneralSquare}
                     label="Общая площадь"
                     className={s.inputSm}
@@ -217,7 +217,7 @@ const GeneralInfoDataTab: React.FC<Props> = observer(({ onNextTab, onPrevTab, ob
                 {("houseSquare" in values) && <BaseInput
                     onChange={onChangeHouseSquare}
                     value={values.houseSquare}
-                    type="text"
+                    type="number"
                     isError={!isValid && !isValidHouseSquare}
                     label="Площадь дома"
                     className={s.inputSm}
@@ -225,7 +225,7 @@ const GeneralInfoDataTab: React.FC<Props> = observer(({ onNextTab, onPrevTab, ob
                 />}
                 {("livingSquare" in values) && <BaseInput
                     value={values.livingSquare}
-                    type="text"
+                    type="number"
                     label="Жилая площадь"
                     isError={!isValid && !isValidLivingSquare}
                     className={s.inputSm}
@@ -235,7 +235,7 @@ const GeneralInfoDataTab: React.FC<Props> = observer(({ onNextTab, onPrevTab, ob
                 {("land" in values) && <BaseInput
                     onChange={onChangeLand}
                     value={values.land}
-                    type="text"
+                    type="number"
                     label="Участок"
                     isError={!isValid && !isValidLand}
                     className={classNames(s.inputSm, s.largeIconSpace)}
@@ -275,7 +275,7 @@ const GeneralInfoDataTab: React.FC<Props> = observer(({ onNextTab, onPrevTab, ob
             {objectType !== ObjectTypes.LAND && (
                 <InputsGroup title="Внутренние размеры объекта">
                     {("bathroom" in values) && <BaseInput
-                        type="text"
+                        type="number"
                         value={values.bathroom}
                         isError={!isValid && !isValidBathroom}
                         onChange={onChangeBathroom}
@@ -286,7 +286,7 @@ const GeneralInfoDataTab: React.FC<Props> = observer(({ onNextTab, onPrevTab, ob
                     {("kitchen" in values) && <BaseInput
                         value={values.kitchen}
                         onChange={onChangeKitchen}
-                        type="text"
+                        type="number"
                         label="Кухня"
                         isError={!isValid && !isValidKitchen}
                         className={s.inputSm}
@@ -324,7 +324,7 @@ const GeneralInfoDataTab: React.FC<Props> = observer(({ onNextTab, onPrevTab, ob
                                 value={values.garage.capacity}
                                 isError={!isValid && !isValidGarageCapacity}
                                 onChange={onChangeGarageCapacity}
-                                type="text"
+                                type="number"
                                 label="Вместимость"
                                 className={s.inputSm}
                                 icon={<Typography className={s.iconColor}>м/м</Typography>}
@@ -333,7 +333,7 @@ const GeneralInfoDataTab: React.FC<Props> = observer(({ onNextTab, onPrevTab, ob
                             <BaseInput
                                 value={values.garage.square}
                                 onChange={onChangeGarageSquare}
-                                type="text"
+                                type="number"
                                 label="Площадь гаража"
                                 isError={!isValid && !isValidGarageSquare}
                                 className={s.inputSm}

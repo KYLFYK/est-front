@@ -13,7 +13,8 @@ import CreateApartmentStore from "./CreateApartmentStore";
 import CreateHouseStore from "./CreateHouseStore";
 import CreateLandStore from "./CreateLandStore";
 import CreateTownhouseStore from "./CreateTownhouseStore";
-
+import {createObjectAPI} from "../../../api/createObjects/createObject";
+import jwt_decode from "jwt-decode";
 
 class CreateObjectStore implements ICreateObject {
 
@@ -126,15 +127,137 @@ class CreateObjectStore implements ICreateObject {
     }
 
     // Fake request method for sending data and receiving response in the future
-    async sendObjectData(data: ICreateObjectHouse | ICreateObjectLand | ICreateObjectTownhouse | ICreateObjectAparts): Promise<string | undefined> {
-        const fakeRequest = () => new Promise<string>((res, rej) => setTimeout(() => res('10'), 1000))
-        try {
-            const response = await fakeRequest()
-            return response
+    async sendObjectData(data: ICreateObjectHouse | ICreateObjectLand | ICreateObjectTownhouse | ICreateObjectAparts, objectType:ObjectTypes): Promise<string | undefined> {
+        const idOwner:any = jwt_decode(localStorage.getItem('accessEstatum') ? localStorage.getItem('accessEstatum') as string: '123' as string )
+        console.log('-fetch',data)
+        console.log('-idOwner',idOwner.id)
+        if(objectType===0){
+            const apartmentObjectCreateBackEnd = {
+                "name": data.about.name,
+                "description": data.generalInfo.description,
+                "address": data.about.address,
+                "longitude": '31.45',
+                "latitude": '31.45',
+                "region": 1, // 1 - краснодарский край ,2 - сочи
+                "owner": idOwner.id, // id owner
+                "status": 1, // 1 - на продаже, 2 - На бронировании, 3-На задатке, 4-ИЖС, 5-Перед сдачей
+                "markAsDelete": false,
+                // "guides": [   // справочник доделывается (Справочник - get ) передаться номер
+                //     0
+                // ],
+                "file": [
+                    0
+                ],
+                "price": data.about.cost,
+                "complex": null
+            }
+            try {
+                const res = await createObjectAPI.createObjectApartment(apartmentObjectCreateBackEnd)
+                console.log('response apartment',res)
+                return res
+            }
+            catch (e) {
+                console.log('response apartment-error',e)
+            }
         }
-        catch (e) {
-            console.warn(e, 'error')
+        if(objectType===1) {
+            const houseObjectCreateBackEnd = {
+                "name": data.about.name,
+                "description": data.generalInfo.description,
+                "address": data.about.address,
+                "longitude": '31.45',
+                "latitude": '31.45',
+                "region": 1,
+                "owner": idOwner.id,
+                "status": 1,
+                "markAsDelete": false,
+                // "guides": [   // справочник доделывается (Справочник - get ) передаться номер
+                //     0
+                // ],
+                "file": [
+                    0
+                ],
+                "price": data.about.cost,
+                "complex": null
+            }
+
+            try {
+                const res = await createObjectAPI.createObjectHouse(houseObjectCreateBackEnd)
+                console.log('response apartment',res)
+                return res
+            }
+            catch (e) {
+                console.log('response apartment-error',e)
+            }
         }
+        if(objectType===2) {
+            const townhouseObjectCreateBackEnd = {
+                "name": data.about.name,
+                "description": data.generalInfo.description,
+                "address": data.about.address,
+                "longitude": '31.45',
+                "latitude": '31.45',
+                "region": 1,
+                "owner": idOwner.id,
+                "status": 1,
+                "markAsDelete": false,
+                // "guides": [   // справочник доделывается (Справочник - get ) передаться номер
+                //     0
+                // ],
+                "file": [
+                    0
+                ],
+                "price": data.about.cost,
+                "complex": null
+            }
+            try {
+                const res = await createObjectAPI.createObjectTownhouse(townhouseObjectCreateBackEnd)
+                console.log('response apartment',res)
+                return res
+            }
+            catch (e) {
+                console.log('response apartment-error',e)
+            }
+        }
+        if(objectType===3) {
+            const landObjectCreateBackEnd = {
+                "name": data.about.name,
+                "description": data.generalInfo.description,
+                "address": data.about.address,
+                "longitude": '31.45',
+                "latitude": '31.45',
+                "region": 1,
+                "owner": idOwner.id,
+                "status": 1,
+                "markAsDelete": false,
+                // "guides": [   // справочник доделывается (Справочник - get ) передаться номер
+                //     0
+                // ],
+                "file": [
+                    0
+                ],
+                "price": data.about.cost,
+                "complex": null
+            }
+            try {
+                const res = await createObjectAPI.createObjectLand(landObjectCreateBackEnd)
+                console.log('response apartment',res)
+                return res
+            }
+            catch (e) {
+                console.log('response apartment-error',e)
+            }
+        }
+
+
+        // const fakeRequest = () => new Promise<string>((res, rej) => setTimeout(() => res('1'), 1000)) //  fake return publish -ID-
+        // try {
+        //     const response = await fakeRequest()
+        //     return response
+        // }
+        // catch (e) {
+        //     console.warn(e, 'error')
+        // }
 
     }
 

@@ -21,6 +21,10 @@ const LegalPurityFounders: React.FC<Props> = observer(({ onPublish, onPrevTab, o
     const [isValid, setIsValid] = useState<boolean>(true)
     const { previousFounder, currentFounder } = values
 
+    const store = useStores()
+
+    console.log("apartment",store.createObjectStore.apartment)
+
     const isValidCurrentFounderNames = !!currentFounder.firstFounderName.length && (currentFounder.secondFouderName !== undefined ? !!currentFounder.secondFouderName.length : true)
     const isValidCurrentCadastralNumber = !!currentFounder.cadastralNumber.length
     const isValidPrevFounderNames = !!previousFounder.firstFounderName.length && (previousFounder.secondFouderName !== undefined ? !!previousFounder.secondFouderName.length : true)
@@ -89,10 +93,9 @@ const LegalPurityFounders: React.FC<Props> = observer(({ onPublish, onPrevTab, o
             const dataToSend = getActualObjectTypeData(createObjectStore, objectType)
             if (!dataToSend) return
 
-            console.log(dataToSend) 
-
-            const response = await createObjectStore.sendObjectData(dataToSend)
-            if (response && onPublish) onPublish(response) // Передаем сюда айди успешного объявления
+            console.log("dataToSend",dataToSend)
+            const response = await createObjectStore.sendObjectData(dataToSend, objectType)
+            // if (response && onPublish) onPublish(response) // Передаем сюда айди успешного объявления
 
         }
         else

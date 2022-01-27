@@ -3,7 +3,7 @@ import ArrayButton from '../../shared/ArrayButton/ArrayButton';
 import BaseButton from '../../shared/BaseButton/BaseButtons';
 import EstateOffer from '../../shared/EstateOffer/estateOffer';
 import HeadLine from '../../shared/HeadLine/HeadLine';
-import css from './bestOffers.module.css'
+import css from './bestOffers.module.scss'
 import Typography from "../../shared/Typography/Typography";
 
 type BestOffersType = {

@@ -5,6 +5,7 @@ import { v4 as uuidv4 } from "uuid";
 
 import styles from "./AvatarSection.module.scss";
 import { myLoader } from "../../../utils/image/image";
+import {observer} from "mobx-react-lite";
 
 interface Props {
   src?: string | StaticImageData;
@@ -13,7 +14,7 @@ interface Props {
   onChange?: (value: FormData) => void;
 }
 
-export const AvatarSection: FC<Props> = ({
+export const AvatarSection: FC<Props> =  observer(({
   src,
   changeable,
   buttonText,
@@ -75,4 +76,4 @@ export const AvatarSection: FC<Props> = ({
       )}
     </div>
   );
-};
+})

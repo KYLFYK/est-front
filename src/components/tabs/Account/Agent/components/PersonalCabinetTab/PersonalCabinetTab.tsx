@@ -17,12 +17,12 @@ export type InfoAccountAgencyType = {
 const infoAccountAgency :InfoAccountAgencyType ={
     info:[
         {label: 'Наименование', value: 'Estatum'},
-        {label: 'Статус', value: 'Агентво'},
+        {label: 'Статус', value: 'Агентство'},
         {label: 'Адрес', value: 'Смоленская обл., г.Смоленск, ул.Советская, д.64'},
         {label: 'Телефон', value: '+7(495) 006 78 69'},
         {label: 'E-mail', value: 'estatum@mail.com'},
         {label: 'Сайт', value: 'estatum'},
-        {label: 'Описание', value: 'фывжлаодфлоыадждлоодлжфыв'},
+        {label: 'Описание', value: 'описание'},
     ],
     id:'1',
     img:imgMoc,
@@ -87,7 +87,7 @@ const PersonalCabinetTab = () => {
                     ? <HorizontalTabs tabs={[
                         {title: "Статистика", Component: <PersonalCabinetStatistics/>},
                         {
-                            title: "Аккаунт агенства",
+                            title: "Аккаунт агентства",
                             Component: <PersonalCabinetAccountInfo
                                 onEdit={() => setEdit(true)}
                                 statusVerification={infoAccountAgency.statusVerification}

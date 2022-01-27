@@ -4,6 +4,7 @@ import { BaseInput } from "../../../../../shared/BaseInput/Input";
 import styles from "./Account.module.scss";
 import BaseButton from "../../../../../shared/BaseButton/BaseButtons";
 import {useStoreDeveloperCabinet} from "../../../../../../mobx/role/developer/cabinet/DeveloperCabinet";
+import {observer} from "mobx-react-lite";
 
 interface IForm {
   phoneNumber: string;
@@ -54,7 +55,7 @@ const IconVis: FC<IconVisProps> = ({ passwordVis, setPasswordVis, type }) => {
   );
 };
 
-export const Settings: FC = () => {
+export const Settings: FC = observer(() => {
 
   const store = useStoreDeveloperCabinet()
 
@@ -220,4 +221,4 @@ export const Settings: FC = () => {
       </section>
     </form>
   );
-};
+})

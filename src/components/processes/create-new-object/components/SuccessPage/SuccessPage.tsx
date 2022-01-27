@@ -3,13 +3,30 @@ import BaseButton from "../../../../shared/BaseButton/BaseButtons"
 import Typography from "../../../../shared/Typography/Typography"
 import s from './SuccessPage.module.scss'
 import Link from 'next/link'
+import {ObjectTypes} from "../../../../../utils/interfaces/objects";
+import {useRouter} from "next/router";
 
 interface Props {
     advertisementId: string
+    typeObjectCreate:ObjectTypes
 }
 
-const CreateObjectSuccessPage: React.FC<Props> = ({ advertisementId }) => {
-    const ADVERTISEMENT_LINK = `/${advertisementId}`
+const CreateObjectSuccessPage: React.FC<Props> = ({ advertisementId,typeObjectCreate }) => {
+
+    const router = useRouter()
+
+    const searchLink = (typeObjectCreate:ObjectTypes) => {
+        switch (typeObjectCreate) {
+            case 1:return'house'
+            case 2:return'house' // wait page - dezign TouwnHouse ??
+            case 3:return'plat' // land ??
+            default:return 'apartment'
+        }
+    }
+
+    const ADVERTISEMENT_LINK = () => {
+        router.push(`/${searchLink(typeObjectCreate)}/${advertisementId}`)
+    }
 
     return (
         <div className={s.wrapper}>
@@ -60,12 +77,13 @@ const CreateObjectSuccessPage: React.FC<Props> = ({ advertisementId }) => {
                 <ellipse cx="57" cy="79.5" rx="3" ry="2.5" fill="#F37041" />
             </svg>
             <Typography weight="light">Ваше объявление опубликовано!</Typography>
-            <BaseButton className={s.button}>
-                <Link href={ADVERTISEMENT_LINK}>
-                    <a className={s.link}>
-                        <Typography size="small">Перейти к объявлению</Typography>
-                    </a>
-                </Link>
+            <BaseButton className={s.button} onClick={ADVERTISEMENT_LINK}>
+                <Typography size="small">Перейти к объявлению</Typography>
+                {/*<Link href={ADVERTISEMENT_LINK}>*/}
+                {/*    <a className={s.link}>*/}
+                {/*        <Typography size="small">Перейти к объявлению</Typography>*/}
+                {/*    </a>*/}
+                {/*</Link>*/}
             </BaseButton>
         </div>
     )

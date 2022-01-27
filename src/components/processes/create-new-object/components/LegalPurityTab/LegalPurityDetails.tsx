@@ -68,7 +68,7 @@ const LegalPurityDetails: React.FC<Props> = observer(({ onNextTab, onPrevTab, ob
                     onChange={(event) => onChangeInputs(event, 'cadastralCost')}
                     value={realEstateRegister.cadastralCost}
                     label="Кадастровая стоимость"
-                    type="text"
+                    type="number"
                     classNameWrapper={s.inputMd}
                     isError={!isValid && !isValidCadastralCost}
                 />
@@ -76,7 +76,7 @@ const LegalPurityDetails: React.FC<Props> = observer(({ onNextTab, onPrevTab, ob
                     onChange={(event) => onChangeInputs(event, 'generalSquare')}
                     value={realEstateRegister.generalSquare}
                     label="Общая площадь"
-                    type="text"
+                    type="number"
                     classNameWrapper={s.inputSm}
                     isError={!isValid && !isValidGeneralSquare}
                 />
@@ -85,7 +85,7 @@ const LegalPurityDetails: React.FC<Props> = observer(({ onNextTab, onPrevTab, ob
                         onChange={(event) => onChangeInputs(event, 'floors' as keyof TLegalPurityTabState['realEstateRegister'])}
                         value={realEstateRegister.floors}
                         label="Этажность"
-                        type="text"
+                        type="number"
                         classNameWrapper={s.inputSm}
                         isError={!isValid && !isValidFloors}
                     />

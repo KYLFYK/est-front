@@ -82,8 +82,6 @@ const ourOffice: OurOfficeType = {
 
 const Start :React.FC<FetchMainType> = observer(({agents, developersArray}) => {
 
-    // console.log('developersArray',developersArray)
-    // console.log('agentArray', agents)
     return (
         <MainContainer
             keywords={"Главная"}
@@ -95,7 +93,7 @@ const Start :React.FC<FetchMainType> = observer(({agents, developersArray}) => {
             <HeadFilter/>
             <BestOffers tagsButton={tagsButton} bestOffers={estateOffers}/>
             <DevelopersContainer
-                title={"Застройщики и агенства, которые нам доверяют"}
+                title={"Застройщики и агентства, которые нам доверяют"}
                 developersInfo={developersArray}
             />
             <AgentsContainer
@@ -278,7 +276,7 @@ type DeveloperType = {
         location: string
         passed: string
         objectsDeveloper: Array<{nameObject:string, id:string}>
-    },
+    }
 }
 
 type FetchMainType={

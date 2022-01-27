@@ -8,8 +8,8 @@ import { AdminCabinetWrapper } from "../../src/components/tabs/Account/Admin/Adm
 import { UsersTab } from "../../src/components/tabs/Account/Admin/components/UsersTab/UsersTab";
 import Typography from './../../src/components/shared/Typography/Typography'
 
-
 export const searchCabinet = (type: string | null) => {
+
   switch (type) {
     case "agency":
       return <AgencyRoleTabs />;
@@ -24,9 +24,10 @@ export const searchCabinet = (type: string | null) => {
     case "bank":
       return "bank";
     default:
-      return <Typography weight={"bold"}> Время Авторизации истекло, повторно авторизируйтесь.</Typography>;
+      return <Typography weight={"bold"}> Время авторизации истекло, необходима повторная авторизация.</Typography>;
   }
 };
+
 
 const Cabinet = () => {
   return getLocalStorage() === "admin" ? (

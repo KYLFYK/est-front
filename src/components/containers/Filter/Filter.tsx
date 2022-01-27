@@ -8,7 +8,8 @@ import BaseButton from "../../shared/BaseButton/BaseButtons"
 import { CompareInput } from "../../shared/CompareInput/CompareInput"
 import InputsUnion from "../../shared/InputsUnion/InputsUnion"
 import { ToggleButtons } from "../../shared/ToggleButtons/ToggleButtons"
-import { FILTER_ACTIONS_OPTIONS, FILTER_BUILDING_TYPE_OPTIONS, FILTER_FLOORS_OPTIONS, FILTER_HOUSE_TYPE_OPTIONS, TOGGLE_BUTTONS_OPTIONS } from "./config"
+import { FILTER_ACTIONS_OPTIONS, FILTER_BUILDING_TYPE_OPTIONS, FILTER_PRIVATE_HOUSE_OPTIONS, FILTER_FLOORS_OPTIONS, 
+    FILTER_HOUSE_TYPE_OPTIONS, TOGGLE_BUTTONS_OPTIONS, FILTER_IRB_OPTIONS, FILTER_LAND_SPECS_OPTIONS } from "./config"
 import { useStore } from "src/mobx/stores/SearchStore/SearchStore"
 
 import s from './Filter.module.scss'
@@ -60,8 +61,13 @@ export const Filter: React.FC<Props> = observer(({ location, initialValues }) =>
         rooms: undefined,
         'order-type': FILTER_ACTIONS_OPTIONS[0].value,
         searchValue: undefined,
+        privateType: FILTER_PRIVATE_HOUSE_OPTIONS[0].value,
+        'floor-from': undefined,
+        'floor-to': undefined,
+        'irb': undefined,
+        'improvement': undefined,
     })
-
+    console.log(values)
     const params: any = Object.entries(values).reduce((acc, cur, i): any => {
         if(cur[1]) {
             //@ts-expect-error
@@ -123,24 +129,126 @@ export const Filter: React.FC<Props> = observer(({ location, initialValues }) =>
     const onChangeSquareTo = (value: string) => {
         setValues({ ...values, 'square-to': value })
     }
-    const onChangeSearchValue = (e: ChangeEvent<HTMLInputElement>) => {
+    /*const onChangeSearchValue = (e: ChangeEvent<HTMLInputElement>) => {
         setValues({...values, searchValue: e.target.value})
+    }*/
+    const onChangePrivateType = (value: string) => {
+        setValues({...values, privateType: value})
+    }
+    const onChangePrivateFloorFrom = (value: string) => {
+        setValues({...values, 'floor-from': value})
+    }
+    const onChangePrivateFloorTo = (value: string) => {
+        setValues({...values, 'floor-to': value})
+    }
+    const onChangeIrb = (value: string) => {
+        setValues({...values, 'irb': value})
+    }
+    const onChooseImprovment = (value: string) => {
+        setValues({...values, 'improvement': value})
     }
 
     return (
         <div className={s.wrapper}>
             <InputsUnion className={s.actionDropdownUnion}>
-                <BaseDropDown options={FILTER_ACTIONS_OPTIONS} value={values['order-type']} onChange={onChangeActionType} placeholder={FILTER_ACTIONS_OPTIONS[0].label} className={classes.root} />
-                <BaseDropDown options={FILTER_HOUSE_TYPE_OPTIONS} value={values['object-type']} onChange={onChangeHouseType} placeholder={FILTER_HOUSE_TYPE_OPTIONS[0].label} className={classes.root} />
+                <BaseDropDown 
+                    options={FILTER_ACTIONS_OPTIONS} 
+                    value={values['order-type']} 
+                    onChange={onChangeActionType} 
+                    placeholder={FILTER_ACTIONS_OPTIONS[0].label} 
+                    className={classes.root} 
+                />
+                <BaseDropDown 
+                    options={FILTER_HOUSE_TYPE_OPTIONS} 
+                    value={values['object-type']} 
+                    onChange={onChangeHouseType} 
+                    placeholder={FILTER_HOUSE_TYPE_OPTIONS[0].label} 
+                    className={classes.root} 
+                />
             </InputsUnion>
-            <ToggleButtons classNameButton={s.toggleButton} items={TOGGLE_BUTTONS_OPTIONS} activeValue={values.rooms} onChange={onChangePlanning} multiple />
-            <BaseInput type="text" placeholder="Поиск" className={s.searchInput} onChange={onChangeSearchValue}/>
+
+            {values['object-type'] === 'house' && <BaseDropDown 
+                options={FILTER_PRIVATE_HOUSE_OPTIONS} 
+                value={values.privateType} 
+                onChange={onChangePrivateType} 
+                placeholder={FILTER_PRIVATE_HOUSE_OPTIONS[0].label} 
+                className={classes.root} 
+            />}
+
+            {values['object-type'] === 'house' && <CompareInput 
+                classNameInput={s.input} 
+                placeholderFrom="Этажей от" 
+                placeholderTo="до" 
+                valueFrom={values['floor-from']} 
+                valueTo={values['floor-to']} 
+                onChangeFrom={onChangePrivateFloorFrom} 
+                onChangeTo={onChangePrivateFloorTo} 
+            />}
+
+            {values['object-type'] === 'apartment' && <ToggleButtons 
+                classNameButton={s.toggleButton} 
+                items={TOGGLE_BUTTONS_OPTIONS} 
+                activeValue={values.rooms} 
+                onChange={onChangePlanning} 
+                multiple 
+            />}
+
+            {/*<BaseInput type="text" placeholder="Поиск" className={s.searchInput} onChange={onChangeSearchValue}/>*/}
+
             <InputsUnion className={s.inputsUnion}>
-                <CompareInput classNameInput={s.input} placeholderFrom="Цена от" placeholderTo="до" valueFrom={values['price-from']} valueTo={values['price-to']} onChangeFrom={onChangePriceFrom} onChangeTo={onChangePriceTo} Icon="₽" />
-                <CompareInput classNameInput={s.input} placeholderFrom="Площадь от" placeholderTo="до" valueFrom={values['square-from']} valueTo={values['square-to']} onChangeFrom={onChangeSquareFrom} onChangeTo={onChangeSquareTo} Icon={<span>м<sup>2</sup></span>} />
+                <CompareInput 
+                    classNameInput={s.input} 
+                    placeholderFrom="Цена от" 
+                    placeholderTo="до" 
+                    valueFrom={values['price-from']} 
+                    valueTo={values['price-to']} 
+                    onChangeFrom={onChangePriceFrom} 
+                    onChangeTo={onChangePriceTo} 
+                />
+                <CompareInput 
+                    classNameInput={s.input} 
+                    placeholderFrom="Площадь от" 
+                    placeholderTo="до" 
+                    valueFrom={values['square-from']} 
+                    valueTo={values['square-to']} 
+                    onChangeFrom={onChangeSquareFrom} 
+                    onChangeTo={onChangeSquareTo} 
+                    Icon={<span>м<sup>2</sup></span>} 
+                />
             </InputsUnion>
-            <BaseDropDown options={FILTER_BUILDING_TYPE_OPTIONS} value={values['building-type']} onChange={onChangeBuildingType} placeholder="Выбрать тип здания" className={s.dropdown} />
-            <BaseDropDown options={FILTER_FLOORS_OPTIONS} value={values.floor} onChange={onChangeFloors} placeholder="Выбрать этаж" className={s.dropdownFloor} />
+
+            {values['object-type'] !== 'land' && <BaseDropDown 
+                options={FILTER_BUILDING_TYPE_OPTIONS} 
+                value={values['building-type']} 
+                onChange={onChangeBuildingType} 
+                placeholder={values['object-type'] === 'apartment' ? "Выбрать тип здания" : "Тип дома"} 
+                className={s.dropdown} 
+            />}
+
+            {values['object-type'] === 'apartment' && <BaseDropDown 
+                options={FILTER_FLOORS_OPTIONS} 
+                value={values.floor} 
+                onChange={onChangeFloors} 
+                placeholder="Выбрать этаж" 
+                className={s.dropdownFloor} 
+            />}
+
+            {values['object-type'] === 'land' && <BaseDropDown 
+                options={FILTER_IRB_OPTIONS} 
+                value={values['irb']} 
+                onChange={onChangeIrb} 
+                placeholder="Выбрать c ИЖС или без" 
+                className={classes.root} 
+            />}
+
+            {(values['object-type'] === 'house' || values['object-type'] === 'land') && <BaseDropDown 
+                options={FILTER_LAND_SPECS_OPTIONS} 
+                value={values['improvement']} 
+                onChange={onChooseImprovment} 
+                placeholder="Выбрать благоустроенность" 
+                className={classes.root} 
+            />}
+            
             {
                 (location === 'start' || location === 'search')
                 ? <BaseButton className={s.submit} type="primary" onClick={onSubmit}>Показать объявления</BaseButton>
