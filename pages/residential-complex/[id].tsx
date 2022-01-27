@@ -17,6 +17,7 @@ import Map from '../../src/components/containers/Maps/MapInfrastructure/index'
 import { infrastructura } from '../../src/components/containers/Maps/MapInfrastructure/config'
 import ObjectDeveloper from '../../src/components/containers/ObjectDeveloper/ObjectDeveloper'
 import ConstructProgress from '../../src/components/containers/ConstructProgress/ConstructProgress'
+import { MappingGeneralInfo, MappingDeveloperInfo, MappingShedule } from 'src/lib/mapping/ResidentComplex/residentComplexMapping'
 
 import {useStore} from '../../src/mobx/stores/ComplexStore/ComplexStore'
 import {instance, UrlObj} from '../../src/api/instance'
@@ -52,7 +53,7 @@ const tabs = [{
 ]
 
 const ResidentialComplex: NextPage = observer((props: any) => {
-
+  console.log(props)
   const store = useStore()
   const router = useRouter()
 
@@ -65,7 +66,7 @@ const ResidentialComplex: NextPage = observer((props: any) => {
   const [refs, setRefs] = useState<any>([])
 
   const breadcrumbs = ['Крым', 'Купить участок', `${props.name}`]
-  const views = [props.createAt, props.views]
+  const views = [props.publish, props.views]
 
   useEffect(() => {
     setRefs([general.current, specs.current, architec.current, plansec.current, infra.current, developer.current])
@@ -80,24 +81,24 @@ const ResidentialComplex: NextPage = observer((props: any) => {
         <AdressEstate item={props.address}/>
         <HorizontalTabs tabs={tabs} refs={refs}/>
         <div ref={general}>
-          <GeneralInfo info={store.initialData.info_options} price={store.initialData.price} images={IMAGES_SET} />
+          <GeneralInfo info={MappingGeneralInfo(props.address, props.category, props.info_options[0], props.object_specs)} images={IMAGES_SET} />
         </div>
         <div ref={specs}>
-          <ObjectSpecifications specificationsLists={store.initialData.object_specs} title={"Особенности"}/>
+          <ObjectSpecifications specificationsLists={props.object_specs.filter((s: any) => s.subtitle === 'Объекты на территории' || s.subtitle === 'Безопасность')} title={"Особенности"}/>
         </div>
         <div ref={architec}>
-          <ObjectSpecifications specificationsLists={store.initialData.object_specs} title={"Архитектурно-планировочные решения"}/>
+          <ObjectSpecifications specificationsLists={props.object_specs.filter((s: any) => s.subtitle === 'Строительно-техническая экспертиза' || s.subtitle === 'Инженерные коммуникации')} title={"Архитектурно-планировочные решения"}/>
         </div>
         <div ref={plansec}>
           <Planning FilterComponent={<PlanningFilter />} planningList={props.planningList}/>
         </div>
         <div ref={infra}>
-          <Map currentHouse={store.initialData} infrastructura={infrastructura} location={'infrastructure'} InfrastructureInfo={props.property.infrastructure}/>
+          <Map currentHouse={store.initialData} infrastructura={infrastructura} location={'infrastructure'} InfrastructureInfo={props.info_options[0].infrastructure}/>
         </div>
         <div ref={developer}>
-          <ObjectDeveloper developerData={store.initialData.object_developer_info}/>
+          <ObjectDeveloper developerData={MappingDeveloperInfo(props.object_developer_info)}/>
         </div>
-        <ConstructProgress images={IMAGES_SET} info={store.initialData.schedule}/>
+        <ConstructProgress info={MappingShedule(props.schedule)} images={IMAGES_SET} />
     </MainContainer>
   )
 })
