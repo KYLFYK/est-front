@@ -67,7 +67,7 @@ export const Filter: React.FC<Props> = observer(({ location, initialValues }) =>
         'irb': undefined,
         'improvement': undefined,
     })
-    console.log(values)
+
     const params: any = Object.entries(values).reduce((acc, cur, i): any => {
         if(cur[1]) {
             //@ts-expect-error

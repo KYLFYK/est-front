@@ -25,7 +25,7 @@ const DeveloperMassMediaCard: React.FC<Props> = ({ link, title, date, icon, desc
                 <div className={s.icon}>
                     <Image alt="icon" src={icon} loader={() => icon} layout="fill" />
                 </div>
-                <Typography size="small" color="tertiary" > {date.toLocaleDateString()} </Typography>
+                <Typography size="small" color="tertiary" > {date} </Typography>
             </div>
             <Typography className={s.title} weight="medium" color="accent">
                 {title}
