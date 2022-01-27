@@ -4,53 +4,68 @@ import { BaseInput } from "../../../../../../shared/BaseInput/Input";
 import { BaseDropDown } from "../../../../../../shared/BaseDropDown/BaseDropDown";
 import { CheckBox } from "../../common/CheckBox";
 import { Table } from "../../common/Table";
-
-import dealImg from "../../../../../../../Pics/card-images/dealCard.jpg";
-import styles from "./agency.module.scss";
 import { IconDocument } from "../../../../../../../icons/Document/IconDocument";
 import { IconDownload } from "../../../../../../../icons/Download/IconDownload";
 import BaseButton from "../../../../../../shared/BaseButton/BaseButtons";
+import {
+  IAgentProfile,
+  IIdentStatus,
+  IPayment,
+  IPlan,
+} from "../../../../../../../mobx/role/admin/profiles/agency";
+import Link from "next/link";
+
+import dealImg from "../../../../../../../Pics/card-images/dealCard.jpg";
+import styles from "./agency.module.scss";
 
 const Options = {
   pack: [
     {
       label: "Премиум",
-      value: "Премиум",
+      value: "premium",
     },
     {
       label: "Стандарт",
-      value: "Стандарт",
+      value: "standard",
     },
     {
       label: "Эконом",
-      value: "Эконом",
+      value: "economy",
     },
   ],
   pay: [
     {
       label: "Банковская карта",
-      value: "Банковская карта",
+      value: "card",
     },
     {
       label: "Наличные",
-      value: "Наличные",
+      value: "cash",
     },
   ],
   status: [
     {
       label: "Готово к проверке",
-      value: "Готово к проверке",
+      value: "readyToIdent",
     },
   ],
 };
 
-export const AgentForm: FC = () => {
-  const [phoneNumbers, setPhoneNumbers] = useState<string[]>([]);
+interface Props {
+  profile: IAgentProfile;
+}
+
+export const AgentForm: FC<Props> = ({ profile }) => {
+  const [phoneNumbers, setPhoneNumbers] = useState<string[]>(
+    profile.phoneNumbers
+  );
   const [accordion, setAccordion] = useState(true);
 
-  const [selectedObj, setSelectedObj] = useState("Премиум");
-  const [selectedPay, setSelectedPay] = useState("Банковская карта");
-  const [selectedStatus, setSelectedStatus] = useState("Готово к проверке");
+  const [selectedObj, setSelectedObj] = useState(profile.tariff.plan);
+  const [selectedPay, setSelectedPay] = useState(profile.tariff.paymentMethod);
+  const [selectedStatus, setSelectedStatus] = useState(
+    profile.identification.status
+  );
 
   return (
     <div className={styles.formWrapper}>
@@ -64,7 +79,7 @@ export const AgentForm: FC = () => {
             label="Наименование"
             type="text"
             name={"name"}
-            defaultValue={" "}
+            defaultValue={profile.agencyName}
             onChange={() => {
               console.log("sd");
             }}
@@ -76,7 +91,7 @@ export const AgentForm: FC = () => {
             label="Статус"
             type="text"
             name={"lastName"}
-            defaultValue={" "}
+            defaultValue={profile.status}
             onChange={() => {
               console.log("sd");
             }}
@@ -86,9 +101,9 @@ export const AgentForm: FC = () => {
             className={styles.input}
             errorLabel=""
             label="Стаж"
-            type="date"
+            type="text"
             name={"birthdayDate"}
-            defaultValue={" "}
+            defaultValue={profile.experience}
             onChange={() => {
               console.log("sd");
             }}
@@ -98,9 +113,9 @@ export const AgentForm: FC = () => {
             className={styles.input}
             errorLabel=""
             label="Email"
-            type="date"
+            type="email"
             name={"birthdayDate"}
-            defaultValue={" "}
+            defaultValue={profile.agencyEmail}
             onChange={() => {
               console.log("sd");
             }}
@@ -110,9 +125,9 @@ export const AgentForm: FC = () => {
             className={styles.input}
             errorLabel=""
             label="Сайт"
-            type="date"
+            type="url"
             name={"birthdayDate"}
-            defaultValue={" "}
+            defaultValue={profile.citeUrl}
             onChange={() => {
               console.log("sd");
             }}
@@ -124,7 +139,7 @@ export const AgentForm: FC = () => {
             label="Описание"
             type="date"
             name={"birthdayDate"}
-            defaultValue={" "}
+            defaultValue={profile.description}
             textArea
             onChange={() => {
               console.log("sd");
@@ -140,7 +155,7 @@ export const AgentForm: FC = () => {
             label="Логин"
             type="text"
             name={"login"}
-            defaultValue={"deal"}
+            defaultValue={profile.login}
             onChange={() => {
               console.log("sd");
             }}
@@ -152,7 +167,7 @@ export const AgentForm: FC = () => {
             label="Пароль"
             type="password"
             name={"password"}
-            defaultValue={""}
+            defaultValue={profile.password}
             onChange={() => {
               console.log("sd");
             }}
@@ -164,19 +179,7 @@ export const AgentForm: FC = () => {
             label="Email"
             type="email"
             name={"email"}
-            defaultValue={"email@mail.ru"}
-            onChange={() => {
-              console.log("sd");
-            }}
-          />
-          <BaseInput
-            classNameWrapper={styles.inputWrapper}
-            className={styles.input}
-            errorLabel=""
-            label="Номер телефона 1"
-            type="tel"
-            name={"phoneNumber1"}
-            defaultValue={""}
+            defaultValue={profile.email}
             onChange={() => {
               console.log("sd");
             }}
@@ -186,12 +189,16 @@ export const AgentForm: FC = () => {
               classNameWrapper={styles.inputWrapper}
               className={styles.input}
               errorLabel=""
-              label={`Номер телефона ${index + 2}`}
+              label={`Номер телефона ${index + 1}`}
               type="tel"
-              name={`phoneNumber${index + 2}`}
-              defaultValue={""}
+              name={`phoneNumber${index + 1}`}
+              defaultValue={profile.phoneNumbers[index]}
               key={index}
-              icon={index === phoneNumbers.length - 1 ? <>-</> : undefined}
+              icon={
+                index === phoneNumbers.length - 1 && index !== 0 ? (
+                  <>-</>
+                ) : undefined
+              }
               iconClassName={styles.iconDelete}
               iconOnClick={() => {
                 if (index === phoneNumbers.length - 1) {
@@ -222,7 +229,7 @@ export const AgentForm: FC = () => {
                 <span className={styles.selectTitle}>Подключенный пакет:</span>
                 <BaseDropDown
                   onChange={(obj) => {
-                    setSelectedObj(obj);
+                    setSelectedObj(obj as IPlan);
                   }}
                   className={styles.select}
                   options={Options.pack}
@@ -230,14 +237,17 @@ export const AgentForm: FC = () => {
                   value={selectedObj}
                 />
               </div>
-              <CheckBox defaultChecked text="Автовозобновление" />
+              <CheckBox
+                defaultChecked={profile.tariff.autoResume}
+                text="Автовозобновление"
+              />
             </div>
             <div className={styles.selectElem}>
               <div className={styles.selectRow}>
                 <span className={styles.selectTitle}>Тип оплаты:</span>
                 <BaseDropDown
                   onChange={(obj) => {
-                    setSelectedPay(obj);
+                    setSelectedPay(obj as IPayment);
                   }}
                   className={styles.select}
                   options={Options.pay}
@@ -245,7 +255,10 @@ export const AgentForm: FC = () => {
                   value={selectedPay}
                 />
               </div>
-              <CheckBox defaultChecked text="Автоплатеж" />
+              <CheckBox
+                defaultChecked={profile.tariff.autoPayment}
+                text="Автоплатеж"
+              />
             </div>
           </div>
         </section>
@@ -272,7 +285,7 @@ export const AgentForm: FC = () => {
               </svg>
             </span>
           </div>
-          <Table />
+          <Table paymentHistory={profile.paymentHistory} />
         </section>
         <section>
           <span className={styles.formSubTitle}>Идентификация</span>
@@ -281,7 +294,7 @@ export const AgentForm: FC = () => {
               <span className={styles.identSelectTitle}>Статус:</span>
               <BaseDropDown
                 onChange={(obj) => {
-                  setSelectedStatus(obj);
+                  setSelectedStatus(obj as IIdentStatus);
                 }}
                 className={styles.select}
                 options={Options.status}
@@ -290,18 +303,19 @@ export const AgentForm: FC = () => {
               />
             </div>
             <div className={styles.identList}>
-              <div className={styles.identItem}>
-                <IconDocument />
-                <span className={styles.name}>
-                  Лицензия на ведение деятельности 08.08.2021.pdf
-                </span>
-                <IconDownload className={styles.icon} />
-              </div>
-              <div className={styles.identItem}>
-                <IconDocument />
-                <span className={styles.name}>Государственная регистрация</span>
-                <IconDownload className={styles.icon} />
-              </div>
+              {profile.identification.documents.map((el, index) => (
+                <div className={styles.identItem} key={index}>
+                  <IconDocument />
+                  <span className={styles.name}>
+                    {`${el.name}.${el.format}`}
+                  </span>
+                  <Link href={el.url}>
+                    <a>
+                      <IconDownload className={styles.icon} />
+                    </a>
+                  </Link>
+                </div>
+              ))}
             </div>
           </div>
         </section>
