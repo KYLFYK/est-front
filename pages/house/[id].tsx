@@ -21,9 +21,8 @@ import ObjectDeveloper from '../../src/components/containers/ObjectDeveloper/Obj
 import {Mortgage} from '../../src/components/shared/Mortgage/Mortgage'
 import {Record} from '../../src/components/containers/Record/Record'
 import RecordAgent from '../../src/components/containers/Record/RecordAgent.json'
-
 import {useStore} from '../../src/mobx/stores/HouseStore/HouseStore'
-import {instance, UrlObj} from '../../src/api/instance'
+import { UrlObj} from '../../src/api/instance'
 
 const city = ['Москва', 'Санкт-Петербург', 'Крым', 'Сочи', 'Нижний Новгород']
 const personalAccount = [{title: 'Личный кабинет', href: '/User', message: 0},
@@ -87,8 +86,8 @@ const House: NextPage = observer((props: any) => {
 
   const router = useRouter()
 
-  const breadcrumbs = ['Крым', 'Купить участок', `${props.name}`]
-  const views = [props.publish, props.views, store.initialData.agency]
+  const breadcrumbs = ['Крым', 'Купить участок', `${store.initialData.name}`]
+  const views = [store.initialData.publish,store.initialData.views, store.initialData.agency]
 
   useEffect(() => {
     setRefs([general.current, tours.current, architec.current, infra.current, legal.current, payback.current, developer.current, record.current])
@@ -136,7 +135,7 @@ const House: NextPage = observer((props: any) => {
 export default House
 
 export async function getServerSideProps({params}: any) {
-  const res = await fetch(`https://estatum.f-case.ru/api/${UrlObj.house}/${params.id}`)
+  const res  = await fetch(`https://estatum.f-case.ru/api/${UrlObj.house}/${params.id}`)
   const object = await res.json()
 
   return {

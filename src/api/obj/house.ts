@@ -16,26 +16,26 @@ export const HouseApi  = {
     getHouseById: async (id: number) =>{
         try{
 
-            const res = await instance.get(`${UrlObj.house}/${id}`)
+            const res :IhouseApiType = await instance.get(`${UrlObj.house}/${id}`)
             //@ts-ignore
             let object_specsGuide :Array<{value:string,label:{title:string, text:string}}> | [] = res.data.guides.map(guid=>sortGuide(guid,guid.subtitle_ru)).filter(f=>f !== undefined)
-
+            console.log('resApi',res)
             const objectHouse = {
                     images : [
                         {url : "https://cdn.pixabay.com/photo/2021/08/25/20/42/field-6574455__340.jpg", id : 0},
                         {url : "https://images.unsplash.com/photo-1541963463532-d68292c34b19?ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8Ym9va3xlbnwwfHwwfHw%3D&ixlib=rb-1.2.1&w=1000&q=80", id : 1},
                         {url : "https://images.ctfassets.net/hrltx12pl8hq/3MbF54EhWUhsXunc5Keueb/60774fbbff86e6bf6776f1e17a8016b4/04-nature_721703848.jpg?fit=fill&w=480&h=270", id : 2}
                     ],
-                    object_id : 1,
+                    object_id : res.data.id,
                     lang : "ru",
-                    name : "2-этажный коттедж",
+                    name : res.data.name,
                     type : "house",
                     category: "Дом",
-                    address : "Крым респ., Ялта городской округ, Гурзуф пгт,  ул. Ялтинская, 12К",
+                    address :  res.data.address,
                     city : "Ялта",
-                    lat : 35.6,
-                    lng : 45.0,
-                    price : 15160000,
+                    lat : +res.data.latitude,
+                    lng : +res.data.longitude,
+                    price : res.data.price,
                     sort : null,
                     planning : "1",
                     secondary_type : "Вторичное",
@@ -43,8 +43,8 @@ export const HouseApi  = {
                     floor : 3,
                     total_floors : 15,
                     favorite : false,
-                    publish : '12.06.2021',
-                    views : '389',
+                    publish : res.data.owner.createAt.substr(0,10).split('-').reverse().join('.'),
+                    views : res.data.views,
                     agency : 'Агентство: Лунный свет',
                     info_options : [
                         { label: "Общая площадь", value: "615 м²" },
@@ -67,10 +67,7 @@ export const HouseApi  = {
                             value: "2 спальни с индивидуальными душевыми и туалетами",
                         },
                     ],
-                    description_items : [
-                        "Из окон виллы открывается красивейший вид на древнюю гору-вулкан Аю-Даг, Гурзуфскую бухту и парки Артека, скалы Адалары и пристань для яхт и катеров.",
-                        "На террасе расположен бассейн с переливом в сторону моря и уникальными видовыми характеристиками.",
-                    ],
+                    description_items : [res.data.description],
                     online_tour : {
                         threeD_tour: {
                             url: 'https://www.youtube.com/embed/Ke3qyQYNob4',
@@ -453,6 +450,56 @@ export const HouseApi  = {
             return e
         }
     },
+}
+export type IhouseApiType={
+    data:{
+        address:string
+        complex: number
+        createAt: string
+        description: string
+        guides: Array<{
+                "id": number
+                "subtitle_en": null,
+                "subtitle_ru": null,
+                "type_en": string
+                "type_ru": null,
+                "for": Array<string>
+                "value": string
+        }>
+        id: number
+        latitude: string
+        longitude: string
+        markAsDelete: boolean
+        name: string
+        owner:{
+            adminProperty: null
+            agencyProperty: null
+            agentProperty: null
+            bankProperty: null
+            createAt: string
+            customerProperty: null
+            developerProperty: number
+            email: string
+            id: number
+            isConfirmed: false
+            markAsDelete: true
+            phone: string
+            role: string
+            updateAt: string
+        }
+        price: number
+        region:{
+            id: number
+            name: string
+        }
+        "status": {
+            "id": number,
+            "status": string
+        }
+        updateAt: string
+        views: number
+
+    }
 }
 
 
