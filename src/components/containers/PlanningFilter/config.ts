@@ -12,8 +12,21 @@ export const DROPDOWN_CITY_OPTIONS: IOption[] = [
     {label: "Крым", value: "Crimea"},
     {label: "Москва", value: "Moscow"}
 ]
-
-
+const dropDownArray = [
+    { type :'country',
+        dropdown:[
+            {label: "Россия", value: "RF"},
+            {label: "Украина", value: "YKR"},
+            {label: "Беларусь", value: "BL"}
+        ]
+    },{ type :'sity',
+        dropdown:[
+            {label: "Сочи", value: "Sochi"},
+            {label: "Крым", value: "Crimea"},
+            {label: "Москва", value: "Moscow"}
+        ]
+    }
+]
 
 export const TOGGLE_BUTTONS_OPTIONS: IOption[] = [
     {label: "Студия", value: "studio"},

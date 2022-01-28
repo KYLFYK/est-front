@@ -92,7 +92,7 @@ const House: NextPage = observer((props: any) => {
 
   useEffect(() => {
     setRefs([general.current, tours.current, architec.current, infra.current, legal.current, payback.current, developer.current, record.current])
-    store.fetch(router.query.id)
+    store.fetch( Number(router.query.id))
   }, [router.query.id, store])
 
 
@@ -138,7 +138,8 @@ export default House
 export async function getServerSideProps({params}: any) {
   const res = await fetch(`https://estatum.f-case.ru/api/${UrlObj.house}/${params.id}`)
   const object = await res.json()
+
   return {
-      props: object,
+      props: object ,
   }
 }

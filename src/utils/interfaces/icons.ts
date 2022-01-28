@@ -15,9 +15,10 @@ export const enum IconTypes {
 
     // Архитектурно-планировочные решения
     // Строительная экспертиза
+    constructionHouse = 'constructionHouse',
     foundation='foundation',
     roof='roof',
-    walls='walls',
+    wall='wall',
     // Инженерные коммуникации
     water_supply='water_supply',
     heating='heating',

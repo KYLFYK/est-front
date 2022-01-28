@@ -105,7 +105,7 @@ const Map: React.FC<Props> = ({currentHouse, infrastructura, location, Infrastru
                   setActivemarker(up.object_id)
                   setOpen(true)
                 }}>
-                  <IconsCreator 
+                  <IconsCreator
                     locationProject={'infrastucture'}
                     colorBody={up.object_id === activeMarker ? '#0B3248' : '#1A4862'}
                     colorPath={up.object_id === activeMarker ? '#FFFFFF' : '#FFFFFF'}

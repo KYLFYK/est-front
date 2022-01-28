@@ -1,6 +1,7 @@
 import { makeAutoObservable } from "mobx";
 import { createContext, useContext, FC } from "react";
 import {fullObjectData} from "./HouseConfig";
+import {HouseApi} from "../../../api/obj/house";
 
 class HouseStore {
     constructor() {
@@ -113,8 +114,11 @@ class HouseStore {
       }
 
 
-  fetch(id: string | string[] | undefined) {
-    this.initialData = Number(id) > 0 ? fullObjectData.filter((fod) => fod.object_id === Number(id))[0] : this.initialData
+  async fetch(id: number) {
+    // this.initialData = Number(id) > 0 ? fullObjectData.filter((fod) => fod.object_id === Number(id))[0] : this.initialData
+        const res = await HouseApi.getHouseById(id)
+      console.log("res",res)
+      this.initialData = res
     this.fetching = false
   }
 }

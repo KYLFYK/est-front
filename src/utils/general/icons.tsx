@@ -29,6 +29,8 @@ import WashingMachine from "../../icons/Specifications/InteriorExterior/WashingM
 import Dishwasher from "../../icons/Specifications/InteriorExterior/Dishwasher";
 import Conditioner from "../../icons/Specifications/InteriorExterior/Conditioner";
 import FurnitureRooms from "../../icons/Specifications/InteriorExterior/FurnitureRooms";
+import TV from "src/icons/Specifications/InteriorExterior/TV";
+import ConstructionHouse from "../../icons/Specifications/ArchitecturalPlanningSolutions/ConstructionHouse";
 
 export const searchIconByValue = (value: IconTypes | string): JSX.Element => {
   switch (value) {
@@ -57,11 +59,13 @@ export const searchIconByValue = (value: IconTypes | string): JSX.Element => {
       return  <VideoSurveillance/>
 
   // Архитектурно-планировочные решения ( ArchitecturalPlanningSolutions )
+    case IconTypes.constructionHouse:
+          return <ConstructionHouse/>
     case IconTypes.foundation:
       return  <Foundation/>
     case IconTypes.roof:
       return  <Roof/>
-    case IconTypes.walls:
+    case IconTypes.wall:
       return  <Walls/>
     case IconTypes.internet:
       return  <Internet/>
@@ -97,6 +101,8 @@ export const searchIconByValue = (value: IconTypes | string): JSX.Element => {
       return <Conditioner/>
     case  IconTypes.furniture_rooms:
       return <FurnitureRooms/>
+    case  IconTypes.TV:
+      return <TV/>
 
     default:
       return <Mortgage />;
