@@ -5,13 +5,13 @@ export const MappingGeneralInfo = (address: any, category: any, info: any, specs
         { label: "Стоимость квартир", value: `от ${(info.priceObjectMin/1000000).toFixed(2)} млн руб.` },
         { label: "Площадь квартир", value: `${info.areaObjectMin} — ${info.areaObjectMax} м2` },
         { label: "Всего квартир", value: info.amountObjects },
-        { label: "Класс жилья", value: specs[0].specificationsItems.filter((s: any) => s.value === 'class')[0].label.text },
+        //{ label: "Класс жилья", value: specs[0].specificationsItems.filter((s: any) => s.value === 'class')[0].label.text },
         { label: "Корпуса", value: `${info.amountBuildings} корпус` },
         { label: "Этажность", value: info.amountFloors },
-        { label: "Тип дома", value: specs.filter((s: any) => s.subtitle === 'Строительно-техническая экспертиза')[0].specificationsItems.filter((si: any) => si.value === 'construction')[0].label.text },
+        //{ label: "Тип дома", value: specs.filter((s: any) => s.subtitle === 'Строительно-техническая экспертиза')[0].specificationsItems.filter((si: any) => si.value === 'construction')[0].label.text },
         { label: "Высота потолков", value: info.heightCeilings },
-        { label: "Отделка", value: specs[0].specificationsItems.filter((s: any) => s.value === 'decorating')[0].label.text },
-        { label: "Парковка", value: specs[0].specificationsItems.filter((s: any) => s.value === 'parking')[0].label.text },
+        //{ label: "Отделка", value: specs[0].specificationsItems.filter((s: any) => s.value === 'decorating')[0].label.text },
+        //{ label: "Парковка", value: specs[0].specificationsItems.filter((s: any) => s.value === 'parking')[0].label.text },
       ]
     return info_options;
 }
@@ -19,13 +19,17 @@ export const MappingGeneralInfo = (address: any, category: any, info: any, specs
 export const MappingDeveloperInfo = (info: any) => {
     const news: any = []
     info.developerProperty.press.forEach((p: any) => {news.push({link: p.link, date: p.date, title: p.title, description: p.text, icon: p.logo, id: p.id})})
+    const statistics: any = []
+    info.developerProperty.statistics.forEach((s: any) => {statistics.push({value: s.title, label: s.items.map((i: any) => {
+      return {title: i.value, text: i.item}
+    })})})
     const object_developer_info = {
         name: info.developerProperty.name,
         developerType: info.developerProperty.type,
-        logo: "",
+        logo: info.developerProperty.logo,
         risks: info.developerProperty.risks,
-        leasedAmmount: "",
-        inProgressAmmount: "",
+        leasedAmmount: `${info.developerProperty.completedBuildingAmount} дома в ${info.developerProperty.completedBuildingAmount} ЖК`,
+        inProgressAmmount: `${info.developerProperty.inProgressBuildingAmount} домов в ${info.developerProperty.inProgressComplexAmount} ЖК`,
         tabsData: {
           about: [info.developerProperty.description],
           contacts: [
@@ -71,18 +75,13 @@ export const MappingDeveloperInfo = (info: any) => {
                 { value: "authorityBusiness", label: { title: "Регистрирующий орган, в котором находится регистрационное дело", text: info.developerProperty.registeringAuthorityLocated}}
               ]
           },
-          activities: {primary: [""], secondary: [...info.developerProperty.extraOccupations.map((eo: any) => eo.value )]},
+          activities: {primary: [info.developerProperty.mainOccupation], secondary: [...info.developerProperty.extraOccupations.map((eo: any) => eo.value )]},
           news: news,
-          statistics: [
-            { value: "Арбитражные дела", label: [{ title: "", text: "Судебные дела" }]},
-            { value: "Исполнительные производства", label: [{ title: "", text: "Завершённые производства" }]},
-            { value: "Тендеры и госзакупки", label: [{ title: "", text: "Количество закупок" }]},
-            { value: "Существенные события", label: [{ title: "", text: "За всю историю компании" }]}
-          ],
+          statistics: statistics,
           risks: [
-            { value: "", label: { title: "Индекс должной осмотрительности", text: "Оценка, показывающая вероятность того, что компания является «фирмой- однодневкой»"}},
-            { value: "", label: { title: "Индекс финансового риска", text: "Оценка вероятности неплатежеспособности компании"}},
-            { value: "", label: { title: "Индекс платежной дисциплины", text: "Показатель, отражающий своевременность оплаты компанией счетов"}}
+            { value: info.developerProperty.risks.filter((dp: any) => dp.title === "Индекс должной осмотрительности")[0].value, label: { title: "Индекс должной осмотрительности", text: "Оценка, показывающая вероятность того, что компания является «фирмой- однодневкой»"}},
+            { value: info.developerProperty.risks.filter((dp: any) => dp.title === "Индекс финансового риска")[0].value, label: { title: "Индекс финансового риска", text: "Оценка вероятности неплатежеспособности компании"}},
+            { value: info.developerProperty.risks.filter((dp: any) => dp.title === "Индекс платежной дисциплины")[0].value, label: { title: "Индекс платежной дисциплины", text: "Показатель, отражающий своевременность оплаты компанией счетов"}}
           ]
         }
       }
