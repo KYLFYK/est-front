@@ -15,6 +15,7 @@ import {observer} from "mobx-react-lite";
 import {UrlMainPage} from "../src/api/mainPage/mainPage";
 
 const city = ["Москва", "Крым", "Сочи"];
+
 const personalAccount = [
     {title: "Личный кабинет", href: "/User", message: 0},
     {title: "Избранное", href: "/User", message: 0},
