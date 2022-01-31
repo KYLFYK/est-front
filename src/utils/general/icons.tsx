@@ -105,6 +105,6 @@ export const searchIconByValue = (value: IconTypes | string): JSX.Element => {
       return <TV/>
 
     default:
-      return <Mortgage />;
+      return <ConstructionHouse />;
   }
 };
