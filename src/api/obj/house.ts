@@ -17,9 +17,10 @@ export const HouseApi  = {
         try{
 
             const res :IhouseApiType = await instance.get(`${UrlObj.house}/${id}`)
+            // console.log('resApi',res)
             //@ts-ignore
-            let object_specsGuide :Array<{value:string,label:{title:string, text:string}}> | [] = res.data.guides.map(guid=>sortGuide(guid,guid.subtitle_ru)).filter(f=>f !== undefined)
-            console.log('resApi',res)
+            // let object_specsGuide :Array<{value:string,label:{title:string, text:string}}> | [] = res.object_specs.map(guid=>sortGuide(guid,guid.subtitle_ru)).filter(f=>f !== undefined)
+            // console.log('resApi123',res)
             const objectHouse = {
                     images : [
                         {url : "https://cdn.pixabay.com/photo/2021/08/25/20/42/field-6574455__340.jpg", id : 0},
@@ -33,8 +34,8 @@ export const HouseApi  = {
                     category: "Дом",
                     address :  res.data.address,
                     city : "Ялта",
-                    lat : +res.data.latitude,
-                    lng : +res.data.longitude,
+                    lat : +res.data.lat,
+                    lng : +res.data.lng,
                     price : res.data.price,
                     sort : null,
                     planning : "1",
@@ -76,7 +77,8 @@ export const HouseApi  = {
                             url: 'https://3d-tur.ru/010/',
                         }
                     },
-                    object_specs:  sortObject_specsTypeGuide( object_specsGuide),
+                    // object_specs:  sortObject_specsTypeGuide( object_specsGuide),
+                    object_specs:  res.data.object_specs,
                     legalPurityData : {
                         encumbrances: false,
                         risks: false,
@@ -457,18 +459,13 @@ export type IhouseApiType={
         complex: number
         createAt: string
         description: string
-        guides: Array<{
-                "id": number
-                "subtitle_en": null,
-                "subtitle_ru": null,
-                "type_en": string
-                "type_ru": null,
-                "for": Array<string>
-                "value": string
+        object_specs: Array<{
+                subtitle: string
+                specificationsItems: Array<{value:string, label:{title:string, text:string}}>
         }>
         id: number
-        latitude: string
-        longitude: string
+        lat: string
+        lng: string
         markAsDelete: boolean
         name: string
         owner:{

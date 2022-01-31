@@ -30,7 +30,7 @@ export const SelectUser: React.FC<SelectPropsType> = ({options, params, onChange
             </div>
             {open && (
                 <div className={css.dropdown_content_left}>
-                    {options.map(option => {
+                    {options.map((option,index) => {
                         return <div
                             ref={innerBorderRef}
                             key={option.title}
@@ -39,9 +39,9 @@ export const SelectUser: React.FC<SelectPropsType> = ({options, params, onChange
                             }}
                             className={css.dropdown_item_left}
                         >
-                            <Link href={option.href} passHref>
-                                <div>
-                                    <Typography>
+                            {
+                                index === 0 // for 1 dropDown
+                                    ?<Typography className={css.disable}>
                                         <div style={{display: 'flex', justifyContent: "space-between", width: '190px'}}>
                                             <div>
                                                 {option.title}
@@ -50,11 +50,22 @@ export const SelectUser: React.FC<SelectPropsType> = ({options, params, onChange
                                                 {option.message > 0 && <CountMessage messageCount={option.message}/>}
                                             </div>
                                         </div>
-
                                     </Typography>
-
-                                </div>
-                            </Link>
+                                    :<Link href={option.href} passHref >
+                                        <div >
+                                            <Typography >
+                                                <div style={{display: 'flex', justifyContent: "space-between", width: '190px'}}>
+                                                    <div>
+                                                        {option.title}
+                                                    </div>
+                                                    <div>
+                                                        {option.message > 0 && <CountMessage messageCount={option.message}/>}
+                                                    </div>
+                                                </div>
+                                            </Typography>
+                                        </div>
+                                    </Link>
+                            }
                         </div>
                     })}
                     {

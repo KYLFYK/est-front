@@ -20,7 +20,7 @@ export const BestOffers :FC<BestOffersType> = ({bestOffers,tagsButton}) => {
                     <div className={css.buttonLine}>
                         {
                             tagsButton.map((name,index) => {
-                                return <ArrayButton key={index} index={index} name={name} />
+                                return <ArrayButton className={css.button} key={index} index={index} name={name} />
                             })
                         }
                     </div>

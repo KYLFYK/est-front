@@ -2,7 +2,53 @@
     margin-right: 15px;
     width: 430px;
     height: 300px;
-
+    @media  (max-width: 1420px) {
+        width: 390px;
+        height: 300px;
+    }
+    @media  (max-width: 1320px) {
+        width: 350px;
+        height: 280px;
+    }
+    @media  (max-width: 1200px) {
+        width: 315px;
+        height: 265px;
+    }
+    @media  (max-width: 1100px) {
+        width: 295px;
+        height: 260px;
+    }
+    @media  (max-width: 1020px) {
+        width: 265px;
+        height: 255px;
+    }
+    @media  (max-width: 920px) {
+        width: 245px;
+        height: 255px;
+    }
+    @media  (max-width: 860px) {
+        width: 225px;
+        height: 255px;
+    }
+    @media  (max-width: 810px) {
+        width: 210px;
+        height: 255px;
+    }@media  (max-width: 750px) {
+        width: 190px;
+        height: 255px;
+    }@media  (max-width: 700px) {
+        width: 170px;
+        height: 255px;
+    }@media  (max-width: 640px) {
+        width: 150px;
+        height: 255px;
+    }@media  (max-width: 640px) {
+        width: 225px;
+        height: 300px;
+    }@media  (max-width: 580px) {
+        width: 350px;
+        height: 300px;
+    }
 }
 .positionButton{
     z-index:1;
@@ -11,6 +57,9 @@
     bottom: 290px;
     margin:0 5px;
     cursor: default;
+    @media  (max-width: 1020px) {
+        margin-top: 5px;
+    }
 }
 .img {
     width: 430px;
@@ -19,4 +68,7 @@
 }
 .buttonBlock{
     display: flex;
+    @media  (max-width: 1020px) {
+        display: block;
+    }
 }

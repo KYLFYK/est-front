@@ -4,11 +4,8 @@ import {MainContainer} from "src/components/containers/MainContainer/MainContain
 import {HeadFilter} from "../src/components/containers/HeadFilter/Finder";
 import {BestOffers} from "../src/components/containers/BestOffers/bestOffers";
 import {IMAGES_SET} from "../src/components/containers/GeneralInfo/config";
-import DevelopersContainer, {
-    mockDevelopers, mockObjects,
-} from "../src/components/containers/DevelopersContainer/DevelopersContainer";
+import DevelopersContainer, {mockObjects} from "../src/components/containers/DevelopersContainer/DevelopersContainer";
 import {AgentsContainer} from "../src/components/containers/AgentsContainer/AgentsContainer";
-import mocAgent from "../src/components/containers/AgentsContainer/Agents.json";
 import {Advantages} from "../src/components/containers/AdvantageList/AdvantageList";
 import {mocAdvantages} from "../src/components/containers/AdvantageList/config";
 import {OfferNews} from "../src/components/containers/OfferNews/offerNews";
@@ -17,7 +14,8 @@ import {OurOfficeType} from "../src/components/containers/OurOffice/OurOffice";
 import {observer} from "mobx-react-lite";
 import {UrlMainPage} from "../src/api/mainPage/mainPage";
 
-const city = ["Москва", "Санкт-Петербург", "Крым", "Сочи", "Нижний Новгород"];
+const city = ["Москва", "Крым", "Сочи"];
+
 const personalAccount = [
     {title: "Личный кабинет", href: "/User", message: 0},
     {title: "Избранное", href: "/User", message: 0},
@@ -31,21 +29,21 @@ const personalAccount = [
 const estateOffers = [
     {
         id: 1,
-        url: "www.google.com",
+        url: "/residential-complex/1",
         img: IMAGES_SET,
-        tags: ["Покупка", "Таунхаус", "Новостройка"],
+        tags: ["Покупка", "ЖК", "Новостройка"],
     },
     {
         id: 2,
-        url: "www.google.com",
+        url: "/house/1",
         img: IMAGES_SET,
-        tags: ["Покупка", "Таунхаус", "Новостройка"],
+        tags: ["Покупка", "Дом"],
     },
     {
         id: 3,
-        url: "www.google.com",
+        url: "/plat/1",
         img: IMAGES_SET,
-        tags: ["Покупка", "Таунхаус", "Новостройка"],
+        tags: ["Покупка", "Участок"],
     },
 ];
 
@@ -123,7 +121,7 @@ export const getStaticProps : GetStaticProps<FetchMainType> = async ()=> {
             id: agent.id,
             img: "https://images.unsplash.com/photo-1541963463532-d68292c34b19?ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8Ym9va3xlbnwwfHwwfHw%3D&ixlib=rb-1.2.1&w=1000&q=&q=",
             connection: {
-                whatsApp: agent.agentProperty.messengers.whatsApp,
+                whatsApp: agent.agentProperty.messengers.whatsApp ? agent.agentProperty.messengers.whatsApp: agent.agentProperty.messengers.telegram ,
                 telegram: agent.agentProperty.messengers.telegram,
                 email: agent.email,
                 phone: agent.agentProperty.phone[0].value,

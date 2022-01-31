@@ -2,8 +2,7 @@ import type { NextPage } from 'next'
 import React from 'react'
 import { MainContainer } from 'src/components/containers/MainContainer/MainContainer'
 import {Mortgage} from '../../src/components/shared/Mortgage/Mortgage'
-
-const city = ['Москва', 'Санкт-Петербург', 'Крым', 'Сочи', 'Нижний Новгород']
+import css from './../../styles/mainContainer.module.scss'
 const personalAccount = [{title: 'Личный кабинет', href: '/User', message: 0},
   {title: 'Избранное', href: '/User', message: 0},
   {title: 'Сохраненные поиски', href: '/User', message: 0},
@@ -13,10 +12,12 @@ const personalAccount = [{title: 'Личный кабинет', href: '/User', m
   {title: 'Проверка объекта', href: '/User', message: 0},
 ]
 
+
+
 const Calculator: NextPage = () => {
 
   return (
-    <MainContainer keywords={"Калькулятор"} title={"Калькулятор"} city={city} personalAccount={personalAccount} footerColor={'accent'}>
+    <MainContainer keywords={"Калькулятор"} title={"Калькулятор"}  personalAccount={personalAccount} footerColor={'accent'} className={css.js}>
         <Mortgage/>
     </MainContainer>
   )
