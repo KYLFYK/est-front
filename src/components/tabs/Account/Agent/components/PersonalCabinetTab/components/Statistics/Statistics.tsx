@@ -87,8 +87,10 @@ const PersonalCabinetStatistics: React.FC<Props> = () => {
 
     return (
         <div>
-            <div style={{display: 'flex', alignItems: "center"}}>
-                <Typography>Агент :</Typography>
+            <div style={{display: 'flex', alignItems: "center"}} className={css.marginB_15}>
+                <Typography  weight={"light"} className={css.marginB_5} >
+                    Статистика по агенту :
+                </Typography>
                 <BaseDropDown
                     value={agent}
                     options={listAgents}

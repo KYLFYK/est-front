@@ -28,7 +28,7 @@ const AgencyRoleTabs: React.FC<Props> = ({storybook }) => {
         setNotification(newNotification)
     }
     const onRead = (number:number) => {
-        const newNotification = notification.map((t,index)=>index===number? {...t,read:true} : t  )
+        const newNotification = notification.map((t,index)=>index===number? {...t,read:!t.read} : t  )
         setNotification(newNotification)
     }
     const deleteNotification = (number:number) =>{

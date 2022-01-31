@@ -34,6 +34,27 @@ export const SearchOffice: FC<Props> = ({
     }
   };
 
+  const searchColorText = (type :string)=>{
+    switch (type) {
+      case "archive":
+        return "nude";
+      case "draft":
+        return "secondary";
+      case "active":
+        return "secondary";
+    }
+  }
+  const searchLinkColor = (type :string)=>{
+    switch (type) {
+      case "archive":
+        return "primary_light";
+      case "draft":
+        return "secondary";
+      case "active":
+        return "secondary";
+    }
+  }
+
   return (
     <div className={css.search}>
       <div className={css.position}>
@@ -49,10 +70,11 @@ export const SearchOffice: FC<Props> = ({
       {type !== "owner" && !hideButton && (
         <BaseLink
           href="/ads/new-object"
-          type={type === "active" ? "secondary" : "primary_light"}
+          // type={type === "active" ? "secondary" : "primary_light"}
+          type={searchLinkColor(type)}
           isActive
         >
-          <Typography size="small" color={"secondary"}>
+          <Typography size="small" color={searchColorText(type)}>
             {buttonText ? buttonText : searchTitle(type)}
           </Typography>
         </BaseLink>

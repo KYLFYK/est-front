@@ -129,12 +129,11 @@ export const PurseTableOperation: FC<ActualObjectType> = ({ operations }) => {
     page > 0 ? Math.max(0, (1 + page) * rowsPerPage - rows.length) : 0;
 
   return (
-    <Box sx={{ width: "1440px" }}>
+    <Box >
       <>
         <div>
           <TableContainer>
             <Table
-              sx={{ width: "1420px" }}
               aria-labelledby="tableTitle"
               size={"small"}
             >

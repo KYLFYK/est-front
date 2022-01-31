@@ -139,12 +139,12 @@ export const ActualObject: FC<ActualObjectType> = ({ agents }) => {
     page > 0 ? Math.max(0, (1 + page) * rowsPerPage - rows.length) : 0;
 
   return (
-    <Box sx={{ width: "1440px" }}>
+    <Box >
       <>
         <div>
           <TableContainer>
             <Table
-              sx={{ width: "1420px" }}
+              sx={{ width: "100%" }}
               aria-labelledby="tableTitle"
               size={"small"}
             >
@@ -230,7 +230,7 @@ export const ActualObject: FC<ActualObjectType> = ({ agents }) => {
                         </TableCell>
                         <TableCell>
                           <div
-                            style={{ display: "flex", alignItems: "center" }}
+                            style={{ display: "flex", alignItems: "center" ,width:'170px'}}
                             className={css.heightTableNude}
                           >
                             <Typography

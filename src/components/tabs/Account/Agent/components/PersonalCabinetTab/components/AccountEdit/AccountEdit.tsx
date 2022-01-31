@@ -8,6 +8,8 @@ import {Modal} from "../../../../../../../shared/Modal/Modal";
 import {LogoIcon} from "../../../../../../../../icons/Header/LogoIcon";
 import BackPage from "../../../Others/BackPage/BackPage";
 import css from './AccountEdit.module.scss'
+import {myLoader} from "../../../../../../../../utils/image/image";
+import {BaseTextarea} from "../../../../../../../shared/BaseTextarea/BaseTextarea";
 
 type AccountEditType ={
     onEdit:()=>void
@@ -135,10 +137,10 @@ const AccountEdit :FC<AccountEditType>= ({onEdit,infoAgency}) => {
                                 <Typography color={'tertiary'} className={css.marginTypo}>
                                     Описание
                                 </Typography>
-                                <BaseInput
+                                <BaseTextarea
                                     value={valueDescription}
                                     onChange={(e)=>setValueDescription(e.currentTarget.value)}
-                                    className={css.styleButton}
+                                    className={css.textArea}
                                 />
                             </div>
                         </div>
@@ -150,7 +152,13 @@ const AccountEdit :FC<AccountEditType>= ({onEdit,infoAgency}) => {
                     </Typography>
                     <div style={{backgroundImage:image}} className={css.dashed}>
                         <div className={css.marginImage}>
-                            <Image src={importImage} width={200} height={200} alt={'photo'} />
+                            <Image
+                                loader={e=>myLoader(e.src,e.width,e.quality)}
+                                src={importImage}
+                                width={200}
+                                height={200}
+                                alt={'photo'}
+                            />
                         </div>
                     </div>
                 </div>

@@ -20,7 +20,7 @@ type PersonalCabinetAgentsType = {
 const PersonalCabinetAgents: React.FC<PersonalCabinetAgentsType> = ({agents}) => {
     return (
         <div>
-            <div className={css.df}>
+            <div className={css.df} style={{marginBottom:"10px"}}>
                 <BaseInput type={"search"} className={css.input} />
                 <BaseButton type={"secondary"} isActive>
                     <Typography color={"secondary"}>
