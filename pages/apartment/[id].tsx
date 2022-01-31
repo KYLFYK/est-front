@@ -21,7 +21,7 @@ import {Mortgage} from '../../src/components/shared/Mortgage/Mortgage'
 import {Record} from '../../src/components/containers/Record/Record'
 import RecordAgent from '../../src/components/containers/Record/RecordAgent.json'
 import { Footer } from '../../src/components/widget/Footer/ui/Footer'
-import { MappingGeneralInfo, MappingDescription, MappingDeveloperInfo } from 'src/lib/mapping/Apartment/apartmentMapping'
+import { MappingGeneralInfo, MappingDescription } from 'src/lib/mapping/Apartment/apartmentMapping'
 
 import {useStore} from '../../src/mobx/stores/ApartamentStore/ApartmentStore'
 import {instance, UrlObj} from '../../src/api/instance'
@@ -39,7 +39,7 @@ const personalAccount = [{title: 'Личный кабинет', href: '/User', m
 const infrastructureInfo = 'В 15 минутах езды расположена Ялта со своей знаменитой набережной, театр Чехова, авквариум и дельфинарий. Знаменитые дворцы, парки, ботанические сады и винные заводы расположены в получасовой доступности.'
 
 const Apartment: NextPage =  observer((props: any) => {
-  console.log(props)
+
   const store = useStore()
   const tabs = [{
     title: "Общая информация",
@@ -91,7 +91,7 @@ const Apartment: NextPage =  observer((props: any) => {
           <ToursContainer Online_tour={props.online_tour}/>
         </div>
         <div ref={architec}>
-          <ObjectSpecifications specificationsLists={props.object_specs} title={"Архитектурно-планировочные решения"}/>
+          <ObjectSpecifications specificationsLists={props.object_specs.filter((os: any) => os.subtitle !== 'Вид из окон' && os.subtitle !== 'Парковка')} title={"Архитектурно-планировочные решения"}/>
         </div>
         <div ref={infra}>
           <Map currentHouse={JSON.parse(JSON.stringify(store.initialData))} infrastructura={infrastructura} location={'infrastructure'} InfrastructureInfo={infrastructureInfo}/>
