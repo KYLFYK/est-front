@@ -19,7 +19,7 @@ export const OwnerForm: FC = () => {
             label="Имя"
             type="text"
             name={"name"}
-            defaultValue={" "}
+            defaultValue={""}
             onChange={() => {
               console.log("sd");
             }}
@@ -31,7 +31,7 @@ export const OwnerForm: FC = () => {
             label="Фамилия"
             type="text"
             name={"lastName"}
-            defaultValue={" "}
+            defaultValue={""}
             onChange={() => {
               console.log("sd");
             }}
@@ -43,7 +43,7 @@ export const OwnerForm: FC = () => {
             label="Дата рождения"
             type="date"
             name={"birthdayDate"}
-            defaultValue={" "}
+            defaultValue={""}
             onChange={() => {
               console.log("sd");
             }}

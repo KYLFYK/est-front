@@ -1,4 +1,4 @@
-import { FC, useState } from "react";
+import { FC, useEffect, useState } from "react";
 import Link from "next/link";
 import { BackIcon } from "../../../../../../../icons/BackIcon";
 import BaseButton from "../../../../../../shared/BaseButton/BaseButtons";
@@ -12,6 +12,8 @@ import { SMI } from "./tabs/SMI";
 import { Statistics } from "./tabs/Statistics";
 import { Risk } from "./tabs/Risk";
 import { Settings } from "./tabs/Settings";
+import { DeveloperProfileStore } from "../../../../../../../mobx/role/admin/profiles/developer";
+import { observer } from "mobx-react-lite";
 
 import styles from "../agency/agency.module.scss";
 
@@ -42,10 +44,18 @@ const PageHorizontalTabs: ITabItem[] = [
   },
 ];
 
-export const DeveloperPage: FC = () => {
+export const DeveloperPage: FC = observer(() => {
   const [haveUnsaved, setUnsaved] = useState<boolean>(true);
+  const { loadProfileInfo, errorOnLoad, profileData, loaded } =
+    DeveloperProfileStore;
 
-  return (
+  useEffect(() => {
+    if (!loaded && !errorOnLoad) {
+      loadProfileInfo();
+    }
+  }, [loaded, errorOnLoad, loadProfileInfo]);
+
+  return profileData !== null ? (
     <div className={styles.pageWrapper}>
       <div className={styles.header}>
         <Link href={"/cabinet"}>
@@ -79,5 +89,7 @@ export const DeveloperPage: FC = () => {
         />
       </div>
     </div>
+  ) : (
+    <></>
   );
-};
+});

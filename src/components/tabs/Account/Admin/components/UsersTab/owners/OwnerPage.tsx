@@ -1,14 +1,25 @@
-import { FC, useState } from "react";
-import styles from "../agency/agency.module.scss";
+import { FC, useEffect, useState } from "react";
 import Link from "next/link";
 import { BackIcon } from "../../../../../../../icons/BackIcon";
 import BaseButton from "../../../../../../shared/BaseButton/BaseButtons";
 import { OwnerForm } from "./OwnerForm";
+import { AdminOwnerProfileStore } from "../../../../../../../mobx/role/admin/profiles/owner";
+import { observer } from "mobx-react-lite";
 
-export const OwnerPage: FC = () => {
+import styles from "../agency/agency.module.scss";
+
+export const OwnerPage: FC = observer(() => {
   const [haveUnsaved, setUnsaved] = useState<boolean>(true);
+  const { loaded, errorOnLoad, loadProfileInfo, profileData } =
+    AdminOwnerProfileStore;
 
-  return (
+  useEffect(() => {
+    if (!loaded && !errorOnLoad) {
+      loadProfileInfo();
+    }
+  }, [loaded, errorOnLoad, loadProfileInfo]);
+
+  return profileData !== null ? (
     <div className={styles.pageWrapper}>
       <div className={styles.header}>
         <Link href={"/cabinet"}>
@@ -39,5 +50,7 @@ export const OwnerPage: FC = () => {
         <OwnerForm />
       </div>
     </div>
+  ) : (
+    <></>
   );
-};
+});
