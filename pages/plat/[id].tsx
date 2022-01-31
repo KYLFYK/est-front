@@ -109,7 +109,6 @@ export default Plat
 export async function getServerSideProps({params}: any) {
   const res  = await fetch(`https://estatum.f-case.ru/api/${UrlObj.land}/${params.id}`)
   const objectPlatApi :IgetLandIdSSPType  = await res.json()
-
     //@ts-ignore
   const object_specsGuide :Array<{value:string,label:{title:string, text:string}}> | [] = objectPlatApi.object_specs.map(guid=>sortGuide(guid,guid.subtitle_ru)).filter(f=>f !== undefined)
   const objectPlat  = {
