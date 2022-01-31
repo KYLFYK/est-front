@@ -21,6 +21,7 @@ import {Mortgage} from '../../src/components/shared/Mortgage/Mortgage'
 import {Record} from '../../src/components/containers/Record/Record'
 import RecordAgent from '../../src/components/containers/Record/RecordAgent.json'
 import { Footer } from '../../src/components/widget/Footer/ui/Footer'
+import { MappingGeneralInfo, MappingDescription, MappingDeveloperInfo } from 'src/lib/mapping/Apartment/apartmentMapping'
 
 import {useStore} from '../../src/mobx/stores/ApartamentStore/ApartmentStore'
 import {instance, UrlObj} from '../../src/api/instance'
@@ -35,7 +36,12 @@ const personalAccount = [{title: 'Личный кабинет', href: '/User', m
   {title: 'Проверка объекта', href: '/User', message: 0},
 ]
 
-const tabs = [{
+const infrastructureInfo = 'В 15 минутах езды расположена Ялта со своей знаменитой набережной, театр Чехова, авквариум и дельфинарий. Знаменитые дворцы, парки, ботанические сады и винные заводы расположены в получасовой доступности.'
+
+const Apartment: NextPage =  observer((props: any) => {
+  console.log(props)
+  const store = useStore()
+  const tabs = [{
     title: "Общая информация",
   },
   {
@@ -47,22 +53,10 @@ const tabs = [{
   {
     title: "Инфраструктура",
   },
-  {
-    title: "Юридическая чистота",
-  },
-  {
-    title: "Застройщик",
-  },
+  props.secondary_type === 'Новостройка' ? {title: "Застройщик"} : {title: "Юридическая чистота"},
   {
     title: "Записаться на просмотр",
-  }
-]
-
-const infrastructureInfo = 'В 15 минутах езды расположена Ялта со своей знаменитой набережной, театр Чехова, авквариум и дельфинарий. Знаменитые дворцы, парки, ботанические сады и винные заводы расположены в получасовой доступности.'
-
-const Apartment: NextPage =  observer((props: any) => {
-  const store = useStore()
-
+  }]
   const general = useRef(null)
   const tours = useRef(null)
   const architec = useRef(null)
@@ -78,7 +72,7 @@ const Apartment: NextPage =  observer((props: any) => {
   const views = [props.publish, props.views, store.initialData.agency]
 
   useEffect(() => {
-    setRefs([general.current, tours.current, architec.current, infra.current, legal.current, develop.current, record.current]);
+    setRefs([general.current, tours.current, architec.current, infra.current, props.secondary_type === 'Новостройка' ? develop.current : legal.current, record.current]);
     store.fetch(router.query.id)
   }, [router.query.id, store])
 
@@ -90,24 +84,25 @@ const Apartment: NextPage =  observer((props: any) => {
         <AdressEstate item={props.address}/>
         <HorizontalTabs refs={refs} tabs={tabs}/>
         <div ref={general}>
-          <GeneralInfo info={store.initialData.info_options} price={store.initialData.price} images={IMAGES_SET} />
+          <GeneralInfo info={MappingGeneralInfo(props.info_options)} price={store.initialData.price} images={IMAGES_SET} />
         </div>
-        <ObjectDescription items={store.initialData.description_items}/>
+        <ObjectDescription items={MappingDescription(props.description_items)}/>
         <div ref={tours}>
-          <ToursContainer Online_tour={store.initialData.online_tour}/>
+          <ToursContainer Online_tour={props.online_tour}/>
         </div>
         <div ref={architec}>
-          <ObjectSpecifications specificationsLists={store.initialData.object_specs} title={"Архитектурно-планировочные решения"}/>
+          <ObjectSpecifications specificationsLists={props.object_specs} title={"Архитектурно-планировочные решения"}/>
         </div>
         <div ref={infra}>
           <Map currentHouse={JSON.parse(JSON.stringify(store.initialData))} infrastructura={infrastructura} location={'infrastructure'} InfrastructureInfo={infrastructureInfo}/>
         </div>
-        <div ref={legal}>
-          <ObjectLegalPurity legalPurityData={store.initialData.legalPurityData}/>
+        {props.secondary_type === 'Новостройка' 
+        ? <div ref={develop}>
+          <ObjectDeveloper developerData={props.object_developer_info}/>
         </div>
-        <div ref={develop}>
-          <ObjectDeveloper developerData={store.initialData.object_developer_info}/>
-        </div>
+        : <div ref={legal}>
+          <ObjectLegalPurity legalPurityData={props.legalPurityData}/>
+        </div>}
         <Mortgage/>
         <div ref={record}>
           <Record Record={RecordAgent.Record} title={'квартиру'}/>
