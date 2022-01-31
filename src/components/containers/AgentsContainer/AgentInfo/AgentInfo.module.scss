@@ -10,7 +10,6 @@
 .gridConnection{
     display: grid;
     grid-template-columns: 1fr 1fr;
-    width: 400px;
 }
 .marginWork{
     margin: 20px;
@@ -19,7 +18,7 @@
     margin:10px 10px;
     display: flex;
     align-items: center;
-    min-width: 180px;
+    max-width: 240px;
 }
 .marginTop{
     margin-top: 20px;

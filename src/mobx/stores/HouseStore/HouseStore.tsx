@@ -116,8 +116,8 @@ class HouseStore {
 
   async fetch(id: number) {
     // this.initialData = Number(id) > 0 ? fullObjectData.filter((fod) => fod.object_id === Number(id))[0] : this.initialData
-        const res = await HouseApi.getHouseById(id)
-      console.log("res",res)
+      const res = await HouseApi.getHouseById(id)
+      // console.log("res",res)
       this.initialData = res
     this.fetching = false
   }

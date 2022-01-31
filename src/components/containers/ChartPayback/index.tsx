@@ -19,7 +19,7 @@ export const Chart: React.FC<Props> = ({}) => {
       ];
 
     return (
-        <div className={s.container}>
+        <div style={{width:'870px'}} >
             <Typography color={'tertiary'} className={s.textSize}>Прибыль млн.₽</Typography>
           <LineChart
             width={870}

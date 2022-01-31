@@ -2,16 +2,20 @@
   display: flex;
   justify-content: space-between;
   padding: 7px 50px;
+  height: 60px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
   @media  (max-width: 930px) {
     flex-wrap: wrap;
   }
 }
+.headerLogo{
+  display: flex;
+  align-items: center;
+}
 
 .menu {
   display: flex;
   align-items: center;
-  min-width: 666px;
   @media  (max-width: 930px) {
     margin-top: 10px;
   }

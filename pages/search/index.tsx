@@ -8,7 +8,7 @@ import CardContainer from '../../src/components/containers/CardContainer/CardCon
 import Map from '../../src/components/containers/Maps/MapFinder/index'
 import { mapData } from '../../src/components/containers/Maps/MapFinder/config';
 
-const city = ['Москва', 'Санкт-Петербург', 'Крым', 'Сочи', 'Нижний Новгород']
+const city = ['Москва', 'Крым', 'Сочи']
 
 const personalAccount = [{title: 'Личный кабинет', href: '/User', message: 0},
   {title: 'Избранное', href: '/User', message: 0},
