@@ -25,7 +25,7 @@ const ObjectSpecifications: React.FC<Props> = ({ specificationsLists, title }) =
     return (
         <div className={s.container}>
             <HeadLine title={title}>
-                {specificationsLists.map((specList, idx) => {
+                {specificationsLists && specificationsLists.map((specList, idx) => {
                     return <div key={idx}>
                         <Typography weight="bold" className={s.subTitle}>{specList.subtitle}</Typography>
                         <div className={s.specsList}>

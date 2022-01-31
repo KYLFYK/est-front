@@ -10,18 +10,19 @@ export const enum IconTypes {
     CHILDREN='children_playground',
     RELAX_PLACE='relax_place',
     VIDEO_SURVEILLANCE='video_surveillance',
-    FIRE_PROTECTION='fire_protection',
+    FIRE_PROTECTION='safety',
     CONCIERGE='concierge',
 
     // Архитектурно-планировочные решения
     // Строительная экспертиза
-    foundation='foundation',
+    constructionHouse = 'construction',
+    foundation='groundwork',
     roof='roof',
-    walls='walls',
+    wall='wall',
     // Инженерные коммуникации
-    water_supply='water_supply',
+    water_supply='water',
     heating='heating',
-    sewage_system='sewage_system',
+    sewage_system='sewerage',
     electricity='electricity',
     internet='internet',
 

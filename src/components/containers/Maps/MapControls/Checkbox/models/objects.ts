@@ -53,6 +53,7 @@ export interface IObjectTour {
 
 export enum ObjectTypes {
     HOUSE = "house",
+    LAND = "land",
     APARTMENTS = "apartment",
     RC = "residential-complex",
     PLAT = "plat",

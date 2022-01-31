@@ -97,15 +97,15 @@ const Map: React.FC<Props> = ({currentHouse, infrastructura, location, Infrastru
           return (
             <Marker
                 key={up.object_id}
-                latitude={up.lat ? up.lat : Number(up.address.geo.lat)}
-                longitude={up.lng ? up.lng : Number(up.address.geo.lng)}
+                latitude={up.lat ? up.lat : Number(up.address.geo?.lat)?Number(up.address.geo.lat):30}
+                longitude={up.lng ? up.lng : Number(up.address.geo?.lng)?Number(up.address.geo.lat):30}
                 className={(up.type === 'house' || up.type === 'apartment' || up.type === 'residential-complex' || up.type === 'plat') ? s.estateMarker : s.infraMarker}
             >
                 <BaseButton className={s.button} onClick={() => {
                   setActivemarker(up.object_id)
                   setOpen(true)
                 }}>
-                  <IconsCreator 
+                  <IconsCreator
                     locationProject={'infrastucture'}
                     colorBody={up.object_id === activeMarker ? '#0B3248' : '#1A4862'}
                     colorPath={up.object_id === activeMarker ? '#FFFFFF' : '#FFFFFF'}

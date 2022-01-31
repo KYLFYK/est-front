@@ -98,7 +98,8 @@ export const OpenStreetIconsFactory = (type: any, isActive: boolean | undefined,
         case ObjectTypes.CUSTOM_TYPE:
             iconUrl = isActive ? ShowPlacePressed : callingLocation==='checkbox' ? ShowPlaceCheck : ShowPlaceMap
             break;
-        default:
+        default: // for catch Error
+            iconUrl = isActive ? ShowPlacePressed : callingLocation==='checkbox' ? ShowPlaceCheck : ShowPlaceMap
             break;
     }
 

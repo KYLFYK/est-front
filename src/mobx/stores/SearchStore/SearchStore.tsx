@@ -7,6 +7,10 @@ class SearchStore {
     makeAutoObservable(this);
   }
   fetching = true
+  sort = 'default'
+  setSort(sort: string) {
+    this.sort = sort
+  } 
   params = {}
   initialData: any = []
   

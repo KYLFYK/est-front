@@ -1,11 +1,22 @@
 .agentBlock{
     display: flex;
     min-width: 400px;
+    @media  (max-width: 1320px) {
+        min-width: 100px;
+        min-height: 100px;
+    }
 }
 .photoAgent{
     width: 200px;
     height: 200px;
     border-radius: 8px;
+    @media  (max-width: 1320px) {
+        width: 150px;
+        height: 150px;
+    }@media  (max-width: 680px) {
+        width: 100px;
+        height: 100px;
+    }
 }
 .dataAgent{
     display: flex;
