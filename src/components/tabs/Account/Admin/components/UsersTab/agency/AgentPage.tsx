@@ -1,17 +1,29 @@
-import { FC, useState } from "react";
+import { FC, useEffect, useState } from "react";
 import { BackIcon } from "../../../../../../../icons/BackIcon";
 import Link from "next/link";
 import BaseButton from "../../../../../../shared/BaseButton/BaseButtons";
 import { AgentForm } from "./AgentForm";
+import { observer } from "mobx-react-lite";
+import { AgentProfileStore } from "../../../../../../../mobx/role/admin/profiles/agency";
 
 import styles from "./agency.module.scss";
 
-interface Props {}
+interface Props {
+  id: string;
+}
 
-export const AgentPage: FC<Props> = () => {
+export const AgentPage: FC<Props> = observer(({ id }) => {
   const [haveUnsaved, setUnsaved] = useState<boolean>(true);
+  const { loaded, errorOnLoad, profile, uploadProfile } = AgentProfileStore;
 
-  return (
+  useEffect(() => {
+    if ((!loaded && !errorOnLoad) || (profile?.id !== id && !errorOnLoad)) {
+      uploadProfile(id);
+      console.log("update");
+    }
+  }, [loaded, errorOnLoad, uploadProfile, id, profile]);
+
+  return profile !== null && profile.id === id ? (
     <div className={styles.pageWrapper}>
       <div className={styles.header}>
         <Link href={"/cabinet"}>
@@ -22,7 +34,7 @@ export const AgentPage: FC<Props> = () => {
         </Link>
       </div>
       <div className={styles.contentHeader}>
-        <span className={styles.title}>DEAL</span>
+        <span className={styles.title}>{profile.agencyName}</span>
         {haveUnsaved && (
           <div className={styles.rightSide}>
             <span className={styles.unsaved}>Есть несохранённые изменения</span>
@@ -39,8 +51,10 @@ export const AgentPage: FC<Props> = () => {
         )}
       </div>
       <div className={styles.content}>
-        <AgentForm />
+        <AgentForm profile={profile} />
       </div>
     </div>
+  ) : (
+    <>Loading profile</>
   );
-};
+});

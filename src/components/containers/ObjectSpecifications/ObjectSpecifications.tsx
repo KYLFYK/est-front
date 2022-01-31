@@ -22,7 +22,6 @@ interface Props {
 }
 
 const ObjectSpecifications: React.FC<Props> = ({ specificationsLists, title }) => {
-
     return (
         <div className={s.container}>
             <HeadLine title={title}>
