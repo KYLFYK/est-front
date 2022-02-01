@@ -1,11 +1,12 @@
 // Тут создаем компонент горизонтального набора таб с использованием компонентов дочерней папки components
 import {useState} from "react"
-import imgMoc from './AccountInfo/logoFalse.svg'
-import {HorizontalTabs} from "../../../../../shared/HorizontalTabs/HorizontalTabs";
-import PersonalCabinetStatistics from "./Statistics/Statistics";
-import PersonalCabinetSettings from "./Settings/Settings";
-import PersonalCabinetAccountInfo from "./AccountInfo/AccountInfo";
-import AccountEdit from "./AccountEdit/AccountEdit";
+import {HorizontalTabs} from "../../../../../../../shared/HorizontalTabs/HorizontalTabs"
+import PersonalCabinetAccountInfo from "./components/AccountInfo/AccountInfo"
+import PersonalCabinetAgents from "./components/Agents/Agents"
+import PersonalCabinetSettings from "./components/Settings/Settings"
+import PersonalCabinetStatistics from "./components/Statistics/Statistics"
+import AccountEdit from "./components/AccountEdit/AccountEdit";
+import imgMoc from './components/AccountInfo/logoFalse.svg'
 
 export type InfoAccountAgencyType = {
     info:Array<{label:string,value:string}>
@@ -86,7 +87,7 @@ const PersonalCabinetTab = () => {
                     ? <HorizontalTabs tabs={[
                         {title: "Статистика", Component: <PersonalCabinetStatistics/>},
                         {
-                            title: "Аккаунт",
+                            title: "Аккаунт агентства",
                             Component: <PersonalCabinetAccountInfo
                                 onEdit={() => setEdit(true)}
                                 statusVerification={infoAccountAgency.statusVerification}
@@ -94,6 +95,7 @@ const PersonalCabinetTab = () => {
                                 img={infoAccountAgency.img}
                             />
                         },
+                        {title: "Агенты", Component: <PersonalCabinetAgents agents={agentsList}/>},
                         {title: "Настройки", Component: <PersonalCabinetSettings personalCabinet={personalCabinet}/>},
                     ]}/>
                     : <AccountEdit onEdit={() => setEdit(false)} infoAgency={infoAgencyMoc}/>

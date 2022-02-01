@@ -15,7 +15,7 @@ import {
   getComparator,
   rows,
   stableSort,
-} from "../../../PersonalCabinetTab/components/Agents/Transformation";
+} from "../../../../../Agency/components/MyObjectsTab/components/PersonalCabinetTab/components/Agents/Transformation";
 export type Order = "asc" | "desc";
 import Typography from "../../../../../../../shared/Typography/Typography";
 import css from "./PurseTableOperation.module.scss";

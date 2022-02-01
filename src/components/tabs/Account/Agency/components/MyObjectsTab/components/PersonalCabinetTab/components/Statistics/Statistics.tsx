@@ -1,11 +1,11 @@
 // тут описываем горизонтальный подтаб "Статистика", который является частью таба "Заявки на просмотр"
-import WorkloadWork from "../../../Others/Tables/Table/WorkloadWork";
-import RevenueMonth from "../../../Others/Tables/Table/RevenueMonth";
-import ActionPeriod from "../../../Others/Tables/Table/ActionPeriod";
-import ClosedApplicationsMonth from "../../../Others/Tables/Table/ClosedApplicationsMonth";
+import WorkloadWork from "../../../../../../../Agent/components/Others/Tables/Table/WorkloadWork";
+import RevenueMonth from "../../../../../../../Agent/components/Others/Tables/Table/RevenueMonth";
+import ActionPeriod from "../../../../../../../Agent/components/Others/Tables/Table/ActionPeriod";
+import ClosedApplicationsMonth from "../../../../../../../Agent/components/Others/Tables/Table/ClosedApplicationsMonth";
 import css from './Statistics.module.scss'
-import Typography from "../../../../../../../shared/Typography/Typography";
-import {BaseDropDown} from "../../../../../../../shared/BaseDropDown/BaseDropDown";
+import Typography from "../../../../../../../../../shared/Typography/Typography";
+import {BaseDropDown} from "../../../../../../../../../shared/BaseDropDown/BaseDropDown";
 import {useState} from "react";
 import {makeStyles} from "@material-ui/core";
 

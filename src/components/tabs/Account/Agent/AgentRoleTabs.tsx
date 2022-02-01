@@ -2,12 +2,12 @@
 import React, {useState} from "react"
 import VerticalTabs from "../../../shared/VerticalTabs/VerticalTabs"
 import ApplicationsViewTab from "./components/ApplicationsViewTab/ApplicationsViewTab"
-import PersonalCabinetTab from "./components/PersonalCabinetTab/PersonalCabinetTab"
 import MyAds from "./components/MyAds/MyAds";
 import AgentsNotifications from "./components/Notifications/Notifications";
 import PlacementRates from "./components/PlacementRates/PlacementRates";
 import ProfSearch from "./components/ProfSearch/ProfSearch";
 import Messages from "./components/Messages/Messages";
+import PersonalCabinetTab from "./components/PersonalCabinetTab/PersonalCabinetTab";
 
 interface Props {
 }
@@ -40,7 +40,7 @@ const AgentRoleTabs  = () => {
             link={true}
             tabs={[
                 { title: "Личный кабинет", Component: <PersonalCabinetTab /> },
-                { title: "Заявки на просмотр", Component: <ApplicationsViewTab /> },
+                { title: "Заявки", Component: <ApplicationsViewTab /> },
                 { title: "Мои объявления", Component: <MyAds /> },
                 { title: "Тарифы размещения", Component: <PlacementRates /> },
                 { title: "Профпоиск", Component: <ProfSearch /> },

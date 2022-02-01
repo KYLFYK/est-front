@@ -23,6 +23,8 @@ export const searchNamePage = (page: string) => {
       return "messages";
     case "Заявки на просмотр":
       return "requests";
+      case "Заявки":
+      return "requests";
     case "Избранное":
       return "favorites";
     case "Сохранённые поиски":

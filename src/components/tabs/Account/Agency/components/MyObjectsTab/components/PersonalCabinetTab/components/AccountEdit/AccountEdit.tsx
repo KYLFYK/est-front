@@ -1,15 +1,15 @@
 import React, {FC, useState} from 'react';
-import Typography from "../../../../../../../shared/Typography/Typography";
-import {BaseInput} from "../../../../../../../shared/BaseInput/Input";
+import Typography from "../../../../../../../../../shared/Typography/Typography";
+import {BaseInput} from "../../../../../../../../../shared/BaseInput/Input";
 import Image from 'next/image'
 import importImage from './ImportImage.svg'
-import BaseButton from "../../../../../../../shared/BaseButton/BaseButtons";
-import {Modal} from "../../../../../../../shared/Modal/Modal";
-import {LogoIcon} from "../../../../../../../../icons/Header/LogoIcon";
-import BackPage from "../../../Others/BackPage/BackPage";
+import BaseButton from "../../../../../../../../../shared/BaseButton/BaseButtons";
+import {Modal} from "../../../../../../../../../shared/Modal/Modal";
+import {LogoIcon} from "../../../../../../../../../../icons/Header/LogoIcon";
+import BackPage from "../../../../../../../Agent/components/Others/BackPage/BackPage";
 import css from './AccountEdit.module.scss'
-import {myLoader} from "../../../../../../../../utils/image/image";
-import {BaseTextarea} from "../../../../../../../shared/BaseTextarea/BaseTextarea";
+import {myLoader} from "../../../../../../../../../../utils/image/image";
+import {BaseTextarea} from "../../../../../../../../../shared/BaseTextarea/BaseTextarea";
 
 type AccountEditType ={
     onEdit:()=>void

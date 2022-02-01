@@ -3,7 +3,7 @@ import ActionPeriod from "../../../Others/Tables/Table/ActionPeriod";
 import RevenueMonth from "../../../Others/Tables/Table/RevenueMonth";
 import Typography from "../../../../../../../shared/Typography/Typography";
 import {Card} from "../../../../../../../shared/Mortgage/Card";
-import css from "../../../PersonalCabinetTab/components/Statistics/Statistics.module.scss";
+import css from "../../../../../Agency/components/MyObjectsTab/components/PersonalCabinetTab/components/Statistics/Statistics.module.scss";
 import {Chart} from "../../../../../../../shared/DynamicsPrice/Chart";
 import TableColumn from "../../../Others/Tables/TableColumn/TableColumn";
 

@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import css from "../../PersonalCabinetTab/components/AccountEdit/AccountEdit.module.scss";
+import css from "../../../../Agency/components/MyObjectsTab/components/PersonalCabinetTab/components/AccountEdit/AccountEdit.module.scss";
 import Typography from "../../../../../../shared/Typography/Typography";
 
 type BackPageType={

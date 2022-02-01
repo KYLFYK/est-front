@@ -1,0 +1,53 @@
+.columnGrid{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+.activeColumn{
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+}
+.marginL_5{
+  margin-left: 5px;
+}
+.marginTB_10{
+  margin: 10px 0;
+}
+.marginCard{
+  margin:20px 0;
+  padding: 20px;
+}
+.marginTypo{
+  margin-top: 10px ;
+  display: flex;
+  flex-direction: column;
+  align-items: self-start;
+}
+.marginTop1{
+  margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: self-start;
+}
+.marginTop2{
+  margin-top: 20px;
+}
+.priceTable{
+  font-size: 12px;
+  position: relative;
+  top:10px;
+  left:20px;
+}
+.cardStyle{
+  padding: 0;
+  background: #FFFFFF;
+  border: 1px solid #F2F2F2;
+  margin: 20px 0;
+  margin-right: 20px;
+}
+.marginB_15{
+  margin-bottom: 15px;
+}
+.marginB_5{
+  margin-bottom: 5px;
+}

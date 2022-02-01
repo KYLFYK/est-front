@@ -17,7 +17,7 @@ import {
   getComparator,
   rows,
   stableSort,
-} from "../../../PersonalCabinetTab/components/Agents/Transformation";
+} from "../../../../../Agency/components/MyObjectsTab/components/PersonalCabinetTab/components/Agents/Transformation";
 import Typography from "../../../../../../../shared/Typography/Typography";
 
 type HeadCell = {

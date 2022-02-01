@@ -1,6 +1,6 @@
 // тут описываем горизонтальный подтаб "Каталог заявок", который является частью таба "Заявки на просмотр"
 import * as React from "react";
-import {getComparator, rows, stableSort} from "../../../PersonalCabinetTab/components/Agents/Transformation";
+import {getComparator, rows, stableSort} from "../../../../../Agency/components/MyObjectsTab/components/PersonalCabinetTab/components/Agents/Transformation";
 import Box from "@mui/material/Box";
 import TableContainer from "@mui/material/TableContainer";
 import Table from "@mui/material/Table";
@@ -9,7 +9,7 @@ import TableRow from "@mui/material/TableRow";
 import TableCell from "@mui/material/TableCell";
 
 import TablePagination from "@mui/material/TablePagination";
-import {Order} from "../../../PersonalCabinetTab/components/Agents/AgentsTable";
+import {Order} from "../../../../../Agency/components/MyObjectsTab/components/PersonalCabinetTab/components/Agents/AgentsTable";
 import {makeStyles} from "@material-ui/core";
 import TableHead from "@mui/material/TableHead";
 import TableSortLabel from "@mui/material/TableSortLabel";

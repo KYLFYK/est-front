@@ -2,7 +2,7 @@
 import React, {useState} from "react"
 import VerticalTabs from "../../../shared/VerticalTabs/VerticalTabs"
 import MyObjectsTab from "./components/MyObjectsTab/MyObjectsTab"
-import PersonalCabinetTab from "../Agent/components/PersonalCabinetTab/PersonalCabinetTab";
+import PersonalCabinetTab from "./components/MyObjectsTab/components/PersonalCabinetTab/PersonalCabinetTab";
 import ApplicationsViewTab from "../Agent/components/ApplicationsViewTab/ApplicationsViewTab";
 import MyAds from "../Agent/components/MyAds/MyAds";
 import PlacementRates from "../Agent/components/PlacementRates/PlacementRates";
@@ -41,7 +41,7 @@ const AgencyRoleTabs: React.FC<Props> = ({storybook }) => {
             storybook={storybook}
             tabs={[
                 { title: "Личный кабинет", Component: <PersonalCabinetTab /> },
-                { title: "Заявки на просмотр", Component: <ApplicationsViewTab /> },
+                { title: "Заявки", Component: <ApplicationsViewTab /> },
                 { title: "Мои объявления", Component: <MyAds /> },
                 { title: "Тарифы размещения", Component: <PlacementRates /> },
                 { title: "Профпоиск", Component: <ProfSearch /> },

@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 import Typography from "../../../../../../../shared/Typography/Typography";
-import css from '../../../PersonalCabinetTab/components/Statistics/Statistics.module.scss'
+import css from '../../../../../Agency/components/MyObjectsTab/components/PersonalCabinetTab/components/Statistics/Statistics.module.scss'
 import {Card} from "../../../../../../../shared/Mortgage/Card";
 import classNames from "classnames";
 

@@ -1,8 +1,8 @@
 // тут описываем горизонтальный подтаб "Аккаунт агенства", который является частью таба "Заявки на просмотр"
 import css from './Settings.module.scss'
-import Typography from "../../../../../../../shared/Typography/Typography";
-import {BaseInput} from "../../../../../../../shared/BaseInput/Input";
-import BaseButton from "../../../../../../../shared/BaseButton/BaseButtons";
+import Typography from "../../../../../../../../../shared/Typography/Typography";
+import {BaseInput} from "../../../../../../../../../shared/BaseInput/Input";
+import BaseButton from "../../../../../../../../../shared/BaseButton/BaseButtons";
 import {FC, useState} from "react";
 
 type PersonalCabinetSettingsType123 = {

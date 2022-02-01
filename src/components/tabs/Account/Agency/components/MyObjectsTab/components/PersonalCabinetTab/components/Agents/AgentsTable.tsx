@@ -19,7 +19,7 @@ import DriveFileRenameOutlineIcon from "@mui/icons-material/DriveFileRenameOutli
 export type Order = "asc" | "desc";
 import css from "./Agents.module.scss";
 import { FC } from "react";
-import {myLoader} from "../../../../../../../../utils/image/image";
+import {myLoader} from "../../../../../../../../../../utils/image/image";
 type HeadCell = {
   disablePadding: boolean;
   id: keyof Data;

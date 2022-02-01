@@ -1,7 +1,7 @@
 // тут описываем горизонтальный подтаб "Агенты", который является частью таба "Заявки на просмотр"
-import {BaseInput} from "../../../../../../../shared/BaseInput/Input";
-import BaseButton from "../../../../../../../shared/BaseButton/BaseButtons";
-import Typography from "../../../../../../../shared/Typography/Typography";
+import {BaseInput} from "../../../../../../../../../shared/BaseInput/Input";
+import BaseButton from "../../../../../../../../../shared/BaseButton/BaseButtons";
+import Typography from "../../../../../../../../../shared/Typography/Typography";
 import {ActualObject} from "./AgentsTable";
 import css from './Agents.module.scss'
 

@@ -1,7 +1,7 @@
 import React, {FC} from 'react';
 import Typography from "../../../../../../../shared/Typography/Typography";
 import {Chart} from "../../../../../../../shared/DynamicsPrice/Chart";
-import css from '../../../PersonalCabinetTab/components/Statistics/Statistics.module.scss'
+import css from '../../../../../Agency/components/MyObjectsTab/components/PersonalCabinetTab/components/Statistics/Statistics.module.scss'
 import {Card} from "../../../../../../../shared/Mortgage/Card";
 
 
