@@ -120,7 +120,7 @@ export const getStaticProps : GetStaticProps<FetchMainType> = async ()=> {
             id: agent.id,
             img: "https://images.unsplash.com/photo-1541963463532-d68292c34b19?ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8Ym9va3xlbnwwfHwwfHw%3D&ixlib=rb-1.2.1&w=1000&q=&q=",
             connection: {
-                whatsApp: agent.agentProperty.messengers.whatsApp ? agent.agentProperty.messengers.whatsApp: agent.agentProperty.messengers.telegram ,
+                whatsApp: agent?.agentProperty?.messengers?.whatsApp ? agent?.agentProperty?.messengers?.whatsApp : agent.agentProperty.messengers.telegram ,
                 telegram: agent.agentProperty.messengers.telegram,
                 email: agent.email,
                 phone: agent.agentProperty.phone[0].value,
@@ -132,7 +132,7 @@ export const getStaticProps : GetStaticProps<FetchMainType> = async ()=> {
                 completed: agent.agentProperty.rating.toString(),   //  <- WANTED MOCK
                 inWork: agent.agentProperty.rating.toString(),      //  <- WANTED MOCK
 
-                whatsApp: agent.agentProperty.messengers.whatsApp,
+                whatsApp: agent?.agentProperty?.messengers?.whatsApp,
                 telegram: agent.agentProperty.messengers.telegram,
                 email: agent.email,
                 phone: agent.phone,

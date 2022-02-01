@@ -67,9 +67,9 @@ const PlanningFilter: React.FC<Props> = () => {
                 <ToggleButtons classNameButton={css.toggleButton} activeValue={TOGGLE_BUTTONS_OPTIONS[0].value as string} items={TOGGLE_BUTTONS_OPTIONS} onChange={() => { }} />
                 <div className={classes.container}>
                     <InputsUnion className={classes.inputUnion}>
-                        <CompareInput classNameInput={classes.inputs} placeholderFrom="Цена от" placeholderTo="до" valueFrom={""} valueTo={""} onChangeFrom={tempFunc} onChangeTo={tempFunc} Icon={"₽"} />
-                        <CompareInput classNameInput={classes.inputs} placeholderFrom="Площадь от" placeholderTo="до" valueFrom={""} valueTo={""} onChangeFrom={tempFunc} onChangeTo={tempFunc} Icon={"₽"} />
-                        <CompareInput classNameInput={classes.floorInput} placeholderFrom="Этаж от" placeholderTo="до" valueFrom={""} valueTo={""} onChangeFrom={tempFunc} onChangeTo={tempFunc} />
+                        <CompareInput location='planning' classNameInput={classes.inputs} placeholderFrom="Цена от" placeholderTo="до" valueFrom={""} valueTo={""} onChangeFrom={tempFunc} onChangeTo={tempFunc} Icon={"₽"} />
+                        <CompareInput location='planning' classNameInput={classes.inputs} placeholderFrom="Площадь от" placeholderTo="до" valueFrom={""} valueTo={""} onChangeFrom={tempFunc} onChangeTo={tempFunc} Icon={"₽"} />
+                        <CompareInput location='planning' classNameInput={classes.floorInput} placeholderFrom="Этаж от" placeholderTo="до" valueFrom={""} valueTo={""} onChangeFrom={tempFunc} onChangeTo={tempFunc} />
                     </InputsUnion>
                     <BaseButton type="primary"> <Typography color="secondary" size="small">Применить</Typography> </BaseButton>
                 </div>

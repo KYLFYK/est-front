@@ -176,7 +176,9 @@ export const Filter: React.FC<Props> = observer(({ location, initialValues }) =>
             />}
 
             {values['object-type'] === 'house' && <CompareInput 
-                classNameInput={s.input} 
+                location="search"
+                classNameInputFrom={s.floorInputFrom} 
+                classNameInputTo={s.floorInputTo}  
                 placeholderFrom="Этажей от" 
                 placeholderTo="до" 
                 valueFrom={values['floor-from']} 
@@ -197,16 +199,21 @@ export const Filter: React.FC<Props> = observer(({ location, initialValues }) =>
 
             <InputsUnion className={s.inputsUnion}>
                 <CompareInput 
-                    classNameInput={s.input} 
+                    location="search"
+                    classNameInputFrom={s.priceInputFrom} 
+                    classNameInputTo={s.priceInputTo} 
                     placeholderFrom="Цена от" 
                     placeholderTo="до" 
                     valueFrom={values['price-from']} 
                     valueTo={values['price-to']} 
                     onChangeFrom={onChangePriceFrom} 
                     onChangeTo={onChangePriceTo} 
+                    Icon={<span>₽</span>} 
                 />
                 <CompareInput 
-                    classNameInput={s.input} 
+                    location="search"
+                    classNameInputFrom={s.squareInputFrom} 
+                    classNameInputTo={s.squareInputTo} 
                     placeholderFrom="Площадь от" 
                     placeholderTo="до" 
                     valueFrom={values['square-from']} 
