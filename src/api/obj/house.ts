@@ -17,7 +17,8 @@ export const HouseApi  = {
         try{
 
             const res :IhouseApiType = await instance.get(`${UrlObj.house}/${id}`)
-            // console.log('resApi',res)
+            console.log('resApi',res)
+            console.log(res.data.online_tour)
             //@ts-ignore
             // let object_specsGuide :Array<{value:string,label:{title:string, text:string}}> | [] = res.object_specs.map(guid=>sortGuide(guid,guid.subtitle_ru)).filter(f=>f !== undefined)
             // console.log('resApi123',res)
@@ -27,10 +28,10 @@ export const HouseApi  = {
                         {url : "https://images.unsplash.com/photo-1541963463532-d68292c34b19?ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8Ym9va3xlbnwwfHwwfHw%3D&ixlib=rb-1.2.1&w=1000&q=80", id : 1},
                         {url : "https://images.ctfassets.net/hrltx12pl8hq/3MbF54EhWUhsXunc5Keueb/60774fbbff86e6bf6776f1e17a8016b4/04-nature_721703848.jpg?fit=fill&w=480&h=270", id : 2}
                     ],
-                    object_id : res.data.id,
+                    object_id : res.data.object_id,
                     lang : "ru",
                     name : res.data.name,
-                    type : "house",
+                    type : res.data.type,
                     category: "Дом",
                     address :  res.data.address,
                     city : "Ялта",
@@ -69,14 +70,7 @@ export const HouseApi  = {
                         },
                     ],
                     description_items : [res.data.description],
-                    online_tour : {
-                        threeD_tour: {
-                            url: 'https://www.youtube.com/embed/Ke3qyQYNob4',
-                        },
-                        vr_tour: {
-                            url: 'https://3d-tur.ru/010/',
-                        }
-                    },
+                    online_tour :res.data.online_tour,
                     // object_specs:  sortObject_specsTypeGuide( object_specsGuide),
                     object_specs:  res.data.object_specs,
                     legalPurityData : {
@@ -463,7 +457,7 @@ export type IhouseApiType={
                 subtitle: string
                 specificationsItems: Array<{value:string, label:{title:string, text:string}}>
         }>
-        id: number
+        object_id: number
         lat: string
         lng: string
         markAsDelete: boolean
@@ -483,6 +477,11 @@ export type IhouseApiType={
             phone: string
             role: string
             updateAt: string
+        }
+        type:string
+        online_tour:{
+            threeD_tour:string
+            vr_tour:string
         }
         price: number
         region:{

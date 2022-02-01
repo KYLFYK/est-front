@@ -12,7 +12,8 @@ import BaseButton from "../../../../../../shared/BaseButton/BaseButtons";
 
 type PersonalCabinetAccountInfoType = {
     img?:string
-    statusVerification : 'confirmed' | 'waiting' | 'notConfirmed' | 'resend'
+    // statusVerification : 'confirmed' | 'waiting' | 'notConfirmed' | 'resend'
+    statusVerification :string
     info:Array<{label:string,value:string}>
     onEdit:()=>void
 }

@@ -24,6 +24,7 @@ import {
     sortGuide,
     sortObject_specsTypeGuide
 } from "../../src/api/obj/land";
+import {conversionDate} from "../../src/utils/conversionDate/conversionDate";
 
 const city = ['Москва', 'Санкт-Петербург', 'Крым', 'Сочи', 'Нижний Новгород']
 const personalAccount = [{title: 'Личный кабинет', href: '/User', message: 0},
@@ -54,7 +55,7 @@ const tabs = [{
 
 const Plat = observer((props: ObjectLandType) => {
 
-  // console.log('getServerSideProps',props)
+  console.log('ObjectLandType',props)
   const general = useRef(null)
   const specs = useRef(null)
   const infra = useRef(null)
@@ -130,7 +131,7 @@ export async function getServerSideProps({params}: any) {
         "sort": objectPlatApi.sort?objectPlatApi.sort:0,
         "planning": objectPlatApi.planning,
         "favorite": false,
-        "publish": objectPlatApi.publish.substr(0,10).split('-').reverse().join('.'),
+        "publish": conversionDate(objectPlatApi.publish),
         "views": objectPlatApi.views,
         "agency": objectPlatApi.agency?objectPlatApi.agency:'',
         "info_options":objectPlatApi.info_options,

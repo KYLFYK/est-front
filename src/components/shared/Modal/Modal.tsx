@@ -3,7 +3,7 @@ import {ModalClose} from "./ModalClose";
 import {ReactNode} from "react";
 
 export type ModalPropsType = {
-    setActive: (e: boolean) => void
+    setActive?: (e: boolean) => void
     active: boolean
     children: ReactNode
 }
@@ -16,7 +16,7 @@ export const Modal = (props: ModalPropsType) => {
 
         <div
             className={props.active ? active : css.modal}
-            onClick={() => props.setActive(false)}
+            // onClick={() =>props.setActive && props.setActive(false)}
         >
             <div
                 className={props.active ? modal_content : css.modal_content}
@@ -24,7 +24,7 @@ export const Modal = (props: ModalPropsType) => {
             >
                 <div className={css.button}>
                     <div className={css.position}>
-                        <ModalClose setActive={() => props.setActive(false)}/>
+                        <ModalClose setActive={() =>props.setActive && props.setActive(false)}/>
                     </div>
                     <div className={css.padding}>
                         <div className={css.positionContent}>

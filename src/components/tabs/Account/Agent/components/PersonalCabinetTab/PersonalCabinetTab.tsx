@@ -1,11 +1,13 @@
 // Тут создаем компонент горизонтального набора таб с использованием компонентов дочерней папки components
-import {useState} from "react"
+import {useEffect, useState} from "react"
 import imgMoc from './AccountInfo/logoFalse.svg'
 import {HorizontalTabs} from "../../../../../shared/HorizontalTabs/HorizontalTabs";
 import PersonalCabinetStatistics from "./Statistics/Statistics";
 import PersonalCabinetSettings from "./Settings/Settings";
 import PersonalCabinetAccountInfo from "./AccountInfo/AccountInfo";
 import AccountEdit from "./AccountEdit/AccountEdit";
+import {useStoreAgentCabinet} from "../../../../../../mobx/role/agent/cabinet/AgentCabinet";
+import {observer} from "mobx-react-lite";
 
 export type InfoAccountAgencyType = {
     info:Array<{label:string,value:string}>
@@ -77,8 +79,25 @@ const personalCabinet = {
         messageEmail: 'estatum@estatum.com'
 }
 
-const PersonalCabinetTab = () => {
+const PersonalCabinetTab = observer(() => {
     const [edit, setEdit] = useState<boolean>(false)
+    const store = useStoreAgentCabinet()
+
+    useEffect(()=>{
+        store.fetch()
+    },[])
+
+    const accountEdit = {
+        name: store.initialData.name,
+        status: store.initialData.status,
+        address: store.initialData.address,
+        phone: store.initialData.phone,
+        email: store.initialData.email,
+        website: store.initialData.website,
+        description: store.initialData.description
+    }
+
+    store.get()
     return (
         <>
             {
@@ -89,17 +108,20 @@ const PersonalCabinetTab = () => {
                             title: "Аккаунт",
                             Component: <PersonalCabinetAccountInfo
                                 onEdit={() => setEdit(true)}
-                                statusVerification={infoAccountAgency.statusVerification}
-                                info={infoAccountAgency.info}
-                                img={infoAccountAgency.img}
+                                // statusVerification={infoAccountAgency.statusVerification}
+                                // info={infoAccountAgency.info}
+                                // img={infoAccountAgency.img}
+                                statusVerification={store.initialData.statusVerification}
+                                info={store.initialData.info}
+                                img={store.initialData.img}
                             />
                         },
                         {title: "Настройки", Component: <PersonalCabinetSettings personalCabinet={personalCabinet}/>},
                     ]}/>
-                    : <AccountEdit onEdit={() => setEdit(false)} infoAgency={infoAgencyMoc}/>
+                    : <AccountEdit onEdit={() => setEdit(false)} infoAgency={accountEdit}/>
             }
         </>
     )
-}
+})
 
 export default PersonalCabinetTab

@@ -10,6 +10,9 @@ import {myLoader} from "../../../../../../../utils/image/image";
 import BaseButton from "../../../../../../shared/BaseButton/BaseButtons";
 import { Modal } from 'src/components/shared/Modal/Modal';
 import {LogoIcon} from "../../../../../../../icons/Header/LogoIcon";
+import {observer} from "mobx-react-lite";
+import {useStoreAgentCabinet} from "../../../../../../../mobx/role/agent/cabinet/AgentCabinet";
+import {UpdateAgentCabinetType} from "../../../../../../../api/cabinet/cabinet";
 
 
 type AccountEditType ={
@@ -21,7 +24,9 @@ const image ="data:image/svg+xml;utf8,<svg width=\'100%\' height=\'100%\' " +
     "xmlns=\'http://www.w3.org/2000/svg\'><rect width=\'240px\' height=\'240px\' rx=\'6px\'" +
     " style=\'fill: none; stroke: rgb(26, 72, 98); stroke-width: 1; stroke-dasharray: 9 9\'/></svg>"
 
-const AccountEdit :FC<AccountEditType>= ({onEdit,infoAgency}) => {
+const AccountEdit :FC<AccountEditType>= observer(({onEdit,infoAgency}) => {
+
+    const store = useStoreAgentCabinet()
 
     const copyAgency = {...infoAgency}
 
@@ -49,7 +54,18 @@ const AccountEdit :FC<AccountEditType>= ({onEdit,infoAgency}) => {
     }
 
     const save = () =>{
-        console.log('save')
+        const updateValue:UpdateAgentCabinetType ={
+            // name:valueName,
+            // status:valueStatus,
+            // address:valueAddress,
+            // site:valueWebsite,
+            // description:valueDescription,
+            phone:valuePhone,
+            email:valueEmail,
+            markAsDelete: true,
+            role:'agent'
+        }
+        store.update(store.initialData.id,updateValue)
     }
     const saveBack = () => {
         console.log('save')
@@ -196,6 +212,6 @@ const AccountEdit :FC<AccountEditType>= ({onEdit,infoAgency}) => {
         </div>
 
     );
-};
+})
 
 export default AccountEdit;

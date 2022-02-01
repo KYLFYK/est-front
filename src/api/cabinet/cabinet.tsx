@@ -29,7 +29,43 @@ export const cabinetAPI ={
         }catch (e:any)  {
             return e
         }
+    },
+    getCabinetAgent:async ()=> {
+        try{
+            const res = await instance.get(`${UrlMainPage.accountOur}`,{
+                headers: {
+                    authorization: `Bearer ${localStorage.getItem('accessEstatum')}`
+                }
+            })
+            return res
+        }catch (e:any) {
+            return e
+        }
+    },
+    updateAgentsCabinet:async (id:number,updateValue: UpdateAgentCabinetType)=>{
+        try{
+            const res = instance.patch(`account/${id}`,updateValue,{
+                headers: {
+                    authorization: `Bearer ${localStorage.getItem('accessEstatum')}`
+                }})
+            console.log( 'updateAgentsCabinet',res)
+        }catch (e){
+            return false
+        }
     }
+}
+
+export type UpdateAgentCabinetType ={
+    // name:string,
+    // status:string,
+    // address:string,
+    // site:string,
+    // description:string,
+
+    markAsDelete: boolean
+    phone:string,
+    email:string,
+    role:string
 }
 
 export type CabinetDeveloperType ={
