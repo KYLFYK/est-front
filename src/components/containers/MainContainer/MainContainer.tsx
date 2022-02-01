@@ -15,7 +15,7 @@ type MainContainerType = {
   cabinetStyle?: boolean;
   className?: string;
 };
-const cityMoc = ['Москва', 'Санкт-Петербург', 'Крым', 'Сочи', 'Нижний Новгород']
+const cityMoc = ['Москва', 'Крым', 'Сочи']
 
 export const MainContainer = ({
   children,

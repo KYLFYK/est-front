@@ -5,22 +5,22 @@ export const MappingGeneralInfo = (address: any, category: any, info: any, specs
         { label: "Стоимость квартир", value: `от ${(info.priceObjectMin/1000000).toFixed(2)} млн руб.` },
         { label: "Площадь квартир", value: `${info.areaObjectMin} — ${info.areaObjectMax} м2` },
         { label: "Всего квартир", value: info.amountObjects },
-        //{ label: "Класс жилья", value: specs[0].specificationsItems.filter((s: any) => s.value === 'class')[0].label.text },
+        { label: "Класс жилья", value: specs.filter((s: any) => s.subtitle === 'Класс жилья')[0].specificationsItems?.filter((si: any) => si.value === 'class')[0]?.label?.text },
         { label: "Корпуса", value: `${info.amountBuildings} корпус` },
         { label: "Этажность", value: info.amountFloors },
-        //{ label: "Тип дома", value: specs.filter((s: any) => s.subtitle === 'Строительно-техническая экспертиза')[0].specificationsItems.filter((si: any) => si.value === 'construction')[0].label.text },
+        { label: "Тип дома", value: specs.filter((s: any) => s.subtitle === 'Строительно-техническая экспертиза')[0].specificationsItems?.filter((si: any) => si.value === 'construction')[0]?.label?.text },
         { label: "Высота потолков", value: info.heightCeilings },
-        //{ label: "Отделка", value: specs[0].specificationsItems.filter((s: any) => s.value === 'decorating')[0].label.text },
-        //{ label: "Парковка", value: specs[0].specificationsItems.filter((s: any) => s.value === 'parking')[0].label.text },
+        { label: "Отделка", value: specs.filter((s: any) => s.subtitle === 'Отделка')[0].specificationsItems?.filter((si: any) => si.value === 'decorating')[0]?.label?.text },
+        { label: "Парковка", value: specs.filter((s: any) => s.subtitle === 'Парковка')[0].specificationsItems?.filter((si: any) => si.value === 'parking').map((p: any) => p.label.text).join(', ') },
       ]
     return info_options;
 }
 
 export const MappingDeveloperInfo = (info: any) => {
     const news: any = []
-    info.developerProperty.press.forEach((p: any) => {news.push({link: p.link, date: p.date, title: p.title, description: p.text, icon: p.logo, id: p.id})})
+    info.developerProperty.press?.forEach((p: any) => {news.push({link: p.link, date: p.date, title: p.title, description: p.text, icon: p.logo, id: p.id})})
     const statistics: any = []
-    info.developerProperty.statistics.forEach((s: any) => {statistics.push({value: s.title, label: s.items.map((i: any) => {
+    info.developerProperty.statistics?.forEach((s: any) => {statistics.push({value: s.title, label: s.items.map((i: any) => {
       return {title: i.value, text: i.item}
     })})})
     const object_developer_info = {
@@ -79,9 +79,9 @@ export const MappingDeveloperInfo = (info: any) => {
           news: news,
           statistics: statistics,
           risks: [
-            { value: info.developerProperty.risks.filter((dp: any) => dp.title === "Индекс должной осмотрительности")[0].value, label: { title: "Индекс должной осмотрительности", text: "Оценка, показывающая вероятность того, что компания является «фирмой- однодневкой»"}},
-            { value: info.developerProperty.risks.filter((dp: any) => dp.title === "Индекс финансового риска")[0].value, label: { title: "Индекс финансового риска", text: "Оценка вероятности неплатежеспособности компании"}},
-            { value: info.developerProperty.risks.filter((dp: any) => dp.title === "Индекс платежной дисциплины")[0].value, label: { title: "Индекс платежной дисциплины", text: "Показатель, отражающий своевременность оплаты компанией счетов"}}
+            { value: info.developerProperty.risks?.filter((dp: any) => dp.title === "Индекс должной осмотрительности")[0].value, label: { title: "Индекс должной осмотрительности", text: "Оценка, показывающая вероятность того, что компания является «фирмой- однодневкой»"}},
+            { value: info.developerProperty.risks?.filter((dp: any) => dp.title === "Индекс финансового риска")[0].value, label: { title: "Индекс финансового риска", text: "Оценка вероятности неплатежеспособности компании"}},
+            { value: info.developerProperty.risks?.filter((dp: any) => dp.title === "Индекс платежной дисциплины")[0].value, label: { title: "Индекс платежной дисциплины", text: "Показатель, отражающий своевременность оплаты компанией счетов"}}
           ]
         }
       }

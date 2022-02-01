@@ -5,13 +5,17 @@
     display: flex;
     justify-content: space-between;
     @media  (max-width: 1300px) {
-        display: grid;
-        grid-template-columns: 1fr 1fr ;
-        gap: 20px;
+        //display: grid;
+        //grid-template-columns: 1fr 1fr ;
+        //gap: 20px;
     }
     @media  (max-width: 1020px) {
         display: grid;
-        grid-template-columns: 1fr;
+        grid-template-columns: 1fr 1fr;
+        gap: 20px;
+    }@media  (max-width: 650px) {
+        display: grid;
+        grid-template-columns: 1fr ;
         gap: 20px;
     }
 }

@@ -49,10 +49,10 @@ const CardContainer: React.FC<Props> = observer(({ mapData, view, setView }) => 
                 <div className={s.finderDropdown}>
                     <BaseDropDown 
                         className={classes.sortDropdown}
-                        onChange={() => {}}
+                        onChange={(e) => {store.setSort(e)}}
                         placeholder={DROPDOWN_PLACEHOLDER}
                         options={SORT_FILTER_OPTIONS}
-                        value={SORT_FILTER_OPTIONS[0].value as string} 
+                        value={store.sort} 
                     />
                 </div>
                 <div className={s.finderButtons}>

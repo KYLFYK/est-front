@@ -49,32 +49,32 @@ export const AgentInfo: React.FC<AgentDataPropsType> = ({ img,connection,infoAge
             <Typography size={'default'} color="accent" >
                 {infoAgent.heldPost}
             </Typography>
-            <div className={css.gridWork}>
-                <div className={css.marginWork}>
-                    <Typography size={'default'} color="accent" className={css.cursor}  >
-                        Работает
-                    </Typography>
-                    <Typography size={'default'} color="accent" weight={'medium'} >
-                        {years(infoAgent.professionalExperience)}
-                    </Typography>
-                </div>
-                <div className={css.marginWork}>
-                    <Typography size={'default'} color="accent"  >
-                        Завершенных
-                    </Typography>
-                    <Typography size={'default'} color="accent" weight={'medium'} >
-                        {infoAgent.completed}
-                    </Typography>
-                </div>
-                <div className={css.marginWork}>
-                    <Typography size={'default'} color="accent"  >
-                        В работе
-                    </Typography>
-                    <Typography size={'default'} color="accent" weight={'medium'} >
-                        {infoAgent.inWork}
-                    </Typography>
-                </div>
-            </div>
+            {/*<div className={css.gridWork}>*/}
+            {/*    <div className={css.marginWork}>*/}
+            {/*        <Typography size={'default'} color="accent" className={css.cursor}  >*/}
+            {/*            Работает*/}
+            {/*        </Typography>*/}
+            {/*        <Typography size={'default'} color="accent" weight={'medium'} >*/}
+            {/*            {years(infoAgent.professionalExperience)}*/}
+            {/*        </Typography>*/}
+            {/*    </div>*/}
+            {/*    <div className={css.marginWork}>*/}
+            {/*        <Typography size={'default'} color="accent"  >*/}
+            {/*            Завершенных*/}
+            {/*        </Typography>*/}
+            {/*        <Typography size={'default'} color="accent" weight={'medium'} >*/}
+            {/*            {infoAgent.completed}*/}
+            {/*        </Typography>*/}
+            {/*    </div>*/}
+            {/*    <div className={css.marginWork}>*/}
+            {/*        <Typography size={'default'} color="accent"  >*/}
+            {/*            В работе*/}
+            {/*        </Typography>*/}
+            {/*        <Typography size={'default'} color="accent" weight={'medium'} >*/}
+            {/*            {infoAgent.inWork}*/}
+            {/*        </Typography>*/}
+            {/*    </div>*/}
+            {/*</div>*/}
             <div className={css.gridConnection}>
                 <div className={css.marginData}>
                     <IconWhatsapp />

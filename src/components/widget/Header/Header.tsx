@@ -30,16 +30,17 @@ type HeaderPropsType = {
 };
 
 const moc = [
-  { href: "/buy", title: "Купить" },
-  { href: "/take", title: "Снять" },
+  { href: "/search?object-type=apartment&order-type=buy&privateType=house", title: "Купить" },
+  { href: "/search?object-type=apartment&order-type=rent&privateType=house", title: "Снять" },
   { href: "/calculator", title: "Ипотека" },
-  { href: "/construction", title: "Строящиеся дома" },
-  { href: "/contacts", title: "Контакты" },
+  // { href: "/construction", title: "Строящиеся дома" },
+  // { href: "/contacts", title: "Контакты" },
 ];
 
 const personalAcc = [
   [
     //'agency'
+    { title: "Профиль: Агентство", href: "/", message: 0 },
     { title: "Личный кабинет", href: "/cabinet", message: 0 },
     { title: "Заявки на просмотр", href: "/requests", message: 0 },
     { title: "Мои объявления", href: "/ads", message: 0 },
@@ -50,6 +51,7 @@ const personalAcc = [
   ],
   [
     //'agent'
+    { title: "Профиль: Агент", href: "/", message: 0 },
     { title: "Личный кабинет", href: "/cabinet", message: 0 },
     { title: "Заявки на просмотр", href: "/requests", message: 0 },
     { title: "Мои объявления", href: "/ads", message: 0 },
@@ -60,6 +62,7 @@ const personalAcc = [
   ],
   [
     //'owner'(customer)
+    { title: "Профиль: Собственник", href: "/", message: 0 },
     { title: "Личный кабинет", href: "/cabinet", message: 0 },
     { title: "Избранное", href: "/favorites", message: 0 },
     { title: "Сохраненые поиски", href: "/saved-searches", message: 0 },
@@ -70,18 +73,21 @@ const personalAcc = [
   ],
   [
     //'developer'
+    { title: "Профиль: Застройшик", href: "/", message: 0 },
     { title: "Личный кабинет", href: "/cabinet", message: 0 },
     { title: "Мои объекты", href: "/ads", message: 0 },
     { title: "Уведомления", href: "/notifications", message: 5 },
   ],
   [
     //'admin'
+    { title: "Профиль: Админ", href: "/", message: 0 },
     { title: "Пользователи", href: "/cabinet", message: 0 },
     { title: "Объявления", href: "/ads", message: 0 },
     { title: "Сообщения", href: "/messages", message: 4 },
   ],
   [
     //'bank'
+    { title: "Профиль: Банк", href: "/", message: 0 },
     { title: "Личный кабинет", href: "/cabinet", message: 0 },
     { title: "Заявки на ипотеку", href: "/mortgage-applications", message: 0 },
   ],
@@ -255,11 +261,13 @@ export const Header: FC<HeaderPropsType> = ({
 
   return (
     <div className={classNames(css.header, className)}>
-      <Link href={"/"} passHref>
-        <div style={{ cursor: "pointer" }}>
-          <LogoMain />
-        </div>
-      </Link>
+      <div className={css.headerLogo}>
+        <Link href={"/"} passHref>
+          <div style={{ cursor: "pointer" }}>
+            <LogoMain />
+          </div>
+        </Link>
+      </div>
       <div className={css.menu}>
         <div
           className={css.menuName}
@@ -297,7 +305,6 @@ export const Header: FC<HeaderPropsType> = ({
             <Typography size={"default"} color="nude">
               <SelectUser
                 params={"housingCondition"}
-                // options={personalAccount}
                 options={mocAccountMenu}
                 onChangeOption={logout}
               />
@@ -312,13 +319,6 @@ export const Header: FC<HeaderPropsType> = ({
             {searchModal(modalActive ? modalActive : edit)}
           </Modal>
         }
-
-        {/*<button onClick={() => mocRole("agency")}>agency</button>*/}
-        {/*<button onClick={() => mocRole("agent")}>agent</button>*/}
-        {/*<button onClick={() => mocRole("customer")}>owner</button>*/}
-        {/*<button onClick={() => mocRole("developer")}>developer</button>*/}
-        {/*<button onClick={() => mocRole("admin")}>admin</button>*/}
-        {/*<button onClick={() => mocRole("bank")}>bank</button>*/}
       </div>
     </div>
   );
