@@ -84,7 +84,7 @@ const Apartment: NextPage =  observer((props: any) => {
         <AdressEstate item={props.address}/>
         <HorizontalTabs refs={refs} tabs={tabs}/>
         <div ref={general}>
-          <GeneralInfo info={MappingGeneralInfo(props.info_options)} price={store.initialData.price} images={IMAGES_SET} />
+          <GeneralInfo info={MappingGeneralInfo(props.info_options, props.object_specs)} price={store.initialData.price} images={IMAGES_SET} />
         </div>
         <ObjectDescription items={MappingDescription(props.description_items)}/>
         <div ref={tours}>

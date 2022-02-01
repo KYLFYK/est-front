@@ -1,4 +1,4 @@
-export const MappingGeneralInfo = (info: any) => {
+export const MappingGeneralInfo = (info: any, specs: any) => {
     const info_options = [
       {label: "Общая площадь", value: `${info.total_area} м²`},
       {label: "Жилая площадь", value: `${info.living_area} м²`},
@@ -9,7 +9,9 @@ export const MappingGeneralInfo = (info: any) => {
       {label: "Кухня", value: `${info.kitchen_area} м²`},
       {label: info.rooms_area.length < 2 ? "Комната" : "Комнаты", value: info.rooms_area.map((ra: any) => `${ra} м²`).join(', ')},
       {label: "Интерьер", value: info.interior},
-      {label: "Парковка", value: info.parking ? info.parking : 'нет'},
+      {label: "Парковка", value: specs.filter((s: any) => s.subtitle === 'Парковка')[0] 
+        ? specs.filter((s: any) => s.subtitle === 'Парковка')[0].specificationsItems.filter((si: any) => si.value === 'parking')[0].label.text 
+        : 'нет'},
       {label: "ЖК", value: info.complex},
       {label: "Срок сдачи", value: info.deadline},
     ]
