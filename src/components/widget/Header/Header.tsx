@@ -42,7 +42,7 @@ const personalAcc = [
     //'agency'
     { title: "Профиль: Агентство", href: "/", message: 0 },
     { title: "Личный кабинет", href: "/cabinet", message: 0 },
-    { title: "Заявки на просмотр", href: "/requests", message: 0 },
+    { title: "Заявки", href: "/requests", message: 0 },
     { title: "Мои объявления", href: "/ads", message: 0 },
     { title: "Тарифы размещения", href: "/tariff", message: 12 },
     { title: "Профпоиск", href: "/search", message: 3 },
@@ -53,7 +53,7 @@ const personalAcc = [
     //'agent'
     { title: "Профиль: Агент", href: "/", message: 0 },
     { title: "Личный кабинет", href: "/cabinet", message: 0 },
-    { title: "Заявки на просмотр", href: "/requests", message: 0 },
+    { title: "Заявки", href: "/requests", message: 0 },
     { title: "Мои объявления", href: "/ads", message: 0 },
     { title: "Тарифы размещения", href: "/tariff", message: 12 },
     { title: "Профпоиск", href: "/search", message: 3 },
