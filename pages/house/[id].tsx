@@ -73,9 +73,8 @@ const infrastructureInfo = 'В 15 минутах езды расположена
 
 const House: NextPage = observer((props: any) => {
 
-  const store = useStore()
-
     // console.log('apiProps',props)
+  const store = useStore()
 
   const general = useRef(null)
   const tours = useRef(null)
