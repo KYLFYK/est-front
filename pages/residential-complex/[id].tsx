@@ -18,6 +18,7 @@ import { infrastructura } from '../../src/components/containers/Maps/MapInfrastr
 import ObjectDeveloper from '../../src/components/containers/ObjectDeveloper/ObjectDeveloper'
 import ConstructProgress from '../../src/components/containers/ConstructProgress/ConstructProgress'
 import { MappingGeneralInfo, MappingDeveloperInfo, MappingShedule } from 'src/lib/mapping/ResidentComplex/residentComplexMapping'
+import { datetoDayFormat } from 'src/lib/mapping/objectDates'
 
 import {useStore} from '../../src/mobx/stores/ComplexStore/ComplexStore'
 import {instance, UrlObj} from '../../src/api/instance'
@@ -53,7 +54,7 @@ const tabs = [{
 ]
 
 const ResidentialComplex: NextPage = observer((props: any) => {
-  console.log(props)
+
   const store = useStore()
   const router = useRouter()
 
@@ -66,8 +67,7 @@ const ResidentialComplex: NextPage = observer((props: any) => {
   const [refs, setRefs] = useState<any>([])
 
   const breadcrumbs = ['Крым', 'Купить участок', `${props.name}`]
-  const views = [props.publish, props.views]
-
+  const views = [datetoDayFormat(props.publish), props.views]
   useEffect(() => {
     setRefs([general.current, specs.current, architec.current, plansec.current, infra.current, developer.current])
     store.fetch(router.query.id)

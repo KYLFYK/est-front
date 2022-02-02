@@ -3,6 +3,7 @@ import HeadLine from '../../../shared/HeadLine/HeadLine'
 import SampleImage from '../assets/planning_sample.png'
 import Card from '../Card/Card'
 import s from './Plannings.module.scss'
+import {datetoQuarterFormat} from '../../../../lib/mapping/objectDates'
 
 // TODO: Take types from 'model' folder, when global state gets its types
 
@@ -21,6 +22,7 @@ interface Props {
 }
 
 const Planning: React.FC<Props> = ({ FilterComponent, planningList }) => {
+    console.log(planningList)
     return (
         <div className={s.container}>
             <HeadLine title="Квартиры и аппартаменты">
@@ -29,7 +31,7 @@ const Planning: React.FC<Props> = ({ FilterComponent, planningList }) => {
                 </div>
                 <div className={s.content}>
                     {planningList && planningList.map(({ image, price, title, housing, deadline, floor }, idx) =>
-                        <Card key={idx} image={image} price={price} title={title} housing={housing} deadline={deadline} floor={floor} />)}
+                        <Card key={idx} image={image} price={price} title={title} housing={housing} deadline={datetoQuarterFormat(deadline)} floor={floor} />)}
                 </div>
             </HeadLine>
         </div>
