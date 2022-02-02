@@ -15,8 +15,23 @@
     }
 }
 
-.input {
+.floorInputFrom {
+    width: 78px;
+}
+.floorInputTo {
+    width: 50px;
+}
+.priceInputFrom {
     width: 73px;
+}
+.priceInputTo {
+    width: 50px;
+}
+.squareInputFrom {
+    width: 91px;
+}
+.squareInputTo {
+    width: 83px;
 }
 
 .submit {
@@ -32,6 +47,7 @@
 
 .actionDropdownUnion {
     max-width: fit-content;
+    height: 40px;
 }
 
 .toggleButton {
@@ -42,7 +58,7 @@
 
 .inputsUnion {
     max-width: 478px;
-    height: 38px;
+    height: 40px;
 }
 
 .searchInput {

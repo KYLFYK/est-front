@@ -111,7 +111,6 @@ export const getStaticProps : GetStaticProps<FetchMainType> = async ()=> {
     const apiDeveloper = await fetch(`https://estatum.f-case.ru/api/${UrlMainPage.developerOur}?amount=${5}`)
     const agentsArray :Array<FetchMainAgentsType> = await apiAgents.json()
     const developers :Array<FetchMainDeveloperType> = await apiDeveloper.json()
-
     const date = new Date()
     const years = date.getFullYear()
 
@@ -120,7 +119,7 @@ export const getStaticProps : GetStaticProps<FetchMainType> = async ()=> {
             id: agent.id,
             img: "https://images.unsplash.com/photo-1541963463532-d68292c34b19?ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8Ym9va3xlbnwwfHwwfHw%3D&ixlib=rb-1.2.1&w=1000&q=&q=",
             connection: {
-                whatsApp: agent.agentProperty.messengers.whatsApp ? agent.agentProperty.messengers.whatsApp: agent.agentProperty.messengers.telegram ,
+                whatsApp: agent.agentProperty.messengers.whatsApp ? agent.agentProperty.messengers.whatsApp : agent.agentProperty.messengers.telegram ,
                 telegram: agent.agentProperty.messengers.telegram,
                 email: agent.email,
                 phone: agent.agentProperty.phone[0].value,

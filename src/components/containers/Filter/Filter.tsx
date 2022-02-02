@@ -23,7 +23,6 @@ interface Props {
 
 export const useStyles = makeStyles(() => ({
     root: {
-        marginBottom: 1,
         backgroundColor: "#fff",
         width: 200,
         borderRadius: 8,
@@ -35,7 +34,7 @@ export const useStyles = makeStyles(() => ({
             display: 'none'
         },
         "& > .MuiSelect-root": {
-            padding: '10px 15px 10px 12px !important',
+            padding: '10px 15px 11px 12px !important',
             "&:focus": {
                 backgroundColor: 'inherit'
             }
@@ -172,11 +171,13 @@ export const Filter: React.FC<Props> = observer(({ location, initialValues }) =>
                 value={values.privateType} 
                 onChange={onChangePrivateType} 
                 placeholder={FILTER_PRIVATE_HOUSE_OPTIONS[0].label} 
-                className={classes.root} 
+                className={s.dropdown}  
             />}
 
             {values['object-type'] === 'house' && <CompareInput 
-                classNameInput={s.input} 
+                location="search"
+                classNameInputFrom={s.floorInputFrom} 
+                classNameInputTo={s.floorInputTo}  
                 placeholderFrom="Этажей от" 
                 placeholderTo="до" 
                 valueFrom={values['floor-from']} 
@@ -197,16 +198,21 @@ export const Filter: React.FC<Props> = observer(({ location, initialValues }) =>
 
             <InputsUnion className={s.inputsUnion}>
                 <CompareInput 
-                    classNameInput={s.input} 
+                    location="search"
+                    classNameInputFrom={s.priceInputFrom} 
+                    classNameInputTo={s.priceInputTo} 
                     placeholderFrom="Цена от" 
                     placeholderTo="до" 
                     valueFrom={values['price-from']} 
                     valueTo={values['price-to']} 
                     onChangeFrom={onChangePriceFrom} 
                     onChangeTo={onChangePriceTo} 
+                    Icon={<span>₽</span>} 
                 />
                 <CompareInput 
-                    classNameInput={s.input} 
+                    location="search"
+                    classNameInputFrom={s.squareInputFrom} 
+                    classNameInputTo={s.squareInputTo} 
                     placeholderFrom="Площадь от" 
                     placeholderTo="до" 
                     valueFrom={values['square-from']} 
@@ -238,7 +244,7 @@ export const Filter: React.FC<Props> = observer(({ location, initialValues }) =>
                 value={values['irb']} 
                 onChange={onChangeIrb} 
                 placeholder="Выбрать c ИЖС или без" 
-                className={classes.root} 
+                className={s.dropdown} 
             />}
 
             {(values['object-type'] === 'house' || values['object-type'] === 'land') && <BaseDropDown 
@@ -246,7 +252,7 @@ export const Filter: React.FC<Props> = observer(({ location, initialValues }) =>
                 value={values['improvement']} 
                 onChange={onChooseImprovment} 
                 placeholder="Выбрать благоустроенность" 
-                className={classes.root} 
+                className={s.dropdown} 
             />}
             
             {

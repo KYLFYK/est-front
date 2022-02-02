@@ -1,3 +1,5 @@
+import {datetoMonthFormat} from '../objectDates'
+
 export const MappingGeneralInfo = (address: any, category: any, info: any, specs: any) => {
     const info_options = [
         { label: "Адрес", value: address },
@@ -92,7 +94,7 @@ export const MappingShedule = (objs: any) => {
     let returnedObjs: Array<any> = [];
     objs && objs.forEach((o: any) => {
         returnedObjs.push({
-            label: o.date,
+            label: datetoMonthFormat(o.date),
             value: o.id - 1,
             title: o.description,
         })

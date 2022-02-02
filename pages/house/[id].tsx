@@ -72,6 +72,7 @@ const averagePrice ={
 const infrastructureInfo = 'В 15 минутах езды расположена Ялта со своей знаменитой набережной, театр Чехова, авквариум и дельфинарий. Знаменитые дворцы, парки, ботанические сады и винные заводы расположены в получасовой доступности.'
 
 const House: NextPage = observer((props: any) => {
+
   const store = useStore()
 
     console.log('apiProps',props)
