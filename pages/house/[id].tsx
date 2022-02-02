@@ -75,7 +75,7 @@ const House: NextPage = observer((props: any) => {
 
   const store = useStore()
 
-    console.log('apiProps',props)
+    // console.log('apiProps',props)
 
   const general = useRef(null)
   const tours = useRef(null)
