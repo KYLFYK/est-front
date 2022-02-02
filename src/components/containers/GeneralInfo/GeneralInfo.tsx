@@ -25,12 +25,12 @@ const GeneralInfo: React.FC<Props> = ({ images, price, info }) => {
             </div>
             <div className={s.infoContainer}>
                 {price && <Typography size="big" color="nude">{formatNumbersToCurrency(price)} $</Typography>}
-                {/*{info.map((item, idx) => (*/}
-                {/*    <div className={s.infoItem} key={idx}>*/}
-                {/*        <Typography weight="medium" className={s.infoLabel}> {item.label} </Typography>*/}
-                {/*        <Typography className={s.infoValue}> {item.value} </Typography>*/}
-                {/*    </div>*/}
-                {/*))}*/}
+                {info.map((item, idx) => (
+                    <div className={s.infoItem} key={idx}>
+                        <Typography weight="medium" className={s.infoLabel}> {item.label} </Typography>
+                        <Typography className={s.infoValue}> {item.value} </Typography>
+                    </div>
+                ))}
             </div>
         </div>
     )
