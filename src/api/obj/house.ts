@@ -1,5 +1,5 @@
 import {instance, UrlObj} from "../instance";
-import {sortGuide, sortObject_specsTypeGuide} from "./land";
+import {sortObject_specsTypeGuide,sortGuide} from "../../utils/conversionIcons/conversionIcons";
 
 export const HouseApi  = {
     getAllHouse: async (skip = 0, take = 10) =>{
@@ -16,12 +16,12 @@ export const HouseApi  = {
     getHouseById: async (id: number) =>{
         try{
 
-            const res :IhouseApiType = await instance.get(`${UrlObj.house}/${id}`)
-            console.log('resApi',res)
+            const res  = await instance.get(`${UrlObj.house}/${id}`)
+            console.log('resApiHouse',res)
             console.log(res.data.online_tour)
             //@ts-ignore
-            // let object_specsGuide :Array<{value:string,label:{title:string, text:string}}> | [] = res.object_specs.map(guid=>sortGuide(guid,guid.subtitle_ru)).filter(f=>f !== undefined)
-            // console.log('resApi123',res)
+            let object_specsGuide :Array<{value:string,label:{title:string, text:string}}> | [] = res.data.object_specs.map(guid=>sortGuide(guid,guid.subtitle_ru)).filter(f=>f !== undefined)
+             // console.log('object_specsGuide',object_specsGuide)
             const objectHouse = {
                     images : [
                         {url : "https://cdn.pixabay.com/photo/2021/08/25/20/42/field-6574455__340.jpg", id : 0},
@@ -37,17 +37,17 @@ export const HouseApi  = {
                     city : "Ялта",
                     lat : +res.data.lat,
                     lng : +res.data.lng,
-                    price : res.data.price,
+                    price : res.data.price? res.data.price : 999666,
                     sort : null,
-                    planning : "1",
-                    secondary_type : "Вторичное",
+                    planning : res.data.planning,
+                    secondary_type : res.data.secondary_type,
                     total_area : 52,
                     floor : 3,
                     total_floors : 15,
-                    favorite : false,
+                    favorite : res.data.favorite,
                     publish : res.data.owner.createAt.substr(0,10).split('-').reverse().join('.'),
                     views : res.data.views,
-                    agency : 'Агентство: Лунный свет',
+                    agency : res.data.agency !== null? res.data.agency : '',
                     info_options : [
                         { label: "Общая площадь", value: "615 м²" },
                         { label: "Площадь дома", value: "300 м²" },
@@ -71,8 +71,8 @@ export const HouseApi  = {
                     ],
                     description_items : [res.data.description],
                     online_tour :res.data.online_tour,
-                    // object_specs:  sortObject_specsTypeGuide( object_specsGuide),
-                    object_specs:  res.data.object_specs,
+                    object_specs:  sortObject_specsTypeGuide( object_specsGuide),
+                    // object_specs:  res.data.object_specs,
                     legalPurityData : {
                         encumbrances: false,
                         risks: false,
@@ -437,7 +437,6 @@ export const HouseApi  = {
                         }
                     }
                 }
-            console.log("res", res.data)
             return objectHouse
 
         }

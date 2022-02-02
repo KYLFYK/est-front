@@ -9,7 +9,11 @@ class HouseStore {
     }
     fetching = true
     initialData = {
-        images: [{url: "", id: 0},],
+        images: [
+            {url : "https://cdn.pixabay.com/photo/2021/08/25/20/42/field-6574455__340.jpg", id : 0},
+            {url : "https://images.unsplash.com/photo-1541963463532-d68292c34b19?ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8Ym9va3xlbnwwfHwwfHw%3D&ixlib=rb-1.2.1&w=1000&q=80", id : 1},
+            {url : "https://images.ctfassets.net/hrltx12pl8hq/3MbF54EhWUhsXunc5Keueb/60774fbbff86e6bf6776f1e17a8016b4/04-nature_721703848.jpg?fit=fill&w=480&h=270", id : 2}
+        ],
         object_id: 0,
         lang: "ru",
         name: "",
@@ -30,7 +34,7 @@ class HouseStore {
         publish: "",
         views: "",
         agency: "",
-        info_options: [{ label: "", value: "" },],
+        info_options: [{  label: "Общая площадь", value: "615 м²"  }],
         description_items: [""],
         online_tour: {
           threeD_tour: {url: ""},
@@ -117,7 +121,7 @@ class HouseStore {
   async fetch(id: number) {
     // this.initialData = Number(id) > 0 ? fullObjectData.filter((fod) => fod.object_id === Number(id))[0] : this.initialData
       const res = await HouseApi.getHouseById(id)
-      // console.log("res",res)
+      console.log("resMobxHouse",res)
       this.initialData = res
     this.fetching = false
   }

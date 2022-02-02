@@ -18,13 +18,9 @@ import {Mortgage} from '../../src/components/shared/Mortgage/Mortgage'
 import {Record} from '../../src/components/containers/Record/Record'
 import RecordAgent from '../../src/components/containers/Record/RecordAgent.json'
 import { UrlObj} from '../../src/api/instance'
-import {
-    IgetLandIdSSPType,
-    ObjectLandType,
-    sortGuide,
-    sortObject_specsTypeGuide
-} from "../../src/api/obj/land";
+import {IgetLandIdSSPType, ObjectLandType} from "../../src/api/obj/land";
 import {conversionDate} from "../../src/utils/conversionDate/conversionDate";
+import {sortObject_specsTypeGuide,sortGuide} from "../../src/utils/conversionIcons/conversionIcons";
 
 const city = ['Москва', 'Санкт-Петербург', 'Крым', 'Сочи', 'Нижний Новгород']
 const personalAccount = [{title: 'Личный кабинет', href: '/User', message: 0},

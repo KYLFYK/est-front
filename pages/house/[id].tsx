@@ -74,6 +74,8 @@ const infrastructureInfo = 'В 15 минутах езды расположена
 const House: NextPage = observer((props: any) => {
   const store = useStore()
 
+    console.log('apiProps',props)
+
   const general = useRef(null)
   const tours = useRef(null)
   const architec = useRef(null)
@@ -93,7 +95,6 @@ const House: NextPage = observer((props: any) => {
     setRefs([general.current, tours.current, architec.current, infra.current, legal.current, payback.current, developer.current, record.current])
     store.fetch( Number(router.query.id))
   }, [router.query.id, store])
-
 
   return (
     <MainContainer keywords={props.name} title={props.name} city={city} personalAccount={personalAccount} footerColor={'nude'} refs={refs}>
