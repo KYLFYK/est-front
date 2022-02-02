@@ -32,7 +32,7 @@ export const HouseApi  = {
                     lang : "ru",
                     name : res.data.name,
                     type : res.data.type,
-                    category: "Дом",
+                    category: res.data.category,
                     address :  res.data.address,
                     city : "Ялта",
                     lat : +res.data.lat,

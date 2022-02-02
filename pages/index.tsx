@@ -119,20 +119,20 @@ export const getStaticProps : GetStaticProps<FetchMainType> = async ()=> {
             id: agent.id,
             img: "https://images.unsplash.com/photo-1541963463532-d68292c34b19?ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8Ym9va3xlbnwwfHwwfHw%3D&ixlib=rb-1.2.1&w=1000&q=&q=",
             connection: {
-                whatsApp: agent.agentProperty.messengers.whatsApp ? agent.agentProperty.messengers.whatsApp : agent.agentProperty.messengers.telegram ,
-                telegram: agent.agentProperty.messengers.telegram,
+                whatsApp: agent.agentProperty.messengers?.whatsApp ? agent.agentProperty.messengers.whatsApp : 'FAIL!!!' ,
+                telegram: agent.agentProperty.messengers?.telegram? agent.agentProperty.messengers.telegram : 'FAIL!!!' ,
                 email: agent.email,
                 phone: agent.agentProperty.phone[0].value,
             },
             infoAgent: {
                 fullName: agent.agentProperty.name,
-                heldPost: agent.agentProperty.position,
-                professionalExperience: (years - +agent.agentProperty.experience.substr(0, 4)).toString(),
-                completed: agent.agentProperty.rating.toString(),   //  <- WANTED MOCK
-                inWork: agent.agentProperty.rating.toString(),      //  <- WANTED MOCK
+                heldPost: agent.agentProperty.position?agent.agentProperty.position:'FAIL!!!',
+                professionalExperience: (years - +(agent.agentProperty?.experience?.substr(0, 4)? agent.agentProperty?.experience?.substr(0, 4) :years) ).toString(),
+                completed: agent.agentProperty?.rating?.toString() ?agent.agentProperty.rating.toString() : '0',   //  <- WANTED MOCK
+                inWork: agent.agentProperty?.rating?.toString() ?agent.agentProperty.rating.toString() : '0',      //  <- WANTED MOCK
 
-                whatsApp: agent.agentProperty.messengers.whatsApp,
-                telegram: agent.agentProperty.messengers.telegram,
+                whatsApp: agent.agentProperty.messengers?.whatsApp? agent.agentProperty.messengers.whatsApp : 'FAIL!!!' ,
+                telegram: agent.agentProperty.messengers?.telegram? agent.agentProperty.messengers.telegram : 'FAIL!!!' ,
                 email: agent.email,
                 phone: agent.phone,
             }
