@@ -31,6 +31,8 @@ import Conditioner from "../../icons/Specifications/InteriorExterior/Conditioner
 import FurnitureRooms from "../../icons/Specifications/InteriorExterior/FurnitureRooms";
 import TV from "src/icons/Specifications/InteriorExterior/TV";
 import ConstructionHouse from "../../icons/Specifications/ArchitecturalPlanningSolutions/ConstructionHouse";
+import ConstructionFeatures1 from "../../icons/Specifications/constructionFeatures/ConstructionFeatures1";
+import ConstructionFeatures2 from "../../icons/Specifications/constructionFeatures/ConstructionFeatures2";
 
 export const searchIconByValue = (value: IconTypes | string): JSX.Element => {
   switch (value) {
@@ -103,6 +105,12 @@ export const searchIconByValue = (value: IconTypes | string): JSX.Element => {
       return <FurnitureRooms/>
     case  IconTypes.TV:
       return <TV/>
+      //construction features
+    case  IconTypes.construction_features1:
+      return <ConstructionFeatures1/>
+    case  IconTypes.construction_features2:
+      return <ConstructionFeatures2/>
+
 
     default:
       return <ConstructionHouse />;

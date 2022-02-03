@@ -10,19 +10,19 @@ export const enum IconTypes {
     CHILDREN='children_playground',
     RELAX_PLACE='relax_place',
     VIDEO_SURVEILLANCE='video_surveillance',
-    FIRE_PROTECTION='safety',
+    FIRE_PROTECTION='fire_protection',
     CONCIERGE='concierge',
 
     // Архитектурно-планировочные решения
     // Строительная экспертиза
-    constructionHouse = 'construction',
-    foundation='groundwork',
+    constructionHouse = 'constructionHouse',
+    foundation='foundation',
     roof='roof',
     wall='wall',
     // Инженерные коммуникации
-    water_supply='water',
+    water_supply='water_supply',
     heating='heating',
-    sewage_system='sewerage',
+    sewage_system='sewage_system',
     electricity='electricity',
     internet='internet',
 
@@ -42,4 +42,8 @@ export const enum IconTypes {
     conditioner='conditioner',
     TV='TV',
     furniture_rooms='furniture_rooms',
+
+    construction_features1 = 'construction_features1',
+    construction_features2  = 'construction_features2'
+
 }

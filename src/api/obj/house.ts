@@ -57,8 +57,8 @@ export const HouseApi  = {
            const infoOptions = sortInfoOptions(res.data.info_options)                   // сортировка в нужный формат  - info_options
            const  option = floors.map(floor=>({label:floor.floor, value:floor.value}))  // остатки данных - из странного места - переформатирование
                                                                                          // остатки данных - из странного места - переформатирование
-            const construction_featuresFilter = construction_features.map(construction=>(
-                {value:'constructionHouse',label:{title:construction.title, text:''}}
+            const construction_featuresFilter = construction_features.map((construction, index)=>(
+                {value: index %2? 'construction_features2': 'construction_features1',label:{title:construction.title, text:''}}
             ))
 
             infoOptions.push(...option)                                                 // соединение Данных - info_options
@@ -67,7 +67,6 @@ export const HouseApi  = {
                 subtitle: "Строительно-техническая экспертиза",
                 specificationsItems :construction_featuresFilter
             }
-
 
             object_specs.splice(2, 0,construction_featuresSpec)         // object_specs - объединение
 
