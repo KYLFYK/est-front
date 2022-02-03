@@ -19,7 +19,7 @@ interface Props {
 }
 
 const Map: React.FC<Props> = ({currentHouse, infrastructura, location, InfrastructureInfo}) => {
-
+ 
   const places = React.useMemo(() => [currentHouse, ...infrastructura], [currentHouse, infrastructura]);
 
   const getUniqueTypesOptions = React.useCallback((categoriesList: string[]) => {
@@ -67,8 +67,8 @@ const Map: React.FC<Props> = ({currentHouse, infrastructura, location, Infrastru
   const [viewport, setViewport] = useState({
     width: "100%",
     height: "100%",
-    latitude: currentHouse.lat,
-    longitude: currentHouse.lng,
+    latitude: Number(currentHouse.lat),
+    longitude: Number(currentHouse.lng),
     zoom: 9,
   });
 
@@ -97,8 +97,8 @@ const Map: React.FC<Props> = ({currentHouse, infrastructura, location, Infrastru
           return (
             <Marker
                 key={up.object_id}
-                latitude={up.lat ? up.lat : Number(up.address.geo?.lat)?Number(up.address.geo.lat):30}
-                longitude={up.lng ? up.lng : Number(up.address.geo?.lng)?Number(up.address.geo.lat):30}
+                latitude={up.lat ? Number(up.lat) : Number(up.address.geo?.lat)?Number(up.address.geo.lat):30}
+                longitude={up.lng ? Number(up.lng) : Number(up.address.geo?.lng)?Number(up.address.geo.lat):30}
                 className={(up.type === 'house' || up.type === 'apartment' || up.type === 'residential-complex' || up.type === 'plat') ? s.estateMarker : s.infraMarker}
             >
                 <BaseButton className={s.button} onClick={() => {
@@ -139,7 +139,7 @@ const Map: React.FC<Props> = ({currentHouse, infrastructura, location, Infrastru
                             </div>
                         </button>
         </div>
-        <MapControls location={location} viewport={viewport} setViewport={setViewport} center={{lat: currentHouse.lat, lng: currentHouse.lng}} />
+        <MapControls location={location} viewport={viewport} setViewport={setViewport} center={{lat: Number(currentHouse.lat), lng: Number(currentHouse.lng)}} />
     </div>
     </div>
   );

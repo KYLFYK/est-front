@@ -15,7 +15,6 @@ interface Props {
 
 const GeneralInfo: React.FC<Props> = ({ images, price, info }) => {
 
-    console.log("info",{...info})
     return (
         <div className={s.container}>
             <div className={s.sliderContainer}>
