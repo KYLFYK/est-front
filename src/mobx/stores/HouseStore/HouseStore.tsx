@@ -34,7 +34,7 @@ class HouseStore {
         publish: "",
         views: "",
         agency: "",
-        info_options: [{  label: "Общая площадь", value: "615 м²"  }],
+        info_options: [{  label: "Общая площадь", value: "615 м²"  },{  label: "Общая площадь", value: "615 м²"  }],
         description_items: [""],
         online_tour: {
           threeD_tour: {url: ""},

@@ -17,11 +17,60 @@ export const HouseApi  = {
         try{
 
             const res  = await instance.get(`${UrlObj.house}/${id}`)
-            console.log('resApiHouse',res)
-            console.log(res.data.online_tour)
-            //@ts-ignore
+            console.log('resApiHouse',res.data)
+
+            //@ts-ignore  переформатирование(1 из 2) - ( object_specs )
             let object_specsGuide :Array<{value:string,label:{title:string, text:string}}> | [] = res.data.object_specs.map(guid=>sortGuide(guid,guid.subtitle_ru)).filter(f=>f !== undefined)
-             // console.log('object_specsGuide',object_specsGuide)
+            const object_specs = sortObject_specsTypeGuide( object_specsGuide)          // object_specs (2 из 2) - переформатирование
+
+            const floors = [...res.data.info_options.floors]                         // данные находятся в странном месте ( info_options ) - перенос в отдельные переменные
+            const construction_features = [...res.data.info_options.construction_features]  // данные находятся в странном месте( object_specs ) - перенос в отдельные переменные
+                // удаление из основного объекта
+                delete res.data.info_options.floors
+                delete res.data.info_options.construction_features
+
+            const sortInfoOptions = (option:{}) => {                             // сортировка в нужный формат - info_options
+                const infoOptions =[]
+                const keysOption = Object.keys(option)
+
+                for ( let n = 0 ;n < keysOption.length ;n++  ){
+                        //@ts-ignore
+                        if (keysOption[n] ==='total_floor') infoOptions.push({label:'Этажи',value: option[keysOption[n]] })
+                            //@ts-ignore
+                        if (keysOption[n] ==='total_area') infoOptions.push({label:'Общая площадь',value: option[keysOption[n]] })
+                         //@ts-ignore
+                        if (keysOption[n] ==='area') infoOptions.push({label:'Прощадь дома',value: option[keysOption[n]] })
+                            //@ts-ignore
+                        if (keysOption[n] ==='land_area') infoOptions.push({label:'Участок',value: option[keysOption[n]] })
+                         //@ts-ignore
+                        if (keysOption[n] ==='bathroom_area') infoOptions.push({label:'Ванная комната',value: option[keysOption[n]] })
+                            //@ts-ignore
+                        if (keysOption[n] ==='kitchen_area') infoOptions.push({label:'Кухня',value: option[keysOption[n]] })
+                            //@ts-ignore
+                        if (keysOption[n] ==='total_rooms') infoOptions.push({label:'Комнат в доме',value: option[keysOption[n]] })
+                            //@ts-ignore
+                        if (keysOption[n] ==='living_area') infoOptions.push({label:'Жилая площадь',value: option[keysOption[n]] })
+                }
+                return infoOptions
+            }
+
+           const infoOptions = sortInfoOptions(res.data.info_options)                   // сортировка в нужный формат  - info_options
+           const  option = floors.map(floor=>({label:floor.floor, value:floor.value}))  // остатки данных - из странного места - переформатирование
+                                                                                         // остатки данных - из странного места - переформатирование
+            const construction_featuresFilter = construction_features.map(construction=>(
+                {value:'constructionHouse',label:{title:construction.title, text:''}}
+            ))
+
+            infoOptions.push(...option)                                                 // соединение Данных - info_options
+                                                                                        // object_specs - переформатирование - из странного места ( 1 поле )
+            const construction_featuresSpec = {
+                subtitle: "Строительно-техническая экспертиза",
+                specificationsItems :construction_featuresFilter
+            }
+
+
+            object_specs.splice(2, 0,construction_featuresSpec)         // object_specs - объединение
+
             const objectHouse = {
                     images : [
                         {url : "https://cdn.pixabay.com/photo/2021/08/25/20/42/field-6574455__340.jpg", id : 0},
@@ -48,31 +97,10 @@ export const HouseApi  = {
                     publish : res.data.owner.createAt.substr(0,10).split('-').reverse().join('.'),
                     views : res.data.views,
                     agency : res.data.agency !== null? res.data.agency : '',
-                    info_options : [
-                        { label: "Общая площадь", value: "615 м²" },
-                        { label: "Площадь дома", value: "300 м²" },
-                        { label: "Жилая площадь", value: "150 м²" },
-                        { label: "Участок", value: "10 соток" },
-                        { label: "Комнат в доме", value: "5" },
-                        { label: "Ванная комната", value: "10 м²" },
-                        { label: "Кухня", value: "42 м²" },
-                        {
-                            label: "Первый этаж",
-                            value: "Холл, кухня-гостиная, комната, кабинет, санузел",
-                        },
-                        {
-                            label: "Второй этаж",
-                            value: "Терраса, 2 спальни, 2 санузла, 2 гардеробных, холл, кладовая",
-                        },
-                        {
-                            label: "Спец этаж",
-                            value: "2 спальни с индивидуальными душевыми и туалетами",
-                        },
-                    ],
+                    info_options : infoOptions ,
                     description_items : [res.data.description],
                     online_tour :res.data.online_tour,
-                    object_specs:  sortObject_specsTypeGuide( object_specsGuide),
-                    // object_specs:  res.data.object_specs,
+                    object_specs: object_specs ,
                     legalPurityData : {
                         encumbrances: false,
                         risks: false,
