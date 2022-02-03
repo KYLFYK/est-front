@@ -55,13 +55,13 @@ export const HouseApi  = {
             }
 
            const infoOptions = sortInfoOptions(res.data.info_options)                   // сортировка в нужный формат  - info_options
-           const  option = floors.map(floor=>({label:floor.floor, value:floor.value}))  // остатки данных - из странного места - переформатирование
+           const  optionFloors = floors.map(floor=>({label:floor.floor, value:floor.value}))  // остатки данных - из странного места - переформатирование
                                                                                          // остатки данных - из странного места - переформатирование
             const construction_featuresFilter = construction_features.map((construction, index)=>(
                 {value: index %2? 'construction_features2': 'construction_features1',label:{title:construction.title, text:''}}
             ))
 
-            infoOptions.push(...option)                                                 // соединение Данных - info_options
+            infoOptions.push(...optionFloors)                                                 // соединение Данных - info_options
                                                                                         // object_specs - переформатирование - из странного места ( 1 поле )
             const construction_featuresSpec = {
                 subtitle: "Строительно-техническая экспертиза",
