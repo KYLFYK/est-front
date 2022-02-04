@@ -21,7 +21,10 @@ import {Mortgage} from '../../src/components/shared/Mortgage/Mortgage'
 import {Record} from '../../src/components/containers/Record/Record'
 import RecordAgent from '../../src/components/containers/Record/RecordAgent.json'
 import { Footer } from '../../src/components/widget/Footer/ui/Footer'
-import { MappingGeneralInfo, MappingDescription } from 'src/lib/mapping/Apartment/apartmentMapping'
+import { MappingGeneralInfo, MappingDescription, MappingLegalPurity } from 'src/lib/mapping/Apartment/apartmentMapping'
+import { MappingDeveloperInfo } from 'src/lib/mapping/ResidentComplex/residentComplexMapping'
+import { datetoDayFormat } from 'src/lib/mapping/objectDates'
+import {sortObject_specsTypeGuide,sortGuide} from "../../src/utils/conversionIcons/conversionIcons";
 
 import {useStore} from '../../src/mobx/stores/ApartamentStore/ApartmentStore'
 import {instance, UrlObj} from '../../src/api/instance'
@@ -41,6 +44,7 @@ const infrastructureInfo = 'В 15 минутах езды расположена
 const Apartment: NextPage =  observer((props: any) => {
 
   const store = useStore()
+
   const tabs = [{
     title: "Общая информация",
   },
@@ -69,7 +73,7 @@ const Apartment: NextPage =  observer((props: any) => {
   const router = useRouter()
 
   const breadcrumbs = ['Крым', 'Купить участок', props.name]
-  const views = [props.publish, props.views, store.initialData.agency]
+  const views = [datetoDayFormat(props.publish), props.views, props?.agency]
 
   useEffect(() => {
     setRefs([general.current, tours.current, architec.current, infra.current, props.secondary_type === 'Новостройка' ? develop.current : legal.current, record.current]);
@@ -84,25 +88,27 @@ const Apartment: NextPage =  observer((props: any) => {
         <AdressEstate item={props.address}/>
         <HorizontalTabs refs={refs} tabs={tabs}/>
         <div ref={general}>
-          <GeneralInfo info={MappingGeneralInfo(props.info_options, props.object_specs)} price={store.initialData.price} images={IMAGES_SET} />
+          <GeneralInfo info={MappingGeneralInfo(props.info_options, props.object_specs)} price={props.price} images={IMAGES_SET} />
         </div>
         <ObjectDescription items={MappingDescription(props.description_items)}/>
         <div ref={tours}>
           <ToursContainer Online_tour={props.online_tour}/>
         </div>
         <div ref={architec}>
-          <ObjectSpecifications specificationsLists={props.object_specs.filter((os: any) => os.subtitle !== 'Вид из окон' && os.subtitle !== 'Парковка')} title={"Архитектурно-планировочные решения"}/>
+          <ObjectSpecifications specificationsLists={sortObject_specsTypeGuide(props.object_specs.map((guid: any) => sortGuide(guid,guid.subtitle_ru)).filter((f: any) => f !== undefined))} title={"Архитектурно-планировочные решения"}/>
         </div>
         <div ref={infra}>
-          <Map currentHouse={JSON.parse(JSON.stringify(store.initialData))} infrastructura={infrastructura} location={'infrastructure'} InfrastructureInfo={infrastructureInfo}/>
+          <Map currentHouse={props} infrastructura={infrastructura} location={'infrastructure'} InfrastructureInfo={infrastructureInfo}/>
         </div>
+
         {props.secondary_type === 'Новостройка' 
         ? <div ref={develop}>
-          <ObjectDeveloper developerData={props.object_developer_info}/>
+          <ObjectDeveloper developerData={MappingDeveloperInfo(props.object_developer_info)}/>
         </div>
         : <div ref={legal}>
-          <ObjectLegalPurity legalPurityData={props.legalPurityData}/>
+          <ObjectLegalPurity legalPurityData={MappingLegalPurity(props.legalPurityData)}/>
         </div>}
+
         <Mortgage/>
         <div ref={record}>
           <Record Record={RecordAgent.Record} title={'квартиру'}/>

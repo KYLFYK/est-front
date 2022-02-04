@@ -19,6 +19,7 @@ import ObjectDeveloper from '../../src/components/containers/ObjectDeveloper/Obj
 import ConstructProgress from '../../src/components/containers/ConstructProgress/ConstructProgress'
 import { MappingGeneralInfo, MappingDeveloperInfo, MappingShedule } from 'src/lib/mapping/ResidentComplex/residentComplexMapping'
 import { datetoDayFormat } from 'src/lib/mapping/objectDates'
+import {sortObject_specsTypeGuide,sortGuide} from "../../src/utils/conversionIcons/conversionIcons";
 
 import {useStore} from '../../src/mobx/stores/ComplexStore/ComplexStore'
 import {instance, UrlObj} from '../../src/api/instance'
@@ -84,16 +85,16 @@ const ResidentialComplex: NextPage = observer((props: any) => {
           <GeneralInfo info={MappingGeneralInfo(props.address, props.category, props.info_options[0], props.object_specs)} images={IMAGES_SET} />
         </div>
         <div ref={specs}>
-          <ObjectSpecifications specificationsLists={props.object_specs.filter((s: any) => s.subtitle === 'Объекты на территории' || s.subtitle === 'Безопасность')} title={"Особенности"}/>
+          <ObjectSpecifications specificationsLists={sortObject_specsTypeGuide(props.object_specs.map((guid: any) => sortGuide(guid,guid.subtitle_ru)).filter((f: any) => f !== undefined))} title={"Особенности"}/>
         </div>
         <div ref={architec}>
-          <ObjectSpecifications specificationsLists={props.object_specs.filter((s: any) => s.subtitle === 'Строительно-техническая экспертиза' || s.subtitle === 'Инженерные коммуникации')} title={"Архитектурно-планировочные решения"}/>
+          <ObjectSpecifications specificationsLists={sortObject_specsTypeGuide(props.object_specs.map((guid: any) => sortGuide(guid,guid.subtitle_ru)).filter((f: any) => f !== undefined))} title={"Архитектурно-планировочные решения"}/>
         </div>
         <div ref={plansec}>
           <Planning FilterComponent={<PlanningFilter />} planningList={props.planningList}/>
         </div>
         <div ref={infra}>
-          <Map currentHouse={store.initialData} infrastructura={infrastructura} location={'infrastructure'} InfrastructureInfo={props.info_options[0].infrastructure}/>
+          <Map currentHouse={props} infrastructura={infrastructura} location={'infrastructure'} InfrastructureInfo={props.info_options[0].infrastructure}/>
         </div>
         <div ref={developer}>
           <ObjectDeveloper developerData={MappingDeveloperInfo(props.object_developer_info)}/>

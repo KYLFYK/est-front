@@ -29,7 +29,7 @@ const ObjectSpecifications: React.FC<Props> = ({ specificationsLists, title }) =
                     return <div key={idx}>
                         <Typography weight="bold" className={s.subTitle}>{specList.subtitle}</Typography>
                         <div className={s.specsList}>
-                            {specList.specificationsItems.map((spec,index) =>
+                            {specList.specificationsItems && specList.specificationsItems.map((spec,index) =>
                                 <Advantage variant="secondary" text={spec.label.text} title={spec.label.title} key={index}>
                                     {searchIconByValue(spec.value as string)}
                                 </Advantage>
