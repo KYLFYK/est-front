@@ -2,7 +2,6 @@ import {instance} from "../instance";
 
 export enum UrlMainPage {
     accountOur = 'auth/me',             //get
-
 }
 
 export const cabinetAPI ={
