@@ -56,12 +56,6 @@ export const cabinetAPI ={
 }
 
 export type UpdateAgentCabinetType ={
-    // name:string,
-    // status:string,
-    // address:string,
-    // site:string,
-    // description:string,
-    // accountId:number
     "phone": Array<{"ord": number,"value": string, }>
     "name": string,
     "position": string,
@@ -72,10 +66,6 @@ export type UpdateAgentCabinetType ={
         "whatsApp": string,
         "telegram": string,
     }
-    // markAsDelete: boolean
-    // phone:string,
-    // email:string,
-    // role:string
 }
 
 export type CabinetDeveloperType ={

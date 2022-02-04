@@ -82,11 +82,6 @@ const AccountEdit :FC<AccountEditType>= observer(({onEdit}) => {
         }else{
             setComparison(true)
         }
-        console.log(agentInfo.name === valueName,agentInfo.status === valueStatus, +agentInfo.experience === valueExperience,
-            agentInfo.phone === valuePhone,agentInfo.email === valueEmail,agentInfo.whatsApp === valueWhatsApp,
-            agentInfo.telegram === valueTelegram, agentInfo.viber === valueViber
-
-            )
     }
 
     const save = async () =>{
