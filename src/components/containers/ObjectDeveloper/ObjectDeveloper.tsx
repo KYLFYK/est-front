@@ -30,7 +30,7 @@ const ObjectDeveloper: React.FC<any> = ({ developerData }) => {
             <div className={s.infoBlock}>
                 <Advantage title={developerData.name} text={developerData.developerType} className={s.iconItem}>
                     <div className={s.imgContainer}>
-                        {developerData.logo && <Image className={s.img} src={developerData.logo} alt="logo" layout="fill" loader={() => developerData.logo} />}
+                        {developerData.logo && <Image className={s.img} src={developerData.logo} unoptimized alt="logo" layout="fill" loader={() => developerData.logo} />}
                     </div>
                 </Advantage>
 
