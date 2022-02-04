@@ -4,19 +4,23 @@ import {FC, useState} from "react";
 import Typography from "../../../../../../shared/Typography/Typography";
 import BaseButton from "../../../../../../shared/BaseButton/BaseButtons";
 import {BaseInput} from "../../../../../../shared/BaseInput/Input";
+import {observer} from "mobx-react-lite";
+import {useStoreAgentCabinet} from "../../../../../../../mobx/role/agent/cabinet/AgentCabinet";
 
 type PersonalCabinetSettingsType123 = {
-    personalCabinet: {
-        phones: Array<string>
-        login: string
-        passwordOld: string
-        passwordNew: string
-        messagePhone: string
-        messageEmail: string
-    }
 }
 
-const PersonalCabinetSettings :FC<PersonalCabinetSettingsType123> = ({personalCabinet}) => {
+const PersonalCabinetSettings :FC<PersonalCabinetSettingsType123> = observer(() => {
+
+    const store = useStoreAgentCabinet()
+    const personalCabinet ={
+        phones:store.initialData.phoneArray,
+        login:store.initialData.email,
+        passwordOld:'',
+        passwordNew:'',
+        messagePhone:store.initialData.phone,
+        messageEmail:store.initialData.email,
+    }
 
     const [edit, setEdit] = useState<boolean>(false)
     const [valuePhones, setValuePhones] = useState<Array<string>>(personalCabinet.phones)
@@ -28,15 +32,38 @@ const PersonalCabinetSettings :FC<PersonalCabinetSettingsType123> = ({personalCa
 
 
     const createPhone = () => {
-        const newPhone = [...personalCabinet.phones]
-        newPhone.push('')
-        setValuePhones(newPhone)
+        valuePhones.push('')
+        setValuePhones([...valuePhones])
     }
 
     const changePhone =(index:number,e:string)=>{
         const phone = [...valuePhones]
         phone[index] = e
         setValuePhones(phone)
+    }
+
+    const save = async () => {
+        const updateDate ={
+            email:valueMessageEmail,
+            phone:valuePhones.map((phone,index)=>(
+                {ord:index,value:phone}
+            )),
+            name:store.initialData.name,
+            position: store.initialData.status,
+            experience: store.initialData.experience,
+            rating: 0,
+            inviteLink: "string",
+            messengers: {
+                whatsApp: store.initialData.whatsApp,
+                telegram: store.initialData.telegram
+            }
+        }
+        // api update
+        await store.update(store.initialData.id,updateDate)
+        setTimeout(()=>{
+            store.fetch()
+        },100)
+        setEdit(false)
     }
 
     return (
@@ -157,11 +184,11 @@ const PersonalCabinetSettings :FC<PersonalCabinetSettingsType123> = ({personalCa
                 </div>
             </div>
             <div className={css.marginColumn}>
-                <BaseButton type={"secondary"} onClick={() => setEdit(false)} isActive>Сохранить</BaseButton>
+                <BaseButton type={"secondary"} onClick={save} isActive>Сохранить</BaseButton>
             </div>
         </div>
     )
-}
+})
 
 type InputArrayType ={
     index:number
@@ -177,6 +204,7 @@ const InputArray :FC<InputArrayType>= ({index,edit,value,onChange}) => {
                 Телефон {index + 1}
             </Typography>
             <BaseInput
+                type={"number"}
                 disabled={!edit}
                 value={value}
                 onChange={e=>onChange(e.currentTarget.value)}

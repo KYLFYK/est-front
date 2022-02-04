@@ -79,6 +79,8 @@ const ourOffice: OurOfficeType = {
 
 const Start :React.FC<FetchMainType> = observer(({agents, developersArray}) => {
 
+    console.log('start developersArray',developersArray)
+
     return (
         <MainContainer
             keywords={"Главная"}
@@ -142,6 +144,7 @@ export const getStaticProps : GetStaticProps<FetchMainType> = async ()=> {
         {
             // id:developer[index].id,
             img: "https://images.unsplash.com/photo-1541963463532-d68292c34b19?ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8Ym9va3xlbnwwfHwwfHw%3D&ixlib=rb-1.2.1&w=1000&q=&q=",
+            // img: developer.developerProperty.logo,
             title: developer.developerProperty.name,
             description: developer.developerProperty.type,
             developerInfo: {
@@ -220,6 +223,7 @@ type FetchMainDeveloperType ={
     "role": string
     "customerProperty": null | boolean
     "developerProperty": {
+        logo:string
         "id": number
         "name": string
         "type": string

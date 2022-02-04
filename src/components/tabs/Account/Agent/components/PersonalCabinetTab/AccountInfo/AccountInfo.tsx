@@ -9,12 +9,10 @@ import { myLoader } from "src/utils/image/image";
 import Typography from "../../../../../../shared/Typography/Typography";
 import {Card} from "../../../../../../shared/Mortgage/Card";
 import BaseButton from "../../../../../../shared/BaseButton/BaseButtons";
+import {observer} from "mobx-react-lite";
+import {useStoreAgentCabinet} from "../../../../../../../mobx/role/agent/cabinet/AgentCabinet";
 
 type PersonalCabinetAccountInfoType = {
-    img?:string
-    // statusVerification : 'confirmed' | 'waiting' | 'notConfirmed' | 'resend'
-    statusVerification :string
-    info:Array<{label:string,value:string}>
     onEdit:()=>void
 }
 const statusVerificationTitle = (status:string) => {
@@ -27,7 +25,15 @@ const statusVerificationTitle = (status:string) => {
     }
 }
 
-const PersonalCabinetAccountInfo: React.FC<PersonalCabinetAccountInfoType> = ({img,statusVerification,info,onEdit}) => {
+const PersonalCabinetAccountInfo: React.FC<PersonalCabinetAccountInfoType> = observer(({onEdit}) => {
+
+    const store = useStoreAgentCabinet()
+
+    const statusVerification = store.initialData.statusVerification
+    const info = store.initialData.info
+    const img = store.initialData.img
+
+
     const apiStatus = () => {
         console.log('apiStatus')
     }
@@ -71,7 +77,7 @@ const PersonalCabinetAccountInfo: React.FC<PersonalCabinetAccountInfoType> = ({i
             </div>
         </div>
     )
-}
+})
 
 export default PersonalCabinetAccountInfo
 
@@ -81,14 +87,30 @@ type DataTypographyType = {
 }
 
 const DataTypography :FC<DataTypographyType> = ({title,value}) => {
+    const date = new Date()
+
     return (
         <div className={css.marginTextBlock}>
-            <Typography color={"tertiary"} className={css.marginText}>
-                {title}
-            </Typography>
-            <Typography color={"accent"} className={css.marginText}>
-                {value}
-            </Typography>
+            {
+                title==='Стаж'
+                    ?<>
+                        <Typography color={"tertiary"} className={css.marginText}>
+                            {title}
+                        </Typography>
+                        <Typography color={"accent"} className={css.marginText}>
+                            {+date.toISOString().substr(0,4)- +value.substr(0,4)}
+                        </Typography>
+                    </>
+                    :<>
+                        <Typography color={"tertiary"} className={css.marginText}>
+                            {title}
+                        </Typography>
+                        <Typography color={"accent"} className={css.marginText}>
+                            {value}
+                        </Typography>
+                    </>
+            }
+
         </div>
     )
 }

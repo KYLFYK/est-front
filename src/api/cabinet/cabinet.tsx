@@ -44,7 +44,7 @@ export const cabinetAPI ={
     },
     updateAgentsCabinet:async (id:number,updateValue: UpdateAgentCabinetType)=>{
         try{
-            const res = instance.patch(`account/${id}`,updateValue,{
+            const res = instance.put(`agent/{accountId}?accountId=${id}`,updateValue,{
                 headers: {
                     authorization: `Bearer ${localStorage.getItem('accessEstatum')}`
                 }})
@@ -61,11 +61,21 @@ export type UpdateAgentCabinetType ={
     // address:string,
     // site:string,
     // description:string,
-
-    markAsDelete: boolean
-    phone:string,
-    email:string,
-    role:string
+    // accountId:number
+    "phone": Array<{"ord": number,"value": string, }>
+    "name": string,
+    "position": string,
+    "experience": string,
+    "rating": number
+    "inviteLink": string,
+    "messengers": {
+        "whatsApp": string,
+        "telegram": string,
+    }
+    // markAsDelete: boolean
+    // phone:string,
+    // email:string,
+    // role:string
 }
 
 export type CabinetDeveloperType ={

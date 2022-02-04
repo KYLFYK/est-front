@@ -24,7 +24,7 @@ export const BestOffers :FC<BestOffersType> = ({bestOffers,tagsButton}) => {
         }
         bestObjects()
     },[])
-
+    console.log('bestOffers1',bestOffers1)
     return (
         <div className={css.offers} >
             <HeadLine title={'Лучшие предложения'} >

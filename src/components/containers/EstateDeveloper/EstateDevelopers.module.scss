@@ -15,9 +15,12 @@
   object-fit: cover;
   cursor: pointer;
 }
-.img:hover{
-  box-shadow: 0 0 16px 8px rgba(26, 72, 98, 0.2)
-}
+
 .infoCompany{
   margin: 20px 0;
+}
+.hover{
+  :hover{
+    box-shadow: 0  4px 8px 0 rgba(26, 72, 98, 0.2);
+  }
 }

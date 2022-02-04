@@ -10,13 +10,14 @@ class AgentCabinetStore {
 
     initialData = {
         info:[
-            {label: 'Наименование', value: 'Estatum'},
-            {label: 'Статус', value: 'Агентство'},
-            {label: 'Адрес', value: 'Смоленская обл., г.Смоленск, ул.Советская, д.64'},
-            {label: 'Телефон', value: '+7(495) 006 78 69'},
-            {label: 'E-mail', value: 'estatum@mail.com'},
-            {label: 'Сайт', value: 'estatum'},
-            {label: 'Описание', value: 'описание'},
+            {label: 'Имя', value: ''},
+            {label: 'Статус', value: ''},
+            {label: 'Стаж', value: '' },
+            {label: 'Телефон', value:''},
+            {label: 'E-mail', value: ''},
+            {label: 'Telegram', value: ''},
+            {label: 'WhatsApp', value: ''},
+            {label: 'Viber', value: ''},
         ],
         id: 1,
         img:imgMoc,
@@ -24,43 +25,53 @@ class AgentCabinetStore {
 
         name: '',
         status: 'Agency',
-        address: 'Смоленская обл. г.Смоленск',
-        phone: '+7 999 777 55 11',
+        experience: 'Смоленская обл. г.Смоленск',
+        phone: '',
         email: 'estatum@mail.com',
-        website: 'estatum.com',
-        description: 'You agency',
-        loading: true
+        telegram: 'estatum.com',
+        whatsApp: 'estatum.com',
+        viber: 'estatum.com',
+
+        phoneArray: [''],
+
+        loading:true
     }
 
     async fetch() {
         const res  = await cabinetAPI.getCabinetAgent()
-        console.log("resApi",res)
-        const email = res.data.email
-        const status = res.data.role
-        const phone = res.data.phone
-        const site = res.data.site? res.data.site: 'mocSite'
-        const description = res.data.description ? res.data.description :'mocDescription'
-        const name = res.data.agentProperty.name ? res.data.agentProperty.name : 'mocName'
-        const address = res.data.address ? res.data.address : 'mocAddress'
 
-        const info = [{label: 'Наименование', value: name},
+        const name = res.data.agentProperty.name ? res.data.agentProperty.name : 'name'
+        const status = res.data.role
+        const experience = res.data.agentProperty.experience?res.data.agentProperty.experience :'0'
+        const phone = res.data.agentProperty.phone[0].value?res.data.agentProperty.phone[0].value:''
+        const email = res.data.email
+        const telegram = res.data.agentProperty.messengers.telegram ? res.data.agentProperty.messengers.telegram :'telegram'
+        const whatsApp = res.data.agentProperty.messengers.whatsApp  ? res.data.agentProperty.messengers.whatsApp : 'whatsApp'
+        const viber = 'viber'
+
+        const info = [
+            {label: 'Имя', value: name},
             {label: 'Статус', value: status},
-            {label: 'Адрес', value: address },
+            {label: 'Стаж', value: experience },
             {label: 'Телефон', value: phone},
             {label: 'E-mail', value: email},
-            {label: 'Сайт', value: site},
-            {label: 'Описание', value: description},]
+            {label: 'Telegram', value: telegram},
+            {label: 'WhatsApp', value: whatsApp},
+            {label: 'Viber', value: viber},
+        ]
         this.initialData.info = info
         this.initialData.id = res.data.id
         this.initialData.statusVerification = res.data.isConfirmed ? "confirmed" : "notConfirmed"
 
         this.initialData.name = name
         this.initialData.status = status
-        this.initialData.address = address
-        this.initialData.phone = phone
+        this.initialData.experience = experience
+        this.initialData.phone = res.data.agentProperty.phone[0].value?res.data.agentProperty.phone[0].value:''
+        this.initialData.phoneArray = res.data.agentProperty.phone.length>0?res.data.agentProperty.phone.map((p:any)=>p.value):['']
         this.initialData.email = email
-        this.initialData.website = site
-        this.initialData.description = description
+        this.initialData.telegram = telegram
+        this.initialData.whatsApp = whatsApp
+        this.initialData.viber = viber
 
         this.initialData.loading = false
 
@@ -68,7 +79,6 @@ class AgentCabinetStore {
     async update(id:number, updateValue: UpdateAgentCabinetType){
         const res = await cabinetAPI.updateAgentsCabinet(id,updateValue)
     }
-
 
     get() {
         console.log('getMobx',JSON.parse(JSON.stringify({...this.initialData})))

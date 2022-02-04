@@ -38,7 +38,7 @@ export const EstateDeveloper: FC<EstateDevelopersPropsType> = ({
           isActive={edit}
         />
       )}
-      <div onClick={() => !hideModal && setEdit(true)}>
+      <div onClick={() => !hideModal && setEdit(true)} className={css.hover}>
         <Image
           width={200}
           height={80}

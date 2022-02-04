@@ -15,65 +15,128 @@ import {useStoreAgentCabinet} from "../../../../../../../mobx/role/agent/cabinet
 import {UpdateAgentCabinetType} from "../../../../../../../api/cabinet/cabinet";
 
 
+export type infoAgentType={
+    name:string,
+    status:string,
+    experience:string,
+    phone:string,
+    email:string,
+    telegram:string,
+    whatsApp:string,
+    viber:string
+}
+
 type AccountEditType ={
     onEdit:()=>void
-    infoAgency:{name:string,status:string,address:string,phone:string,email:string,website:string,description:string}
+    // infoAgency:infoAgentType
 }
 
 const image ="data:image/svg+xml;utf8,<svg width=\'100%\' height=\'100%\' " +
     "xmlns=\'http://www.w3.org/2000/svg\'><rect width=\'240px\' height=\'240px\' rx=\'6px\'" +
     " style=\'fill: none; stroke: rgb(26, 72, 98); stroke-width: 1; stroke-dasharray: 9 9\'/></svg>"
 
-const AccountEdit :FC<AccountEditType>= observer(({onEdit,infoAgency}) => {
+const AccountEdit :FC<AccountEditType>= observer(({onEdit}) => {
 
     const store = useStoreAgentCabinet()
 
-    const copyAgency = {...infoAgency}
+    const infoAgency = {
+        name: store.initialData.name,
+        status: store.initialData.status,
+        experience: store.initialData.experience,
+        phone: store.initialData.phone,
+        email: store.initialData.email,
+        telegram: store.initialData.telegram,
+        whatsApp: store.initialData.whatsApp,
+        viber: store.initialData.viber
+    }
 
-    const [valueName,setValueName]=useState(copyAgency.name)
-    const [valueStatus,setValueStatus]=useState(copyAgency.status)
-    const [valueAddress,setValueAddress]=useState(copyAgency.address)
-    const [valuePhone,setValuePhone]=useState(copyAgency.phone)
-    const [valueEmail,setValueEmail]=useState(copyAgency.email)
-    const [valueWebsite,setValueWebsite]=useState(copyAgency.website)
-    const [valueDescription,setValueDescription]=useState(copyAgency.description)
+    const [agentInfo ,setAgentInfo]=useState<infoAgentType>(infoAgency)
+
+    // for input date user
+    const date = new Date()
+    const dateReal =  date.toISOString().substr(0,4) // year
+    const mountAndDay = agentInfo.experience.substr(5,5)// save for api ( mountAndDay )
+    const yearsExperience = agentInfo.experience.substr(0,4)// start years Experience
+
+    const [valueName,setValueName]=useState(agentInfo.name)
+    const [valueStatus,setValueStatus]=useState(agentInfo.status)
+    const [valueExperience,setValueExperience]=useState<number>(+dateReal- +yearsExperience )
+    const [valuePhone,setValuePhone]=useState(agentInfo.phone)
+    const [valueEmail,setValueEmail]=useState(agentInfo.email)
+    const [valueWhatsApp,setValueWhatsApp]=useState(agentInfo.whatsApp)
+    const [valueTelegram,setValueTelegram]=useState(agentInfo.telegram)
+    const [valueViber,setValueViber]=useState(agentInfo.viber)
 
     const [comparison, setComparison] =useState<boolean>(false)
 
     const backPage = () => {
-        if ( infoAgency.name === valueName
-            &&infoAgency.status === valueStatus
-            &&infoAgency.address === valueAddress
-            &&infoAgency.phone === valuePhone
-            &&infoAgency.email === valueEmail
-            &&infoAgency.website === valueWebsite
-            &&infoAgency.description === valueDescription){
+        if ( agentInfo.name === valueName
+            && agentInfo.status === valueStatus
+            && +dateReal- +yearsExperience === +valueExperience
+            && agentInfo.phone === valuePhone
+            && agentInfo.email === valueEmail
+            && agentInfo.whatsApp === valueWhatsApp
+            && agentInfo.telegram === valueTelegram
+            && agentInfo.viber === valueViber){
             onEdit()
+        }else{
+            setComparison(true)
         }
-        setComparison(true)
+        console.log(agentInfo.name === valueName,agentInfo.status === valueStatus, +agentInfo.experience === valueExperience,
+            agentInfo.phone === valuePhone,agentInfo.email === valueEmail,agentInfo.whatsApp === valueWhatsApp,
+            agentInfo.telegram === valueTelegram, agentInfo.viber === valueViber
+
+            )
     }
 
-    const save = () =>{
+    const save = async () =>{
         const updateValue:UpdateAgentCabinetType ={
-            // name:valueName,
-            // status:valueStatus,
-            // address:valueAddress,
-            // site:valueWebsite,
-            // description:valueDescription,
+            "phone": [{"ord": 1,"value": valuePhone, }],
+            "name": valueName,
+            "position": valueStatus,
+            "experience": (+dateReal-valueExperience)+'-'+mountAndDay,
+            "rating": 0,
+            "inviteLink": 'string',
+            "messengers": {
+                "whatsApp": valueWhatsApp,
+                "telegram": valueTelegram,
+            },
+        }
+        await store.update(store.initialData.id,updateValue)
+        setAgentInfo({ name:valueName,
+            status:valueStatus,
+            experience:(+dateReal-valueExperience)+'-'+mountAndDay,
             phone:valuePhone,
             email:valueEmail,
-            markAsDelete: true,
-            role:'agent'
-        }
-        store.update(store.initialData.id,updateValue)
+            telegram:valueTelegram,
+            whatsApp:valueWhatsApp,
+            viber:valueViber})
+        setTimeout(()=>{
+             store.fetch()
+        },100)
+
     }
-    const saveBack = () => {
-        console.log('save')
+    const saveBack = async () => {
+        const updateValue:UpdateAgentCabinetType ={
+            "phone": [{"ord": 1,"value": valuePhone, }],
+            "name": valueName,
+            "position": valueStatus,
+            "experience":(+dateReal-valueExperience)+'-'+mountAndDay,
+            "rating": 0,
+            "inviteLink": 'string',
+            "messengers": {
+                "whatsApp": valueWhatsApp,
+                "telegram": valueTelegram,
+            },
+        }
+        await store.update(store.initialData.id,updateValue)
+        setTimeout(()=>{
+            store.fetch()
+        },100)
         setComparison(false)
         onEdit()
     }
     const backPageNoSave = () => {
-        console.log('backPageNoSave')
         setComparison(false)
         onEdit()
     }
@@ -85,11 +148,11 @@ const AccountEdit :FC<AccountEditType>= observer(({onEdit,infoAgency}) => {
                 <div>
                     <Typography weight={'bold'}>Аккаунт</Typography>
                     <div className={css.df_jc}>
-                        <div>
+                        <div style={{width:'50vw'}}>
                             <div className={css.df}>
-                                <div className={css.marginColumn}>
+                                <div className={css.marginColumn} style={{width:"80%"}}>
                                     <Typography color={'tertiary'} className={css.marginTypo}>
-                                        Наименование
+                                        Имя
                                     </Typography>
                                     <BaseInput
                                         value={valueName}
@@ -97,7 +160,7 @@ const AccountEdit :FC<AccountEditType>= observer(({onEdit,infoAgency}) => {
                                         className={css.styleButton}
                                     />
                                 </div>
-                                <div className={css.marginColumn}>
+                                <div className={css.marginColumn} style={{width:"40%"}}>
                                     <Typography color={'tertiary'} className={css.marginTypo}>
                                         Статус
                                     </Typography>
@@ -107,19 +170,24 @@ const AccountEdit :FC<AccountEditType>= observer(({onEdit,infoAgency}) => {
                                         className={css.styleButton}
                                     />
                                 </div>
-                            </div>
-                            <div className={css.marginColumn}>
-                                <Typography color={'tertiary'} className={css.marginTypo}>
-                                    Адрес
-                                </Typography>
-                                <BaseInput
-                                    value={valueAddress}
-                                    onChange={(e)=>setValueAddress(e.currentTarget.value)}
-                                    className={css.styleButton}
-                                />
+                                <div className={css.marginColumn} style={{width:"40%"}}>
+                                    <Typography color={'tertiary'} className={css.marginTypo}>
+                                        Стаж
+                                    </Typography>
+                                    <BaseInput
+                                        value={valueExperience}
+                                        type={"number"}
+                                        onChange={ (e)=>{
+                                                if(+e.currentTarget.value < 60){
+                                                    setValueExperience( +e.currentTarget.value)
+                                                }
+                                        }}
+                                        className={css.styleButton}
+                                    />
+                                </div>
                             </div>
                             <div  className={css.df}>
-                                <div className={css.marginColumn}>
+                                <div className={css.marginColumn} style={{width:"25%"}} >
                                     <Typography color={'tertiary'} className={css.marginTypo}>
                                         Телефон
                                     </Typography>
@@ -129,7 +197,7 @@ const AccountEdit :FC<AccountEditType>= observer(({onEdit,infoAgency}) => {
                                         className={css.styleButton}
                                     />
                                 </div>
-                                <div className={css.marginColumn}>
+                                <div className={css.marginColumn} style={{width:"40%"}}>
                                     <Typography color={'tertiary'} className={css.marginTypo}>
                                         E-mail
                                     </Typography>
@@ -139,26 +207,39 @@ const AccountEdit :FC<AccountEditType>= observer(({onEdit,infoAgency}) => {
                                         className={css.styleButton}
                                     />
                                 </div>
-                                <div className={css.marginColumn}>
+
+                            </div>
+                            <div className={css.df}>
+                                <div className={css.marginColumn} style={{width:"25%"}}>
                                     <Typography color={'tertiary'} className={css.marginTypo}>
-                                        Сайт
+                                        Telegram
                                     </Typography>
                                     <BaseInput
-                                        value={valueWebsite}
-                                        onChange={(e)=>setValueWebsite(e.currentTarget.value)}
+                                        value={valueTelegram}
+                                        onChange={(e)=> setValueTelegram(e.currentTarget.value)}
                                         className={css.styleButton}
                                     />
                                 </div>
-                            </div>
-                            <div className={css.marginColumn}>
-                                <Typography color={'tertiary'} className={css.marginTypo}>
-                                    Описание
-                                </Typography>
-                                <BaseTextarea
-                                    value={valueDescription}
-                                    onChange={(e)=>setValueDescription(e.currentTarget.value)}
-                                    className={css.textArea}
-                                />
+                                <div className={css.marginColumn} style={{width:"25%"}}>
+                                    <Typography color={'tertiary'} className={css.marginTypo}>
+                                       WhatsApp
+                                    </Typography>
+                                    <BaseInput
+                                        value={valueWhatsApp}
+                                        onChange={(e)=>setValueWhatsApp(e.currentTarget.value)}
+                                        className={css.styleButton}
+                                    />
+                                </div>
+                                <div className={css.marginColumn} style={{width:"25%"}}>
+                                    <Typography color={'tertiary'} className={css.marginTypo}>
+                                        Viber
+                                    </Typography>
+                                    <BaseInput
+                                        value={valueViber}
+                                        onChange={(e)=>setValueViber(e.currentTarget.value)}
+                                        className={css.styleButton}
+                                    />
+                                </div>
                             </div>
                         </div>
                     </div>
