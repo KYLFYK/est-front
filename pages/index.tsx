@@ -80,6 +80,7 @@ const ourOffice: OurOfficeType = {
 const Start :React.FC<FetchMainType> = observer(({agents, developersArray}) => {
 
     const router = useRouter()
+
     useEffect(()=>{
         if (router.asPath === '/#contact'){
             router.push('/#contact')
