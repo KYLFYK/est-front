@@ -34,7 +34,7 @@ const moc = [
   { href: "/search?object-type=apartment&order-type=rent&privateType=house", title: "Снять" },
   { href: "/calculator", title: "Ипотека" },
   // { href: "/construction", title: "Строящиеся дома" },
-  // { href: "/contacts", title: "Контакты" },
+  { href: "/#contact", title: "Контакты" },
 ];
 
 const personalAcc = [

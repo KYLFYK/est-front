@@ -1,5 +1,5 @@
 import type {GetStaticProps, NextPage} from "next";
-import React from "react";
+import React, {useEffect, useRef, useState} from "react";
 import {MainContainer} from "src/components/containers/MainContainer/MainContainer";
 import {HeadFilter} from "../src/components/containers/HeadFilter/Finder";
 import {BestOffers} from "../src/components/containers/BestOffers/bestOffers";
@@ -13,7 +13,8 @@ import OurOffice from "../src/components/containers/OurOffice/OurOffice";
 import {OurOfficeType} from "../src/components/containers/OurOffice/OurOffice";
 import {observer} from "mobx-react-lite";
 import {UrlMainPage} from "../src/api/mainPage/mainPage";
-
+import Link from 'next/link'
+import {useRouter} from "next/router";
 const city = ["Москва", "Крым", "Сочи"];
 const personalAccount = [
     {title: "Личный кабинет", href: "/User", message: 0},
@@ -78,8 +79,12 @@ const ourOffice: OurOfficeType = {
 };
 
 const Start :React.FC<FetchMainType> = observer(({agents, developersArray}) => {
-
-    console.log('start developersArray',developersArray)
+    const router = useRouter()
+    useEffect(()=>{
+        if (router.asPath === '/#contact'){
+            router.push('/#contact')
+        }// eslint-disable-next-line
+    },[router.asPath])
 
     return (
         <MainContainer
@@ -101,7 +106,9 @@ const Start :React.FC<FetchMainType> = observer(({agents, developersArray}) => {
             />
             <Advantages advantages={mocAdvantages}/>
             <OfferNews/>
-            <OurOffice ourOffice={ourOffice.ourOffice}/>
+            <div id={'contact'}>
+                <OurOffice  ourOffice={ourOffice.ourOffice}/>
+            </div>
         </MainContainer>
     );
 })

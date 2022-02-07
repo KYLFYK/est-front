@@ -26,7 +26,7 @@ export const mailPage ={
     bestObjects:async (number:number)=>{
         try{
             const res =await instance.get(`${UrlMainPage.bestObject}?take=${number}`)
-            console.log("resObject",res)
+            console.log("resObject", res)
             const objects = res.data.map((object:any)=>(
                 {
                     id:object.id,
@@ -38,8 +38,9 @@ export const mailPage ={
             ))
            return objects
         }catch (e:any) {
+            console.log("error",e.message)
+            alert(e.message)
             return []
-            alert(e)
         }
     }
 }

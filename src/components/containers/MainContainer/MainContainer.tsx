@@ -44,7 +44,6 @@ export const MainContainer = ({
         {children}
       </div>
       {footerColor && <Footer color={footerColor} />}
-      <ScrollUp refs={refs} />
     </>
   );
 };

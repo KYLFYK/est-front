@@ -246,6 +246,25 @@ export type IgetLandIdSSPType={
         "id": number
         "name": string
     }
+    "legalPurityData": {
+        "id": number,
+        "address": string
+        "areaUnits": string
+        "areaValue": number
+        "cadastalNumber": string
+        "cadastralPrice": number
+        "currentOwnerName":string
+        "currentOwnerStartDate": string
+        "floor": null | number | string,
+        "previewOwners": {
+            "owners": Array<string>
+            "startDate": string
+            "finishDate": string
+        },
+        "encumbrances": Array<{ "title": string ,"status": true, "description": string}>
+        "recomendations": Array<{ "title": string ,"description": string}>
+        "risks": boolean
+    }
 }
 
 

@@ -25,7 +25,8 @@ const CreateObjectSuccessPage: React.FC<Props> = ({ advertisementId,typeObjectCr
     }
 
     const ADVERTISEMENT_LINK = () => {
-        router.push(`/${searchLink(typeObjectCreate)}/${advertisementId}`)
+        router.push('/ads')
+        // router.push(`/${searchLink(typeObjectCreate)}/${advertisementId}`)
     }
 
     return (
@@ -78,7 +79,7 @@ const CreateObjectSuccessPage: React.FC<Props> = ({ advertisementId,typeObjectCr
             </svg>
             <Typography weight="light">Ваше объявление опубликовано!</Typography>
             <BaseButton className={s.button} onClick={ADVERTISEMENT_LINK}>
-                <Typography size="small">Перейти к объявлению</Typography>
+                <Typography size="small" color={"secondary"}>Мои объявления</Typography>
                 {/*<Link href={ADVERTISEMENT_LINK}>*/}
                 {/*    <a className={s.link}>*/}
                 {/*        <Typography size="small">Перейти к объявлению</Typography>*/}

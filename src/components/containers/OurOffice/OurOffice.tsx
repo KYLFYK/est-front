@@ -19,7 +19,7 @@ export type OurOfficeType ={
 const OurOffice :FC<OurOfficeType> = ({ourOffice}) => {
 
     return (
-        <div className={css.marginContainer}>
+        <div className={css.marginContainer} >
             <HeadLine title={'Наш офис'} >
                 <div className={css.position}>
                     <Map center={ourOffice.positionMap} location={ourOffice.location} />
