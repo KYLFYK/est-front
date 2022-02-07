@@ -2,14 +2,60 @@ import { FC } from "react";
 import { BaseInput } from "../../../../../../shared/BaseInput/Input";
 import BaseButton from "../../../../../../shared/BaseButton/BaseButtons";
 import { AvatarSection } from "../../../../../../shared/AvatarSection";
+import {
+  FormController,
+  useForm,
+} from "../../../../../../containers/FormController";
 
 import styles from "../agency/agency.module.scss";
 import dealImg from "../../../../../../../Pics/card-images/dealCard.jpg";
 
+interface IForm {
+  name?: string;
+  lastName?: string;
+  birthdayDate?: string;
+  phoneNumber?: string;
+  email?: string;
+  login?: string;
+  password?: string;
+  accountEmail?: string;
+  accountPhoneNumber?: string;
+}
+
 export const OwnerForm: FC = () => {
+  const [Form] = useForm<IForm>({
+    name: "name",
+    lastName: "What",
+  });
+
+  const handleConfirm = () => {
+    console.log(Form.getValues());
+  };
+
+  const setValue = () => {
+    Form.setValues([
+      {
+        name: "name",
+        value: "Иван",
+      },
+      {
+        name: "lastName",
+        value: "Иванов",
+      },
+      {
+        name: "birthdayDate",
+        value: "2022-02-17",
+      },
+    ]);
+  };
+
+  const resetValue = () => {
+    Form.resetValues();
+  };
+
   return (
     <div className={styles.formWrapper}>
-      <div className={styles.form}>
+      <FormController form={Form} className={styles.form}>
         <section>
           <span className={styles.formSubTitle}>Личные данные</span>
           <BaseInput
@@ -20,9 +66,6 @@ export const OwnerForm: FC = () => {
             type="text"
             name={"name"}
             defaultValue={""}
-            onChange={() => {
-              console.log("sd");
-            }}
           />
           <BaseInput
             classNameWrapper={styles.inputWrapper}
@@ -32,9 +75,6 @@ export const OwnerForm: FC = () => {
             type="text"
             name={"lastName"}
             defaultValue={""}
-            onChange={() => {
-              console.log("sd");
-            }}
           />
           <BaseInput
             classNameWrapper={styles.inputWrapper}
@@ -44,10 +84,16 @@ export const OwnerForm: FC = () => {
             type="date"
             name={"birthdayDate"}
             defaultValue={""}
-            onChange={() => {
-              console.log("sd");
-            }}
           />
+          <button type={"button"} onClick={handleConfirm}>
+            Получить данные
+          </button>
+          <button type={"button"} onClick={setValue}>
+            Изменить данные
+          </button>
+          <button type={"button"} onClick={resetValue}>
+            Удалить данные
+          </button>
         </section>
         <section>
           <span className={styles.formSubTitle}>Контактные данные</span>
@@ -57,7 +103,7 @@ export const OwnerForm: FC = () => {
             errorLabel=""
             label="Номер телефона"
             type="tel"
-            name={"login"}
+            name={"phoneNumber"}
             defaultValue={"deal"}
             onChange={() => {
               console.log("sd");
@@ -69,7 +115,7 @@ export const OwnerForm: FC = () => {
             errorLabel=""
             label="Email"
             type="email"
-            name={"password"}
+            name={"email"}
             defaultValue={""}
             onChange={() => {
               console.log("sd");
@@ -108,7 +154,7 @@ export const OwnerForm: FC = () => {
             errorLabel=""
             label="Email"
             type="email"
-            name={"email"}
+            name={"accountEmail"}
             defaultValue={""}
             onChange={() => {
               console.log("sd");
@@ -120,7 +166,7 @@ export const OwnerForm: FC = () => {
             errorLabel=""
             label="Номер телефона"
             type="email"
-            name={"email"}
+            name={"accountPhoneNumber"}
             defaultValue={""}
             onChange={() => {
               console.log("sd");
@@ -132,7 +178,7 @@ export const OwnerForm: FC = () => {
             <BaseButton type={"danger"}>Заблокировать</BaseButton>
           </div>
         </section>
-      </div>
+      </FormController>
       <AvatarSection src={dealImg} changeable />
     </div>
   );
