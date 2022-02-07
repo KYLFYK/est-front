@@ -49,60 +49,61 @@ export const AgentInfo: React.FC<AgentDataPropsType> = ({ img,connection,infoAge
             <Typography size={'default'} color="accent" >
                 {infoAgent.heldPost}
             </Typography>
-            {/*<div className={css.gridWork}>*/}
-            {/*    <div className={css.marginWork}>*/}
-            {/*        <Typography size={'default'} color="accent" className={css.cursor}  >*/}
-            {/*            Работает*/}
-            {/*        </Typography>*/}
-            {/*        <Typography size={'default'} color="accent" weight={'medium'} >*/}
-            {/*            {years(infoAgent.professionalExperience)}*/}
-            {/*        </Typography>*/}
-            {/*    </div>*/}
-            {/*    <div className={css.marginWork}>*/}
-            {/*        <Typography size={'default'} color="accent"  >*/}
-            {/*            Завершенных*/}
-            {/*        </Typography>*/}
-            {/*        <Typography size={'default'} color="accent" weight={'medium'} >*/}
-            {/*            {infoAgent.completed}*/}
-            {/*        </Typography>*/}
-            {/*    </div>*/}
-            {/*    <div className={css.marginWork}>*/}
-            {/*        <Typography size={'default'} color="accent"  >*/}
-            {/*            В работе*/}
-            {/*        </Typography>*/}
-            {/*        <Typography size={'default'} color="accent" weight={'medium'} >*/}
-            {/*            {infoAgent.inWork}*/}
-            {/*        </Typography>*/}
-            {/*    </div>*/}
-            {/*</div>*/}
             <div className={css.gridConnection}>
                 <div className={css.marginData}>
-                    <IconWhatsapp />
-                    <Typography size={'default'} color="accent"  >
-                        {/*{connection.whatsApp}*/}
-                        {infoAgent.whatsApp}
-                    </Typography>
+                    {
+                        infoAgent.whatsApp !== '' &&
+                        <a href={`https://wa.me/${infoAgent.whatsApp}`} rel='noopener' className={css.linkStyle}>
+                            <div style={{display:'flex'}}>
+                                <IconWhatsapp />
+                                <Typography size={'default'} color="accent"  >
+                                    {infoAgent.whatsApp}
+                                </Typography>
+                            </div>
+                        </a>
+                    }
                 </div>
+
                 <div className={css.marginData}>
-                    <IconTelegram />
-                    <Typography size={'default'} color="accent"  >
-                        {/*{connection.telegram}*/}
-                        {infoAgent.telegram}
-                    </Typography>
+                    {
+                        infoAgent.telegram !== '' &&
+                        <a href={`tg://resolve?domain=${infoAgent.telegram}`} rel='noopener' className={css.linkStyle}>
+                            <div style={{display:'flex'}}>
+                                <IconTelegram/>
+                                <Typography size={'default'} color="accent"  >
+                                    {infoAgent.telegram}
+                                </Typography>
+                            </div>
+                        </a>
+                    }
                 </div>
+
                 <div className={css.marginData}>
-                    <IconPhone/>
-                    <Typography size={'default'} color="accent"  >
-                        {/*{connection.phone}*/}
-                        {infoAgent.phone}
-                    </Typography>
+                    {
+                        infoAgent.phone !== '' &&
+                        <a href={`tel:+${infoAgent.phone}`} rel='noopener' className={css.linkStyle}>
+                            <div style={{display:'flex'}}>
+                                <IconPhone/>
+                                <Typography size={'default'} color="accent"  >
+                                    {infoAgent.phone}
+                                </Typography>
+                            </div>
+                        </a>
+                    }
                 </div>
+
                 <div className={css.marginData}>
-                    <IconMail />
-                    <Typography size={'default'} color="accent"  >
-                        {/*{connection.email}*/}
-                        {infoAgent.email}
-                    </Typography>
+                    {
+                        infoAgent.email !== '' &&
+                        <a href={`mailto:blog@${infoAgent.email}`} rel='noopener' className={css.linkStyle} >
+                            <div style={{display:'flex'}}>
+                                <IconMail />
+                                <Typography size={'default'} color="accent"  >
+                                    {infoAgent.email}
+                                </Typography>
+                            </div>
+                        </a>
+                    }
                 </div>
             </div>
         </>
