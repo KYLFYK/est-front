@@ -20,12 +20,13 @@ export const mailPage ={
             await instance.post(`${UrlMainPage.newsSubscription}`,{name,email,phone})
             alert(`Спасибо что подписались на новости ${name}`)
         }catch (e:any) {
-            alert(e)
+            alert(e.response.data.message)
         }
     },
     bestObjects:async (number:number)=>{
+        let res
         try{
-            const res =await instance.get(`${UrlMainPage.bestObject}?take=${number}`)
+             res = await instance.get(`${UrlMainPage.bestObject}?take=${number}`)
             console.log("resObject", res)
             const objects = res.data.map((object:any)=>(
                 {
@@ -38,9 +39,9 @@ export const mailPage ={
             ))
            return objects
         }catch (e:any) {
-            console.log("error",e.message)
-            alert(e.message)
             return []
+            alert(e)
+
         }
     }
 }
