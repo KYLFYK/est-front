@@ -42,7 +42,7 @@ const personalAccount = [{title: 'Личный кабинет', href: '/User', m
 const infrastructureInfo = 'В 15 минутах езды расположена Ялта со своей знаменитой набережной, театр Чехова, авквариум и дельфинарий. Знаменитые дворцы, парки, ботанические сады и винные заводы расположены в получасовой доступности.'
 
 const Apartment: NextPage =  observer((props: any) => {
-
+  
   const store = useStore()
 
   const tabs = [{

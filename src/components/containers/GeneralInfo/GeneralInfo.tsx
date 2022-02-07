@@ -14,7 +14,6 @@ interface Props {
 }
 
 const GeneralInfo: React.FC<Props> = ({ images, price, info }) => {
-
     return (
         <div className={s.container}>
             <div className={s.sliderContainer}>
@@ -26,8 +25,8 @@ const GeneralInfo: React.FC<Props> = ({ images, price, info }) => {
                 {price && <Typography size="big" color="nude">{formatNumbersToCurrency(price)} $</Typography>}
                 {info.map((item, idx) => (
                     <div className={s.infoItem} key={idx}>
-                        <Typography weight="medium" className={s.infoLabel}> {item.label} </Typography>
-                        <Typography className={s.infoValue}> {item.value} </Typography>
+                        <Typography color={item.value === '' ? 'tertiary' : 'default'} weight="medium" className={idx > 0 && item.value === '' ? s.infoTitle : s.infoLabel}> {item.label} </Typography>
+                        {item.value && <Typography className={s.infoValue}> {item.value} </Typography>}
                     </div>
                 ))}
             </div>

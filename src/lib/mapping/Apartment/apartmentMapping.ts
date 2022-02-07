@@ -24,9 +24,10 @@ export const MappingDescription = (description: any) => {
 }
 
 export const MappingLegalPurity = (legal: any) => {
+  console.log(legal)
   return {
     encumbrances: true,
-    risks: true,
+    risks: legal.risks,
     tabsData: {
       general: [
         {
@@ -54,8 +55,8 @@ export const MappingLegalPurity = (legal: any) => {
           description: "Всплывающая подсказка предыдущих владельцев",
           label: [
             {
-              title: "2 владельца",
-              text: "Иванов Филипп Васильевич, Иванов Филипп Васильевич",
+              title: `${legal.previewOwners.owners.length} владельца`,
+              text: legal.previewOwners.owners.join(),
             },
             { title: "77-77-08/011/2021-0308", text: "03.08.2021" },
           ],
@@ -64,22 +65,10 @@ export const MappingLegalPurity = (legal: any) => {
       encumbrances: [
         {
           title: "Текущие владельцы",
-          encumbrances: [
-            {status: 0, description: "Description", text: "Дом в ипотеке"},
-            {status: 1, description: "Description", text: "Записей об аренде не найдено"},
-          ],
+          encumbrances: legal.encumbrances.map((e: any) => { return {status: e.status ? 0 : 1, description: e.title, text: e.title } }),
         },
       ],
-      recomendations: [
-        {
-          value: "Квартира меняла владельцев несколько раз за последние 3 года",
-          label: "Внимательно изучите документы, по которым квартира перешла в собственность текущего владельца, узнайте больше о предыдущих собственниках и сделках. Лучше обратиться к специалистам для проверки и сопровождения сделки.",
-        },
-        {
-          value: "Квартира в собственности менее 5 лет",
-          label: "При продаже продавец скорее всего должен будет заплатить налог с её продажи. Чтобы этого не делать, он может настаивать на занижении стоимости жилья в договоре купли-продажи. В таком случае вы рискуете: если что-то пойдёт не так, возместить можно будет только сумму, указанную в договоре, и вы не сможете полностью получить налоговый вычет за покупку квартиры.",
-        },
-      ]
+      recomendations: legal.recomendations.map((r: any) => { return {value: r.title, label: r.description} })
     }
   }
 }
