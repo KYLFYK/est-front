@@ -12,6 +12,7 @@ interface Props {
 }
 
 const ObjectLegalPurity: React.FC<Props> = ({ legalPurityData }) => {
+
     return (
         <div className={s.container}>
         <HeadLine title="Юридическая чистота">

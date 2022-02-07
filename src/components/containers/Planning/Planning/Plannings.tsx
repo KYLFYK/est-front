@@ -22,7 +22,7 @@ interface Props {
 }
 
 const Planning: React.FC<Props> = ({ FilterComponent, planningList }) => {
-    console.log(planningList)
+
     return (
         <div className={s.container}>
             <HeadLine title="Квартиры и аппартаменты">

@@ -1,20 +1,22 @@
 import {datetoMonthFormat} from '../objectDates'
 
-export const MappingGeneralInfo = (address: any, category: any, info: any, specs: any) => {
-    const info_options = [
-        { label: "Адрес", value: address },
-        { label: "Срок сдачи", value: category },
-        { label: "Стоимость квартир", value: `от ${(info.priceObjectMin/1000000).toFixed(2)} млн руб.` },
-        { label: "Площадь квартир", value: `${info.areaObjectMin} — ${info.areaObjectMax} м2` },
-        { label: "Всего квартир", value: info.amountObjects },
-        //{ label: "Класс жилья", value: specs.filter((s: any) => s.subtitle === 'Класс жилья')[0].specificationsItems?.filter((si: any) => si.value === 'class')[0]?.label?.text },
-        { label: "Корпуса", value: `${info.amountBuildings} корпус` },
-        { label: "Этажность", value: info.amountFloors },
-        //{ label: "Тип дома", value: specs.filter((s: any) => s.subtitle === 'Строительно-техническая экспертиза')[0].specificationsItems?.filter((si: any) => si.value === 'construction')[0]?.label?.text },
-        { label: "Высота потолков", value: info.heightCeilings },
-        //{ label: "Отделка", value: specs.filter((s: any) => s.subtitle === 'Отделка')[0].specificationsItems?.filter((si: any) => si.value === 'decorating')[0]?.label?.text },
-        //{ label: "Парковка", value: specs.filter((s: any) => s.subtitle === 'Парковка')[0].specificationsItems?.filter((si: any) => si.value === 'parking').map((p: any) => p.label.text).join(', ') },
-      ]
+export const MappingGeneralInfo = (name: any, address: any, category: any, info: any, specs: any) => {
+    let info_options = []
+    info_options.push({ label: name, value: ''})
+    if(address) info_options.push({ label: "Адрес", value: address })
+    if(category) info_options.push({ label: "Срок сдачи", value: category })
+    info_options.push({ label: 'Общая информация', value: ''})
+    if(info['priceObjectMin']) info_options.push({ label: "Стоимость квартир", value: `от ${(info.priceObjectMin/1000000).toFixed(2)} млн руб.` })
+    if(info['areaObjectMin'] && info['areaObjectMax']) info_options.push({ label: "Площадь квартир", value: `${info.areaObjectMin} — ${info.areaObjectMax} м2` })
+    if(info['amountObjects']) info_options.push({ label: "Всего квартир", value: info.amountObjects })
+    info_options.push({ label: 'О доме', value: ''})
+    if(specs.filter((s: any) => s.type_en === 'class').length > 0) info_options.push({label: "Класс жилья", value: specs.filter((s: any) => s.type_en === 'class')[0].value})
+    if(info['amountBuildings']) info_options.push({label: "Корпуса", value: `${info.amountBuildings} корпус`})
+    if(info['amountFloors']) info_options.push({ label: "Этажность", value: info.amountFloors })
+    if(specs.filter((s: any) => s.type_en === 'construction').length > 0) info_options.push({label: "Тип дома", value: specs.filter((s: any) => s.type_en === 'construction')[0].value})
+    if(info['heightCeilings']) info_options.push({ label: "Высота потолков", value: info.heightCeilings })
+    if(specs.filter((s: any) => s.type_en === 'decorating').length > 0) info_options.push({label: "Отделка", value: specs.filter((s: any) => s.type_en === 'decorating')[0].value})
+    if(specs.filter((s: any) => s.type_en === 'parking').length > 0) info_options.push({label: "Парковка", value: specs.filter((s: any) => s.type_en === 'parking')[0].value})
     return info_options;
 }
 

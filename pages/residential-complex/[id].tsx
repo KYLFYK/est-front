@@ -82,13 +82,13 @@ const ResidentialComplex: NextPage = observer((props: any) => {
         <AdressEstate item={props.address}/>
         <HorizontalTabs tabs={tabs} refs={refs}/>
         <div ref={general}>
-          <GeneralInfo info={MappingGeneralInfo(props.address, props.category, props.info_options[0], props.object_specs)} images={IMAGES_SET} />
+          <GeneralInfo info={MappingGeneralInfo(props.name, props.address, props.category, props.info_options[0], props.object_specs)} images={IMAGES_SET} />
         </div>
         <div ref={specs}>
-          <ObjectSpecifications specificationsLists={sortObject_specsTypeGuide(props.object_specs.map((guid: any) => sortGuide(guid,guid.subtitle_ru)).filter((f: any) => f !== undefined))} title={"Особенности"}/>
+          <ObjectSpecifications specificationsLists={sortObject_specsTypeGuide(props.object_specs.map((guid: any) => sortGuide(guid,guid.subtitle_ru)).filter((f: any) => f !== undefined)).filter((s: any) => s.subtitle === 'Объекты на территории' || s.subtitle === 'Безопасность')} title={"Особенности"}/>
         </div>
         <div ref={architec}>
-          <ObjectSpecifications specificationsLists={sortObject_specsTypeGuide(props.object_specs.map((guid: any) => sortGuide(guid,guid.subtitle_ru)).filter((f: any) => f !== undefined))} title={"Архитектурно-планировочные решения"}/>
+          <ObjectSpecifications specificationsLists={sortObject_specsTypeGuide(props.object_specs.map((guid: any) => sortGuide(guid,guid.subtitle_ru)).filter((f: any) => f !== undefined)).filter((s: any) => s.subtitle === 'Строительно-техническая экспертиза' || s.subtitle === 'Инженерные коммуникации')} title={"Архитектурно-планировочные решения"}/>
         </div>
         <div ref={plansec}>
           <Planning FilterComponent={<PlanningFilter />} planningList={props.planningList}/>
