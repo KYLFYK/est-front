@@ -93,8 +93,6 @@ const Start :React.FC<FetchMainType> = observer(({ }) => {
     const agents = store.initialData.agents
     const developers = store.initialData.developers
 
-
-
     return (
         <MainContainer
             keywords={"Главная"}
