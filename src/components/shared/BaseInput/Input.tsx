@@ -32,6 +32,7 @@ export const BaseInput: React.FC<Props> = ({
   iconOnClick,
   ...props
 }) => {
+  console.log(textArea);
   return (
     <div className={classNameWrapper}>
       {label && (

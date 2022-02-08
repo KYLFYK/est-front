@@ -5,6 +5,7 @@ import {
   ReactNode,
   RefObject,
   useEffect,
+  useMemo,
   useState,
 } from "react";
 
@@ -27,11 +28,10 @@ export const useForm: <T>(initValues: T) => [Form: FormInstance<T>] = (
 
   const formRef = createRef<HTMLFormElement>();
 
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  let initialValues: Record<
+  const initialValues: Record<
     keyof IInitialValues,
     IInitialValues[keyof IInitialValues] | undefined
-  > = { ...initValues };
+  > = useMemo(() => ({ ...initValues }), [initValues]);
 
   const [Form] = useState<FormInstance<IInitialValues>>({
     ref: formRef,
@@ -53,9 +53,7 @@ export const useForm: <T>(initValues: T) => [Form: FormInstance<T>] = (
       });
     },
     resetValues: () => {
-      const objKeys = Object.keys(initialValues) as Array<
-        keyof typeof initValues
-      >;
+      const objKeys = Object.keys(initialValues) as Array<keyof IInitialValues>;
 
       objKeys.forEach((obj, index) => {
         if (initValues && initValues[obj]) {
@@ -108,9 +106,7 @@ export const useForm: <T>(initValues: T) => [Form: FormInstance<T>] = (
 
   useEffect(() => {
     if (formRef && formRef.current) {
-      const objKeys = Object.keys(initialValues) as Array<
-        keyof typeof initValues
-      >;
+      const objKeys = Object.keys(initialValues) as Array<keyof IInitialValues>;
 
       objKeys.forEach((obj, index) => {
         if (formRef.current?.[index]) {
@@ -122,8 +118,6 @@ export const useForm: <T>(initValues: T) => [Form: FormInstance<T>] = (
         }
       });
     }
-
-    //  eslint-disable-next-line
   }, [formRef, initialValues]);
 
   return [Form];
@@ -141,7 +135,6 @@ export function FormController<T>({
   className,
   style,
 }: IControllerProps<T> & { children?: ReactNode }): ReactElement {
-  // logic etc.
   return (
     <form ref={form.ref} style={style} className={className}>
       {children}

@@ -55,7 +55,7 @@ export const OwnerForm: FC = () => {
 
   return (
     <div className={styles.formWrapper}>
-      <FormController form={Form} className={styles.form}>
+      <FormController<IForm> form={Form} className={styles.form}>
         <section>
           <span className={styles.formSubTitle}>Личные данные</span>
           <BaseInput
@@ -65,7 +65,6 @@ export const OwnerForm: FC = () => {
             label="Имя"
             type="text"
             name={"name"}
-            defaultValue={""}
           />
           <BaseInput
             classNameWrapper={styles.inputWrapper}
@@ -74,7 +73,6 @@ export const OwnerForm: FC = () => {
             label="Фамилия"
             type="text"
             name={"lastName"}
-            defaultValue={""}
           />
           <BaseInput
             classNameWrapper={styles.inputWrapper}
@@ -83,17 +81,10 @@ export const OwnerForm: FC = () => {
             label="Дата рождения"
             type="date"
             name={"birthdayDate"}
-            defaultValue={""}
+            style={{
+              resize: "none",
+            }}
           />
-          <button type={"button"} onClick={handleConfirm}>
-            Получить данные
-          </button>
-          <button type={"button"} onClick={setValue}>
-            Изменить данные
-          </button>
-          <button type={"button"} onClick={resetValue}>
-            Удалить данные
-          </button>
         </section>
         <section>
           <span className={styles.formSubTitle}>Контактные данные</span>
@@ -104,10 +95,6 @@ export const OwnerForm: FC = () => {
             label="Номер телефона"
             type="tel"
             name={"phoneNumber"}
-            defaultValue={"deal"}
-            onChange={() => {
-              console.log("sd");
-            }}
           />
           <BaseInput
             classNameWrapper={styles.inputWrapper}
@@ -116,10 +103,6 @@ export const OwnerForm: FC = () => {
             label="Email"
             type="email"
             name={"email"}
-            defaultValue={""}
-            onChange={() => {
-              console.log("sd");
-            }}
           />
         </section>
         <section>
@@ -131,10 +114,6 @@ export const OwnerForm: FC = () => {
             label="Логин"
             type="tel"
             name={"login"}
-            defaultValue={"deal"}
-            onChange={() => {
-              console.log("sd");
-            }}
           />
           <BaseInput
             classNameWrapper={styles.inputWrapper}
@@ -143,10 +122,6 @@ export const OwnerForm: FC = () => {
             label="Пароль"
             type="email"
             name={"password"}
-            defaultValue={""}
-            onChange={() => {
-              console.log("sd");
-            }}
           />
           <BaseInput
             classNameWrapper={styles.inputWrapper}
@@ -155,10 +130,6 @@ export const OwnerForm: FC = () => {
             label="Email"
             type="email"
             name={"accountEmail"}
-            defaultValue={""}
-            onChange={() => {
-              console.log("sd");
-            }}
           />
           <BaseInput
             classNameWrapper={styles.inputWrapper}
@@ -167,10 +138,6 @@ export const OwnerForm: FC = () => {
             label="Номер телефона"
             type="email"
             name={"accountPhoneNumber"}
-            defaultValue={""}
-            onChange={() => {
-              console.log("sd");
-            }}
           />
         </section>
         <section>
@@ -178,6 +145,15 @@ export const OwnerForm: FC = () => {
             <BaseButton type={"danger"}>Заблокировать</BaseButton>
           </div>
         </section>
+        <button type={"button"} onClick={handleConfirm}>
+          Получить данные
+        </button>
+        <button type={"button"} onClick={setValue}>
+          Изменить данные
+        </button>
+        <button type={"button"} onClick={resetValue}>
+          Удалить данные
+        </button>
       </FormController>
       <AvatarSection src={dealImg} changeable />
     </div>
