@@ -1,10 +1,9 @@
-import type {GetStaticProps} from "next";
 import React, {useEffect} from "react";
 import {MainContainer} from "src/components/containers/MainContainer/MainContainer";
 import {HeadFilter} from "../src/components/containers/HeadFilter/Finder";
 import {BestOffers} from "../src/components/containers/BestOffers/bestOffers";
 import {IMAGES_SET} from "../src/components/containers/GeneralInfo/config";
-import DevelopersContainer, {mockObjects} from "../src/components/containers/DevelopersContainer/DevelopersContainer";
+import DevelopersContainer from "../src/components/containers/DevelopersContainer/DevelopersContainer";
 import {AgentsContainer} from "../src/components/containers/AgentsContainer/AgentsContainer";
 import {Advantages} from "../src/components/containers/AdvantageList/AdvantageList";
 import {mocAdvantages} from "../src/components/containers/AdvantageList/config";
@@ -12,7 +11,6 @@ import {OfferNews} from "../src/components/containers/OfferNews/offerNews";
 import OurOffice from "../src/components/containers/OurOffice/OurOffice";
 import {OurOfficeType} from "../src/components/containers/OurOffice/OurOffice";
 import {observer} from "mobx-react-lite";
-import {UrlMainPage} from "../src/api/mainPage/mainPage";
 import {useRouter} from "next/router";
 import {useStoreMainPage} from "../src/mobx/mainPage/mainPage";
 const city = ["Москва", "Крым", "Сочи"];
@@ -78,7 +76,7 @@ const ourOffice: OurOfficeType = {
     },
 };
 
-const Start :React.FC<FetchMainType> = observer(({ }) => {
+const Start = observer(({ }) => {
 
     const store = useStoreMainPage()
 
@@ -122,180 +120,9 @@ const Start :React.FC<FetchMainType> = observer(({ }) => {
 
 export default Start;
 
-export const getStaticProps : GetStaticProps<FetchMainType> = async ()=> {
-    const apiAgents = await fetch (`https://estatum.f-case.ru/api/${UrlMainPage.agentOur}?amount=${3}`)
-    const apiDeveloper = await fetch(`https://estatum.f-case.ru/api/${UrlMainPage.developerOur}?amount=${5}`)
-    const agentsArray :Array<FetchMainAgentsType> = await apiAgents.json()
-    const developers :Array<FetchMainDeveloperType> = await apiDeveloper.json()
-    const date = new Date()
-    const years = date.getFullYear()
 
-    const agents:Array<AgentsType> = agentsArray.map((agent) => (
-        {
-            id: agent.id,
-            img: "https://images.unsplash.com/photo-1541963463532-d68292c34b19?ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8Ym9va3xlbnwwfHwwfHw%3D&ixlib=rb-1.2.1&w=1000&q=&q=",
-            connection: {
-                whatsApp: agent.agentProperty.messengers?.whatsApp ? agent.agentProperty.messengers.whatsApp : '' ,
-                telegram: agent.agentProperty.messengers?.telegram? agent.agentProperty.messengers.telegram : '' ,
-                email: agent.email,
-                phone: agent.agentProperty.phone[0].value,
-            },
-            infoAgent: {
-                fullName: agent.agentProperty.name,
-                heldPost: agent.agentProperty.position?agent.agentProperty.position:'FAIL!!!',
-                professionalExperience: (years - +(agent.agentProperty?.experience?.substr(0, 4)? agent.agentProperty?.experience?.substr(0, 4) :years) ).toString(),
-                completed: agent.agentProperty?.rating?.toString() ?agent.agentProperty.rating.toString() : '0',   //  <- WANTED MOCK
-                inWork: agent.agentProperty?.rating?.toString() ?agent.agentProperty.rating.toString() : '0',      //  <- WANTED MOCK
 
-                whatsApp: agent.agentProperty.messengers?.whatsApp? agent.agentProperty.messengers.whatsApp : '' ,
-                telegram: agent.agentProperty.messengers?.telegram? agent.agentProperty.messengers.telegram : '' ,
-                email: agent.email,
-                phone: agent.phone,
-            }
-        }
-    ))
-    const developersArray = developers.map((developer) => (
-        {
-            // id:developer[index].id,
-            img: "https://images.unsplash.com/photo-1541963463532-d68292c34b19?ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8Ym9va3xlbnwwfHwwfHw%3D&ixlib=rb-1.2.1&w=1000&q=&q=",
-            // img: developer.developerProperty.logo,
-            title: developer.developerProperty.name,
-            description: developer.developerProperty.type,
-            developerInfo: {
-                title: developer.developerProperty.name,
-                location: developer.developerProperty.address,
-                passed: '50 in 50',              //  <- WANTED MOCK
-                objectsDeveloper: mockObjects  //  <- WANTED MOCK
-            },
-        }
-    ))
-    return {
-        props: {agents, developersArray},
-    }
-}
 
-type FetchMainAgentsType ={
-    "id": number
-    "createAt": string
-    "updateAt": string
-    "email": string
-    "phone": string
-    "markAsDelete": boolean
-    "isConfirmed":boolean
-    "role": string
-    "customerProperty": null | boolean,
-    "developerProperty": null | boolean,
-    "agencyProperty": null | boolean,
-    "agentProperty": {
-        "id": number
-        "name": string
-        "position":string
-        "phone": Array<{ "ord": number, "value": string }>
-        "experience": string
-        "rating": number
-        "inviteLink":string
-        "messengers": {
-            "telegram": string
-            "whatsApp": string
-        },
-        "agencyId":number
-    },
-    "adminProperty": null | boolean
-    "bankProperty": null | boolean
-}
 
-type AgentsType = {
-    img:string
-    connection: {
-        whatsApp: string
-        telegram: string
-        email:string
-        phone: string
-    },
-    infoAgent: {
-        fullName: string
-        heldPost: string
-        professionalExperience: string
-        completed: string
-        inWork: string
-
-        whatsApp: string
-        telegram: string
-        email: string
-        phone: string
-    }
-}
-
-type FetchMainDeveloperType ={
-    "id": number
-    "createAt": string
-    "updateAt": string
-    "email": string
-    "phone": string
-    "markAsDelete": boolean,
-    "isConfirmed": boolean,
-    "role": string
-    "customerProperty": null | boolean
-    "developerProperty": {
-        logo:string
-        "id": number
-        "name": string
-        "type": string
-        "phone":Array<{ord:string, value:number}>
-        "address": string
-        "site": string
-        "description": string
-        "legalFullName": string
-        "legalAddress": string
-        "authorizedCapital": number
-        "OKFS": string
-        "OKOPF": string
-        "OKOGU": null | string
-        "INN": string
-        "OGRN": string
-        "KPP": string
-        "OKATO": null | string
-        "OKPO": string
-        "OKTMO": string
-        "status": string
-        "leaderName": string
-        "founders": string
-        "enterpriseSize": number
-        "numberOfStaff": number
-        "branch": number
-        "revenue": number
-        "netProfit": number
-        "netAssets": number
-        "registrationDate": string
-        "registrationAuthorityName": string
-        "registrationAuthorityAddress": string
-        "registeringAuthorityLocated": string
-        "mainOccupation": string
-        "extraOccupations": Array<{ord:string, value:number}>
-        "statistics": Array<{items:Array<{items:string, value:number}>, title:string}>
-        "risks": null | boolean
-    },
-    "agencyProperty": null | boolean
-    "agentProperty": null | boolean
-    "adminProperty": null | boolean
-    "bankProperty": null | boolean
-}
-
-type DeveloperType = {
-    img: string
-    title: string
-    description: string
-    developerInfo: {
-        title: string
-        location: string
-        passed: string
-        objectsDeveloper: Array<{nameObject:string, id:string}>
-    }
-}
-
-type FetchMainType={
-    agents: Array<AgentsType>
-    developersArray:  Array<DeveloperType>
-}
 
 

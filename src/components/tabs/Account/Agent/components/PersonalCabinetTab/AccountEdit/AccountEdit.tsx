@@ -138,7 +138,7 @@ const AccountEdit :FC<AccountEditType>= observer(({onEdit}) => {
 
     return (
         <div>
-            <BackPage onBackPage={backPage} title={'Редактирование аккаунта агента'} />
+            <BackPage onBackPage={backPage} title={'Редактирование аккаунта'} />
             <div className={css.df_jc}>
                 <div>
                     <Typography weight={'bold'}>Аккаунт</Typography>

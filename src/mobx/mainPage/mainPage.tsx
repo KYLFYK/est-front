@@ -131,3 +131,96 @@ const useStoreMainPage = () => {
 };
 
 export { MainPageStore, StoreProvider, useStoreMainPage };
+
+
+type FetchMainDeveloperType ={
+    "id": number
+    "createAt": string
+    "updateAt": string
+    "email": string
+    "phone": string
+    "markAsDelete": boolean,
+    "isConfirmed": boolean,
+    "role": string
+    "customerProperty": null | boolean
+    "developerProperty": {
+        logo:string
+        "id": number
+        "name": string
+        "type": string
+        "phone":Array<{ord:string, value:number}>
+        "address": string
+        "site": string
+        "description": string
+        "legalFullName": string
+        "legalAddress": string
+        "authorizedCapital": number
+        "OKFS": string
+        "OKOPF": string
+        "OKOGU": null | string
+        "INN": string
+        "OGRN": string
+        "KPP": string
+        "OKATO": null | string
+        "OKPO": string
+        "OKTMO": string
+        "status": string
+        "leaderName": string
+        "founders": string
+        "enterpriseSize": number
+        "numberOfStaff": number
+        "branch": number
+        "revenue": number
+        "netProfit": number
+        "netAssets": number
+        "registrationDate": string
+        "registrationAuthorityName": string
+        "registrationAuthorityAddress": string
+        "registeringAuthorityLocated": string
+        "mainOccupation": string
+        "extraOccupations": Array<{ord:string, value:number}>
+        "statistics": Array<{items:Array<{items:string, value:number}>, title:string}>
+        "risks": null | boolean
+    },
+    "agencyProperty": null | boolean
+    "agentProperty": null | boolean
+    "adminProperty": null | boolean
+    "bankProperty": null | boolean
+}
+
+type DeveloperType = {
+    img: string
+    title: string
+    description: string
+    developerInfo: {
+        title: string
+        location: string
+        passed: string
+        objectsDeveloper: Array<{nameObject:string, id:string}>
+    }
+}
+type AgentsType = {
+    img:string
+    connection: {
+        whatsApp: string
+        telegram: string
+        email:string
+        phone: string
+    },
+    infoAgent: {
+        fullName: string
+        heldPost: string
+        professionalExperience: string
+        completed: string
+        inWork: string
+
+        whatsApp: string
+        telegram: string
+        email: string
+        phone: string
+    }
+}
+export type FetchMainType={
+    agents: Array<AgentsType>
+    developersArray:  Array<DeveloperType>
+}
