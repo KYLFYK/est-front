@@ -1,4 +1,5 @@
 import React, {useState, useRef, useEffect} from "react";
+import { useRouter } from 'next/router'
 import { observer } from "mobx-react-lite"
 import { useStore } from "../../../../mobx/stores/SearchStore/SearchStore"
 import MapGL, {Marker} from "react-map-gl";
@@ -23,6 +24,7 @@ interface Props {
 }
 
 const Map: React.FC<Props> = observer(({mapData, location, viewport, setViewport, view, setView}) => {
+  const router = useRouter()
   const store = useStore()
   const data = store.get()
   const center = {
@@ -155,7 +157,7 @@ const Map: React.FC<Props> = observer(({mapData, location, viewport, setViewport
                             </BaseButton>
                           </div>
                           <div className={s.list}>
-                            {choosedPlaces.length && choosedPlaces.map((cp: any, i: number) => <div key={i} style={{padding:'5px'}}><ObjectCard key={i} houseData={cp.properties.prop} data={cp.properties.prop}/></div>)}
+                            {choosedPlaces.length && choosedPlaces.map((cp: any, i: number) => <div key={i} style={{padding:'5px'}}><ObjectCard route={router.query['object-type']} key={i} houseData={cp.properties.prop} data={cp.properties.prop}/></div>)}
                           </div>
                         </div>
         </div>

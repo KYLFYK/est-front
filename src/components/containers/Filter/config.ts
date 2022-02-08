@@ -38,14 +38,14 @@ export const FILTER_FLOORS_OPTIONS: IOption[] = [
 ]
 
 export const FILTER_IRB_OPTIONS: IOption[] = [
-    {value: "irb", label: "ИЖС"},
-    {value: "noirb", label: "Без ИЖС"},
+    {value: "true", label: "ИЖС"},
+    {value: "false", label: "Без ИЖС"},
 ]
 
 export const FILTER_LAND_SPECS_OPTIONS: IOption[] = [
-    {value: "electro", label: "Электричество"},
+    {value: "electric", label: "Электричество"},
     {value: "gas", label: "Газ"},
     {value: "water", label: "Вода"},
-    {value: "sewerage", label: "Канализация"},
+    {value: "canalization", label: "Канализация"},
 ]
 

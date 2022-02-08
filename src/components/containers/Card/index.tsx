@@ -9,6 +9,7 @@ import Typography from '../../shared/Typography/Typography';
 import {mapData} from '../CardContainer/config'
 
 interface Props {
+    route: string | string[] | undefined,
     houseData: APIObject.types.IObjectEntry,
     data?: any
 }
@@ -16,7 +17,7 @@ interface Props {
 const TEMP_LINK = '/'
 const MAX_SLIDERS_AMMOUNT = 7
 
-const ObjectCard: React.FC<Props> = ({ houseData, data }) => {
+const ObjectCard: React.FC<Props> = ({ route, houseData, data }) => {
 
     //const houseImages = houseData.images.length > MAX_SLIDERS_AMMOUNT ? houseData.images.slice(0, MAX_SLIDERS_AMMOUNT) : houseData.images
     const houseImages = mapData[0].images
@@ -28,7 +29,7 @@ const ObjectCard: React.FC<Props> = ({ houseData, data }) => {
                 <BaseSlider images={imagesUrls} height={200} withFavorite onClickFavorite={() => {}}/>
             </div>
 
-            <Link href={`${TEMP_LINK}${'apartment'}/${data.id}`}>
+            <Link href={`${TEMP_LINK}${route}/${data.id}`}>
                 <a className={s.content}>
                     <Typography inline weight="bold" color="accent" className={s.title}>{data.name}</Typography>
                     <p className={s.subtitle}>
