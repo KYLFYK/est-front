@@ -80,6 +80,10 @@ export const Filter: React.FC<Props> = observer(({ location, initialValues }) =>
     }, {})
 
     React.useEffect(() => {
+        if(initialValues && initialValues['object-type'] === 'townhouse') {
+            initialValues['object-type'] = 'house'
+            initialValues['privateType'] = FILTER_PRIVATE_HOUSE_OPTIONS[1].value
+        }
         initialValues && setValues(initialValues)
         location === 'search' && store.fetch()
     }, [initialValues])
