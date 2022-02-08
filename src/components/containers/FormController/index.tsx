@@ -14,8 +14,12 @@ interface FieldType<T> {
   value: T[keyof T];
 }
 
+interface IFormRef extends HTMLFormElement {
+  [key: number]: HTMLInputElement;
+}
+
 export interface FormInstance<T> {
-  ref: RefObject<HTMLFormElement>;
+  ref: RefObject<IFormRef>;
   getValues: () => T;
   setValues: (data: FieldType<T>[]) => void;
   resetValues: () => void;
@@ -26,7 +30,7 @@ export const useForm: <T>(initValues: T) => [Form: FormInstance<T>] = (
 ) => {
   type IInitialValues = typeof initValues;
 
-  const formRef = createRef<HTMLFormElement>();
+  const formRef = createRef<IFormRef>();
 
   const initialValues: Record<
     keyof IInitialValues,
@@ -45,8 +49,7 @@ export const useForm: <T>(initValues: T) => [Form: FormInstance<T>] = (
 
           Object.keys(initialValues).forEach((obj, index) => {
             if (formRef.current?.[index] && obj === element.name) {
-              // @ts-ignore
-              formRef.current?.[index].value = element.value;
+              formRef.current[index].value = element.value as any;
             }
           });
         }
@@ -64,11 +67,9 @@ export const useForm: <T>(initValues: T) => [Form: FormInstance<T>] = (
 
         if (formRef.current?.[index]) {
           if (initValues && initValues[obj]) {
-            // @ts-ignore
-            formRef.current?.[index].value = initValues[obj];
+            formRef.current[index].value = initValues[obj] as any;
           } else {
-            // @ts-ignore
-            formRef.current?.[index].value = "";
+            formRef.current[index].value = "";
           }
         }
       });
@@ -80,19 +81,17 @@ export const useForm: <T>(initValues: T) => [Form: FormInstance<T>] = (
 
     const initForm = (index: number) => {
       if (formRef?.current?.[index]) {
-        // @ts-ignore
-        if (initValues[formRef?.current[index].name]) {
-          // @ts-ignore
-          formRef?.current[index].value =
-            // @ts-ignore
-            initValues[formRef?.current[index].name];
-          // @ts-ignore
-          initialValues[formRef?.current[index].name] =
-            // @ts-ignore
-            initValues[formRef?.current[index].name];
+        if (initValues[formRef.current[index].name as keyof IInitialValues]) {
+          formRef.current[index].value = initValues[
+            formRef.current[index].name as keyof IInitialValues
+          ] as any;
+          initialValues[formRef.current[index].name as keyof IInitialValues] =
+            initValues[
+              formRef?.current[index].name as keyof IInitialValues
+            ] as any;
         } else {
-          // @ts-ignore
-          initialValues[formRef?.current[index].name] = undefined;
+          initialValues[formRef.current[index].name as keyof IInitialValues] =
+            undefined;
         }
 
         initForm(index + 1);
@@ -134,7 +133,9 @@ export function FormController<T>({
   form,
   className,
   style,
-}: IControllerProps<T> & { children?: ReactNode }): ReactElement {
+}: IControllerProps<T> & {
+  children?: ReactNode | HTMLInputElement;
+}): ReactElement {
   return (
     <form ref={form.ref} style={style} className={className}>
       {children}
