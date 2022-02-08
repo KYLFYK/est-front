@@ -14,6 +14,7 @@ import {OurOfficeType} from "../src/components/containers/OurOffice/OurOffice";
 import {observer} from "mobx-react-lite";
 import {UrlMainPage} from "../src/api/mainPage/mainPage";
 import {useRouter} from "next/router";
+import {useStoreMainPage} from "../src/mobx/mainPage/mainPage";
 const city = ["Москва", "Крым", "Сочи"];
 const personalAccount = [
     {title: "Личный кабинет", href: "/User", message: 0},
@@ -69,23 +70,30 @@ const ourOffice: OurOfficeType = {
             {title: "dot", value: "Крым, Ленина, 23 корпус 1"},
             {title: "time", value: "Ежедневно с 10:00 до 20:00"},
             {title: "phone", value: "+7 913 453 22 34", href: "tel:"},
-            {title: "phone", value: "+7 913 453 22 35", href: "tel:"},
-            {title: "printer", value: "+7 913 453 22 34"},
+            // {title: "phone", value: "+7 913 453 22 35", href: "tel:"},
+            // {title: "printer", value: "+7 913 453 22 34"},
             {title: "email", value: "estatum@mail.com", href: "mailto:"},
         ],
         plotRoute: "www.google.com",
     },
 };
 
-const Start :React.FC<FetchMainType> = observer(({agents, developersArray}) => {
+const Start :React.FC<FetchMainType> = observer(({ }) => {
+
+    const store = useStoreMainPage()
 
     const router = useRouter()
-
     useEffect(()=>{
+        store.fetch()
         if (router.asPath === '/#contact'){
             router.push('/#contact')
         }// eslint-disable-next-line
     },[router.asPath])
+
+    const agents = store.initialData.agents
+    const developers = store.initialData.developers
+
+
 
     return (
         <MainContainer
@@ -99,7 +107,7 @@ const Start :React.FC<FetchMainType> = observer(({agents, developersArray}) => {
             <BestOffers tagsButton={tagsButton} bestOffers={estateOffers}/>
             <DevelopersContainer
                 title={"Застройщики и агентства, которые нам доверяют"}
-                developersInfo={developersArray}
+                developersInfo={developers}
             />
             <AgentsContainer
                 title={"Наши агенты к вашим услугам"}

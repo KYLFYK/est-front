@@ -138,7 +138,7 @@ const AccountEdit :FC<AccountEditType>= observer(({onEdit}) => {
 
     return (
         <div>
-            <BackPage onBackPage={backPage} title={'Редактирование аккаунта агентства'} />
+            <BackPage onBackPage={backPage} title={'Редактирование аккаунта агента'} />
             <div className={css.df_jc}>
                 <div>
                     <Typography weight={'bold'}>Аккаунт</Typography>
@@ -160,7 +160,9 @@ const AccountEdit :FC<AccountEditType>= observer(({onEdit}) => {
                                         Статус
                                     </Typography>
                                     <BaseInput
-                                        value={valueStatus}
+                                        disabled={true}
+                                        // value={valueStatus}
+                                        placeholder={valueStatus}
                                         onChange={(e)=>setValueStatus(e.currentTarget.value)}
                                         className={css.styleButton}
                                     />
@@ -197,7 +199,9 @@ const AccountEdit :FC<AccountEditType>= observer(({onEdit}) => {
                                         E-mail
                                     </Typography>
                                     <BaseInput
-                                        value={valueEmail}
+                                        disabled={true}
+                                        // value={valueEmail}
+                                        placeholder={valueEmail}
                                         onChange={(e)=>setValueEmail(e.currentTarget.value)}
                                         className={css.styleButton}
                                     />
@@ -210,9 +214,10 @@ const AccountEdit :FC<AccountEditType>= observer(({onEdit}) => {
                                         Telegram
                                     </Typography>
                                     <BaseInput
+                                        placeholder={'estatum'}
                                         value={valueTelegram}
                                         onChange={(e)=> setValueTelegram(e.currentTarget.value)}
-                                        className={css.styleButton}
+                                        className={!valueTelegram?css.styleButton:''}
                                     />
                                 </div>
                                 <div className={css.marginColumn} style={{width:"25%"}}>
@@ -220,9 +225,10 @@ const AccountEdit :FC<AccountEditType>= observer(({onEdit}) => {
                                        WhatsApp
                                     </Typography>
                                     <BaseInput
+                                        placeholder={'89996665522'}
                                         value={valueWhatsApp}
                                         onChange={(e)=>setValueWhatsApp(e.currentTarget.value)}
-                                        className={css.styleButton}
+                                        className={!valueTelegram?css.styleButton:''}
                                     />
                                 </div>
                                 <div className={css.marginColumn} style={{width:"25%"}}>
@@ -232,7 +238,7 @@ const AccountEdit :FC<AccountEditType>= observer(({onEdit}) => {
                                     <BaseInput
                                         value={valueViber}
                                         onChange={(e)=>setValueViber(e.currentTarget.value)}
-                                        className={css.styleButton}
+                                        className={!valueTelegram?css.styleButton:''}
                                     />
                                 </div>
                             </div>

@@ -11,14 +11,14 @@ export const mailPage ={
     getAgentOur:async (amount:number)=>{
         try{
             return await instance.get<mainAgentsType>(`${UrlMainPage.agentOur}?amount=${amount}`)
-        }catch (e) {
+        }catch (e:any) {
             return e
         }
     },
     newSubscription:async (name:string,email:string,phone:string)=>{
         try{
             await instance.post(`${UrlMainPage.newsSubscription}`,{name,email,phone})
-            alert(`Спасибо что подписались на новости ${name}`)
+            alert(`Спасибо за подписку ${name}`)
         }catch (e:any) {
             alert(e.response.data.message)
         }
@@ -43,7 +43,15 @@ export const mailPage ={
             alert(e)
 
         }
-    }
+    },
+    getDeveloperOur:async (amount:number)=>{
+        try{
+            return await instance.get(`${UrlMainPage.developerOur}?amount=${amount}`)
+        }catch (e:any) {
+            return e
+        }
+    },
+
 }
 type mainAgentsType={
     data:[]

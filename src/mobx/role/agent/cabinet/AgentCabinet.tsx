@@ -10,14 +10,14 @@ class AgentCabinetStore {
 
     initialData = {
         info:[
-            {label: 'Имя', value: ''},
-            {label: 'Статус', value: ''},
-            {label: 'Стаж', value: '' },
-            {label: 'Телефон', value:''},
-            {label: 'E-mail', value: ''},
-            {label: 'Telegram', value: ''},
-            {label: 'WhatsApp', value: ''},
-            {label: 'Viber', value: ''},
+            {label: 'Имя', value: '',placeholder:''},
+            {label: 'Статус', value: '',placeholder:''},
+            {label: 'Стаж', value: '' ,placeholder:''},
+            {label: 'Телефон', value:'',placeholder:''},
+            {label: 'E-mail', value: '',placeholder:''},
+            {label: 'Telegram', value: '',placeholder:''},
+            {label: 'WhatsApp', value: '',placeholder:''},
+            {label: 'Viber', value: '',placeholder:''},
         ],
         id: 1,
         img:imgMoc,
@@ -45,19 +45,19 @@ class AgentCabinetStore {
         const experience = res.data.agentProperty.experience?res.data.agentProperty.experience :'0'
         const phone = res.data.agentProperty.phone[0].value?res.data.agentProperty.phone[0].value:''
         const email = res.data.email
-        const telegram = res.data.agentProperty.messengers.telegram ? res.data.agentProperty.messengers.telegram :'telegram'
-        const whatsApp = res.data.agentProperty.messengers.whatsApp  ? res.data.agentProperty.messengers.whatsApp : 'whatsApp'
+        const telegram = res.data.agentProperty.messengers?.telegram ? res.data.agentProperty.messengers.telegram :''
+        const whatsApp = res.data.agentProperty.messengers?.whatsApp  ? res.data.agentProperty.messengers.whatsApp : ''
         const viber = 'viber'
 
         const info = [
-            {label: 'Имя', value: name},
-            {label: 'Статус', value: status},
-            {label: 'Стаж', value: experience },
-            {label: 'Телефон', value: phone},
-            {label: 'E-mail', value: email},
-            {label: 'Telegram', value: telegram},
-            {label: 'WhatsApp', value: whatsApp},
-            {label: 'Viber', value: viber},
+            {label: 'Имя', value: name ,placeholder:''},
+            {label: 'Статус', value: status ,placeholder:''},
+            {label: 'Стаж', value: experience  ,placeholder:''},
+            {label: 'Телефон', value: phone ,placeholder:''},
+            {label: 'E-mail', value: email ,placeholder:'E-mail'},
+            {label: 'Telegram', value: telegram ,placeholder:'estatum'},
+            {label: 'WhatsApp', value: whatsApp ,placeholder:'89996667722'},
+            {label: 'Viber', value: viber,placeholder:''},
         ]
         this.initialData.info = info
         this.initialData.id = res.data.id
