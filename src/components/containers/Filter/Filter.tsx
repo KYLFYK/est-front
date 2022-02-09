@@ -9,7 +9,7 @@ import { CompareInput } from "../../shared/CompareInput/CompareInput"
 import InputsUnion from "../../shared/InputsUnion/InputsUnion"
 import { ToggleButtons } from "../../shared/ToggleButtons/ToggleButtons"
 import { FILTER_ACTIONS_OPTIONS, FILTER_BUILDING_TYPE_OPTIONS, FILTER_PRIVATE_HOUSE_OPTIONS, FILTER_FLOORS_OPTIONS, 
-    FILTER_HOUSE_TYPE_OPTIONS, TOGGLE_BUTTONS_OPTIONS, FILTER_IRB_OPTIONS, FILTER_LAND_SPECS_OPTIONS } from "./config"
+    FILTER_HOUSE_TYPE_OPTIONS, TOGGLE_BUTTONS_OPTIONS_APART, TOGGLE_BUTTONS_OPTIONS_HOUSE, FILTER_IRB_OPTIONS, FILTER_LAND_SPECS_OPTIONS } from "./config"
 import { useStore } from "src/mobx/stores/SearchStore/SearchStore"
 import s from './Filter.module.scss'
 
@@ -50,7 +50,7 @@ export const Filter: React.FC<Props> = observer(({ location, initialValues }) =>
 
     const [values, setValues] = React.useState<any>({
         'object-type': FILTER_HOUSE_TYPE_OPTIONS[0].value,
-        'building-type': undefined,
+        'building-type': FILTER_BUILDING_TYPE_OPTIONS[0].value,
         floor: undefined,
         'price-from': undefined,
         'price-to': undefined,
@@ -66,7 +66,7 @@ export const Filter: React.FC<Props> = observer(({ location, initialValues }) =>
         'building': undefined,
         'benefit': undefined,
     })
-    
+
     const params: any = Object.entries(values).reduce((acc, cur, i): any => {
         if(cur[1] && cur[0] !== 'privateType') {
             //@ts-expect-error
@@ -76,16 +76,23 @@ export const Filter: React.FC<Props> = observer(({ location, initialValues }) =>
             //@ts-expect-error
             acc[`${cur[0]}`] = 'townhouse'
         } 
+        if(cur[0] === 'rooms-in-apartment' && values['object-type'] === 'apartment') {
+            //@ts-expect-error
+            acc[`${cur[0]}`] = cur[1]
+        } 
+        if(cur[0] === 'rooms-in-house' && values['object-type'] === 'house' || values['object-type'] === 'townhouse' ) {
+            //@ts-expect-error
+            acc[`${cur[0]}`] = cur[1]
+        } 
         return acc
     }, {})
-
+    
     React.useEffect(() => {
         if(initialValues && initialValues['object-type'] === 'townhouse') {
             initialValues['object-type'] = 'house'
             initialValues['privateType'] = FILTER_PRIVATE_HOUSE_OPTIONS[1].value
         }
         initialValues && setValues(initialValues)
-        console.log(params)
         location === 'search' && store.fetch()
     }, [initialValues])
     
@@ -116,7 +123,7 @@ export const Filter: React.FC<Props> = observer(({ location, initialValues }) =>
     const onChangeHouseType = (value: string) => {
         setValues({ ...values, 
             'object-type': value, 
-            'building-type': undefined,
+            'building-type': FILTER_BUILDING_TYPE_OPTIONS[0].value,
             'privateType': FILTER_PRIVATE_HOUSE_OPTIONS[0].value, 
             'benefit': undefined, 
             'building': value === 'land' ? undefined : values['building'],
@@ -130,12 +137,12 @@ export const Filter: React.FC<Props> = observer(({ location, initialValues }) =>
     const onChangePlanningApart = (value: string) => {
         const selectedPlanningSet = new Set(values['rooms-in-apartment']?.split(','))
         selectedPlanningSet.has(value) ? selectedPlanningSet.delete(value) : selectedPlanningSet.add(value)
-        setValues({ ...values, 'rooms-in-apartment': Array.from(selectedPlanningSet).join(',') || undefined, 'rooms-in-house': undefined })
+        setValues({ ...values, 'rooms-in-apartment': Array.from(selectedPlanningSet).filter((s) => s !== '').join() || undefined, 'rooms-in-house': undefined })
     }
     const onChangePlanningHouse = (value: string) => {
         const selectedPlanningSet = new Set(values['rooms-in-house']?.split(','))
         selectedPlanningSet.has(value) ? selectedPlanningSet.delete(value) : selectedPlanningSet.add(value)
-        setValues({ ...values, 'rooms-in-house': Array.from(selectedPlanningSet).join(',') || undefined, 'rooms-in-apartment': undefined })
+        setValues({ ...values, 'rooms-in-house': Array.from(selectedPlanningSet).filter((s) => s !== '').join() || undefined, 'rooms-in-apartment': undefined })
     }
     const onChangeBuildingType = (value: string) => {
         setValues({ ...values, 'building-type': value })
@@ -219,7 +226,7 @@ export const Filter: React.FC<Props> = observer(({ location, initialValues }) =>
 
             {values['object-type'] === 'apartment' && <ToggleButtons 
                 classNameButton={s.toggleButton} 
-                items={TOGGLE_BUTTONS_OPTIONS} 
+                items={TOGGLE_BUTTONS_OPTIONS_APART} 
                 activeValue={values['rooms-in-apartment']} 
                 onChange={onChangePlanningApart} 
                 multiple 
@@ -227,7 +234,7 @@ export const Filter: React.FC<Props> = observer(({ location, initialValues }) =>
 
             {(values['object-type'] === 'house' || values['object-type'] === 'townhouse') && <ToggleButtons 
                 classNameButton={s.toggleButton} 
-                items={TOGGLE_BUTTONS_OPTIONS} 
+                items={TOGGLE_BUTTONS_OPTIONS_HOUSE} 
                 activeValue={values['rooms-in-house']} 
                 onChange={onChangePlanningHouse} 
                 multiple 
@@ -266,7 +273,7 @@ export const Filter: React.FC<Props> = observer(({ location, initialValues }) =>
                 options={FILTER_BUILDING_TYPE_OPTIONS} 
                 value={values['building-type']} 
                 onChange={onChangeBuildingType} 
-                placeholder={values['object-type'] === 'apartment' ? "Выбрать тип здания" : "Тип дома"} 
+                placeholder={values['building-type']} 
                 className={s.dropdown} 
             />}
 
