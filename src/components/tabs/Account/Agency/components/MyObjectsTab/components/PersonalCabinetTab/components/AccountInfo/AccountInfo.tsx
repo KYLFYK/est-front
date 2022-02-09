@@ -7,11 +7,10 @@ import {Card} from "../../../../../../../../../shared/Mortgage/Card";
 import { FC } from 'react';
 import css from './AccountInfo.module.scss'
 import { myLoader } from "src/utils/image/image";
+import {observer} from "mobx-react-lite";
+import {useStoreAgencyCabinet} from "../../../../../../../../../../mobx/role/agency/cabinet/AgencyCabinet";
 
 type PersonalCabinetAccountInfoType = {
-    img?:string
-    statusVerification : 'confirmed' | 'waiting' | 'notConfirmed' | 'resend'
-    info:Array<{label:string,value:string}>
     onEdit:()=>void
 }
 const statusVerificationTitle = (status:string) => {
@@ -24,7 +23,10 @@ const statusVerificationTitle = (status:string) => {
     }
 }
 
-const PersonalCabinetAccountInfo: React.FC<PersonalCabinetAccountInfoType> = ({img,statusVerification,info,onEdit}) => {
+const PersonalCabinetAccountInfo: React.FC<PersonalCabinetAccountInfoType> = observer(({onEdit}) => {
+
+    const store = useStoreAgencyCabinet()
+
     const apiStatus = () => {
         console.log('apiStatus')
     }
@@ -36,7 +38,7 @@ const PersonalCabinetAccountInfo: React.FC<PersonalCabinetAccountInfoType> = ({i
                     <Typography weight={"bold"}>Логитип</Typography>
                     <Card className={css.card}>
                         <Image
-                            src={img ? img : imgMoc }
+                            src={store.initialData.img }
                             loader={(e)=>myLoader(e.src,e.width,e.quality)}
                             width={88} height={88} alt={'photo'}/>
                     </Card>
@@ -50,7 +52,7 @@ const PersonalCabinetAccountInfo: React.FC<PersonalCabinetAccountInfoType> = ({i
                     <BaseButton type={"secondary"} isActive className={css.margin} onClick={apiStatus}>
                         <Typography size={"small"} color={"secondary"} >
                             {
-                                statusVerificationTitle(statusVerification)
+                                statusVerificationTitle(store.initialData.statusVerification)
                             }
                         </Typography>
                     </BaseButton>
@@ -59,16 +61,23 @@ const PersonalCabinetAccountInfo: React.FC<PersonalCabinetAccountInfoType> = ({i
             <Typography  weight={"bold"} className={css.marginText}>
                 Аккаунт
             </Typography>
-            <div className={css.df_w}>
+            <div className={css.dg_w}>
                 {
-                    info.map(({label,value},index)=>(
+                    store.initialData.info.map(({label,value},index)=>(
+                        <DataTypography key={index} title={label} value={value}/>
+                    ))
+                }
+            </div>
+            <div className={css.columnAccount}>
+                {
+                    store.initialData.descriptionAccount.map(({label,value},index)=>(
                         <DataTypography key={index} title={label} value={value}/>
                     ))
                 }
             </div>
         </div>
     )
-}
+})
 
 export default PersonalCabinetAccountInfo
 
