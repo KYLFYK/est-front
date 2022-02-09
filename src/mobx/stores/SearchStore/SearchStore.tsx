@@ -25,7 +25,7 @@ class SearchStore {
   }
 
   get() {
-    return JSON.parse(JSON.stringify({ ...this.initialData}))
+    return JSON.parse(JSON.stringify({ ...this.params}))
   }
 
   async fetch() {

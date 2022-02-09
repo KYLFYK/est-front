@@ -1,5 +1,4 @@
 import React from 'react'
-import { useRouter } from 'next/router'
 import { observer } from "mobx-react-lite"
 import { useStore } from "../../../mobx/stores/SearchStore/SearchStore"
 import { makeStyles } from "@material-ui/core"
@@ -38,9 +37,9 @@ const useStyles = makeStyles(() => ({
 }))
 
 const CardContainer: React.FC<Props> = observer(({ mapData, view, setView }) => {
-    const router = useRouter()
     const store = useStore()
     const classes = useStyles()
+
     const toggleButtonOptions = [
         { icon: <GridView fill={view === 'gridView' ? '#96A2B5' : '#CAD1DA'}/>, onclick: () => setView('gridView') }, 
         { icon: <MapView fill={view === 'mapView' ? '#96A2B5' : '#CAD1DA'}/>, onclick: () => setView('mapView') },
@@ -79,7 +78,7 @@ const CardContainer: React.FC<Props> = observer(({ mapData, view, setView }) => 
                     : store.initialData && store.initialData.length 
                         ? store.initialData.map((i: any, id: number) => {
                             return(<>
-                                <div key={id} style={{padding:'5px'}}><ObjectCard key={id} route={router.query['object-type']} typeObject={router.query['building-type']} houseData={mapData[0]} data={i} /></div>
+                                <div key={id} style={{padding:'5px'}}><ObjectCard key={id} route={store.get()['object-type']} typeObject={store.get()['building-type']} houseData={mapData[0]} data={i} /></div>
                             </>)
                         })
                         : <h1>Объекты отсутствуют</h1>

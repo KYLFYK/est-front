@@ -25,9 +25,7 @@ interface Props {
 }
 
 const Map: React.FC<Props> = observer(({mapData, location, viewport, setViewport, view, setView}) => {
-  for (let i=0; i<130; i++) {
-    console.log(`${i} - ${digitToSyntax(i)}`)
-  }
+
   const router = useRouter()
   const store = useStore()
   const data = store.get()
