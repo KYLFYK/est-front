@@ -20,5 +20,4 @@ const infoAgencyMoc = {
 const Template: ComponentStory<typeof AccountEdit> = (args) => <AccountEdit {...args} />;
 export const AccountEdit_ = Template.bind({});
 AccountEdit_.args = {
-    infoAgency:infoAgencyMoc
 };
