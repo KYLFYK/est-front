@@ -24,7 +24,6 @@ export const MappingDescription = (description: any) => {
 }
 
 export const MappingLegalPurity = (legal: any) => {
-  console.log(legal)
   return {
     encumbrances: true,
     risks: legal.risks,

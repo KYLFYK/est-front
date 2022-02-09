@@ -1,4 +1,5 @@
 import React from 'react'
+import { useRouter } from 'next/router'
 import { observer } from "mobx-react-lite"
 import { useStore } from "../../../mobx/stores/SearchStore/SearchStore"
 import { makeStyles } from "@material-ui/core"
@@ -37,6 +38,7 @@ const useStyles = makeStyles(() => ({
 }))
 
 const CardContainer: React.FC<Props> = observer(({ mapData, view, setView }) => {
+    const router = useRouter()
     const store = useStore()
     const classes = useStyles()
     const toggleButtonOptions = [
@@ -56,14 +58,14 @@ const CardContainer: React.FC<Props> = observer(({ mapData, view, setView }) => 
                     />
                 </div>
                 <div className={s.finderButtons}>
-                    <BaseButton
+                    {/*<BaseButton
                         type={'secondary'}
                         isActive={false}
                         icon={<FavoriteIcon />}
                         iconActive={''}
                     >
                         Сохранить поиск
-                    </BaseButton>
+                    </BaseButton>*/}
                     <div className={s.toggleButtonsWrap}>
                         <ToggleButtonsWithIcons
                             items={toggleButtonOptions}
@@ -77,7 +79,7 @@ const CardContainer: React.FC<Props> = observer(({ mapData, view, setView }) => 
                     : store.initialData && store.initialData.length 
                         ? store.initialData.map((i: any, id: number) => {
                             return(<>
-                                <div key={id} style={{padding:'5px'}}><ObjectCard houseData={mapData[0]} data={i} /></div>
+                                <div key={id} style={{padding:'5px'}}><ObjectCard key={i} route={router.query['object-type']} houseData={mapData[0]} data={i} /></div>
                             </>)
                         })
                         : <h1>Объекты отсутствуют</h1>

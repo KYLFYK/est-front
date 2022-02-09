@@ -1,4 +1,4 @@
-import React, { ChangeEvent } from "react"
+import React from "react"
 import { observer } from "mobx-react-lite"
 import { useRouter } from 'next/router'
 import { ISearchParamsModel } from "../../../utils/interfaces/search"
@@ -9,9 +9,8 @@ import { CompareInput } from "../../shared/CompareInput/CompareInput"
 import InputsUnion from "../../shared/InputsUnion/InputsUnion"
 import { ToggleButtons } from "../../shared/ToggleButtons/ToggleButtons"
 import { FILTER_ACTIONS_OPTIONS, FILTER_BUILDING_TYPE_OPTIONS, FILTER_PRIVATE_HOUSE_OPTIONS, FILTER_FLOORS_OPTIONS, 
-    FILTER_HOUSE_TYPE_OPTIONS, TOGGLE_BUTTONS_OPTIONS, FILTER_IRB_OPTIONS, FILTER_LAND_SPECS_OPTIONS } from "./config"
+    FILTER_HOUSE_TYPE_OPTIONS, TOGGLE_BUTTONS_OPTIONS_APART, TOGGLE_BUTTONS_OPTIONS_HOUSE, FILTER_IRB_OPTIONS, FILTER_LAND_SPECS_OPTIONS } from "./config"
 import { useStore } from "src/mobx/stores/SearchStore/SearchStore"
-
 import s from './Filter.module.scss'
 
 import {makeStyles} from "@material-ui/core";
@@ -51,35 +50,52 @@ export const Filter: React.FC<Props> = observer(({ location, initialValues }) =>
 
     const [values, setValues] = React.useState<any>({
         'object-type': FILTER_HOUSE_TYPE_OPTIONS[0].value,
-        'building-type': undefined,
+        'building-type': FILTER_BUILDING_TYPE_OPTIONS[0].value,
         floor: undefined,
         'price-from': undefined,
         'price-to': undefined,
         'square-from': undefined,
         'square-to': undefined,
-        rooms: undefined,
+        'rooms-in-apartment': undefined,
+        'rooms-in-house': undefined,
         'order-type': FILTER_ACTIONS_OPTIONS[0].value,
         searchValue: undefined,
-        privateType: FILTER_PRIVATE_HOUSE_OPTIONS[0].value,
+        'privateType': FILTER_PRIVATE_HOUSE_OPTIONS[0].value,
         'floor-from': undefined,
         'floor-to': undefined,
-        'irb': undefined,
-        'improvement': undefined,
+        'building': undefined,
+        'benefit': undefined,
     })
 
     const params: any = Object.entries(values).reduce((acc, cur, i): any => {
-        if(cur[1]) {
+        if(cur[1] && cur[0] !== 'privateType') {
             //@ts-expect-error
             acc[`${cur[0]}`] = cur[1]    
         } 
+        if(cur[1] && cur[0] === 'object-type' && values['privateType'] === 'townhouse') {
+            //@ts-expect-error
+            acc[`${cur[0]}`] = 'townhouse'
+        } 
+        if(cur[0] === 'rooms-in-apartment' && values['object-type'] === 'apartment') {
+            //@ts-expect-error
+            acc[`${cur[0]}`] = cur[1]
+        } 
+        if(cur[0] === 'rooms-in-house' && values['object-type'] === 'house' || values['object-type'] === 'townhouse' ) {
+            //@ts-expect-error
+            acc[`${cur[0]}`] = cur[1]
+        } 
         return acc
     }, {})
-
+    
     React.useEffect(() => {
+        if(initialValues && initialValues['object-type'] === 'townhouse') {
+            initialValues['object-type'] = 'house'
+            initialValues['privateType'] = FILTER_PRIVATE_HOUSE_OPTIONS[1].value
+        }
         initialValues && setValues(initialValues)
         location === 'search' && store.fetch()
     }, [initialValues])
-
+    
     const onSubmit = () => {
         if(location === 'start') {
             router.push(
@@ -87,6 +103,8 @@ export const Filter: React.FC<Props> = observer(({ location, initialValues }) =>
               pathname: '/search',
               query: params,
             })
+            store.setParams(params)
+            store.fetch()
         }
         if(location === 'search') {
             router.replace(
@@ -103,15 +121,28 @@ export const Filter: React.FC<Props> = observer(({ location, initialValues }) =>
         setValues({...values, 'order-type': value})
     }
     const onChangeHouseType = (value: string) => {
-        setValues({ ...values, 'object-type': value })
+        setValues({ ...values, 
+            'object-type': value, 
+            'building-type': FILTER_BUILDING_TYPE_OPTIONS[0].value,
+            'privateType': FILTER_PRIVATE_HOUSE_OPTIONS[0].value, 
+            'benefit': undefined, 
+            'building': value === 'land' ? undefined : values['building'],
+            'rooms-in-house': undefined,
+            'rooms-in-apartment': undefined,
+        })
     }
     const onChangeFloors = (value: string) => {
         setValues({ ...values, floor: value })
     }
-    const onChangePlanning = (value: string) => {
-        const selectedPlanningSet = new Set(values['rooms']?.split(','))
+    const onChangePlanningApart = (value: string) => {
+        const selectedPlanningSet = new Set(values['rooms-in-apartment']?.split(','))
         selectedPlanningSet.has(value) ? selectedPlanningSet.delete(value) : selectedPlanningSet.add(value)
-        setValues({ ...values, 'rooms': Array.from(selectedPlanningSet).join(',') || undefined })
+        setValues({ ...values, 'rooms-in-apartment': Array.from(selectedPlanningSet).filter((s) => s !== '').join() || undefined, 'rooms-in-house': undefined })
+    }
+    const onChangePlanningHouse = (value: string) => {
+        const selectedPlanningSet = new Set(values['rooms-in-house']?.split(','))
+        selectedPlanningSet.has(value) ? selectedPlanningSet.delete(value) : selectedPlanningSet.add(value)
+        setValues({ ...values, 'rooms-in-house': Array.from(selectedPlanningSet).filter((s) => s !== '').join() || undefined, 'rooms-in-apartment': undefined })
     }
     const onChangeBuildingType = (value: string) => {
         setValues({ ...values, 'building-type': value })
@@ -132,19 +163,26 @@ export const Filter: React.FC<Props> = observer(({ location, initialValues }) =>
         setValues({...values, searchValue: e.target.value})
     }*/
     const onChangePrivateType = (value: string) => {
-        setValues({...values, privateType: value})
+        setValues({...values, 'privateType': value})
     }
     const onChangePrivateFloorFrom = (value: string) => {
         setValues({...values, 'floor-from': value})
     }
     const onChangePrivateFloorTo = (value: string) => {
-        setValues({...values, 'floor-to': value})
+        setValues({...values, 'floor-to': value}) 
     }
     const onChangeIrb = (value: string) => {
-        setValues({...values, 'irb': value})
+        setValues({...values, 'building': value})
     }
     const onChooseImprovment = (value: string) => {
-        setValues({...values, 'improvement': value})
+        const selectedImprovmentSet = new Set(values['benefit']?.split(','))
+        selectedImprovmentSet.has(value) ? selectedImprovmentSet.delete(value) : selectedImprovmentSet.add(value)
+        setValues({ ...values, 'benefit': Array.from(selectedImprovmentSet).join(',') || undefined })
+    }
+
+    const MultiChoiceBenefits = () => {
+        const selectedImprovmentSet = new Set(values['benefit']?.split(','))
+        return Array.from(selectedImprovmentSet).map((si: any) => FILTER_LAND_SPECS_OPTIONS.filter((s: any) => si === s.value)[0].label).join(', ')
     }
 
     return (
@@ -166,15 +204,15 @@ export const Filter: React.FC<Props> = observer(({ location, initialValues }) =>
                 />
             </InputsUnion>
 
-            {values['object-type'] === 'house' && <BaseDropDown 
+            {(values['object-type'] === 'house') && <BaseDropDown 
                 options={FILTER_PRIVATE_HOUSE_OPTIONS} 
-                value={values.privateType} 
+                value={values['privateType']} 
                 onChange={onChangePrivateType} 
                 placeholder={FILTER_PRIVATE_HOUSE_OPTIONS[0].label} 
                 className={s.dropdown}  
             />}
 
-            {values['object-type'] === 'house' && <CompareInput 
+            {(values['object-type'] === 'house') && <CompareInput 
                 location="search"
                 classNameInputFrom={s.floorInputFrom} 
                 classNameInputTo={s.floorInputTo}  
@@ -188,9 +226,17 @@ export const Filter: React.FC<Props> = observer(({ location, initialValues }) =>
 
             {values['object-type'] === 'apartment' && <ToggleButtons 
                 classNameButton={s.toggleButton} 
-                items={TOGGLE_BUTTONS_OPTIONS} 
-                activeValue={values.rooms} 
-                onChange={onChangePlanning} 
+                items={TOGGLE_BUTTONS_OPTIONS_APART} 
+                activeValue={values['rooms-in-apartment']} 
+                onChange={onChangePlanningApart} 
+                multiple 
+            />}
+
+            {(values['object-type'] === 'house' || values['object-type'] === 'townhouse') && <ToggleButtons 
+                classNameButton={s.toggleButton} 
+                items={TOGGLE_BUTTONS_OPTIONS_HOUSE} 
+                activeValue={values['rooms-in-house']} 
+                onChange={onChangePlanningHouse} 
                 multiple 
             />}
 
@@ -227,7 +273,7 @@ export const Filter: React.FC<Props> = observer(({ location, initialValues }) =>
                 options={FILTER_BUILDING_TYPE_OPTIONS} 
                 value={values['building-type']} 
                 onChange={onChangeBuildingType} 
-                placeholder={values['object-type'] === 'apartment' ? "Выбрать тип здания" : "Тип дома"} 
+                placeholder={values['building-type']} 
                 className={s.dropdown} 
             />}
 
@@ -241,17 +287,17 @@ export const Filter: React.FC<Props> = observer(({ location, initialValues }) =>
 
             {values['object-type'] === 'land' && <BaseDropDown 
                 options={FILTER_IRB_OPTIONS} 
-                value={values['irb']} 
+                value={values['building']} 
                 onChange={onChangeIrb} 
                 placeholder="Выбрать c ИЖС или без" 
                 className={s.dropdown} 
             />}
 
-            {(values['object-type'] === 'house' || values['object-type'] === 'land') && <BaseDropDown 
+            {values['object-type'] !== 'apartment' && <BaseDropDown 
                 options={FILTER_LAND_SPECS_OPTIONS} 
-                value={values['improvement']} 
+                value={values['benefit']} 
                 onChange={onChooseImprovment} 
-                placeholder="Выбрать благоустроенность" 
+                placeholder={values['benefit'] ? MultiChoiceBenefits() : "Выбрать благоустроенность"} 
                 className={s.dropdown} 
             />}
             
