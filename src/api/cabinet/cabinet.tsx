@@ -41,9 +41,31 @@ export const cabinetAPI ={
             return e
         }
     },
+    getCabinetAgency:async ()=> {
+        try{
+            const res = await instance.get(`${UrlMainPage.accountOur}`,{
+                headers: {
+                    authorization: `Bearer ${localStorage.getItem('accessEstatum')}`
+                }
+            })
+            return res
+        }catch (e:any) {
+            return e
+        }
+    },
+    updateAgencyCabinet:async (id:number,updateValue: UpdateAgencyCabinetType)=>{
+        try{
+            const res = await instance.put(`agency/{accountId}?accountId=${id}`,updateValue,{
+                headers: {
+                    authorization: `Bearer ${localStorage.getItem('accessEstatum')}`
+                }})
+        }catch (e){
+            return false
+        }
+    },
     updateAgentsCabinet:async (id:number,updateValue: UpdateAgentCabinetType)=>{
         try{
-            const res = instance.put(`agent/{accountId}?accountId=${id}`,updateValue,{
+            const res =await instance.put(`agent/{accountId}?accountId=${id}`,updateValue,{
                 headers: {
                     authorization: `Bearer ${localStorage.getItem('accessEstatum')}`
                 }})
@@ -52,6 +74,10 @@ export const cabinetAPI ={
             return false
         }
     }
+}
+
+export type UpdateAgencyCabinetType ={
+
 }
 
 export type UpdateAgentCabinetType ={

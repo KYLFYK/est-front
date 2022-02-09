@@ -28,7 +28,4 @@ const infoAccountAgency :InfoAccountAgencyType ={
 const Template: ComponentStory<typeof AccountInfo> = (args) => <AccountInfo {...args} />;
 export const AccountInfo_ = Template.bind({});
 AccountInfo_.args = {
-    statusVerification:infoAccountAgency.statusVerification,
-    info:infoAccountAgency.info,
-    img:infoAccountAgency.img,
 };

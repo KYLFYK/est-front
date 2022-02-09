@@ -10,17 +10,31 @@ import BackPage from "../../../../../../../Agent/components/Others/BackPage/Back
 import css from './AccountEdit.module.scss'
 import {myLoader} from "../../../../../../../../../../utils/image/image";
 import {BaseTextarea} from "../../../../../../../../../shared/BaseTextarea/BaseTextarea";
+import {observer} from "mobx-react-lite";
+import {useStoreAgencyCabinet} from "../../../../../../../../../../mobx/role/agency/cabinet/AgencyCabinet";
+import {cabinetAPI} from "../../../../../../../../../../api/cabinet/cabinet";
 
 type AccountEditType ={
     onEdit:()=>void
-    infoAgency:{name:string,status:string,address:string,phone:string,email:string,website:string,description:string}
 }
 
 const image ="data:image/svg+xml;utf8,<svg width=\'100%\' height=\'100%\' " +
     "xmlns=\'http://www.w3.org/2000/svg\'><rect width=\'240px\' height=\'240px\' rx=\'6px\'" +
     " style=\'fill: none; stroke: rgb(26, 72, 98); stroke-width: 1; stroke-dasharray: 9 9\'/></svg>"
 
-const AccountEdit :FC<AccountEditType>= ({onEdit,infoAgency}) => {
+const AccountEdit :FC<AccountEditType>= observer(({onEdit}) => {
+
+    const store = useStoreAgencyCabinet()
+
+    const infoAgency = {
+        name: store.initialData.name,
+        status: store.initialData.status,
+        address: store.initialData.address,
+        phone: store.initialData.phone,
+        email: store.initialData.email,
+        website: store.initialData.website,
+        description: store.initialData.description,
+    }
 
     const copyAgency = {...infoAgency}
 
@@ -43,11 +57,14 @@ const AccountEdit :FC<AccountEditType>= ({onEdit,infoAgency}) => {
             &&infoAgency.website === valueWebsite
             &&infoAgency.description === valueDescription){
             onEdit()
+        }else {
+            setComparison(true)
         }
-        setComparison(true)
     }
 
-    const save = () =>{
+    const save = async () =>{
+        // id + править типизацию + пока нету запроса на правку
+        await cabinetAPI.updateAgencyCabinet(1,{})
         console.log('save')
     }
     const saveBack = () => {
@@ -85,9 +102,11 @@ const AccountEdit :FC<AccountEditType>= ({onEdit,infoAgency}) => {
                                         Статус
                                     </Typography>
                                     <BaseInput
-                                        value={valueStatus}
+                                        disabled={true}
+                                        // value={valueStatus}
+                                        placeholder={valueStatus}
                                         onChange={(e)=>setValueStatus(e.currentTarget.value)}
-                                        className={css.styleButton}
+                                        className={css.styleInput}
                                     />
                                 </div>
                             </div>
@@ -117,9 +136,11 @@ const AccountEdit :FC<AccountEditType>= ({onEdit,infoAgency}) => {
                                         E-mail
                                     </Typography>
                                     <BaseInput
-                                        value={valueEmail}
+                                        disabled={true}
+                                        // value={valueEmail}
+                                        placeholder={valueEmail}
                                         onChange={(e)=>setValueEmail(e.currentTarget.value)}
-                                        className={css.styleButton}
+                                        className={css.styleInput}
                                     />
                                 </div>
                                 <div className={css.marginColumn}>
@@ -195,6 +216,6 @@ const AccountEdit :FC<AccountEditType>= ({onEdit,infoAgency}) => {
         </div>
 
     );
-};
+})
 
 export default AccountEdit;

@@ -51,37 +51,10 @@ class HouseStore {
           encumbrances: false,
           risks: false,
           tabsData: {
-            general: [
-              {
-                value: "",
-                description: "",
-                label: [{ title: "", text: ""}],
-              },
-            ],
-            founders: [
-              {
-                value: "",
-                label: [{ title: "", text: ""}],
-              },
-              {
-                value: "",
-                description: "",
-                label: [{title: "", text: ""}],
-              },
-            ],
-            encumbrances: [
-              {
-                title: "",
-                encumbrances: [
-                  {
-                    status: 0,
-                    description: "",
-                    text: "",
-                  },
-                ],
-              },
-            ],
-            recomendations: [{value: "", label: ""}]
+            general: [],
+            founders: [],
+            encumbrances: [],
+            recomendations: []
           }
         },
         object_developer_info : {

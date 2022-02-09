@@ -169,12 +169,7 @@ export const HouseApi  = {
                                                 text:encum.title
                                             }
                                         ))
-                                        :[{
-
-                                            "status": 0,
-                                            "description": "Записи не найдены",
-                                            "text": "Записи не найдены"
-                                        }]
+                                        :[]
                                 },
                             ],
                             recomendations:
@@ -185,10 +180,7 @@ export const HouseApi  = {
                                         label:rec.description
                                     }
                                 ))
-                                :[{
-                                    value: "Записи не найдены",
-                                    label: "Записи не найдены"
-                                }]
+                                :[]
                         }
                     },
                     object_developer_info : {
