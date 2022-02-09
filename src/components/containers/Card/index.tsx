@@ -37,8 +37,8 @@ const ObjectCard: React.FC<Props> = ({ route, houseData, typeObject, data }) => 
                         <Typography inline weight="light" color="tertiary"> Адрес: </Typography> {data.address}
                     </p>
                     <p className={s.subtitle}>
-                        <Typography inline weight="light" color="tertiary">Этаж:</Typography> {data.property.floor} / {houseData.total_floors}
-                        <Typography inline weight="light" color="tertiary"> Тип жилья:</Typography> {typeObject === 'new' ? 'Новостройка' : 'Вторичное'}
+                        <Typography inline weight="light" color="tertiary">Этаж:</Typography> {data.property.floor} / {data.property.totalFloor}
+                        <Typography inline weight="light" color="tertiary">Тип жилья:</Typography> {typeObject === 'new' ? 'Новостройка' : 'Вторичное'}
                     </p>
                     <p className={s.price}>
                         {data.price} ₽

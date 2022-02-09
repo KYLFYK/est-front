@@ -79,7 +79,7 @@ const CardContainer: React.FC<Props> = observer(({ mapData, view, setView }) => 
                     : store.initialData && store.initialData.length 
                         ? store.initialData.map((i: any, id: number) => {
                             return(<>
-                                <div key={id} style={{padding:'5px'}}><ObjectCard key={i} route={router.query['object-type']} typeObject={router.query['building-type']} houseData={mapData[0]} data={i} /></div>
+                                <div key={id} style={{padding:'5px'}}><ObjectCard key={id} route={router.query['object-type']} typeObject={router.query['building-type']} houseData={mapData[0]} data={i} /></div>
                             </>)
                         })
                         : <h1>Объекты отсутствуют</h1>

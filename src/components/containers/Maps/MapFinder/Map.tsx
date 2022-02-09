@@ -13,6 +13,7 @@ import ObjectCard from "../../Card/index";
 import Typography from "../../../shared/Typography/Typography";
 import s from './styles.module.scss';
 import {MapControls} from "../MapControls/Buttons";
+import {digitToSyntax} from "../../../../lib/syntax/syntax";
 
 interface Props {
   mapData: any
@@ -24,6 +25,9 @@ interface Props {
 }
 
 const Map: React.FC<Props> = observer(({mapData, location, viewport, setViewport, view, setView}) => {
+  for (let i=0; i<130; i++) {
+    console.log(`${i} - ${digitToSyntax(i)}`)
+  }
   const router = useRouter()
   const store = useStore()
   const data = store.get()
@@ -36,7 +40,7 @@ const Map: React.FC<Props> = observer(({mapData, location, viewport, setViewport
   const [choosedPlaces, setChoosedplaces] = useState<any>([])
   const [open, setOpen] = useState(false)
   const [fullscreen, setFullscreen] = useState(false)
-  
+
   const mapRef: any = useRef(null);
   const mapWrap: any = useRef(null);
 
@@ -151,8 +155,11 @@ const Map: React.FC<Props> = observer(({mapData, location, viewport, setViewport
         <div className={s.dynamicBar}>
                         <div className={open && s.localbarActive || s.localbar}>
                           <div className={s.checkboxTitle}>
-                            <Typography color={'tertiary'} weight={'light'}> {choosedPlaces.length} объектов </Typography>
-                            <BaseButton className={s.button} onClick={() => { setOpen(!open) }}>
+                            <Typography color={'tertiary'} weight={'light'}> {choosedPlaces.length} объект{digitToSyntax(choosedPlaces.length)} </Typography>
+                            <BaseButton className={s.button} onClick={() => { 
+                              setOpen(!open) 
+                              setActivemarker(0)
+                            }}>
                                 <CrossIcon />
                             </BaseButton>
                           </div>
