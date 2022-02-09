@@ -22,7 +22,7 @@ const GeneralInfo: React.FC<Props> = ({ images, price, info }) => {
                     height={600} withArrows withFavorite onClickFavorite={() => {}}/>
             </div>
             <div className={s.infoContainer}>
-                {price && <Typography size="big" color="nude">{formatNumbersToCurrency(price)} $</Typography>}
+                {price && <Typography size="big" color="nude">{formatNumbersToCurrency(price)} ₽</Typography>}
                 {info.map((item, idx) => (
                     <div className={s.infoItem} key={idx}>
                         <Typography color={item.value === '' ? 'tertiary' : 'default'} weight="medium" className={idx > 0 && item.value === '' ? s.infoTitle : s.infoLabel}> {item.label} </Typography>

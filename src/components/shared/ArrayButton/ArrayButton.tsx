@@ -13,7 +13,7 @@ const ArrayButton: FC<ArrayButtonType> = ({ name,index,className }) => {
     return (
         <div onClick={() => setActive(!active)} style={{cursor:'default'}} className={className}>
             <BaseButton
-                type={index > 1 ? "tags" : "secondary"}
+                type={"secondary"}
                 className={css.margin}
                 isActive={active}
             >
