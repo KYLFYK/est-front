@@ -85,6 +85,7 @@ export const Filter: React.FC<Props> = observer(({ location, initialValues }) =>
             initialValues['privateType'] = FILTER_PRIVATE_HOUSE_OPTIONS[1].value
         }
         initialValues && setValues(initialValues)
+        console.log(params)
         location === 'search' && store.fetch()
     }, [initialValues])
     
@@ -95,6 +96,8 @@ export const Filter: React.FC<Props> = observer(({ location, initialValues }) =>
               pathname: '/search',
               query: params,
             })
+            store.setParams(params)
+            store.fetch()
         }
         if(location === 'search') {
             router.replace(
