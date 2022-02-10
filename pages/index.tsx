@@ -46,14 +46,11 @@ const estateOffers = [
 ];
 
 const tagsButton = [
-    "Покупка",
-    "Аренда",
+    "Квартира",
     "Дом",
-    "Коммерческая недвижимость",
     "Новостройка",
     "Вторичное жилье",
-    "Строящийся дом",
-    "От собственника",
+    "ЖК",
 ];
 
 const ourOffice: OurOfficeType = {
@@ -78,18 +75,12 @@ const ourOffice: OurOfficeType = {
 
 const Start = observer(({ }) => {
 
-    const store = useStoreMainPage()
-
     const router = useRouter()
     useEffect(()=>{
-        store.fetch()
         if (router.asPath === '/#contact'){
             router.push('/#contact')
         }// eslint-disable-next-line
     },[router.asPath])
-
-    const agents = store.initialData.agents
-    const developers = store.initialData.developers
 
     return (
         <MainContainer
@@ -100,14 +91,12 @@ const Start = observer(({ }) => {
             footerColor="accent"
         >
             <HeadFilter/>
-            <BestOffers tagsButton={tagsButton} bestOffers={estateOffers}/>
+            <BestOffers tagsButton={tagsButton}/>
             <DevelopersContainer
                 title={"Застройщики и агентства, которые нам доверяют"}
-                developersInfo={developers}
             />
             <AgentsContainer
                 title={"Наши агенты к вашим услугам"}
-                agents={agents}
             />
             <Advantages advantages={mocAdvantages}/>
             <OfferNews/>

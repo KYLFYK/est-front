@@ -21,30 +21,7 @@ class MainPageStore  {
                     passed: '',
                     objectsDeveloper: mockObjects  //  <- WANTED MOCK
                 },
-            }
-            // {
-            // account:{id: '1',
-            //     src: 'https://cdn.pixabay.com/photo/2021/08/25/20/42/field-6574455__340.jpg',
-            //     profileForm: {
-            //         name: "Брусника",
-            //         type: "Девелоперская компания",
-            //         address: "5 лет",
-            //         phone: "+7 (123) 456-78-90",
-            //         email: "email@mail.ru",
-            //         site: "brusnika.ru",
-            //         description:
-            //             "Брусника — российская девелоперская компания. Специализируется на строительстве жилых многоэтажных домов. Основана в 2004 году. Штаб-квартира находится в Екатеринбурге. Сегодня Брусника строит современное демократичное жильё в крупных городах Урала и Сибири, в Москве и Московский области. Ежегодно это 6 000 новых квартир для российских семей.",
-            //     },
-            // },
-            // setting:{
-            //     phoneNumber: "+7 (123) 456-78-90",
-            //     login: "brusnika",
-            //     oldPassword: "12345678",
-            //     newPassword: "1234567890",
-            //     noticePhone: "+7 (123) 456-78-90",
-            //     noticeEmail: "email@email.ru",
-            // }
-        ],
+            }],
         agents:[{
             id: 1,
             img: "https://images.unsplash.com/photo-1541963463532-d68292c34b19?ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8Ym9va3xlbnwwfHwwfHw%3D&ixlib=rb-1.2.1&w=1000&q=&q=",
@@ -66,9 +43,12 @@ class MainPageStore  {
                 email:'',
                 phone: '',
             }
-        }]
+        }],
+        bestOffers:[
+
+        ]
     }
-    async fetch() {
+    async fetchAgents() {
         const res =  await mailPage.getAgentOur(3)
         const date = new Date()
         const years = date.getFullYear()
@@ -96,6 +76,8 @@ class MainPageStore  {
                 }
             }
         ))
+    }
+    async fetchDevelopers(){
         const developers = await mailPage.getDeveloperOur(5)
         this.initialData.developers = developers.data.map((developer:any)=>(
             {
@@ -112,8 +94,26 @@ class MainPageStore  {
                 },
             }
         ))
-
-        console.log("agents",JSON.parse(JSON.stringify({ ...this.initialData})))
+    }
+    async fetchBestOffers() {
+        const bestOffers = await mailPage.bestObjects(4)
+        this.initialData.bestOffers =  bestOffers.map((object:any)=>(
+            {
+                id:object.id,
+                name:object.name,
+                address:object.address,
+                type:object.guides.map((t:any)=>t.type_en==='objectType'? t.value:'').filter((t:any)=>t!=='')[0],
+                price:object.price,
+                property:{
+                    floor:3, // moc
+                    floorAll:15, // moc
+                    images: [],
+                    object_id:object.id,
+                    name: object.name,
+                    description: '',
+                }
+            }
+        ))
     }
     get() {
         console.log(JSON.parse(JSON.stringify({ ...this.initialData})))

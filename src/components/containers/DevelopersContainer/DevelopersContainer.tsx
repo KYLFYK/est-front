@@ -1,21 +1,23 @@
-import React, {FC} from 'react';
+import React, {FC, useEffect} from 'react';
 import { EstateDeveloper } from '../EstateDeveloper/EstateDeveloper';
 import HeadLine from '../../shared/HeadLine/HeadLine';
 import css from './developers.module.scss'
+import {useStoreMainPage} from "../../../mobx/mainPage/mainPage";
+import {observer} from "mobx-react-lite";
 
 type DevelopersContainerType = {
     title:string
-    developersInfo:Array<{
-        img: string,
-        title: string,
-        description:string,
-        developerInfo:{
-            title: string,
-            location:string,
-            passed:string,
-            objectsDeveloper:Array<{id:string,nameObject:string}>
-        }
-    }>
+    // developersInfo:Array<{
+    //     img: string,
+    //     title: string,
+    //     description:string,
+    //     developerInfo:{
+    //         title: string,
+    //         location:string,
+    //         passed:string,
+    //         objectsDeveloper:Array<{id:string,nameObject:string}>
+    //     }
+    // }>
 }
 
 export const mockObjects = [{nameObject:'EMAAR1',id:'1'},
@@ -56,13 +58,21 @@ export  const mockDevelopers = [{
     developerInfo:developerInfo
 },]
 // 'Застройщики и агества, которые нам доверяют'
-const DevelopersContainer :FC<DevelopersContainerType> = ({title,developersInfo}) => {
+const DevelopersContainer :FC<DevelopersContainerType> = observer(({title}) => {
+
+    const store = useStoreMainPage()
+
+    useEffect(()=>{
+        store.fetchDevelopers()
+    },[])
+
+
     return (
         <div className={css.containerDevelopersBlock}>
             <HeadLine title={title} >
                 <div className={css.containerDevelopers}>
                     {
-                        developersInfo && developersInfo.map(({developerInfo,title,img,description},index)=>(
+                        store.initialData.developers && store.initialData.developers.map(({developerInfo,title,img,description},index)=>(
                             <EstateDeveloper
                                 key={index}
                                 developerInfo={developerInfo}
@@ -75,6 +85,6 @@ const DevelopersContainer :FC<DevelopersContainerType> = ({title,developersInfo}
             </HeadLine>
         </div>
     );
-};
+})
 
 export default DevelopersContainer;

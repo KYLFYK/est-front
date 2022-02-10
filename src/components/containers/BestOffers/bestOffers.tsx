@@ -1,30 +1,28 @@
-import React, {FC, useEffect, useState} from 'react';
+import React, {FC, useEffect} from 'react';
 import ArrayButton from '../../shared/ArrayButton/ArrayButton';
 import BaseButton from '../../shared/BaseButton/BaseButtons';
-import EstateOffer from '../../shared/EstateOffer/estateOffer';
 import HeadLine from '../../shared/HeadLine/HeadLine';
 import css from './bestOffers.module.scss'
 import Typography from "../../shared/Typography/Typography";
-import {mailPage} from "../../../api/mainPage/mainPage";
-import {IMAGES_SET} from "../GeneralInfo/config";
+import ObjectCard from "../Card";
+import { mapData } from '../Maps/MapFinder/config';
+import {useStoreMainPage} from "../../../mobx/mainPage/mainPage";
+import {observer} from "mobx-react-lite";
 
 type BestOffersType = {
-    bestOffers:Array<{id:number,url:string,img:Array<string>,tags:Array<string>}>
     tagsButton:Array<string>
 }
 
-export const BestOffers :FC<BestOffersType> = ({bestOffers,tagsButton}) => {
+export const BestOffers :FC<BestOffersType> = observer(({tagsButton}) => {
 
-    const [bestOffers1, setBestOffers]=useState([])
+    const store = useStoreMainPage()
 
     useEffect(()=>{
-        const bestObjects = async ()=>{
-            const res=  await mailPage.bestObjects(3)
-            setBestOffers(res)
-        }
-        bestObjects()
+        store.fetchBestOffers()
     },[])
-    console.log('bestOffers1',bestOffers1)
+
+    const mapDat:any = mapData[0]
+
     return (
         <div className={css.offers} >
             <HeadLine title={'Лучшие предложения'} >
@@ -47,29 +45,33 @@ export const BestOffers :FC<BestOffersType> = ({bestOffers,tagsButton}) => {
                 </div>
 
                 <div className={css.offersPhoto}>
+                    {
+                        store.initialData.bestOffers && store.initialData.bestOffers.map((t:any)=>(
+                            <div key={t.id} style={{padding:'5px'}}>
+                                <ObjectCard
+                                    route={t.type}
+                                    typeObject={"new"}
+                                    houseData={mapDat}
+                                    data={t}
+                                />
+                            </div>
+                        ))
+                    }
+                    {/*    OLD - BEST OFFERS*/}
+
                     {/*{*/}
-                    {/*    bestOffers.map(({id, img,tags,url})=>(*/}
+                    {/*    store.initialData.bestOffers && store.initialData.bestOffers.map((t:any)=>(*/}
                     {/*        <EstateOffer*/}
-                    {/*            key={id}*/}
-                    {/*            url={url}*/}
-                    {/*            tags={tags}*/}
-                    {/*            img={img}*/}
+                    {/*            key={t.id}*/}
+                    {/*            url={`${t.type}/${t.id}`}*/}
+                    {/*            tags={[]}*/}
+                    {/*            img={IMAGES_SET}*/}
                     {/*        />*/}
                     {/*    ))*/}
                     {/*}*/}
-                    {
-                        bestOffers1.map((t:any)=>(
-                            <EstateOffer
-                                key={t.id}
-                                url={`${t.type}/${t.id}`}
-                                tags={[]}
-                                img={IMAGES_SET}
-                            />
-                        ))
-                    }
                 </div>
             </HeadLine>
         </div>
     );
-};
+})
 

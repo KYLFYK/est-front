@@ -27,21 +27,10 @@ export const mailPage ={
         let res
         try{
              res = await instance.get(`${UrlMainPage.bestObject}?take=${number}`)
-            console.log("resObject", res)
-            const objects = res.data.map((object:any)=>(
-                {
-                    id:object.id,
-                    name:object.name,
-                    address:object.address,
-                    type:object.guides.map((t:any)=>t.type_en==='objectType'? t.value:'').filter((t:any)=>t!=='')[0],
-                    price:object.price
-                }
-            ))
-           return objects
+           return res.data
         }catch (e:any) {
             return []
             alert(e)
-
         }
     },
     getDeveloperOur:async (amount:number)=>{
