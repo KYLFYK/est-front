@@ -24,7 +24,8 @@ import RecordAgent from '../../src/components/containers/Record/RecordAgent.json
 import {useStore} from '../../src/mobx/stores/HouseStore/HouseStore'
 import { UrlObj} from '../../src/api/instance'
 
-const city = ['Москва', 'Санкт-Петербург', 'Крым', 'Сочи', 'Нижний Новгород']
+const city = ['Москва', 'Крым', 'Сочи']
+
 const personalAccount = [{title: 'Личный кабинет', href: '/User', message: 0},
   {title: 'Избранное', href: '/User', message: 0},
   {title: 'Сохраненные поиски', href: '/User', message: 0},
