@@ -2,7 +2,7 @@ import {instance} from "../instance";
 
 export enum UrlMainPage {
     agentOur = 'agent/our',             //get
-    developerOur = 'developer/our',     //get
+    developerOur = 'developer/get/our',     //get
     newsSubscription = 'news-subscription',     //post
     bestObject = 'objects/best',     //get
 }

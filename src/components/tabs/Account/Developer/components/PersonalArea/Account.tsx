@@ -16,7 +16,11 @@ const profileForm={
         "Брусника — российская девелоперская компания. Специализируется на строительстве жилых многоэтажных домов. Основана в 2004 году. Штаб-квартира находится в Екатеринбурге. Сегодня Брусника строит современное демократичное жильё в крупных городах Урала и Сибири, в Москве и Московский области. Ежегодно это 6 000 новых квартир для российских семей.",
 }
 
-export const Account: FC = observer(() => {
+type AccountDeveloperType={
+    onEdit:()=>void
+}
+
+export const Account: FC<AccountDeveloperType> = observer(({onEdit}) => {
   const store = useStoreDeveloperCabinet()
 
   return (
@@ -27,7 +31,7 @@ export const Account: FC = observer(() => {
                     src={store.initialData.account.src}
                     changeable
                 />
-                <ProfileForm profileForm={store.initialData.account.profileForm} />
+                <ProfileForm profileForm={store.initialData.account.profileForm} onEdit={onEdit} />
                 </>
             : <h2>loader </h2>
         }

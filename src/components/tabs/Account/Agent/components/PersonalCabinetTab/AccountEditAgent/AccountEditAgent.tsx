@@ -5,7 +5,6 @@ import css from './AccountEdit.module.scss'
 import BackPage from '../../Others/BackPage/BackPage';
 import Typography from "../../../../../../shared/Typography/Typography";
 import {BaseInput} from "../../../../../../shared/BaseInput/Input";
-import {BaseTextarea} from "../../../../../../shared/BaseTextarea/BaseTextarea";
 import {myLoader} from "../../../../../../../utils/image/image";
 import BaseButton from "../../../../../../shared/BaseButton/BaseButtons";
 import { Modal } from 'src/components/shared/Modal/Modal';
@@ -13,7 +12,6 @@ import {LogoIcon} from "../../../../../../../icons/Header/LogoIcon";
 import {observer} from "mobx-react-lite";
 import {useStoreAgentCabinet} from "../../../../../../../mobx/role/agent/cabinet/AgentCabinet";
 import {UpdateAgentCabinetType} from "../../../../../../../api/cabinet/cabinet";
-
 
 export type infoAgentType={
     name:string,
@@ -35,7 +33,7 @@ const image ="data:image/svg+xml;utf8,<svg width=\'100%\' height=\'100%\' " +
     "xmlns=\'http://www.w3.org/2000/svg\'><rect width=\'240px\' height=\'240px\' rx=\'6px\'" +
     " style=\'fill: none; stroke: rgb(26, 72, 98); stroke-width: 1; stroke-dasharray: 9 9\'/></svg>"
 
-const AccountEdit :FC<AccountEditType>= observer(({onEdit}) => {
+const AccountEditAgent :FC<AccountEditType>= observer(({onEdit}) => {
 
     const store = useStoreAgentCabinet()
 
@@ -296,4 +294,4 @@ const AccountEdit :FC<AccountEditType>= observer(({onEdit}) => {
     );
 })
 
-export default AccountEdit;
+export default AccountEditAgent;
