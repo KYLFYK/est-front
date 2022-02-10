@@ -192,6 +192,22 @@ const AccountEditAgency :FC<AccountEditType>= observer(({onEdit}) => {
                 >
                     Сохранить
                 </BaseButton>
+
+                {
+                    infoAgency.name !== valueName
+                    || infoAgency.status !== valueStatus
+                    || infoAgency.address !== valueAddress
+                    || infoAgency.phone !== valuePhone
+                    || infoAgency.email !== valueEmail
+                    || infoAgency.website !== valueWebsite
+                    || infoAgency.description !== valueDescription &&
+                    <div style={{display:"flex",alignItems:"center",marginRight:'10px'}}>
+                        <Typography color={"tertiary"}>
+                            Есть несохраненные изменения
+                        </Typography>
+                    </div>
+                }
+
             </div>
             {
                 <Modal setActive={() => setComparison(!comparison)} active={comparison}>

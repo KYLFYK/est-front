@@ -232,6 +232,7 @@ const AccountEditDeveloper: FC<AccountEditType> = observer(({onEdit}) => {
                 </div>
             </div>
             <div style={{display: 'flex', width: "100%", flexDirection: 'row-reverse'}}>
+
                 <BaseButton
                     type={"secondary"}
                     isActive className={css.marginButton}
@@ -239,6 +240,22 @@ const AccountEditDeveloper: FC<AccountEditType> = observer(({onEdit}) => {
                 >
                     Сохранить
                 </BaseButton>
+
+                {
+                    agentInfo.name !== valueName
+                    || agentInfo.type !== valueType
+                    || agentInfo.address !== valueAddress
+                    || agentInfo.phone !== valuePhone
+                    || agentInfo.email !== valueEmail
+                    || agentInfo.site !== valueSite
+                    || agentInfo.description !== valueDescription &&
+                    <div style={{display:"flex",alignItems:"center",marginRight:'10px'}}>
+                        <Typography color={"tertiary"}>
+                            Есть несохраненные изменения
+                        </Typography>
+                    </div>
+                }
+
             </div>
             {
                 <Modal setActive={() => setComparison(!comparison)} active={comparison}>
