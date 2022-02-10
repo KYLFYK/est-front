@@ -26,7 +26,6 @@ const estateOffers = [{id:1,url:'www.google.com',img:IMAGES_SET,tags:["Поку�
 
 export const BestOffers_ = Template.bind({});
 BestOffers_.args = {
-    bestOffers:estateOffers,
     tagsButton:['Покупка', 'Аренда', 'Дом', 'Коммерческая недвижимость', 'Новостройка', 'Вторичноежилье',
         'Строящийся дом', '2-23 этажи']
 };
