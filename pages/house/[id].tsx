@@ -97,7 +97,7 @@ const House: NextPage = observer((props: any) => {
     store.fetch( Number(router.query.id))
   }, [router.query.id, store])
 
-    console.log('store.initialData.info_options', store.initialData.info_options)
+    // console.log('store.initialData.info_options', store.initialData.info_options)
 
   return (
     <MainContainer keywords={props.name} title={props.name} city={city} personalAccount={personalAccount} footerColor={'nude'} refs={refs}>
