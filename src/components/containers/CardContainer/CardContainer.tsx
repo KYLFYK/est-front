@@ -77,9 +77,11 @@ const CardContainer: React.FC<Props> = observer(({ mapData, view, setView }) => 
                     ? <h1>Loading...</h1>
                     : store.initialData && store.initialData.length 
                         ? store.initialData.map((i: any, id: number) => {
-                            return(<>
-                                <div key={id} style={{padding:'5px'}}><ObjectCard key={id} route={store.get()['object-type']} typeObject={store.get()['building-type']} houseData={mapData[0]} data={i} /></div>
-                            </>)
+                            return(
+                                <div key={id} style={{padding:'5px'}}>
+                                    <ObjectCard route={store.get()['object-type']} typeObject={store.get()['building-type']} houseData={mapData[0]} data={i} />
+                                </div>
+                            )
                         })
                         : <h1>Объекты отсутствуют</h1>
                 }

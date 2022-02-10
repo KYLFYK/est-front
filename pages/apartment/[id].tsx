@@ -24,7 +24,7 @@ import { Footer } from '../../src/components/widget/Footer/ui/Footer'
 import { MappingGeneralInfo, MappingDescription, MappingLegalPurity } from 'src/lib/mapping/Apartment/apartmentMapping'
 import { MappingDeveloperInfo } from 'src/lib/mapping/ResidentComplex/residentComplexMapping'
 import { datetoDayFormat } from 'src/lib/mapping/objectDates'
-import {sortObject_specsTypeGuide,sortGuide} from "../../src/utils/conversionIcons/conversionIcons";
+import {sortObject_specsTypeGuide, sortGuide} from "../../src/utils/conversionIcons/conversionIcons";
 
 import {useStore} from '../../src/mobx/stores/ApartamentStore/ApartmentStore'
 import {instance, UrlObj} from '../../src/api/instance'
@@ -42,7 +42,7 @@ const personalAccount = [{title: 'Личный кабинет', href: '/User', m
 const infrastructureInfo = 'В 15 минутах езды расположена Ялта со своей знаменитой набережной, театр Чехова, авквариум и дельфинарий. Знаменитые дворцы, парки, ботанические сады и винные заводы расположены в получасовой доступности.'
 
 const Apartment: NextPage =  observer((props: any) => {
-  
+
   const store = useStore()
 
   const tabs = [{
