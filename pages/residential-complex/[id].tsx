@@ -2,7 +2,7 @@ import type { NextPage } from 'next'
 import { observer } from "mobx-react-lite"
 import React, {useRef, useEffect, useState} from 'react'
 import { useRouter } from 'next/router'
-import { MainContainer } from 'src/components/containers/MainContainer/MainContainer'
+import { MainContainer } from '../../src/components/containers/MainContainer/MainContainer'
 import {Breadcrumbs} from '../../src/components/shared/Breadcrumbs/Breadcrumbs'
 import {Views} from '../../src/components/shared/Views/Views'
 import {NameEstate} from '../../src/components/shared/NameEstate/NameEstate'

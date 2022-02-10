@@ -1,12 +1,23 @@
 import { IOption } from "../../../utils/interfaces/general";
 
-export const TOGGLE_BUTTONS_OPTIONS: IOption[] = [
+export const TOGGLE_BUTTONS_OPTIONS_APART: IOption[] = [
     {label: "Студия", value: "studio"},
     {label: "1", value: "one"},
     {label: "2", value: "two"},
     {label: "3", value: "three"},
     {label: "4", value: "four"},
+    {label: "5", value: "five"},
+    {label: "6", value: "six"},
     {label: "Свободная планировка", value: "free_plan"},
+]
+
+export const TOGGLE_BUTTONS_OPTIONS_HOUSE: IOption[] = [
+    {label: "1", value: "one"},
+    {label: "2", value: "two"},
+    {label: "3", value: "three"},
+    {label: "4", value: "four"},
+    {label: "5", value: "five"},
+    {label: "6", value: "six"},
 ]
 
 export const FILTER_ACTIONS_OPTIONS: IOption[] = [
@@ -28,7 +39,7 @@ export const FILTER_PRIVATE_HOUSE_OPTIONS: IOption[] = [
 
 export const FILTER_BUILDING_TYPE_OPTIONS: IOption[] = [
     {value: "new", label: "Новостройка"},
-    {value: "secondary", label: "Вторичное"},
+    {value: "old", label: "Вторичное"},
 ]
 
 export const FILTER_FLOORS_OPTIONS: IOption[] = [
@@ -38,14 +49,14 @@ export const FILTER_FLOORS_OPTIONS: IOption[] = [
 ]
 
 export const FILTER_IRB_OPTIONS: IOption[] = [
-    {value: "irb", label: "ИЖС"},
-    {value: "noirb", label: "Без ИЖС"},
+    {value: "true", label: "ИЖС"},
+    {value: "false", label: "Без ИЖС"},
 ]
 
 export const FILTER_LAND_SPECS_OPTIONS: IOption[] = [
-    {value: "electro", label: "Электричество"},
+    {value: "electric", label: "Электричество"},
     {value: "gas", label: "Газ"},
     {value: "water", label: "Вода"},
-    {value: "sewerage", label: "Канализация"},
+    {value: "canalization", label: "Канализация"},
 ]
 

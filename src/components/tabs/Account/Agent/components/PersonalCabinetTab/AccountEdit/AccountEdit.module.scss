@@ -51,3 +51,8 @@
 .textArea{
   height: 60px;
 }
+.styleButton{
+  &::placeholder{
+    color:#96A2B5
+  }
+}

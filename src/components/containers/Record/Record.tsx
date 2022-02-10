@@ -9,6 +9,8 @@ import s from './Record.module.scss';
 import Typography from "../../shared/Typography/Typography";
 import {BaseInput} from "../../shared/BaseInput/Input";
 import Image from "next/image";
+import {RecordApi} from "../../../api/record/record";
+import {useRouter} from "next/router";
 
 type AgentRecordType = {
     Record: {
@@ -24,6 +26,8 @@ type AgentRecordType = {
 }
 
 export const Record: FC<AgentRecordType> = ({Record, title}) => {
+
+    const router = useRouter()
 
     const [name, setName] = useState('')
     const [mail, setMail] = useState('')
@@ -42,6 +46,7 @@ export const Record: FC<AgentRecordType> = ({Record, title}) => {
 
     const [formValid, setFormValid] = useState(false)
 
+    console.log('nameDirty',nameDirty)
     useEffect(() => {
         if (nameError || mailError || phoneError || timeError) {
             setFormValid(false)
@@ -54,13 +59,6 @@ export const Record: FC<AgentRecordType> = ({Record, title}) => {
     const [clicked, setClicked] = useState(false)
 
     const onClickHandler = () => {
-        const form = new FormData();
-        // form.append("object_id", (choosedHouse.object_id || '').toString());
-        // form.append("object_name", (choosedHouse.name || '').toString());
-        form.append("name", name.toString());
-        form.append("email", mail.toString());
-        form.append("phone", phone.toString());
-        form.append("time", time.toString());
         setName('');
         setNameError('не указано имя');
         setNameDirty(false)
@@ -75,7 +73,18 @@ export const Record: FC<AgentRecordType> = ({Record, title}) => {
         setTimeDirty(false)
         // dispatch(sendOrderTC(form));
         setClicked(true);
+
+        const routerApi = router.asPath.split('/')
+        RecordApi.RecordPost(routerApi[1], routerApi[2],{
+            name:name,
+            email:mail,
+            phone:phone,
+            status:'Новая заявка',
+            comfortableTimeFrom:time.split('-')[0],
+            comfortableTimeTo:time.split('-')[1]
+        })
     }
+
     const onMouseHoverHandler = () => {
         setHover(true);
     }
@@ -121,22 +130,22 @@ export const Record: FC<AgentRecordType> = ({Record, title}) => {
         }
     }
 
-    const onBlurHandler = (e: React.FocusEvent<HTMLInputElement, Element>) => {
-        switch (e.target.value) {
+    const onBlurHandler = (e: string) => {
+        switch (e) {
             case 'name':
-                if (!e.target.value) setNameError('не указано имя')
+                if (!setName) setNameError('не указано имя')
                 setNameDirty(true)
                 break
             case 'mail':
-                if (!e.target.value) setMailError('не заполнен e-mail')
+                if (!setMail) setMailError('не заполнен e-mail')
                 setMailDirty(true)
                 break
             case 'phone':
-                if (!e.target.value) setPhoneError('не указан телефон')
+                if (!setPhone) setPhoneError('не указан телефон')
                 setPhoneDirty(true)
                 break
             case 'time':
-                if (!e.target.value) setTimeError('не выбрано время')
+                if (!setTime) setTimeError('не выбрано время')
                 setTimeDirty(true)
                 break
             default:
@@ -178,8 +187,8 @@ export const Record: FC<AgentRecordType> = ({Record, title}) => {
                             </div>
                             <BaseInput
                                 name='name'
-                                placeholder={'Имя'}
-                                onBlur={e => onBlurHandler(e)}
+                                placeholder={'Иван Петрович'}
+                                onBlur={() => onBlurHandler('name')}
                                 value={name}
                                 onChange={(e) => onNameHandler(e)}
                                 className={s.paddingInput}
@@ -195,7 +204,7 @@ export const Record: FC<AgentRecordType> = ({Record, title}) => {
                             <BaseInput
                                 name='mail'
                                 placeholder={'ivan@mail.com'}
-                                onBlur={e => onBlurHandler(e)}
+                                onBlur={() => onBlurHandler('mail')}
                                 value={mail}
                                 onChange={(e) => onEmailHandler(e)}
                                 className={s.paddingInput}
@@ -208,7 +217,8 @@ export const Record: FC<AgentRecordType> = ({Record, title}) => {
                             <BaseInput
                                 name='phone'
                                 placeholder={'Телефон'}
-                                onBlur={e => onBlurHandler(e)}
+                                onBlur={() => onBlurHandler('phone')}
+                                type={'number'}
                                 value={phone}
                                 onChange={(e) => onPhoneHandler(e)}
                                 className={s.paddingInput}
@@ -221,7 +231,7 @@ export const Record: FC<AgentRecordType> = ({Record, title}) => {
                             <BaseInput
                                 name='time'
                                 placeholder={'12:00–18:00'}
-                                onBlur={e => onBlurHandler(e)}
+                                onBlur={() => onBlurHandler('time')}
                                 value={time}
                                 onChange={(e) => onTimeHandler(e)}
                                 className={s.paddingInput}
@@ -244,75 +254,77 @@ export const Record: FC<AgentRecordType> = ({Record, title}) => {
                         && <div className={s.unselectable}>не заполнена форма</div>}
                     </div>
                 </div>
-                <div className={s.margin_40_20}>
-                    <Typography color='secondary' weight={"bold"}>
-                        За домом закреплён агент
-                    </Typography>
-                </div>
-                <div className={s.card}>
-                    <div className={s.avatar}>
-                        <div className={s.divImage}>
-                            <Image unoptimized src={RomanSafonov} width={100} height={100} className={s.image}
-                                   alt={`property agent`}
-                                   loader={() => '../../../Pics/persons/РоманСафонов.png'}/>
-                        </div>
-                        <div className={s.fullName}>
-                            <div className={s.bold}>
-                                <Typography weight={'bold'}>
-                                    {Record.fullName}
-                                </Typography>
-                            </div>
-                            <div style={{marginLeft: '5px'}}>
-                                <Typography>
-                                    {Record.heldPost}
-                                </Typography>
-                            </div>
-                        </div>
-                    </div>
-                    <div className={s.portfolioContacts}>
-                        <div className={s.portfolio}>
-                            <div className={s.portfolioPosition}>
-                                <Typography> Работает: </Typography>
-                                <span className={s.bold}>
-                                    <Typography weight={'bold'}>
-                                        {Record.workExperience}
-                                    </Typography>
-                                </span>
-                            </div>
-                            <div className={s.portfolioPosition}>
-                                <Typography> Завершено: </Typography>
-                                <span className={s.bold}>
-                                    <Typography weight={'bold'}>
-                                        {Record.completed}
-                                    </Typography>
-                                </span>
-                            </div>
-                            <div className={s.portfolioPosition}>
-                                <Typography> В работе: </Typography>
-                                <span className={s.bold}>
-                                    <Typography weight={'bold'}>
-                                         {Record.inWork}
-                                    </Typography>
-                                </span>
-                            </div>
-                        </div>
-                        <div className={s.contacts}>
-                            {
-                                Record.connection.map((i, id) => (
-                                    <a key={id} style={{color: '#3d4550', textDecoration: 'none'}}
-                                       href={`${i.url}${i.value}`}>
-                                        <div key={id} className={s.contact}>
-                                            <div style={{marginRight: '8px'}}>{
-                                                searchIcon(i.title)
-                                            }</div>
-                                            <Typography> {i.value}</Typography>
-                                        </div>
-                                    </a>
-                                ))
-                            }
-                        </div>
-                    </div>
-                </div>
+
+                {/* Старая верстка +  фото */}
+                {/*<div className={s.margin_40_20}>*/}
+                {/*    <Typography color='secondary' weight={"bold"}>*/}
+                {/*        За домом закреплён агент*/}
+                {/*    </Typography>*/}
+                {/*</div>*/}
+                {/*<div className={s.card}>*/}
+                {/*    <div className={s.avatar}>*/}
+                {/*        <div className={s.divImage}>*/}
+                {/*            <Image unoptimized src={RomanSafonov} width={100} height={100} className={s.image}*/}
+                {/*                   alt={`property agent`}*/}
+                {/*                   loader={() => '../../../Pics/persons/РоманСафонов.png'}/>*/}
+                {/*        </div>*/}
+                {/*        <div className={s.fullName}>*/}
+                {/*            <div className={s.bold}>*/}
+                {/*                <Typography weight={'bold'}>*/}
+                {/*                    {Record.fullName}*/}
+                {/*                </Typography>*/}
+                {/*            </div>*/}
+                {/*            <div style={{marginLeft: '5px'}}>*/}
+                {/*                <Typography>*/}
+                {/*                    {Record.heldPost}*/}
+                {/*                </Typography>*/}
+                {/*            </div>*/}
+                {/*        </div>*/}
+                {/*    </div>*/}
+                {/*    <div className={s.portfolioContacts}>*/}
+                {/*        <div className={s.portfolio}>*/}
+                {/*            <div className={s.portfolioPosition}>*/}
+                {/*                <Typography> Работает: </Typography>*/}
+                {/*                <span className={s.bold}>*/}
+                {/*                    <Typography weight={'bold'}>*/}
+                {/*                        {Record.workExperience}*/}
+                {/*                    </Typography>*/}
+                {/*                </span>*/}
+                {/*            </div>*/}
+                {/*            <div className={s.portfolioPosition}>*/}
+                {/*                <Typography> Завершено: </Typography>*/}
+                {/*                <span className={s.bold}>*/}
+                {/*                    <Typography weight={'bold'}>*/}
+                {/*                        {Record.completed}*/}
+                {/*                    </Typography>*/}
+                {/*                </span>*/}
+                {/*            </div>*/}
+                {/*            <div className={s.portfolioPosition}>*/}
+                {/*                <Typography> В работе: </Typography>*/}
+                {/*                <span className={s.bold}>*/}
+                {/*                    <Typography weight={'bold'}>*/}
+                {/*                         {Record.inWork}*/}
+                {/*                    </Typography>*/}
+                {/*                </span>*/}
+                {/*            </div>*/}
+                {/*        </div>*/}
+                {/*        <div className={s.contacts}>*/}
+                {/*            {*/}
+                {/*                Record.connection.map((i, id) => (*/}
+                {/*                    <a key={id} style={{color: '#3d4550', textDecoration: 'none'}}*/}
+                {/*                       href={`${i.url}${i.value}`}>*/}
+                {/*                        <div key={id} className={s.contact}>*/}
+                {/*                            <div style={{marginRight: '8px'}}>{*/}
+                {/*                                searchIcon(i.title)*/}
+                {/*                            }</div>*/}
+                {/*                            <Typography> {i.value}</Typography>*/}
+                {/*                        </div>*/}
+                {/*                    </a>*/}
+                {/*                ))*/}
+                {/*            }*/}
+                {/*        </div>*/}
+                {/*    </div>*/}
+                {/*</div>*/}
             </ContentContainer>
         </div>
     )

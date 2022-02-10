@@ -9,14 +9,16 @@ import Typography from '../../shared/Typography/Typography';
 import {mapData} from '../CardContainer/config'
 
 interface Props {
+    route: string | string[] | undefined,
     houseData: APIObject.types.IObjectEntry,
-    data?: any
+    typeObject?: string | string[] | undefined, 
+    data?: any,
 }
 
 const TEMP_LINK = '/'
 const MAX_SLIDERS_AMMOUNT = 7
 
-const ObjectCard: React.FC<Props> = ({ houseData, data }) => {
+const ObjectCard: React.FC<Props> = ({ route, houseData, typeObject, data }) => {
 
     //const houseImages = houseData.images.length > MAX_SLIDERS_AMMOUNT ? houseData.images.slice(0, MAX_SLIDERS_AMMOUNT) : houseData.images
     const houseImages = mapData[0].images
@@ -28,14 +30,15 @@ const ObjectCard: React.FC<Props> = ({ houseData, data }) => {
                 <BaseSlider images={imagesUrls} height={200} withFavorite onClickFavorite={() => {}}/>
             </div>
 
-            <Link href={`${TEMP_LINK}${'apartment'}/${data.id}`}>
+            <Link href={`${TEMP_LINK}${route}/${data.id}`}>
                 <a className={s.content}>
                     <Typography inline weight="bold" color="accent" className={s.title}>{data.name}</Typography>
                     <p className={s.subtitle}>
                         <Typography inline weight="light" color="tertiary"> Адрес: </Typography> {data.address}
                     </p>
                     <p className={s.subtitle}>
-                        <Typography inline weight="light" color="tertiary">Этаж:</Typography> {data.property.floor} / {houseData.total_floors}
+                        <Typography inline weight="light" color="tertiary">Этаж:</Typography> {data.property.floor} / {data.property.totalFloor}
+                        <Typography inline weight="light" color="tertiary">Тип жилья:</Typography> {typeObject === 'new' ? 'Новостройка' : 'Вторичное'}
                     </p>
                     <p className={s.price}>
                         {data.price} ₽

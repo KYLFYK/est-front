@@ -8,6 +8,7 @@ import Typography from "../../../../../../../../../shared/Typography/Typography"
 import {BaseDropDown} from "../../../../../../../../../shared/BaseDropDown/BaseDropDown";
 import {useState} from "react";
 import {makeStyles} from "@material-ui/core";
+import {observer} from "mobx-react-lite";
 
 export const useStyles = makeStyles(() => ({
         dropDown: {
@@ -80,9 +81,10 @@ const tableActiveDay=[
     {name: '24:00', price: '2'},
 ]
 
-const PersonalCabinetStatistics: React.FC<Props> = () => {
+const PersonalCabinetStatistics: React.FC<Props> = observer(() => {
 
     const classes = useStyles()
+
     const [agent, setAgent] = useState<string>(listAgents[0].label)
 
     return (
@@ -115,6 +117,6 @@ const PersonalCabinetStatistics: React.FC<Props> = () => {
         </div>
 
     )
-}
+})
 
 export default PersonalCabinetStatistics

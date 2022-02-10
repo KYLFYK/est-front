@@ -5,9 +5,12 @@
 .df{
   display: flex;
 }
-.df_w{
+.dg_w{
   display: grid;
   grid-template-columns: 2fr 2fr 5fr;
+}
+.columnAccount{
+  width: 600px;
 }
 .margin{
   margin:0 5px;

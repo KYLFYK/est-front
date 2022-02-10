@@ -1,5 +1,5 @@
 // Тут создаем компонент горизонтального набора таб с использованием компонентов дочерней папки components
-import {useState} from "react"
+import {useEffect, useState} from "react"
 import {HorizontalTabs} from "../../../../../../../shared/HorizontalTabs/HorizontalTabs"
 import PersonalCabinetAccountInfo from "./components/AccountInfo/AccountInfo"
 import PersonalCabinetAgents from "./components/Agents/Agents"
@@ -7,26 +7,13 @@ import PersonalCabinetSettings from "./components/Settings/Settings"
 import PersonalCabinetStatistics from "./components/Statistics/Statistics"
 import AccountEdit from "./components/AccountEdit/AccountEdit";
 import imgMoc from './components/AccountInfo/logoFalse.svg'
+import {useStoreAgencyCabinet} from "../../../../../../../../mobx/role/agency/cabinet/AgencyCabinet";
 
 export type InfoAccountAgencyType = {
     info:Array<{label:string,value:string}>
     id:string
     img:string
     statusVerification:'confirmed' | 'waiting' | 'notConfirmed' | 'resend'
-}
-const infoAccountAgency :InfoAccountAgencyType ={
-    info:[
-        {label: 'Наименование', value: 'Estatum'},
-        {label: 'Статус', value: 'Агентство'},
-        {label: 'Адрес', value: 'Смоленская обл., г.Смоленск, ул.Советская, д.64'},
-        {label: 'Телефон', value: '+7(495) 006 78 69'},
-        {label: 'E-mail', value: 'estatum@mail.com'},
-        {label: 'Сайт', value: 'estatum'},
-        {label: 'Описание', value: 'описание'},
-    ],
-    id:'1',
-    img:imgMoc,
-    statusVerification:'notConfirmed'
 }
 
 const infoAgencyMoc = {
@@ -79,6 +66,11 @@ const personalCabinet = {
 }
 
 const PersonalCabinetTab = () => {
+    const store = useStoreAgencyCabinet()
+    useEffect(()=>{
+        store.fetch()
+    },[store])
+
     const [edit, setEdit] = useState<boolean>(false)
     return (
         <>
@@ -90,15 +82,12 @@ const PersonalCabinetTab = () => {
                             title: "Аккаунт агентства",
                             Component: <PersonalCabinetAccountInfo
                                 onEdit={() => setEdit(true)}
-                                statusVerification={infoAccountAgency.statusVerification}
-                                info={infoAccountAgency.info}
-                                img={infoAccountAgency.img}
                             />
                         },
                         {title: "Агенты", Component: <PersonalCabinetAgents agents={agentsList}/>},
                         {title: "Настройки", Component: <PersonalCabinetSettings personalCabinet={personalCabinet}/>},
                     ]}/>
-                    : <AccountEdit onEdit={() => setEdit(false)} infoAgency={infoAgencyMoc}/>
+                    : <AccountEdit onEdit={() => setEdit(false)} />
             }
         </>
     )

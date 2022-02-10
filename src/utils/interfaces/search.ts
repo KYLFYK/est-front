@@ -1,5 +1,5 @@
 export enum SearchFieldsTypes {
-    HOUSE_TYPE = 'objectType',
+    HOUSE_TYPE = 'object-type',
     BUILDING_TYPE = 'secondaryType',
     FLOORS = 'floors',
     PRICE_FROM = 'priceFrom',
@@ -11,6 +11,7 @@ export enum SearchFieldsTypes {
     PAGE = 'page',
     ACTION_TYPE = 'actionType',
     SEARCH_VALUE = 'searchValue',
+    PRIVATE_TYPE = 'privateType',
 }
 
 export interface ISearchParamsModel {
@@ -26,4 +27,5 @@ export interface ISearchParamsModel {
     [SearchFieldsTypes.PAGE]?: string,
     [SearchFieldsTypes.ACTION_TYPE]?: string,
     [SearchFieldsTypes.SEARCH_VALUE]?: string,
+    [SearchFieldsTypes.PRIVATE_TYPE]?: string | number,
 }

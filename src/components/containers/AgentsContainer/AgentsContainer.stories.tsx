@@ -43,5 +43,4 @@ const mocAgent = [agentInfoMoc,agentInfoMoc,agentInfoMoc]
 export const AgentsContainer_ = Template.bind({});
 AgentsContainer_.args = {
     title:'Наши агенты к вашим услугам',
-    agents:mocAgent
 };

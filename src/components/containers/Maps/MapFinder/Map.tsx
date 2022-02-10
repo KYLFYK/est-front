@@ -1,4 +1,5 @@
 import React, {useState, useRef, useEffect} from "react";
+import { useRouter } from 'next/router'
 import { observer } from "mobx-react-lite"
 import { useStore } from "../../../../mobx/stores/SearchStore/SearchStore"
 import MapGL, {Marker} from "react-map-gl";
@@ -12,6 +13,7 @@ import ObjectCard from "../../Card/index";
 import Typography from "../../../shared/Typography/Typography";
 import s from './styles.module.scss';
 import {MapControls} from "../MapControls/Buttons";
+import {digitToSyntax} from "../../../../lib/syntax/syntax";
 
 interface Props {
   mapData: any
@@ -23,6 +25,8 @@ interface Props {
 }
 
 const Map: React.FC<Props> = observer(({mapData, location, viewport, setViewport, view, setView}) => {
+
+  const router = useRouter()
   const store = useStore()
   const data = store.get()
   const center = {
@@ -34,7 +38,7 @@ const Map: React.FC<Props> = observer(({mapData, location, viewport, setViewport
   const [choosedPlaces, setChoosedplaces] = useState<any>([])
   const [open, setOpen] = useState(false)
   const [fullscreen, setFullscreen] = useState(false)
-  
+
   const mapRef: any = useRef(null);
   const mapWrap: any = useRef(null);
 
@@ -149,13 +153,16 @@ const Map: React.FC<Props> = observer(({mapData, location, viewport, setViewport
         <div className={s.dynamicBar}>
                         <div className={open && s.localbarActive || s.localbar}>
                           <div className={s.checkboxTitle}>
-                            <Typography color={'tertiary'} weight={'light'}> {choosedPlaces.length} объектов </Typography>
-                            <BaseButton className={s.button} onClick={() => { setOpen(!open) }}>
+                            <Typography color={'tertiary'} weight={'light'}> {choosedPlaces.length} объект{digitToSyntax(choosedPlaces.length)} </Typography>
+                            <BaseButton className={s.button} onClick={() => { 
+                              setOpen(!open) 
+                              setActivemarker(0)
+                            }}>
                                 <CrossIcon />
                             </BaseButton>
                           </div>
                           <div className={s.list}>
-                            {choosedPlaces.length && choosedPlaces.map((cp: any, i: number) => <div key={i} style={{padding:'5px'}}><ObjectCard key={i} houseData={cp.properties.prop} data={cp.properties.prop}/></div>)}
+                            {choosedPlaces.length && choosedPlaces.map((cp: any, i: number) => <div key={i} style={{padding:'5px'}}><ObjectCard route={router.query['object-type']} key={i} houseData={cp.properties.prop} data={cp.properties.prop}/></div>)}
                           </div>
                         </div>
         </div>

@@ -15,11 +15,17 @@ class SearchStore {
   initialData: any = []
   
   setParams(newParams: any) {
+    if(newParams['object-type'] === 'apartment' && !newParams['rooms-in-apartment']){
+      newParams['rooms-in-apartment'] = 'free_plan,six,five,four,three,two,one,studio'
+    }
+    if((newParams['object-type'] === 'house' || newParams['object-type'] === 'townhouse') && !newParams['rooms-in-house']){
+      newParams['rooms-in-house'] = 'six,five,four,three,two,one'
+    }
     this.params = newParams
   }
 
   get() {
-    return JSON.parse(JSON.stringify({ ...this.initialData}))
+    return JSON.parse(JSON.stringify({ ...this.params}))
   }
 
   async fetch() {

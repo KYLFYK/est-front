@@ -11,14 +11,14 @@ export const mailPage ={
     getAgentOur:async (amount:number)=>{
         try{
             return await instance.get<mainAgentsType>(`${UrlMainPage.agentOur}?amount=${amount}`)
-        }catch (e) {
+        }catch (e:any) {
             return e
         }
     },
     newSubscription:async (name:string,email:string,phone:string)=>{
         try{
             await instance.post(`${UrlMainPage.newsSubscription}`,{name,email,phone})
-            alert(`Спасибо что подписались на новости ${name}`)
+            alert(`Спасибо за подписку ${name}`)
         }catch (e:any) {
             alert(e.response.data.message)
         }
@@ -27,23 +27,20 @@ export const mailPage ={
         let res
         try{
              res = await instance.get(`${UrlMainPage.bestObject}?take=${number}`)
-            console.log("resObject", res)
-            const objects = res.data.map((object:any)=>(
-                {
-                    id:object.id,
-                    name:object.name,
-                    address:object.address,
-                    type:object.guides.map((t:any)=>t.type_en==='objectType'? t.value:'').filter((t:any)=>t!=='')[0],
-                    price:object.price
-                }
-            ))
-           return objects
+           return res.data
         }catch (e:any) {
             return []
             alert(e)
-
         }
-    }
+    },
+    getDeveloperOur:async (amount:number)=>{
+        try{
+            return await instance.get(`${UrlMainPage.developerOur}?amount=${amount}`)
+        }catch (e:any) {
+            return e
+        }
+    },
+
 }
 type mainAgentsType={
     data:[]

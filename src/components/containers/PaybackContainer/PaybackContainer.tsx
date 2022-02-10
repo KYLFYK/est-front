@@ -40,12 +40,13 @@ const PaybackContainer :FC<PaybackContainerType> = ({averagePrice}) => {
                     <PaybackPeriod/>
                     <DynamicsPrice/>
                 </div>
-                <div className={css.columnGrid_Bottom}>
-                    <DynamicsPriceTable table={table} />
-                    <AverageMarketPrice averagePrice={averagePrice} />
-                </div>
+                {/*Пока нету данных скрыто!*/}
+                {/*<div className={css.columnGrid_Bottom}>*/}
+                {/*    <DynamicsPriceTable table={table} />*/}
+                {/*    <AverageMarketPrice averagePrice={averagePrice} />*/}
+                {/*</div>*/}
                 <div style={{margin: '30px 0 0 0'}}>
-                    <Typography weight={'medium'}> 
+                    <Typography weight={'medium'}>
                         Похожие предложения в этом районе
                     </Typography>
                     <div style={{margin: '20px 0 0 0'}}>
