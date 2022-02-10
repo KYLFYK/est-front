@@ -232,7 +232,6 @@ const AccountEditDeveloper: FC<AccountEditType> = observer(({onEdit}) => {
                 </div>
             </div>
             <div style={{display: 'flex', width: "100%", flexDirection: 'row-reverse'}}>
-
                 <BaseButton
                     type={"secondary"}
                     isActive className={css.marginButton}
