@@ -22,6 +22,9 @@ import {Mortgage} from '../../src/components/shared/Mortgage/Mortgage'
 import {Record} from '../../src/components/containers/Record/Record'
 import RecordAgent from '../../src/components/containers/Record/RecordAgent.json'
 import {useStore} from '../../src/mobx/stores/HouseStore/HouseStore'
+import { datetoDayFormat } from 'src/lib/mapping/objectDates'
+import { MappingGeneralInfo, MappingDescription, MappingLegalPurity } from 'src/lib/mapping/Apartment/apartmentMapping'
+import {sortObject_specsTypeGuide, sortGuide} from "../../src/utils/conversionIcons/conversionIcons"
 import { UrlObj} from '../../src/api/instance'
 
 const city = ['Москва', 'Санкт-Петербург', 'Крым', 'Сочи', 'Нижний Новгород']
@@ -71,7 +74,7 @@ const averagePrice ={
 
 const infrastructureInfo = 'В 15 минутах езды расположена Ялта со своей знаменитой набережной, театр Чехова, авквариум и дельфинарий. Знаменитые дворцы, парки, ботанические сады и винные заводы расположены в получасовой доступности.'
 
-const House: NextPage = observer((props: any) => {
+const TownHouse: NextPage = observer((props: any) => {
 
   const store = useStore()
 
@@ -87,15 +90,14 @@ const House: NextPage = observer((props: any) => {
 
   const router = useRouter()
 
-  const breadcrumbs = ['Крым', 'Купить участок', `${store.initialData.name}`]
-  const views = [store.initialData.publish,store.initialData.views, store.initialData.agency]
+  const breadcrumbs = ['Крым', 'Купить участок', props.name]
+  const views = ['', props.views, props?.agency]
 
   useEffect(() => {
     setRefs([general.current, tours.current, architec.current, infra.current, legal.current, payback.current, developer.current, record.current])
     store.fetch( Number(router.query.id))
   }, [router.query.id, store])
 
-    //console.log('store.initialData.info_options', store.initialData.info_options)
   return (
     <MainContainer keywords={props.name} title={props.name} city={city} personalAccount={personalAccount} footerColor={'nude'} refs={refs}>
         <Breadcrumbs items={breadcrumbs}/>
@@ -104,14 +106,14 @@ const House: NextPage = observer((props: any) => {
         <AdressEstate item={props.address}/>
         <HorizontalTabs tabs={tabs} refs={refs}/>
         <div ref={general}>
-          <GeneralInfo info={store.initialData.info_options} price={store.initialData.price} images={IMAGES_SET} />
+          <GeneralInfo info={store.initialData.info_options} price={props.price} images={IMAGES_SET} />
         </div>
-        <ObjectDescription items={store.initialData.description_items}/>
+        <ObjectDescription items={MappingDescription(props.description)}/>
         <div ref={tours}>
-          <ToursContainer  Online_tour={store.initialData.online_tour}/>
+          <ToursContainer Online_tour={store.initialData.online_tour}/>
         </div>
         <div ref={architec}>
-          <ObjectSpecifications specificationsLists={store.initialData.object_specs} title={"Архитектурно-планировочные решения"}/>
+          <ObjectSpecifications specificationsLists={sortObject_specsTypeGuide(props.guides.map((guid: any) => sortGuide(guid, guid.subtitle_ru)).filter((f: any) => f !== undefined))} title={"Архитектурно-планировочные решения"}/>
         </div>
         <div ref={infra}>
           <Map currentHouse={JSON.parse(JSON.stringify(store.initialData))} infrastructura={infrastructura} location={'infrastructure'} InfrastructureInfo={infrastructureInfo}/>
@@ -133,7 +135,7 @@ const House: NextPage = observer((props: any) => {
   )
 })
 
-export default House
+export default TownHouse
 
 export async function getServerSideProps({params}: any) {
   const res  = await fetch(`https://estatum.f-case.ru/api/${UrlObj.townhouse}/${params.id}`)
