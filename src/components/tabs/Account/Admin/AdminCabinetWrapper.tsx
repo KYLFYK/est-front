@@ -11,7 +11,11 @@ interface LinkProps {
   additionalPaths?: string[];
 }
 
-const ActiveLink: FC<LinkProps> = ({ href, children, additionalPaths }) => {
+export const ActiveLink: FC<LinkProps> = ({
+  href,
+  children,
+  additionalPaths,
+}) => {
   const { asPath } = useRouter();
 
   return (
@@ -21,7 +25,9 @@ const ActiveLink: FC<LinkProps> = ({ href, children, additionalPaths }) => {
         style={{
           color:
             asPath === href ||
-            additionalPaths?.includes(`/${asPath.split("/", 2)[1]}`)
+            additionalPaths?.includes(`/${asPath.split("/", 2)[1]}`) ||
+            additionalPaths?.includes(`/${asPath.split("/")[2]}`) ||
+            asPath.indexOf(href.split("/")[1]) > -1
               ? "#C5A28E"
               : "",
         }}
@@ -30,7 +36,9 @@ const ActiveLink: FC<LinkProps> = ({ href, children, additionalPaths }) => {
           size={"default"}
           color={
             asPath === href ||
-            additionalPaths?.includes(`/${asPath.split("/", 2)[1]}`)
+            additionalPaths?.includes(`/${asPath.split("/", 2)[1]}`) ||
+            additionalPaths?.includes(`/${asPath.split("/")[2]}`) ||
+            asPath.indexOf(href.split("/")[1]) > -1
               ? "nude"
               : "tertiary"
           }

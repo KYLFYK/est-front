@@ -1,0 +1,56 @@
+@import "src/app/styles/typography";
+@import "src/app/styles/colours";
+
+.flex {
+  display: flex;
+  align-items: center;
+}
+
+.wrapper {
+  padding-top: 7px;
+
+  @include ROBOTOREGULAR16;
+
+  table {
+    color: #3D4550;
+    width: 100%;
+
+    th, td {
+      padding-bottom: 20px;
+      text-align: left;
+
+      &:first-of-type {
+        width: fit-content;
+
+        div {
+          width: fit-content;
+        }
+      }
+    }
+
+    th {
+      border-bottom: 1px solid #F2F2F2;
+      text-align: left;
+    }
+
+    td {
+      padding-top: 20px;
+      border-bottom: 1px solid #F2F2F2;
+    }
+  }
+}
+
+.select {
+  border: none !important;
+  color: #96A2B5 !important;
+  width: auto !important;
+  padding-right: 20px;
+
+  div[class~='MuiSelect-root'] {
+    padding: 10px 15px 10px 0 !important;
+  }
+
+  &.green {
+    color: #219653 !important;
+  }
+}

@@ -10,7 +10,7 @@ export interface INotice {
   action: "change" | "see";
 }
 
-const IconDown: FC = () => {
+export const IconDown: FC = () => {
   return (
     <svg
       width="16"
