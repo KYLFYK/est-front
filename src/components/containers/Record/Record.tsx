@@ -77,7 +77,6 @@ export const Record: FC<AgentRecordType> = ({Record, title}) => {
     const [timeEnd, setTimeEnd] = useState('18:00')
 
 
-
     const [nameDirty, setNameDirty] = useState(false)
     const [mailDirty, setMailDirty] = useState(false)
     const [phoneDirty, setPhoneDirty] = useState(false)
@@ -101,13 +100,13 @@ export const Record: FC<AgentRecordType> = ({Record, title}) => {
 
     const onClickHandler = () => {
         setName('');
-        setNameError('не указано имя');
+        // setNameError('не указано имя');
         setNameDirty(false)
         setMail('');
-        setMailError('не заполнен e-mail');
+        // setMailError('не заполнен e-mail');
         setMailDirty(false)
         setPhone('');
-        setPhoneError('не указан телефон');
+        // setPhoneError('не указан телефон');
         setPhoneDirty(false)
         // dispatch(sendOrderTC(form));
         setClicked(true);
@@ -158,7 +157,7 @@ export const Record: FC<AgentRecordType> = ({Record, title}) => {
             setPhoneError('')
         }
     }
-
+    console.log("nameError--", setName)
     const onBlurHandler = (e: string) => {
         switch (e) {
             case 'name':

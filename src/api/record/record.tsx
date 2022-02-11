@@ -9,7 +9,7 @@ export const RecordApi  = {
     RecordPost: async (type:string,id:string,body:RecordPostType) =>{
         try{
             await instance.post(`${UrlRecord.registration}?objectId=${id}&objectType=${type}`,body )
-            alert('Поздравляю вы записались на просмотр дома!')
+            alert('Заявка зарегистрирована. С вами свяжется наш менеджер.')
         }
         catch (e){
             alert('Ошибка свяжитесь с администратором')

@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, {FC, useEffect} from 'react';
 import Typography from "../../shared/Typography/Typography";
 import { Modal } from '../../shared/Modal/Modal';
 import { IconLocation } from '../../../icons/Development/IconLocation';
@@ -7,6 +7,9 @@ import { IconDevelopmentObjects } from '../../../icons/Development/IconDevelopme
 import Image from 'next/image'
 import css from './DeveloperData.module.scss'
 import { myLoader } from 'src/utils/image/image';
+import {observer} from "mobx-react-lite";
+import {useStoreMainPage} from "../../../mobx/mainPage/mainPage";
+import Link from 'next/link'
 
 type DeveloperDataPropsType = {
     img: string
@@ -17,11 +20,20 @@ type DeveloperDataPropsType = {
         objectsDeveloper:Array<{nameObject:string,id:string}>
     }
     setActive: (value: boolean) => void,
-    isActive: boolean,
+    isActive: boolean
+    id:number
 }
 
-export const DeveloperDataModal: FC<DeveloperDataPropsType> = ({ img,  developer,isActive, setActive }) => {
+export const DeveloperDataModal: FC<DeveloperDataPropsType> = observer(({ img,  developer,isActive, setActive,id }) => {
 
+    const store = useStoreMainPage()
+    console.log("idDeveloper" , id)
+    useEffect(()=>{
+        if (isActive) store.fetchComplexDeveloper(id)
+
+    },[isActive,store,id])
+
+    store.get()
     return (
 
         <Modal setActive={() => setActive(false)} active={isActive} >
@@ -61,12 +73,24 @@ export const DeveloperDataModal: FC<DeveloperDataPropsType> = ({ img,  developer
                     <Typography size={'default'} color="accent">
                         Объекты застройщика
                     </Typography>
+                    {/*{*/}
+                    {/*    developer.objectsDeveloper.map(({ nameObject,id}, index) => (*/}
+                    {/*        <div key={index} className={css.colorText}>*/}
+                    {/*            <Typography size={'default'} color="nude">*/}
+                    {/*                {nameObject}*/}
+                    {/*            </Typography>*/}
+                    {/*        </div>*/}
+                    {/*    ))*/}
+                    {/*}*/}
                     {
-                        developer.objectsDeveloper.map(({ nameObject,id}, index) => (
+                        store.initialData.complexDeveloper.map(({ name,id}, index) => (
                             <div key={index} className={css.colorText}>
-                                <Typography size={'default'} color="nude">
-                                    {nameObject}
-                                </Typography>
+                                <Link href={`residential-complex/${id}`}>
+                                    <Typography size={'default'} color="nude">
+                                        {name}
+                                    </Typography>
+                                </Link>
+
                             </div>
                         ))
                     }
@@ -74,5 +98,5 @@ export const DeveloperDataModal: FC<DeveloperDataPropsType> = ({ img,  developer
             </div>
         </Modal>
     );
-};
+})
 
