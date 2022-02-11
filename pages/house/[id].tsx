@@ -138,7 +138,6 @@ const House: NextPage = observer((props: any) => {
                     </div>
                 </>
         }
-
     </MainContainer>
   )
 })
