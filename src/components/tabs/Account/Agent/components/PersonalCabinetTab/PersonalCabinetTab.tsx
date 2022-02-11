@@ -1,11 +1,10 @@
 // Тут создаем компонент горизонтального набора таб с использованием компонентов дочерней папки components
 import {useEffect, useState} from "react"
-import imgMoc from './AccountInfo/logoFalse.svg'
 import {HorizontalTabs} from "../../../../../shared/HorizontalTabs/HorizontalTabs";
 import PersonalCabinetStatistics from "./Statistics/Statistics";
 import PersonalCabinetSettings from "./Settings/Settings";
 import PersonalCabinetAccountInfo from "./AccountInfo/AccountInfo";
-import AccountEdit from "./AccountEdit/AccountEdit";
+import AccountEditAgent from "./AccountEditAgent/AccountEditAgent";
 import {useStoreAgentCabinet} from "../../../../../../mobx/role/agent/cabinet/AgentCabinet";
 import {observer} from "mobx-react-lite";
 
@@ -36,7 +35,7 @@ const PersonalCabinetTab = observer(() => {
                         },
                         {title: "Настройки", Component: <PersonalCabinetSettings />},
                     ]}/>
-                    : <AccountEdit onEdit={() => setEdit(false)}/>
+                    : <AccountEditAgent onEdit={() => setEdit(false)}/>
             }
         </>
     )

@@ -18,8 +18,7 @@ class DeveloperCabinetStore {
                 phone: "",
                 email: "",
                 site: "",
-                description:
-                    "",
+                description: "",
             },
         },
         setting: {
@@ -51,6 +50,9 @@ class DeveloperCabinetStore {
 
         this.initialData.loading=  true
 
+    }
+    async updateDeveloper(id:number,updateDeveloper:{}){
+        await cabinetAPI.updateDeveloper(id,updateDeveloper)
     }
 
     get() {

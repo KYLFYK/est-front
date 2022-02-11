@@ -22,7 +22,7 @@ const image ="data:image/svg+xml;utf8,<svg width=\'100%\' height=\'100%\' " +
     "xmlns=\'http://www.w3.org/2000/svg\'><rect width=\'240px\' height=\'240px\' rx=\'6px\'" +
     " style=\'fill: none; stroke: rgb(26, 72, 98); stroke-width: 1; stroke-dasharray: 9 9\'/></svg>"
 
-const AccountEdit :FC<AccountEditType>= observer(({onEdit}) => {
+const AccountEditAgency :FC<AccountEditType>= observer(({onEdit}) => {
 
     const store = useStoreAgencyCabinet()
 
@@ -192,6 +192,22 @@ const AccountEdit :FC<AccountEditType>= observer(({onEdit}) => {
                 >
                     Сохранить
                 </BaseButton>
+
+                {
+                    infoAgency.name !== valueName
+                    || infoAgency.status !== valueStatus
+                    || infoAgency.address !== valueAddress
+                    || infoAgency.phone !== valuePhone
+                    || infoAgency.email !== valueEmail
+                    || infoAgency.website !== valueWebsite
+                    || infoAgency.description !== valueDescription &&
+                    <div style={{display:"flex",alignItems:"center",marginRight:'10px'}}>
+                        <Typography color={"tertiary"}>
+                            Есть несохраненные изменения
+                        </Typography>
+                    </div>
+                }
+
             </div>
             {
                 <Modal setActive={() => setComparison(!comparison)} active={comparison}>
@@ -218,4 +234,4 @@ const AccountEdit :FC<AccountEditType>= observer(({onEdit}) => {
     );
 })
 
-export default AccountEdit;
+export default AccountEditAgency;

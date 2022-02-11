@@ -2,7 +2,7 @@ import {instance} from "../instance";
 
 export enum UrlMainPage {
     agentOur = 'agent/our',             //get
-    developerOur = 'developer/our',     //get
+    developerOur = 'developer/get/our',     //get
     newsSubscription = 'news-subscription',     //post
     bestObject = 'objects/best',     //get
 }
@@ -18,7 +18,7 @@ export const mailPage ={
     newSubscription:async (name:string,email:string,phone:string)=>{
         try{
             await instance.post(`${UrlMainPage.newsSubscription}`,{name,email,phone})
-            alert(`Спасибо за подписку ${name}`)
+            alert(`Спасибо за подписку`)
         }catch (e:any) {
             alert(e.response.data.message)
         }

@@ -17,6 +17,7 @@ interface FormValues {
 }
 
 type ProfileFormType = {
+    onEdit:()=>void
     profileForm: {
         name: string
         type: string;
@@ -28,7 +29,7 @@ type ProfileFormType = {
     };
 }
 
-export const ProfileForm: FC<ProfileFormType> = observer( ({profileForm}) => {
+export const ProfileForm: FC<ProfileFormType> = observer( ({profileForm,onEdit}) => {
     const [formValues, setFormValues] = useState<FormValues>({
         name: profileForm.name,
         type: profileForm.type,
@@ -46,6 +47,7 @@ export const ProfileForm: FC<ProfileFormType> = observer( ({profileForm}) => {
         <div className={styles.profile}>
             <form>
                 <BaseInput
+                    disabled={true}
                     classNameWrapper={styles.inputWrapper}
                     className={styles.input}
                     errorLabel=""
@@ -58,6 +60,7 @@ export const ProfileForm: FC<ProfileFormType> = observer( ({profileForm}) => {
                     }}
                 />
                 <BaseInput
+                    disabled={true}
                     classNameWrapper={styles.inputWrapper}
                     className={styles.input}
                     errorLabel=""
@@ -70,6 +73,7 @@ export const ProfileForm: FC<ProfileFormType> = observer( ({profileForm}) => {
                     }}
                 />
                 <BaseInput
+                    disabled={true}
                     classNameWrapper={styles.inputWrapper}
                     className={styles.input}
                     errorLabel=""
@@ -82,6 +86,7 @@ export const ProfileForm: FC<ProfileFormType> = observer( ({profileForm}) => {
                     }}
                 />
                 <BaseInput
+                    disabled={true}
                     classNameWrapper={styles.inputWrapper}
                     className={styles.input}
                     errorLabel=""
@@ -94,6 +99,7 @@ export const ProfileForm: FC<ProfileFormType> = observer( ({profileForm}) => {
                     }}
                 />
                 <BaseInput
+                    disabled={true}
                     classNameWrapper={styles.inputWrapper}
                     className={styles.input}
                     errorLabel=""
@@ -106,6 +112,7 @@ export const ProfileForm: FC<ProfileFormType> = observer( ({profileForm}) => {
                     }}
                 />
                 <BaseInput
+                    disabled={true}
                     classNameWrapper={styles.inputWrapper}
                     className={styles.input}
                     errorLabel=""
@@ -131,6 +138,7 @@ export const ProfileForm: FC<ProfileFormType> = observer( ({profileForm}) => {
                 {/*  }}*/}
                 {/*/>*/}
                 <BaseTextarea
+                    disabled={true}
                     classNameWrapper={styles.baseTextarea}
                     className={styles.baseTextarea}
                     style={{paddingLeft: '10px'}}
@@ -143,9 +151,15 @@ export const ProfileForm: FC<ProfileFormType> = observer( ({profileForm}) => {
                 />
             </form>
             <div>
-                <BaseButton isActive type={"secondary"}>
+                <BaseButton  isActive type={"secondary"}>
                     Пройти идентификацию
                 </BaseButton>
+                <div style={{marginTop:'20px'}}>
+                    <BaseButton onClick={onEdit}  isActive type={"secondary"}>
+                        Редактировать аккаунт
+                    </BaseButton>
+                </div>
+
             </div>
         </div>
     );
