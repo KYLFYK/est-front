@@ -24,27 +24,6 @@ const personalAccount = [
     {title: "Проверка объекта", href: "/User", message: 0},
 ];
 
-const estateOffers = [
-    {
-        id: 1,
-        url: "/residential-complex/1",
-        img: IMAGES_SET,
-        tags: ["Покупка", "ЖК", "Новостройка"],
-    },
-    {
-        id: 2,
-        url: "/house/1",
-        img: IMAGES_SET,
-        tags: ["Покупка", "Дом"],
-    },
-    {
-        id: 3,
-        url: "/plat/1",
-        img: IMAGES_SET,
-        tags: ["Покупка", "Участок"],
-    },
-];
-
 const tagsButton = [
     "Квартира",
     "Дом",
