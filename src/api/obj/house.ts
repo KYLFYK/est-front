@@ -461,13 +461,13 @@ export const HouseApi  = {
                                 },
                             ]
                         }
-                    }
+                    },
+                status:200
                 }
             return objectHouse
 
         }
         catch (e:any){
-            console.log('error', e)
             return e
         }
     },

@@ -15,7 +15,7 @@ const ErrorPage= () => {
                         <div>
                             <div className={css.margin}>
                                 <Typography weight={"light"}>
-                                    К сожаления, данная страница недоступна
+                                    К сожалению, данная страница недоступна
                                 </Typography>
                             </div>
                             <div className={css.centerInfo}>

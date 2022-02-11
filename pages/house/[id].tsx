@@ -97,41 +97,48 @@ const House: NextPage = observer((props: any) => {
     store.fetch( Number(router.query.id))
   }, [router.query.id, store])
 
-    // console.log('store.initialData.info_options', store.initialData.info_options)
+  if( store.initialData.status === 404) router.push('/500')
 
   return (
     <MainContainer keywords={props.name} title={props.name} city={city} personalAccount={personalAccount} footerColor={'nude'} refs={refs}>
-        <Breadcrumbs items={breadcrumbs}/>
-        <Views items={views}/>
-        <NameEstate item={props.name}/>
-        <AdressEstate item={props.address}/>
-        <HorizontalTabs tabs={tabs} refs={refs}/>
-        <div ref={general}>
-          <GeneralInfo info={store.initialData.info_options} price={store.initialData.price} images={IMAGES_SET} />
-        </div>
-        <ObjectDescription items={store.initialData.description_items}/>
-        <div ref={tours}>
-          <ToursContainer  Online_tour={store.initialData.online_tour}/>
-        </div>
-        <div ref={architec}>
-          <ObjectSpecifications specificationsLists={store.initialData.object_specs} title={"Архитектурно-планировочные решения"}/>
-        </div>
-        <div ref={infra}>
-          <Map currentHouse={JSON.parse(JSON.stringify(store.initialData))} infrastructura={infrastructura} location={'infrastructure'} InfrastructureInfo={infrastructureInfo}/>
-        </div>
-        <div ref={legal}>
-          <ObjectLegalPurity legalPurityData={store.initialData.legalPurityData}/>
-        </div>
-        <div ref={payback}>
-          <PaybackContainer averagePrice={averagePrice}/>
-        </div>
-        <div ref={developer}>
-          <ObjectDeveloper developerData={store.initialData.object_developer_info}/>
-        </div>
-        <Mortgage/>
-        <div ref={record}>
-          <Record Record={RecordAgent.Record} title={'дом'}/>
-        </div>
+        {
+            store.initialData.status  === 404
+                ? router.push('/500')
+                :<>
+                    <Breadcrumbs items={breadcrumbs}/>
+                    <Views items={views}/>
+                    <NameEstate item={props.name}/>
+                    <AdressEstate item={props.address}/>
+                    <HorizontalTabs tabs={tabs} refs={refs}/>
+                    <div ref={general}>
+                        <GeneralInfo info={store.initialData.info_options} price={store.initialData.price} images={IMAGES_SET} />
+                    </div>
+                    <ObjectDescription items={store.initialData.description_items}/>
+                    <div ref={tours}>
+                        <ToursContainer  Online_tour={store.initialData.online_tour}/>
+                    </div>
+                    <div ref={architec}>
+                        <ObjectSpecifications specificationsLists={store.initialData.object_specs} title={"Архитектурно-планировочные решения"}/>
+                    </div>
+                    <div ref={infra}>
+                        <Map currentHouse={JSON.parse(JSON.stringify(store.initialData))} infrastructura={infrastructura} location={'infrastructure'} InfrastructureInfo={infrastructureInfo}/>
+                    </div>
+                    <div ref={legal}>
+                        <ObjectLegalPurity legalPurityData={store.initialData.legalPurityData}/>
+                    </div>
+                    <div ref={payback}>
+                        <PaybackContainer averagePrice={averagePrice}/>
+                    </div>
+                    <div ref={developer}>
+                        <ObjectDeveloper developerData={store.initialData.object_developer_info}/>
+                    </div>
+                    <Mortgage/>
+                    <div ref={record}>
+                        <Record Record={RecordAgent.Record} title={'дом'}/>
+                    </div>
+                </>
+        }
+
     </MainContainer>
   )
 })
@@ -140,6 +147,7 @@ export default House
 
 export async function getServerSideProps({params}: any) {
   const res  = await fetch(`https://estatum.f-case.ru/api/${UrlObj.house}/${params.id}`)
+
   const object = await res.json()
 
   return {
