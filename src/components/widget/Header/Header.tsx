@@ -30,8 +30,14 @@ type HeaderPropsType = {
 };
 
 const moc = [
-  { href: "/search?object-type=apartment&order-type=buy&privateType=house", title: "Купить" },
-  { href: "/search?object-type=apartment&order-type=rent&privateType=house", title: "Снять" },
+  {
+    href: "/search?object-type=apartment&order-type=buy&privateType=house",
+    title: "Купить",
+  },
+  {
+    href: "/search?object-type=apartment&order-type=rent&privateType=house",
+    title: "Снять",
+  },
   { href: "/calculator", title: "Ипотека" },
   // { href: "/construction", title: "Строящиеся дома" },
   { href: "/#contact", title: "Контакты" },
@@ -89,7 +95,7 @@ const personalAcc = [
     //'bank'
     { title: "Профиль: Банк", href: "/", message: 0 },
     { title: "Личный кабинет", href: "/cabinet", message: 0 },
-    { title: "Заявки на ипотеку", href: "/mortgage-applications", message: 0 },
+    { title: "Заявки на ипотеку", href: "/mortgage-orders", message: 0 },
   ],
 ];
 
@@ -142,18 +148,14 @@ export const Header: FC<HeaderPropsType> = ({
       case "reset-password":
         return (
           <NewPassword
-            onBack={() => setEdit('login')}
+            onBack={() => setEdit("login")}
             onPassword={setNewPassword}
             password={newPassword}
-            onEdit={() => setEdit('confirmationNewPassword')}
+            onEdit={() => setEdit("confirmationNewPassword")}
           />
         );
       case "confirmationNewPassword":
-        return (
-          <ConfirmationNewPassword
-            onEdit={() => setEdit('login')}
-          />
-        );
+        return <ConfirmationNewPassword onEdit={() => setEdit("login")} />;
       case "email-conformation":
         return (
           <EmailConformation
@@ -169,7 +171,7 @@ export const Header: FC<HeaderPropsType> = ({
   const activeEdit = (e: string) => {
     setEdit(e);
     setActiveModal(false);
-  }
+  };
 
   useEffect(() => {
     if (router.query.text === "email-conformation") {
@@ -233,8 +235,8 @@ export const Header: FC<HeaderPropsType> = ({
   const logout = () => {
     localStorage.clear();
     setAuthorization(false);
-    if(router.asPath === '/search' ) return 1
-    router.push('/')
+    if (router.asPath === "/search") return 1;
+    router.push("/");
   };
 
   const loginActive = () => {
@@ -250,7 +252,7 @@ export const Header: FC<HeaderPropsType> = ({
       };
       res();
     } catch (e) {
-      console.log('error - throw',e)
+      console.log("error - throw", e);
     }
   }, []);
 

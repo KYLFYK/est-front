@@ -1,0 +1,76 @@
+@import "src/app/styles/typography";
+@import "src/app/styles/colours";
+
+.wrapper {
+  padding-top: 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.section {
+  padding-bottom: 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+
+  &:not(:last-of-type) {
+    border-bottom: 1px solid #F2F2F2;
+  }
+
+  .title {
+    @include ROBOTOMEDIUM16;
+
+    display: inline-block;
+
+    &:not(:first-of-type) {
+      margin-top: 10px;
+    }
+  }
+
+  &List {
+    display: flex;
+    gap: 30px;
+
+    &:not(:last-of-type) {
+      margin-bottom: 30px;
+    }
+  }
+
+  &Elem {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+    &.large {
+      width: 550px;
+    }
+  }
+
+  .key, .value {
+    @include ROBOTOREGULAR16;
+  }
+
+  .key {
+    color: #CAD1DA;
+  }
+
+  .value {
+    color: #3D4550;
+  }
+
+  .select {
+    border: none;
+    width: fit-content;
+    padding-right: 30px;
+    color: #3D4550 !important;
+
+    div[class~='MuiSelect-root'] {
+      padding: 0 !important;
+    }
+
+    &.green {
+      color: #219653 !important;
+    }
+  }
+}
