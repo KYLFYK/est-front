@@ -8,9 +8,9 @@ import { useStyles } from "./styles";
 
 interface Props {
   options: IOption[];
-  value?: string;
+  value?: any;
   label?: string;
-  placeholder: string;
+  placeholder: any;
   className?: string;
   classNameWrapper?: string;
   isError?: boolean;

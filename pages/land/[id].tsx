@@ -53,7 +53,7 @@ const tabs = [{
 
 const Land = observer((props: ObjectLandType) => {
 
-    console.log('ObjectLandType', props)
+    const breadCrumbsStore = useBreadcrumbsStore()
     const general = useRef(null)
     const specs = useRef(null)
     const infra = useRef(null)
@@ -73,6 +73,8 @@ const Land = observer((props: ObjectLandType) => {
 
     useEffect(() => {
         setRefs([general.current, specs.current, infra.current, legal.current, record.current])
+        breadCrumbsStore.addBreadCrumbs(`${FILTER_HOUSE_TYPE_OPTIONS.filter((a: any) => props.type === a.value)[0].label} ${FILTER_ACTIONS_OPTIONS.filter((a: any) => props.orderType === a.value)[0].label}`, 1)
+        breadCrumbsStore.addBreadCrumbs(props.name, 2)
     }, [router.query.id])
 
 

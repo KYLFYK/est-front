@@ -39,6 +39,7 @@ export const LandApi  = {
                 "lang": "ru",
                 "name": res.data.name,
                 "type": res.data.type,
+                "orderType": res.data.orderType,
                 "category": res.data.category,
                 "address": res.data.address,
                 "city": res.data.city ? res.data.city : '' ,
@@ -165,7 +166,8 @@ export type ObjectLandType={
     object_id: number,
     lang: string,
     name: string
-    type : string
+    type: string
+    orderType: string
     category: string
     address: string
     city: string
@@ -270,8 +272,9 @@ export type IgetLandIdSSPType={
 
 export type IgetLandIdType={
     data:{
-        type:string
-        "object_id": number,
+        type: string
+        orderType: string
+        "object_id": number
         "publish": string
         "name": string
         "description_Info":string
@@ -282,8 +285,8 @@ export type IgetLandIdType={
         planning:string
         category:string
         "lat": string
-        "views": number,
-        "price": number,
+        "views": number
+        "price": number
         "markAsDelete": boolean
         sort: null|number
         agency: null|string

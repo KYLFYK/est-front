@@ -26,15 +26,15 @@ const ObjectCard: React.FC<Props> = ({ route, houseData, typeObject, data }) => 
 
     return (
         <div className={s.wrapper}>
-            <div className={s.slider}>
-                <BaseSlider images={imagesUrls} height={200} withFavorite onClickFavorite={() => {}}/>
-            </div>
-
             <Link href={`${TEMP_LINK}${route}/${data.id}`}>
-                <a className={s.content}>
+                <a className={s.link}>
+                    <div className={s.slider}>
+                        <BaseSlider images={imagesUrls} height={200} withFavorite={typeof window !== "undefined" && localStorage.getItem("roleEstatum") ? true : false} onClickFavorite={() => {}}/>
+                    </div>
+                    <div className={s.content}>
                     <Typography inline weight="bold" color="accent" className={s.title}>{data.name}</Typography>
                     <p className={s.subtitle}>
-                        <Typography inline weight="light" color="tertiary"> Адрес: </Typography> {data.address}
+                        <Typography inline weight="light" color="tertiary"> Адрес: </Typography> <div className={s.addressText}>{data.address}</div>
                     </p>
                     <p className={s.subtitle}>
                         <Typography inline weight="light" color="tertiary">Этаж:</Typography> {data.property.floor} / {data.property.totalFloor}
@@ -43,6 +43,7 @@ const ObjectCard: React.FC<Props> = ({ route, houseData, typeObject, data }) => 
                     <p className={s.price}>
                         {data.price} ₽
                     </p>
+                    </div>
                 </a>
             </Link>
         </div>

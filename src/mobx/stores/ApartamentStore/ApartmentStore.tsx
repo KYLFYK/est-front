@@ -8,6 +8,9 @@ class ApartmentStore {
       makeAutoObservable(this);
     }
     fetching = true
+    get() {
+      return JSON.parse(JSON.stringify({...this.initialData}))
+    }
     initialData = {
         images: [{url: "", id: 0},],
         object_id: 0,

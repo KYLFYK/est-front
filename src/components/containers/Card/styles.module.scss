@@ -16,15 +16,7 @@ $borderRadius: 6px;
     }
 }
 
-.content {
-    display: block;
-    cursor: pointer;
-    margin-right: 2px;
-    overflow: auto;
-    height: $contentHeight;
-    padding: 10px 15px 0px 15px;
-    box-sizing: border-box;
-    @include MapScrollbar;
+.link {
     color: black;
     &:visited{
        color: black 
@@ -35,7 +27,17 @@ $borderRadius: 6px;
     &:link {
         text-decoration: none
     }
-    
+}
+
+.content {
+    display: block;
+    cursor: pointer;
+    margin-right: 2px;
+    overflow: auto;
+    height: 100%;
+    padding: 10px 15px 0px 15px;
+    box-sizing: border-box;
+    @include MapScrollbar;
 }
 
 .title {
@@ -50,7 +52,7 @@ $borderRadius: 6px;
 .subtitle {
     @include ROBOTOREGULAR16;
     margin: 0px 0px 4px 0px;
-
+    display: flex;
 }
 .typeLabel {
     color: $GREY;
@@ -58,3 +60,8 @@ $borderRadius: 6px;
     font-weight: 300;
 }
 
+.addressText {
+    white-space: nowrap; 
+    overflow: hidden; 
+    text-overflow: ellipsis;
+}

@@ -106,6 +106,7 @@ export const Header: FC<HeaderPropsType> = ({
   modalActive,
   auth = false,
 }) => {
+
   const router = useRouter();
 
   const [email, setEmail] = useState<string>("");
@@ -278,7 +279,7 @@ export const Header: FC<HeaderPropsType> = ({
         >
           <IconLocation />
           <div className={css.textTypography}>
-            <SelectEstate options={city} selectLeft={false} />
+            <SelectEstate options={city} selectLeft={false}/>
           </div>
         </div>
         {moc.map(({ href, title }, index) => (

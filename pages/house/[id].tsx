@@ -22,7 +22,9 @@ import {Mortgage} from '../../src/components/shared/Mortgage/Mortgage'
 import {Record} from '../../src/components/containers/Record/Record'
 import RecordAgent from '../../src/components/containers/Record/RecordAgent.json'
 import {useStore} from '../../src/mobx/stores/HouseStore/HouseStore'
+import {useBreadcrumbsStore} from '../../src/mobx/stores/BreadcrumbsStore/BreadcrumbsStore'
 import { UrlObj} from '../../src/api/instance'
+import {FILTER_ACTIONS_OPTIONS, FILTER_HOUSE_TYPE_OPTIONS} from '../../src/components/containers/Filter/config'
 
 const city = ['Москва', 'Крым', 'Сочи']
 
@@ -74,9 +76,8 @@ const infrastructureInfo = 'В 15 минутах езды расположена
 
 const House: NextPage = observer((props: any) => {
 
-    // console.log('apiProps',props)
   const store = useStore()
-
+  const breadCrumbsStore = useBreadcrumbsStore()
   const general = useRef(null)
   const tours = useRef(null)
   const architec = useRef(null)
@@ -95,6 +96,8 @@ const House: NextPage = observer((props: any) => {
   useEffect(() => {
     setRefs([general.current, tours.current, architec.current, infra.current, legal.current, payback.current, developer.current, record.current])
     store.fetch( Number(router.query.id))
+    breadCrumbsStore.addBreadCrumbs(`${FILTER_HOUSE_TYPE_OPTIONS.filter((a: any) => props.type === a.value)[0].label} ${FILTER_ACTIONS_OPTIONS.filter((a: any) => props.orderType === a.value)[0].label}`, 1)
+    breadCrumbsStore.addBreadCrumbs(props.name, 2)
   }, [router.query.id, store])
 
   if( store.initialData.status === 404) router.push('/500')

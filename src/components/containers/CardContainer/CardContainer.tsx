@@ -1,6 +1,6 @@
 import React from 'react'
 import { observer } from "mobx-react-lite"
-import { useStore } from "../../../mobx/stores/SearchStore/SearchStore"
+import { useSearchStore } from "../../../mobx/stores/SearchStore/SearchStore"
 import { makeStyles } from "@material-ui/core"
 import ObjectCard from '../Card/index'
 import {BaseDropDown} from '../../shared/BaseDropDown/BaseDropDown'
@@ -37,7 +37,7 @@ const useStyles = makeStyles(() => ({
 }))
 
 const CardContainer: React.FC<Props> = observer(({ mapData, view, setView }) => {
-    const store = useStore()
+    const searchStore = useSearchStore()
     const classes = useStyles()
 
     const toggleButtonOptions = [
@@ -50,10 +50,10 @@ const CardContainer: React.FC<Props> = observer(({ mapData, view, setView }) => 
                 <div className={s.finderDropdown}>
                     <BaseDropDown 
                         className={classes.sortDropdown}
-                        onChange={(e) => {store.setSort(e)}}
+                        onChange={(e) => {searchStore.setSort(e)}}
                         placeholder={DROPDOWN_PLACEHOLDER}
                         options={SORT_FILTER_OPTIONS}
-                        value={store.sort} 
+                        value={searchStore.sort} 
                     />
                 </div>
                 <div className={s.finderButtons}>
@@ -73,13 +73,18 @@ const CardContainer: React.FC<Props> = observer(({ mapData, view, setView }) => 
                 </div>
             </div>
             <div className={s.content}>
-                {store.fetching 
+                {searchStore.fetching 
                     ? <h1>Loading...</h1>
-                    : store.initialData && store.initialData.length 
-                        ? store.initialData.map((i: any, id: number) => {
+                    : searchStore.initialData && searchStore.initialData.length 
+                        ? searchStore.initialData.map((i: any, id: number) => {
                             return(
                                 <div key={id} style={{padding:'5px'}}>
-                                    <ObjectCard route={store.get()['object-type']} typeObject={store.get()['building-type']} houseData={mapData[0]} data={i} />
+                                    <ObjectCard 
+                                        route={searchStore.getParams()['object-type']} 
+                                        typeObject={searchStore.getParams()['building-type']} 
+                                        houseData={mapData[0]} 
+                                        data={i} 
+                                    />
                                 </div>
                             )
                         })

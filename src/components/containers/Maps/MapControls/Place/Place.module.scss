@@ -20,7 +20,7 @@
     @include for-size(KT2) {
         position: relative;
         top: 0px;
-        height: 660px;
+        max-height: 660px;
         margin: 0px 0px 0px -520px;
         padding: 20px 20px 20px 20px;
     }
