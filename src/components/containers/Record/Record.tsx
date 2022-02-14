@@ -261,7 +261,7 @@ export const Record: FC<AgentRecordType> = ({Record, title}) => {
                                     Удобное время
                                 </Typography>
                             </div>
-                            <div style={{backgroundColor:'white',borderRadius:'8px'}}>
+                            <div style={{backgroundColor:'white',borderRadius:'8px',display:'flex',justifyContent:'space-around'}}>
                                 <TextField
                                     id="time"
                                     type="time"
