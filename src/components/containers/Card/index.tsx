@@ -21,6 +21,7 @@ const MAX_SLIDERS_AMMOUNT = 7
 const ObjectCard: React.FC<Props> = ({ route, houseData, typeObject, data }) => {
 
     //const houseImages = houseData.images.length > MAX_SLIDERS_AMMOUNT ? houseData.images.slice(0, MAX_SLIDERS_AMMOUNT) : houseData.images
+
     const houseImages = mapData[0].images
     const imagesUrls = houseImages.map((image) => image.url)
 
