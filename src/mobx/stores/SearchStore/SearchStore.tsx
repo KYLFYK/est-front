@@ -30,7 +30,29 @@ class SearchStore {
     'floor-from': undefined,
     'floor-to': undefined,
     'building': undefined,
-    'benefit': undefined,
+    'benefit': '',
+  }
+  setFilter(values: any) {
+    console.log(values)
+    this.filter = {
+    ...this.filter,
+    'object-type': values['object-type'],
+    'building-type': values['building-type'],
+    floor: values.floor,
+    'price-from': values['price-from'],
+    'price-to': values['price-to'],
+    'square-from': values['square-from'],
+    'square-to': values['square-to'],
+    'rooms-in-apartment': values['rooms-in-apartment'],
+    'rooms-in-house': values['rooms-in-house'],
+    'order-type': values['order-type'],
+    searchValue: values.searchValue,
+    'privateType': values['privateType'],
+    'floor-from': values['floor-from'],
+    'floor-to': values['floor-to'],
+    'building': values['building'],
+    'benefit': values['benefit'],
+    }
   }
 
   setOrderType(value: string) {
@@ -42,7 +64,7 @@ class SearchStore {
       'object-type': value, 
       'building-type': FILTER_BUILDING_TYPE_OPTIONS[0].value,
       'privateType': FILTER_PRIVATE_HOUSE_OPTIONS[0].value, 
-      'benefit': undefined, 
+      'benefit': '', 
       'building': value === 'land' ? undefined : this.filter['building'],
       'rooms-in-house': '',
       'rooms-in-apartment': '',
@@ -64,9 +86,34 @@ class SearchStore {
   setBuildingType(value: any) {
     this.filter = { ...this.filter, 'building-type': value }
   }
-
   setPrivateType(value: any) {
     this.filter = {...this.filter, 'privateType': value}
+  }
+  setPriceFrom(value: any) {
+    this.filter = {...this.filter, 'price-from': value}
+  }
+  setPriceTo(value: any) {
+    this.filter = {...this.filter, 'price-to': value}
+  }
+  setSquareFrom(value: any) {
+    this.filter = {...this.filter, 'square-from': value}
+  }
+  setSquareTo(value: any) {
+    this.filter = {...this.filter, 'square-to': value}
+  }
+  setPrivateFloorFrom(value: any) {
+    this.filter = {...this.filter, 'floor-from': value}
+  }
+  setPrivateFloorTo(value: any) {
+    this.filter = {...this.filter, 'floor-to': value}
+  }
+  setIRB(value: any) {
+    this.filter = {...this.filter, 'building': value}
+  }
+  setImprovment(value: any) {
+    const selectedImprovmentSet = new Set(this.filter['benefit']?.split(','))
+    selectedImprovmentSet.has(value) ? selectedImprovmentSet.delete(value) : selectedImprovmentSet.add(value)
+    this.filter = { ...this.filter, 'benefit': Array.from(selectedImprovmentSet).join(',') || '' }
   }
 
   getFilter() {

@@ -23,6 +23,7 @@ import {sortObject_specsTypeGuide,sortGuide} from "../../src/utils/conversionIco
 import {useBreadcrumbsStore} from '../../src/mobx/stores/BreadcrumbsStore/BreadcrumbsStore'
 import {useStore} from '../../src/mobx/stores/ComplexStore/ComplexStore'
 import {UrlObj} from '../../src/api/instance'
+import {FILTER_ACTIONS_OPTIONS, FILTER_HOUSE_TYPE_OPTIONS} from '../../src/components/containers/Filter/config'
 
 const city = ['Москва', 'Санкт-Петербург', 'Крым', 'Сочи', 'Нижний Новгород']
 const personalAccount = [{title: 'Личный кабинет', href: '/User', message: 0},
@@ -68,18 +69,17 @@ const ResidentialComplex: NextPage = observer((props: any) => {
   const developer = useRef(null)
   const [refs, setRefs] = useState<any>([])
 
-  const breadcrumbs = ['Крым', 'Купить участок', `${props.name}`]
   const views = [datetoDayFormat(props.publish), props.views]
   useEffect(() => {
     setRefs([general.current, specs.current, architec.current, plansec.current, infra.current, developer.current])
     store.fetch(router.query.id)
-    breadCrumbsStore.addBreadCrumbs(`${props.type} ${props.orderType}`, 1)
+    breadCrumbsStore.addBreadCrumbs(`${FILTER_ACTIONS_OPTIONS.filter((a: any) => props.orderType === a.value)[0].label} ${FILTER_HOUSE_TYPE_OPTIONS.filter((a: any) => props.type === a.value)[0].label}`, 1)
     breadCrumbsStore.addBreadCrumbs(props.name, 2)
   }, [router.query.id, store])
 
   return (
     <MainContainer keywords={props.name} title={props.name} city={city} personalAccount={personalAccount} footerColor={'accent'} refs={refs}>
-        <Breadcrumbs items={breadcrumbs} location={'object'}/>
+        <Breadcrumbs location={'object'}/>
         <Views items={views}/>
         <NameEstate item={props.name}/>
         <AdressEstate item={props.address}/>

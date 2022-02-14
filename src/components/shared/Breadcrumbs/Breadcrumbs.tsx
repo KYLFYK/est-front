@@ -7,7 +7,7 @@ import {useBreadcrumbsStore} from '../../../mobx/stores/BreadcrumbsStore/Breadcr
 import {useSearchStore} from '../../../mobx/stores/SearchStore/SearchStore'
 
 type BreadcrumbsPropsType = {
-    items: string[]
+    items?: string[]
     text?: string
     variant?: "primary" | "secondary",
     className?: string,
@@ -34,7 +34,7 @@ export const Breadcrumbs: React.FC<BreadcrumbsPropsType> = observer(({ className
                 return (
                     <div key={id} style={{display: 'flex'}}>
                         <Typography className={id < breadCrumbsStore.get().length-1 ? s.secondaryItem : s.primaryItem} size={'small'} weight={'light'} >
-                            <div onClick={location === 'object' ? onReturntoSearch : () => {}}>{i}</div>
+                            <div className={location === 'object' && id === 1 ? s.clickedItem : ''} onClick={location === 'object' ? onReturntoSearch : () => {}}>{i}</div>
                         </Typography>
                         {id < breadCrumbsStore.get().length-1 && 
                             <Typography className={s.secondaryItem} size={'small'} weight={'light'} >

@@ -32,17 +32,17 @@ const ObjectCard: React.FC<Props> = ({ route, houseData, typeObject, data }) => 
                         <BaseSlider images={imagesUrls} height={200} withFavorite={typeof window !== "undefined" && localStorage.getItem("roleEstatum") ? true : false} onClickFavorite={() => {}}/>
                     </div>
                     <div className={s.content}>
-                    <Typography inline weight="bold" color="accent" className={s.title}>{data.name}</Typography>
-                    <p className={s.subtitle}>
-                        <Typography inline weight="light" color="tertiary"> Адрес: </Typography> <div className={s.addressText}>{data.address}</div>
-                    </p>
-                    <p className={s.subtitle}>
-                        <Typography inline weight="light" color="tertiary">Этаж:</Typography> {data.property.floor} / {data.property.totalFloor}
-                        <Typography inline weight="light" color="tertiary">Тип жилья:</Typography> {typeObject === 'new' ? 'Новостройка' : 'Вторичное'}
-                    </p>
-                    <p className={s.price}>
-                        {data.price} ₽
-                    </p>
+                        <Typography inline weight="bold" color="accent" className={s.title}>{data.name}</Typography>
+                        <p className={s.subtitle}>
+                            <Typography inline weight="light" color="tertiary"> Адрес: </Typography> {data.address}
+                        </p>
+                        <p className={s.subtitle}>
+                            <Typography inline weight="light" color="tertiary">Этаж:</Typography> {data.property.floor} / {data.property.totalFloor}
+                            <Typography inline weight="light" color="tertiary">Тип жилья:</Typography> {typeObject === 'new' ? 'Новостройка' : 'Вторичное'}
+                        </p>
+                        <p className={s.price}>
+                            {data.price} ₽
+                        </p>
                     </div>
                 </a>
             </Link>

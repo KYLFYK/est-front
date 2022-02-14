@@ -90,7 +90,6 @@ const TownHouse: NextPage = observer((props: any) => {
 
   const router = useRouter()
 
-  const breadcrumbs = ['Крым', 'Купить участок', props.name]
   const views = ['', props.views, props?.agency]
 
   useEffect(() => {
@@ -100,7 +99,7 @@ const TownHouse: NextPage = observer((props: any) => {
 
   return (
     <MainContainer keywords={props.name} title={props.name} city={city} personalAccount={personalAccount} footerColor={'nude'} refs={refs}>
-        <Breadcrumbs items={breadcrumbs}/>
+        <Breadcrumbs location={'object'}/>
         <Views items={views}/>
         <NameEstate item={props.name}/>
         <AdressEstate item={props.address}/>

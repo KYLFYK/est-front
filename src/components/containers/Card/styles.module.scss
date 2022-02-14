@@ -33,15 +33,18 @@ $borderRadius: 6px;
     display: block;
     cursor: pointer;
     margin-right: 2px;
-    overflow: auto;
     height: 100%;
     padding: 10px 15px 0px 15px;
     box-sizing: border-box;
     @include MapScrollbar;
+    white-space: nowrap; 
+    overflow: hidden; 
+    text-overflow: ellipsis;
 }
 
 .title {
     margin: 0px 0px 4px 0px !important;
+    
 }
 
 .price {

@@ -73,19 +73,18 @@ const Apartment: NextPage =  observer((props: any) => {
 
   const router = useRouter()
 
-  const breadcrumbs = ['Крым', 'Купить участок', props.name]
   const views = [datetoDayFormat(props.publish), props.views, props?.agency]
 
   useEffect(() => {
     setRefs([general.current, tours.current, architec.current, infra.current, props.secondary_type === 'Новостройка' ? develop.current : legal.current, record.current]);
     store.fetch(router.query.id)
-    breadCrumbsStore.addBreadCrumbs(`${FILTER_HOUSE_TYPE_OPTIONS.filter((a: any) => props.type === a.value)[0].label} ${FILTER_ACTIONS_OPTIONS.filter((a: any) => props.orderType === a.value)[0].label}`, 1)
+    breadCrumbsStore.addBreadCrumbs(`${FILTER_ACTIONS_OPTIONS.filter((a: any) => props.orderType === a.value)[0].label} ${FILTER_HOUSE_TYPE_OPTIONS.filter((a: any) => props.type === a.value)[0].label}`, 1)
     breadCrumbsStore.addBreadCrumbs(props.name, 2)
   }, [router.query.id, store])
 
   return (
     <MainContainer keywords={props.name} title={props.name} city={city} personalAccount={personalAccount} refs={refs}>
-        <Breadcrumbs items={breadcrumbs} location={'object'}/>
+        <Breadcrumbs location={'object'}/>
         <Views items={views}/>
         <NameEstate item={props.name}/>
         <AdressEstate item={props.address}/>

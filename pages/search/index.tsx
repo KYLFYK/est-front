@@ -1,5 +1,4 @@
 import type { NextPage } from 'next'
-import { useRouter } from 'next/router'
 import { observer } from "mobx-react-lite"
 import {useBreadcrumbsStore} from '../../src/mobx/stores/BreadcrumbsStore/BreadcrumbsStore'
 import React, {useState} from 'react'
@@ -22,19 +21,16 @@ const personalAccount = [{title: 'Личный кабинет', href: '/User', m
   {title: 'Проверка объекта', href: '/User', message: 0},
 ]
 
-const breadcrumbs = ['Крым', 'Купить участок', 'Участок в Троицком 30 соток']
-
 const center = {lat: 45.16, lng: 36.90}
 
 const Finder: NextPage = observer(() => {
-  const router = useRouter()
   const [view, setView] = useState('mapView')
 
   return (
     <MainContainer keywords={"Поиск"} title={"Поиск"} city={city} personalAccount={personalAccount} >
-        <Breadcrumbs items={breadcrumbs}/>
+        <Breadcrumbs/>
         <div style={{margin: '20px 0 0 0'}}>
-          <Filter location={'search'} initialValues={router.query}/>
+          <Filter location={'search'} />
         </div>
         <div style={{display: 'grid', gridTemplateColumns: view==='mapView' ? '1fr 1fr' : '1fr', width: '100%', margin: '20px 0 0 0'}}>
           <div style={{display: view==='mapView' ? 'flex' : 'none'}}>
