@@ -113,7 +113,7 @@ class MainPageStore {
                 price: object.price,
                 property: {
                     floor: 3, // moc
-                    floorAll: 15, // moc
+                    totalFloor: 15, // moc
                     images: [],
                     object_id: object.id,
                     name: object.name,
