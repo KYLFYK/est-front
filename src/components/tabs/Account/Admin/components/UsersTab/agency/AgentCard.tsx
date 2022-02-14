@@ -13,7 +13,7 @@ interface Props {
   description: string;
   description2?: string;
   hrefPrefix?: string;
-  id: string;
+  id: string | number;
 }
 
 export const AgentCard: FC<Props> = ({
