@@ -56,7 +56,7 @@ const tabs = [{
 ]
 
 const ResidentialComplex: NextPage = observer((props: any) => {
-
+  console.log(props)
   const store = useStore()
   const breadCrumbsStore = useBreadcrumbsStore()
   const router = useRouter()
@@ -73,7 +73,7 @@ const ResidentialComplex: NextPage = observer((props: any) => {
   useEffect(() => {
     setRefs([general.current, specs.current, architec.current, plansec.current, infra.current, developer.current])
     store.fetch(router.query.id)
-    breadCrumbsStore.addBreadCrumbs(`${FILTER_ACTIONS_OPTIONS.filter((a: any) => props.orderType === a.value)[0].label} ${FILTER_HOUSE_TYPE_OPTIONS.filter((a: any) => props.type === a.value)[0].label}`, 1)
+    breadCrumbsStore.addBreadCrumbs(`${FILTER_ACTIONS_OPTIONS.filter((a: any) => props.orderType === a.value)[0].label}`, 1)
     breadCrumbsStore.addBreadCrumbs(props.name, 2)
   }, [router.query.id, store])
 
