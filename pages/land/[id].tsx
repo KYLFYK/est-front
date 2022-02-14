@@ -21,6 +21,8 @@ import {UrlObj} from '../../src/api/instance'
 import {IgetLandIdSSPType, ObjectLandType} from "../../src/api/obj/land";
 import {conversionDate} from "../../src/utils/conversionDate/conversionDate";
 import {sortObject_specsTypeGuide, sortGuide} from "../../src/utils/conversionIcons/conversionIcons";
+import {useBreadcrumbsStore} from '../../src/mobx/stores/BreadcrumbsStore/BreadcrumbsStore'
+import {FILTER_ACTIONS_OPTIONS, FILTER_HOUSE_TYPE_OPTIONS} from '../../src/components/containers/Filter/config'
 import Error404 from "../../public/Error404";
 import ErrorPage from "../404";
 
