@@ -1,7 +1,33 @@
 import { makeAutoObservable } from "mobx";
+import { instance } from "../../../../api/instance";
+
+interface IResponseProps {
+  address: string;
+  description: string;
+  id: string | number;
+  name: string;
+  phone: {
+    ord: string;
+    value: string;
+  }[];
+  site: string;
+  status: string;
+}
+
+interface IResponse {
+  agencyProperty: IResponseProps;
+  createAt: Date;
+  email: string;
+  id: string | number;
+  isConfirmed: boolean;
+  markAsDelete: boolean;
+  phone: string;
+  role: string;
+  updateAt: Date;
+}
 
 interface IAdminAgent {
-  id: string;
+  id: string | number;
   agencyName: string;
   description: string;
   imgUrl?: string;
@@ -19,50 +45,19 @@ class AgenciesList {
   list: ListType = null;
 
   uploadList: () => void = async () => {
-    this.loaded = true;
-    this.errorOnLoad = false;
-    this.list = [
-      {
-        id: "1",
-        description: "Агентство элитной недвижимости",
-        agencyName: "Deal",
-      },
-      {
-        id: "2",
-        description: "Агентство элитной недвижимости",
-        agencyName: "Deal",
-      },
-      {
-        id: "3",
-        description: "Агентство элитной недвижимости",
-        agencyName: "Deal",
-      },
-      {
-        id: "4",
-        description: "Агентство элитной недвижимости",
-        agencyName: "Deal",
-      },
-      {
-        id: "5",
-        description: "Агентство элитной недвижимости",
-        agencyName: "Deal",
-      },
-      {
-        id: "6",
-        description: "Агентство элитной недвижимости",
-        agencyName: "Deal",
-      },
-      {
-        id: "7",
-        description: "Агентство элитной недвижимости",
-        agencyName: "Deal",
-      },
-      {
-        id: "8",
-        description: "Агентство элитной недвижимости",
-        agencyName: "Deal",
-      },
-    ];
+    try {
+      const res = await instance.get<IResponse[]>("agency");
+      this.list = res.data.map((el) => ({
+        id: el.id,
+        description: el.agencyProperty.description,
+        agencyName: el.agencyProperty.name,
+      }));
+      this.loaded = true;
+      this.errorOnLoad = false;
+    } catch (e) {
+      this.loaded = false;
+      this.errorOnLoad = true;
+    }
   };
 }
 
