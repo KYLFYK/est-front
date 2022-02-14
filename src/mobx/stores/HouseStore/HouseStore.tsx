@@ -96,10 +96,15 @@ class HouseStore {
     // this.initialData = Number(id) > 0 ? fullObjectData.filter((fod) => fod.object_id === Number(id))[0] : this.initialData
 
           const res = await HouseApi.getHouseById(id)
+
           // this.initialData.status = res.response.data.statusCode === 404 ? res.response.data.statusCode : 200
           this.initialData = res
           this.fetching = false
   }
+    get(){
+        console.log('mobxHouse',JSON.parse(JSON.stringify(this.initialData)))
+    }
+
 }
 
 const StoreContext = createContext<HouseStore>(new HouseStore());

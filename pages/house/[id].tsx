@@ -113,7 +113,9 @@ const House: NextPage = observer((props: any) => {
                     <AdressEstate item={props.address}/>
                     <HorizontalTabs tabs={tabs} refs={refs}/>
                     <div ref={general}>
-                        <GeneralInfo info={store.initialData.info_options} price={store.initialData.price} images={IMAGES_SET} />
+                      {
+                        store.initialData.info_options && <GeneralInfo info={store.initialData.info_options} price={store.initialData.price} images={IMAGES_SET} />
+                      }
                     </div>
                     <ObjectDescription items={store.initialData.description_items}/>
                     <div ref={tours}>

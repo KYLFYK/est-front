@@ -6,6 +6,7 @@ import { IOption } from '../../../utils/interfaces/general';
 import BaseSlider from '../../shared/BaseSlider/BaseSlider';
 import Typography from '../../shared/Typography/Typography';
 import { formatNumbersToCurrency } from '../../../utils/general';
+import {observer} from "mobx-react-lite";
 
 interface Props {
     images: string[],
@@ -13,7 +14,8 @@ interface Props {
     info: IOption[]
 }
 
-const GeneralInfo: React.FC<Props> = ({ images, price, info }) => {
+const GeneralInfo: React.FC<Props> = observer(({ images, price, info }) => {
+
     return (
         <div className={s.container}>
             <div className={s.sliderContainer}>
@@ -25,13 +27,27 @@ const GeneralInfo: React.FC<Props> = ({ images, price, info }) => {
                 {price && <Typography size="big" color="nude">{formatNumbersToCurrency(price)} ₽</Typography>}
                 {info.map((item, idx) => (
                     <div className={s.infoItem} key={idx}>
-                        <Typography color={item.value === '' ? 'tertiary' : 'default'} weight="medium" className={idx > 0 && item.value === '' ? s.infoTitle : s.infoLabel}> {item.label} </Typography>
-                        {item.value && <Typography className={s.infoValue}> {item.value} </Typography>}
+                        {
+                            item.value !== '' && item.value !== null &&
+                                <>
+                                    <Typography
+                                        color={item.value === '' ? 'tertiary' : 'default'}
+                                        weight="medium" className={idx > 0 && item.value === '' ? s.infoTitle : s.infoLabel}
+                                    >
+                                        {item.label}
+                                    </Typography>
+                                    <Typography className={s.infoValue}>
+                                        {item.value}
+                                    </Typography>
+                                </>
+
+                        }
+
                     </div>
                 ))}
             </div>
         </div>
     )
-};
+})
 
 export default GeneralInfo

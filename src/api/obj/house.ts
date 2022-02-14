@@ -18,13 +18,13 @@ export const HouseApi  = {
         try{
 
             const res  = await instance.get(`${UrlObj.house}/${id}`)
-            console.log('resApiHouse',res.data)
+            // console.log('resApiHouse',res.data)
 
             //@ts-ignore  переформатирование(1 из 2) - ( object_specs )
             let object_specsGuide :Array<{value:string,label:{title:string, text:string}}> | [] = res.data.object_specs.map(guid=>sortGuide(guid,guid.subtitle_ru)).filter(f=>f !== undefined)
             const object_specs = sortObject_specsTypeGuide( object_specsGuide)          // object_specs (2 из 2) - переформатирование
-
-            const floors = [...res.data.info_options.floors]                         // данные находятся в странном месте ( info_options ) - перенос в отдельные переменные
+            let floors = res.data.info_options.floors ? res.data.info_options.floors : [{floor:'',value:''}]
+                                    // данные находятся в странном месте ( info_options ) - перенос в отдельные переменные
             const construction_feat = res.data.info_options.construction_features?res.data.info_options.construction_features : [{title:'',value:''}]
             const construction_features = [...construction_feat]  // данные находятся в странном месте( object_specs ) - перенос в отдельные переменные
                 // удаление из основного объекта
@@ -58,7 +58,7 @@ export const HouseApi  = {
 
 
            const infoOptions = sortInfoOptions(res.data.info_options)                   // сортировка в нужный формат  - info_options
-           const  optionFloors = floors.map(floor=>({label:floor.floor, value:floor.value}))  // остатки данных - из странного места - переформатирование
+           const  optionFloors = floors? floors.map((floor:any)=>({label:floor.floor, value:floor.value})) : [{label: '1',value:'2'}]  // остатки данных - из странного места - переформатирование
                                                                                          // остатки данных - из странного места - переформатирование
             const construction_featuresFilter = construction_features.map((construction, index)=>(
                 {value: index %2? 'construction_features2': 'construction_features1',label:{title:construction.title, text:''}}
