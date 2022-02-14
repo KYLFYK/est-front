@@ -24,6 +24,10 @@ const ObjectCard: React.FC<Props> = ({ route, houseData, typeObject, data }) => 
     const houseImages = mapData[0].images
     const imagesUrls = houseImages.map((image) => image.url)
 
+    function numberWithSpaces(price:any) {
+        return price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ");
+    }
+
     return (
         <div className={s.wrapper}>
             <Link href={`${TEMP_LINK}${route}/${data.id}`}>
@@ -41,7 +45,9 @@ const ObjectCard: React.FC<Props> = ({ route, houseData, typeObject, data }) => 
                         <Typography inline weight="light" color="tertiary">Тип жилья:</Typography> {typeObject === 'new' ? 'Новостройка' : 'Вторичное'}
                     </p>
                     <p className={s.price}>
-                        {data.price} ₽
+                        {
+                            numberWithSpaces(data.price)
+                        } ₽
                     </p>
                     </div>
                 </a>
