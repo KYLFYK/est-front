@@ -32,7 +32,7 @@ export const Breadcrumbs: React.FC<BreadcrumbsPropsType> = observer(({ className
         <div className={s.blockAdvantage}>
             {breadCrumbsStore.get().map((i: string, id: number) => {
                 return (
-                    <div key={id} style={{display: 'flex'}}>
+                    <div key={id} style={{display: 'flex',cursor:'pointer'}}>
                         <Typography className={id < breadCrumbsStore.get().length-1 ? s.secondaryItem : s.primaryItem} size={'small'} weight={'light'} >
                             <div className={location === 'object' && id === 1 ? s.clickedItem : ''} onClick={location === 'object' ? onReturntoSearch : () => {}}>{i}</div>
                         </Typography>
