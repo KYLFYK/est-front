@@ -23,7 +23,7 @@ export const HouseApi  = {
             //@ts-ignore  переформатирование(1 из 2) - ( object_specs )
             let object_specsGuide :Array<{value:string,label:{title:string, text:string}}> | [] = res.data.object_specs.map(guid=>sortGuide(guid,guid.subtitle_ru)).filter(f=>f !== undefined)
             const object_specs = sortObject_specsTypeGuide( object_specsGuide)          // object_specs (2 из 2) - переформатирование
-            debugger
+
             const floors = [...res.data.info_options.floors]                         // данные находятся в странном месте ( info_options ) - перенос в отдельные переменные
             const construction_feat = res.data.info_options.construction_features?res.data.info_options.construction_features : [{title:'',value:''}]
             const construction_features = [...construction_feat]  // данные находятся в странном месте( object_specs ) - перенос в отдельные переменные
