@@ -92,7 +92,6 @@ const House: NextPage = observer((props: any) => {
 
   const views = [store.initialData.publish,store.initialData.views, store.initialData.agency]
 
-
   useEffect(() => {
     setRefs([general.current, tours.current, architec.current, infra.current, legal.current, payback.current, developer.current, record.current])
     store.fetch( Number(router.query.id))
