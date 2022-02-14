@@ -21,6 +21,8 @@ import {UrlObj} from '../../src/api/instance'
 import {IgetLandIdSSPType, ObjectLandType} from "../../src/api/obj/land";
 import {conversionDate} from "../../src/utils/conversionDate/conversionDate";
 import {sortObject_specsTypeGuide, sortGuide} from "../../src/utils/conversionIcons/conversionIcons";
+import {useBreadcrumbsStore} from '../../src/mobx/stores/BreadcrumbsStore/BreadcrumbsStore'
+import {FILTER_ACTIONS_OPTIONS, FILTER_HOUSE_TYPE_OPTIONS} from '../../src/components/containers/Filter/config'
 
 const city = ['Москва', 'Санкт-Петербург', 'Крым', 'Сочи', 'Нижний Новгород']
 const personalAccount = [{title: 'Личный кабинет', href: '/User', message: 0},
@@ -51,7 +53,7 @@ const tabs = [{
 
 const Plat = observer((props: ObjectLandType) => {
 
-    console.log('ObjectLandType', props)
+    const breadCrumbsStore = useBreadcrumbsStore()
     const general = useRef(null)
     const specs = useRef(null)
     const infra = useRef(null)
@@ -66,12 +68,14 @@ const Plat = observer((props: ObjectLandType) => {
 
     useEffect(() => {
         setRefs([general.current, specs.current, infra.current, legal.current, record.current])
+        breadCrumbsStore.addBreadCrumbs(`${FILTER_HOUSE_TYPE_OPTIONS.filter((a: any) => props.type === a.value)[0].label} ${FILTER_ACTIONS_OPTIONS.filter((a: any) => props.orderType === a.value)[0].label}`, 1)
+        breadCrumbsStore.addBreadCrumbs(props.name, 2)
     }, [router.query.id])
 
     return (
         <MainContainer keywords={props.name} title={props.name} city={city} personalAccount={personalAccount}
                        footerColor={'nude'} refs={refs}>
-            <Breadcrumbs items={breadcrumbs}/>
+            <Breadcrumbs items={breadcrumbs} location={'object'}/>
             <Views items={views}/>
             <NameEstate item={props.name}/>
             <AdressEstate item={props.address}/>
@@ -84,8 +88,7 @@ const Plat = observer((props: ObjectLandType) => {
                 <ObjectSpecifications specificationsLists={props.object_specs} title={"Об участке"}/>
             </div>
             <div ref={infra}>
-                <Map currentHouse={props} infrastructura={infrastructura} location={'infrastructure'}
-                     InfrastructureInfo={props.description_Info.toString()}/>
+                <Map currentHouse={props} location={'infrastructure'} InfrastructureInfo={props.description_Info.toString()}/>
             </div>
             <div ref={legal}>
                 <ObjectLegalPurity legalPurityData={props.legalPurityData}/>

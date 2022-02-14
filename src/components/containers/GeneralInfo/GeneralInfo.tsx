@@ -19,7 +19,7 @@ const GeneralInfo: React.FC<Props> = ({ images, price, info }) => {
             <div className={s.sliderContainer}>
                 <BaseSlider
                     images={images}
-                    height={600} withArrows withFavorite onClickFavorite={() => {}}/>
+                    height={600} withArrows withFavorite={typeof window !== "undefined" && localStorage.getItem("roleEstatum") ? true : false} onClickFavorite={() => {}}/>
             </div>
             <div className={s.infoContainer}>
                 {price && <Typography size="big" color="nude">{formatNumbersToCurrency(price)} ₽</Typography>}

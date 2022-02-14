@@ -1,12 +1,15 @@
 import type { NextPage } from 'next'
 import { useRouter } from 'next/router'
+import { observer } from "mobx-react-lite"
+import {useBreadcrumbsStore} from '../../src/mobx/stores/BreadcrumbsStore/BreadcrumbsStore'
 import React, {useState} from 'react'
 import { MainContainer } from 'src/components/containers/MainContainer/MainContainer'
 import {Breadcrumbs} from '../../src/components/shared/Breadcrumbs/Breadcrumbs'
 import { Filter } from '../../src/components/containers/Filter/Filter'
 import CardContainer from '../../src/components/containers/CardContainer/CardContainer'
 import Map from '../../src/components/containers/Maps/MapFinder/index'
-import { mapData } from '../../src/components/containers/Maps/MapFinder/config';
+import { mapData } from '../../src/components/containers/Maps/MapFinder/config'
+
 
 const city = ['Москва', 'Крым', 'Сочи']
 
@@ -23,8 +26,7 @@ const breadcrumbs = ['Крым', 'Купить участок', 'Участок 
 
 const center = {lat: 45.16, lng: 36.90}
 
-const Finder: NextPage = () => {
-
+const Finder: NextPage = observer(() => {
   const router = useRouter()
   const [view, setView] = useState('mapView')
 
@@ -42,7 +44,7 @@ const Finder: NextPage = () => {
         </div>
     </MainContainer>
   )
-}
+})
 
 export default Finder
 

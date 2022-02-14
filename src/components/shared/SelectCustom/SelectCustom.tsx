@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useOnOutsideClick } from '../../../hooks/useOnOutsideClick';
+import { useBreadcrumbsStore } from 'src/mobx/stores/BreadcrumbsStore/BreadcrumbsStore';
 import css from './SelectCustom.module.scss'
 
 type SelectPropsType = {
@@ -8,13 +9,16 @@ type SelectPropsType = {
     selectLeft?: boolean
 }
 
-export const SelectEstate: React.FC<SelectPropsType> = ({ options,  selectLeft }) => {
-
+export const SelectEstate: React.FC<SelectPropsType> = ({ options, selectLeft }) => {
+  
     const [open, setOpen] = useState(false);
     const [edit, setEdit] = useState<string>('Крым')
-
+    
     const { innerBorderRef } = useOnOutsideClick(() => setTimeout(() => setOpen(false), 0));
-
+    const breadCrumbs = useBreadcrumbsStore()
+    useEffect(() => {
+        breadCrumbs.addBreadCrumbs(edit, 0)
+    }, [edit])
     return (
         <div className={selectLeft ? css.dropdown_left : css.dropdown}>
             <div

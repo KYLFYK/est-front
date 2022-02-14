@@ -65,7 +65,7 @@
         top: 20px; 
         left: -500px;
         width: 323px;
-        height: 660px;
+        max-height: 660px;
     }
     @include for-size(KT5) {
         width: 343px;
@@ -74,7 +74,8 @@
 
 .localbarActive {
     background-color: #ffffff;
-    height: 360px;
+    padding: 20px 0 20px 20px;
+    max-height: 360px;
     position: absolute;
     z-index: 10;
     transition: all .5s;
@@ -89,7 +90,7 @@
     @include for-size(KT2) {
         border-radius: 10px 0 10px 10px;
         flex-direction: row;
-        height: 660px;
+        max-height: 660px;
         width: 323px;
         left: 20px;
         top: 20px; 
@@ -122,7 +123,7 @@
         display: flex;
     }
     @include for-size(KT5) {
-        left: 364px;
+        left: 384px;
     }
 }
 .backButton {

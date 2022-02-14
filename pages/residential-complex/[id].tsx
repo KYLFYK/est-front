@@ -20,7 +20,7 @@ import ConstructProgress from '../../src/components/containers/ConstructProgress
 import { MappingGeneralInfo, MappingDeveloperInfo, MappingShedule } from 'src/lib/mapping/ResidentComplex/residentComplexMapping'
 import { datetoDayFormat } from 'src/lib/mapping/objectDates'
 import {sortObject_specsTypeGuide,sortGuide} from "../../src/utils/conversionIcons/conversionIcons";
-
+import {useBreadcrumbsStore} from '../../src/mobx/stores/BreadcrumbsStore/BreadcrumbsStore'
 import {useStore} from '../../src/mobx/stores/ComplexStore/ComplexStore'
 import {instance, UrlObj} from '../../src/api/instance'
 
@@ -57,6 +57,7 @@ const tabs = [{
 const ResidentialComplex: NextPage = observer((props: any) => {
 
   const store = useStore()
+  const breadCrumbsStore = useBreadcrumbsStore()
   const router = useRouter()
 
   const general = useRef(null)
@@ -72,11 +73,13 @@ const ResidentialComplex: NextPage = observer((props: any) => {
   useEffect(() => {
     setRefs([general.current, specs.current, architec.current, plansec.current, infra.current, developer.current])
     store.fetch(router.query.id)
+    breadCrumbsStore.addBreadCrumbs(`${props.type} ${props.orderType}`, 1)
+    breadCrumbsStore.addBreadCrumbs(props.name, 2)
   }, [router.query.id, store])
 
   return (
     <MainContainer keywords={props.name} title={props.name} city={city} personalAccount={personalAccount} footerColor={'accent'} refs={refs}>
-        <Breadcrumbs items={breadcrumbs}/>
+        <Breadcrumbs items={breadcrumbs} location={'object'}/>
         <Views items={views}/>
         <NameEstate item={props.name}/>
         <AdressEstate item={props.address}/>
@@ -94,7 +97,7 @@ const ResidentialComplex: NextPage = observer((props: any) => {
           <Planning FilterComponent={<PlanningFilter />} planningList={props.planningList}/>
         </div>
         <div ref={infra}>
-          <Map currentHouse={props} infrastructura={infrastructura} location={'infrastructure'} InfrastructureInfo={props.info_options[0].infrastructure}/>
+          <Map currentHouse={props} location={'infrastructure'} InfrastructureInfo={props.info_options[0].infrastructure}/>
         </div>
         <div ref={developer}>
           <ObjectDeveloper developerData={MappingDeveloperInfo(props.object_developer_info)}/>

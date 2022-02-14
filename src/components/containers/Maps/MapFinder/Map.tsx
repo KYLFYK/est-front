@@ -1,7 +1,7 @@
 import React, {useState, useRef, useEffect} from "react";
 import { useRouter } from 'next/router'
 import { observer } from "mobx-react-lite"
-import { useStore } from "../../../../mobx/stores/SearchStore/SearchStore"
+import { useSearchStore } from "../../../../mobx/stores/SearchStore/SearchStore"
 import MapGL, {Marker} from "react-map-gl";
 import "mapbox-gl/dist/mapbox-gl.css";
 import useSupercluster from "use-supercluster";
@@ -27,8 +27,8 @@ interface Props {
 const Map: React.FC<Props> = observer(({mapData, location, viewport, setViewport, view, setView}) => {
 
   const router = useRouter()
-  const store = useStore()
-  const data = store.get()
+  const searchStore = useSearchStore()
+  const data = searchStore.getInitialData()
   const center = {
     lat: 45.16,
     lng: 36.90
@@ -162,7 +162,17 @@ const Map: React.FC<Props> = observer(({mapData, location, viewport, setViewport
                             </BaseButton>
                           </div>
                           <div className={s.list}>
-                            {choosedPlaces.length && choosedPlaces.map((cp: any, i: number) => <div key={i} style={{padding:'5px'}}><ObjectCard route={router.query['object-type']} key={i} houseData={cp.properties.prop} data={cp.properties.prop}/></div>)}
+                            {choosedPlaces.length && choosedPlaces.map((cp: any, i: number) => {
+                              return (
+                                <div key={i} style={{padding:'5px'}}>
+                                  <ObjectCard 
+                                    route={router.query['object-type']} 
+                                    houseData={cp.properties.prop} 
+                                    data={cp.properties.prop}
+                                  />
+                                </div>
+                              )
+                            })}
                           </div>
                         </div>
         </div>

@@ -1,4 +1,4 @@
-import {datetoDayFormat} from '../objectDates';
+import {datetoDayFormat} from '../objectDates'
 
 export const MappingGeneralInfo = (info: any, specs: any) => {
     let info_options = []

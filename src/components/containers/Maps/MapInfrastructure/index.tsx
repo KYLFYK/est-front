@@ -13,14 +13,14 @@ import s from './styles.module.scss';
 
 interface Props {
   currentHouse: any
-  infrastructura: any
+  infrastructura?: any
   location: 'finder' | 'start' | 'infrastructure' | 'payback'
-  InfrastructureInfo:string
+  InfrastructureInfo: string
 }
 
-const Map: React.FC<Props> = ({currentHouse, infrastructura, location, InfrastructureInfo}) => {
+const Map: React.FC<Props> = ({currentHouse, location, InfrastructureInfo}) => {
  
-  const places = React.useMemo(() => [currentHouse, ...infrastructura], [currentHouse, infrastructura]);
+  const places = React.useMemo(() => [currentHouse], [currentHouse]);
 
   const getUniqueTypesOptions = React.useCallback((categoriesList: string[]) => {
     const uniqueSetTypes = Array.from(new Set(categoriesList));
