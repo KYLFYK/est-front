@@ -22,7 +22,7 @@ import { datetoDayFormat } from 'src/lib/mapping/objectDates'
 import {sortObject_specsTypeGuide,sortGuide} from "../../src/utils/conversionIcons/conversionIcons";
 import {useBreadcrumbsStore} from '../../src/mobx/stores/BreadcrumbsStore/BreadcrumbsStore'
 import {useStore} from '../../src/mobx/stores/ComplexStore/ComplexStore'
-import {instance, UrlObj} from '../../src/api/instance'
+import {UrlObj} from '../../src/api/instance'
 
 const city = ['Москва', 'Санкт-Петербург', 'Крым', 'Сочи', 'Нижний Новгород']
 const personalAccount = [{title: 'Личный кабинет', href: '/User', message: 0},
@@ -94,7 +94,10 @@ const ResidentialComplex: NextPage = observer((props: any) => {
           <ObjectSpecifications specificationsLists={sortObject_specsTypeGuide(props.object_specs.map((guid: any) => sortGuide(guid,guid.subtitle_ru)).filter((f: any) => f !== undefined)).filter((s: any) => s.subtitle === 'Строительно-техническая экспертиза' || s.subtitle === 'Инженерные коммуникации')} title={"Архитектурно-планировочные решения"}/>
         </div>
         <div ref={plansec}>
-          <Planning FilterComponent={<PlanningFilter />} planningList={props.planningList}/>
+            {
+                props.planningList.length>0 && <Planning FilterComponent={<PlanningFilter />} planningList={props.planningList}/>
+            }
+
         </div>
         <div ref={infra}>
           <Map currentHouse={props} location={'infrastructure'} InfrastructureInfo={props.info_options[0].infrastructure}/>
@@ -102,7 +105,12 @@ const ResidentialComplex: NextPage = observer((props: any) => {
         <div ref={developer}>
           <ObjectDeveloper developerData={MappingDeveloperInfo(props.object_developer_info)}/>
         </div>
-        <ConstructProgress info={MappingShedule(props.schedule)} images={IMAGES_SET} />
+        {
+            props.schedule.length>0
+                ? <ConstructProgress info={MappingShedule(props.schedule)} images={IMAGES_SET} />
+                :<div style={{height:"40px"}}> </div>
+        }
+
     </MainContainer>
   )
 })

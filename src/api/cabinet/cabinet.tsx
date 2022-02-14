@@ -17,6 +17,18 @@ export const cabinetAPI ={
             return e
         }
     },
+    updateDeveloper:async (id:number,updateDeveloper:{})=> {
+        try{
+            const res = await instance.put(`/developer/{accountId}?accountId=${id}`,updateDeveloper,{
+                headers: {
+                    authorization: `Bearer ${localStorage.getItem('accessEstatum')}`
+                }
+            })
+            return res
+        }catch (e:any) {
+            return e
+        }
+    },
     getCabinetOwner:async ()=>{
         try {
             const res = instance.get<CabinetAgentType>(`${UrlMainPage.accountOur}`,{

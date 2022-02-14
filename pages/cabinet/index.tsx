@@ -4,12 +4,13 @@ import { DeveloperRoleTabs } from "../../src/components/tabs/Account/Developer/D
 import OwnerRoleTabs from "../../src/components/tabs/Account/Owner/OwnerRoleTabs";
 import { getLocalStorage } from "../../src/lib/localStorage/localStorage";
 import { MainContainer } from "../../src/components/containers/MainContainer/MainContainer";
+import Typography from "./../../src/components/shared/Typography/Typography";
+import { BankRoleTabs } from "../../src/components/tabs/Account/Bank/BankRoleTabs";
+import { BankCabinetPage } from "../../src/components/tabs/Account/Bank/cabinet";
 import { AdminCabinetWrapper } from "../../src/components/tabs/Account/Admin/AdminCabinetWrapper";
 import { UsersTab } from "../../src/components/tabs/Account/Admin/components/UsersTab/UsersTab";
-import Typography from './../../src/components/shared/Typography/Typography'
 
 export const searchCabinet = (type: string | null) => {
-
   switch (type) {
     case "agency":
       return <AgencyRoleTabs />;
@@ -22,18 +23,25 @@ export const searchCabinet = (type: string | null) => {
     case "admin":
       return "admin";
     case "bank":
-      return "bank";
+      return <BankRoleTabs />;
     default:
-      return <Typography weight={"bold"}> Время авторизации истекло, необходима повторная авторизация.</Typography>;
+      return (
+        <Typography weight={"bold"}>
+          Время авторизации истекло, необходима повторная авторизация.
+        </Typography>
+      );
   }
 };
-
 
 const Cabinet = () => {
   return getLocalStorage() === "admin" ? (
     <AdminCabinetWrapper>
       <UsersTab />
     </AdminCabinetWrapper>
+  ) : getLocalStorage() === "bank" ? (
+    <BankRoleTabs>
+      <BankCabinetPage />
+    </BankRoleTabs>
   ) : (
     <MainContainer footerColor={"accent"} cabinetStyle={true}>
       {searchCabinet(getLocalStorage())}

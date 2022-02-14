@@ -87,16 +87,22 @@ class HouseStore {
             statistics: [{value: "", label: [{ title: "", text: ""}]}],
             risks: [{value: "", label: {title: "", text: ""}}]
           }
-        }
+        },
+        status:200
       }
 
 
   async fetch(id: number) {
     // this.initialData = Number(id) > 0 ? fullObjectData.filter((fod) => fod.object_id === Number(id))[0] : this.initialData
-      const res = await HouseApi.getHouseById(id)
-      console.log("resMobxHouse",res)
-      this.initialData = res
-    this.fetching = false
+      try{
+          const res = await HouseApi.getHouseById(id)
+          this.initialData.status = res.response.data.statusCode === 404 ? res.response.data.statusCode : 200
+          this.initialData = res
+          this.fetching = false
+      }catch (e:any){
+          this.initialData.status = e.response.data.statusCode
+      }
+
   }
 }
 

@@ -5,8 +5,7 @@ import PersonalCabinetAccountInfo from "./components/AccountInfo/AccountInfo"
 import PersonalCabinetAgents from "./components/Agents/Agents"
 import PersonalCabinetSettings from "./components/Settings/Settings"
 import PersonalCabinetStatistics from "./components/Statistics/Statistics"
-import AccountEdit from "./components/AccountEdit/AccountEdit";
-import imgMoc from './components/AccountInfo/logoFalse.svg'
+import AccountEditAgency from "./components/AccountEdit/AccountEditAgency";
 import {useStoreAgencyCabinet} from "../../../../../../../../mobx/role/agency/cabinet/AgencyCabinet";
 
 export type InfoAccountAgencyType = {
@@ -87,7 +86,7 @@ const PersonalCabinetTab = () => {
                         {title: "Агенты", Component: <PersonalCabinetAgents agents={agentsList}/>},
                         {title: "Настройки", Component: <PersonalCabinetSettings personalCabinet={personalCabinet}/>},
                     ]}/>
-                    : <AccountEdit onEdit={() => setEdit(false)} />
+                    : <AccountEditAgency onEdit={() => setEdit(false)} />
             }
         </>
     )

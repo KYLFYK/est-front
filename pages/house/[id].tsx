@@ -26,7 +26,8 @@ import {useBreadcrumbsStore} from '../../src/mobx/stores/BreadcrumbsStore/Breadc
 import { UrlObj} from '../../src/api/instance'
 import {FILTER_ACTIONS_OPTIONS, FILTER_HOUSE_TYPE_OPTIONS} from '../../src/components/containers/Filter/config'
 
-const city = ['Москва', 'Санкт-Петербург', 'Крым', 'Сочи', 'Нижний Новгород']
+const city = ['Москва', 'Крым', 'Сочи']
+
 const personalAccount = [{title: 'Личный кабинет', href: '/User', message: 0},
   {title: 'Избранное', href: '/User', message: 0},
   {title: 'Сохраненные поиски', href: '/User', message: 0},
@@ -99,40 +100,47 @@ const House: NextPage = observer((props: any) => {
     breadCrumbsStore.addBreadCrumbs(props.name, 2)
   }, [router.query.id, store])
 
+  if( store.initialData.status === 404) router.push('/500')
 
   return (
     <MainContainer keywords={props.name} title={props.name} city={city} personalAccount={personalAccount} footerColor={'nude'} refs={refs}>
-        <Breadcrumbs items={breadcrumbs} location={'object'}/>
-        <Views items={views}/>
-        <NameEstate item={props.name}/>
-        <AdressEstate item={props.address}/>
-        <HorizontalTabs tabs={tabs} refs={refs}/>
-        <div ref={general}>
-          <GeneralInfo info={store.initialData.info_options} price={store.initialData.price} images={IMAGES_SET} />
-        </div>
-        <ObjectDescription items={store.initialData.description_items}/>
-        <div ref={tours}>
-          <ToursContainer  Online_tour={store.initialData.online_tour}/>
-        </div>
-        <div ref={architec}>
-          <ObjectSpecifications specificationsLists={store.initialData.object_specs} title={"Архитектурно-планировочные решения"}/>
-        </div>
-        <div ref={infra}>
-          <Map currentHouse={JSON.parse(JSON.stringify(store.initialData))} location={'infrastructure'} InfrastructureInfo={infrastructureInfo}/>
-        </div>
-        <div ref={legal}>
-          <ObjectLegalPurity legalPurityData={store.initialData.legalPurityData}/>
-        </div>
-        <div ref={payback}>
-          <PaybackContainer averagePrice={averagePrice}/>
-        </div>
-        <div ref={developer}>
-          <ObjectDeveloper developerData={store.initialData.object_developer_info}/>
-        </div>
-        <Mortgage/>
-        <div ref={record}>
-          <Record Record={RecordAgent.Record} title={'дом'}/>
-        </div>
+        {
+            store.initialData.status  === 404
+                ? router.push('/500')
+                :<>
+                    <Breadcrumbs items={breadcrumbs}/>
+                    <Views items={views}/>
+                    <NameEstate item={props.name}/>
+                    <AdressEstate item={props.address}/>
+                    <HorizontalTabs tabs={tabs} refs={refs}/>
+                    <div ref={general}>
+                        <GeneralInfo info={store.initialData.info_options} price={store.initialData.price} images={IMAGES_SET} />
+                    </div>
+                    <ObjectDescription items={store.initialData.description_items}/>
+                    <div ref={tours}>
+                        <ToursContainer  Online_tour={store.initialData.online_tour}/>
+                    </div>
+                    <div ref={architec}>
+                        <ObjectSpecifications specificationsLists={store.initialData.object_specs} title={"Архитектурно-планировочные решения"}/>
+                    </div>
+                    <div ref={infra}>
+                        <Map currentHouse={JSON.parse(JSON.stringify(store.initialData))} infrastructura={infrastructura} location={'infrastructure'} InfrastructureInfo={infrastructureInfo}/>
+                    </div>
+                    <div ref={legal}>
+                        <ObjectLegalPurity legalPurityData={store.initialData.legalPurityData}/>
+                    </div>
+                    <div ref={payback}>
+                        <PaybackContainer averagePrice={averagePrice}/>
+                    </div>
+                    <div ref={developer}>
+                        <ObjectDeveloper developerData={store.initialData.object_developer_info}/>
+                    </div>
+                    <Mortgage/>
+                    <div ref={record}>
+                        <Record Record={RecordAgent.Record} title={'дом'}/>
+                    </div>
+                </>
+        }
     </MainContainer>
   )
 })
@@ -141,6 +149,7 @@ export default House
 
 export async function getServerSideProps({params}: any) {
   const res  = await fetch(`https://estatum.f-case.ru/api/${UrlObj.house}/${params.id}`)
+
   const object = await res.json()
 
   return {

@@ -21,10 +21,10 @@ import {UrlObj} from '../../src/api/instance'
 import {IgetLandIdSSPType, ObjectLandType} from "../../src/api/obj/land";
 import {conversionDate} from "../../src/utils/conversionDate/conversionDate";
 import {sortObject_specsTypeGuide, sortGuide} from "../../src/utils/conversionIcons/conversionIcons";
-import {useBreadcrumbsStore} from '../../src/mobx/stores/BreadcrumbsStore/BreadcrumbsStore'
-import {FILTER_ACTIONS_OPTIONS, FILTER_HOUSE_TYPE_OPTIONS} from '../../src/components/containers/Filter/config'
+import Error404 from "../../public/Error404";
+import ErrorPage from "../404";
 
-const city = ['Москва', 'Санкт-Петербург', 'Крым', 'Сочи', 'Нижний Новгород']
+const city = ['Москва', 'Крым', 'Сочи']
 const personalAccount = [{title: 'Личный кабинет', href: '/User', message: 0},
     {title: 'Избранное', href: '/User', message: 0},
     {title: 'Сохраненные поиски', href: '/User', message: 0},
@@ -51,7 +51,7 @@ const tabs = [{
     },
 ]
 
-const Plat = observer((props: ObjectLandType) => {
+const Land = observer((props: ObjectLandType) => {
 
     const breadCrumbsStore = useBreadcrumbsStore()
     const general = useRef(null)
@@ -63,8 +63,13 @@ const Plat = observer((props: ObjectLandType) => {
 
     const router = useRouter()
 
+    // if( props.name === undefined  &&
+    //     props.address === undefined  &&
+    //     props.info_options === undefined
+    //     ) router.push('https://estatum.f-case.ru/')
+
     const breadcrumbs = ['Крым', 'Купить участок', `${props.name}`]
-    const views = [props.publish, props.views.toString(), props.agency]
+    const views = [props.publish ? props.publish : '', props.views?.toString() ? props.views?.toString() : '', props.agency ? props.agency : '']
 
     useEffect(() => {
         setRefs([general.current, specs.current, infra.current, legal.current, record.current])
@@ -72,36 +77,52 @@ const Plat = observer((props: ObjectLandType) => {
         breadCrumbsStore.addBreadCrumbs(props.name, 2)
     }, [router.query.id])
 
+
     return (
-        <MainContainer keywords={props.name} title={props.name} city={city} personalAccount={personalAccount}
-                       footerColor={'nude'} refs={refs}>
-            <Breadcrumbs items={breadcrumbs} location={'object'}/>
-            <Views items={views}/>
-            <NameEstate item={props.name}/>
-            <AdressEstate item={props.address}/>
-            <HorizontalTabs tabs={tabs} refs={refs}/>
-            <div ref={general}>
-                <GeneralInfo info={props.info_options} price={props.price} images={IMAGES_SET}/>
-            </div>
-            <ObjectDescription items={props.description_items}/>
-            <div ref={specs}>
-                <ObjectSpecifications specificationsLists={props.object_specs} title={"Об участке"}/>
-            </div>
-            <div ref={infra}>
-                <Map currentHouse={props} location={'infrastructure'} InfrastructureInfo={props.description_Info.toString()}/>
-            </div>
-            <div ref={legal}>
-                <ObjectLegalPurity legalPurityData={props.legalPurityData}/>
-            </div>
-            <Mortgage/>
-            <div ref={record}>
-                <Record Record={RecordAgent.Record} title={'участок'}/>
-            </div>
-        </MainContainer>
+        <>
+            {
+                !props.name === undefined &&
+                !props.address === undefined &&
+                !props.info_options === undefined
+                    ? <ErrorPage/>
+                    : <MainContainer
+                        keywords={props.name}
+                        title={props.name}
+                        city={city}
+                        personalAccount={personalAccount}
+                        footerColor={'nude'}
+                        refs={refs}
+                    >
+                        <Breadcrumbs items={breadcrumbs}/>
+                        <Views items={views}/>
+                        <NameEstate item={props.name}/>
+                        <AdressEstate item={props.address}/>
+                        <HorizontalTabs tabs={tabs} refs={refs}/>
+                        <div ref={general}>
+                            <GeneralInfo info={props.info_options} price={props.price} images={IMAGES_SET}/>
+                        </div>
+                        <ObjectDescription items={props.description_items}/>
+                        <div ref={specs}>
+                            <ObjectSpecifications specificationsLists={props.object_specs} title={"Об участке"}/>
+                        </div>
+                        <div ref={infra}>
+                            <Map currentHouse={props} infrastructura={infrastructura} location={'infrastructure'}
+                                 InfrastructureInfo={props.description_Info.toString()}/>
+                        </div>
+                        <div ref={legal}>
+                            <ObjectLegalPurity legalPurityData={props.legalPurityData}/>
+                        </div>
+                        <Mortgage/>
+                        <div ref={record}>
+                            <Record Record={RecordAgent.Record} title={'участок'}/>
+                        </div>
+                    </MainContainer>
+            }
+        </>
     )
 })
 
-export default Plat
+export default Land
 
 // need fix
 // 1 images
@@ -109,10 +130,14 @@ export default Plat
 // 3 legalPurityData
 
 export async function getServerSideProps({params}: any) {
+
     const res = await fetch(`https://estatum.f-case.ru/api/${UrlObj.land}/${params.id}`)
-    const objectPlatApi: IgetLandIdSSPType = await res.json()
+    // const objectPlatApi: IgetLandIdSSPType = await res.json()
+    const objectPlatApi = await res.json()
+
     //@ts-ignore
-    const object_specsGuide: Array<{ value: string, label: { title: string, text: string } }> | [] = objectPlatApi.object_specs.map(guid => sortGuide(guid, guid.subtitle_ru)).filter(f => f !== undefined)
+    const object_specsGuide: Array<{ value: string, label: { title: string, text: string } }> | [] = objectPlatApi?.object_specs?.map(guid => sortGuide(guid, guid.subtitle_ru)).filter(f => f !== undefined)
+
     const objectPlat = {
         "images": [ // нету
             {"url": "https://cdn.pixabay.com/photo/2021/08/25/20/42/field-6574455__340.jpg", "id": 0},
@@ -207,15 +232,15 @@ export async function getServerSideProps({params}: any) {
                 "encumbrances": [
                     {
                         title: "Текущие владельцы",
-                        "encumbrances":objectPlatApi.legalPurityData.encumbrances?
-                            objectPlatApi.legalPurityData.encumbrances.map((encum:any)=>(
+                        "encumbrances": objectPlatApi.legalPurityData.encumbrances ?
+                            objectPlatApi.legalPurityData.encumbrances.map((encum: any) => (
                                 {
-                                    status:encum.status ? 0 : 1,
-                                    description:encum.description,
-                                    text:encum.title
+                                    status: encum.status ? 0 : 1,
+                                    description: encum.description,
+                                    text: encum.title
                                 }
                             ))
-                            :[{
+                            : [{
 
                                 "status": 0,
                                 "description": "Записи не найдены",
@@ -235,11 +260,12 @@ export async function getServerSideProps({params}: any) {
                             value: "Записи не найдены",
                             label: "Записи не найдены"
                         }]
-                }
+            }
         }
+
     }
     return {
-        props: objectPlat,
+        props: objectPlat
     }
 }
 

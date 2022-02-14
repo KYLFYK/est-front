@@ -13,6 +13,7 @@ import {OurOfficeType} from "../src/components/containers/OurOffice/OurOffice";
 import {observer} from "mobx-react-lite";
 import {useRouter} from "next/router";
 import {useStoreMainPage} from "../src/mobx/mainPage/mainPage";
+
 const city = ["Москва", "Крым", "Сочи"];
 const personalAccount = [
     {title: "Личный кабинет", href: "/User", message: 0},
@@ -22,27 +23,6 @@ const personalAccount = [
     {title: "Уведомления", href: "/User", message: 3},
     {title: "Мои объекты", href: "/User", message: 0},
     {title: "Проверка объекта", href: "/User", message: 0},
-];
-
-const estateOffers = [
-    {
-        id: 1,
-        url: "/residential-complex/1",
-        img: IMAGES_SET,
-        tags: ["Покупка", "ЖК", "Новостройка"],
-    },
-    {
-        id: 2,
-        url: "/house/1",
-        img: IMAGES_SET,
-        tags: ["Покупка", "Дом"],
-    },
-    {
-        id: 3,
-        url: "/plat/1",
-        img: IMAGES_SET,
-        tags: ["Покупка", "Участок"],
-    },
 ];
 
 const tagsButton = [

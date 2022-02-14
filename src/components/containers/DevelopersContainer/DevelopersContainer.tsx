@@ -66,14 +66,14 @@ const DevelopersContainer :FC<DevelopersContainerType> = observer(({title}) => {
         store.fetchDevelopers()
     },[])
 
-
     return (
         <div className={css.containerDevelopersBlock}>
             <HeadLine title={title} >
                 <div className={css.containerDevelopers}>
                     {
-                        store.initialData.developers && store.initialData.developers.map(({developerInfo,title,img,description},index)=>(
+                        store.initialData.developers && store.initialData.developers.map(({developerInfo,title,img,description,id},index)=>(
                             <EstateDeveloper
+                                id={id}
                                 key={index}
                                 developerInfo={developerInfo}
                                 title={title}

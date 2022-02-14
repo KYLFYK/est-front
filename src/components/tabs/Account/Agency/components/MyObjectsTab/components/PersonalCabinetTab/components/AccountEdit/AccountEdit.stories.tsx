@@ -1,6 +1,6 @@
 import React from 'react';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
-import AccountEdit from './AccountEdit';
+import AccountEdit from './AccountEditAgency';
 
 export default {
     title: 'Tabs/AgentRoleTabs',

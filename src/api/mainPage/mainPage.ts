@@ -2,46 +2,81 @@ import {instance} from "../instance";
 
 export enum UrlMainPage {
     agentOur = 'agent/our',             //get
-    developerOur = 'developer/our',     //get
+    developerOur = 'developer/get/our',     //get
     newsSubscription = 'news-subscription',     //post
     bestObject = 'objects/best',     //get
+    bestObjectDeveloper = 'complex/getByOwner',     //get
 }
 
-export const mailPage ={
-    getAgentOur:async (amount:number)=>{
-        try{
+export const mailPage = {
+    getAgentOur: async (amount: number) => {
+        try {
             return await instance.get<mainAgentsType>(`${UrlMainPage.agentOur}?amount=${amount}`)
-        }catch (e:any) {
+        } catch (e: any) {
             return e
         }
     },
-    newSubscription:async (name:string,email:string,phone:string)=>{
-        try{
-            await instance.post(`${UrlMainPage.newsSubscription}`,{name,email,phone})
-            alert(`Спасибо за подписку ${name}`)
-        }catch (e:any) {
+    newSubscription: async (name: string, email: string, phone: string) => {
+        try {
+            await instance.post(`${UrlMainPage.newsSubscription}`, {name, email, phone})
+            alert(`Спасибо за подписку`)
+        } catch (e: any) {
             alert(e.response.data.message)
         }
     },
-    bestObjects:async (number:number)=>{
+    bestObjects: async (number: number) => {
         let res
-        try{
-             res = await instance.get(`${UrlMainPage.bestObject}?take=${number}`)
-           return res.data
-        }catch (e:any) {
+        try {
+            res = await instance.get(`${UrlMainPage.bestObject}?take=${number}`)
+            return res.data
+        } catch (e: any) {
             return []
             alert(e)
         }
     },
-    getDeveloperOur:async (amount:number)=>{
-        try{
+    bestObjectsModalDeveloper: async (id: number) => {
+        try {
+            const res = await instance.get<Array<bestObjectsComplexDeveloperType>>(`${UrlMainPage.bestObjectDeveloper}/${id}`)
+            console.log("bestObjectsModalDeveloper", res.data)
+            return res.data
+        } catch (e) {
+            return [{id: '', name: ''}]
+        }
+    },
+    getDeveloperOur: async (amount: number) => {
+        try {
             return await instance.get(`${UrlMainPage.developerOur}?amount=${amount}`)
-        }catch (e:any) {
+        } catch (e: any) {
             return e
         }
     },
 
 }
-type mainAgentsType={
-    data:[]
+type mainAgentsType = {
+    data: []
+}
+
+type bestObjectsComplexDeveloperType = {
+    address: string
+    constructionProgress: []
+    createAt: string
+    description: string
+    guides: Array<{
+        id: number
+        subtitle_en: string
+        subtitle_ru: string
+        type_en: string
+        type_ru: string
+        value: string
+    }>
+    id: number
+    latitude: string
+    longitude: string
+    markAsDelete: boolean
+    name: string
+    objectType: string
+    region: { id: number, name: string }
+    status: { id: number, status: string }
+    updateAt: string
+    views: number
 }

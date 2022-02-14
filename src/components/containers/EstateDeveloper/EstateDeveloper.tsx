@@ -16,6 +16,7 @@ type EstateDevelopersPropsType = {
     objectsDeveloper: Array<{ nameObject: string; id: string }>;
   };
   hideModal?: boolean;
+  id:number
 };
 
 export const EstateDeveloper: FC<EstateDevelopersPropsType> = ({
@@ -24,6 +25,7 @@ export const EstateDeveloper: FC<EstateDevelopersPropsType> = ({
   img,
   developerInfo,
   hideModal,
+  id
 }) => {
 
   const [edit, setEdit] = useState<boolean>(false);
@@ -32,6 +34,7 @@ export const EstateDeveloper: FC<EstateDevelopersPropsType> = ({
     <div className={css.containerEstate}>
       {!hideModal && developerInfo && (
         <DeveloperDataModal
+          id={id}
           img={img}
           developer={developerInfo}
           setActive={setEdit}

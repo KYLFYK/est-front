@@ -1,6 +1,5 @@
-import React, {useState, useEffect, FC,} from 'react';
-import RomanSafonov from '../../../Pics/persons/РоманСафонов.png'
-import {Button} from "@mui/material";
+import React, {useState, useEffect, FC, ChangeEvent,} from 'react';
+import {Button, TextField} from "@mui/material";
 import {IconWhatsapp} from "../../../icons/Agent/IconWhatsapp";
 import {IconTelegram} from "../../../icons/Agent/IconTelegram";
 import {IconMail} from "../../../icons/Agent/IconMail";
@@ -8,9 +7,10 @@ import {IconPhone} from "../../../icons/Agent/IconPhone";
 import s from './Record.module.scss';
 import Typography from "../../shared/Typography/Typography";
 import {BaseInput} from "../../shared/BaseInput/Input";
-import Image from "next/image";
 import {RecordApi} from "../../../api/record/record";
 import {useRouter} from "next/router";
+import {makeStyles} from "@material-ui/core";
+
 
 type AgentRecordType = {
     Record: {
@@ -25,52 +25,89 @@ type AgentRecordType = {
     title?: string
 }
 
+export const useStyles = makeStyles({
+        root: {
+            height:'40px !important',
+            borderRadius:'6px',
+            width:'120px',
+            "& .MuiOutlinedInput-root .MuiOutlinedInput-notchedOutline": {
+                borderColor: "white",
+                borderRadius:'6px',
+            },
+            "&:hover .MuiOutlinedInput-root .MuiOutlinedInput-notchedOutline": {
+                borderColor: "white"
+            },
+            "& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline": {
+                borderColor: "white"
+            },
+            "& .MuiOutlinedInput-input": {
+                color: "black"
+            },
+            "&:hover .MuiOutlinedInput-input": {
+                color: "black"
+            },
+            "& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-input": {
+                color: "black"
+            },
+            "& .MuiInputLabel-outlined": {
+                color: "black"
+            },
+            "&:hover .MuiInputLabel-outlined": {
+                color: "black"
+            },
+            "& .MuiInputLabel-outlined.Mui-focused": {
+                color: "black"
+            },
+            "& > .MuiInputBase-root":{
+                height:'40px',
+            }
+        }
+})
+
 export const Record: FC<AgentRecordType> = ({Record, title}) => {
 
     const router = useRouter()
 
+    const classes = useStyles()
+
     const [name, setName] = useState('')
     const [mail, setMail] = useState('')
     const [phone, setPhone] = useState('')
-    const [time, setTime] = useState('')
+    const [timeStart, setTimeStart] = useState('08:00')
+    const [timeEnd, setTimeEnd] = useState('18:00')
+
 
     const [nameDirty, setNameDirty] = useState(false)
     const [mailDirty, setMailDirty] = useState(false)
     const [phoneDirty, setPhoneDirty] = useState(false)
-    const [timeDirty, setTimeDirty] = useState(false)
 
     const [nameError, setNameError] = useState('не указано имя')
     const [mailError, setMailError] = useState('не заполнен e-mail')
     const [phoneError, setPhoneError] = useState('не указан телефон')
-    const [timeError, setTimeError] = useState('не выбрано время')
 
     const [formValid, setFormValid] = useState(false)
 
-    console.log('nameDirty',nameDirty)
     useEffect(() => {
-        if (nameError || mailError || phoneError || timeError) {
+        if (nameError || mailError || phoneError) {
             setFormValid(false)
         } else {
             setFormValid(true)
         }
-    }, [nameError, mailError, phoneError, timeError])
+    }, [nameError, mailError, phoneError])
 
     const [hover, setHover] = useState(false)
     const [clicked, setClicked] = useState(false)
 
     const onClickHandler = () => {
         setName('');
-        setNameError('не указано имя');
+        // setNameError('не указано имя');
         setNameDirty(false)
         setMail('');
-        setMailError('не заполнен e-mail');
+        // setMailError('не заполнен e-mail');
         setMailDirty(false)
         setPhone('');
-        setPhoneError('не указан телефон');
+        // setPhoneError('не указан телефон');
         setPhoneDirty(false)
-        setTime('');
-        setTimeError('не выбрано время');
-        setTimeDirty(false)
         // dispatch(sendOrderTC(form));
         setClicked(true);
 
@@ -80,8 +117,8 @@ export const Record: FC<AgentRecordType> = ({Record, title}) => {
             email:mail,
             phone:phone,
             status:'Новая заявка',
-            comfortableTimeFrom:time.split('-')[0],
-            comfortableTimeTo:time.split('-')[1]
+            comfortableTimeFrom:timeStart,
+            comfortableTimeTo:timeEnd
         })
     }
 
@@ -120,16 +157,7 @@ export const Record: FC<AgentRecordType> = ({Record, title}) => {
             setPhoneError('')
         }
     }
-
-    const onTimeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setTime(e.target.value)
-        if (!e.target.value) {
-            setTimeError('не выбрано время')
-        } else {
-            setTimeError('')
-        }
-    }
-
+    console.log("nameError--", setName)
     const onBlurHandler = (e: string) => {
         switch (e) {
             case 'name':
@@ -143,10 +171,6 @@ export const Record: FC<AgentRecordType> = ({Record, title}) => {
             case 'phone':
                 if (!setPhone) setPhoneError('не указан телефон')
                 setPhoneDirty(true)
-                break
-            case 'time':
-                if (!setTime) setTimeError('не выбрано время')
-                setTimeDirty(true)
                 break
             default:
                 break
@@ -183,7 +207,10 @@ export const Record: FC<AgentRecordType> = ({Record, title}) => {
                 <div className={s.blockInputButton}>
                     <div className={s.blockInputs}>
                         <div className={s.input}>
-                            <div className={s.inputTitle}><Typography size={'small'} color='tertiary'>Имя</Typography>
+                            <div className={s.inputTitle}>
+                                <Typography size={'small'} color='tertiary'>
+                                    Имя
+                                </Typography>
                             </div>
                             <BaseInput
                                 name='name'
@@ -212,8 +239,11 @@ export const Record: FC<AgentRecordType> = ({Record, title}) => {
                             {(mailDirty && mailError) && <div style={{color: 'red'}}>{mailError}</div>}
                         </div>
                         <div className={s.input}>
-                            <div className={s.inputTitle}><Typography size={'small'}
-                                                                      color='tertiary'>Телефон</Typography></div>
+                            <div className={s.inputTitle}>
+                                <Typography size={'small'} color='tertiary'>
+                                    Телефон
+                                </Typography>
+                            </div>
                             <BaseInput
                                 name='phone'
                                 placeholder={'Телефон'}
@@ -226,17 +256,40 @@ export const Record: FC<AgentRecordType> = ({Record, title}) => {
                             {(phoneDirty && phoneError) && <div style={{color: 'red'}}>{phoneError}</div>}
                         </div>
                         <div className={s.input}>
-                            <div className={s.inputTitle}><Typography size={'small'} color='tertiary'>Удобное
-                                время</Typography></div>
-                            <BaseInput
-                                name='time'
-                                placeholder={'12:00–18:00'}
-                                onBlur={() => onBlurHandler('time')}
-                                value={time}
-                                onChange={(e) => onTimeHandler(e)}
-                                className={s.paddingInput}
-                            />
-                            {(timeDirty && timeError) && <div style={{color: 'red'}}>{timeError}</div>}
+                            <div className={s.inputTitle}>
+                                <Typography size={'small'} color='tertiary'>
+                                    Удобное время
+                                </Typography>
+                            </div>
+                            <div style={{backgroundColor:'white',borderRadius:'8px'}}>
+                                <TextField
+                                    id="time"
+                                    type="time"
+                                    variant="outlined"
+                                    defaultValue="08:00"
+                                    value={timeStart}
+                                    onChange={e=>setTimeStart(e.currentTarget.value)}
+                                    className={classes.root}
+                                    inputProps={{
+                                        step: 60, // 1 min
+                                    }}
+                                />
+                                <span style={{color:'black',marginTop:'8px',display:'inline-block'}}>
+                                    -
+                                </span>
+                                <TextField
+                                    id="time"
+                                    type="time"
+                                    variant="outlined"
+                                    defaultValue="18:00"
+                                    value={timeEnd}
+                                    onChange={e=>setTimeEnd(e.currentTarget.value)}
+                                    className={classes.root}
+                                    inputProps={{
+                                        step: 60, // 1 min
+                                    }}
+                                />
+                            </div>
                         </div>
                     </div>
                     <div className={s.sendButton}>
@@ -250,7 +303,7 @@ export const Record: FC<AgentRecordType> = ({Record, title}) => {
                         >
                             <div><Typography color='secondary' className={s.buttonTitle}> Записаться</Typography></div>
                         </Button>
-                        {((nameDirty && nameError) || (mailDirty && mailError) || (phoneDirty && phoneError) || (timeDirty && timeError))
+                        {((nameDirty && nameError) || (mailDirty && mailError) || (phoneDirty && phoneError))
                         && <div className={s.unselectable}>не заполнена форма</div>}
                     </div>
                 </div>
