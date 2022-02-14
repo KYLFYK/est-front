@@ -6,6 +6,7 @@
 .wrapper {
     background-color: #fff;
     max-width: fit-content;
+    height: 40px;
     @include for-size(KT1) {
         border: 1px solid $ACCENTBUTTONDISABLED;
         display: flex;
