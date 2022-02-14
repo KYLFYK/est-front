@@ -15,6 +15,7 @@ import {useRouter} from "next/router";
 import {useStoreMainPage} from "../src/mobx/mainPage/mainPage";
 
 const city = ["Москва", "Крым", "Сочи"];
+
 const personalAccount = [
     {title: "Личный кабинет", href: "/User", message: 0},
     {title: "Избранное", href: "/User", message: 0},
