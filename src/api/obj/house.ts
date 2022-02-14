@@ -25,7 +25,8 @@ export const HouseApi  = {
             const object_specs = sortObject_specsTypeGuide( object_specsGuide)          // object_specs (2 из 2) - переформатирование
 
             const floors = [...res.data.info_options.floors]                         // данные находятся в странном месте ( info_options ) - перенос в отдельные переменные
-            const construction_features = [...res.data.info_options.construction_features]  // данные находятся в странном месте( object_specs ) - перенос в отдельные переменные
+            const construction_feat = res.data.info_options.construction_features?res.data.info_options.construction_features : [{title:'',value:''}]
+            const construction_features = [...construction_feat]  // данные находятся в странном месте( object_specs ) - перенос в отдельные переменные
                 // удаление из основного объекта
                 delete res.data.info_options.floors
                 delete res.data.info_options.construction_features
@@ -54,6 +55,7 @@ export const HouseApi  = {
                 }
                 return infoOptions
             }
+
 
            const infoOptions = sortInfoOptions(res.data.info_options)                   // сортировка в нужный формат  - info_options
            const  optionFloors = floors.map(floor=>({label:floor.floor, value:floor.value}))  // остатки данных - из странного места - переформатирование

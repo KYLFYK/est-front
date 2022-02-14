@@ -126,13 +126,15 @@ const House: NextPage = observer((props: any) => {
                         <Map currentHouse={JSON.parse(JSON.stringify(store.initialData))} infrastructura={infrastructura} location={'infrastructure'} InfrastructureInfo={infrastructureInfo}/>
                     </div>
                     <div ref={legal}>
-                        <ObjectLegalPurity legalPurityData={store.initialData.legalPurityData}/>
+                      {
+                        store.initialData.legalPurityData && <ObjectLegalPurity legalPurityData={store.initialData.legalPurityData}/>
+                      }
                     </div>
                     <div ref={payback}>
-                        <PaybackContainer averagePrice={averagePrice}/>
+                        {/*<PaybackContainer averagePrice={averagePrice}/>*/}
                     </div>
                     <div ref={developer}>
-                        <ObjectDeveloper developerData={store.initialData.object_developer_info}/>
+                        {/*<ObjectDeveloper developerData={store.initialData.object_developer_info}/>*/}
                     </div>
                     <Mortgage/>
                     <div ref={record}>

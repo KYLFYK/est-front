@@ -23,7 +23,6 @@ import {conversionDate} from "../../src/utils/conversionDate/conversionDate";
 import {sortObject_specsTypeGuide, sortGuide} from "../../src/utils/conversionIcons/conversionIcons";
 import {useBreadcrumbsStore} from '../../src/mobx/stores/BreadcrumbsStore/BreadcrumbsStore'
 import {FILTER_ACTIONS_OPTIONS, FILTER_HOUSE_TYPE_OPTIONS} from '../../src/components/containers/Filter/config'
-import Error404 from "../../public/Error404";
 import ErrorPage from "../404";
 
 const city = ['Москва', 'Крым', 'Сочи']
@@ -104,14 +103,19 @@ const Land = observer((props: ObjectLandType) => {
                         </div>
                         <ObjectDescription items={props.description_items}/>
                         <div ref={specs}>
-                            <ObjectSpecifications specificationsLists={props.object_specs} title={"Об участке"}/>
+                            {
+                                props.object_specs && <ObjectSpecifications specificationsLists={props.object_specs} title={"Об участке"}/>
+                            }
                         </div>
                         <div ref={infra}>
                             <Map currentHouse={props} infrastructura={infrastructura} location={'infrastructure'}
                                  InfrastructureInfo={props.description_Info.toString()}/>
                         </div>
                         <div ref={legal}>
-                            <ObjectLegalPurity legalPurityData={props.legalPurityData}/>
+                            {
+                                props.legalPurityData && <ObjectLegalPurity legalPurityData={props.legalPurityData}/>
+                            }
+
                         </div>
                         <Mortgage/>
                         <div ref={record}>
@@ -164,6 +168,7 @@ export async function getServerSideProps({params}: any) {
         "sort": objectPlatApi.sort ? objectPlatApi.sort : 0,
         "planning": objectPlatApi.planning,
         "favorite": false,
+        "orderType": objectPlatApi.orderType,
         "publish": conversionDate(objectPlatApi.publish),
         "views": objectPlatApi.views,
         "agency": objectPlatApi.agency ? objectPlatApi.agency : '',
