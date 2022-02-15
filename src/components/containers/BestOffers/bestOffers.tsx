@@ -32,6 +32,7 @@ const SampleNextArrow: React.FC<ArrowType> = ({onClick}) => {
         </div>
     )
 }
+
 const SamplePrevArrow: React.FC<ArrowType> = ({onClick}) => {
     return (
         <div
@@ -46,8 +47,6 @@ const SamplePrevArrow: React.FC<ArrowType> = ({onClick}) => {
 }
 
 const settings = {
-
-    // dots: true,
     infinite: false,
     speed: 500,
     slidesToShow: 4,

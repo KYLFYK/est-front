@@ -34,8 +34,6 @@ export const AgentsContainer: FC<AgentsContainerType> = observer(({  title }) =>
         store.fetchAgents()
     },[])
 
-
-
     return (
         <div className={css.containerAgentsBlock}>
             <HeadLine title={title}>
