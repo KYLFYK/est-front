@@ -34,14 +34,14 @@ export const BestOffers :FC<BestOffersType> = observer(({tagsButton}) => {
                             })
                         }
                     </div>
-                    <BaseButton
-                        type="secondary"
-                        className={css.margin}
-                    >
-                        <Typography color={"accent"}>
-                            Показать еще
-                        </Typography>
-                    </BaseButton>
+                    {/*<BaseButton*/}
+                    {/*    type="secondary"*/}
+                    {/*    className={css.margin}*/}
+                    {/*>*/}
+                    {/*    <Typography color={"accent"}>*/}
+                    {/*        Показать еще*/}
+                    {/*    </Typography>*/}
+                    {/*</BaseButton>*/}
                 </div>
 
                 <div className={css.offersPhoto}>
