@@ -6,35 +6,37 @@ type ArrayButtonType = {
     name: string
     index:number
     className:string
-    onActiveTags:(tags:string)=>void
+    onActiveTags:(tag:string)=>void
 }
 
-const ArrayButton: FC<ArrayButtonType> = ({ name,index,className,onActiveTags }) => {
+const ArrayButton :React.FC<ArrayButtonType> = ({ name,index,className,onActiveTags }) => {
     const [active, setActive] = useState<boolean>(false)
 
     const activeTags = (tags:string) =>{
+        let tag = '1'
         if(tags=== "Квартира"){
-            onActiveTags('apartment')
+            tag ='apartment'
             setActive(!active)
         }if(tags=== "Дом"){
-            onActiveTags('house')
+            tag ='house'
             setActive(!active)
         }if(tags=== "ЖК"){
-            onActiveTags('residential-complex')
+            tag ='house'
+
             setActive(!active)
         }if(tags=== "Участок"){
-            onActiveTags('land')
+            tag ='house'
             setActive(!active)
         }
         if(tags=== "Новостройка"){
-            onActiveTags('apartment')
+            tag ='new'
+
             setActive(!active)
         }if(tags=== "Вторичное жилье"){
-            onActiveTags('apartment')
+            tag ='old'
             setActive(!active)
         }
-
-
+        onActiveTags(tag)
     }
 
     return (
