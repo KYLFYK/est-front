@@ -6,6 +6,8 @@ import { StoreProvider } from "../src/mobx/StoreProvider";
 import RootStore from "../src/mobx/stores/RootStore";
 import Router from "next/router";
 import { FC, useState } from "react";
+import Typography from '../src/components/shared/Typography/Typography';
+import s from '../src/components/containers/CardContainer/styles.module.scss'
 
 const Noop: FC = ({ children }) => <>{children}</>;
 
@@ -23,7 +25,7 @@ function MyApp({ Component, pageProps }: AppProps) {
     <StoreProvider store={RootStore}>
       <MuiThemeProvider theme={theme}>
         <Layout pageProps={pageProps}>
-          {loading ? <h1>LOADING...</h1> : <Component {...pageProps} />}
+          {loading ? <Typography className={s.contentText} size={'header'}>LOADING...</Typography> : <Component {...pageProps} />}
         </Layout>
       </MuiThemeProvider>
     </StoreProvider>

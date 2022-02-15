@@ -25,6 +25,11 @@
     scrollbar-width: 1px;
     @include MapScrollbar;
 }
+.contentText {
+    display: flex;
+    justify-content: center;
+    height: 575px;
+}
 .filterWrapper {
     margin-bottom: 20px;
 }
