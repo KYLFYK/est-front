@@ -4,12 +4,11 @@ import BaseButton from "../BaseButton/BaseButtons";
 
 type ArrayButtonType = {
     name: string
-    index:number
     className:string
     onActiveTags:(tag:string)=>void
 }
 
-const ArrayButton :React.FC<ArrayButtonType> = ({ name,index,className,onActiveTags }) => {
+const ArrayButton :React.FC<ArrayButtonType> = ({ name,className,onActiveTags }) => {
     const [active, setActive] = useState<boolean>(false)
 
     const activeTags = (tags:string) =>{
