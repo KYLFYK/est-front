@@ -5,6 +5,7 @@ import { IOption } from './models/general';
 import { ObjectTypes } from './models/objects';
 import Typography from '../../../../shared/Typography/Typography';
 import s from './check.module.scss';
+import {FILTER_HOUSE_TYPES} from '../../../Filter/config';
 
 interface Props {
     uniqueTypesList?: IOption[],
@@ -13,7 +14,6 @@ interface Props {
 }
 
 export const CheckBox: React.FC<Props> = ({ uniqueTypesList, pressed, handlePressed }) => {
-
     const renderFilterLists = () => uniqueTypesList && uniqueTypesList.map((typeOption, index) => (
         <div key={index} className={s.elem}>
             <button onClick={() => handlePressed && handlePressed(typeOption.label)} className={`${s.elem} ${s.button}`}>
@@ -24,7 +24,11 @@ export const CheckBox: React.FC<Props> = ({ uniqueTypesList, pressed, handlePres
                                     width='50px' height='50px' alt='icon' 
                                 />
                     }
-                    <div className={s.buttonTitle}>{Object.values(ObjectTypes).includes(typeOption.label as ObjectTypes) ? typeOption.label : typeOption.label}</div>
+                    <div className={s.buttonTitle}>
+                        {Object.values(ObjectTypes).includes(typeOption.label as ObjectTypes) 
+                            ? FILTER_HOUSE_TYPES.filter((s: any) => typeOption.label === s.value)[0].label 
+                            : typeOption.label}
+                    </div>
                 </div>
             </button>
         </div>

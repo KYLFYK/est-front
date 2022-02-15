@@ -60,3 +60,11 @@ export const FILTER_LAND_SPECS_OPTIONS: IOption[] = [
     {value: "canalization", label: "Канализация"},
 ]
 
+export const FILTER_HOUSE_TYPES: IOption[] = [
+    {value: "apartment", label: "Квартиру"},
+    {value: "house", label: "Дом"},
+    {value: "land", label: "Участок"},
+    {value: "townhouse", label: "Таунхаус"},
+    {value: "complex", label: "Жилой комплекс"}
+]
+

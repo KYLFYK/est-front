@@ -9,7 +9,8 @@ import { CompareInput } from "../../shared/CompareInput/CompareInput"
 import InputsUnion from "../../shared/InputsUnion/InputsUnion"
 import { ToggleButtons } from "../../shared/ToggleButtons/ToggleButtons"
 import { FILTER_ACTIONS_OPTIONS, FILTER_BUILDING_TYPE_OPTIONS, FILTER_PRIVATE_HOUSE_OPTIONS, FILTER_FLOORS_OPTIONS, 
-    FILTER_HOUSE_TYPE_OPTIONS, TOGGLE_BUTTONS_OPTIONS_APART, TOGGLE_BUTTONS_OPTIONS_HOUSE, FILTER_IRB_OPTIONS, FILTER_LAND_SPECS_OPTIONS } from "./config"
+    FILTER_HOUSE_TYPE_OPTIONS, TOGGLE_BUTTONS_OPTIONS_APART, TOGGLE_BUTTONS_OPTIONS_HOUSE, FILTER_IRB_OPTIONS, FILTER_LAND_SPECS_OPTIONS, 
+    FILTER_HOUSE_TYPES } from "./config"
 import { useSearchStore } from "src/mobx/stores/SearchStore/SearchStore"
 import { useBreadcrumbsStore } from "src/mobx/stores/BreadcrumbsStore/BreadcrumbsStore"
 import s from './Filter.module.scss'
@@ -68,7 +69,12 @@ export const Filter: React.FC<Props> = observer(({ location }) => {
         } 
         return acc
     }, {})
-
+    console.log('params')
+    console.log(params)
+    console.log('router.query')
+    console.log(router.query)
+    console.log('searchStore.getFilter()')
+    console.log(searchStore.getFilter())
     React.useEffect(() => {
         if(searchStore.getFilter() && searchStore.getFilter()['object-type'] === 'townhouse') {
             searchStore.setPrivateType('house')
@@ -78,7 +84,7 @@ export const Filter: React.FC<Props> = observer(({ location }) => {
         if(location === 'search') {
             searchStore.setFilter(router.query)
             searchStore.getFilter()['order-type'] && breadcrumbs.addBreadCrumbs(FILTER_ACTIONS_OPTIONS.filter((s: any) => searchStore.getFilter()['order-type'] === s.value)[0].label, 1)
-            searchStore.getFilter()['object-type'] && breadcrumbs.addBreadCrumbs(FILTER_HOUSE_TYPE_OPTIONS.filter((s: any) => searchStore.getFilter()['object-type'] === s.value)[0].label, 2)
+            searchStore.getFilter()['object-type'] && breadcrumbs.addBreadCrumbs(FILTER_HOUSE_TYPES.filter((s: any) => searchStore.getFilter()['object-type'] === s.value)[0].label, 2)
             searchStore.fetch()
         }
     }, [])
@@ -109,7 +115,7 @@ export const Filter: React.FC<Props> = observer(({ location }) => {
     }
     const onChangeHouseType = (value: string) => {
         searchStore.setHouseType(value)
-        breadcrumbs.addBreadCrumbs(FILTER_HOUSE_TYPE_OPTIONS.filter((s: any) => value === s.value)[0].label, 2)
+        breadcrumbs.addBreadCrumbs(FILTER_HOUSE_TYPES.filter((s: any) => value === s.value)[0].label, 2)
     }
     const onChangeFloors = (value: string) => {
         searchStore.setFloors(value)
@@ -140,7 +146,7 @@ export const Filter: React.FC<Props> = observer(({ location }) => {
     }*/
     const onChangePrivateType = (value: string) => {
         searchStore.setPrivateType(value)
-        breadcrumbs.addBreadCrumbs(value, 2)
+        breadcrumbs.addBreadCrumbs(FILTER_HOUSE_TYPES.filter((s: any) => value === s.value)[0].label, 2)
     }
     const onChangePrivateFloorFrom = (value: string) => {
         searchStore.setPrivateFloorFrom(value)

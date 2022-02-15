@@ -5,6 +5,7 @@ import s from './Breadcrumbs.module.scss'
 import Typography from "../Typography/Typography"
 import {useBreadcrumbsStore} from '../../../mobx/stores/BreadcrumbsStore/BreadcrumbsStore'
 import {useSearchStore} from '../../../mobx/stores/SearchStore/SearchStore'
+import {ArrowIconRight} from '../../../icons/Search&Crumbs/ArrowIconRight'
 
 type BreadcrumbsPropsType = {
     items?: string[]
@@ -18,7 +19,6 @@ export const Breadcrumbs: React.FC<BreadcrumbsPropsType> = observer(({ className
     const breadCrumbsStore = useBreadcrumbsStore()
     const searchStore = useSearchStore()
     const router = useRouter()
-
     const onReturntoSearch = () => {
         router.push(
             {
@@ -32,14 +32,11 @@ export const Breadcrumbs: React.FC<BreadcrumbsPropsType> = observer(({ className
         <div className={s.blockAdvantage}>
             {breadCrumbsStore.get().map((i: string, id: number) => {
                 return (
-                    <div key={id} style={{display: 'flex',cursor:'pointer'}}>
-                        <Typography className={id < breadCrumbsStore.get().length-1 ? s.secondaryItem : s.primaryItem} size={'small'} weight={'light'} >
-                            <div className={location === 'object' && id === 1 ? s.clickedItem : ''} onClick={location === 'object' ? onReturntoSearch : () => {}}>{i}</div>
+                    <div key={id} className={s.item}>
+                        <Typography className={id < breadCrumbsStore.get().length-1 ? s.secondaryItem : s.primaryItem} size={'small'} weight={'regular'} >
+                            <div onClick={location === 'object' ? onReturntoSearch : () => {}}>{i}</div>
                         </Typography>
-                        {id < breadCrumbsStore.get().length-1 && 
-                            <Typography className={s.secondaryItem} size={'small'} weight={'light'} >
-                                {'>'}
-                            </Typography>}
+                        {id < breadCrumbsStore.get().length-1 && <ArrowIconRight/>}
                     </div>
                 )
             })}

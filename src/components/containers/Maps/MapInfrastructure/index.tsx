@@ -35,16 +35,29 @@ const Map: React.FC<Props> = ({currentHouse, location, InfrastructureInfo}) => {
     return optionsList
   }, [places])
 
-  const uniqueTypesList: any = React.useMemo(() => getUniqueTypesOptions(places.map((pl: any) => pl.category)), [places, getUniqueTypesOptions]);
+  const uniqueTypesList: any = React.useMemo(() => getUniqueTypesOptions(places.map((pl: any) => pl.type)), [places, getUniqueTypesOptions]);
 
   const [updatePlaces, setUpdatePlaces] = useState(places);
   const [pressed, setPressed] = useState<string[]>(uniqueTypesList.map((item: any) => item.label));
+  const [viewport, setViewport] = useState({
+    width: "100%",
+    height: "100%",
+    latitude: Number(currentHouse.lat),
+    longitude: Number(currentHouse.lng),
+    zoom: 9,
+  });
+  const _onViewportChange = (viewport: any) => {
+    setViewport({ ...viewport, transitionDuration: 100 });
+  } 
 
   const handlePressed = (value: string) => {
     const currentIndex = pressed.indexOf(value);
     const newPressed = [...pressed];
     if (currentIndex === -1) {
         newPressed.push(value)
+        if(value === 'house' || value === 'apartment' || value === 'complex' || value === 'land') {
+          setViewport({ ...viewport, latitude: Number(currentHouse.lat), longitude: Number(currentHouse.lng) })
+        }
     } else {
         newPressed.splice(currentIndex, 1)
     }
@@ -56,25 +69,13 @@ const Map: React.FC<Props> = ({currentHouse, location, InfrastructureInfo}) => {
       showFilteredResults(newFilters)
   }
   const showFilteredResults = (filters: string[]) => {
-    let filteredResults = places.filter((pl: any) => filters.includes(pl.category))
+    let filteredResults = places.filter((pl: any) => filters.includes(pl.type))
     setUpdatePlaces(filteredResults);
   }
   const [picSlider, setPicSlider] = useState(0);
 
   const [activeMarker, setActivemarker] = useState(0)
   const [open, setOpen] = useState(true)
-
-  const [viewport, setViewport] = useState({
-    width: "100%",
-    height: "100%",
-    latitude: Number(currentHouse.lat),
-    longitude: Number(currentHouse.lng),
-    zoom: 9,
-  });
-
-  const _onViewportChange = (viewport: any) => {
-    setViewport({ ...viewport, transitionDuration: 100 });
-  } 
 
   return (
     <div className={s.container}>
@@ -99,7 +100,7 @@ const Map: React.FC<Props> = ({currentHouse, location, InfrastructureInfo}) => {
                 key={up.object_id}
                 latitude={up.lat ? Number(up.lat) : Number(up.address.geo?.lat)?Number(up.address.geo.lat):30}
                 longitude={up.lng ? Number(up.lng) : Number(up.address.geo?.lng)?Number(up.address.geo.lat):30}
-                className={(up.type === 'house' || up.type === 'apartment' || up.type === 'residential-complex' || up.type === 'plat') ? s.estateMarker : s.infraMarker}
+                className={(up.type === 'house' || up.type === 'apartment' || up.type === 'residential-complex' || up.type === 'land') ? s.estateMarker : s.infraMarker}
             >
                 <BaseButton className={s.button} onClick={() => {
                   setActivemarker(up.object_id)
