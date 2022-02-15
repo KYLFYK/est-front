@@ -12,6 +12,7 @@ import { OpenCloseMapButton } from "./OpenCloseMapButton";
 import s from './styles.module.scss'
 import { DROPDOWN_PLACEHOLDER, SORT_FILTER_OPTIONS } from "../PlanningFilter/config"
 import { ToggleButtonsWithIcons } from '../../shared/ToggleButtonsWithIcons/ToggleButtonsWithIcons'
+import Typography from '../../shared/Typography/Typography'
 
 // TODO: Take types from 'model' folder, when global state gets its types
 
@@ -48,13 +49,13 @@ const CardContainer: React.FC<Props> = observer(({ mapData, view, setView }) => 
         <div className={view === 'mapView' ? s.openContainer : s.closeContainer}>
             <div className={s.finderControls}>
                 <div className={s.finderDropdown}>
-                    <BaseDropDown 
+                    {/*<BaseDropDown 
                         className={classes.sortDropdown}
                         onChange={(e) => {searchStore.setSort(e)}}
                         placeholder={DROPDOWN_PLACEHOLDER}
                         options={SORT_FILTER_OPTIONS}
                         value={searchStore.sort} 
-                    />
+                    />*/}
                 </div>
                 <div className={s.finderButtons}>
                     {/*<BaseButton
@@ -72,9 +73,9 @@ const CardContainer: React.FC<Props> = observer(({ mapData, view, setView }) => 
                     </div>
                 </div>
             </div>
-            <div className={s.content}>
+            <div className={searchStore.fetching || !searchStore.initialData ? s.contentText : s.content}>
                 {searchStore.fetching 
-                    ? <h1>Loading...</h1>
+                    ? <Typography size={'header'}>Loading...</Typography>
                     : searchStore.initialData && searchStore.initialData.length 
                         ? searchStore.initialData.map((i: any, id: number) => {
                             return(
@@ -88,7 +89,7 @@ const CardContainer: React.FC<Props> = observer(({ mapData, view, setView }) => 
                                 </div>
                             )
                         })
-                        : <h1>Объекты отсутствуют</h1>
+                        : <Typography size={'subheaderBig'}>Объекты отсутствуют</Typography>
                 }
             </div>
             <OpenCloseMapButton view={view} setView={setView}/>
