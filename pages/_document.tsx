@@ -13,6 +13,7 @@ class MyDocument extends Document {
             rel="stylesheet"
             href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons&display=swap"
           />
+          <link rel="shortcut icon" href="/favicon.ico" />
           <style jsx global>
             {`
               html,
