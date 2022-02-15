@@ -7,6 +7,7 @@ import { APIObject } from '../../../api';
 import BaseSlider from '../../shared/BaseSlider/BaseSlider';
 import Typography from '../../shared/Typography/Typography';
 import {mapData} from '../CardContainer/config'
+import {observer} from "mobx-react-lite";
 
 interface Props {
     route: string | string[] | undefined,
@@ -18,7 +19,7 @@ interface Props {
 const TEMP_LINK = '/'
 const MAX_SLIDERS_AMMOUNT = 7
 
-const ObjectCard: React.FC<Props> = ({ route, houseData, typeObject, data }) => {
+const ObjectCard: React.FC<Props> = observer(({ route, houseData, typeObject, data }) => {
 
     //const houseImages = houseData.images.length > MAX_SLIDERS_AMMOUNT ? houseData.images.slice(0, MAX_SLIDERS_AMMOUNT) : houseData.images
 
@@ -55,6 +56,6 @@ const ObjectCard: React.FC<Props> = ({ route, houseData, typeObject, data }) => 
             </Link>
         </div>
     )
-}
+})
 
 export default ObjectCard

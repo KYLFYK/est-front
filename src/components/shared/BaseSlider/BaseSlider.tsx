@@ -9,6 +9,7 @@ import placeholderImage from './assets/house.jpg'
 import BaseButton from "../BaseButton/BaseButtons";
 import { SliderDocIcon } from "../../../icons/SliderDot/SliderDotIcon";
 import FavoriteIcon from "../../../icons/Favorite/Favorite";
+import {myLoader} from "../../../utils/image/image";
 
 interface Props {
     images: string[],
@@ -34,14 +35,14 @@ const BaseSlider: React.FC<Props> = ({ images, height, withArrows, withFavorite,
         images.map((i) => (
             <Box className={s.imgContainer} key={i}>
                 <div style={{ height }}>
-                    <Image unoptimized src={i} className={s.image} alt={`Slider Screen`} layout="fill" loader={() => i} />
+                    <Image unoptimized src={i} className={s.image} height={'200px'} width={'315px'} alt={`Slider Screen`}  loader={e=>myLoader(e.src,e.width,e.quality)} />
                 </div>
             </Box>
         ))
     ) : (
         <Box className={s.imgContainer} style={{ height }}>
             <div style={{ height }}>
-                <Image unoptimized src={placeholderImage} className={s.image} alt={`Slider Screen Placeholder`} layout="fill" />
+                <Image unoptimized src={placeholderImage} height={'200px'} width={'315px'} className={s.image} alt={`Slider Screen Placeholder`} loader={e=>myLoader(e.src,e.width,e.quality)}  />
             </div>
         </Box>
     )

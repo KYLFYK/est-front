@@ -12,7 +12,6 @@ import OurOffice from "../src/components/containers/OurOffice/OurOffice";
 import {OurOfficeType} from "../src/components/containers/OurOffice/OurOffice";
 import {observer} from "mobx-react-lite";
 import {useRouter} from "next/router";
-import {useStoreMainPage} from "../src/mobx/mainPage/mainPage";
 
 const city = ["Москва", "Крым", "Сочи"];
 
@@ -29,9 +28,11 @@ const personalAccount = [
 const tagsButton = [
     "Квартира",
     "Дом",
+    "ЖК",
+    "Участок",
     "Новостройка",
     "Вторичное жилье",
-    "ЖК",
+
 ];
 
 const ourOffice: OurOfficeType = {

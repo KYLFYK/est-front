@@ -27,13 +27,12 @@ type DeveloperDataPropsType = {
 export const DeveloperDataModal: FC<DeveloperDataPropsType> = observer(({ img,  developer,isActive, setActive,id }) => {
 
     const store = useStoreMainPage()
-    console.log("idDeveloper" , id)
+
     useEffect(()=>{
         if (isActive) store.fetchComplexDeveloper(id)
 
     },[isActive,store,id])
 
-    store.get()
     return (
 
         <Modal setActive={() => setActive(false)} active={isActive} >

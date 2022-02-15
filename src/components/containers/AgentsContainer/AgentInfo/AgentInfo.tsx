@@ -67,7 +67,8 @@ export const AgentInfo: React.FC<AgentDataPropsType> = ({ img,connection,infoAge
                 <div className={css.marginData}>
                     {
                         infoAgent.telegram !== '' &&
-                        <a href={`tg://resolve?domain=${infoAgent.telegram}`} rel='noopener' className={css.linkStyle}>
+                        // <a href={`tg://resolve?domain=${infoAgent.telegram}`} rel='noopener' className={css.linkStyle}>
+                        <a href={`https://t.me/${infoAgent.telegram}`} rel='noopener' className={css.linkStyle}>
                             <div style={{display:'flex'}}>
                                 <IconTelegram/>
                                 <Typography size={'default'} color="accent"  >

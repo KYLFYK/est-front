@@ -46,11 +46,12 @@ class MainPageStore {
             }
         }],
         bestOffers: [],
+        bestOffersFilter: [],
         complexDeveloper: [{
             name: '',
             id: 0,
         }]
-
+        ,tagsButton :  ["Квартира", "Дом", "ЖК", "Участок", "Новостройка", "Вторичное жилье"]
     }
 
     async fetchAgents() {
@@ -103,7 +104,7 @@ class MainPageStore {
     }
 
     async fetchBestOffers() {
-        const bestOffers = await mailPage.bestObjects(4)
+        const bestOffers = await mailPage.bestObjects(10)
         this.initialData.bestOffers = bestOffers.map((object: any) => (
             {
                 id: object.id,
@@ -131,6 +132,17 @@ class MainPageStore {
                 name: re.name
             }
         ))
+    }
+
+    filterBestOffer(tags:Array<string>|[]){
+        const result =
+            tags.map(tag=>{
+              return this.initialData.bestOffers
+                    .filter((offers:any)=>{
+                        return offers.type === tag && offers
+                    })
+            })
+        this.initialData.bestOffersFilter = result.flat(1)
     }
 
     get() {

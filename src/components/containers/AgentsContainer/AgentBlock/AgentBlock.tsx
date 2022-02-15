@@ -83,7 +83,8 @@ export const AgentBlock: React.FC<AgentBlockPropsType> = ({img, connection, info
                         }
                         {
                             connection.telegram !== '' &&
-                            <a href={`tg://resolve?domain=${connection.telegram}`} rel='noopener'>
+                            // <a href={`tg://resolve?domain=${connection.telegram}`} rel='noopener'>
+                            <a href={`https://t.me/${connection.telegram}`} rel='noopener'>
                                 <IconTelegram/>
                             </a>
                         }
