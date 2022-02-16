@@ -26,7 +26,6 @@ const PersonalCabinetSettings: FC<PersonalCabinetSettingsType123> = ({personalCa
     const [valueMessagePhone, setValueMessagePhone] = useState<string>(personalCabinet.messagePhone)
     const [valueMessageEmail, setValueMessageEmail] = useState<string>(personalCabinet.messageEmail)
 
-
     const createPhone = () => {
         const newPhone = [...personalCabinet.phones]
         newPhone.push('')
