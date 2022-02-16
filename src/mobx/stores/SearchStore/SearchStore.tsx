@@ -14,6 +14,8 @@ class SearchStore {
   setSort(sort: string) {
     this.sort = sort
   } 
+  params = {}
+  initialData: any = []
   filter = {
     'object-type': FILTER_HOUSE_TYPE_OPTIONS[0].value,
     'building-type': FILTER_BUILDING_TYPE_OPTIONS[0].value,
@@ -33,7 +35,6 @@ class SearchStore {
     'benefit': '',
   }
   setFilter(values: any) {
-    console.log(values)
     this.filter = {
     ...this.filter,
     'object-type': values['object-type'],
@@ -55,10 +56,10 @@ class SearchStore {
     }
   }
 
-  setOrderType(value: string) {
+  setOrderType(value: string | number) {
     this.filter = {...this.filter, 'order-type': value}
   }
-  setHouseType(value: string) {
+  setHouseType(value: string | number) {
     this.filter = {
       ...this.filter, 
       'object-type': value, 
@@ -115,13 +116,6 @@ class SearchStore {
     selectedImprovmentSet.has(value) ? selectedImprovmentSet.delete(value) : selectedImprovmentSet.add(value)
     this.filter = { ...this.filter, 'benefit': Array.from(selectedImprovmentSet).join(',') || '' }
   }
-
-  getFilter() {
-    return JSON.parse(JSON.stringify({ ...this.filter}))
-  }
-
-  params = {}
-  initialData: any = []
   
   setParams(newParams: any) {
     if(newParams['object-type'] === 'apartment' && !newParams['rooms-in-apartment']){
@@ -133,8 +127,12 @@ class SearchStore {
     this.params = newParams
   }
 
+  getFilter() {
+    return JSON.parse(JSON.stringify({ ...this.filter}))
+  }
+
   getInitialData() {
-    return JSON.parse(JSON.stringify({ ...this.initialData}))
+    return Array.from(JSON.parse(JSON.stringify({ ...this.initialData})))
   }
 
   getParams() {
@@ -144,7 +142,7 @@ class SearchStore {
   async fetch() {
     this.fetching = true
     const res = SearchApi.getFilteredObj(this.params)
-    this.initialData = await res
+    this.initialData = [...await res]
     this.fetching = false
   }
 }

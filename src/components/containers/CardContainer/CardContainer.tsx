@@ -45,6 +45,7 @@ const CardContainer: React.FC<Props> = observer(({ mapData, view, setView }) => 
         { icon: <GridView fill={view === 'gridView' ? '#96A2B5' : '#CAD1DA'}/>, onclick: () => setView('gridView') }, 
         { icon: <MapView fill={view === 'mapView' ? '#96A2B5' : '#CAD1DA'}/>, onclick: () => setView('mapView') },
     ]
+
     return (
         <div className={view === 'mapView' ? s.openContainer : s.closeContainer}>
             <div className={s.finderControls}>
@@ -73,7 +74,7 @@ const CardContainer: React.FC<Props> = observer(({ mapData, view, setView }) => 
                     </div>
                 </div>
             </div>
-            <div className={searchStore.fetching || !searchStore.initialData ? s.contentText : s.content}>
+            <div className={(searchStore.fetching || !searchStore.initialData.length) ? s.contentText : s.content}>
                 {searchStore.fetching 
                     ? <Typography size={'header'}>Loading...</Typography>
                     : searchStore.initialData && searchStore.initialData.length 
