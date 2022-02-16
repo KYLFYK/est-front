@@ -62,18 +62,49 @@ const AccountEditAgency :FC<AccountEditType>= observer(({onEdit}) => {
         }
     }
 
+    console.log(infoAgency.name !== valueName
+        , infoAgency.status !== valueStatus
+        , infoAgency.address !== valueAddress
+        , infoAgency.phone !== valuePhone
+        , infoAgency.email !== valueEmail
+        , infoAgency.website !== valueWebsite
+        , infoAgency.description !== valueDescription)
     const save = async () =>{
-        // id + править типизацию + пока нету запроса на правку
-        await cabinetAPI.updateAgencyCabinet(1,{})
-        console.log('save')
+       const infoAgency ={
+           "phone": [
+               {
+                   "ord": 1,
+                   "value": valuePhone
+               }
+           ],
+           "name": valueName,
+           "address": valueAddress,
+           "site": valueWebsite,
+           "description": valueDescription
+       }
+        await cabinetAPI.updateAgencyCabinet(store.initialData.id,infoAgency)
+        await  store.fetch()
+
     }
-    const saveBack = () => {
-        console.log('save')
+    const saveBack = async () => {
+        const infoAgency ={
+            "phone": [
+                {
+                    "ord": 1,
+                    "value": valuePhone
+                }
+            ],
+            "name": valueName,
+            "address": valueAddress,
+            "site": valueWebsite,
+            "description": valueDescription
+        }
+        await cabinetAPI.updateAgencyCabinet(store.initialData.id,infoAgency)
+        await  store.fetch()
         setComparison(false)
         onEdit()
     }
     const backPageNoSave = () => {
-        console.log('backPageNoSave')
         setComparison(false)
         onEdit()
     }
@@ -82,12 +113,12 @@ const AccountEditAgency :FC<AccountEditType>= observer(({onEdit}) => {
         <div>
             <BackPage onBackPage={backPage} title={'Редактирование аккаунта агентства'} />
             <div className={css.df_jc}>
-                <div>
+                <div style={{width:'100%'}}>
                     <Typography weight={'bold'}>Аккаунт</Typography>
-                    <div className={css.df_jc}>
-                        <div>
+                    <div className={css.df_jc} >
+                        <div style={{width:'50vw'}}>
                             <div className={css.df}>
-                                <div className={css.marginColumn}>
+                                <div className={css.marginColumn} style={{width:'60%'}}>
                                     <Typography color={'tertiary'} className={css.marginTypo}>
                                         Наименование
                                     </Typography>
@@ -97,7 +128,7 @@ const AccountEditAgency :FC<AccountEditType>= observer(({onEdit}) => {
                                         className={css.styleButton}
                                     />
                                 </div>
-                                <div className={css.marginColumn}>
+                                <div className={css.marginColumn} style={{width:'60%'}}>
                                     <Typography color={'tertiary'} className={css.marginTypo}>
                                         Статус
                                     </Typography>
@@ -121,7 +152,7 @@ const AccountEditAgency :FC<AccountEditType>= observer(({onEdit}) => {
                                 />
                             </div>
                             <div  className={css.df}>
-                                <div className={css.marginColumn}>
+                                <div className={css.marginColumn} style={{width:'60%'}}>
                                     <Typography color={'tertiary'} className={css.marginTypo}>
                                         Телефон
                                     </Typography>
@@ -131,7 +162,7 @@ const AccountEditAgency :FC<AccountEditType>= observer(({onEdit}) => {
                                         className={css.styleButton}
                                     />
                                 </div>
-                                <div className={css.marginColumn}>
+                                <div className={css.marginColumn} style={{width:'60%'}}>
                                     <Typography color={'tertiary'} className={css.marginTypo}>
                                         E-mail
                                     </Typography>
@@ -143,7 +174,7 @@ const AccountEditAgency :FC<AccountEditType>= observer(({onEdit}) => {
                                         className={css.styleInput}
                                     />
                                 </div>
-                                <div className={css.marginColumn}>
+                                <div className={css.marginColumn} style={{width:'60%'}}>
                                     <Typography color={'tertiary'} className={css.marginTypo}>
                                         Сайт
                                     </Typography>
@@ -201,13 +232,12 @@ const AccountEditAgency :FC<AccountEditType>= observer(({onEdit}) => {
                     || infoAgency.email !== valueEmail
                     || infoAgency.website !== valueWebsite
                     || infoAgency.description !== valueDescription &&
-                    <div style={{display:"flex",alignItems:"center",marginRight:'10px'}}>
+                    <div style={{display:"flex",alignItems:"center",marginRight:'10px',paddingTop:'20px'}}>
                         <Typography color={"tertiary"}>
                             Есть несохраненные изменения
                         </Typography>
                     </div>
                 }
-
             </div>
             {
                 <Modal setActive={() => setComparison(!comparison)} active={comparison}>

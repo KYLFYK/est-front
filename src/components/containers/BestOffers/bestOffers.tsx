@@ -120,11 +120,6 @@ export const BestOffers: FC<BestOffersType> = observer(({tagsButton}) => {
             <HeadLine title={'Лучшие предложения'}>
                 <div className={css.positionButton}>
                     <div className={css.buttonLine}>
-                        {/*{*/}
-                        {/*    tagsButton.map((name,index) => {*/}
-                        {/*        return <ArrayButton onActiveTags={(tags)=>activeFilterActive(tags)} className={css.button} key={index} index={index} name={name} />*/}
-                        {/*    })*/}
-                        {/*} */}
                         {
                             store.initialData.tagsButton.map((tags,index)=>(
                                 <ArrayButton
@@ -135,7 +130,6 @@ export const BestOffers: FC<BestOffersType> = observer(({tagsButton}) => {
                                 />
                             ))
                         }
-
                     </div>
                     {/*<BaseButton*/}
                     {/*    type="secondary"*/}
