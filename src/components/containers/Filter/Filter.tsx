@@ -14,7 +14,7 @@ import { FILTER_ACTIONS_OPTIONS, FILTER_BUILDING_TYPE_OPTIONS, FILTER_PRIVATE_HO
 import { useSearchStore } from "src/mobx/stores/SearchStore/SearchStore"
 import { useBreadcrumbsStore } from "src/mobx/stores/BreadcrumbsStore/BreadcrumbsStore"
 import s from './Filter.module.scss'
-
+import {paramsForGet} from '../../../lib/params/params';
 import {makeStyles} from "@material-ui/core";
 
 interface Props {
@@ -50,37 +50,12 @@ export const Filter: React.FC<Props> = observer(({ location }) => {
     const breadcrumbs = useBreadcrumbsStore()
     const classes = useStyles()
 
-    const params: any = Object.entries(searchStore.getFilter()).reduce((acc, cur, i): any => {
-        if(cur[1] && cur[0] !== 'privateType') {
-            //@ts-expect-error
-            acc[`${cur[0]}`] = cur[1]    
-        } 
-        if(cur[1] && cur[0] === 'object-type' && searchStore.getFilter()['privateType'] === 'townhouse') {
-            //@ts-expect-error
-            acc[`${cur[0]}`] = 'townhouse'
-        } 
-        if(cur[0] === 'rooms-in-apartment' && searchStore.getFilter()['object-type'] === 'apartment') {
-            //@ts-expect-error
-            acc[`${cur[0]}`] = cur[1]
-        } 
-        if(cur[0] === 'rooms-in-house' && searchStore.getFilter()['object-type'] === 'house' || searchStore.getFilter()['object-type'] === 'townhouse' ) {
-            //@ts-expect-error
-            acc[`${cur[0]}`] = cur[1]
-        } 
-        return acc
-    }, {})
-    console.log('params')
-    console.log(params)
-    console.log('router.query')
-    console.log(router.query)
-    console.log('searchStore.getFilter()')
-    console.log(searchStore.getFilter())
     React.useEffect(() => {
         if(searchStore.getFilter() && searchStore.getFilter()['object-type'] === 'townhouse') {
             searchStore.setPrivateType('house')
             searchStore.setPrivateType(FILTER_PRIVATE_HOUSE_OPTIONS[1].value)
         }
-        searchStore.setParams(params)
+        searchStore.setParams(paramsForGet(router.query))
         if(location === 'search') {
             searchStore.setFilter(router.query)
             searchStore.getFilter()['order-type'] && breadcrumbs.addBreadCrumbs(FILTER_ACTIONS_OPTIONS.filter((s: any) => searchStore.getFilter()['order-type'] === s.value)[0].label, 1)
@@ -94,18 +69,18 @@ export const Filter: React.FC<Props> = observer(({ location }) => {
             router.push(
             {
               pathname: '/search',
-              query: params,
+              query: paramsForGet(searchStore.getFilter()),
             })
-            searchStore.setParams(params)
+            searchStore.setParams(paramsForGet(searchStore.getFilter()))
             searchStore.fetch()
         }
         if(location === 'search') {
             router.replace(
             {
                 pathname: '/search',
-                query: params,
+                query: paramsForGet(searchStore.getFilter()),
             }, undefined, {})
-            searchStore.setParams(params)
+            searchStore.setParams(paramsForGet(searchStore.getFilter()))
             searchStore.fetch()
         }
     }

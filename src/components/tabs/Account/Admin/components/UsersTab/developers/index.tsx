@@ -22,14 +22,16 @@ export const DevelopersTab: FC = observer(() => {
     <div className={commonStyles.wrapper}>
       <PageFilter />
       <div className={styles.wrapper}>
-        {list.map((agent, index) => (
+        {list.map((developer, index) => (
           <AgentCard
             key={index}
             hrefPrefix={hrefPrefix}
-            description={agent.description}
-            title={agent.developerName}
-            imgUrl={agent.imgUrl}
-            id={agent.id}
+            description={
+              developer.description ? developer.description : "Не указано"
+            }
+            title={developer.developerName}
+            imgUrl={developer.imgUrl}
+            id={developer.id}
           />
         ))}
       </div>
