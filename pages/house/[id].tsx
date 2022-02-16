@@ -105,15 +105,14 @@ const sortInfoOptions = (option: {}) => {                             // сор�
     return infoOptions
 }
 
-
 const House = observer((props: any) => {
     let floors = props.info_options.floors ? props.info_options.floors : [{floor: '', value: ''}]
     const construction_feat = props.info_options.construction_features ? props.info_options.construction_features : [{title: '', value: ''}]
     const construction_features = [...construction_feat]
-    delete props.info_options.floors
-    delete props.info_options.construction_features
+    // delete props.info_options.floors
+    // delete props.info_options.construction_features
     const infoOptions = sortInfoOptions(props.info_options)
-    const optionFloors = floors ? floors.map((floor: any) => ({label: floor.floor, value: floor.value})) : [{
+    const optionFloors = floors ? floors.map((floo: any) => ({label: floo.floor, value: floo.value})) : [{
         label: '1',
         value: '2'
     }]
@@ -123,6 +122,7 @@ const House = observer((props: any) => {
             label: {title: construction.title, text: ''}
         }
     ))
+
     infoOptions.push(...optionFloors)
     const construction_featuresSpec = {
         subtitle: "Строительно-техническая экспертиза",
@@ -261,10 +261,9 @@ const House = observer((props: any) => {
                     />
                 }
             </div>
-            {
-                props.description_items && <ObjectDescription items={[props.description_items]}/>
-            }
-
+                {
+                    props.description_items && <ObjectDescription items={[props.description_items]}/>
+                }
             <div ref={tours}>
                 {
                     props.online_tour && <ToursContainer Online_tour={props.online_tour}/>
@@ -277,7 +276,6 @@ const House = observer((props: any) => {
                         specificationsLists={object_specs}
                         title={"Архитектурно-планировочные решения"}/>
                 }
-
             </div>
             <div ref={infra}>
                 <Map currentHouse={JSON.parse(JSON.stringify(props))} infrastructura={infrastructura}
