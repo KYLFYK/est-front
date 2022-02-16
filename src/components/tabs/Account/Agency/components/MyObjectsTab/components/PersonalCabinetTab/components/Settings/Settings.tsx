@@ -190,6 +190,7 @@ const PersonalCabinetSettings: FC<PersonalCabinetSettingsType123> = ({personalCa
 
             {/*    </div>*/}
             {/*</div>*/}
+
             {
                 edit &&
                 <div className={css.marginColumn}>
