@@ -1,11 +1,13 @@
 import css from './Modal.module.scss'
 import {ModalClose} from "./ModalClose";
 import {ReactNode} from "react";
+import classNames from "classnames";
 
 export type ModalPropsType = {
     setActive?: (e: boolean) => void
     active: boolean
     children: ReactNode
+    className?:string
 }
 
 export const Modal = (props: ModalPropsType) => {
@@ -15,7 +17,7 @@ export const Modal = (props: ModalPropsType) => {
     return (
 
         <div
-            className={props.active ? active : css.modal}
+            className={classNames(props.active ? active : css.modal,props.className)}
             // onClick={() =>props.setActive && props.setActive(false)}
         >
             <div

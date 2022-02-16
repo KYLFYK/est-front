@@ -19,9 +19,9 @@ export const mailPage = {
     newSubscription: async (name: string, email: string, phone: string) => {
         try {
             await instance.post(`${UrlMainPage.newsSubscription}`, {name, email, phone})
-            alert(`Спасибо за подписку`)
+            return 'Спасибо что подписались на новости'
         } catch (e: any) {
-            alert(e.response.data.message)
+            return e.response.data.message
         }
     },
     bestObjects: async (number: number) => {
