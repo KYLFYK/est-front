@@ -2,10 +2,10 @@ import { FC } from "react";
 import Image from "next/image";
 import { Trash } from "../../../../../../../icons/Trash";
 import Link from "next/link";
+import { myLoader } from "../../../../../../../utils/image/image";
 
 import cardImage from "../../../../../../../Pics/card-images/dealCard.jpg";
 import styles from "./agency.module.scss";
-import { myLoader } from "../../../../../../../utils/image/image";
 
 interface Props {
   imgUrl?: string;
@@ -13,7 +13,7 @@ interface Props {
   description: string;
   description2?: string;
   hrefPrefix?: string;
-  id: string;
+  id: string | number;
 }
 
 export const AgentCard: FC<Props> = ({
@@ -35,10 +35,12 @@ export const AgentCard: FC<Props> = ({
       >
         <a className={styles.cardImage}>
           <Image
-            loader={(e) => myLoader(e.src, e.width, e.quality)}
+            loader={(e) => {
+              return imgUrl ? imgUrl : myLoader(e.src, e.width, e.quality);
+            }}
             src={imgUrl ? imgUrl : cardImage}
             layout={"fill"}
-            alt={"Логотип агенства"}
+            alt={"Логотип"}
           />
         </a>
       </Link>
