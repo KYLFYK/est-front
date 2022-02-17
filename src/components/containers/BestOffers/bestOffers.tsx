@@ -92,27 +92,6 @@ const settings = {
 
 }
 
-const activeTags = (tags:string) =>{
-    let tag = ''
-    if(tags=== "Квартира"){
-       return  tag ='apartment'
-
-    }if(tags=== "Дом"){
-        return  tag ='house'
-
-    }if(tags=== "ЖК"){
-        return   tag ='house'
-    }if(tags=== "Участок"){
-        return  tag ='house'
-    }
-    if(tags=== "Новостройка"){
-        return tag ='isNew'
-    }if(tags=== "Вторичное жилье"){
-        return  tag ='isOld'
-    }
-
-}
-
 export const BestOffers: FC<BestOffersType> = observer(({tagsButton}) => {
 
     const store = useStoreMainPage()
