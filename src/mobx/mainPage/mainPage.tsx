@@ -51,7 +51,7 @@ class MainPageStore {
             name: '',
             id: 0,
         }]
-        ,tagsButton :  ["Квартира", "Дом", "ЖК", "Участок", "Новостройка", "Вторичное жилье"]
+        ,tagsButton :  ["Квартира", "Дом", "ЖК", "Новостройка", "Вторичное жилье"]
     }
 
     async fetchAgents() {
@@ -85,7 +85,7 @@ class MainPageStore {
     }
 
     async fetchDevelopers() {
-        const developers = await mailPage.getDeveloperOur(5)
+        const developers = await mailPage.getDeveloperOur(10)
         this.initialData.developers = developers.data.map((developer: any) => (
             {
                 id:developer.id,
@@ -122,8 +122,32 @@ class MainPageStore {
                 }
             }
         ))
-    }
 
+    }
+    async fetchBestOffers1(count:number,isOld:boolean,isNew:boolean,isComplex:boolean,isHouse:boolean,isApartment:boolean) {
+
+        const bestOfferNew = await mailPage.bestObjects1(count,isOld,isNew,isComplex,isHouse,isApartment)
+
+
+        // this.initialData.bestOffers = bestOfferNew.map((object: any) => (
+        //     {
+        //         id: object.id,
+        //         name: object.name,
+        //         address: object.address,
+        //         type: object.guides.map((t: any) => t.type_en === 'objectType' ? t.value : '').filter((t: any) => t !== '')[0],
+        //         price: object.price,
+        //         property: {
+        //             floor: 3, // moc
+        //             totalFloor: 15, // moc
+        //             images: [],
+        //             object_id: object.id,
+        //             name: object.name,
+        //             description: '',
+        //         }
+        //     }
+        // ))
+        console.log("bestOfferNew",bestOfferNew,[isOld,isNew,isComplex,isHouse,isApartment])
+    }
     async fetchComplexDeveloper(id: number) {
         const complex = await mailPage.bestObjectsModalDeveloper(id)
         this.initialData.complexDeveloper = complex.map((re: any) => (

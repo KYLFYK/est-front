@@ -63,5 +63,5 @@ body{
   display: flex;
   flex-direction: column;
 }
-
-
+/*.slick-initialized { overflow: hidden; }*/
+/*.slick-next {arrows: false}*/

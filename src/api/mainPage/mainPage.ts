@@ -6,6 +6,7 @@ export enum UrlMainPage {
     newsSubscription = 'news-subscription',     //post
     bestObject = 'objects/best',     //get
     bestObjectDeveloper = 'complex/getByOwner',     //get
+    bestObject1 = 'objects/best-offers?',     //get
 }
 
 export const mailPage = {
@@ -28,6 +29,16 @@ export const mailPage = {
         let res
         try {
             res = await instance.get(`${UrlMainPage.bestObject}?take=${number}`)
+            return res.data
+        } catch (e: any) {
+            return []
+            alert(e)
+        }
+    },
+    bestObjects1: async (number: number,isOld:boolean,isNew:boolean,isComplex:boolean,isHouse:boolean,isApartment:boolean) => {
+        let res
+        try {
+            res = await instance.get(`${UrlMainPage.bestObject1}?isOld=${isNew}&isNew=${isOld}&isComplex=${isComplex}&isHouse=${isHouse}&isApartment=${isApartment}&take=${number}`)
             return res.data
         } catch (e: any) {
             return []

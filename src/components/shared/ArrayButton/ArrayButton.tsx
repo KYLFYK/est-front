@@ -8,6 +8,8 @@ type ArrayButtonType = {
     onActiveTags:(tag:string)=>void
 }
 
+
+
 const ArrayButton :React.FC<ArrayButtonType> = ({ name,className,onActiveTags }) => {
     const [active, setActive] = useState<boolean>(false)
 
@@ -20,19 +22,18 @@ const ArrayButton :React.FC<ArrayButtonType> = ({ name,className,onActiveTags })
             tag ='house'
             setActive(!active)
         }if(tags=== "ЖК"){
-            tag ='house'
-
+            tag ='isComplex'
             setActive(!active)
         }if(tags=== "Участок"){
             tag ='house'
             setActive(!active)
         }
         if(tags=== "Новостройка"){
-            tag ='new'
+            tag ='isNew'
 
             setActive(!active)
         }if(tags=== "Вторичное жилье"){
-            tag ='old'
+            tag ='isOld'
             setActive(!active)
         }
         onActiveTags(tag)

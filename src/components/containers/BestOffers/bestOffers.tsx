@@ -1,15 +1,11 @@
-import React, {FC, useEffect, useState} from 'react';
+import React, {FC, useEffect, useRef, useState} from 'react';
 import ArrayButton from '../../shared/ArrayButton/ArrayButton';
-import BaseButton from '../../shared/BaseButton/BaseButtons';
 import HeadLine from '../../shared/HeadLine/HeadLine';
 import css from './bestOffers.module.scss'
-import Typography from "../../shared/Typography/Typography";
 import ObjectCard from "../Card";
 import {mapData} from '../Maps/MapFinder/config';
 import {useStoreMainPage} from "../../../mobx/mainPage/mainPage";
 import {observer} from "mobx-react-lite";
-import {Tab, Tabs} from '@material-ui/core';
-import s from "../../shared/BaseSlider/BaseSlider.module.scss";
 import Slider from "react-slick";
 
 type BestOffersType = {
@@ -47,8 +43,20 @@ const SamplePrevArrow: React.FC<ArrowType> = ({onClick}) => {
         </div>
     )
 }
+// const gotoNext = () => {
+//     //@ts-ignore
+//     customeSlider.current.slickNext()
+// }
+// const gotoPrev = () => {
+//     //@ts-ignore
+//     customeSlider.current.slickPrev()
+// }
+
+// <SampleNextArrow  onClick={()=>gotoPrev()} />
+// <SamplePrevArrow onClick={()=>gotoNext()}/>
 
 const settings = {
+    dots: true,
     infinite: false,
     speed: 500,
     slidesToShow: 4,
@@ -80,40 +88,65 @@ const settings = {
             }
         }
     ],
-    prevArrow: <SampleNextArrow onClick={() => console.log('hello')}/>,
-    nextArrow: <SamplePrevArrow onClick={() => console.log('hello')}/>,
+    arrows: false,
+
+}
+
+const activeTags = (tags:string) =>{
+    let tag = ''
+    if(tags=== "Квартира"){
+       return  tag ='apartment'
+
+    }if(tags=== "Дом"){
+        return  tag ='house'
+
+    }if(tags=== "ЖК"){
+        return   tag ='house'
+    }if(tags=== "Участок"){
+        return  tag ='house'
+    }
+    if(tags=== "Новостройка"){
+        return tag ='isNew'
+    }if(tags=== "Вторичное жилье"){
+        return  tag ='isOld'
+    }
+
 }
 
 export const BestOffers: FC<BestOffersType> = observer(({tagsButton}) => {
 
     const store = useStoreMainPage()
-
+    const customeSlider = useRef()
     useEffect(() => {
         store.fetchBestOffers()
+        store.fetchBestOffers1(5,false,false,false,false,false)
     }, [])
 
     const mapDat: any = mapData[0]
 
-    const [activeFilter, setActiveFilter] = useState<Array<string>>([])
+    const [activeFilter, setActiveFilter] = useState<Array<boolean>>([false,false,false,false,false])
 
     const activeFilterActive = (tag: string) => {
-        let res: Array<any> = []
-        if (activeFilter.length === 0) {
-            activeFilter.push(tag)
-            res = activeFilter
-        } else {
-            const act = activeFilter.some(f => f === tag)
-            if (act) {
-                res = activeFilter.filter(f => f !== tag)
-            } else {
-                let opt = [...activeFilter]
-                opt.push(tag)
-                res = opt
-            }
+        if(tag==="apartment"){
+            activeFilter[0]=!activeFilter[0]
+            setActiveFilter(activeFilter)
+        } if(tag==="house"){
+            activeFilter[1]=!activeFilter[1]
+            setActiveFilter(activeFilter)
+        } if(tag==="isComplex"){
+            activeFilter[2]=!activeFilter[2]
+            setActiveFilter(activeFilter)
+        } if(tag==="isNew"){
+            activeFilter[3]=!activeFilter[3]
+            setActiveFilter(activeFilter)
+        }if(tag==="isOld"){
+            activeFilter[4]=!activeFilter[4]
+            setActiveFilter(activeFilter)
         }
-        setActiveFilter(res)
-        store.filterBestOffer(res)
+        store.fetchBestOffers1(10,activeFilter[0],activeFilter[1],activeFilter[2],activeFilter[3],activeFilter[4])
     }
+
+
 
     return (
         <div className={css.offers}>
@@ -142,7 +175,8 @@ export const BestOffers: FC<BestOffersType> = observer(({tagsButton}) => {
                 </div>
 
                 <div style={{padding: '5px', marginTop: '20px'}}>
-                    <Slider {...settings}  >
+                    {/*<Slider {...settings} ref={customeSlider}  >*/}
+                    <Slider {...settings} >
                         {
                             store.initialData.bestOffersFilter.length > 0
                                 ? store.initialData.bestOffersFilter.map((t: any, index) => (
@@ -168,50 +202,8 @@ export const BestOffers: FC<BestOffersType> = observer(({tagsButton}) => {
                                 ))
                         }
                     </Slider>
+
                 </div>
-
-
-                {/*<div className={css.offersPhoto}>*/}
-                {/*<div >*/}
-
-                {/*{*/}
-                {/*    store.initialData.bestOffersFilter.length > 0*/}
-                {/*        ? store.initialData.bestOffersFilter.map((t: any, index) => (*/}
-                {/*            <div key={index} style={{padding: '5px'}}>*/}
-                {/*                <ObjectCard*/}
-                {/*                    route={t.type}*/}
-                {/*                    typeObject={"new"}*/}
-                {/*                    houseData={mapDat}*/}
-                {/*                    data={t}*/}
-                {/*                />*/}
-                {/*            </div>*/}
-                {/*        ))*/}
-                {/*        : store.initialData.bestOffers*/}
-                {/*        && store.initialData.bestOffers.map((t: any, index) => (*/}
-                {/*            <div key={index} style={{padding: '5px'}}>*/}
-                {/*                <ObjectCard*/}
-                {/*                    route={t.type}*/}
-                {/*                    typeObject={"new"}*/}
-                {/*                    houseData={mapDat}*/}
-                {/*                    data={t}*/}
-                {/*                />*/}
-                {/*            </div>*/}
-                {/*        ))*/}
-                {/*}*/}
-
-                {/*    OLD - BEST OFFERS*/}
-
-                {/*{*/}
-                {/*    store.initialData.bestOffers && store.initialData.bestOffers.map((t:any)=>(*/}
-                {/*        <EstateOffer*/}
-                {/*            key={t.id}*/}
-                {/*            url={`${t.type}/${t.id}`}*/}
-                {/*            tags={[]}*/}
-                {/*            img={IMAGES_SET}*/}
-                {/*        />*/}
-                {/*    ))*/}
-                {/*}*/}
-                {/*</div>*/}
             </HeadLine>
         </div>
     );
