@@ -23,6 +23,7 @@ import {UrlObj} from '../../src/api/instance'
 import {FILTER_ACTIONS_OPTIONS, FILTER_HOUSE_TYPE_OPTIONS} from '../../src/components/containers/Filter/config'
 import {sortGuide, sortObject_specsTypeGuide} from "../../src/utils/conversionIcons/conversionIcons";
 import {conversionDate} from "../../src/utils/conversionDate/conversionDate";
+import PaybackContainer from "../../src/components/containers/PaybackContainer/PaybackContainer";
 
 const city = ['Москва', 'Крым', 'Сочи']
 
@@ -288,7 +289,7 @@ const House = observer((props: any) => {
                 }
             </div>
             <div ref={payback}>
-                {/*<PaybackContainer averagePrice={averagePrice}/>*/}
+                <PaybackContainer averagePrice={averagePrice}/>
             </div>
             <div ref={developer}>
                 {/*<ObjectDeveloper developerData={store.initialData.object_developer_info}/>*/}
