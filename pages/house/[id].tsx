@@ -24,6 +24,7 @@ import {FILTER_ACTIONS_OPTIONS, FILTER_HOUSE_TYPE_OPTIONS} from '../../src/compo
 import {sortGuide, sortObject_specsTypeGuide} from "../../src/utils/conversionIcons/conversionIcons";
 import {conversionDate} from "../../src/utils/conversionDate/conversionDate";
 import PaybackContainer from "../../src/components/containers/PaybackContainer/PaybackContainer";
+import {plusUnitMeasurement} from "../../src/utils/plusUnitMeasurement/plusUnitMeasurement";
 
 const city = ['Москва', 'Крым', 'Сочи']
 
@@ -229,7 +230,7 @@ const House = observer((props: any) => {
 
     const router = useRouter()
 
-    const views = [props.publish, props.views, props.agency]
+    const views = [conversionDate(props.publish), props.views, props.agency]
 
     useEffect(() => {
         setRefs([general.current, tours.current, architec.current, infra.current, legal.current, payback.current, developer.current, record.current])
@@ -256,14 +257,14 @@ const House = observer((props: any) => {
                 {
                     infoOptions &&
                     <GeneralInfo
-                        info={infoOptions}
+                        info={plusUnitMeasurement(infoOptions)}
                         price={props.price}
                         images={IMAGES_SET}
                     />
                 }
             </div>
                 {
-                    props.description_items && <ObjectDescription items={[props.description_items]}/>
+                    props.description && <ObjectDescription items={[props.description]}/>
                 }
             <div ref={tours}>
                 {
@@ -280,7 +281,7 @@ const House = observer((props: any) => {
             </div>
             <div ref={infra}>
                 <Map currentHouse={JSON.parse(JSON.stringify(props))} infrastructura={infrastructura}
-                     location={'infrastructure'} InfrastructureInfo={infrastructureInfo}/>
+                     location={'infrastructure'} InfrastructureInfo={props.description_items ? props.description_items : ''}/>
             </div>
             <div ref={legal}>
                 {
