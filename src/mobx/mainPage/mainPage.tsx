@@ -128,24 +128,23 @@ class MainPageStore {
 
         const bestOfferNew = await mailPage.bestObjects1(count,isOld,isNew,isComplex,isHouse,isApartment)
 
-
-        // this.initialData.bestOffers = bestOfferNew.map((object: any) => (
-        //     {
-        //         id: object.id,
-        //         name: object.name,
-        //         address: object.address,
-        //         type: object.guides.map((t: any) => t.type_en === 'objectType' ? t.value : '').filter((t: any) => t !== '')[0],
-        //         price: object.price,
-        //         property: {
-        //             floor: 3, // moc
-        //             totalFloor: 15, // moc
-        //             images: [],
-        //             object_id: object.id,
-        //             name: object.name,
-        //             description: '',
-        //         }
-        //     }
-        // ))
+        this.initialData.bestOffers = bestOfferNew.map((object: any) => (
+            {
+                id: object.id,
+                name: object.name,
+                address: object.address,
+                type: object.objectName ==='complex' ? "residential-complex" :object.objectName,
+                price:object.objectName !=='complex'? object.price: object.property.priceObjectMin !== null ? object.property.priceObjectMin : '10000000',
+                property: {
+                    floor: 3, // moc
+                    totalFloor: 15, // moc
+                    images: [],
+                    object_id: object.id,
+                    name: object.name,
+                    description: '',
+                }
+            }
+        ))
         console.log("bestOfferNew",bestOfferNew,[isOld,isNew,isComplex,isHouse,isApartment])
     }
     async fetchComplexDeveloper(id: number) {

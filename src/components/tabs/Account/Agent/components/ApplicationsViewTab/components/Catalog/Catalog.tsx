@@ -69,7 +69,14 @@ export const useStyles = makeStyles(() => ({
     cursor:{
         cursor:"pointer",
         height: 80 ,
+        padding:"6px 0 !important"
 
+    },
+    root:{
+        padding:'6px 0px !important',
+        '& .MuiTableSortLabel-root':{
+            padding:'6px 0px !important'
+        }
     }
 }))
 type ActualObjectType = {
@@ -142,12 +149,11 @@ const ApplicationsViewCatalog: React.FC<ActualObjectType> = ({agents,onClick}) =
         page > 0 ? Math.max(0, (1 + page) * rowsPerPage - rows.length) : 0;
 
     return (
-        <Box sx={{width: '1440px'}}>
+        <Box >
             <>
                 <div>
                     <TableContainer>
                         <Table
-                            sx={{width: '1420px'}}
                             aria-labelledby="tableTitle"
                             size={'small'}
                         >
@@ -200,7 +206,7 @@ const ApplicationsViewCatalog: React.FC<ActualObjectType> = ({agents,onClick}) =
                                                 </TableCell>
                                                 <TableCell
                                                     width={'128px'}
-                                                    title={agent.status.toString()}
+                                                    // title={agent.status.toString()}
                                                     align="left">
                                                     <Typography className={css.heightTable}>
                                                         {agent.convenientTime}
@@ -228,18 +234,21 @@ const ApplicationsViewCatalog: React.FC<ActualObjectType> = ({agents,onClick}) =
                                                     </Typography>
                                                 </TableCell>
                                                 <TableCell
-                                                    width={'114px'}>
+                                                    width={'104px'}>
                                                     <Typography className={css.heightTable}>
                                                         {agent.typeContract}
                                                     </Typography>
                                                 </TableCell>
-                                                <TableCell width={'102px'}>
-                                                    <Typography className={css.heightTable}>
-                                                        {object[0]}
-                                                    </Typography>
-                                                    <Typography className={css.heightTable}>
-                                                        {object[1]}
-                                                    </Typography>
+                                                <TableCell width={'92px'}>
+                                                    <div style={{minWidth:"92px"}}>
+                                                        <Typography className={css.heightTable}>
+                                                            {object[0]}
+                                                        </Typography>
+                                                        <Typography className={css.heightTable}>
+                                                            {object[1]}
+                                                        </Typography>
+                                                    </div>
+
                                                 </TableCell>
                                                 <TableCell width={'110px'}>
                                                     <Typography className={css.heightTable}>
@@ -292,6 +301,7 @@ type EnhancedTableProps = {
     headCells: HeadCell[]
 }
 
+
 const EnhancedTableHead: React.FC<EnhancedTableProps> = ({
                                                                     numSelected,
                                                                     onRequestSort,
@@ -307,6 +317,8 @@ const EnhancedTableHead: React.FC<EnhancedTableProps> = ({
             onRequestSort(event, property);
         };
 
+    const classes = useStyles()
+
     return (
         <TableHead>
             <TableRow>
@@ -319,6 +331,7 @@ const EnhancedTableHead: React.FC<EnhancedTableProps> = ({
                     >
                         <TableSortLabel
                             // active={orderBy === headCell.id}
+                            className={classes.root}
                             hideSortIcon={false}
                             active
                             direction={orderBy === headCell.id ? order : 'asc'}
@@ -332,7 +345,7 @@ const EnhancedTableHead: React.FC<EnhancedTableProps> = ({
                                 />
                             }}
                         >
-                            <Typography>
+                            <Typography size={"small"}>
                                 {headCell.label !== 'none' ? headCell.label : ''}
                             </Typography>
                             {orderBy === headCell.id ? (

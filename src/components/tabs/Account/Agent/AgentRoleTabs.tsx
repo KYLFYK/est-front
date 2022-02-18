@@ -8,6 +8,7 @@ import PlacementRates from "./components/PlacementRates/PlacementRates";
 import ProfSearch from "./components/ProfSearch/ProfSearch";
 import Messages from "./components/Messages/Messages";
 import PersonalCabinetTab from "./components/PersonalCabinetTab/PersonalCabinetTab";
+import css from "../Agency/AgencyRoleTabs.module.css";
 
 interface Props {
 }
@@ -38,6 +39,7 @@ const AgentRoleTabs  = () => {
     return (
         <VerticalTabs
             link={true}
+            className={css.verticalTabsMargin}
             tabs={[
                 { title: "Личный кабинет", Component: <PersonalCabinetTab /> },
                 { title: "Заявки", Component: <ApplicationsViewTab /> },

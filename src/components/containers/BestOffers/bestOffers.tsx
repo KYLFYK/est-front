@@ -97,7 +97,7 @@ export const BestOffers: FC<BestOffersType> = observer(({tagsButton}) => {
     const store = useStoreMainPage()
     const customeSlider = useRef()
     useEffect(() => {
-        store.fetchBestOffers()
+        // store.fetchBestOffers()
         store.fetchBestOffers1(5,false,false,false,false,false)
     }, [])
 
@@ -107,19 +107,19 @@ export const BestOffers: FC<BestOffersType> = observer(({tagsButton}) => {
 
     const activeFilterActive = (tag: string) => {
         if(tag==="apartment"){
-            activeFilter[0]=!activeFilter[0]
+            activeFilter[4]=!activeFilter[4]
             setActiveFilter(activeFilter)
         } if(tag==="house"){
-            activeFilter[1]=!activeFilter[1]
+            activeFilter[3]=!activeFilter[3]
             setActiveFilter(activeFilter)
         } if(tag==="isComplex"){
             activeFilter[2]=!activeFilter[2]
             setActiveFilter(activeFilter)
-        } if(tag==="isNew"){
-            activeFilter[3]=!activeFilter[3]
-            setActiveFilter(activeFilter)
         }if(tag==="isOld"){
-            activeFilter[4]=!activeFilter[4]
+            activeFilter[1]=!activeFilter[1]
+            setActiveFilter(activeFilter)
+        }if(tag==="isNew"){
+            activeFilter[0]=!activeFilter[0]
             setActiveFilter(activeFilter)
         }
         store.fetchBestOffers1(10,activeFilter[0],activeFilter[1],activeFilter[2],activeFilter[3],activeFilter[4])

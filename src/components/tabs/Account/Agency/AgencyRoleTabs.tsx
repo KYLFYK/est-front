@@ -9,6 +9,7 @@ import PlacementRates from "../Agent/components/PlacementRates/PlacementRates";
 import ProfSearch from "../Agent/components/ProfSearch/profSearch/ProfSearch";
 import Messages from "../Agent/components/Messages/Messages";
 import AgentsNotifications from "../Agent/components/Notifications/Notifications";
+import css from './AgencyRoleTabs.module.css'
 
 type Props = {
     storybook?:boolean
@@ -37,6 +38,7 @@ const AgencyRoleTabs: React.FC<Props> = ({storybook }) => {
     }
     return (
         <VerticalTabs
+            // className={css.verticalTabsMargin}
             link={true}
             storybook={storybook}
             tabs={[
