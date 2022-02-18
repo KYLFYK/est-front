@@ -13,6 +13,13 @@
     justify-content: center;
     text-align: center;
     font-family: RobotoRegular;
+    &:hover{
+        border: 1px solid  $GREY;
+    }
+    //&:active{
+    //    color: $WHITE !important;
+    //    background-color: $ACCENT
+    //}
 }
 
 .primary {
@@ -20,6 +27,12 @@
     background-color: $NUDE;
     font-weight: 500;
     border: 1px solid rgba(0,0,0,0);
+    &:hover{
+        background-color: $SECONDARYBUTTONHOVER
+    }
+    &:active{
+        background-color: $PRESSED
+    }
 }
 .primary_light{
     padding: 10px 20px;
@@ -49,6 +62,13 @@
         background-color: $ACCENT;
         color: $WHITE;
         border: 1px solid rgba(22, 18, 18, 0);
+        &:hover{
+            background-color: $ACCENTBUTTONHOVER
+        }
+        &:active{
+            color: $WHITE;
+            background-color: $ACCENTBUTTONPRESSED
+        }
     }
 }
 

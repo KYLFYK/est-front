@@ -39,7 +39,9 @@
         padding: 60px 60px 110px 60px;
     }
 }
-
+.buttonsColor{
+    background-color: #C5A28E !important;
+}
 .buttons {
     @include button;
     background-color: #C5A28E !important;

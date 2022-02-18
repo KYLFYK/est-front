@@ -10,6 +10,7 @@ import {BaseInput} from "../../shared/BaseInput/Input";
 import {RecordApi} from "../../../api/record/record";
 import {useRouter} from "next/router";
 import {makeStyles} from "@material-ui/core";
+import classNames from "classnames";
 
 
 type AgentRecordType = {
@@ -94,25 +95,22 @@ export const Record: FC<AgentRecordType> = ({Record, title}) => {
             setFormValid(true)
         }
     }, [nameError, mailError, phoneError])
+    // useEffect(() => {
+    //     if (nameDirty && nameError)setNameDirty(true)
+    //     if (mailDirty && mailError)setMailDirty(true)
+    //     if (phoneDirty && phoneError)setPhoneDirty(true)
+    // }, [nameDirty, mailDirty, phoneDirty])
 
     const [hover, setHover] = useState(false)
     const [clicked, setClicked] = useState(false)
 
-    const onClickHandler = () => {
-        setName('');
-        // setNameError('не указано имя');
-        setNameDirty(false)
-        setMail('');
-        // setMailError('не заполнен e-mail');
-        setMailDirty(false)
-        setPhone('');
-        // setPhoneError('не указан телефон');
-        setPhoneDirty(false)
+    const onClickHandler = async () => {
+
         // dispatch(sendOrderTC(form));
         setClicked(true);
 
         const routerApi = router.asPath.split('/')
-        RecordApi.RecordPost(routerApi[1], routerApi[2],{
+        await RecordApi.RecordPost(routerApi[1], routerApi[2],{
             name:name,
             email:mail,
             phone:phone,
@@ -120,6 +118,17 @@ export const Record: FC<AgentRecordType> = ({Record, title}) => {
             comfortableTimeFrom:timeStart,
             comfortableTimeTo:timeEnd
         })
+        onBlurHandler('')
+        setFormValid(false)
+        setName('');
+        setNameError('не указано имя');
+        setNameDirty(false)
+        setMail('');
+        setMailError('не заполнен e-mail');
+        setMailDirty(false)
+        setPhone('');
+        setPhoneError('не указан телефон');
+        setPhoneDirty(false)
     }
 
     const onMouseHoverHandler = () => {
@@ -298,7 +307,7 @@ export const Record: FC<AgentRecordType> = ({Record, title}) => {
                             onMouseEnter={onMouseHoverHandler}
                             onMouseLeave={onMouseOutHandler}
                             onMouseDown={onClickHandler}
-                            className={(clicked && s.buttonClicked) || (hover && s.buttonHovered) || s.buttons}
+                            className={classNames(s.buttonsColor,(clicked && s.buttonClicked) || (hover && s.buttonHovered) || s.buttons )}
                             style={{width: '100%', cursor: !formValid ? 'not-allowed' : ''}}
                         >
                             <div><Typography color='secondary' className={s.buttonTitle}> Записаться</Typography></div>

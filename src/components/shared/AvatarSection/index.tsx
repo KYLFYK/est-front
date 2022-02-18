@@ -12,6 +12,7 @@ interface Props {
   changeable?: boolean;
   buttonText?: string;
   onChange?: (value: FormData) => void;
+  activeUpload?:boolean
 }
 
 export const AvatarSection: FC<Props> =  observer(({
@@ -19,6 +20,7 @@ export const AvatarSection: FC<Props> =  observer(({
   changeable,
   buttonText,
   onChange,
+  activeUpload=true
 }) => {
   const labelId = changeable ? uuidv4() : "";
 
@@ -46,32 +48,38 @@ export const AvatarSection: FC<Props> =  observer(({
       {changeable && (
         <>
           <label className={styles.label} htmlFor={labelId}>
-            <BaseButton
-              className={styles.button}
-              onClick={() => {}}
-              type="secondary"
-            >
-              {buttonText ? buttonText : "Загрузить лого"}
-            </BaseButton>
+            {
+              activeUpload
+              &&
+              <BaseButton
+                  className={styles.button}
+                  onClick={() => {
+                  }}
+                  type="secondary"
+              >
+                {buttonText ? buttonText : "Загрузить лого"}
+              </BaseButton>
+
+            }
           </label>
-          <input
-            type="file"
-            id={labelId}
-            multiple={false}
-            accept="image/*"
-            name={labelId}
-            onChange={(file) => {
-              if (file.currentTarget.files?.[0]) {
-                handleFile(file.currentTarget.files[0]);
-              }
-            }}
-            style={{
-              position: "absolute",
-              opacity: 0,
-              width: 0,
-              height: 0,
-            }}
-          />
+           <input
+                type="file"
+                id={labelId}
+                multiple={false}
+                accept="image/*"
+                name={labelId}
+                onChange={(file) => {
+                  if (file.currentTarget.files?.[0]) {
+                    handleFile(file.currentTarget.files[0]);
+                  }
+                }}
+                style={{
+                  position: "absolute",
+                  opacity: 0,
+                  width: 0,
+                  height: 0,
+                }}
+            />
         </>
       )}
     </div>
