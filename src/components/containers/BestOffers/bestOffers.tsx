@@ -97,8 +97,7 @@ export const BestOffers: FC<BestOffersType> = observer(({tagsButton}) => {
     const store = useStoreMainPage()
     const customeSlider = useRef()
     useEffect(() => {
-        // store.fetchBestOffers()
-        store.fetchBestOffers1(5,false,false,false,false,false)
+        store.fetchBestOffers(10,false,false,false,false,false)
     }, [])
 
     const mapDat: any = mapData[0]
@@ -122,10 +121,8 @@ export const BestOffers: FC<BestOffersType> = observer(({tagsButton}) => {
             activeFilter[0]=!activeFilter[0]
             setActiveFilter(activeFilter)
         }
-        store.fetchBestOffers1(10,activeFilter[0],activeFilter[1],activeFilter[2],activeFilter[3],activeFilter[4])
+        store.fetchBestOffers(10,activeFilter[0],activeFilter[1],activeFilter[2],activeFilter[3],activeFilter[4])
     }
-
-
 
     return (
         <div className={css.offers}>
@@ -157,18 +154,7 @@ export const BestOffers: FC<BestOffersType> = observer(({tagsButton}) => {
                     {/*<Slider {...settings} ref={customeSlider}  >*/}
                     <Slider {...settings} >
                         {
-                            store.initialData.bestOffersFilter.length > 0
-                                ? store.initialData.bestOffersFilter.map((t: any, index) => (
-                                    <div key={index} style={{padding: '5px', marginTop: index > 1 ? "24px" : '0px'}}>
-                                        <ObjectCard
-                                            route={t.type}
-                                            typeObject={"new"}
-                                            houseData={mapDat}
-                                            data={t}
-                                        />
-                                    </div>
-                                ))
-                                : store.initialData.bestOffers
+                            store.initialData.bestOffers
                                 && store.initialData.bestOffers.map((t: any, index) => (
                                     <div key={index} style={{padding: '5px', marginTop: index > 1 ? "24px" : '0px'}}>
                                         <ObjectCard
@@ -181,7 +167,6 @@ export const BestOffers: FC<BestOffersType> = observer(({tagsButton}) => {
                                 ))
                         }
                     </Slider>
-
                 </div>
             </HeadLine>
         </div>

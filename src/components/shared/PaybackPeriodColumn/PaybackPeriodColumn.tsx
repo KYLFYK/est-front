@@ -4,6 +4,9 @@ import css from "../../tabs/Account/Agent/components/Others/Tables/TableColumn/T
 import {Card} from "../Mortgage/Card";
 import {Bar, BarChart, CartesianGrid, Legend, ResponsiveContainer, Tooltip, XAxis, YAxis} from "recharts";
 import Link from 'next/link'
+import Image from "next/image";
+import QuestionIcon from "../Mortgage/icons/QuestionIcon.svg";
+import s from "../PaybackPeriod/Payback.module.scss";
 
 type PaybackPeriodColumnType={
     title:string
@@ -19,9 +22,21 @@ const PaybackPeriodColumn :FC<PaybackPeriodColumnType> = ({title,tableColumn}) =
 
     return (
         <div>
-            <Typography weight={'bold'} className={css.title}>
-                {title}
-            </Typography>
+            <div style={{display:'flex'}}>
+                <Typography weight={'bold'} className={css.title}>
+                    {title}
+                </Typography>
+                <Image
+                    id={"2"}
+                    loader={() => QuestionIcon} unoptimized
+                    src={QuestionIcon}
+                    className={s.image}
+                    width={26}
+                    height={20}
+                    alt='icon'
+                />
+            </div>
+
             <Card className={css.card}>
                 <div style={{display:'flex',justifyContent:"space-between",padding:'0 40px'}}>
                     <Typography weight={'light'} color={"tertiary"} className={css.textSize} >
@@ -51,13 +66,13 @@ const PaybackPeriodColumn :FC<PaybackPeriodColumnType> = ({title,tableColumn}) =
                             yAxisId="left"
                             tickCount={ticksY}
                             domain={[minY,maxY]}
-                            tick={{stroke: '#1A4862',fontFamily:"RobotoLight",strokeWidth: 0,fontSize:"12px"}}/>
+                            tick={{stroke: '#1A4862',fontFamily:"RobotoLight",strokeWidth: 0,fontSize:"10px"}}/>
                         <YAxis
                             yAxisId="right"
                             orientation="right"
                             tickCount={8}
-                            tick={{stroke: '#1A4862',fontFamily:"RobotoLight",strokeWidth: 0,fontSize:"12px"}} />
-                        <Tooltip/>
+                            tick={{stroke: '#1A4862',fontFamily:"RobotoLight",strokeWidth: 0,fontSize:"10px"}} />
+                        {/*<Tooltip/>*/}
                         <Bar
                             yAxisId="left"
                             dataKey='Чистый доход млн. ₽'

@@ -127,7 +127,7 @@ const House = observer((props: any) => {
 
     infoOptions.push(...optionFloors)
     const construction_featuresSpec = {
-        subtitle: "Строительно-техническая экспертиза",
+        subtitle: "Особенности строительства",
         specificationsItems: construction_featuresFilter
     }
     let object_specsGuide: Array<{ value: string, label: { title: string, text: string } }> = props.object_specs.map((guid: any) => sortGuide(guid, guid.subtitle_ru)).filter((f: any) => f !== undefined)

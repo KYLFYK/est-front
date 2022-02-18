@@ -77,7 +77,20 @@ const PaybackPeriod = () => {
     return (
         <div>
             <div ref={card} className={s.cardContainer}>
-                <Typography weight={'bold'}>Сроки окупаемости</Typography>
+                <div style={{display:'flex'}}>
+                    <Typography weight={'bold'} className={s.paddingR_5}>Сроки окупаемости</Typography>
+                    <Image
+                        id={"2"}
+                        loader={() => QuestionIcon} unoptimized
+                        src={QuestionIcon}
+                        onMouseEnter={onMouseCardhoverHandler}
+                        onMouseLeave={onMouseCardoutHandler}
+                        className={s.image}
+                        width={26}
+                        height={20}
+                        alt='icon'
+                    />
+                </div>
                 <Card className={s.card}>
                     <div className={s.cards}>
                         <Card style={cardStyle}>
