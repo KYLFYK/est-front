@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useState} from 'react'
 import { observer } from "mobx-react-lite"
 import { useSearchStore } from "../../../mobx/stores/SearchStore/SearchStore"
 import { makeStyles } from "@material-ui/core"
@@ -41,6 +41,17 @@ const CardContainer: React.FC<Props> = observer(({ mapData, view, setView }) => 
     const searchStore = useSearchStore()
     const classes = useStyles()
 
+    const [sort, setSort] = useState(SORT_FILTER_OPTIONS[0].value)
+
+    let sortedData: any = []
+    if(sort === 'default'){
+        sortedData = [...searchStore.getInitialData()]
+    } else if(sort === 'bigger'){
+        sortedData = [...searchStore.getInitialData()?.sort((a: any, b: any) => a.price > b.price ? 1 : -1)]
+    } else if(sort === 'smaller'){
+        sortedData = [...searchStore.getInitialData()?.sort((a: any, b: any) => a.price < b.price ? 1 : -1)]
+    }
+
     const toggleButtonOptions = [
         { icon: <GridView fill={view === 'gridView' ? '#96A2B5' : '#CAD1DA'}/>, onclick: () => setView('gridView') }, 
         { icon: <MapView fill={view === 'mapView' ? '#96A2B5' : '#CAD1DA'}/>, onclick: () => setView('mapView') },
@@ -50,13 +61,13 @@ const CardContainer: React.FC<Props> = observer(({ mapData, view, setView }) => 
         <div className={view === 'mapView' ? s.openContainer : s.closeContainer}>
             <div className={s.finderControls}>
                 <div className={s.finderDropdown}>
-                    {/*<BaseDropDown 
+                    <BaseDropDown 
                         className={classes.sortDropdown}
-                        onChange={(e) => {searchStore.setSort(e)}}
+                        onChange={(e) => {setSort(e)}}
                         placeholder={DROPDOWN_PLACEHOLDER}
                         options={SORT_FILTER_OPTIONS}
-                        value={searchStore.sort} 
-                    />*/}
+                        value={sort} 
+                    />
                 </div>
                 <div className={s.finderButtons}>
                     {/*<BaseButton
@@ -74,11 +85,11 @@ const CardContainer: React.FC<Props> = observer(({ mapData, view, setView }) => 
                     </div>
                 </div>
             </div>
-            <div className={(searchStore.fetching || !searchStore.initialData.length) ? s.contentText : s.content}>
+            <div className={(searchStore.fetching || !sortedData.length) ? s.contentText : s.content}>
                 {searchStore.fetching 
                     ? <Typography size={'header'}>Loading...</Typography>
-                    : searchStore.initialData && searchStore.initialData.length 
-                        ? searchStore.initialData.map((i: any, id: number) => {
+                    : sortedData.length 
+                        ? sortedData && sortedData.map((i: any, id: number) => {
                             return(
                                 <div key={id} style={{padding:'5px'}}>
                                     <ObjectCard 

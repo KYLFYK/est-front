@@ -1,0 +1,73 @@
+@import '../../../app/styles/colours.scss';
+
+.dropdown {
+  width: 200px;
+  user-select: none;
+  position: relative;
+  height: 40px;
+  right: 1px;
+  cursor: pointer;
+}
+.dropdown .dropdown_btn {
+  padding: 10px 16px 10px 10px; 
+  background: #FFFFFF;
+  color: #333;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  justify-content: space-between;
+  border: 1px double #C5A28E;
+  border-radius: 8px;
+}
+.dropdown .dropdown_btn:active {
+  
+}
+.dropdown .dropdown_content {
+  position: absolute;
+  top: 110%;
+  left: 0;
+  padding: 6px;
+  background: #FFFFFF;
+  box-shadow: 3px 3px 10px 6px rgba(0, 0, 0, 0.06);
+  color: #333;
+  width: 94%;
+  border-radius: 8px;
+  z-index: 2;
+}
+.dropdown .dropdown_content .dropdown_item {
+  display: flex;
+  padding: 4px;
+  transition: all 0.3s;
+}
+.dropdown .dropdown_content .dropdown_item:hover {
+  background: #F2F2F2;;
+  border-radius: 4px;
+}
+
+.title {
+  max-width: 190px !important;
+  white-space: nowrap; 
+  overflow: hidden; 
+  text-overflow: ellipsis;
+}
+
+.checkIcon {
+  width: 26px;
+  position: relative;
+  top: 2px;
+}
+
+.icon {
+  position: absolute;
+  top: 31% !important;
+  right: 10px !important;
+  width: 12px;
+}
+
+.ellipsisText {
+  font-family: "RobotoRegular";
+  color: $BLACK;
+  white-space: nowrap; 
+  overflow: hidden; 
+  text-overflow: ellipsis;
+}
