@@ -14,11 +14,12 @@ import { FILTER_ACTIONS_OPTIONS, FILTER_BUILDING_TYPE_OPTIONS, FILTER_PRIVATE_HO
 import { useSearchStore } from "src/mobx/stores/SearchStore/SearchStore"
 import { useBreadcrumbsStore } from "src/mobx/stores/BreadcrumbsStore/BreadcrumbsStore"
 import s from './Filter.module.scss'
-import {paramsForGet} from '../../../lib/params/params';
-import {makeStyles} from "@material-ui/core";
+import {paramsForGet} from '../../../lib/params/params'
+import {makeStyles} from "@material-ui/core"
+import {SelectEstate} from '../../shared/SelectEstate/SelectEstate'
 
 interface Props {
-    location?: 'start' | 'search'
+    location? : 'start' | 'search'
 }
 
 export const useStyles = makeStyles(() => ({
@@ -159,7 +160,7 @@ export const Filter: React.FC<Props> = observer(({ location }) => {
                     className={classes.root} 
                 />
             </InputsUnion>
-
+            
             {(searchStore.getFilter()['object-type'] === 'house') && <BaseDropDown 
                 options={FILTER_PRIVATE_HOUSE_OPTIONS} 
                 value={searchStore.getFilter()['privateType']} 
@@ -225,12 +226,19 @@ export const Filter: React.FC<Props> = observer(({ location }) => {
                 />
             </InputsUnion>
 
-            {searchStore.getFilter()['object-type'] !== 'land' && <BaseDropDown 
+            {/*searchStore.getFilter()['object-type'] !== 'land' && <BaseDropDown 
                 options={FILTER_BUILDING_TYPE_OPTIONS} 
                 value={searchStore.getFilter()['building-type']} 
                 onChange={onChangeBuildingType} 
                 placeholder={searchStore.getFilter()['building-type']} 
                 className={s.dropdown} 
+            />*/}
+
+            {searchStore.getFilter()['object-type'] !== 'land' && <SelectEstate 
+                options={FILTER_BUILDING_TYPE_OPTIONS} 
+                value={searchStore.getFilter()['building-type']} 
+                onChange={onChangeBuildingType} 
+                placeholder={searchStore.getFilter()['building-type']} 
             />}
 
             {searchStore.getFilter()['object-type'] === 'apartment' && <BaseDropDown 
@@ -249,12 +257,19 @@ export const Filter: React.FC<Props> = observer(({ location }) => {
                 className={s.dropdown} 
             />}
 
-            {searchStore.getFilter()['object-type'] !== 'apartment' && <BaseDropDown 
+            {/*searchStore.getFilter()['object-type'] !== 'apartment' && <BaseDropDown 
                 options={FILTER_LAND_SPECS_OPTIONS} 
                 value={searchStore.getFilter()['benefit']} 
                 onChange={onChooseImprovment} 
                 placeholder={searchStore.getFilter()['benefit'] ? MultiChoiceBenefits() : "Выбрать благоустроенность"} 
                 className={s.dropdown} 
+            />*/}
+            {searchStore.getFilter()['object-type'] !== 'apartment' && <SelectEstate 
+                options={FILTER_LAND_SPECS_OPTIONS}
+                value={searchStore.getFilter()['benefit']} 
+                onChange={onChooseImprovment} 
+                placeholder={searchStore.getFilter()['benefit'] ? MultiChoiceBenefits() : "Выбрать благоустроенность"} 
+                multi
             />}
             
             {

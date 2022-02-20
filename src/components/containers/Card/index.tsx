@@ -35,16 +35,26 @@ const ObjectCard: React.FC<Props> = observer(({ route, houseData, typeObject, da
             <Link href={`${TEMP_LINK}${route}/${data.id}`}>
                 <a className={s.link}>
                     <div className={s.slider}>
-                        <BaseSlider images={imagesUrls} height={200} withFavorite={typeof window !== "undefined" && localStorage.getItem("roleEstatum") ? true : false} onClickFavorite={() => {}}/>
+                        <BaseSlider  
+                            images={imagesUrls} 
+                            height={200} 
+                            withFavorite={typeof window !== "undefined" && localStorage.getItem("roleEstatum") ? true : false} 
+                            onClickFavorite={() => {}}
+                        />
                     </div>
                     <div className={s.content}>
-                        <Typography inline weight="bold" color="accent" className={s.title}>{data.name}</Typography>
+                        <div className={s.ellipsisTextBold}>{data.name}</div>
                         <p className={s.subtitle}>
-                            <Typography inline weight="light" color="tertiary"> Адрес: </Typography> {data.address}
+                            <Typography inline weight="light" color="tertiary" > Адрес: </Typography> 
+                            <div className={s.ellipsisText}> {data.address} </div>
                         </p>
                         <p className={s.subtitle}>
-                            <Typography inline weight="light" color="tertiary">Этаж:</Typography> {data.property.floor} / {data.property.totalFloor}
-                            <Typography inline weight="light" color="tertiary">Тип жилья:</Typography> {typeObject === 'new' ? 'Новостройка' : 'Вторичное'}
+                            <Typography inline weight="light" color="tertiary">Этаж:</Typography> 
+                            <Typography inline className={s.margin}>{data.property.floor} / {data.property.totalFloor}</Typography>
+                        </p>
+                        <p className={s.subtitle}>
+                            <Typography inline weight="light" color="tertiary">Тип жилья:</Typography> 
+                            <Typography inline className={s.margin}>{typeObject === 'new' ? 'Новостройка' : 'Вторичное'}</Typography>
                         </p>
                         <p className={s.price}>
                             {

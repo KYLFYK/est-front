@@ -37,19 +37,12 @@ $borderRadius: 6px;
     padding: 10px 15px 0px 15px;
     box-sizing: border-box;
     @include MapScrollbar;
-    white-space: nowrap; 
-    overflow: hidden; 
-    text-overflow: ellipsis;
-}
-
-.title {
-    margin: 0px 0px 4px 0px !important;
-    
 }
 
 .price {
     @include ROBOTOBOLD16;
     margin: 0px 0px 4px 0px;
+    color: $BLACK;
 }
 
 .subtitle {
@@ -63,8 +56,24 @@ $borderRadius: 6px;
     font-weight: 300;
 }
 
-.addressText {
+.ellipsisTextBold {
+    font-family: "RobotoBold";
+    color: $ACCENT;
+    margin: -4px 0 4px 0;
     white-space: nowrap; 
     overflow: hidden; 
     text-overflow: ellipsis;
+}
+
+.ellipsisText {
+    font-family: "RobotoRegular";
+    color: $BLACK;
+    margin: 0 0 0 4px;
+    white-space: nowrap; 
+    overflow: hidden; 
+    text-overflow: ellipsis;
+}
+
+.margin {
+    margin: 0 0 0 4px;
 }
