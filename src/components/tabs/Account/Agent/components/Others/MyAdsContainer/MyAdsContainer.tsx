@@ -7,6 +7,7 @@ import css from "./Active.module.scss";
 import LineV1 from "../../../../../../shared/CardObject/Lines/LineV1";
 import LineAddressV1 from "../../../../../../shared/CardObject/Lines/LineAddressV1";
 import LineArray from "../../../../../../shared/CardObject/Lines/LineArray";
+import {GlassIcon} from '../../../../../../../icons/InputIcon/GlassIcon';
 
 export const searchColor = (status: string) => {
   switch (status) {
@@ -52,9 +53,10 @@ const MyAdsContainer: FC<ActiveType> = ({ menu, objects }) => {
   const publish = (id: string) => {
     console.log(id, "publish");
   };
+  
   return (
     <div>
-      <SearchOffice type={menu} />
+      <SearchOffice type={menu} inputIcon={<GlassIcon/>} inputIconPlacement={'right'} placeholder={'Поиск...'} className={`${css.placeholder} ${css.altPadding}`}/>
       <FilterSearch />
       {objects.map((home) => (
         <div key={home.id} className={css.borderCard}>

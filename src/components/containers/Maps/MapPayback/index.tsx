@@ -5,6 +5,7 @@ import { MapControls } from "../MapControls/Buttons";
 import { IconsCreator } from "../../../../lib/mapIcons/IconsCreator";
 import BaseButton from "../../../shared/BaseButton/BaseButtons";
 import s from './styles.module.scss';
+import {changeMapLanguage} from '../../../../lib/mapTranslate/changeMapLanguage';
 
 interface Props {
   currentHouse: any
@@ -34,11 +35,13 @@ const Map: React.FC<Props> = ({currentHouse, objects, location}) => {
         <MapGL
           {...viewport}
           mapboxApiAccessToken={'pk.eyJ1Ijoibmlja29sYXlhcmJ1em92IiwiYSI6ImNrdmdtYWQxYjd0enQybnM3bGR5b2Fnd2YifQ.IEtk0ClJ58f6dgZYa8hKpA'}
-          mapStyle="mapbox://styles/mapbox/streets-v9"
+          mapStyle="mapbox://styles/mapbox/light-v9"
           onViewportChange={_onViewportChange}
           onClick={() => {
             setActivemarker(0)
           }}
+          className={s.border}
+          onLoad={changeMapLanguage}
         >
           {mapData.map((md: any) => {
             return (

@@ -16,6 +16,7 @@ interface Props
   iconPlacement?: "right" | "left";
   textArea?: boolean;
   iconClassName?: string;
+  altPadding?: boolean
   iconOnClick?: () => void;
 }
 

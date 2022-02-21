@@ -10,6 +10,7 @@ import HeadLine from "../../../shared/HeadLine/HeadLine";
 import Typography from '../../../shared/Typography/Typography';
 import {MapControls} from "../MapControls/Buttons";
 import s from './styles.module.scss';
+import {changeMapLanguage} from '../../../../lib/mapTranslate/changeMapLanguage';
 
 interface Props {
   currentHouse: any
@@ -42,8 +43,8 @@ const Map: React.FC<Props> = ({currentHouse, location, InfrastructureInfo}) => {
   const [viewport, setViewport] = useState({
     width: "100%",
     height: "100%",
-    latitude: Number(currentHouse.lat),
-    longitude: Number(currentHouse.lng),
+    latitude: Number(currentHouse.lng),
+    longitude: Number(currentHouse.lat),
     zoom: 9,
   });
   const _onViewportChange = (viewport: any) => {
@@ -56,7 +57,7 @@ const Map: React.FC<Props> = ({currentHouse, location, InfrastructureInfo}) => {
     if (currentIndex === -1) {
         newPressed.push(value)
         if(value === 'house' || value === 'apartment' || value === 'complex' || value === 'land') {
-          setViewport({ ...viewport, latitude: Number(currentHouse.lat), longitude: Number(currentHouse.lng) })
+          setViewport({ ...viewport, latitude: Number(currentHouse.lng), longitude: Number(currentHouse.lat), zoom: 10 })
         }
     } else {
         newPressed.splice(currentIndex, 1)
@@ -88,18 +89,20 @@ const Map: React.FC<Props> = ({currentHouse, location, InfrastructureInfo}) => {
         <MapGL
           {...viewport}
           mapboxApiAccessToken={'pk.eyJ1Ijoibmlja29sYXlhcmJ1em92IiwiYSI6ImNrdmdtYWQxYjd0enQybnM3bGR5b2Fnd2YifQ.IEtk0ClJ58f6dgZYa8hKpA'}
-          mapStyle="mapbox://styles/mapbox/streets-v9"
+          mapStyle="mapbox://styles/mapbox/light-v9"
           onViewportChange={_onViewportChange}
           onClick={() => {
             setActivemarker(0)
           }}
+          className={s.border}
+          onLoad={changeMapLanguage}
         >
         {updatePlaces.map((up: any) => {
           return (
             <Marker
                 key={up.object_id}
-                latitude={up.lat ? Number(up.lat) : Number(up.address.geo?.lat)?Number(up.address.geo.lat):30}
-                longitude={up.lng ? Number(up.lng) : Number(up.address.geo?.lng)?Number(up.address.geo.lat):30}
+                latitude={up.lng ? Number(up.lng) : Number(up.address.geo?.lng) ? Number(up.address.geo.lat) : 30}
+                longitude={up.lat ? Number(up.lat) : Number(up.address.geo?.lat) ? Number(up.address.geo.lat) : 30}
                 className={(up.type === 'house' || up.type === 'apartment' || up.type === 'residential-complex' || up.type === 'land') ? s.estateMarker : s.infraMarker}
             >
                 <BaseButton className={s.button} onClick={() => {

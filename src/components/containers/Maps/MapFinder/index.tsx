@@ -1,5 +1,6 @@
 import React, {useState} from "react";
 import Map from './Map';
+import s from './styles.module.scss';
 
 interface Props {
   mapData: any

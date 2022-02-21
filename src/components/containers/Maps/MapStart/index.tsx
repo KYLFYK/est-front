@@ -5,6 +5,7 @@ import Image from 'next/image';
 import { MapControls } from "../MapControls/Buttons/index";
 import s from './styles.module.scss';
 import OfficeIcon from "../../../../icons/MapIcons/OfficeIcon/OfficeIcon.png";
+import {changeMapLanguage} from '../../../../lib/mapTranslate/changeMapLanguage';
 
 interface Props {
   center: any
@@ -30,9 +31,10 @@ const Map: React.FC<Props> = ({center, location}) => {
         <MapGL
           {...viewport}
           mapboxApiAccessToken={'pk.eyJ1Ijoibmlja29sYXlhcmJ1em92IiwiYSI6ImNrdmdtYWQxYjd0enQybnM3bGR5b2Fnd2YifQ.IEtk0ClJ58f6dgZYa8hKpA'}
-          mapStyle="mapbox://styles/mapbox/streets-v9"
+          mapStyle="mapbox://styles/mapbox/light-v9"
           onViewportChange={_onViewportChange}
           className={s.border}
+          onLoad={changeMapLanguage}
         >
           <Marker 
             latitude={center.lat}

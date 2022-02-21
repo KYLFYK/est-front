@@ -13,6 +13,8 @@ interface Props {
   buttonText?: string;
   inputIcon?: JSX.Element | string;
   inputIconPlacement?: "right" | "left";
+  className?: string;
+  altPadding?: boolean;
 }
 
 export const SearchOffice: FC<Props> = ({
@@ -22,6 +24,7 @@ export const SearchOffice: FC<Props> = ({
   buttonText,
   inputIcon,
   inputIconPlacement,
+  className,
 }) => {
   const searchTitle = (type: string) => {
     switch (type) {
@@ -33,7 +36,8 @@ export const SearchOffice: FC<Props> = ({
         return "Добавить объект";
     }
   };
-
+  console.log('menu')
+  console.log(type)
   const searchColorText = (type :string)=>{
     switch (type) {
       case "archive":
@@ -63,9 +67,10 @@ export const SearchOffice: FC<Props> = ({
             icon={inputIcon}
             iconPlacement={inputIconPlacement}
             placeholder={placeholder}
+            className={className}
           />
         </div>
-        <IconOption />
+        {/*<IconOption />*/}
       </div>
       {type !== "owner" && !hideButton && (
         <BaseLink

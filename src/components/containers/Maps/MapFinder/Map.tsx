@@ -14,6 +14,7 @@ import Typography from "../../../shared/Typography/Typography";
 import s from './styles.module.scss';
 import {MapControls} from "../MapControls/Buttons";
 import {digitToSyntax} from "../../../../lib/syntax/syntax";
+import {changeMapLanguage} from '../../../../lib/mapTranslate/changeMapLanguage';
 
 interface Props {
   mapData: any
@@ -33,7 +34,7 @@ const Map: React.FC<Props> = observer(({mapData, location, viewport, setViewport
     lat: 45.16,
     lng: 36.90
   }
-
+  console.log('rfhnf')
   const [activeMarker, setActivemarker] = useState(0)
   const [choosedPlaces, setChoosedplaces] = useState<any>([])
   const [open, setOpen] = useState(false)
@@ -87,7 +88,7 @@ const Map: React.FC<Props> = observer(({mapData, location, viewport, setViewport
         <MapGL
           {...viewport}
           mapboxApiAccessToken={'pk.eyJ1Ijoibmlja29sYXlhcmJ1em92IiwiYSI6ImNrdmdtYWQxYjd0enQybnM3bGR5b2Fnd2YifQ.IEtk0ClJ58f6dgZYa8hKpA'}
-          mapStyle="mapbox://styles/mapbox/streets-v9"
+          mapStyle="mapbox://styles/mapbox/light-v9"
           onViewportChange={_onViewportChange}
           onClick={() => {
             setActivemarker(0)
@@ -95,6 +96,7 @@ const Map: React.FC<Props> = observer(({mapData, location, viewport, setViewport
             setOpen(false)
           }}
           ref={mapRef}
+          onLoad={changeMapLanguage}
         >
           {clusters.map(cluster => {
             const [longitude, latitude] = cluster.geometry.coordinates;
