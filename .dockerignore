@@ -1,0 +1,13 @@
+env
+dist
+node_modules
+pages
+public
+docker-compose.yaml
+Dockerfile
+README.md
+.dockerignore
+.git
+.gitignore
+.gitlab-ci.yml
+.prod.env

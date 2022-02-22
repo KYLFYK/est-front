@@ -5,46 +5,24 @@ services:
 
 stages:
   - build
- # - build-storybook
   - deploy
 variables:
   DOCKER_HOST: tcp://docker:2375
   DOCKER_DRIVER: overlay2
-  #KEYS_DIR: ${CI_PROJECT_DIR}/keys
-  #DEPLOY_HOST: 178.154.197.125
-  #DEPLOY_USER: deployer
-  #DEPLOY_PORT: 22
 
 before_script:
-  - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
+  - docker login $CI_REGISTRY -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD
 
 build:
   stage: build
   script:
-    - docker pull $CI_REGISTRY_IMAGE:latest || true
+    - docker pull $CI_REGISTRY_IMAGE:latest
     - docker build --cache-from $CI_REGISTRY_IMAGE:latest
       --tag $CI_REGISTRY_IMAGE:$CI_COMMIT_SHA
-      --tag $CI_REGISTRY_IMAGE:$CI_COMMIT_REF_NAME
       --tag $CI_REGISTRY_IMAGE:latest
       .
     - docker push $CI_REGISTRY_IMAGE:$CI_COMMIT_SHA
-    - docker push $CI_REGISTRY_IMAGE:$CI_COMMIT_REF_NAME
     - docker push $CI_REGISTRY_IMAGE:latest
-
-#build-storybook:
- # image: node:14
-  #stage: build-storybook
-#  script:
- #   - yarn install
-  #  - npm run build
-   # - pwd
-#    - ls -la
- #   - ls -la out
-  #  - ls -la public
-#  artifacts:
- #   paths:
-  #    - public
-
 
 deploy:
   stage: deploy
@@ -55,6 +33,6 @@ deploy:
      - '[[ -f /.dockerenv ]] && echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config' 
        
   script:
-     - ssh deployer@$DEPLOY_SERVER "cd /data/marketplace-front && ./deploy.sh"
+     - ssh deployer@$DEPLOY_SERVER "/app/$CI_PROJECT_NAME/deploy.sh --projectName $CI_PROJECT_NAME --user $CI_REGISTRY_USER --token $CI_REGISTRY_PASSWORD --tag $CI_COMMIT_SHA"
   only:
      - development
