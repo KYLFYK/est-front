@@ -1,7 +1,6 @@
 env
 dist
 node_modules
-pages
 docker-compose.yaml
 Dockerfile
 README.md
