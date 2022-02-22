@@ -2,7 +2,6 @@ env
 dist
 node_modules
 pages
-public
 docker-compose.yaml
 Dockerfile
 README.md
