@@ -100,7 +100,7 @@ const ApplicationsViewTab: React.FC<Props> = () => {
                 !edit
                     ? <HorizontalTabs tabs={[
                         {title: "Каталог заявок", Component: <ApplicationsViewCatalog agents={agents} onClick={()=>setEdit(true)} />},
-                        {title: "Статистика", Component: <ApplicationsViewStatistics />}
+                        /*{title: "Статистика", Component: <ApplicationsViewStatistics />}*/
                     ]}/>
                     : <ViewingApplication
                         onAddSchedule={addSchedule}

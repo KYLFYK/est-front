@@ -32,12 +32,12 @@ export const DeveloperRoleTabs: FC = () => {
                 tabs={[
                     {title: "Личный кабинет", Component: <PersonalArea/>},
                     {title: "Мои объекты", Component: <MyObjects/>},
-                    {title: "Уведомления", Component: <AgentsNotifications
+                    /*{title: "Уведомления", Component: <AgentsNotifications
                             onRead={onRead}
                             onReadAll={onReadAll}
                             notification={notification}
                             onDelete={deleteNotification}
-                        />},
+                        />},*/
                 ]}
             />
         </div>

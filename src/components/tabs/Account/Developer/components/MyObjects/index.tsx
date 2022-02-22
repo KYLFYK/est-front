@@ -34,7 +34,7 @@ export const MyObjects: FC = () => {
                 !complex
                     ? <HorizontalTabs
                         tabs={[
-                            {title: "Статистика", Component: <Statistic/>,},
+                            /*{title: "Статистика", Component: <Statistic/>,},*/
                             {title: "Мои ЖК", Component: <ResComplexes onComplex={()=>setComplex(true)}/>,},
                             {title: "Мои дома", Component: <MyHouses/>,},
                         ]}

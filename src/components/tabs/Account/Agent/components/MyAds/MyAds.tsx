@@ -11,7 +11,7 @@ const MyAds = () => {
             {title: "Активные", Component: <Active  />},
             {title: "Архив", Component: <Archive />},
             {title: "Черновики", Component: <Drafts />},
-            {title: "Статистика", Component: <Statistics />},
+            /*{title: "Статистика", Component: <Statistics />},*/
         ]}/>
     );
 };

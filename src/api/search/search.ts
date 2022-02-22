@@ -1,4 +1,3 @@
-import qs from "qs";
 import {instance, UrlSearch} from "../instance";
 import { transformRequestOptions } from "src/lib/mapping/urlPathCollect";
 
