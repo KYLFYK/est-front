@@ -1,4 +1,5 @@
-import React, {FC, useState} from 'react';
+import React, {FC, useState, useEffect, SetStateAction, Dispatch} from 'react';
+import { observer } from "mobx-react-lite";
 import BackPage from "../../../Agent/components/Others/BackPage/BackPage";
 import Typography from "../../../../../shared/Typography/Typography";
 import {BaseDropDown} from "../../../../../shared/BaseDropDown/BaseDropDown";
@@ -7,7 +8,8 @@ import ResApartment from "./ResApartment";
 import {useStoreDeveloperMyObjectStore} from "../../../../../../mobx/role/developer/myObject/DeveloperMyObject";
 
 type ResComplexObjectsType={
-    onComplex:()=>void
+    onComplex: Dispatch<SetStateAction<boolean>>
+    complexId: {id: number, name: string}
 }
 
 const optionCorpus =[
@@ -23,32 +25,18 @@ const optionFloor =[
     {value:'3',label:'5 этаж'},
 ]
 
-const infoObject={
-    corpus: {'Корпус':'1'},
-    floor: {'Этаж':'3/15'},
-    area: {'Площадь':'52м2'},
-    status: {'Статус':'Продана'},
-}
-const infoObject1={
-    corpus: {'Корпус':'2'},
-    floor: {'Этаж':'4/15'},
-    area: {'Площадь':'72м2'},
-    status: {'Статус':'Свободна'},
-}
-const infoObject2={
-    corpus: {'Корпус':'4'},
-    floor: {'Этаж':'12/15'},
-    area: {'Площадь':'92м2'},
-    status: {'Статус':'Бронь до 12/11/21'},
-}
-const ResComplexObjects :FC<ResComplexObjectsType> = ({onComplex}) => {
+const ResComplexObjects :FC<ResComplexObjectsType> = observer(({onComplex, complexId}) => {
 
-    const store=useStoreDeveloperMyObjectStore()
+    const store = useStoreDeveloperMyObjectStore()
+    const [corpus, setCompus] = useState<string>(optionCorpus[0].label)
 
-    const [corpus, setCompus]=useState<string>(optionCorpus[0].label)
+    useEffect(() => {
+        store.fetchAllObjectsByComplexId(complexId.id)
+    }, [])
+
     return (
         <div >
-            <BackPage onBackPage={onComplex} title={'ЖК Ленинский'} />
+            <BackPage onBackPage={() => onComplex(false)} title={complexId.name} />
             <Typography weight={"bold"} className={css.marginB_20}>
                 Квартиры и аппартаменты
             </Typography>
@@ -62,15 +50,9 @@ const ResComplexObjects :FC<ResComplexObjectsType> = ({onComplex}) => {
                         <ResApartment key={object.id} name={object.name} price={object.price} info={object.infoObject}  />
                     ))
                 }
-                {/*<ResApartment name={'1-комнатная квартира'} price={'12 860 000'} info={infoObject}  />*/}
-                {/*<ResApartment name={'1-комнатная квартира'} price={'12 860 000'} info={infoObject1}  />*/}
-                {/*<ResApartment name={'1-комнатная квартира'} price={'12 860 000'} info={infoObject2}  />*/}
-                {/*<ResApartment name={'1-комнатная квартира'} price={'12 860 000'} info={infoObject2}  />*/}
-                {/*<ResApartment name={'1-комнатная квартира'} price={'12 860 000'} info={infoObject1}  />*/}
-                {/*<ResApartment name={'1-комнатная квартира'} price={'12 860 000'} info={infoObject}  />*/}
             </div>
         </div>
     );
-};
+});
 
 export default ResComplexObjects;

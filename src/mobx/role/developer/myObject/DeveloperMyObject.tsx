@@ -1,12 +1,15 @@
-import {createContext, FC, useContext} from "react";
-import {makeAutoObservable} from "mobx";
+import {createContext, FC, useContext} from "react"
+import {makeAutoObservable} from "mobx"
+import {ComplexApi} from '../../../../api/obj/complex'
+import {datetoDayFormat} from '../../../../lib/mapping/objectDates'
 
 class DeveloperMyObjectStore  {
     constructor() {
         makeAutoObservable(this);
     }
     initialData = {
-        statistics:{
+        loading: true,
+        statistics: {
             byMonth: [
                 {
                     name: "Январь 2018",
@@ -134,22 +137,22 @@ class DeveloperMyObjectStore  {
         },
         complex:[
             {
-                id: "1902830123",
+                id: "",
                 img: "https://i.pinimg.com/736x/6a/30/8d/6a308d4d949bcf10e4382c9b4a455721.jpg",
-                type: "Аренда",
-                name: "3-этажный коттедж",
-                price: "100 000р/mec",
+                type: "",
+                name: "",
+                price: "",
                 mainSpecifications: [
-                    "600м",
-                    "3 этажа",
-                    "Бассейн",
-                    "Гараж 150м2",
-                    "Терраса 200 m2",
+                    "",
+                    "",
+                    "",
+                    "",
+                    "",
                 ],
-                agent: "Виталий Панкратов",
-                dateStart: "31/08/2021",
-                dateEnd: "05/09/21",
-                address: "Крым, Ялта",
+                agent: "",
+                dateStart: "",
+                dateEnd: "",
+                address: "",
             },
         ],
         complexObjects:[
@@ -234,11 +237,57 @@ class DeveloperMyObjectStore  {
                 dateEnd: "05/09/21",
                 address: "Крым, Алушта",
             },
-        ]
+        ],
     }
     fetch(id:string) {
         console.log("DeveloperMyObjectStore",id)
     }
+    async fetchAllComplexByOwnerId(ownerId: number) {
+        this.initialData.loading = true
+        const res = await ComplexApi.getAllComplexByOwnerId(ownerId)
+
+        this.initialData.complex = res?.data.map((r: any) => {
+            return {
+                id: r.id,
+                img: "https://i.pinimg.com/736x/6a/30/8d/6a308d4d949bcf10e4382c9b4a455721.jpg",
+                type: "",
+                name: r.name,
+                price: "",
+                mainSpecifications: [
+                    "",
+                    "",
+                    "",
+                    "",
+                    "",
+                ],
+                agent: r.owner.id,
+                dateStart: datetoDayFormat(r.createAt, 'Cabinet'),
+                dateEnd: "",
+                address: r.address,
+            }
+        })
+        this.initialData.loading = false
+    }
+
+    async fetchAllObjectsByComplexId(complexId: number) {
+        this.initialData.loading = true
+        const res = await ComplexApi.getAllObjectsByComplexId(complexId)
+        this.initialData.complexObjects = res?.data.map((r: any) => {
+            return {
+                id:'4',
+                name:'1-комнатная квартира',
+                price:'12 860 000 ₽',
+                infoObject:{
+                    corpus: {'Корпус':'2'},
+                    floor: {'Этаж':'4/15'},
+                    area: {'Площадь':'72м2'},
+                    status: {'Статус':'Свободна'},
+                }
+            }
+        })
+        this.initialData.loading = false
+    }
+
     get() {
         console.log(JSON.parse(JSON.stringify({ ...this.initialData})))
     }

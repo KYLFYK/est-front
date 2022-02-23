@@ -1,5 +1,6 @@
-export const datetoDayFormat = (date: string) => {
-    return date.substring(0,10).split('-').reverse().join('.');
+export const datetoDayFormat = (date: string, location = '') => {
+    if(location === '') return date.substring(0,10).split('-').reverse().join('.')
+    if(location === 'Cabinet') return date.substring(0,10).split('-').reverse().join('/')
 }
 
 export const datetoQuarterFormat = (date: string) => {

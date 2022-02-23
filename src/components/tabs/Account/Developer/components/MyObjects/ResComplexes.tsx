@@ -1,4 +1,5 @@
-import React, { FC } from "react";
+import React, { FC, useEffect, SetStateAction, Dispatch } from "react";
+import { observer } from "mobx-react-lite";
 import FilterSearch from "../../../../../shared/FilterSearch/FilterSearch";
 import { SearchOffice } from "../../../../../containers/SearchOffice/SearchOffice";
 import LineV1 from "../../../../../shared/CardObject/Lines/LineV1";
@@ -6,7 +7,7 @@ import LineAddressV1 from "../../../../../shared/CardObject/Lines/LineAddressV1"
 import LineArray from "../../../../../shared/CardObject/Lines/LineArray";
 import Typography from "../../../../../shared/Typography/Typography";
 import CardObject from "../../../../../shared/CardObject/CardObject";
-
+import {Loader} from '../../../../../shared/Loader/Loader';
 import styles from "./ResComplexes.module.scss";
 import css from "../../../Agent/components/Others/MyAdsContainer/Active.module.scss";
 import {useStoreDeveloperMyObjectStore} from "../../../../../../mobx/role/developer/myObject/DeveloperMyObject";
@@ -35,13 +36,23 @@ const Data = {
 };
 
 type ResComplexesType ={
-  onComplex:()=>void
+  onComplex: Dispatch<SetStateAction<boolean>>
+  setComplexId: Dispatch<SetStateAction<{id: number, name: string}>>
 }
 
-export const ResComplexes: FC<ResComplexesType> = ({onComplex}) => {
+export const ResComplexes: FC<ResComplexesType> = observer(({onComplex, setComplexId}) => {
 
-  const store =useStoreDeveloperMyObjectStore()
+  const store = useStoreDeveloperMyObjectStore()
 
+  useEffect(() => {
+    store.fetchAllComplexByOwnerId(19)
+  },[])
+
+  const onSetCompex = (id: number, name: string) => {
+    onComplex(true)
+    setComplexId({id: id, name: name})
+  }
+  store.get()
   const recover = (id: string) => {
     console.log(id, "recover");
   };
@@ -56,13 +67,13 @@ export const ResComplexes: FC<ResComplexesType> = ({onComplex}) => {
   };
 
   return (
-    <div className={styles.wrapper} onClick={onComplex}>
+    <div className={styles.wrapper} >
       <SearchOffice hideButton placeholder={"Поиск"} />
       <FilterSearch className={styles.filter} type="agent" />
       <div className={styles.objectsList}>
         {/*{Data.objects.map((home, index) => (*/}
-        {store.initialData.complex.map((home, index) => (
-          <div className={styles.object} key={index}>
+        {store.initialData.loading ? <Loader/> : store.initialData.complex.map((home, index) => (
+          <div className={styles.object} key={index} onClick={() => onSetCompex(+home.id, home.name)}>
             <CardObject img={home.img}>
               <div className={css.paddingCard}>
                 <LineV1
@@ -111,4 +122,4 @@ export const ResComplexes: FC<ResComplexesType> = ({onComplex}) => {
       </div>
     </div>
   );
-};
+});

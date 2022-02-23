@@ -3,7 +3,7 @@ import {instance, UrlObj} from "../instance";
 export const ApartmentApi  = {
     getAllApartment: async (skip = 0, take = 10) =>{
         try{
-            const res = await instance.get(`${UrlObj.apartment}`, {skip, take})
+            const res = await instance.get(`${UrlObj.apartment}`, {params: {skip: skip, take: take}})
             return res
         }
         catch (e){

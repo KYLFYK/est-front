@@ -1,5 +1,8 @@
-import React from 'react';
-import MyAdsContainer from "../../../Others/MyAdsContainer/MyAdsContainer";
+import React, {useEffect} from 'react'
+import {observer} from "mobx-react-lite"
+
+import MyAdsContainer from "../../../Others/MyAdsContainer/MyAdsContainer"
+import {useAgentAdsStore} from '../../../../../../../../mobx/role/agent/ads/AgentAds'
 
 const mocActive = [{
     id: '1',
@@ -40,10 +43,16 @@ const mocActive = [{
 },
 ]
 
-const MyAdsActive = () => {
+const MyAdsActive = observer(() => {
+    const adsStore = useAgentAdsStore();
+    useEffect(() => {
+        adsStore.fetch()
+    }, [])
     return (
-        <MyAdsContainer objects={mocActive} menu={'active'}/>
+        adsStore.get().loading 
+        ? <h1>Loading...</h1> 
+        : <MyAdsContainer objects={adsStore.get().data.filter((d: any, i: number) => d.agent === 28)} menu={'active'}/>
     );
-};
+});
 
 export default MyAdsActive;

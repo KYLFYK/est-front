@@ -4,9 +4,8 @@ import {sortObject_specsTypeGuide,sortGuide} from "../../utils/conversionIcons/c
 export const LandApi  = {
     getAllLand: async (skip = 0, take = 10) =>{
         try{
-            const res = await instance.get(`${UrlObj.land}`, {skip, take})
-
-            console.log("res", res.data)
+            const res = await instance.get(`${UrlObj.land}`, {params: {skip: skip, take: take}})
+            return res
         }
         catch (e){
             console.log('error', e)
