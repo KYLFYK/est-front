@@ -3,47 +3,16 @@
 import { HorizontalTabs } from "../../../../../shared/HorizontalTabs/HorizontalTabs"
 import ApplicationsViewCatalog from "./components/Catalog/Catalog"
 import ApplicationsViewStatistics from "./components/Statistics"
-import {useState} from "react";
-import ViewingApplication from "./components/Catalog/ViewingApplication";
+import {useState, useEffect} from "react"
+import ViewingApplication from "./components/Catalog/ViewingApplication"
+import { observer } from "mobx-react-lite"
+import {useAgentReqStore} from '../../../../../../mobx/role/agent/request/AgentReq'
+import {Loader} from '../../../../../shared/Loader/Loader'
 
 interface Props {
 
 }
 
-const agents =[
-    {
-        id:'1',
-        name: "Евгений",
-        email: 'evgeniy@mail.ru',
-        phone: '+7 999 888 77 11',
-        convenientTime:'11:00-12:50',
-        applicationDate:'27.08.2021',
-        applicationTime:'13:00',
-        agentName:'Валерий Сидоров',
-        typeContract:'Аренда',
-        object:'3-этажный коттедж',
-        priceObject:'10 000 000',
-        status: 'Новая заявка',
-        idOffers: '1',
-        url: '123',
-    },
-    {
-        id:'2',
-        name: "Евгений",
-        email: 'evgeniy@mail.ru',
-        phone: '+7 999 222 77 11',
-        convenientTime:'11:00-12:50',
-        applicationDate:'27.08.2021',
-        applicationTime:'13:00',
-        agentName:'Валерий Сидоров',
-        typeContract:'Аренда',
-        object:'3-этажный коттедж',
-        priceObject:'10 000 000',
-        status: 'Новая заявка',
-        idOffers: '2',
-        url: '123'
-    }
-]
 const applicationsView :Array<{id:string
     type:string
     statusOrDate:string
@@ -92,14 +61,21 @@ const addMessage = (e:{ message: string, date: string, time: string },index:numb
     applicationsView[index].message.push(e)
 }
 
-const ApplicationsViewTab: React.FC<Props> = () => {
-    const [edit, setEdit] = useState<boolean>(false)
+const ApplicationsViewTab: React.FC<Props> = observer(() => {
+    const store = useAgentReqStore()
+    const [edit, setEdit] = useState<any>({edit: false, id: ''})
+    useEffect(() => {
+        store.fetchReqs(28)
+    },[])
+    
     return (
         <>
             {
-                !edit
+                store.initialData.loading 
+                ? <Loader/>
+                : !edit
                     ? <HorizontalTabs tabs={[
-                        {title: "Каталог заявок", Component: <ApplicationsViewCatalog agents={agents} onClick={()=>setEdit(true)} />},
+                        {title: "Каталог заявок", Component: <ApplicationsViewCatalog agents={store.get().data} onClick={setEdit} />},
                         /*{title: "Статистика", Component: <ApplicationsViewStatistics />}*/
                     ]}/>
                     : <ViewingApplication
@@ -111,6 +87,6 @@ const ApplicationsViewTab: React.FC<Props> = () => {
             }
         </>
     )
-}
+})
 
 export default ApplicationsViewTab

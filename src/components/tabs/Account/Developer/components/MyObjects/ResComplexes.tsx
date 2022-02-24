@@ -12,29 +12,6 @@ import styles from "./ResComplexes.module.scss";
 import css from "../../../Agent/components/Others/MyAdsContainer/Active.module.scss";
 import {useStoreDeveloperMyObjectStore} from "../../../../../../mobx/role/developer/myObject/DeveloperMyObject";
 
-const Data = {
-  objects: [
-    {
-      id: "1902830123",
-      img: "https://i.pinimg.com/736x/6a/30/8d/6a308d4d949bcf10e4382c9b4a455721.jpg",
-      type: "Аренда",
-      name: "3-этажный коттедж",
-      price: "100 000р/mec",
-      mainSpecifications: [
-        "600м",
-        "3 этажа",
-        "Бассейн",
-        "Гараж 50м2",
-        "Терраса 20 m2",
-      ],
-      agent: "Виталий Панкратов",
-      dateStart: "31/08/2021",
-      dateEnd: "05/09/21",
-      address: "Крым, Ялта",
-    },
-  ],
-};
-
 type ResComplexesType ={
   onComplex: Dispatch<SetStateAction<boolean>>
   setComplexId: Dispatch<SetStateAction<{id: number, name: string}>>

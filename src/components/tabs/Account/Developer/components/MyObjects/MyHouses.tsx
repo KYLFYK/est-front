@@ -1,4 +1,5 @@
-import React, { FC } from "react";
+import React, { FC, useEffect } from "react";
+import { observer } from "mobx-react-lite";
 import { SearchOffice } from "../../../../../containers/SearchOffice/SearchOffice";
 import FilterSearch from "../../../../../shared/FilterSearch/FilterSearch";
 import LineV1 from "../../../../../shared/CardObject/Lines/LineV1";
@@ -6,38 +7,19 @@ import LineAddressV1 from "../../../../../shared/CardObject/Lines/LineAddressV1"
 import LineArray from "../../../../../shared/CardObject/Lines/LineArray";
 import Typography from "../../../../../shared/Typography/Typography";
 import CardObject from "../../../../../shared/CardObject/CardObject";
-
+import {Loader} from '../../../../../shared/Loader/Loader';
 import styles from "./ResComplexes.module.scss";
 import css from "../../../Agent/components/Others/MyAdsContainer/Active.module.scss";
 import {useStoreDeveloperMyObjectStore} from "../../../../../../mobx/role/developer/myObject/DeveloperMyObject";
 
-const Data = {
-  objects: [
-    {
-      id: "1902830123",
-      img: "https://i.pinimg.com/736x/6a/30/8d/6a308d4d949bcf10e4382c9b4a455721.jpg",
-      type: "Аренда",
-      name: "3-этажный коттедж",
-      price: "100 000р/mec",
-      mainSpecifications: [
-        "600м",
-        "3 этажа",
-        "Бассейн",
-        "Гараж 50м2",
-        "Терраса 20 m2",
-      ],
-      agent: "Виталий Панкратов",
-      dateStart: "31/08/2021",
-      dateEnd: "05/09/21",
-      address: "Крым, Ялта",
-    },
-  ],
-};
-
-export const MyHouses: FC = () => {
+export const MyHouses: FC = observer(() => {
 
   const store = useStoreDeveloperMyObjectStore()
 
+  useEffect(() => {
+    store.fetchAllHousesByOwnerId(19)
+  }, [])
+  store.get()
   const recover = (id: string) => {
     console.log(id, "recover");
   };
@@ -57,7 +39,7 @@ export const MyHouses: FC = () => {
       <FilterSearch className={styles.filter} type="agent" />
       <div className={styles.objectsList}>
         {/*{Data.objects.map((home, index) => (*/}
-        {store.initialData.house.map((home, index) => (
+        {store.initialData.loading ? <Loader/> : store.initialData.house.map((home, index) => (
           <div className={styles.object} key={index}>
             <CardObject img={home.img}>
               <div className={css.paddingCard}>
@@ -108,4 +90,4 @@ export const MyHouses: FC = () => {
       </div>
     </div>
   );
-};
+});
