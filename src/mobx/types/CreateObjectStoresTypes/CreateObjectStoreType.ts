@@ -4,16 +4,16 @@ import { ICreateObjectLand } from "./CreateLandStoreType";
 import { ICreateObjectTownhouse } from "./CreateTownhouseStoreType";
 
 export interface ICreateObjectModel<A, B, C, D, E> {
-    about: A
-    generalInfo: B,
-    infrastructure: C,
-    info: D,
-    legalPurity: E
+  about: A;
+  generalInfo: B;
+  infrastructure: C;
+  info: D;
+  legalPurity: E;
 }
 
 export interface ICreateObject {
-    apartment: ICreateObjectAparts
-    land: ICreateObjectLand
-    house: ICreateObjectHouse
-    townhouse: ICreateObjectTownhouse
+  apartment: ICreateObjectAparts;
+  land: ICreateObjectLand;
+  house: ICreateObjectHouse;
+  townhouse: ICreateObjectTownhouse;
 }

@@ -1,5 +1,5 @@
 import Link from "next/link";
-import React from "react";
+import React, { FC, useState, useCallback, useEffect } from "react";
 import NavArrowIcon from "../../../../icons/NavArrow/NavArrow";
 import { ObjectTypes } from "../../../../utils/interfaces/objects";
 import Typography from "../../../shared/Typography/Typography";
@@ -17,26 +17,48 @@ import MultipleHorizontalTab, {
   ICreateObjectTabs,
 } from "../components/MultipleHorizontalTab/MultipleHorizontalTab";
 import CreateObjectSuccessPage from "../components/SuccessPage/SuccessPage";
+import { observer } from "mobx-react-lite";
+import {
+  GuideObject,
+  ObjectGuides,
+} from "../../../../mobx/stores/objects/GuidesStore";
+
 import s from "./FormScreen.module.scss";
+import { toJS } from "mobx";
 
 interface Props {
   objectType: ObjectTypes;
   clearObjectType: () => void;
 }
 
-const FormScreen: React.FC<Props> = ({ clearObjectType, objectType }) => {
-  const [activeTabIdx, setActiveTabIdx] = React.useState<number>(0);
-  const [activeSubTabIdx, setActiveSubTabIdx] = React.useState<number>(0);
-  const [tabsProp, setTabsProp] = React.useState<ICreateObjectTabs[]>([]);
+const objEnumToString: (type: ObjectTypes) => GuideObject = (type) => {
+  switch (type) {
+    case ObjectTypes.APARTMENTS:
+      return "apartment";
+    case ObjectTypes.HOUSE:
+      return "house";
+    case ObjectTypes.LAND:
+      return "land";
+    case ObjectTypes.TOWNHOUSE:
+      return "townhouse";
+  }
+};
+
+const FormScreen: FC<Props> = observer(({ clearObjectType, objectType }) => {
+  const guidesStore = ObjectGuides;
+
+  const [activeTabIdx, setActiveTabIdx] = useState<number>(0);
+  const [activeSubTabIdx, setActiveSubTabIdx] = useState<number>(0);
+  const [tabsProp, setTabsProp] = useState<ICreateObjectTabs[]>([]);
   const [succesAdvertisementId, setSuccesAdvertisementId] =
-    React.useState<string | null>(null);
+    useState<string | null>(null);
 
   const lastSubTabIdx = tabsProp[activeTabIdx]?.Components.length - 1;
   const lastTabIdx = tabsProp.length - 1;
   const isLastScreen =
     activeTabIdx === lastTabIdx && activeSubTabIdx === lastSubTabIdx;
 
-  const handleNextTab = React.useCallback(() => {
+  const handleNextTab = useCallback(() => {
     if (isLastScreen) return;
 
     if (activeSubTabIdx < lastSubTabIdx) {
@@ -48,7 +70,7 @@ const FormScreen: React.FC<Props> = ({ clearObjectType, objectType }) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [activeTabIdx, activeSubTabIdx, isLastScreen, lastSubTabIdx]);
 
-  const handlePrevTab = React.useCallback(() => {
+  const handlePrevTab = useCallback(() => {
     if (activeTabIdx === 0 && activeSubTabIdx === 0) {
       clearObjectType();
       return;
@@ -68,7 +90,20 @@ const FormScreen: React.FC<Props> = ({ clearObjectType, objectType }) => {
     setSuccesAdvertisementId(advertisementId);
   };
 
-  React.useEffect(() => {
+  console.log(
+    guidesStore.readyToWork ? toJS(guidesStore.readyToWork) : undefined
+  );
+
+  useEffect(() => {
+    if (
+      (!guidesStore.loaded && !guidesStore.errorOnLoad) ||
+      objEnumToString(objectType) !== guidesStore.loadedObject
+    ) {
+      guidesStore.uploadGuides(objEnumToString(objectType)).then();
+    }
+  }, [objectType, guidesStore]);
+
+  useEffect(() => {
     const AboutTabComponents: JSX.Element[] =
       objectType === ObjectTypes.LAND
         ? [
@@ -222,6 +257,6 @@ const FormScreen: React.FC<Props> = ({ clearObjectType, objectType }) => {
       />
     </div>
   );
-};
+});
 
 export default FormScreen;

@@ -23,6 +23,7 @@ import ButtonPanel, {
 import InputsGroup from "../InputsGroup/InputsGroup";
 import s from "./AboutObject.module.scss";
 import { FormController, useForm } from "../../../../containers/FormController";
+import { ObjectGuides } from "../../../../../mobx/stores/objects/GuidesStore";
 
 interface Props extends ICreateObjectControls {
   objectType: ObjectTypes;
@@ -41,6 +42,8 @@ interface IForm {
 
 const AboutObjectTab: React.FC<Props> = observer(
   ({ onNextTab, onPrevTab, objectType }) => {
+    const guidesStore = ObjectGuides;
+
     const [form] = useForm<IForm>({
       type: "",
       objectName: "",
@@ -98,6 +101,7 @@ const AboutObjectTab: React.FC<Props> = observer(
       setValues({ ...values, name: event.target.value });
     };
     const onChangeType = (value: string) => {
+      console.log(value);
       setValues({ ...values, type: value });
     };
     const onChangeComplexName = (value: string) => {
@@ -130,6 +134,11 @@ const AboutObjectTab: React.FC<Props> = observer(
     ) => {
       setValues({ ...values, cost: +event.target.value });
     };
+
+    const buildingType = guidesStore.readyToWork?.find(
+      (el) => el.type_en === "buildingType"
+    );
+
     return (
       <FormController<IForm> form={form}>
         <ButtonPanel onNextTab={handleNext} onPrevTab={handlePrev}>
@@ -148,16 +157,21 @@ const AboutObjectTab: React.FC<Props> = observer(
               "floorsAmmount" in values &&
               "type" in values && (
                 <>
-                  <BaseDropDown
-                    className={s.inputSm}
-                    options={DROPDOWN_COUNTRY_OPTIONS}
-                    placeholder={"Тип жилья"}
-                    value={values.type}
-                    onChange={onChangeType}
-                    label="Тип жилья"
-                    isError={!isValid && !isValidType}
-                    name={"type"}
-                  />
+                  {buildingType && (
+                    <BaseDropDown
+                      className={s.inputSm}
+                      options={buildingType.values.map((el) => ({
+                        label: el.value,
+                        value: el.id.toString(),
+                      }))}
+                      placeholder={"Тип жилья"}
+                      value={values.type}
+                      onChange={onChangeType}
+                      label="Тип жилья"
+                      isError={!isValid && !isValidType}
+                      name={"type"}
+                    />
+                  )}
 
                   <BaseDropDown
                     className={s.inputSm}
