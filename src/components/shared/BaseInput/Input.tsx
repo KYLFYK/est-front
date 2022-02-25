@@ -61,6 +61,7 @@ export const BaseInput: React.FC<Props> = ({
                 props.onChange(ev as any);
               }
             }}
+            name={props.name}
           >
             {props.value}
           </textarea>

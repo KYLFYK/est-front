@@ -16,6 +16,7 @@ interface Props {
   isError?: boolean;
   errorLabel?: string;
   onChange: (value: string) => void;
+  name?: string;
 }
 
 export const BaseDropDown: React.FC<Props> = ({
@@ -28,8 +29,8 @@ export const BaseDropDown: React.FC<Props> = ({
   label,
   classNameWrapper,
   onChange,
+  name,
 }) => {
-
   const classes = useStyles();
   const handleOnChange = (
     event: React.ChangeEvent<{ name?: string | unknown; value: unknown }>
@@ -57,6 +58,7 @@ export const BaseDropDown: React.FC<Props> = ({
         displayEmpty={true}
         value={value === undefined || value === null ? "" : value}
         onChange={handleOnChange}
+        name={name}
       >
         {options.map(({ value, label }) => (
           <MenuItem key={value} value={value}>
