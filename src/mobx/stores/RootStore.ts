@@ -1,18 +1,18 @@
-import {configure} from "mobx";
+import { configure } from "mobx";
 import CreateObjectStore from "./CreateObjectStores/CreateObjectStore";
 
-configure({enforceActions: "observed"})
+configure({ enforceActions: "observed" });
 
 export interface IRootStore {
-    createObjectStore: CreateObjectStore
+  createObjectStore: CreateObjectStore;
 }
 
 class RootStore implements IRootStore {
-    createObjectStore: CreateObjectStore;
+  createObjectStore: CreateObjectStore;
 
-    constructor() {
-        this.createObjectStore = new CreateObjectStore(this)
-    }
+  constructor() {
+    this.createObjectStore = new CreateObjectStore();
+  }
 }
 
-export default new RootStore()
+export default new RootStore();
