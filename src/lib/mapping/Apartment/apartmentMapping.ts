@@ -26,18 +26,18 @@ export const MappingDescription = (description: any) => {
 export const MappingLegalPurity = (legal: any) => {
   return {
     encumbrances: true,
-    risks: legal.risks,
+    risks: legal.risks ? legal.risks : '',
     tabsData: {
       general: [
         {
           value: "Данные из ЕГРН",
           description: "Это всплывающая подсказка о данных из ЕГРН",
           label: [
-            {title: "Адрес", text: legal.address},
-            {title: "Кадастровый номер", text: legal.cadastalNumber},
-            {title: "Кадастровая стоимость", text: legal.cadastralPrice, description: "Это всплывающая подсказка о данных кадастровой стоимости"},
-            {title: "Общая площадь", text: legal.areaValue},
-            {title: "Этажность", text: legal.floor},
+            {title: "Адрес", text: legal.address ? legal.address : ''},
+            {title: "Кадастровый номер", text: legal.cadastalNumber ? legal.cadastalNumber : ''},
+            {title: "Кадастровая стоимость", text: legal.cadastralPrice ? legal.cadastralPrice : '', description: "Это всплывающая подсказка о данных кадастровой стоимости"},
+            {title: "Общая площадь", text: legal.areaValue ? legal.areaValue : ''},
+            {title: "Этажность", text: legal.floor ? legal.floor : ''},
           ],
         },
       ],
@@ -45,8 +45,8 @@ export const MappingLegalPurity = (legal: any) => {
         {
           value: "Текущие владельцы",
           label: [
-            { title: "Единоличный собственник", text: legal.currentOwnerName },
-            { title: "77-77-08/011/2021-0308", text: legal.currentOwnerStartDate },
+            { title: "Единоличный собственник", text: legal.currentOwnerName ? legal.currentOwnerName : ''},
+            { title: "77-77-08/011/2021-0308", text: legal.currentOwnerStartDate ? legal.currentOwnerStartDate : ''},
           ],
         },
         {
@@ -54,8 +54,8 @@ export const MappingLegalPurity = (legal: any) => {
           description: "Всплывающая подсказка предыдущих владельцев",
           label: [
             {
-              title: `${legal.previewOwners.owners.length} владельца`,
-              text: legal.previewOwners.owners.join(),
+              title: legal.previewOwners.owners ? `${legal.previewOwners.owners.length} владельца` : '',
+              text: legal.previewOwners.owners ? legal.previewOwners.owners.join() : '',
             },
             { title: "77-77-08/011/2021-0308", text: "03.08.2021" },
           ],
@@ -64,10 +64,10 @@ export const MappingLegalPurity = (legal: any) => {
       encumbrances: [
         {
           title: "Текущие владельцы",
-          encumbrances: legal.encumbrances.map((e: any) => { return {status: e.status ? 0 : 1, description: e.title, text: e.title } }),
+          encumbrances: legal.encumbrances ? legal.encumbrances.map((e: any) => { return {status: e.status ? 0 : 1, description: e.title, text: e.title } }) : [],
         },
       ],
-      recomendations: legal.recomendations.map((r: any) => { return {value: r.title, label: r.description} })
+      recomendations: legal.recomendations ? legal.recomendations.map((r: any) => { return {value: r.title, label: r.description} }) : []
     }
   }
 }

@@ -1,12 +1,16 @@
-import {createContext, FC, useContext} from "react";
-import {makeAutoObservable} from "mobx";
+import {createContext, FC, useContext} from "react"
+import {makeAutoObservable} from "mobx"
+import {ComplexApi} from '../../../../api/obj/complex'
+import {HouseApi} from '../../../../api/obj/house'
+import {datetoDayFormat} from '../../../../lib/mapping/objectDates'
 
 class DeveloperMyObjectStore  {
     constructor() {
         makeAutoObservable(this);
     }
     initialData = {
-        statistics:{
+        loading: true,
+        statistics: {
             byMonth: [
                 {
                     name: "Январь 2018",
@@ -134,22 +138,22 @@ class DeveloperMyObjectStore  {
         },
         complex:[
             {
-                id: "1902830123",
+                id: "",
                 img: "https://i.pinimg.com/736x/6a/30/8d/6a308d4d949bcf10e4382c9b4a455721.jpg",
-                type: "Аренда",
-                name: "3-этажный коттедж",
-                price: "100 000р/mec",
+                type: "",
+                name: "",
+                price: "",
                 mainSpecifications: [
-                    "600м",
-                    "3 этажа",
-                    "Бассейн",
-                    "Гараж 150м2",
-                    "Терраса 200 m2",
+                    "",
+                    "",
+                    "",
+                    "",
+                    "",
                 ],
-                agent: "Виталий Панкратов",
-                dateStart: "31/08/2021",
-                dateEnd: "05/09/21",
-                address: "Крым, Ялта",
+                agent: "",
+                dateStart: "",
+                dateEnd: "",
+                address: "",
             },
         ],
         complexObjects:[
@@ -163,27 +167,98 @@ class DeveloperMyObjectStore  {
                     area: {'Площадь':'52м2'},
                     status: {'Статус':'Продана'},
                 }
-            },{
-                id:'2',
-                name:'2-комнатная квартира',
-                price:'17 860 000 ₽',
-                infoObject:{
-                    corpus: {'Корпус':'2'},
-                    floor: {'Этаж':'4/15'},
-                    area: {'Площадь':'72м2'},
-                    status: {'Статус':'Свободна'},
-                }
-            },{
-                id:'3',
-                name:'3-комнатная квартира',
-                price:'22 860 000 ₽',
-                infoObject:{
-                    corpus: {'Корпус':'4'},
-                    floor: {'Этаж':'12/15'},
-                    area: {'Площадь':'92м2'},
-                    status: {'Статус':'Бронь до 12/11/21'},
-                }
-            },{
+            },
+        ],
+        house:[
+            {
+                id: "",
+                img: "https://i.pinimg.com/736x/6a/30/8d/6a308d4d949bcf10e4382c9b4a455721.jpg",
+                type: "",
+                name: "",
+                price: "",
+                mainSpecifications: [
+                    "",
+                    "",
+                    "",
+                    "",
+                    "",
+                ],
+                agent: "",
+                dateStart: "",
+                dateEnd: "",
+                address: "",
+            },
+        ],
+    }
+    fetch(id:string) {
+        console.log("DeveloperMyObjectStore",id)
+    }
+    async fetchAllComplexByOwnerId(ownerId: number) {
+        this.initialData.loading = true
+        const res = await ComplexApi.getAllComplexByOwnerId(ownerId)
+
+        this.initialData.complex = res?.data.map((r: any) => {
+            return {
+                id: r.id,
+                img: "https://i.pinimg.com/736x/6a/30/8d/6a308d4d949bcf10e4382c9b4a455721.jpg",
+                type: "",
+                name: r.name,
+                price: "",
+                mainSpecifications: [
+                    "",
+                    "",
+                    "",
+                    "",
+                    "",
+                ],
+                agent: r.owner.id,
+                dateStart: datetoDayFormat(r.createAt, 'Cabinet'),
+                dateEnd: "",
+                address: r.address,
+            }
+        })
+        this.initialData.loading = false
+    }
+
+    async fetchAllHousesByOwnerId(ownerId: number) {
+        this.initialData.loading = true
+        let i = 0
+        let obj: any = []
+        let res
+        do {
+            res = await HouseApi.getAllHouse(i*10, 10)
+            obj = [...obj, ...res?.data]
+            i++
+        } while (res?.data?.length >= 10)
+
+        this.initialData.house = obj.filter((o: any) => o.owner.id === ownerId).map((o: any) => {
+            return {
+                id: o.id,
+                img: "https://i.pinimg.com/736x/6a/30/8d/6a308d4d949bcf10e4382c9b4a455721.jpg",
+                type: o.objectType,
+                name: o.name,
+                price: o.price,
+                mainSpecifications: [
+                    "",
+                    "",
+                    "",
+                    "",
+                    "",
+                ],
+                agent: o.owner.id,
+                dateStart: datetoDayFormat(o.createAt, 'Cabinet'),
+                dateEnd: "",
+                address: o.address,
+            }
+        })
+        this.initialData.loading = false
+    }
+
+    async fetchAllObjectsByComplexId(complexId: number) {
+        this.initialData.loading = true
+        const res = await ComplexApi.getAllObjectsByComplexId(complexId)
+        this.initialData.complexObjects = res?.data.map((r: any) => {
+            return {
                 id:'4',
                 name:'1-комнатная квартира',
                 price:'12 860 000 ₽',
@@ -193,52 +268,11 @@ class DeveloperMyObjectStore  {
                     area: {'Площадь':'72м2'},
                     status: {'Статус':'Свободна'},
                 }
-            },{
-                id:'5',
-                name:'2-комнатная квартира',
-                price:'18 860 000 ₽',
-                infoObject:{
-                    corpus: {'Корпус':'2'},
-                    floor: {'Этаж':'4/15'},
-                    area: {'Площадь':'72м2'},
-                    status: {'Статус':'Свободна'},
-                }
-            },{
-                id:'6',
-                name:'1-комнатная квартира',
-                price:'12 860 000 ₽',
-                infoObject:{
-                    corpus: {'Корпус':'1'},
-                    floor: {'Этаж':'3/15'},
-                    area: {'Площадь':'52м2'},
-                    status: {'Статус':'Продана'},
-                }
-            },
-        ],
-        house:[
-            {
-                id: "1902830124",
-                img: "https://i.pinimg.com/736x/6a/30/8d/6a308d4d949bcf10e4382c9b4a455721.jpg",
-                type: "Аренда",
-                name: "4-этажный коттедж",
-                price: "300 000р/mec",
-                mainSpecifications: [
-                    "900м",
-                    "4 этажа",
-                    "Бассейн",
-                    "Гараж 250м2",
-                    "Терраса 200 m2",
-                ],
-                agent: "Виталий Панкратов",
-                dateStart: "12/04/2020",
-                dateEnd: "05/09/21",
-                address: "Крым, Алушта",
-            },
-        ]
+            }
+        })
+        this.initialData.loading = false
     }
-    fetch(id:string) {
-        console.log("DeveloperMyObjectStore",id)
-    }
+
     get() {
         console.log(JSON.parse(JSON.stringify({ ...this.initialData})))
     }

@@ -27,6 +27,7 @@ import ResComplexObjects from "./ResComplexObjects";
 
 export const MyObjects: FC = () => {
     const [complex, setComplex] = useState<boolean>(false)
+    const [complexId, setComplexId] = useState<{id: number, name: string}>({id: 0, name: ''})
 
     return (
         <>
@@ -34,12 +35,12 @@ export const MyObjects: FC = () => {
                 !complex
                     ? <HorizontalTabs
                         tabs={[
-                            {title: "Статистика", Component: <Statistic/>,},
-                            {title: "Мои ЖК", Component: <ResComplexes onComplex={()=>setComplex(true)}/>,},
+                            /*{title: "Статистика", Component: <Statistic/>,},*/
+                            {title: "Мои ЖК", Component: <ResComplexes setComplexId={setComplexId} onComplex={setComplex}/>,},
                             {title: "Мои дома", Component: <MyHouses/>,},
                         ]}
                         wrapperClassName={styles.tabsWrapper}/>
-                    : <ResComplexObjects onComplex={()=>setComplex(false)}/>
+                    : <ResComplexObjects complexId={complexId} onComplex={setComplex}/>
             }
         </>
     );

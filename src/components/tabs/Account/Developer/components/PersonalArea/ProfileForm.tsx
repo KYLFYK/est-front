@@ -5,6 +5,7 @@ import styles from "./Account.module.scss";
 import BaseButton from "../../../../../shared/BaseButton/BaseButtons";
 import {BaseTextarea} from "../../../../../shared/BaseTextarea/BaseTextarea";
 import {observer} from "mobx-react-lite";
+import Typography from "../../../../../shared/Typography/Typography";
 
 interface FormValues {
     name: string;
@@ -46,85 +47,91 @@ export const ProfileForm: FC<ProfileFormType> = observer( ({profileForm,onEdit})
     return (
         <div className={styles.profile}>
             <form>
-                <BaseInput
-                    disabled={true}
-                    classNameWrapper={styles.inputWrapper}
-                    className={styles.input}
-                    errorLabel=""
-                    label="Название компании"
-                    type="text"
-                    name={"name"}
-                    value={formValues.name}
-                    onChange={(e) => {
-                        handleFieldChange("name", e.currentTarget.value);
-                    }}
-                />
-                <BaseInput
-                    disabled={true}
-                    classNameWrapper={styles.inputWrapper}
-                    className={styles.input}
-                    errorLabel=""
-                    label="Тип застройщика"
-                    type="text"
-                    name={"type"}
-                    value={formValues.type}
-                    onChange={(e) => {
-                        handleFieldChange("type", e.currentTarget.value);
-                    }}
-                />
-                <BaseInput
-                    disabled={true}
-                    classNameWrapper={styles.inputWrapper}
-                    className={styles.input}
-                    errorLabel=""
-                    label="Адрес"
-                    type="text"
-                    name={"address"}
-                    value={formValues.address}
-                    onChange={(e) => {
-                        handleFieldChange("address", e.currentTarget.value);
-                    }}
-                />
-                <BaseInput
-                    disabled={true}
-                    classNameWrapper={styles.inputWrapper}
-                    className={styles.input}
-                    errorLabel=""
-                    label="Телефон"
-                    type="tel"
-                    name={"phone"}
-                    value={formValues.phone}
-                    onChange={(e) => {
-                        handleFieldChange("phone", e.currentTarget.value);
-                    }}
-                />
-                <BaseInput
-                    disabled={true}
-                    classNameWrapper={styles.inputWrapper}
-                    className={styles.input}
-                    errorLabel=""
-                    label="Email"
-                    type="text"
-                    name={"email"}
-                    value={formValues.email}
-                    onChange={(e) => {
-                        handleFieldChange("email", e.currentTarget.value);
-                    }}
-                />
-                <BaseInput
-                    disabled={true}
-                    classNameWrapper={styles.inputWrapper}
-                    className={styles.input}
-                    errorLabel=""
-                    label="Сайт"
-                    type="text"
-                    name={"cite"}
-                    value={formValues.site}
-                    onChange={(e) => {
-                        handleFieldChange("cite", e.currentTarget.value);
-                    }}
-                />
-
+                <Typography weight={"bold"}>
+                    Аккаунт
+                </Typography>
+                <div style={{display:"flex"}}>
+                    <BaseInput
+                        disabled={true}
+                        classNameWrapper={styles.inputWrapper}
+                        className={styles.input}
+                        errorLabel=""
+                        label="Название компании"
+                        type="text"
+                        name={"name"}
+                        value={formValues.name}
+                        onChange={(e) => {
+                            handleFieldChange("name", e.currentTarget.value);
+                        }}
+                    />
+                    <BaseInput
+                        disabled={true}
+                        classNameWrapper={styles.inputWrapper}
+                        className={styles.input}
+                        errorLabel=""
+                        label="Тип застройщика"
+                        type="text"
+                        name={"type"}
+                        value={formValues.type}
+                        onChange={(e) => {
+                            handleFieldChange("type", e.currentTarget.value);
+                        }}
+                    />
+                    <BaseInput
+                        disabled={true}
+                        classNameWrapper={styles.inputWrapper}
+                        className={styles.input}
+                        errorLabel=""
+                        label="Адрес"
+                        type="text"
+                        name={"address"}
+                        value={formValues.address}
+                        onChange={(e) => {
+                            handleFieldChange("address", e.currentTarget.value);
+                        }}
+                    />
+                </div>
+                <div style={{display:"flex"}}>
+                    <BaseInput
+                        disabled={true}
+                        classNameWrapper={styles.inputWrapper}
+                        className={styles.input}
+                        errorLabel=""
+                        label="Телефон"
+                        type="tel"
+                        name={"phone"}
+                        value={formValues.phone}
+                        onChange={(e) => {
+                            handleFieldChange("phone", e.currentTarget.value);
+                        }}
+                    />
+                    <BaseInput
+                        disabled={true}
+                        classNameWrapper={styles.inputWrapper}
+                        className={styles.input}
+                        errorLabel=""
+                        label="Email"
+                        type="text"
+                        name={"email"}
+                        value={formValues.email}
+                        onChange={(e) => {
+                            handleFieldChange("email", e.currentTarget.value);
+                        }}
+                    />
+                    <BaseInput
+                        disabled={true}
+                        classNameWrapper={styles.inputWrapper}
+                        className={styles.input}
+                        errorLabel=""
+                        label="Сайт"
+                        type="text"
+                        name={"cite"}
+                        value={formValues.site}
+                        onChange={(e) => {
+                            handleFieldChange("cite", e.currentTarget.value);
+                        }}
+                    />
+                </div>
                 {/*<BaseInput*/}
                 {/*  classNameWrapper={styles.inputWrapper}*/}
                 {/*  className={styles.input}*/}
@@ -141,7 +148,7 @@ export const ProfileForm: FC<ProfileFormType> = observer( ({profileForm,onEdit})
                     disabled={true}
                     classNameWrapper={styles.baseTextarea}
                     className={styles.baseTextarea}
-                    style={{paddingLeft: '10px'}}
+                    // style={{paddingLeft: '10px'}}
                     label={"Описание"}
                     value={formValues.description}
                     onChange={(e) => {
@@ -150,17 +157,7 @@ export const ProfileForm: FC<ProfileFormType> = observer( ({profileForm,onEdit})
 
                 />
             </form>
-            <div>
-                <BaseButton  isActive type={"secondary"}>
-                    Пройти идентификацию
-                </BaseButton>
-                <div style={{marginTop:'20px'}}>
-                    <BaseButton onClick={onEdit}  isActive type={"secondary"}>
-                        Редактировать аккаунт
-                    </BaseButton>
-                </div>
 
-            </div>
         </div>
     );
 })

@@ -35,7 +35,7 @@ const PersonalCabinetAccountInfo: React.FC<PersonalCabinetAccountInfoType> = obs
         <div>
             <div className={css.column}>
                 <div>
-                    <Typography weight={"bold"}>Логитип</Typography>
+                    <Typography weight={"bold"}>Логотип</Typography>
                     <Card className={css.card}>
                         <Image
                             src={store.initialData.img }

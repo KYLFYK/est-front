@@ -19,14 +19,18 @@ import css from "./Catalog.module.scss";
 import Typography from "../../../../../../../shared/Typography/Typography";
 
 type Data = {
+    id: string
     name: string
+    email: string
     convenientTime: string
     applicationDate: string
+    applicationTime: string
     agentName: string
     typeContract: string
     object: string
     priceObject: string
     status: string
+    phone: string
 }
 type HeadCell = {
     disablePadding: boolean;
@@ -69,32 +73,40 @@ export const useStyles = makeStyles(() => ({
     cursor:{
         cursor:"pointer",
         height: 80 ,
+        padding:"6px 0 !important"
 
+    },
+    root:{
+        padding:'6px 0px !important',
+        '& .MuiTableSortLabel-root':{
+            padding:'6px 0px !important'
+        }
     }
 }))
 type ActualObjectType = {
-    onClick?:(idOffers:string)=>void
+    setEdit: any
     agents: Array<{
-        name: string
-        phone: string
-        email: string
-        convenientTime: string
-        applicationDate: string
-        applicationTime: string
-        agentName: string
-        typeContract: string
-        object: string
-        priceObject: string
-        status: string
-        idOffers: string
-        url: string
+        id: string;
+        name: any;
+        email: string;
+        phone: string;
+        convenientTime: string;
+        applicationDate: string;
+        applicationTime: string;
+        agentName: string;
+        typeContract: string;
+        object: string;
+        priceObject: string;
+        status: string;
+        idOffers: string;
+        url: string;
     }>
 }
 
-const ApplicationsViewCatalog: React.FC<ActualObjectType> = ({agents,onClick}) => {
+const ApplicationsViewCatalog: React.FC<any> = ({agents, setEdit}) => {
 
     const classes = useStyles()
-
+    
     const [order, setOrder] = React.useState<Order>('asc');
     const [orderBy, setOrderBy] = React.useState<keyof Data>('name');
     const [selected, setSelected] = React.useState<readonly string[]>([]);
@@ -135,19 +147,18 @@ const ApplicationsViewCatalog: React.FC<ActualObjectType> = ({agents,onClick}) =
         setPage(0);
     };
 
-    const isSelected = (name: string) => selected.indexOf(name) !== -1;
+    const isSelected = (name: any) => selected.indexOf('name') !== -1;
 
     // Avoid a layout jump when reaching the last page with empty rows.
     const emptyRows =
         page > 0 ? Math.max(0, (1 + page) * rowsPerPage - rows.length) : 0;
 
     return (
-        <Box sx={{width: '1440px'}}>
+        <Box >
             <>
                 <div>
                     <TableContainer>
                         <Table
-                            sx={{width: '1420px'}}
                             aria-labelledby="tableTitle"
                             size={'small'}
                         >
@@ -163,23 +174,21 @@ const ApplicationsViewCatalog: React.FC<ActualObjectType> = ({agents,onClick}) =
                             <TableBody>
                                 {/* if you don't need to support IE11, you can replace the `stableSort` call with:
               rows.slice().sort(getComparator(order, orderBy)) */}
-                                {stableSort(agents, getComparator(order, orderBy))
+                                {agents.length > 0 && stableSort(agents, getComparator(order, orderBy))
                                     .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                                     .map((agent, index) => {
                                         const isItemSelected = isSelected(agent.name);
                                         const labelId = `enhanced-table-checkbox-${index}`;
-                                        const fullName = agent.agentName.split(' ')
-                                        const object =agent.object.split(' ')
                                         return (
                                             <TableRow
                                                 hover
                                                 role="checkbox"
                                                 aria-checked={isItemSelected}
                                                 tabIndex={-1}
-                                                key={agent.idOffers}
+                                                key={agent.id}
                                                 selected={isItemSelected}
                                                 onClick={()=>{
-                                                    onClick &&  onClick(agent.idOffers)
+                                                    setEdit && setEdit({edit: true, id: agent.id})
                                                 }}
                                                 className={classes.cursor}
                                             >
@@ -200,7 +209,7 @@ const ApplicationsViewCatalog: React.FC<ActualObjectType> = ({agents,onClick}) =
                                                 </TableCell>
                                                 <TableCell
                                                     width={'128px'}
-                                                    title={agent.status.toString()}
+                                                    // title={agent.status.toString()}
                                                     align="left">
                                                     <Typography className={css.heightTable}>
                                                         {agent.convenientTime}
@@ -221,25 +230,28 @@ const ApplicationsViewCatalog: React.FC<ActualObjectType> = ({agents,onClick}) =
                                                     align="left"
                                                 >
                                                     <Typography className={css.heightTable}>
-                                                        {fullName[0]}
+                                                        {agent.agentName}
                                                     </Typography>
                                                     <Typography className={css.heightTable}>
-                                                        {fullName[1]}
+                                                        {agent.agentName}
                                                     </Typography>
                                                 </TableCell>
                                                 <TableCell
-                                                    width={'114px'}>
+                                                    width={'104px'}>
                                                     <Typography className={css.heightTable}>
                                                         {agent.typeContract}
                                                     </Typography>
                                                 </TableCell>
-                                                <TableCell width={'102px'}>
-                                                    <Typography className={css.heightTable}>
-                                                        {object[0]}
-                                                    </Typography>
-                                                    <Typography className={css.heightTable}>
-                                                        {object[1]}
-                                                    </Typography>
+                                                <TableCell width={'92px'}>
+                                                    <div style={{minWidth:"92px"}}>
+                                                        <Typography className={css.heightTable}>
+                                                            {agent.object}
+                                                        </Typography>
+                                                        <Typography className={css.heightTable}>
+                                                            {agent.object}
+                                                        </Typography>
+                                                    </div>
+
                                                 </TableCell>
                                                 <TableCell width={'110px'}>
                                                     <Typography className={css.heightTable}>
@@ -292,6 +304,7 @@ type EnhancedTableProps = {
     headCells: HeadCell[]
 }
 
+
 const EnhancedTableHead: React.FC<EnhancedTableProps> = ({
                                                                     numSelected,
                                                                     onRequestSort,
@@ -307,6 +320,8 @@ const EnhancedTableHead: React.FC<EnhancedTableProps> = ({
             onRequestSort(event, property);
         };
 
+    const classes = useStyles()
+
     return (
         <TableHead>
             <TableRow>
@@ -319,6 +334,7 @@ const EnhancedTableHead: React.FC<EnhancedTableProps> = ({
                     >
                         <TableSortLabel
                             // active={orderBy === headCell.id}
+                            className={classes.root}
                             hideSortIcon={false}
                             active
                             direction={orderBy === headCell.id ? order : 'asc'}
@@ -332,7 +348,7 @@ const EnhancedTableHead: React.FC<EnhancedTableProps> = ({
                                 />
                             }}
                         >
-                            <Typography>
+                            <Typography size={"small"}>
                                 {headCell.label !== 'none' ? headCell.label : ''}
                             </Typography>
                             {orderBy === headCell.id ? (

@@ -132,7 +132,7 @@ class SearchStore {
   }
 
   getInitialData() {
-    return Array.from(JSON.parse(JSON.stringify({ ...this.initialData})))
+    return Object.values(JSON.parse(JSON.stringify({ ...this.initialData})))
   }
 
   getParams() {
@@ -142,7 +142,7 @@ class SearchStore {
   async fetch() {
     this.fetching = true
     const res = SearchApi.getFilteredObj(this.params)
-    this.initialData = [...await res]
+    this.initialData = await res
     this.fetching = false
   }
 }

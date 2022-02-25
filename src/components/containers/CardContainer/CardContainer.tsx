@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useState} from 'react'
 import { observer } from "mobx-react-lite"
 import { useSearchStore } from "../../../mobx/stores/SearchStore/SearchStore"
 import { makeStyles } from "@material-ui/core"
@@ -8,11 +8,11 @@ import BaseButton from '../../shared/BaseButton/BaseButtons'
 import FavoriteIcon from '../../../icons/Favorite/Favorite'
 import {GridView} from '../../../icons/FinderPageIcon/GridView'
 import {MapView} from '../../../icons/FinderPageIcon/MapView'
-import { OpenCloseMapButton } from "./OpenCloseMapButton";
+import { OpenCloseMapButton } from "./OpenCloseMapButton"
 import s from './styles.module.scss'
 import { DROPDOWN_PLACEHOLDER, SORT_FILTER_OPTIONS } from "../PlanningFilter/config"
 import { ToggleButtonsWithIcons } from '../../shared/ToggleButtonsWithIcons/ToggleButtonsWithIcons'
-import Typography from '../../shared/Typography/Typography'
+import {Loader, Empty} from '../../shared/Loader/Loader'
 
 // TODO: Take types from 'model' folder, when global state gets its types
 
@@ -40,6 +40,17 @@ const useStyles = makeStyles(() => ({
 const CardContainer: React.FC<Props> = observer(({ mapData, view, setView }) => {
     const searchStore = useSearchStore()
     const classes = useStyles()
+    console.log(searchStore.getInitialData())
+    const [sort, setSort] = useState(SORT_FILTER_OPTIONS[0].value)
+
+    let sortedData: any = []
+    if(sort === 'default'){
+        sortedData = [...searchStore.getInitialData()]
+    } else if(sort === 'bigger'){
+        sortedData = [...searchStore.getInitialData()?.sort((a: any, b: any) => a.price > b.price ? 1 : -1)]
+    } else if(sort === 'smaller'){
+        sortedData = [...searchStore.getInitialData()?.sort((a: any, b: any) => a.price < b.price ? 1 : -1)]
+    }
 
     const toggleButtonOptions = [
         { icon: <GridView fill={view === 'gridView' ? '#96A2B5' : '#CAD1DA'}/>, onclick: () => setView('gridView') }, 
@@ -50,13 +61,13 @@ const CardContainer: React.FC<Props> = observer(({ mapData, view, setView }) => 
         <div className={view === 'mapView' ? s.openContainer : s.closeContainer}>
             <div className={s.finderControls}>
                 <div className={s.finderDropdown}>
-                    {/*<BaseDropDown 
+                    <BaseDropDown 
                         className={classes.sortDropdown}
-                        onChange={(e) => {searchStore.setSort(e)}}
+                        onChange={(e) => {setSort(e)}}
                         placeholder={DROPDOWN_PLACEHOLDER}
                         options={SORT_FILTER_OPTIONS}
-                        value={searchStore.sort} 
-                    />*/}
+                        value={sort} 
+                    />
                 </div>
                 <div className={s.finderButtons}>
                     {/*<BaseButton
@@ -74,11 +85,11 @@ const CardContainer: React.FC<Props> = observer(({ mapData, view, setView }) => 
                     </div>
                 </div>
             </div>
-            <div className={(searchStore.fetching || !searchStore.initialData.length) ? s.contentText : s.content}>
+            <div className={(searchStore.fetching || !sortedData.length) ? s.contentText : s.content}>
                 {searchStore.fetching 
-                    ? <Typography size={'header'}>Loading...</Typography>
-                    : searchStore.initialData && searchStore.initialData.length 
-                        ? searchStore.initialData.map((i: any, id: number) => {
+                    ? <Loader/>
+                    : sortedData.length 
+                        ? sortedData && sortedData.map((i: any, id: number) => {
                             return(
                                 <div key={id} style={{padding:'5px'}}>
                                     <ObjectCard 
@@ -90,7 +101,7 @@ const CardContainer: React.FC<Props> = observer(({ mapData, view, setView }) => 
                                 </div>
                             )
                         })
-                        : <Typography size={'subheaderBig'}>Объекты отсутствуют</Typography>
+                        : <Empty/>
                 }
             </div>
             <OpenCloseMapButton view={view} setView={setView}/>

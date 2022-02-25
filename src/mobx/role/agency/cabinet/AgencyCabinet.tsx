@@ -37,7 +37,7 @@ class AgencyCabinetStore {
         const res  = await cabinetAPI.getCabinetAgency()
         const name = res.data.agencyProperty.name
         const address = res.data.agencyProperty.address
-        const phone = res.data.phone
+        const phone = res.data.agencyProperty.phone[0].value
         const email = res.data.email
         const site = res.data.agencyProperty.site
         const description = res.data.agencyProperty.description

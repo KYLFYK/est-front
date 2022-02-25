@@ -4,7 +4,7 @@ import {PersonalArea} from "./components/PersonalArea";
 import {MyObjects} from "./components/MyObjects";
 import AgentsNotifications from "../Agent/components/Notifications/Notifications";
 import {useStoreDeveloperNotificationsStore} from "../../../../mobx/role/developer/notifications/notifications";
-
+import css from './developer.module.css'
 
 export const DeveloperRoleTabs: FC = () => {
 
@@ -27,16 +27,17 @@ export const DeveloperRoleTabs: FC = () => {
     return (
         <div>
             <VerticalTabs
+                className={css.marginDeveloper}
                 link={true}
                 tabs={[
                     {title: "Личный кабинет", Component: <PersonalArea/>},
                     {title: "Мои объекты", Component: <MyObjects/>},
-                    {title: "Уведомления", Component: <AgentsNotifications
+                    /*{title: "Уведомления", Component: <AgentsNotifications
                             onRead={onRead}
                             onReadAll={onReadAll}
                             notification={notification}
                             onDelete={deleteNotification}
-                        />},
+                        />},*/
                 ]}
             />
         </div>

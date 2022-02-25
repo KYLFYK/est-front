@@ -8,13 +8,14 @@ import PlacementRates from "./components/PlacementRates/PlacementRates";
 import ProfSearch from "./components/ProfSearch/ProfSearch";
 import Messages from "./components/Messages/Messages";
 import PersonalCabinetTab from "./components/PersonalCabinetTab/PersonalCabinetTab";
+import css from "../Agency/AgencyRoleTabs.module.css";
 
 interface Props {
 }
 
 const notifications =[
     {date:'22.03.2021',time:'17:30',message:'Автоматическое возобновление публикаций выключено', read:false},
-    {date:'22.03.2021',time:'15:30',message:'Автоматическое возобновление публикаций выключеноАвтоматическое возобновление публикаций выключ', read:false},
+    {date:'22.03.2021',time:'15:30',message:'Автоматическое возобновление публикаций выключено', read:false},
     {date:'21.03.2021',time:'13:30',message:'Автоматическое возобновление публикаций выключено', read:true},
     {date:'20.03.2021',time:'11:30',message:'Автоматическое возобновление публикаций выключено', read:true},
 ]
@@ -38,19 +39,20 @@ const AgentRoleTabs  = () => {
     return (
         <VerticalTabs
             link={true}
+            className={css.verticalTabsMargin}
             tabs={[
                 { title: "Личный кабинет", Component: <PersonalCabinetTab /> },
                 { title: "Заявки", Component: <ApplicationsViewTab /> },
                 { title: "Мои объявления", Component: <MyAds /> },
                 { title: "Тарифы размещения", Component: <PlacementRates /> },
                 { title: "Профпоиск", Component: <ProfSearch /> },
-                { title: "Сообщения", Component: <Messages /> },
-                { title: "Уведомления", Component: <AgentsNotifications
+                /*{ title: "Сообщения", Component: <Messages /> },*/
+                /*{ title: "Уведомления", Component: <AgentsNotifications
                         onRead={onRead}
                         onReadAll={onReadAll}
                         notification={notification}
                         onDelete={deleteNotification}
-                    /> },
+                    /> },*/
             ]}
         />
     )

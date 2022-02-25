@@ -16,7 +16,7 @@ type PersonalCabinetSettingsType123 = {
     }
 }
 
-const PersonalCabinetSettings :FC<PersonalCabinetSettingsType123> = ({personalCabinet}) => {
+const PersonalCabinetSettings: FC<PersonalCabinetSettingsType123> = ({personalCabinet}) => {
 
     const [edit, setEdit] = useState<boolean>(false)
     const [valuePhones, setValuePhones] = useState<Array<string>>(personalCabinet.phones)
@@ -26,14 +26,13 @@ const PersonalCabinetSettings :FC<PersonalCabinetSettingsType123> = ({personalCa
     const [valueMessagePhone, setValueMessagePhone] = useState<string>(personalCabinet.messagePhone)
     const [valueMessageEmail, setValueMessageEmail] = useState<string>(personalCabinet.messageEmail)
 
-
     const createPhone = () => {
         const newPhone = [...personalCabinet.phones]
         newPhone.push('')
         setValuePhones(newPhone)
     }
 
-    const changePhone =(index:number,e:string)=>{
+    const changePhone = (index: number, e: string) => {
         const phone = [...valuePhones]
         phone[index] = e
         setValuePhones(phone)
@@ -41,98 +40,59 @@ const PersonalCabinetSettings :FC<PersonalCabinetSettingsType123> = ({personalCa
 
     return (
         <div>
-            <div>
-                <div style={{display: 'flex', justifyContent: "space-between"}}>
-                    <Typography weight={"bold"} className={css.marginSubTitle}>
-                        Телефоны
-                    </Typography>
-                    <div style={{display: 'flex', alignItems: 'center'}}>
-                        <div style={{cursor: edit ? 'pointer' : '', padding: "0 15px"}} onClick={() => {
-                            if (edit) createPhone()
-                        }}>
-                            <Typography>
-                                + Добавить телефон
-                            </Typography>
-                        </div>
-                        <div>
-                            <BaseButton
-                                onClick={() => setEdit(!edit)}
-                                className={edit ? css.redact_border : css.redact}
-                            >
-                                Редактировать настройки
-                            </BaseButton>
-                        </div>
-                    </div>
-                </div>
+            {/*<div>*/}
+            {/*    <div style={{display: 'flex', justifyContent: "space-between"}}>*/}
+            {/*        <Typography weight={"bold"} className={css.marginSubTitle}>*/}
+            {/*            Телефоны*/}
+            {/*        </Typography>*/}
+            {/*        <div style={{display: 'flex', alignItems: 'center'}}>*/}
+            {/*            <div style={{cursor: edit ? 'pointer' : '', padding: "0 15px"}} onClick={() => {*/}
+            {/*                if (edit) createPhone()*/}
+            {/*            }}>*/}
+            {/*                <Typography>*/}
+            {/*                    + Добавить телефон*/}
+            {/*                </Typography>*/}
+            {/*            </div>*/}
+            {/*            <div>*/}
+            {/*                <BaseButton*/}
+            {/*                    onClick={() => setEdit(!edit)}*/}
+            {/*                    className={edit ? css.redact_border : css.redact}*/}
+            {/*                >*/}
+            {/*                    Редактировать настройки*/}
+            {/*                </BaseButton>*/}
+            {/*            </div>*/}
+            {/*        </div>*/}
+            {/*    </div>*/}
 
-                <div style={{display: 'flex', flexWrap: "wrap"}}>
+            {/*    <div style={{display: 'flex', flexWrap: "wrap"}}>*/}
+            {/*        {*/}
+            {/*            valuePhones.map((p, index) => (*/}
+            {/*               <InputArray*/}
+            {/*                   value={p}*/}
+            {/*                   index={index}*/}
+            {/*                   edit={edit}*/}
+            {/*                   key={index}*/}
+            {/*                   onChange={(e)=>changePhone(index,e)}*/}
+            {/*               />*/}
+            {/*            ))*/}
+            {/*        }*/}
+            {/*    </div>*/}
+            {/*</div>*/}
+
+            <div>
+                <div className={css.df_jc_ai}>
+                    <Typography weight={"bold"} className={css.marginSubTitle}>
+                        Данные регистрации
+                    </Typography>
                     {
-                        valuePhones.map((p, index) => (
-                           <InputArray
-                               value={p}
-                               index={index}
-                               edit={edit}
-                               key={index}
-                               onChange={(e)=>changePhone(index,e)}
-                           />
-                        ))
+                        !edit &&
+                        <BaseButton onClick={()=>setEdit(!edit)} className={css.styleButton}>
+                            Редактировать настройки
+                        </BaseButton>
                     }
                 </div>
-            </div>
-
-            <div>
-                <Typography weight={"bold"} className={css.marginSubTitle}>
-                    Данные регистрации
-                </Typography>
-                <div style={{display: 'flex'}}>
-                    <div className={css.marginColumn}>
-                        <Typography color={"tertiary"} className={css.marginTypo}>
-                            Логин
-                        </Typography>
-                        <BaseInput
-                            value={valueLogin}
-                            onChange={(e) => setValueLogin(e.currentTarget.value)}
-                            disabled={!edit}
-                            className={css.marginInput}/>
-                    </div>
-                </div>
-                <div style={{display: 'flex'}}>
-                    <div style={{display: 'flex'}}>
-                        <div className={css.marginColumn}>
-                            <Typography color={"tertiary"} className={css.marginTypo}>
-                                Старый пароль
-                            </Typography>
-                            <BaseInput
-                                value={valuePasswordOld}
-                                onChange={e => setValuePasswordOld(e.currentTarget.value)}
-                                disabled={!edit}
-                                className={css.marginInput}
-                            />
-                        </div>
-                    </div>
-                    <div style={{display: 'flex'}}>
-                        <div className={css.marginColumn}>
-                            <Typography color={"tertiary"} className={css.marginTypo}>
-                                Новый пароль
-                            </Typography>
-                            <BaseInput
-                                value={valuePasswordNew}
-                                onChange={e => setValuePasswordNew(e.currentTarget.value)}
-                                disabled={!edit}
-                                className={css.marginInput}
-                            />
-                        </div>
-                    </div>
-                    <BaseButton className={css.marginButton} type={"secondary"}>Сохранить</BaseButton>
-                </div>
-            </div>
-
-            <div>
-                <Typography weight={"bold"} className={css.marginSubTitle}>
-                    Уведомления
-                </Typography>
-                <div style={{display: 'flex'}}>
-                    <div className={css.marginColumn}>
+                <div className={css.marginColumn} style={{display: 'flex'}} >
+                    <div style={{marginRight:"20px"}}>
                         <Typography color={"tertiary"} className={css.marginTypo}>
                             Телефон
                         </Typography>
@@ -143,7 +103,7 @@ const PersonalCabinetSettings :FC<PersonalCabinetSettingsType123> = ({personalCa
                             className={css.marginInput}
                         />
                     </div>
-                    <div className={css.marginColumn}>
+                    <div >
                         <Typography color={"tertiary"} className={css.marginTypo}>
                             E-mail
                         </Typography>
@@ -155,22 +115,101 @@ const PersonalCabinetSettings :FC<PersonalCabinetSettingsType123> = ({personalCa
                         />
                     </div>
                 </div>
+
+                {/*<div style={{display: 'flex'}}>*/}
+                {/*    <div className={css.marginColumn}>*/}
+                {/*        <Typography color={"tertiary"} className={css.marginTypo}>*/}
+                {/*            Логин*/}
+                {/*        </Typography>*/}
+                {/*        <BaseInput*/}
+                {/*            value={valueLogin}*/}
+                {/*            onChange={(e) => setValueLogin(e.currentTarget.value)}*/}
+                {/*            disabled={!edit}*/}
+                {/*            className={css.marginInput}/>*/}
+                {/*    </div>*/}
+                {/*</div>*/}
+                <div style={{display: 'flex'}}>
+                    <div style={{display: 'flex'}}>
+                        <div className={css.marginColumn}>
+                            <Typography color={"tertiary"} className={css.marginTypo}>
+                                {
+                                    !edit ? 'Пароль'
+                                        : 'Старый пароль'
+                                }
+                            </Typography>
+                            <BaseInput
+                                type={'password'}
+                                value={valuePasswordOld}
+                                onChange={e => setValuePasswordOld(e.currentTarget.value)}
+                                disabled={!edit}
+                                className={css.marginInput}
+                            />
+                        </div>
+                    </div>
+                    {
+                        edit &&
+                        <div style={{display: 'flex'}}>
+                            <div className={css.marginColumn}>
+                                <Typography color={"tertiary"} className={css.marginTypo}>
+                                    Новый пароль
+                                </Typography>
+                                <BaseInput
+                                    type={'password'}
+                                    value={valuePasswordNew}
+                                    onChange={e => setValuePasswordNew(e.currentTarget.value)}
+                                    disabled={!edit}
+                                    className={css.marginInput}
+                                />
+                            </div>
+                        </div>
+                    }
+
+                    <div style={{display: 'flex'}}>
+                        {/*<div className={css.marginColumn}>*/}
+                        {/*    <Typography color={"tertiary"} className={css.marginTypo}>*/}
+                        {/*        Новый пароль*/}
+                        {/*    </Typography>*/}
+                        {/*    <BaseInput*/}
+                        {/*        value={valuePasswordNew}*/}
+                        {/*        onChange={e => setValuePasswordNew(e.currentTarget.value)}*/}
+                        {/*        disabled={!edit}*/}
+                        {/*        className={css.marginInput}*/}
+                        {/*    />*/}
+                        {/*</div>*/}
+                    </div>
+                    {/*<BaseButton className={css.marginButton} type={"secondary"}>Сохранить</BaseButton>*/}
+                </div>
             </div>
-            <div className={css.marginColumn}>
-                <BaseButton type={"secondary"} onClick={() => setEdit(false)} isActive>Сохранить</BaseButton>
-            </div>
+
+            {/*<div>*/}
+            {/*    <Typography weight={"bold"} className={css.marginSubTitle}>*/}
+            {/*        Уведомления*/}
+            {/*    </Typography>*/}
+            {/*    <div style={{display: 'flex'}}>*/}
+
+
+            {/*    </div>*/}
+            {/*</div>*/}
+
+            {
+                edit &&
+                <div className={css.marginColumn}>
+                    <BaseButton type={"secondary"} onClick={() => setEdit(false)} isActive>Сохранить</BaseButton>
+                </div>
+            }
+
         </div>
     )
 }
 
-type InputArrayType ={
-    index:number
-    edit:boolean
-    value:string
-    onChange:(e:string)=>void
+type InputArrayType = {
+    index: number
+    edit: boolean
+    value: string
+    onChange: (e: string) => void
 }
 
-const InputArray :FC<InputArrayType>= ({index,edit,value,onChange}) => {
+const InputArray: FC<InputArrayType> = ({index, edit, value, onChange}) => {
     return (
         <div className={css.marginColumn}>
             <Typography color={"tertiary"} className={css.marginTypo}>
@@ -179,7 +218,7 @@ const InputArray :FC<InputArrayType>= ({index,edit,value,onChange}) => {
             <BaseInput
                 disabled={!edit}
                 value={value}
-                onChange={e=>onChange(e.currentTarget.value)}
+                onChange={e => onChange(e.currentTarget.value)}
                 className={css.marginInput}
             />
         </div>

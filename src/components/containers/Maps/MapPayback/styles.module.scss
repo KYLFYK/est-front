@@ -38,22 +38,15 @@
     }
 }
 
-.title {
-
-}
-
 .text {
-
     margin: 10px 0 30px 0;
 }
 
 .point {
-
     margin: 10px 0 0 0;
 }
 
 .value {
-
     font-weight: 300;
     margin: 4px 0 0 0;
 }
@@ -222,9 +215,17 @@
 }
 
 .description {
+    font-family: "MontserratRegular" !important;
+    font-size: 16px;
     padding: 9px 0 14px 16px;
+    color: $BLACK;
 }
 
 .price {
+    font-family: "MontserratBold" !important;
+    font-size: 20px;
     color: $NUDE;
+}
+.border{
+    border-radius: 6px;
 }

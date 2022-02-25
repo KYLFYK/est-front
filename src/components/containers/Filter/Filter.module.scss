@@ -43,6 +43,12 @@
     @include for-size(KT3) {
         width: auto;
     }
+    &:hover{
+        background-color: $SECONDARYBUTTONHOVER
+    }
+    &:active{
+        background-color: $PRESSED
+    }
 }
 
 .actionDropdownUnion {

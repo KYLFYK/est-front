@@ -11,40 +11,39 @@ import DeveloperRisksTab from "./components/Risks/DeveloperRisksTab"
 import DeveloperStatisticTab from "./components/Statistic/DeveloperStatisticTab"
 
 export interface IDeveloperTabsData {
-    about: string[],
-    contacts: IOption<IArticleGeneral>[],
-    requisits: IOption<IArticleGeneral>[],
-    owners: {
+    about?: string[],
+    contacts?: IOption<IArticleGeneral>[],
+    requisits?: IOption<IArticleGeneral>[],
+    owners?: {
         company: IDeveloperCompanyData,
         goverment: IOption<IArticleGeneral>[]
     },
-    activities: {
+    activities?: {
         primary: string[],
         secondary: string[]
     },
-    news: IDeveloperArticleItem[],
-    statistics: IOption<IArticleGeneral[]>[],
-    risks: IOption<IArticleGeneral>[],
+    news?: IDeveloperArticleItem[],
+    statistics?: IOption<IArticleGeneral[]>[],
+    risks?: IOption<IArticleGeneral>[],
 }
 interface Props {
     tabsData: IDeveloperTabsData
 }
 
 const DeveloperTabs: React.FC<Props> = ({ tabsData: { news, statistics, risks, activities, owners, requisits, contacts, about } }) => {
+    let tab = []
+    if (about && about.length) tab.push({ title: "О застройщике", Component: <DeveloperAbout paragraphs={about} /> })
+    if (contacts && contacts.length) tab.push({ title: "Контакты", Component: <DeveloperContacts items={contacts} /> })
+    if (requisits && requisits.length) tab.push({ title: "Реквизиты", Component: <DeveloperRequisites items={requisits} /> })
+    if (owners) tab.push({ title: "Учредители", Component: <DeveloperOwners companyData={owners.company} govermentData={owners.goverment} /> })
+    if (activities) tab.push({ title: "Виды деятельности", Component: <DeveloperActivity primaryActivities={activities.primary} secondaryActivities={activities.secondary} /> })
+    if (news && news.length) tab.push({ title: "СМИ о застройщике", Component: <DeveloperMassMedia articlesItems={news} /> })
+    if (statistics && statistics.length) tab.push({ title: "Статистика", Component: <DeveloperStatisticTab items={statistics} /> })
+    if (risks && risks.length) tab.push({ title: "Риски", Component: <DeveloperRisksTab items={risks} /> })
     return (
         <VerticalTabs
             link={false}
-            tabs={[
-                { title: "О застройщике", Component: <DeveloperAbout paragraphs={about} /> },
-                { title: "Контакты", Component: <DeveloperContacts items={contacts} /> },
-                { title: "Реквизиты", Component: <DeveloperRequisites items={requisits} /> },
-                { title: "Учредители", Component: <DeveloperOwners companyData={owners.company} govermentData={owners.goverment} /> },
-                { title: "Виды деятельности", Component: <DeveloperActivity primaryActivities={activities.primary} secondaryActivities={activities.secondary} /> },
-                { title: "СМИ о застройщике", Component: <DeveloperMassMedia articlesItems={news} /> },
-                { title: "Статистика", Component: <DeveloperStatisticTab items={statistics} /> },
-                { title: "Риски", Component: <DeveloperRisksTab items={risks} /> },
-
-            ]}
+            tabs={tab}
         />
     )
 }

@@ -16,7 +16,7 @@ export const PersonalArea: FC = observer(() => {
     const [edit, setEdit] = useState<boolean>(false)
 
     const store = useStoreDeveloperCabinet()
-
+    store.get()
     useEffect(() => {
         store.fetch()
     }, [store])

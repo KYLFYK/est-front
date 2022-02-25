@@ -129,7 +129,7 @@ const AccountEditDeveloper: FC<AccountEditType> = observer(({onEdit}) => {
                     <div className={css.df_jc}>
                         <div style={{width: '50vw'}}>
                             <div className={css.df}>
-                                <div className={css.marginColumn} style={{width: "40%"}}>
+                                <div className={css.marginColumn} style={{width: "100%"}}>
                                     <Typography color={'tertiary'} className={css.marginTypo}>
                                         Название Компании
                                     </Typography>
@@ -139,7 +139,7 @@ const AccountEditDeveloper: FC<AccountEditType> = observer(({onEdit}) => {
                                         className={css.styleButton}
                                     />
                                 </div>
-                                <div className={css.marginColumn} style={{width: "40%"}}>
+                                <div className={css.marginColumn} style={{width: "100%"}}>
                                     <Typography color={'tertiary'} className={css.marginTypo}>
                                         Тип застройщика
                                     </Typography>
@@ -151,16 +151,17 @@ const AccountEditDeveloper: FC<AccountEditType> = observer(({onEdit}) => {
                                         className={css.styleButton}
                                     />
                                 </div>
-                                <div className={css.marginColumn} style={{width: "40%"}}>
-                                    <Typography color={'tertiary'} className={css.marginTypo}>
-                                        Адрес
-                                    </Typography>
-                                    <BaseInput
-                                        value={valueAddress}
-                                        onChange={e => setValueAddress(e.currentTarget.value)}
-                                        className={css.styleButton}
-                                    />
-                                </div>
+
+                            </div>
+                            <div className={css.marginColumn} style={{width: "98%"}}>
+                                <Typography color={'tertiary'} className={css.marginTypo}>
+                                    Адрес
+                                </Typography>
+                                <BaseInput
+                                    value={valueAddress}
+                                    onChange={e => setValueAddress(e.currentTarget.value)}
+                                    className={css.styleButton}
+                                />
                             </div>
                             <div className={css.df}>
                                 <div className={css.marginColumn} style={{width: "40%"}}>

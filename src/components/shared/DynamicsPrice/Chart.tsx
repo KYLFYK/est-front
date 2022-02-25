@@ -184,7 +184,7 @@ export const Chart: React.FC<Props> = ({
         <XAxis
           interval={0}
           dataKey="name"
-          padding={{ left: 30, right: 30 }}
+          domain={[minY, maxY]}
           tick={customTickX}
         />
         <YAxis

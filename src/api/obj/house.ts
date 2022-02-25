@@ -5,9 +5,8 @@ import {conversionDate} from "../../utils/conversionDate/conversionDate";
 export const HouseApi  = {
     getAllHouse: async (skip = 0, take = 10) =>{
         try{
-            const res = await instance.get(`${UrlObj.house}`, {skip, take})
-
-            console.log("res", res.data)
+            const res = await instance.get(`${UrlObj.house}`, {params: {skip: skip, take: take}})
+            return res
         }
         catch (e){
             console.log('error', e)

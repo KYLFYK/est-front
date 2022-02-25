@@ -9,24 +9,9 @@ import BaseButton from "../../../../../../../shared/BaseButton/BaseButtons";
 import ViewingLetter from "./message/ViewingLetter";
 import ViewingBell from "./message/ViewingBell";
 import css from './ViewingApplication.module.scss'
+import { observer } from "mobx-react-lite"
+import {useAgentReqStore} from '../../../../../../../../mobx/role/agent/request/AgentReq'
 
-const agents = [
-    {
-        name: "Евгений",
-        email: 'evgeniy@mail.ru',
-        phone: '+7 999 888 77 11',
-        convenientTime: '11:00-12:50',
-        applicationDate: '27.08.2021',
-        applicationTime: '13:00',
-        agentName: 'Валерий Сидоров',
-        typeContract: 'Аренда',
-        object: '3-этажный коттедж',
-        priceObject: '10 000 000',
-        status: 'Новая заявка',
-        idOffers: '1',
-        url: '123',
-    }
-]
 export const useStyles = makeStyles(() => ({
         select: {
             height: 40,
@@ -72,8 +57,6 @@ export const useStyles = makeStyles(() => ({
             justifyContent: 'center',
             width: "100%",
         }
-
-
     })
 )
 
@@ -82,7 +65,8 @@ const options = [
     {value: 'letter', label: 'Письмо'},
 ]
 type ViewingApplicationType = {
-    onClick: () => void
+    onClick: any,
+    id: string,
     applicationsView: Array<{
         id:string
         type:string
@@ -106,7 +90,9 @@ type ViewingApplicationType = {
 
 
 
-const ViewingApplication: FC<ViewingApplicationType> = ({onClick, applicationsView,onAddSchedule,onAddMessage}) => {
+const ViewingApplication: FC<ViewingApplicationType> = ({id, onClick, applicationsView, onAddSchedule, onAddMessage}) => {
+
+    const store = useAgentReqStore()    
 
     const date = new Date
     const functionZeroDate = (date:string) =>{
@@ -173,7 +159,7 @@ const ViewingApplication: FC<ViewingApplicationType> = ({onClick, applicationsVi
             <Typography weight={"bold"}>
                 Заявка
             </Typography>
-            <ApplicationsViewCatalog agents={agents}/>
+            <ApplicationsViewCatalog agents={store.get().data.filter((a: any) => a.id === id)}/>
             <Typography weight={"bold"}>
                 Новое действие
             </Typography>
@@ -198,7 +184,7 @@ const ViewingApplication: FC<ViewingApplicationType> = ({onClick, applicationsVi
                             </Typography>
                             <BaseInput
                                 className={classes.heightInput}
-                                value={agents[0].phone}
+                                value={store.initialData.data[0].phone}
                                 disabled={true}/>
                         </div>
                         <div>
@@ -207,7 +193,7 @@ const ViewingApplication: FC<ViewingApplicationType> = ({onClick, applicationsVi
                             </Typography>
                             <BaseInput
                                 className={classes.heightInput}
-                                value={agents[0].name}
+                                value={store.initialData.data[0].name}
                                 disabled={true}/>
                         </div>
                         <div style={{display: 'flex', flexDirection: 'column',alignItems:'flex-end'}}>

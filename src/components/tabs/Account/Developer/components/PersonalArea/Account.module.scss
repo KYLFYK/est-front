@@ -2,7 +2,8 @@
 @import "src/app/styles/typography";
 
 .tabsWrapper {
-  margin: 0 0 30px 0;
+  margin: 0 0 20px 0;
+
 }
 
 .wrapper {
@@ -11,9 +12,11 @@
 }
 
 .profile {
+  margin-top: 10px;
   display: flex;
   gap: 110px;
-
+  justify-content: space-between;
+  width: 100%;
   form {
     display: flex;
     flex-direction: column;
@@ -26,13 +29,18 @@
 .input {
   min-width: 290px;
   width: 100%;
-
+  border: none;
+  background: #FFFFFF;
+  padding-left: 0 !important;
+  position: relative;
+  right: 15px;
   &Wrapper {
     display: flex;
+    flex-direction: column;
     //justify-content: space-between;
-    gap: 20px;
+    //gap: 20px;
     width: 100%;
-
+    margin-right: 10px;
     div {
       width: fit-content;
     }
@@ -49,9 +57,16 @@
   width: 100%;
   display: flex;
   align-items: flex-start;
+  flex-direction: column;
   gap: 20px;
   height: 150px;
-
+  border: none;
+  background: #FFFFFF;
+  textarea{
+    position: relative;
+    right: 15px;
+    padding: 0;
+  }
   div {
     width: fit-content;
   }
@@ -129,4 +144,13 @@
       margin-left: 174px;
     }
   }
+}
+.buttonHeight{
+  height: 40px;
+  min-width: 200px;
+  margin-left: 15px;
+  font-size: 14px;
+}
+.marginB_20{
+  margin-bottom:20px ;
 }

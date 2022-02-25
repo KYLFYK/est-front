@@ -28,7 +28,7 @@ const PersonalCabinetTab = observer(() => {
             {
                 !edit
                     ? <HorizontalTabs tabs={[
-                        {title: "Статистика", Component: <PersonalCabinetStatistics/>},
+                        /*{title: "Статистика", Component: <PersonalCabinetStatistics/>},*/
                         {
                             title: "Аккаунт",
                             Component: <PersonalCabinetAccountInfo onEdit={() => setEdit(true)}/>

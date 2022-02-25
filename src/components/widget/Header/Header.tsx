@@ -63,8 +63,8 @@ const personalAcc = [
     { title: "Мои объявления", href: "/ads", message: 0 },
     { title: "Тарифы размещения", href: "/tariff", message: 12 },
     { title: "Профпоиск", href: "/search", message: 3 },
-    { title: "Сообщения", href: "/messages", message: 0 },
-    { title: "Уведомления", href: "/notifications", message: 0 },
+    /*{ title: "Сообщения", href: "/messages", message: 0 },
+    { title: "Уведомления", href: "/notifications", message: 0 },*/
   ],
   [
     //'owner'(customer)
@@ -82,7 +82,7 @@ const personalAcc = [
     { title: "Профиль: Застройшик", href: "/", message: 0 },
     { title: "Личный кабинет", href: "/cabinet", message: 0 },
     { title: "Мои объекты", href: "/ads", message: 0 },
-    { title: "Уведомления", href: "/notifications", message: 5 },
+    /*{ title: "Уведомления", href: "/notifications", message: 5 },*/
   ],
   [
     //'admin'

@@ -57,11 +57,17 @@
 body{
   margin: 0;
 }
-
 #__next {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
 }
-
-
+/*.slick-initialized { overflow: hidden; }*/
+/*.slick-next {arrows: false}*/
+/*table-agent - material UI*/
+.css-1howxi1-MuiTableCell-root{
+  padding: 6px 0 !important;
+}
+.css-dsuxgy-MuiTableCell-root{
+  padding: 6px 0 !important;
+}
