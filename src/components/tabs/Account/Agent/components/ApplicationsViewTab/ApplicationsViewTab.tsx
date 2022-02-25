@@ -67,22 +67,23 @@ const ApplicationsViewTab: React.FC<Props> = observer(() => {
     useEffect(() => {
         store.fetchReqs(28)
     },[])
-    
+
     return (
         <>
             {
                 store.initialData.loading 
                 ? <Loader/>
-                : !edit
+                : !edit.edit
                     ? <HorizontalTabs tabs={[
-                        {title: "Каталог заявок", Component: <ApplicationsViewCatalog agents={store.get().data} onClick={setEdit} />},
+                        {title: "Каталог заявок", Component: <ApplicationsViewCatalog agents={store.get().data} setEdit={setEdit} />},
                         /*{title: "Статистика", Component: <ApplicationsViewStatistics />}*/
                     ]}/>
                     : <ViewingApplication
                         onAddSchedule={addSchedule}
                         onAddMessage={addMessage}
                         applicationsView={applicationsView}
-                        onClick={()=>setEdit(false)}
+                        onClick={setEdit}
+                        id={edit.id}
                     />
             }
         </>

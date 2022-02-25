@@ -65,7 +65,8 @@ const options = [
     {value: 'letter', label: 'Письмо'},
 ]
 type ViewingApplicationType = {
-    onClick: () => void
+    onClick: any,
+    id: string,
     applicationsView: Array<{
         id:string
         type:string
@@ -89,9 +90,9 @@ type ViewingApplicationType = {
 
 
 
-const ViewingApplication: FC<ViewingApplicationType> = ({onClick, applicationsView, onAddSchedule, onAddMessage}) => {
+const ViewingApplication: FC<ViewingApplicationType> = ({id, onClick, applicationsView, onAddSchedule, onAddMessage}) => {
 
-    const store = useAgentReqStore()
+    const store = useAgentReqStore()    
 
     const date = new Date
     const functionZeroDate = (date:string) =>{
@@ -158,7 +159,7 @@ const ViewingApplication: FC<ViewingApplicationType> = ({onClick, applicationsVi
             <Typography weight={"bold"}>
                 Заявка
             </Typography>
-            <ApplicationsViewCatalog agents={store.initialData}/>
+            <ApplicationsViewCatalog agents={store.get().data.filter((a: any) => a.id === id)}/>
             <Typography weight={"bold"}>
                 Новое действие
             </Typography>
