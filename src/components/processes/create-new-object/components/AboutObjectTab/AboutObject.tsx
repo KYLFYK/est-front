@@ -1,8 +1,11 @@
 import { observer } from "mobx-react-lite";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useStores } from "../../../../../hooks/useStores";
 import { ICreateHouseAboutTab } from "../../../../../mobx/types/CreateObjectStoresTypes/CreateHouseStoreType";
-import { ObjectTypes } from "../../../../../utils/interfaces/objects";
+import {
+  NewObjectActionTypes,
+  ObjectTypes,
+} from "../../../../../utils/interfaces/objects";
 import {
   DROPDOWN_CITY_OPTIONS,
   DROPDOWN_COUNTRY_OPTIONS,
@@ -14,6 +17,7 @@ import CounterButtons from "../../../../shared/CounterButtons/CounterButtons";
 import Typography from "../../../../shared/Typography/Typography";
 import {
   getInitStateAboutTab,
+  getObjType,
   isValidInputsAboutTab,
   TAboutTabState,
 } from "../../lib";
@@ -24,9 +28,11 @@ import InputsGroup from "../InputsGroup/InputsGroup";
 import s from "./AboutObject.module.scss";
 import { FormController, useForm } from "../../../../containers/FormController";
 import { ObjectGuides } from "../../../../../mobx/stores/objects/GuidesStore";
+import { IObjType } from "../../../../tabs/Account/Agent/components/Others/MyAdsContainer/MyAdsContainer";
 
 interface Props extends ICreateObjectControls {
   objectType: ObjectTypes;
+  action: NewObjectActionTypes;
 }
 
 interface IForm {
@@ -40,8 +46,17 @@ interface IForm {
   cost: string;
 }
 
+const actionToText: (action: NewObjectActionTypes) => IObjType = (action) => {
+  switch (action) {
+    case NewObjectActionTypes.RENT:
+      return "rent";
+    case NewObjectActionTypes.SELL:
+      return "sale";
+  }
+};
+
 const AboutObjectTab: React.FC<Props> = observer(
-  ({ onNextTab, onPrevTab, objectType }) => {
+  ({ onNextTab, onPrevTab, objectType, action }) => {
     const guidesStore = ObjectGuides;
 
     const [form] = useForm<IForm>({
@@ -59,6 +74,7 @@ const AboutObjectTab: React.FC<Props> = observer(
     const [values, setValues] = React.useState<TAboutTabState>(
       getInitStateAboutTab(objectType, createObjectStore)
     ); // 1-type Object  2-
+    const [objType, setType] = useState(getObjType(createObjectStore));
     const [isValid, setIsValid] = useState<boolean>(true);
     const saveAboutTab = createObjectStore.saveAboutTab.bind(createObjectStore);
 
@@ -77,7 +93,7 @@ const AboutObjectTab: React.FC<Props> = observer(
         objectType,
         isValidName,
         isValidType,
-        isValidComplexName,
+        true,
         isValidCountry,
         isValidCity,
         isValidIndex,
@@ -91,6 +107,12 @@ const AboutObjectTab: React.FC<Props> = observer(
         setIsValid(isValid);
       }
     };
+
+    useEffect(() => {
+      if (objType !== actionToText(action)) {
+        setType(actionToText(action));
+      }
+    }, [action]);
 
     const handlePrev = () => {
       onPrevTab();

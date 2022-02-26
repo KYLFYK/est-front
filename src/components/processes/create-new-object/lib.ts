@@ -70,6 +70,10 @@ export const getInitStateAboutTab = (
   }
 };
 
+export const getObjType = (createObjectStore: ICreateObject) => {
+  return createObjectStore.objType;
+};
+
 export const getInitialStateGeneralInfoTab = (
   objectType: ObjectTypes,
   createObjectStore: ICreateObject

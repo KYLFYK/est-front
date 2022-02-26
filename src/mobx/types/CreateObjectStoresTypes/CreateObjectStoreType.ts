@@ -2,6 +2,7 @@ import { ICreateObjectAparts } from "./CreateApartmentStoreType";
 import { ICreateObjectHouse } from "./CreateHouseStoreType";
 import { ICreateObjectLand } from "./CreateLandStoreType";
 import { ICreateObjectTownhouse } from "./CreateTownhouseStoreType";
+import { IObjType } from "../../../components/tabs/Account/Agent/components/Others/MyAdsContainer/MyAdsContainer";
 
 export interface ICreateObjectModel<A, B, C, D, E> {
   about: A;
@@ -16,4 +17,5 @@ export interface ICreateObject {
   land: ICreateObjectLand;
   house: ICreateObjectHouse;
   townhouse: ICreateObjectTownhouse;
+  objType: IObjType;
 }

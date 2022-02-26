@@ -23,6 +23,7 @@ const NewObjectPage: NextPage = () => {
         <FormScreen
           objectType={objectType}
           clearObjectType={() => setObjectType(undefined)}
+          action={action}
         />
       ) : (
         <StartScreen

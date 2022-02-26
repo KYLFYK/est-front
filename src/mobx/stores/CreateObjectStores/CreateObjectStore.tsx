@@ -48,12 +48,14 @@ import CreateLandStore from "./CreateLandStore";
 import CreateTownhouseStore from "./CreateTownhouseStore";
 import { createObjectAPI } from "../../../api/createObjects/createObject";
 import jwt_decode from "jwt-decode";
+import { IObjType } from "../../../components/tabs/Account/Agent/components/Others/MyAdsContainer/MyAdsContainer";
 
 class CreateObjectStore implements ICreateObject {
   apartment: CreateApartmentStore = new CreateApartmentStore();
   townhouse: CreateTownhouseStore = new CreateTownhouseStore();
   land: CreateLandStore = new CreateLandStore();
   house: CreateHouseStore = new CreateHouseStore();
+  objType: IObjType = "sale";
 
   saveAboutTab(data: TAboutTabState, objectType: ObjectTypes) {
     switch (objectType) {
@@ -228,19 +230,20 @@ class CreateObjectStore implements ICreateObject {
 
       const newApartmentData = new FormData();
 
+      console.log("type", this.objType);
+
       newApartmentData.set("name", newData.about.name);
-      newApartmentData.set("objectType", newData.about.name);
+      newApartmentData.set("objectType", this.objType);
       newApartmentData.set("description", newData.generalInfo.description);
       newApartmentData.set("address", newData.about.address);
       newApartmentData.set("postcode", newData.about.index);
       newApartmentData.set("longitude", "31.45");
       newApartmentData.set("latitude", "31.45");
       newApartmentData.set("region", "1");
-      newApartmentData.set("country", newData.about.country);
-      newApartmentData.set("city", newData.about.city);
+      newApartmentData.set("country", "1");
+      newApartmentData.set("city", "1");
       newApartmentData.set("owner", idOwner.id);
       newApartmentData.set("status", "1");
-      newApartmentData.set("markAsDelete", "false");
       newApartmentData.set("price", newData.about.cost);
       newApartmentData.set("complex", "1");
       newApartmentData.set(
@@ -261,11 +264,28 @@ class CreateObjectStore implements ICreateObject {
             startDate: newData.legalPurity.previousFounder.ownershipFrom,
             finishDate: newData.legalPurity.previousFounder.ownershipTo,
           },
-          encumbrances: [],
-          recomendations: [],
+          encumbrances: [
+            {
+              title: "На дом наложен арест",
+              status: false,
+              description: null,
+            },
+            {
+              title: "Записей об аренде не найдено",
+              status: false,
+              description: null,
+            },
+          ],
+          recomendations: [
+            {
+              title: "Дом в собственности менее 5 лет",
+              description:
+                "При продаже продавец скорее всего должен будет заплатить налог с её продажи",
+            },
+          ],
         })
       );
-      newApartmentData.set("guides", JSON.stringify(guides));
+      newApartmentData.set("guides", guides.join(", "));
       newApartmentData.set(
         "property",
         JSON.stringify({

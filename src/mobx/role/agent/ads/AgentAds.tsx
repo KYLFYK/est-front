@@ -86,6 +86,10 @@ class AgentAdsStore {
     ],
   };
 
+  setLoading() {
+    this.initialData.loading = true;
+  }
+
   async fetch() {
     const loadAllData: () => any = async () => {
       let i = 0;
