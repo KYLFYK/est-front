@@ -175,8 +175,10 @@ class CreateObjectStore implements ICreateObject {
         ? (localStorage.getItem("accessEstatum") as string)
         : ("123" as string)
     );
+
     console.log("-fetch", data);
     console.log("-idOwner", idOwner.id);
+
     if (objectType === 0) {
       const newData: any = data;
 
@@ -224,22 +226,26 @@ class CreateObjectStore implements ICreateObject {
         guides.push(Number(newData.info.parking));
       }
 
-      const apartmentData = {
-        name: newData.about.name,
-        description: newData.generalInfo.description,
-        address: newData.about.address,
-        postcode: newData.about.index,
-        longitude: 31.45,
-        latitude: 31.45,
-        region: 1,
-        country: newData.about.country,
-        city: newData.about.city,
-        owner: idOwner.id,
-        status: 1,
-        markAsDelete: false,
-        price: newData.about.cost,
-        complex: 1,
-        legalPurity: {
+      const newApartmentData = new FormData();
+
+      newApartmentData.set("name", newData.about.name);
+      newApartmentData.set("objectType", newData.about.name);
+      newApartmentData.set("description", newData.generalInfo.description);
+      newApartmentData.set("address", newData.about.address);
+      newApartmentData.set("postcode", newData.about.index);
+      newApartmentData.set("longitude", "31.45");
+      newApartmentData.set("latitude", "31.45");
+      newApartmentData.set("region", "1");
+      newApartmentData.set("country", newData.about.country);
+      newApartmentData.set("city", newData.about.city);
+      newApartmentData.set("owner", idOwner.id);
+      newApartmentData.set("status", "1");
+      newApartmentData.set("markAsDelete", "false");
+      newApartmentData.set("price", newData.about.cost);
+      newApartmentData.set("complex", "1");
+      newApartmentData.set(
+        "legalPurity",
+        JSON.stringify({
           address: newData.legalPurity.realEstateRegister.address,
           areaValue: newData.legalPurity.realEstateRegister.generalSquare,
           areaUnits: "м2",
@@ -257,9 +263,12 @@ class CreateObjectStore implements ICreateObject {
           },
           encumbrances: [],
           recomendations: [],
-        },
-        guides: guides,
-        property: {
+        })
+      );
+      newApartmentData.set("guides", JSON.stringify(guides));
+      newApartmentData.set(
+        "property",
+        JSON.stringify({
           floor: newData.about.floor,
           totalFloor: newData.about.floorsAmmount,
           area: newData.generalInfo.generalSquare,
@@ -286,13 +295,16 @@ class CreateObjectStore implements ICreateObject {
               value: "foundation",
             },
           ],
-        },
-      };
+        })
+      );
 
       console.log("all ok");
+      console.log("sentData", newApartmentData);
 
       try {
-        const res = await createObjectAPI.createObjectApartment(apartmentData);
+        const res = await createObjectAPI.createObjectApartment(
+          newApartmentData
+        );
         console.log("response apartment", res);
         return res;
       } catch (e) {
