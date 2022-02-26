@@ -22,9 +22,9 @@ import {
   GuideObject,
   ObjectGuides,
 } from "../../../../mobx/stores/objects/GuidesStore";
+import { toJS } from "mobx";
 
 import s from "./FormScreen.module.scss";
-import { toJS } from "mobx";
 
 interface Props {
   objectType: ObjectTypes;

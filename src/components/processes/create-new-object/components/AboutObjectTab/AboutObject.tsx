@@ -104,9 +104,9 @@ const AboutObjectTab: React.FC<Props> = observer(
       console.log(value);
       setValues({ ...values, type: value });
     };
-    const onChangeComplexName = (value: string) => {
-      setValues({ ...values, complexName: value });
-    };
+    // const onChangeComplexName = (value: string) => {
+    //   setValues({ ...values, complexName: value });
+    // };
     const onChangeFloor = (value: number) => {
       setValues({ ...values, floor: value });
     };
@@ -173,16 +173,16 @@ const AboutObjectTab: React.FC<Props> = observer(
                     />
                   )}
 
-                  <BaseDropDown
-                    className={s.inputSm}
-                    options={DROPDOWN_FILTER_OPTIONS}
-                    placeholder={"ЖК"}
-                    onChange={onChangeComplexName}
-                    value={values.complexName}
-                    label="ЖК"
-                    isError={!isValid && !isValidComplexName}
-                    name={"lcd"}
-                  />
+                  {/*<BaseDropDown*/}
+                  {/*  className={s.inputSm}*/}
+                  {/*  options={DROPDOWN_FILTER_OPTIONS}*/}
+                  {/*  placeholder={"ЖК"}*/}
+                  {/*  onChange={onChangeComplexName}*/}
+                  {/*  value={values.complexName}*/}
+                  {/*  label="ЖК"*/}
+                  {/*  isError={!isValid && !isValidComplexName}*/}
+                  {/*  name={"lcd"}*/}
+                  {/*/>*/}
 
                   <CounterButtons
                     onChange={onChangeFloor}
