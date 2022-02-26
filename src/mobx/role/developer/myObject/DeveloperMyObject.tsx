@@ -158,14 +158,14 @@ class DeveloperMyObjectStore  {
         ],
         complexObjects:[
             {
-                id:'1',
-                name:'1-комнатная квартира',
-                price:'12 860 000 ₽',
+                id: '',
+                name: '',
+                price: '',
                 infoObject:{
-                    corpus: {'Корпус':'1'},
-                    floor: {'Этаж':'3/15'},
-                    area: {'Площадь':'52м2'},
-                    status: {'Статус':'Продана'},
+                    corpus: {'Корпус': ''},
+                    floor: {'Этаж': ''},
+                    area: {'Площадь': ''},
+                    status: {'Статус': ''},
                 }
             },
         ],
@@ -257,16 +257,17 @@ class DeveloperMyObjectStore  {
     async fetchAllObjectsByComplexId(complexId: number) {
         this.initialData.loading = true
         const res = await ComplexApi.getAllObjectsByComplexId(complexId)
+        console.log(res)
         this.initialData.complexObjects = res?.data.map((r: any) => {
             return {
-                id:'4',
-                name:'1-комнатная квартира',
-                price:'12 860 000 ₽',
-                infoObject:{
-                    corpus: {'Корпус':'2'},
-                    floor: {'Этаж':'4/15'},
-                    area: {'Площадь':'72м2'},
-                    status: {'Статус':'Свободна'},
+                id: r.id,
+                name: r.name,
+                price: r.price,
+                infoObject: {
+                    corpus: {'Корпус': ''},
+                    floor: {'Этаж': `${r.property.floor}/${r.property.totalFloor}`},
+                    area: {'Площадь': `${r.property.area} м2`},
+                    status: {'Статус': r.status.status},
                 }
             }
         })

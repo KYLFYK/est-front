@@ -1,28 +1,30 @@
-import { FC, useState } from "react";
-import { BaseDropDown } from "../../../../shared/BaseDropDown/BaseDropDown";
+import { FC, useState } from "react"
+import { BaseDropDown } from "../../../../shared/BaseDropDown/BaseDropDown"
+import {useMortGageStore} from '../../../../../mobx/role/bank/mortgage/MortGage'
+import styles from "./Catalog.module.scss"
+import {datetoDayFormat, datetoTimeFormat} from '../../../../../lib/mapping/objectDates'
 
-import styles from "./Catalog.module.scss";
-
-export const CatalogItem: FC = () => {
-  const [status, setStatus] = useState<"new" | "expired">("new");
+export const CatalogItem: FC<any> = ({data, setStatus, id}) => {
+  //const [status, setStatus] = useState<"new" | "expired">("new");
+  const store = useMortGageStore()
 
   return (
-    <tr>
+    <tr onClick={() => store.setDetail(true, id)}>
       <td>
-        <span>Васильев Евгений Константинович</span>
+        <span>{data.fio}</span>
       </td>
       <td>
-        <span>+7 911 589 56 98</span>
+        <span>{data.phone}</span>
       </td>
       <td>
-        <span>zhenya71@yandex.ru</span>
+        <span>{data.email}</span>
       </td>
       <td>
-        <span>27.08.2021 13:00</span>
+        <span>{`${datetoDayFormat(data.dateOfPayment)} ${datetoTimeFormat(data.dateOfPayment)}`}</span>
       </td>
-      <td>
+      {/*<td>
         <span>3-этажный коттедж</span>
-      </td>
+      </td>*/}
       <td>
         <span
           style={{
@@ -32,7 +34,7 @@ export const CatalogItem: FC = () => {
         >
           <BaseDropDown
             onChange={(obj) => {
-              setStatus(obj as "new" | "expired");
+              store.updateLead(id, obj);
             }}
             className={`${styles.select}${
               status === "new" ? ` ${styles.green}` : ""
@@ -47,8 +49,8 @@ export const CatalogItem: FC = () => {
                 value: "expired",
               },
             ]}
-            placeholder="Выберите статус"
-            value={status}
+            placeholder={data.status}
+            value={data.status}
           />
         </span>
       </td>

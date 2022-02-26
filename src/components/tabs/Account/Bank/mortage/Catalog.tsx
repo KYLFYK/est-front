@@ -1,10 +1,22 @@
-import { FC } from "react";
+import { FC, useEffect } from "react";
+import { observer } from "mobx-react-lite";
+import {useMortGageStore} from '../../../../../mobx/role/bank/mortgage/MortGage'
 import { IconDown } from "../../Developer/components/Notifications";
 import { CatalogItem } from "./CatalogItem";
-
+import { Loader } from "src/components/shared/Loader/Loader";
 import styles from "./Catalog.module.scss";
 
-export const Catalog: FC = () => {
+export const Catalog: FC = observer(() => {
+  const store = useMortGageStore()
+
+  useEffect(() => {
+    store.fetchAllLeads()
+  }, [])
+
+  const setStatus = (obj: any) => {
+    console.log(obj)
+  }
+
   return (
     <div className={styles.wrapper}>
       <table>
@@ -29,7 +41,7 @@ export const Catalog: FC = () => {
               <IconDown />
             </div>
           </th>
-          <th>
+          {/*<th>
             <div
               className={styles.flex}
               style={{
@@ -39,7 +51,7 @@ export const Catalog: FC = () => {
               <span>Объект</span>
               <IconDown />
             </div>
-          </th>
+            </th>*/}
           <th>
             <div
               className={styles.flex}
@@ -52,11 +64,11 @@ export const Catalog: FC = () => {
             </div>
           </th>
         </tr>
-        <CatalogItem />
-        <CatalogItem />
-        <CatalogItem />
-        <CatalogItem />
+        {store.initialData.loading 
+          ? <Loader/>
+          : store.initialData.getAllData.map((d) => <CatalogItem data={d} setStatus={setStatus} id={d.id}/>)
+        }
       </table>
     </div>
   );
-};
+});

@@ -1,4 +1,6 @@
 import React, {ChangeEvent, SyntheticEvent, useState, Dispatch, SetStateAction} from 'react';
+import { observer } from "mobx-react-lite"
+import {useMortGageStore} from '../../../../mobx/role/bank/mortgage/MortGage'
 import s from './Calculator.module.scss';
 import classNames from 'classnames';
 import QuestionIcon from '../icons/QuestionIcon.svg';
@@ -59,9 +61,9 @@ export const useStyles = makeStyles(() => ({
     },
 }))
 
-export const Calculator: React.FC<Props> = ({setModal}) => {
+export const Calculator: React.FC<Props> = observer(({setModal}) => {
     // const price = Number(String(choosedHouse.price || "").replace(/[^0-9]+/g, ""));
-    const price = 10000000
+    const store = useMortGageStore()
     const classes = useStyles()
     
     /*отклонение координат всплывашки с подсказкой, относительно координаты курсора,
@@ -141,14 +143,35 @@ export const Calculator: React.FC<Props> = ({setModal}) => {
         top: '20px',
     }
 
-    // стартовые состояния ренджей
-    const [cost, setCost] = useState(price);
-    const [contrib, setContrib] = useState(0);
-    const [term, setTerm] = useState(10);
-    const [rate, setRate] = useState(6);
+    const setStatePrice = (value: any) => {
+        store.setStatePrice(value)
+    }
+    const setInitialPayment = (value: any) => {
+        store.setInitialPayment(value)
+    }
+    const setCreditTerm = (value: any) => {
+        store.setCreditTerm(value)
+    }
+    const setPercentageRate = (value: any) => {
+        store.setPercentageRate(value)
+    }
+    const setFrequencyPayment = (value: any) => {
+        store.setFrequencyPayment(value)
+    }
+    const setReduce = (value: any) => {
+        store.setReduce(value)
+    }
+    const setFrequencyPrice = (value: any) => {
+        store.setFrequencyPrice(value)
+    }
+    
 
-    const maxCost = price * 2;
-    const maxContribution = cost - 100000;
+    // стартовые состояния ренджей
+    const term = store.initialData.createPayload.creditTerm
+    const rate = store.initialData.createPayload.percentageRate
+
+    const maxCost = 20000000;
+    const maxContribution = store.initialData.createPayload.statePrice - 100000;
     const maxTerm = 25;
     const maxRate = 25;
 
@@ -163,19 +186,32 @@ export const Calculator: React.FC<Props> = ({setModal}) => {
     //const payment = ((cost - contrib) * Math.pow(Math.pow(1 + rate / 100, 1 / 12), 12 * term) * (Math.pow(1 + rate / 100, 1 / 12) - 1)) / (Math.pow(Math.pow(1 + rate / 100, 1 / 12), 12 * term) - 1);
 
     // формула, которая используется на ЦИАН
-    let payment = (cost - contrib) * (rate / 1200 + ((rate / 1200) / (Math.pow(1 + rate / 1200, term * 12) - 1)))
+    let payment = (store.initialData.createPayload.statePrice - store.initialData.createPayload.initialPayment) * (rate / 1200 + ((rate / 1200) / (Math.pow(1 + rate / 1200, term * 12) - 1)))
     // переменная для сохранения начального значения, для расчёта разницы
-    let startPayment = (cost - contrib) * (rate / 1200 + ((rate / 1200) / (Math.pow(1 + rate / 1200, term * 12) - 1)))
-
+    let startPayment = (store.initialData.createPayload.statePrice - store.initialData.createPayload.initialPayment) * (rate / 1200 + ((rate / 1200) / (Math.pow(1 + rate / 1200, term * 12) - 1)))
+    
+    const setMonthlyPayment = (value: any) => {
+        store.setMonthlyPayment(value)
+    }
+    const setCreditTotal = (value: any) => {
+        store.setCreditTotal(value)
+    }
+    const setPercentTotal = (value: any) => {
+        store.setPercentTotal(value)
+    }
+    const setMonthlyIncome = (value: any) => {
+        store.setMonthlyIncome(value)
+    }
+    
     // сведение данных по периодичным платежам
     let termPeriodPayments: IPeriodPayments[] = []
     let payPeriodPayments: IPeriodPayments[] = []
-    for (let i = 0; i < term * 12; i++) {
+    for (let i = 0; i < store.initialData.createPayload.creditTerm * 12; i++) {
         termPeriodPayments.push({month: i + 1, payment: 0,})
         payPeriodPayments.push({month: i + 1, payment: 0})
     }
 
-    for (let i = 0; i < term * 12; i++) {
+    for (let i = 0; i < store.initialData.createPayload.creditTerm * 12; i++) {
         earlyRepayment.filter((er) => er.diff === termPeriodPayments[i].month && er.select === PaymentPeriodSelectTypes.ONCE && er.buttons === EarlyPaymentButtonsTypes.TERM).forEach((er) => {
             termPeriodPayments[i].payment += er.summ;
         });
@@ -195,9 +231,9 @@ export const Calculator: React.FC<Props> = ({setModal}) => {
     }
 
     // создание графика платежей
-    let payments: IPaymentGraph[] = [{month: 0, payment: 0, debt: 0, percent: 0, remainder: cost}];
+    let payments: IPaymentGraph[] = [{month: 0, payment: 0, debt: 0, percent: 0, remainder: store.initialData.createPayload.statePrice}];
     let flagRecountPayment: boolean
-    for (let i = 1; i <= term * 12; i++) {
+    for (let i = 1; i <= store.initialData.createPayload.creditTerm * 12; i++) {
         // переменная для накопления суммы досрочных платежей за каждый из месяцев
         let summEarlyPay = 0;
         flagRecountPayment = false;
@@ -226,7 +262,7 @@ export const Calculator: React.FC<Props> = ({setModal}) => {
                 : Number(payments[i - 1].remainder) - (Number((payment - payments[i - 1].remainder * rate / (12 * 100)).toFixed(0)) + Number(summEarlyPay)),
         })
         if (flagRecountPayment) {
-            payment = payments[i].remainder * (rate / 1200 + ((rate / 1200) / (Math.pow(1 + rate / 1200, term * 12 - i) - 1)))
+            payment = payments[i].remainder * (rate / 1200 + ((rate / 1200) / (Math.pow(1 + rate / 1200, store.initialData.createPayload.creditTerm * 12 - i) - 1)))
         }
     }
 
@@ -315,13 +351,13 @@ export const Calculator: React.FC<Props> = ({setModal}) => {
                                             Стоимость недвижимости
                                         </Typography>
                                         <Typography>
-                                            {new Intl.NumberFormat('ru-RU').format(cost)}
+                                            {new Intl.NumberFormat('ru-RU').format(store.initialData.createPayload.statePrice)}
                                         </Typography>
                                     </div>
                                     <Typography>₽</Typography>
                                 </Card>
                                 <div style={sliderStyle}>
-                                    <InputRange value={cost} setValue={setCost} max={maxCost} min={100000}/>
+                                    <InputRange value={store.initialData.createPayload.statePrice} setValue={setStatePrice} max={maxCost} min={100000}/>
                                 </div>
                                 <Card style={cardStyle}>
                                     <div>
@@ -329,25 +365,25 @@ export const Calculator: React.FC<Props> = ({setModal}) => {
                                             Первоначальный взнос
                                         </Typography>
                                         <Typography>
-                                            {new Intl.NumberFormat('ru-RU').format(contrib)}
+                                            {new Intl.NumberFormat('ru-RU').format(store.initialData.createPayload.initialPayment)}
                                         </Typography>
                                     </div>
                                     <Typography>₽</Typography>
                                 </Card>
                                 <div style={sliderStyle}>
-                                    <InputRange value={contrib} setValue={setContrib} max={maxContribution} min={0}/>
+                                    <InputRange value={store.initialData.createPayload.initialPayment} setValue={setInitialPayment} max={maxContribution} min={0}/>
                                 </div>
                                 <Card style={cardStyle}>
                                     <div>
                                         <Typography className={s.size} color={'tertiary'} weight={'light'}>
                                             Срок кредита
                                         </Typography>
-                                        <Typography>{term}</Typography>
+                                        <Typography>{store.initialData.createPayload.creditTerm}</Typography>
                                     </div>
                                     <Typography>лет</Typography>
                                 </Card>
                                 <div style={sliderStyle}>
-                                    <InputRange value={term} setValue={setTerm} max={maxTerm} min={1}/>
+                                    <InputRange value={store.initialData.createPayload.creditTerm} setValue={setCreditTerm} max={maxTerm} min={1}/>
                                 </div>
                                 <Card style={cardStyle}>
                                     <div>
@@ -359,7 +395,7 @@ export const Calculator: React.FC<Props> = ({setModal}) => {
                                     <Typography>%</Typography>
                                 </Card>
                                 <div style={sliderStyle}>
-                                    <InputRange value={rate} setValue={setRate} max={maxRate} min={1}/>
+                                    <InputRange value={rate} setValue={setPercentageRate} max={maxRate} min={1}/>
                                 </div>
                             </div>
                             <div>
@@ -387,7 +423,7 @@ export const Calculator: React.FC<Props> = ({setModal}) => {
                                                 />
                                             </Typography>
                                             <Typography
-                                                className={s.subresult}>{`${new Intl.NumberFormat('ru-RU').format(cost - contrib)} ₽`}</Typography>
+                                                className={s.subresult}>{`${new Intl.NumberFormat('ru-RU').format(store.initialData.createPayload.statePrice - store.initialData.createPayload.initialPayment)} ₽`}</Typography>
                                         </div>
                                         <div className={s.position}>
                                             <Typography weight={'medium'} className={s.subtitle}>
@@ -406,14 +442,14 @@ export const Calculator: React.FC<Props> = ({setModal}) => {
                                             </Typography>
                                             <Typography className={s.subresult}>{`${new Intl.NumberFormat('ru-RU').format(
                                                 earlyRepayment.every((er) => er.summ < 1)
-                                                    ? +renderResult.toFixed(0) * term * 12 - (cost - contrib)
+                                                    ? +renderResult.toFixed(0) * store.initialData.createPayload.creditTerm * 12 - (store.initialData.createPayload.statePrice - store.initialData.createPayload.initialPayment)
                                                     : payAfterEarlyPayments
                                             )} ₽`}
                                             </Typography>
                                         </div>
 
                                         {!earlyRepayment.every((er) => er.summ < 1) && <div>
-                                            {`${new Intl.NumberFormat('ru-RU').format(payAfterEarlyPayments - (+startPayment.toFixed(0) * term * 12 - (cost - contrib)))} ₽`}
+                                            {`${new Intl.NumberFormat('ru-RU').format(payAfterEarlyPayments - (+startPayment.toFixed(0) * store.initialData.createPayload.creditTerm * 12 - (store.initialData.createPayload.statePrice - store.initialData.createPayload.initialPayment)))} ₽`}
                                         </div>}
 
                                         <div className={s.position}>
@@ -433,14 +469,14 @@ export const Calculator: React.FC<Props> = ({setModal}) => {
                                             </Typography>
                                             <Typography className={s.subresult}>{`${new Intl.NumberFormat('ru-RU').format(
                                                 earlyRepayment.every((er) => er.summ < 1)
-                                                    ? +renderResult.toFixed(0) * term * 12
-                                                    : payAfterEarlyPayments + cost - contrib
+                                                    ? +renderResult.toFixed(0) * store.initialData.createPayload.creditTerm * 12
+                                                    : payAfterEarlyPayments + store.initialData.createPayload.statePrice - store.initialData.createPayload.initialPayment
                                             )} ₽`}
                                             </Typography>
                                         </div>
 
                                         {!earlyRepayment.every((er) => er.summ < 1) && <div>
-                                            {`${new Intl.NumberFormat('ru-RU').format(payAfterEarlyPayments - (+startPayment.toFixed(0) * term * 12 - (cost - contrib)))} ₽`}
+                                            {`${new Intl.NumberFormat('ru-RU').format(payAfterEarlyPayments - (+startPayment.toFixed(0) * store.initialData.createPayload.creditTerm * 12 - (store.initialData.createPayload.statePrice - store.initialData.createPayload.initialPayment)))} ₽`}
                                         </div>}
 
                                         <div className={s.position}>
@@ -634,4 +670,4 @@ export const Calculator: React.FC<Props> = ({setModal}) => {
             </div>
         </div>
     )
-}
+})

@@ -5,16 +5,16 @@ import Typography from "../../../shared/Typography/Typography";
 import { IconExclam } from "../../../../icons/Login/IconExclam";
 
 type InputAlwaysPropsType = {
-    id: number
+    id?: number
     title: string
     error: boolean
     value: string
-    inputs: any
+    inputs?: any
     setInputs: any
     className?: string
 }
 
-export const InputAlways :React.FC<InputAlwaysPropsType>  = ({id, title, error, value, inputs, setInputs, className}) => {
+export const InputAlways :React.FC<InputAlwaysPropsType>  = ({title, error, value, setInputs, className}) => {
 
     return (
 
@@ -24,12 +24,12 @@ export const InputAlways :React.FC<InputAlwaysPropsType>  = ({id, title, error, 
                 type='text'
                 className={css.form__input}
                 placeholder=" "
-                onBlur={() => {
+                /*onBlur={() => {
                     setInputs(inputs.map((i: any, idx: number) => idx !== id ? i : {title: i.title, error: true, value: i.value}))
-                }}
+                }}*/
                 value={value}
                 onChange={(e) => {
-                    setInputs(inputs.map((i: any, idx: number) => idx !== id ? i : {title: i.title, error: i.error, value: e.currentTarget.value}))
+                    setInputs(e.target.value)
                 }}
             />
             <label htmlFor=""  className={css.form__label}>

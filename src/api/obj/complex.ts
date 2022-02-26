@@ -21,9 +21,9 @@ export const ComplexApi  = {
         }
     },
 
-    getAllObjectsByComplexId: async (ownerId: number) =>{
+    getAllObjectsByComplexId: async (complexId: number) =>{
         try{
-            const res = await instance.get(`${UrlObj.complex}/getByOwner/${ownerId}`)
+            const res = await instance.get(`${UrlObj.apartment}/getByComplex/${complexId}`)
             return res
         }
         catch (e){
