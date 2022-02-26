@@ -56,8 +56,6 @@ const MyAdsContainer: FC<ActiveType> = ({ menu, objects }) => {
     console.log(id, "publish");
   };
 
-  console.log(objects);
-
   return (
     <div>
       <SearchOffice
@@ -68,75 +66,97 @@ const MyAdsContainer: FC<ActiveType> = ({ menu, objects }) => {
         className={`${css.placeholder} ${css.altPadding}`}
       />
       <FilterSearch />
-      {objects.map((home) => (
-        <div key={home.id} className={css.borderCard}>
-          <CardObject img={home.img.src}>
-            <div className={css.paddingCard}>
-              <LineV1
-                id={home.id.toString()}
-                onPublish={publish}
-                onRecover={recover}
-                typeMenu={menu}
-                price={home.price}
-                name={home.name}
-                typeObject={getObjType(home.type as IObjType)}
-                type={home.status ? home.status.status : ""}
-                onEdit={edit}
-                onDelete={del}
-              />
-              <LineAddressV1 address={home.address} />
-              <LineArray mainSpecifications={home.mainSpecifications} />
-              <div style={{ display: "flex", paddingBottom: "10px" }}>
-                <Typography
-                  weight={"light"}
-                  color={"tertiary"}
-                  className={css.paddingRight_5}
-                >
-                  Агент:
-                </Typography>
-                <Typography color={"tertiary"} className={css.paddingRight_20}>
-                  {home.agent ? home.agent.email : ""}
-                </Typography>
-                <Typography
-                  color={"tertiary"}
-                  weight={"light"}
-                  className={css.paddingRight_5}
-                >
-                  От:
-                </Typography>
-                <Typography color={"tertiary"} className={css.paddingRight_20}>
-                  {home.dateStart}
-                </Typography>
-                <Typography
-                  color={"tertiary"}
-                  weight={"light"}
-                  className={css.paddingRight_5}
-                >
-                  Статус:
-                </Typography>
-                <Typography
-                  color={searchColor(home.status ? home.status.status : "")}
-                  className={css.paddingRight_20}
-                >
-                  {home.status && home.status.status}
-                </Typography>
-                {home.status && home.status.status === "Забронирован" && (
-                  <>
-                    <Typography
-                      color={"tertiary"}
-                      weight={"light"}
-                      className={css.paddingRight_5}
-                    >
-                      До:
-                    </Typography>
-                    <Typography color={"tertiary"}>{home.dateEnd}</Typography>
-                  </>
-                )}
+      {objects.length > 0 ? (
+        objects.map((home) => (
+          <div key={home.id} className={css.borderCard}>
+            <CardObject img={home.img.src}>
+              <div className={css.paddingCard}>
+                <LineV1
+                  id={home.id.toString()}
+                  onPublish={publish}
+                  onRecover={recover}
+                  typeMenu={menu}
+                  price={home.price}
+                  name={home.name}
+                  typeObject={getObjType(home.type as IObjType)}
+                  type={home.status ? home.status.status : ""}
+                  onEdit={edit}
+                  onDelete={del}
+                />
+                <LineAddressV1 address={home.address} />
+                <LineArray mainSpecifications={home.mainSpecifications} />
+                <div style={{ display: "flex", paddingBottom: "10px" }}>
+                  <Typography
+                    weight={"light"}
+                    color={"tertiary"}
+                    className={css.paddingRight_5}
+                  >
+                    Агент:
+                  </Typography>
+                  <Typography
+                    color={"tertiary"}
+                    className={css.paddingRight_20}
+                  >
+                    {home.agent ? home.agent.email : ""}
+                  </Typography>
+                  <Typography
+                    color={"tertiary"}
+                    weight={"light"}
+                    className={css.paddingRight_5}
+                  >
+                    От:
+                  </Typography>
+                  <Typography
+                    color={"tertiary"}
+                    className={css.paddingRight_20}
+                  >
+                    {home.dateStart}
+                  </Typography>
+                  <Typography
+                    color={"tertiary"}
+                    weight={"light"}
+                    className={css.paddingRight_5}
+                  >
+                    Статус:
+                  </Typography>
+                  <Typography
+                    color={searchColor(home.status ? home.status.status : "")}
+                    className={css.paddingRight_20}
+                  >
+                    {home.status && home.status.status}
+                  </Typography>
+                  {home.status && home.status.status === "Забронирован" && (
+                    <>
+                      <Typography
+                        color={"tertiary"}
+                        weight={"light"}
+                        className={css.paddingRight_5}
+                      >
+                        До:
+                      </Typography>
+                      <Typography color={"tertiary"}>{home.dateEnd}</Typography>
+                    </>
+                  )}
+                </div>
               </div>
-            </div>
-          </CardObject>
+            </CardObject>
+          </div>
+        ))
+      ) : (
+        <div
+          style={{
+            marginTop: 40,
+          }}
+        >
+          <Typography
+            color={"default"}
+            weight={"bold"}
+            className={css.paddingRight_5}
+          >
+            Нет объявлений
+          </Typography>
         </div>
-      ))}
+      )}
     </div>
   );
 };

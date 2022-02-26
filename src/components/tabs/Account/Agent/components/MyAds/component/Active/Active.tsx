@@ -9,7 +9,9 @@ const MyAdsActive = observer(() => {
   const adsStore = useAgentAdsStore();
 
   useEffect(() => {
-    adsStore.fetch();
+    if (adsStore.get().loading) {
+      adsStore.fetch();
+    }
   }, []);
 
   const idOwner: any = jwt_decode(

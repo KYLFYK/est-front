@@ -17,6 +17,7 @@ export interface IObject {
   name: string;
   price: string;
   mainSpecifications: Array<string>;
+  markAsDelete: boolean;
   agent: {
     adminProperty: null;
     agencyProperty: number;
@@ -58,6 +59,7 @@ class AgentAdsStore {
         img: imgMoc,
         type: "",
         name: "",
+        markAsDelete: false,
         price: "",
         mainSpecifications: ["", "", "", "", ""],
         agent: {
@@ -106,6 +108,8 @@ class AgentAdsStore {
 
     const fetchResult = await loadAllData();
 
+    console.log(fetchResult);
+
     this.initialData.data = fetchResult.map((o: any, i: number) => ({
       id: o.id,
       img: imgMoc,
@@ -120,6 +124,7 @@ class AgentAdsStore {
       dateEnd: "",
       status: o.status,
       address: o.address,
+      markAsDelete: o.markAsDelete,
     }));
 
     this.initialData.loading = false;
