@@ -2,6 +2,7 @@ import { FC, useState } from "react"
 import { BaseDropDown } from "../../../../shared/BaseDropDown/BaseDropDown"
 import {useMortGageStore} from '../../../../../mobx/role/bank/mortgage/MortGage'
 import styles from "./Catalog.module.scss"
+import {datetoDayFormat, datetoTimeFormat} from '../../../../../lib/mapping/objectDates'
 
 export const CatalogItem: FC<any> = ({data, setStatus, id}) => {
   //const [status, setStatus] = useState<"new" | "expired">("new");
@@ -19,7 +20,7 @@ export const CatalogItem: FC<any> = ({data, setStatus, id}) => {
         <span>{data.email}</span>
       </td>
       <td>
-        <span>{data.dateOfPayment}</span>
+        <span>{`${datetoDayFormat(data.dateOfPayment)} ${datetoTimeFormat(data.dateOfPayment)}`}</span>
       </td>
       {/*<td>
         <span>3-этажный коттедж</span>
@@ -33,7 +34,7 @@ export const CatalogItem: FC<any> = ({data, setStatus, id}) => {
         >
           <BaseDropDown
             onChange={(obj) => {
-              setStatus(obj);
+              store.updateLead(id, obj);
             }}
             className={`${styles.select}${
               status === "new" ? ` ${styles.green}` : ""

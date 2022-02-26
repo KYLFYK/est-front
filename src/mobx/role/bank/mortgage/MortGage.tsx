@@ -50,6 +50,9 @@ class MortGageStore  {
             "percentTotal": 0,
             "monthlyIncome": 0,
         },
+        updateStatus: {
+
+        },
         detail: {
             detail: false,
             id: 0,
@@ -122,9 +125,9 @@ class MortGageStore  {
         //this.initialData.loading = false
     }
 
-    async updateLead(id: number, payload: any) {
+    async updateLead(id: number, payload: string) {
         //this.initialData.loading = true
-        const res = await leadsAPI.updateLead(id, payload)
+        const res = await leadsAPI.updateLead(id, {'status': payload})
         //this.initialData.data = res.data
         //this.initialData.loading = false
     }

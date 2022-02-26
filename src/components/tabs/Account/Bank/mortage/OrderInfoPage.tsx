@@ -3,6 +3,7 @@ import {useMortGageStore} from '../../../../../mobx/role/bank/mortgage/MortGage'
 import Link from "next/link";
 import { BackIcon } from "../../../../../icons/BackIcon";
 import { BaseDropDown } from "../../../../shared/BaseDropDown/BaseDropDown";
+import {datetoDayFormat, datetoTimeFormat} from '../../../../../lib/mapping/objectDates'
 
 import commonStyles from "../../Admin/components/UsersTab/agency/agency.module.scss";
 import styles from "./OrderInfo.module.scss";
@@ -25,11 +26,11 @@ export const OrderInfoPage: FC<any> = ({req}) => {
           <div className={styles.sectionList}>
             <div className={styles.sectionElem}>
               <span className={styles.key}>Дата заявки</span>
-              <span className={styles.value}>{req && req.createAt}</span>
+              <span className={styles.value}>{req && datetoDayFormat(req.createAt)}</span>
             </div>
             <div className={styles.sectionElem}>
               <span className={styles.key}>Время заявки</span>
-              <span className={styles.value}>{req && req.createAt}</span>
+              <span className={styles.value}>{req && datetoTimeFormat(req.createAt)}</span>
             </div>
             <div className={styles.sectionElem}>
               <span className={styles.key}>Статус заявки</span>
@@ -112,7 +113,7 @@ export const OrderInfoPage: FC<any> = ({req}) => {
               <span className={styles.value}>{req && req.percentageRate} %</span>
             </div>
           </div>
-          <span className={styles.title}>Досрочный платёж 1</span>
+          {/*<span className={styles.title}>Досрочный платёж 1</span>
           <div className={styles.sectionList}>
             <div className={styles.sectionElem}>
               <span className={styles.key}>Дата платежа</span>
@@ -130,7 +131,7 @@ export const OrderInfoPage: FC<any> = ({req}) => {
               <span className={styles.key}>Сумма</span>
               <span className={styles.value}>10 000 ₽</span>
             </div>
-          </div>
+          </div>*/}
           <span className={styles.title}>Итоговый расчёт</span>
           <div className={styles.sectionList}>
             <div className={styles.sectionElem}>
