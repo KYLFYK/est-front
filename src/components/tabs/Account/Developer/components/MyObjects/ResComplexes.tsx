@@ -49,7 +49,7 @@ export const ResComplexes: FC<ResComplexesType> = observer(({onComplex, setCompl
       <FilterSearch className={styles.filter} type="agent" />
       <div className={styles.objectsList}>
         {/*{Data.objects.map((home, index) => (*/}
-        {store.initialData.loading ? <Loader/> : store.initialData.complex.map((home, index) => (
+        {store.initialData.loading ? <Loader/> : store.initialData.complex && store.initialData.complex.map((home, index) => (
           <div className={styles.object} key={index} onClick={() => onSetCompex(+home.id, home.name)}>
             <CardObject img={home.img}>
               <div className={css.paddingCard}>

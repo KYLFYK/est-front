@@ -48,6 +48,7 @@ const MyAdsActive = observer(() => {
     useEffect(() => {
         adsStore.fetch()
     }, [])
+
     return (
         adsStore.get().loading 
         ? <h1>Loading...</h1> 

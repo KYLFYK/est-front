@@ -13,7 +13,7 @@ import css from "../../../Agent/components/Others/MyAdsContainer/Active.module.s
 import {useStoreDeveloperMyObjectStore} from "../../../../../../mobx/role/developer/myObject/DeveloperMyObject";
 
 export const MyHouses: FC = observer(() => {
-
+  
   const store = useStoreDeveloperMyObjectStore()
 
   useEffect(() => {

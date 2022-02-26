@@ -14,7 +14,8 @@ type ResApartmentType = {
 
 }
 
-const ResApartment: FC<ResApartmentType> = ({name, price,info}) => {
+const ResApartment: FC<ResApartmentType> = ({name, price, info}) => {
+
     return (
         <div className={css.apartmentBorder}>
             <Typography weight={"bold"}>

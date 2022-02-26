@@ -1,4 +1,5 @@
 import { FC, useState } from "react";
+import {useMortGageStore} from '../../../../../mobx/role/bank/mortgage/MortGage'
 import Link from "next/link";
 import { BackIcon } from "../../../../../icons/BackIcon";
 import { BaseDropDown } from "../../../../shared/BaseDropDown/BaseDropDown";
@@ -6,18 +7,17 @@ import { BaseDropDown } from "../../../../shared/BaseDropDown/BaseDropDown";
 import commonStyles from "../../Admin/components/UsersTab/agency/agency.module.scss";
 import styles from "./OrderInfo.module.scss";
 
-export const OrderInfoPage: FC = () => {
+export const OrderInfoPage: FC<any> = ({req}) => {
   const [status, setStatus] = useState<"new" | "expired">("new");
-
+  const store = useMortGageStore()
+  console.log(store.get())
   return (
     <div className={commonStyles.pageWrapper}>
       <div className={commonStyles.header}>
-        <Link href={"/mortgage-orders"}>
-          <a className={commonStyles.link}>
-            <BackIcon width={24} height={24} color={"#3D4550"} />
-            <span>Информация о заявке</span>
-          </a>
-        </Link>
+        <div onClick={() => store.setDetail(false, 0)} className={commonStyles.link}>
+          <BackIcon width={24} height={24} color={"#3D4550"} />
+          <span>Информация о заявке</span>
+        </div>
       </div>
       <div className={styles.wrapper}>
         <section className={styles.section}>
@@ -25,11 +25,11 @@ export const OrderInfoPage: FC = () => {
           <div className={styles.sectionList}>
             <div className={styles.sectionElem}>
               <span className={styles.key}>Дата заявки</span>
-              <span className={styles.value}>27/08/2021</span>
+              <span className={styles.value}>{req && req.createAt}</span>
             </div>
             <div className={styles.sectionElem}>
               <span className={styles.key}>Время заявки</span>
-              <span className={styles.value}>13:00</span>
+              <span className={styles.value}>{req && req.createAt}</span>
             </div>
             <div className={styles.sectionElem}>
               <span className={styles.key}>Статус заявки</span>
@@ -51,8 +51,8 @@ export const OrderInfoPage: FC = () => {
                       value: "expired",
                     },
                   ]}
-                  placeholder="Выберите статус"
-                  value={status}
+                  placeholder={req && req.status}
+                  value={req && req.status}
                 />
               </span>
             </div>
@@ -64,20 +64,20 @@ export const OrderInfoPage: FC = () => {
             <div className={`${styles.sectionElem} ${styles.large}`}>
               <span className={styles.key}>ФИО</span>
               <span className={styles.value}>
-                Васильев Евгений Константинович
+                {req && req.fio}
               </span>
             </div>
             <div className={styles.sectionElem}>
               <span className={styles.key}>Телефон</span>
-              <span className={styles.value}>+7 (495) 232-90-00</span>
+              <span className={styles.value}>{req && req.phone}</span>
             </div>
             <div className={styles.sectionElem}>
               <span className={styles.key}>E-mail</span>
-              <span className={styles.value}>zhenya71@yandex.ru</span>
+              <span className={styles.value}>{req && req.email}</span>
             </div>
           </div>
         </section>
-        <section className={styles.section}>
+        {/*<section className={styles.section}>
           <span className={styles.title}>Об объекте</span>
           <div className={styles.sectionList}>
             <div className={`${styles.sectionElem} ${styles.large}`}>
@@ -91,25 +91,25 @@ export const OrderInfoPage: FC = () => {
               <span className={styles.value}>150 000 000 ₽</span>
             </div>
           </div>
-        </section>
+        </section>*/}
         <section className={styles.section}>
           <span className={styles.title}>Исходные данные</span>
           <div className={styles.sectionList}>
             <div className={styles.sectionElem}>
               <span className={styles.key}>Стоимость недвижимости</span>
-              <span className={styles.value}>150 000 000 ₽</span>
+              <span className={styles.value}>{req && req.statePrice}</span>
             </div>
             <div className={styles.sectionElem}>
               <span className={styles.key}>Первоначальная взнос</span>
-              <span className={styles.value}>1 000 000 ₽</span>
+              <span className={styles.value}>{req && req.initialPayment}</span>
             </div>
             <div className={styles.sectionElem}>
               <span className={styles.key}>Срок кредита</span>
-              <span className={styles.value}>20 лет</span>
+              <span className={styles.value}>{req && req.creditTerm} лет</span>
             </div>
             <div className={styles.sectionElem}>
               <span className={styles.key}>Процентная ставка</span>
-              <span className={styles.value}>7,3 %</span>
+              <span className={styles.value}>{req && req.percentageRate} %</span>
             </div>
           </div>
           <span className={styles.title}>Досрочный платёж 1</span>

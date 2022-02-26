@@ -46,7 +46,7 @@ const ResComplexObjects :FC<ResComplexObjectsType> = observer(({onComplex, compl
             </div>
             <div className={css.grid4}>
                 {
-                    store.initialData.complexObjects.map(object=>(
+                    store.initialData.complexObjects && store.initialData.complexObjects.map(object=>(
                         <ResApartment key={object.id} name={object.name} price={object.price} info={object.infoObject}  />
                     ))
                 }
