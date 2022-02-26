@@ -15,11 +15,12 @@ import { AddressConfirmation } from "../Login/AddressConfirmation/AddressConfirm
 import { RecoveryMail } from "../Login/RecoveryMail/RecoveryMail";
 import NewPassword from "../Login/NewPassword/NewPassword";
 import { ConfirmationNewPassword } from "../Login/ConfirmationNewPassword/ConfirmationNewPassword";
-import css from "./Header.module.scss";
 import { AuthApi } from "../../../api/auth/auth";
 import { EmailConformation } from "../Login/EmailConfirmation/EmailConfirmation";
 import { useRouter } from "next/router";
 import { ThankRegistering } from "../Login/ThankRegistering/ThankRegistering";
+
+import css from "./Header.module.scss";
 
 type HeaderPropsType = {
   className?: string;
@@ -61,8 +62,8 @@ const personalAcc = [
     { title: "Личный кабинет", href: "/cabinet", message: 0 },
     { title: "Заявки", href: "/requests", message: 0 },
     { title: "Мои объявления", href: "/ads", message: 0 },
-    { title: "Тарифы размещения", href: "/tariff", message: 12 },
-    { title: "Профпоиск", href: "/search", message: 3 },
+    // { title: "Тарифы размещения", href: "/tariff", message: 12 },
+    // { title: "Профпоиск", href: "/search", message: 3 },
     /*{ title: "Сообщения", href: "/messages", message: 0 },
     { title: "Уведомления", href: "/notifications", message: 0 },*/
   ],
@@ -106,7 +107,6 @@ export const Header: FC<HeaderPropsType> = ({
   modalActive,
   auth = false,
 }) => {
-
   const router = useRouter();
 
   const [email, setEmail] = useState<string>("");
@@ -279,7 +279,7 @@ export const Header: FC<HeaderPropsType> = ({
         >
           <IconLocation />
           <div className={css.textTypography}>
-            <SelectEstate options={city} selectLeft={false}/>
+            <SelectEstate options={city} selectLeft={false} />
           </div>
         </div>
         {moc.map(({ href, title }, index) => (

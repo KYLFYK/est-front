@@ -48,12 +48,14 @@ import CreateLandStore from "./CreateLandStore";
 import CreateTownhouseStore from "./CreateTownhouseStore";
 import { createObjectAPI } from "../../../api/createObjects/createObject";
 import jwt_decode from "jwt-decode";
+import { IObjType } from "../../../components/tabs/Account/Agent/components/Others/MyAdsContainer/MyAdsContainer";
 
 class CreateObjectStore implements ICreateObject {
   apartment: CreateApartmentStore = new CreateApartmentStore();
   townhouse: CreateTownhouseStore = new CreateTownhouseStore();
   land: CreateLandStore = new CreateLandStore();
   house: CreateHouseStore = new CreateHouseStore();
+  objType: IObjType = "sale";
 
   saveAboutTab(data: TAboutTabState, objectType: ObjectTypes) {
     switch (objectType) {
@@ -175,34 +177,153 @@ class CreateObjectStore implements ICreateObject {
         ? (localStorage.getItem("accessEstatum") as string)
         : ("123" as string)
     );
+
     console.log("-fetch", data);
     console.log("-idOwner", idOwner.id);
-    if (objectType === 0) {
-      const apartmentObjectCreateBackEnd = new FormData();
 
-      apartmentObjectCreateBackEnd.set("name", data.about.name);
-      apartmentObjectCreateBackEnd.set(
-        "description",
-        data.generalInfo.description
+    if (objectType === 0) {
+      const newData: any = data;
+
+      const guides = [];
+      const owners = [];
+
+      if (newData.legalPurity.previousFounder.firstFounderName) {
+        owners.push(newData.legalPurity.previousFounder.firstFounderName);
+      }
+      if (newData.legalPurity.previousFounder.secondFouderName) {
+        owners.push(newData.legalPurity.previousFounder.secondFouderName);
+      }
+
+      if (newData.about.type) {
+        guides.push(Number(newData.about.type));
+      }
+      if (newData.infrastructure.view) {
+        guides.push(Number(newData.infrastructure.view));
+      }
+      if (newData.info.construction) {
+        guides.push(Number(newData.info.construction));
+      }
+      if (newData.info.groundwork) {
+        guides.push(Number(newData.info.groundwork));
+      }
+      if (newData.info.roof) {
+        guides.push(Number(newData.info.roof));
+      }
+      if (newData.info.wall) {
+        guides.push(Number(newData.info.wall));
+      }
+      if (newData.info.water) {
+        guides.push(Number(newData.info.water));
+      }
+      if (newData.info.heating) {
+        guides.push(Number(newData.info.heating));
+      }
+      if (newData.info.sewerage) {
+        guides.push(Number(newData.info.sewerage));
+      }
+      if (newData.info.electricity) {
+        guides.push(Number(newData.info.electricity));
+      }
+      if (newData.info.parking) {
+        guides.push(Number(newData.info.parking));
+      }
+
+      const newApartmentData = new FormData();
+
+      console.log("type", this.objType);
+
+      newApartmentData.set("name", newData.about.name);
+      newApartmentData.set("objectType", this.objType);
+      newApartmentData.set("description", newData.generalInfo.description);
+      newApartmentData.set("address", newData.about.address);
+      newApartmentData.set("postcode", newData.about.index);
+      newApartmentData.set("longitude", "31.45");
+      newApartmentData.set("latitude", "31.45");
+      newApartmentData.set("region", "1");
+      newApartmentData.set("country", "1");
+      newApartmentData.set("city", "1");
+      newApartmentData.set("owner", idOwner.id);
+      newApartmentData.set("status", "1");
+      newApartmentData.set("price", newData.about.cost);
+      newApartmentData.set("complex", "1");
+      newApartmentData.set(
+        "legalPurity",
+        JSON.stringify({
+          address: newData.legalPurity.realEstateRegister.address,
+          areaValue: newData.legalPurity.realEstateRegister.generalSquare,
+          areaUnits: "м2",
+          cadastalNumber:
+            newData.legalPurity.realEstateRegister.cadastralNumber,
+          cadastralPrice: newData.legalPurity.realEstateRegister.cadastralCost,
+          currentOwnerName: newData.legalPurity.currentFounder.firstFounderName,
+          currentOwnerStartDate:
+            newData.legalPurity.currentFounder.ownershipFrom,
+          floor: 1,
+          previewOwners: {
+            owners: owners,
+            startDate: newData.legalPurity.previousFounder.ownershipFrom,
+            finishDate: newData.legalPurity.previousFounder.ownershipTo,
+          },
+          encumbrances: [
+            {
+              title: "На дом наложен арест",
+              status: false,
+              description: null,
+            },
+            {
+              title: "Записей об аренде не найдено",
+              status: false,
+              description: null,
+            },
+          ],
+          recomendations: [
+            {
+              title: "Дом в собственности менее 5 лет",
+              description:
+                "При продаже продавец скорее всего должен будет заплатить налог с её продажи",
+            },
+          ],
+        })
       );
-      apartmentObjectCreateBackEnd.set("address", data.about.address);
-      apartmentObjectCreateBackEnd.set("longitude", 31.45 as any);
-      apartmentObjectCreateBackEnd.set("latitude", 31.45 as any);
-      apartmentObjectCreateBackEnd.set("region", 1 as any);
-      apartmentObjectCreateBackEnd.set("owner", idOwner.id);
-      apartmentObjectCreateBackEnd.set("status", 1 as any);
-      apartmentObjectCreateBackEnd.set("markAsDelete", false as any);
-      apartmentObjectCreateBackEnd.set("guides", [0] as any);
-      apartmentObjectCreateBackEnd.set(
-        "file",
-        data.generalInfo.photos.map((el) => el.file) as any
+      newApartmentData.set("guides", guides.join(", "));
+      newApartmentData.set(
+        "property",
+        JSON.stringify({
+          floor: newData.about.floor,
+          totalFloor: newData.about.floorsAmmount,
+          area: newData.generalInfo.generalSquare,
+          livingArea: newData.generalInfo.livingSquare,
+          bathroomArea: newData.generalInfo.bathroom,
+          kitchenArea: newData.generalInfo.kitchen,
+          roomsArea: newData.generalInfo.customRooms.map((el: any) =>
+            Number(el.value)
+          ),
+          amountBathrooms: 1,
+          amountBedrooms: 1,
+          amountShowers: 1,
+          buildingNumber: 1,
+          heightCeilings: 3.3,
+          deadline: "2022-02-25T17:53:38.800Z",
+          interior: "string",
+          infrastructure: "string",
+          rooms: "one",
+          threeD: "https://www.youtube.com/embed/Ke3qyQYNob4",
+          vr: "https://3d-tur.ru/010/",
+          constructionFeatures: [
+            {
+              title: newData.generalInfo.interiorDescription,
+              value: "foundation",
+            },
+          ],
+        })
       );
-      apartmentObjectCreateBackEnd.set("price", data.about.cost as any);
-      apartmentObjectCreateBackEnd.set("complex", null as any);
+
+      console.log("all ok");
+      console.log("sentData", newApartmentData);
 
       try {
         const res = await createObjectAPI.createObjectApartment(
-          apartmentObjectCreateBackEnd
+          newApartmentData
         );
         console.log("response apartment", res);
         return res;
@@ -215,6 +336,7 @@ class CreateObjectStore implements ICreateObject {
         name: data.about.name,
         description: data.generalInfo.description,
         address: data.about.address,
+        postcode: data.about.cost,
         longitude: "31.45",
         latitude: "31.45",
         region: 1,

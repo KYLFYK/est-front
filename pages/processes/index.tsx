@@ -21,7 +21,7 @@ const Home: NextPage = () => {
     <div style={{ display: "flex", gap: "15px", flexDirection: "column" }}>
       <div style={{ margin: "50px" }}>
         <h1>AboutObjectTab</h1>
-        <AboutObjectTab objectType={0} onPrevTab={() => {}} />
+        <AboutObjectTab action={1} objectType={0} onPrevTab={() => {}} />
       </div>
       <div style={{ margin: "50px" }}>
         <h1>ButtonPanel</h1>
@@ -76,7 +76,7 @@ const Home: NextPage = () => {
       </div>
       <div style={{ margin: "50px" }}>
         <h1>FormScreen</h1>
-        <FormScreen objectType={0} clearObjectType={() => {}} />
+        <FormScreen action={1} objectType={0} clearObjectType={() => {}} />
       </div>
       <div style={{ margin: "50px" }}>
         <h1>StartScreen</h1>
