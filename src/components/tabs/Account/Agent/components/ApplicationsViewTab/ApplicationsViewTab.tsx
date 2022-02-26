@@ -70,21 +70,22 @@ const ApplicationsViewTab: React.FC<Props> = observer(() => {
 
     return (
         <>
-            {
-                store.initialData.loading 
-                ? <Loader/>
-                : !edit.edit
-                    ? <HorizontalTabs tabs={[
-                        {title: "Каталог заявок", Component: <ApplicationsViewCatalog agents={store.get().data} setEdit={setEdit} />},
-                        /*{title: "Статистика", Component: <ApplicationsViewStatistics />}*/
-                    ]}/>
-                    : <ViewingApplication
-                        onAddSchedule={addSchedule}
-                        onAddMessage={addMessage}
-                        applicationsView={applicationsView}
-                        onClick={setEdit}
-                        id={edit.id}
-                    />
+            {store.initialData.loading && <Loader/>}
+            {store.initialData.error && <h1>Нет заявок</h1>}
+            {(!store.initialData.loading && !store.initialData.error) && !edit.edit &&
+                <HorizontalTabs tabs={[
+                    {title: "Каталог заявок", Component: <ApplicationsViewCatalog agents={store.get().data} setEdit={setEdit} />},
+                    /*{title: "Статистика", Component: <ApplicationsViewStatistics />}*/
+                ]}/>
+            }
+            {(!store.initialData.loading && !store.initialData.error) && edit.edit &&
+                <ViewingApplication
+                    onAddSchedule={addSchedule}
+                    onAddMessage={addMessage}
+                    applicationsView={applicationsView}
+                    onClick={setEdit}
+                    id={edit.id}
+                />
             }
         </>
     )
