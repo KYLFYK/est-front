@@ -26,7 +26,7 @@ const Archive = () => {
       objects={toJS(adsStore.initialData.data).filter(
         (el) => el.agent?.id === idOwner.id && el.markAsDelete
       )}
-      menu={"active"}
+      menu={"archive"}
     />
   );
 };
