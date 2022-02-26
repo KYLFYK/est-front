@@ -6,11 +6,6 @@ import {
   NewObjectActionTypes,
   ObjectTypes,
 } from "../../../../../utils/interfaces/objects";
-import {
-  DROPDOWN_CITY_OPTIONS,
-  DROPDOWN_COUNTRY_OPTIONS,
-  DROPDOWN_FILTER_OPTIONS,
-} from "../../../../containers/PlanningFilter/config";
 import { BaseDropDown } from "../../../../shared/BaseDropDown/BaseDropDown";
 import { BaseInput } from "../../../../shared/BaseInput/Input";
 import CounterButtons from "../../../../shared/CounterButtons/CounterButtons";
@@ -29,6 +24,7 @@ import s from "./AboutObject.module.scss";
 import { FormController, useForm } from "../../../../containers/FormController";
 import { ObjectGuides } from "../../../../../mobx/stores/objects/GuidesStore";
 import { IObjType } from "../../../../tabs/Account/Agent/components/Others/MyAdsContainer/MyAdsContainer";
+import { AddressGuides } from "../../../../../mobx/stores/objects/AddressGuidesStore";
 
 interface Props extends ICreateObjectControls {
   objectType: ObjectTypes;
@@ -58,6 +54,7 @@ const actionToText: (action: NewObjectActionTypes) => IObjType = (action) => {
 const AboutObjectTab: React.FC<Props> = observer(
   ({ onNextTab, onPrevTab, objectType, action }) => {
     const guidesStore = ObjectGuides;
+    const addressStore = AddressGuides;
 
     const [form] = useForm<IForm>({
       type: "",
@@ -80,13 +77,14 @@ const AboutObjectTab: React.FC<Props> = observer(
 
     const isValidName = "name" in values && !!values.name.length; // REPLACE BY VALIDATION SERVICE
     const isValidType = "type" in values && !!values.type.length; // REPLACE BY VALIDATION SERVICE
-    const isValidComplexName =
-      "complexName" in values && !!values.complexName.length; // REPLACE BY VALIDATION SERVICE
+    // const isValidComplexName =
+    //   "complexName" in values && !!values.complexName.length; // REPLACE BY VALIDATION SERVICE
     const isValidCountry = "country" in values && !!values.country.length; // REPLACE BY VALIDATION SERVICE
     const isValidCity = "city" in values && !!values.city.length; // REPLACE BY VALIDATION SERVICE
     const isValidIndex = "index" in values && !!values.index; // REPLACE BY VALIDATION SERVICE
     const isValidAddress = "address" in values && !!values.address.length; // REPLACE BY VALIDATION SERVICE
     const isValidCost = "cost" in values && !!values.cost; // REPLACE BY VALIDATION SERVICE
+    const isValidRegion = "region" in values && !!values.region; // REPLACE BY VALIDATION SERVICE
 
     const handleNext = () => {
       const isValid = isValidInputsAboutTab(
@@ -114,6 +112,12 @@ const AboutObjectTab: React.FC<Props> = observer(
       }
     }, [action]);
 
+    useEffect(() => {
+      if (!addressStore.loaded && !addressStore.errorOnLoad) {
+        addressStore.loadData().then();
+      }
+    }, []);
+
     const handlePrev = () => {
       onPrevTab();
     };
@@ -137,6 +141,9 @@ const AboutObjectTab: React.FC<Props> = observer(
     };
     const onChangeCountry = (value: string) => {
       setValues({ ...values, country: value });
+    };
+    const onChangeRegion = (value: string) => {
+      setValues({ ...values, region: value });
     };
     const onChangeCity = (value: string) => {
       setValues({ ...values, city: value });
@@ -222,27 +229,51 @@ const AboutObjectTab: React.FC<Props> = observer(
           </InputsGroup>
           <div className={s.divider} />
           <InputsGroup title={"Адрес"}>
-            <BaseDropDown
-              value={values.country}
-              className={s.inputMd}
-              options={DROPDOWN_COUNTRY_OPTIONS}
-              placeholder={"Страна"}
-              onChange={onChangeCountry}
-              label="Страна"
-              isError={!isValid && !isValidCountry}
-              name={"country"}
-            />
-
-            <BaseDropDown
-              value={values.city}
-              className={s.inputMd}
-              options={DROPDOWN_CITY_OPTIONS}
-              placeholder={"Город"}
-              onChange={onChangeCity}
-              label="Город"
-              isError={!isValid && !isValidCity}
-              name={"city"}
-            />
+            {addressStore.countries && (
+              <BaseDropDown
+                value={values.country}
+                className={s.inputMd}
+                options={addressStore.countries.map((el) => ({
+                  label: el.name,
+                  value: el.id,
+                }))}
+                placeholder={"Страна"}
+                onChange={onChangeCountry}
+                label="Страна"
+                isError={!isValid && !isValidCountry}
+                name={"country"}
+              />
+            )}
+            {addressStore.regions && (
+              <BaseDropDown
+                value={values.region}
+                className={s.inputMd}
+                options={addressStore.regions.map((el) => ({
+                  label: el.name,
+                  value: el.id,
+                }))}
+                placeholder={"Регион"}
+                onChange={onChangeRegion}
+                label="Регион"
+                isError={!isValid && !isValidRegion}
+                name={"region"}
+              />
+            )}
+            {addressStore.cities && (
+              <BaseDropDown
+                value={values.city}
+                className={s.inputMd}
+                options={addressStore.cities.map((el) => ({
+                  label: el.name,
+                  value: el.id,
+                }))}
+                placeholder={"Город"}
+                onChange={onChangeCity}
+                label="Город"
+                isError={!isValid && !isValidCity}
+                name={"city"}
+              />
+            )}
             {"index" in values && (
               <BaseInput
                 value={(values as ICreateHouseAboutTab).index}

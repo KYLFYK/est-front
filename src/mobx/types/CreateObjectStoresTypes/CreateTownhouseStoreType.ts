@@ -17,6 +17,7 @@ export interface ICreateTownhouseAboutTab {
   country: string;
   city: string;
   address: string;
+  region: string;
   cost: number;
   index: number;
 }
@@ -72,27 +73,26 @@ export interface ICreateTownhouseInfoTab {
 
 export interface ICreateTownhouseLegalPurity {
   realEstateRegister: {
-    address: string,
-    cadastralNumber: string,
-    cadastralCost: string,
-    generalSquare: string,
-    floors: string,
-  },
+    address: string;
+    cadastralNumber: string;
+    cadastralCost: string;
+    generalSquare: string;
+    floors: string;
+  };
   currentFounder: {
-    founderType: FoundersTypes,
-    firstFounderName: string,
-    secondFouderName?: string,
-    cadastralNumber: string,
-    ownershipFrom: Date,
-    ownershipTo: Date, 
-  },
+    founderType: FoundersTypes;
+    firstFounderName: string;
+    secondFouderName?: string;
+    cadastralNumber: string;
+    ownershipFrom: Date;
+    ownershipTo: Date;
+  };
   previousFounder: {
-    founderType: FoundersTypes,
-    firstFounderName: string,
-    secondFouderName?: string,
-    cadastralNumber: string,
-    ownershipFrom: Date,
-    ownershipTo: Date, 
-  }
+    founderType: FoundersTypes;
+    firstFounderName: string;
+    secondFouderName?: string;
+    cadastralNumber: string;
+    ownershipFrom: Date;
+    ownershipTo: Date;
+  };
 }
-

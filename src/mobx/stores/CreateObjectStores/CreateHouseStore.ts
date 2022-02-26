@@ -9,6 +9,7 @@ class CreateHouseStore implements ICreateObjectHouse {
     city: "",
     index: 0,
     address: "",
+    region: "",
     cost: 0,
   };
   generalInfo: ICreateObjectHouse["generalInfo"] = {
@@ -22,12 +23,12 @@ class CreateHouseStore implements ICreateObjectHouse {
     bathroom: "",
     kitchen: "",
     garage: {
-      has: '',
+      has: "",
       capacity: "",
       square: "",
     },
     pool: {
-      has: '',
+      has: "",
       square: "",
     },
     floors: {
@@ -61,7 +62,7 @@ class CreateHouseStore implements ICreateObjectHouse {
   };
   legalPurity: ICreateObjectHouse["legalPurity"] = {
     realEstateRegister: {
-      address: '',
+      address: "",
       cadastralNumber: "",
       cadastralCost: "",
       generalSquare: "",
@@ -69,23 +70,21 @@ class CreateHouseStore implements ICreateObjectHouse {
     },
     currentFounder: {
       founderType: FoundersTypes.SINGLE,
-      firstFounderName: '',
+      firstFounderName: "",
       secondFouderName: undefined,
       cadastralNumber: "",
       ownershipFrom: new Date(),
-      ownershipTo: new Date(), 
+      ownershipTo: new Date(),
     },
     previousFounder: {
       founderType: FoundersTypes.SINGLE,
-      firstFounderName: '',
+      firstFounderName: "",
       secondFouderName: undefined,
       cadastralNumber: "",
       ownershipFrom: new Date(),
-      ownershipTo: new Date(), 
-    }
+      ownershipTo: new Date(),
+    },
   };
-
-  
 }
 
 export default CreateHouseStore;

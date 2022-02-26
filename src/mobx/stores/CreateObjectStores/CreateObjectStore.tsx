@@ -234,9 +234,9 @@ class CreateObjectStore implements ICreateObject {
       newApartmentData.set("postcode", newData.about.index);
       newApartmentData.set("longitude", "31.45");
       newApartmentData.set("latitude", "31.45");
-      newApartmentData.set("region", "1");
-      newApartmentData.set("country", "1");
-      newApartmentData.set("city", "1");
+      newApartmentData.set("region", data.about.region);
+      newApartmentData.set("country", data.about.country);
+      newApartmentData.set("city", data.about.city);
       newApartmentData.set("owner", idOwner.id);
       newApartmentData.set("status", "1");
       newApartmentData.set("price", newData.about.cost);

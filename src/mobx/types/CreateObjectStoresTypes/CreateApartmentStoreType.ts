@@ -16,6 +16,7 @@ export interface ICreateApartmentAboutTab {
   name: string;
   country: string;
   city: string;
+  region: string;
   address: string;
   cost: number;
   index: number;

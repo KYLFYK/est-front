@@ -97,10 +97,6 @@ const FormScreen: FC<Props> = observer(
       setSuccesAdvertisementId(advertisementId);
     };
 
-    console.log(
-      guidesStore.readyToWork ? toJS(guidesStore.readyToWork) : undefined
-    );
-
     useEffect(() => {
       if (
         (!guidesStore.loaded && !guidesStore.errorOnLoad) ||

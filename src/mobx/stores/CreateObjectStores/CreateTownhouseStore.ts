@@ -8,6 +8,7 @@ class CreateTownhouseStore implements ICreateObjectTownhouse {
     country: "",
     city: "",
     index: 0,
+    region: "",
     address: "",
     cost: 0,
   };
@@ -71,7 +72,7 @@ class CreateTownhouseStore implements ICreateObjectTownhouse {
     },
     currentFounder: {
       founderType: FoundersTypes.SINGLE,
-      firstFounderName: '',
+      firstFounderName: "",
       secondFouderName: undefined,
       cadastralNumber: "",
       ownershipFrom: new Date(),
@@ -79,14 +80,13 @@ class CreateTownhouseStore implements ICreateObjectTownhouse {
     },
     previousFounder: {
       founderType: FoundersTypes.SINGLE,
-      firstFounderName: '',
+      firstFounderName: "",
       secondFouderName: undefined,
       cadastralNumber: "",
       ownershipFrom: new Date(),
       ownershipTo: new Date(),
     },
   };
-
 }
 
 export default CreateTownhouseStore;

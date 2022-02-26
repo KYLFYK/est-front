@@ -8,6 +8,7 @@ class CreateApartmentStore implements ICreateObjectAparts {
     country: "",
     city: "",
     address: "",
+    region: "",
     cost: 0,
     index: 0,
     type: "",
@@ -52,7 +53,7 @@ class CreateApartmentStore implements ICreateObjectAparts {
   };
   legalPurity: ICreateObjectAparts["legalPurity"] = {
     realEstateRegister: {
-      address: '',
+      address: "",
       cadastralNumber: "",
       cadastralCost: "",
       generalSquare: "",
@@ -60,22 +61,21 @@ class CreateApartmentStore implements ICreateObjectAparts {
     },
     currentFounder: {
       founderType: FoundersTypes.SINGLE,
-      firstFounderName: '',
+      firstFounderName: "",
       secondFouderName: undefined,
       cadastralNumber: "",
       ownershipFrom: new Date(),
-      ownershipTo: new Date(), 
+      ownershipTo: new Date(),
     },
     previousFounder: {
       founderType: FoundersTypes.SINGLE,
-      firstFounderName: '',
+      firstFounderName: "",
       secondFouderName: undefined,
       cadastralNumber: "",
       ownershipFrom: new Date(),
-      ownershipTo: new Date(), 
-    }
+      ownershipTo: new Date(),
+    },
   };
-
 }
 
 export default CreateApartmentStore;

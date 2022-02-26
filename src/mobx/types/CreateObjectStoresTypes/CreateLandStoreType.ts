@@ -17,6 +17,7 @@ export interface ICreateLandAboutTab {
   city: string;
   address: string;
   cost: number;
+  region: string;
 }
 
 export interface ICreateLandGeneralInfo {
@@ -38,28 +39,27 @@ export interface ICreateLandInfoTab {
   buildings: string;
 }
 
-
 export interface ICreateLandLegalPurity {
   realEstateRegister: {
-    address: string,
-    cadastralNumber: string,
-    cadastralCost: string,
-    generalSquare: string,
-  },
+    address: string;
+    cadastralNumber: string;
+    cadastralCost: string;
+    generalSquare: string;
+  };
   currentFounder: {
-    founderType: FoundersTypes,
-    firstFounderName: string,
-    secondFouderName?: string,
-    cadastralNumber: string,
-    ownershipFrom: Date,
-    ownershipTo: Date, 
-  },
+    founderType: FoundersTypes;
+    firstFounderName: string;
+    secondFouderName?: string;
+    cadastralNumber: string;
+    ownershipFrom: Date;
+    ownershipTo: Date;
+  };
   previousFounder: {
-    founderType: FoundersTypes,
-    firstFounderName: string,
-    secondFouderName?: string,
-    cadastralNumber: string,
-    ownershipFrom: Date,
-    ownershipTo: Date, 
-  }
+    founderType: FoundersTypes;
+    firstFounderName: string;
+    secondFouderName?: string;
+    cadastralNumber: string;
+    ownershipFrom: Date;
+    ownershipTo: Date;
+  };
 }
