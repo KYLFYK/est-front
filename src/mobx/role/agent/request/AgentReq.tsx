@@ -11,6 +11,7 @@ class AgentReqStore {
     }
     
     initialData = {
+        error: false,
         loading: true,
         data: [
         {
@@ -33,28 +34,31 @@ class AgentReqStore {
 
     async fetchReqs(ownerId: number) {
         this.initialData.loading = true
-
+        this.initialData.error = false
         const res = await reqAPI.getAgentReq(ownerId)
-        this.initialData.data = res.data.map((r: any) => {
-            return {
-                id: r.id,
-                name: r.name,
-                email: r.email,
-                phone: r.phone,
-                convenientTime: `${r.comfortableTimeFrom.substring(0, 5)}-${r.comfortableTimeTo.substring(0, 5)}`,
-                applicationDate: datetoDayFormat(r.createAt),
-                applicationTime: datetoTimeFormat(r.createAt),
-                agentName: '',
-                typeContract: '',
-                object: String(r.object),
-                priceObject: '',
-                status: r.status.value,
-                idOffers: '',
-                url: '',
-            }
-        })
-
-        this.initialData.loading = false
+        if (res.name === 'Error') {
+            this.initialData.loading = false
+            this.initialData.error = true
+        } else {
+            this.initialData.data = res.data.map((r: any) => {
+                return {
+                    id: r.id,
+                    email: r.email,
+                    phone: r.phone,
+                    convenientTime: `${r.comfortableTimeFrom.substring(0, 5)}-${r.comfortableTimeTo.substring(0, 5)}`,
+                    applicationDate: datetoDayFormat(r.createAt),
+                    applicationTime: datetoTimeFormat(r.createAt),
+                    agentName: '',
+                    typeContract: '',
+                    object: String(r.object),
+                    priceObject: '',
+                    status: r.status.value,
+                    idOffers: '',
+                    url: '',
+                }
+            })
+            this.initialData.loading = false
+        }
     }
 
     get() {
