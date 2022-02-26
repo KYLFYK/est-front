@@ -5,6 +5,7 @@ import { HouseApi } from "../../../../api/obj/house";
 import { datetoDayFormat } from "../../../../lib/mapping/objectDates";
 
 import imgMoc from "../../../../components/tabs/Account/Agent/components/PersonalCabinetTab/AccountInfo/logoFalse.svg";
+import { IGuide } from "../../../stores/objects/GuidesStore";
 
 export interface IObject {
   id: number;
@@ -112,16 +113,19 @@ class AgentAdsStore {
 
     const fetchResult = await loadAllData();
 
-    console.log(fetchResult);
-
-    this.initialData.data = fetchResult.map((o: any, i: number) => ({
+    this.initialData.data = fetchResult.map((o: any) => ({
       id: o.id,
       img: imgMoc,
       type: o.objectType,
       name: o.name,
       price: o.price,
       mainSpecifications: o.guides
-        .filter((el: any) => el.type_en === "furniture")
+        .filter(
+          (el: IGuide) =>
+            el.type_en === "safety" ||
+            el.type_en === "furniture" ||
+            el.type_en === "buildings"
+        )
         .map((el: any) => el.value),
       agent: o.owner,
       dateStart: datetoDayFormat(o.createAt, "Cabinet"),

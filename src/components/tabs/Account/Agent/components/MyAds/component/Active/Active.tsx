@@ -21,7 +21,7 @@ const MyAdsActive = observer(() => {
   );
 
   return adsStore.get().loading ? (
-    <h1>Loading...</h1>
+    <h1>Загрузка...</h1>
   ) : (
     <MyAdsContainer
       objects={toJS(adsStore.initialData.data).filter(

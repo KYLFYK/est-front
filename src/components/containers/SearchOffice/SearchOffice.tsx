@@ -1,10 +1,10 @@
 import React, { FC } from "react";
 import BaseLink from "../../shared/BaseLink/BaseLink";
 import { BaseInput } from "../../shared/BaseInput/Input";
-import { IconOption } from "../../../icons/SearchOffice/IconOption";
+import Typography from "src/components/shared/Typography/Typography";
+import BaseButton from "../../shared/BaseButton/BaseButtons";
 
 import css from "./SearchOffice.module.scss";
-import Typography from "src/components/shared/Typography/Typography";
 
 interface Props {
   type?: "active" | "archive" | "draft" | "owner";
@@ -36,9 +36,9 @@ export const SearchOffice: FC<Props> = ({
         return "Добавить объект";
     }
   };
-  console.log('menu')
-  console.log(type)
-  const searchColorText = (type :string)=>{
+  console.log("menu");
+  console.log(type);
+  const searchColorText = (type: string) => {
     switch (type) {
       case "archive":
         return "nude";
@@ -47,8 +47,8 @@ export const SearchOffice: FC<Props> = ({
       case "active":
         return "secondary";
     }
-  }
-  const searchLinkColor = (type :string)=>{
+  };
+  const searchLinkColor = (type: string) => {
     switch (type) {
       case "archive":
         return "primary_light";
@@ -57,7 +57,7 @@ export const SearchOffice: FC<Props> = ({
       case "active":
         return "secondary";
     }
-  }
+  };
 
   return (
     <div className={css.search}>
@@ -72,17 +72,24 @@ export const SearchOffice: FC<Props> = ({
         </div>
         {/*<IconOption />*/}
       </div>
-      {type !== "owner" && !hideButton && (
-        <BaseLink
-          href="/ads/new-object"
-          // type={type === "active" ? "secondary" : "primary_light"}
-          type={searchLinkColor(type)}
-          isActive
-        >
-          <Typography size="small" color={searchColorText(type)}>
-            {buttonText ? buttonText : searchTitle(type)}
-          </Typography>
-        </BaseLink>
+      {type === "archive" ? (
+        <BaseButton type={searchLinkColor(type)} isActive>
+          {buttonText ? buttonText : searchTitle(type)}
+        </BaseButton>
+      ) : (
+        type !== "owner" &&
+        !hideButton && (
+          <BaseLink
+            href="/ads/new-object"
+            // type={type === "active" ? "secondary" : "primary_light"}
+            type={searchLinkColor(type)}
+            isActive
+          >
+            <Typography size="small" color={searchColorText(type)}>
+              {buttonText ? buttonText : searchTitle(type)}
+            </Typography>
+          </BaseLink>
+        )
       )}
     </div>
   );

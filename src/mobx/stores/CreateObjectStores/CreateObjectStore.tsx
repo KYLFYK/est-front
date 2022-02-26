@@ -175,11 +175,8 @@ class CreateObjectStore implements ICreateObject {
     const idOwner: any = jwt_decode(
       localStorage.getItem("accessEstatum")
         ? (localStorage.getItem("accessEstatum") as string)
-        : ("123" as string)
+        : "123"
     );
-
-    console.log("-fetch", data);
-    console.log("-idOwner", idOwner.id);
 
     if (objectType === 0) {
       const newData: any = data;
@@ -229,8 +226,6 @@ class CreateObjectStore implements ICreateObject {
       }
 
       const newApartmentData = new FormData();
-
-      console.log("type", this.objType);
 
       newApartmentData.set("name", newData.about.name);
       newApartmentData.set("objectType", this.objType);
@@ -317,9 +312,6 @@ class CreateObjectStore implements ICreateObject {
           ],
         })
       );
-
-      console.log("all ok");
-      console.log("sentData", newApartmentData);
 
       try {
         const res = await createObjectAPI.createObjectApartment(

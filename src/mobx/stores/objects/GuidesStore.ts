@@ -34,16 +34,16 @@ export type GuideType =
 export interface IGuide {
   id: number;
   for: GuideObject[];
-  subtitle_en: string;
-  subtitle_ru: string;
+  subtitle_en: string | null;
+  subtitle_ru: string | null;
   type_en: GuideType;
   type_ru: string;
   value: string;
 }
 
 export interface IRTWGuide {
-  subtitle_en: string;
-  subtitle_ru: string;
+  subtitle_en: string | null;
+  subtitle_ru: string | null;
   type_en: GuideType;
   type_ru: string;
   values: {
