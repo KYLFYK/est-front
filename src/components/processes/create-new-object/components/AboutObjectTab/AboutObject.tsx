@@ -79,10 +79,10 @@ const AboutObjectTab: React.FC<Props> = observer(
     const isValidType = "type" in values && !!values.type.length; // REPLACE BY VALIDATION SERVICE
     // const isValidComplexName =
     //   "complexName" in values && !!values.complexName.length; // REPLACE BY VALIDATION SERVICE
-    const isValidCountry = "country" in values && !!values.country.length; // REPLACE BY VALIDATION SERVICE
-    const isValidCity = "city" in values && !!values.city.length; // REPLACE BY VALIDATION SERVICE
+    const isValidCountry = "country" in values && !!values.country; // REPLACE BY VALIDATION SERVICE
+    const isValidCity = "city" in values && !!values.city; // REPLACE BY VALIDATION SERVICE
     const isValidIndex = "index" in values && !!values.index; // REPLACE BY VALIDATION SERVICE
-    const isValidAddress = "address" in values && !!values.address.length; // REPLACE BY VALIDATION SERVICE
+    const isValidAddress = "address" in values && !!values.address; // REPLACE BY VALIDATION SERVICE
     const isValidCost = "cost" in values && !!values.cost; // REPLACE BY VALIDATION SERVICE
     const isValidRegion = "region" in values && !!values.region; // REPLACE BY VALIDATION SERVICE
 
