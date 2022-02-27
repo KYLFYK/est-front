@@ -25,7 +25,6 @@ import {
   GuideObject,
   ObjectGuides,
 } from "../../../../mobx/stores/objects/GuidesStore";
-import { toJS } from "mobx";
 import { useAgentAdsStore } from "../../../../mobx/role/agent/ads/AgentAds";
 
 import s from "./FormScreen.module.scss";

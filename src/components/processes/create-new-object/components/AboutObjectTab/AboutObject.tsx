@@ -12,7 +12,6 @@ import CounterButtons from "../../../../shared/CounterButtons/CounterButtons";
 import Typography from "../../../../shared/Typography/Typography";
 import {
   getInitStateAboutTab,
-  getObjType,
   isValidInputsAboutTab,
   TAboutTabState,
 } from "../../lib";
@@ -20,11 +19,12 @@ import ButtonPanel, {
   ICreateObjectControls,
 } from "../ButtonsPanel/ButtonsPanel";
 import InputsGroup from "../InputsGroup/InputsGroup";
-import s from "./AboutObject.module.scss";
 import { FormController, useForm } from "../../../../containers/FormController";
 import { ObjectGuides } from "../../../../../mobx/stores/objects/GuidesStore";
 import { IObjType } from "../../../../tabs/Account/Agent/components/Others/MyAdsContainer/MyAdsContainer";
 import { AddressGuides } from "../../../../../mobx/stores/objects/AddressGuidesStore";
+
+import s from "./AboutObject.module.scss";
 
 interface Props extends ICreateObjectControls {
   objectType: ObjectTypes;
@@ -71,7 +71,6 @@ const AboutObjectTab: React.FC<Props> = observer(
     const [values, setValues] = React.useState<TAboutTabState>(
       getInitStateAboutTab(objectType, createObjectStore)
     ); // 1-type Object  2-
-    const [objType, setType] = useState(getObjType(createObjectStore));
     const [isValid, setIsValid] = useState<boolean>(true);
     const saveAboutTab = createObjectStore.saveAboutTab.bind(createObjectStore);
 
@@ -107,8 +106,8 @@ const AboutObjectTab: React.FC<Props> = observer(
     };
 
     useEffect(() => {
-      if (objType !== actionToText(action)) {
-        setType(actionToText(action));
+      if (createObjectStore.getObjType() !== actionToText(action)) {
+        createObjectStore.setObjType(actionToText(action));
       }
     }, [action]);
 

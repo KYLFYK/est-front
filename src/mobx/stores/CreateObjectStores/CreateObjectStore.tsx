@@ -156,6 +156,14 @@ class CreateObjectStore implements ICreateObject {
     }
   }
 
+  setObjType(type: IObjType) {
+    this.objType = type;
+  }
+
+  getObjType() {
+    return this.objType;
+  }
+
   // Fake request method for assigning options list in store in the future
   *getFurnitureList(): Generator<Promise<IOption[]>, IOption[], IOption[]> {
     const fakeRequest = () =>
@@ -183,6 +191,10 @@ class CreateObjectStore implements ICreateObject {
 
       const guides = [];
       const owners = [];
+
+      if ("furnitureList" in data.info) {
+        guides.push(...data.info.furnitureList.map((el) => Number(el)));
+      }
 
       if (newData.legalPurity.previousFounder.firstFounderName) {
         owners.push(newData.legalPurity.previousFounder.firstFounderName);
@@ -225,31 +237,32 @@ class CreateObjectStore implements ICreateObject {
         guides.push(Number(newData.info.parking));
       }
 
-      const newApartmentData = new FormData();
-
-      newApartmentData.set("name", newData.about.name);
-      newApartmentData.set("objectType", this.objType);
-      newApartmentData.set("description", newData.generalInfo.description);
-      newApartmentData.set("address", newData.about.address);
-      newApartmentData.set("postcode", newData.about.index);
-      newApartmentData.set("longitude", "31.45");
-      newApartmentData.set("latitude", "31.45");
-      newApartmentData.set("region", data.about.region);
-      newApartmentData.set("country", data.about.country);
-      newApartmentData.set("city", data.about.city);
-      newApartmentData.set("owner", idOwner.id);
-      newApartmentData.set("status", "1");
-      newApartmentData.set("price", newData.about.cost);
-      newApartmentData.set("complex", "1");
-      newApartmentData.set(
-        "legalPurity",
-        JSON.stringify({
+      const apartmentData = {
+        name: newData.about.name,
+        objectType: this.getObjType(),
+        description: newData.generalInfo.description,
+        address: newData.about.address,
+        postcode: String(newData.about.index),
+        longitude: "31.45",
+        latitude: "31.45",
+        region: data.about.region,
+        country: data.about.country,
+        city: data.about.city,
+        owner: idOwner.id,
+        status: 1,
+        price: newData.about.cost,
+        complex: 1,
+        legalPurity: {
           address: newData.legalPurity.realEstateRegister.address,
-          areaValue: newData.legalPurity.realEstateRegister.generalSquare,
+          areaValue: Number(
+            newData.legalPurity.realEstateRegister.generalSquare
+          ),
           areaUnits: "м2",
           cadastalNumber:
             newData.legalPurity.realEstateRegister.cadastralNumber,
-          cadastralPrice: newData.legalPurity.realEstateRegister.cadastralCost,
+          cadastralPrice: Number(
+            newData.legalPurity.realEstateRegister.cadastralCost
+          ),
           currentOwnerName: newData.legalPurity.currentFounder.firstFounderName,
           currentOwnerStartDate:
             newData.legalPurity.currentFounder.ownershipFrom,
@@ -278,18 +291,23 @@ class CreateObjectStore implements ICreateObject {
                 "При продаже продавец скорее всего должен будет заплатить налог с её продажи",
             },
           ],
-        })
-      );
-      newApartmentData.set("guides", guides.join(", "));
-      newApartmentData.set(
-        "property",
-        JSON.stringify({
+        },
+        guides: guides,
+        files: [
+          {
+            fileName: "string",
+            mimeType: "string",
+            size: "string",
+            url: "string",
+          },
+        ],
+        property: {
           floor: newData.about.floor,
           totalFloor: newData.about.floorsAmmount,
-          area: newData.generalInfo.generalSquare,
-          livingArea: newData.generalInfo.livingSquare,
-          bathroomArea: newData.generalInfo.bathroom,
-          kitchenArea: newData.generalInfo.kitchen,
+          area: Number(newData.generalInfo.generalSquare),
+          livingArea: Number(newData.generalInfo.livingSquare),
+          bathroomArea: Number(newData.generalInfo.bathroom),
+          kitchenArea: Number(newData.generalInfo.kitchen),
           roomsArea: newData.generalInfo.customRooms.map((el: any) =>
             Number(el.value)
           ),
@@ -310,13 +328,11 @@ class CreateObjectStore implements ICreateObject {
               value: "foundation",
             },
           ],
-        })
-      );
+        },
+      };
 
       try {
-        const res = await createObjectAPI.createObjectApartment(
-          newApartmentData
-        );
+        const res = await createObjectAPI.createObjectApartment(apartmentData);
         console.log("response apartment", res);
         return res;
       } catch (e) {
