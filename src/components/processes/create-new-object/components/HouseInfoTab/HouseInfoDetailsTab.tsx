@@ -22,6 +22,7 @@ import ButtonPanel, {
 import InputsGroup from "../InputsGroup/InputsGroup";
 import s from "./HouseInfoTab.module.scss";
 import { ObjectGuides } from "../../../../../mobx/stores/objects/GuidesStore";
+import { toJS } from "mobx";
 
 interface Props extends ICreateObjectControls {
   objectType: Exclude<ObjectTypes, ObjectTypes.LAND>;
@@ -126,6 +127,10 @@ const HouseInfoDetailsTab: React.FC<Props> = observer(
 
     const parkingType = guidesStore.readyToWork?.find(
       (el) => el.type_en === "parking"
+    );
+
+    const internetType = guidesStore.readyToWork?.find(
+      (el) => el.type_en === "internet"
     );
 
     return (
@@ -277,15 +282,20 @@ const HouseInfoDetailsTab: React.FC<Props> = observer(
               isError={!isValid && !isValidVent}
             />
           )}
-          <BaseDropDown
-            value={values.internet}
-            isError={!isValid && !isValidInternet}
-            className={s.dropdownSm}
-            label="Интернет"
-            options={INFO_TAB_internet_TYPE}
-            placeholder="Интернет"
-            onChange={(value) => onChangeDropDown(value, "internet")}
-          />
+          {internetType && (
+            <BaseDropDown
+              value={values.internet}
+              isError={!isValid && !isValidInternet}
+              className={s.dropdownSm}
+              label="Интернет"
+              options={internetType.values.map((el) => ({
+                label: el.value,
+                value: el.id.toString(),
+              }))}
+              placeholder="Интернет"
+              onChange={(value) => onChangeDropDown(value, "internet")}
+            />
+          )}
           {"engineeringComment" in values && (
             <BaseInput
               onChange={(event) =>

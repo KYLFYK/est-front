@@ -340,29 +340,154 @@ class CreateObjectStore implements ICreateObject {
       }
     }
     if (objectType === 1) {
-      const houseObjectCreateBackEnd = {
-        name: data.about.name,
-        description: data.generalInfo.description,
-        address: data.about.address,
-        postcode: data.about.cost,
+      const newHouse: any = data;
+
+      const guides = [];
+      const owners = [];
+
+      if ("furnitureList" in data.info) {
+        guides.push(...data.info.furnitureList.map((el) => Number(el)));
+      }
+
+      if (newHouse.legalPurity.previousFounder.firstFounderName) {
+        owners.push(newHouse.legalPurity.previousFounder.firstFounderName);
+      }
+      if (newHouse.legalPurity.previousFounder.secondFouderName) {
+        owners.push(newHouse.legalPurity.previousFounder.secondFouderName);
+      }
+
+      if (newHouse.about.type) {
+        guides.push(Number(newHouse.about.type));
+      }
+      if (newHouse.infrastructure.view) {
+        guides.push(Number(newHouse.infrastructure.view));
+      }
+      if (newHouse.info.construction) {
+        guides.push(Number(newHouse.info.construction));
+      }
+      if (newHouse.info.groundwork) {
+        guides.push(Number(newHouse.info.groundwork));
+      }
+      if (newHouse.info.roof) {
+        guides.push(Number(newHouse.info.roof));
+      }
+      if (newHouse.info.wall) {
+        guides.push(Number(newHouse.info.wall));
+      }
+      if (newHouse.info.water) {
+        guides.push(Number(newHouse.info.water));
+      }
+      if (newHouse.info.heating) {
+        guides.push(Number(newHouse.info.heating));
+      }
+      if (newHouse.info.sewerage) {
+        guides.push(Number(newHouse.info.sewerage));
+      }
+      if (newHouse.info.electricity) {
+        guides.push(Number(newHouse.info.electricity));
+      }
+      if (newHouse.info.parking) {
+        guides.push(Number(newHouse.info.parking));
+      }
+      if (newHouse.info.internet) {
+        guides.push(Number(newHouse.info.internet));
+      }
+
+      const houseObject = {
+        name: newHouse.about.name,
+        objectType: this.getObjType(),
+        description: newHouse.generalInfo.description,
+        address: newHouse.about.address,
+        postcode: String(newHouse.about.index),
         longitude: "31.45",
         latitude: "31.45",
-        region: 1,
+        region: data.about.region,
+        country: data.about.country,
+        city: data.about.city,
         owner: idOwner.id,
         status: 1,
-        markAsDelete: false,
-        // "guides": [   // справочник доделывается (Справочник - get ) передаться номер
-        //     0
-        // ],
-        file: [0],
-        price: data.about.cost,
-        complex: null,
+        price: newHouse.about.cost,
+        complex: 1,
+        legalPurity: {
+          address: newHouse.legalPurity.realEstateRegister.address,
+          areaValue: Number(
+            newHouse.legalPurity.realEstateRegister.generalSquare
+          ),
+          areaUnits: "м2",
+          cadastalNumber:
+            newHouse.legalPurity.realEstateRegister.cadastralNumber,
+          cadastralPrice: Number(
+            newHouse.legalPurity.realEstateRegister.cadastralCost
+          ),
+          currentOwnerName:
+            newHouse.legalPurity.currentFounder.firstFounderName,
+          currentOwnerStartDate:
+            newHouse.legalPurity.currentFounder.ownershipFrom,
+          floor: 1,
+          previewOwners: {
+            owners: owners,
+            startDate: newHouse.legalPurity.previousFounder.ownershipFrom,
+            finishDate: newHouse.legalPurity.previousFounder.ownershipTo,
+          },
+          encumbrances: [
+            {
+              title: "На дом наложен арест",
+              status: false,
+              description: null,
+            },
+            {
+              title: "Записей об аренде не найдено",
+              status: false,
+              description: null,
+            },
+          ],
+          recomendations: [
+            {
+              title: "Дом в собственности менее 5 лет",
+              description:
+                "При продаже продавец скорее всего должен будет заплатить налог с её продажи",
+            },
+          ],
+        },
+        guides: guides,
+        files: [
+          {
+            fileName: "string",
+            mimeType: "string",
+            size: "string",
+            url: "string",
+          },
+        ],
+        property: {
+          floor: newHouse.about.floor,
+          totalFloor: newHouse.about.floorsAmmount,
+          area: Number(newHouse.generalInfo.generalSquare),
+          livingArea: Number(newHouse.generalInfo.livingSquare),
+          bathroomArea: Number(newHouse.generalInfo.bathroom),
+          kitchenArea: Number(newHouse.generalInfo.kitchen),
+          roomsArea: [],
+          amountBathrooms: 1,
+          amountBedrooms: 1,
+          amountShowers: 1,
+          buildingNumber: 1,
+          heightCeilings: 3.3,
+          deadline: "2022-02-25T17:53:38.800Z",
+          interior: "string",
+          infrastructure: "string",
+          rooms: "one",
+          threeD: "https://www.youtube.com/embed/Ke3qyQYNob4",
+          vr: "https://3d-tur.ru/010/",
+          constructionFeatures: [
+            {
+              title: newHouse.generalInfo.interiorDescription,
+              value: "foundation",
+            },
+          ],
+        },
       };
 
       try {
-        const res = await createObjectAPI.createObjectHouse(
-          houseObjectCreateBackEnd
-        );
+        const res = await createObjectAPI.createObjectHouse(houseObject);
         console.log("response apartment", res);
         return res;
       } catch (e) {
