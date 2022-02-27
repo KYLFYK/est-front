@@ -57,6 +57,14 @@ class CreateObjectStore implements ICreateObject {
   house: CreateHouseStore = new CreateHouseStore();
   objType: IObjType = "sale";
 
+  resetFields() {
+    this.apartment = new CreateApartmentStore();
+    this.townhouse = new CreateTownhouseStore();
+    this.land = new CreateLandStore();
+    this.house = new CreateHouseStore();
+    this.objType = "sale";
+  }
+
   saveAboutTab(data: TAboutTabState, objectType: ObjectTypes) {
     switch (objectType) {
       case ObjectTypes.APARTMENTS:

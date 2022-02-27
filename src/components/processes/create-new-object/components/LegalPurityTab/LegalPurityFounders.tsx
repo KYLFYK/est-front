@@ -203,12 +203,12 @@ const LegalPurityFounders: React.FC<Props> = observer(
         );
         if (!dataToSend) return;
 
-        console.log("dataToSend", dataToSend);
         const response = await createObjectStore.sendObjectData(
           dataToSend,
           objectType
         );
         if (response && onPublish) onPublish(response); // Передаем сюда айди успешного объявления
+        createObjectStore.resetFields();
       } else setIsValid(false);
     };
 
