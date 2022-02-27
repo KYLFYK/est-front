@@ -33,10 +33,6 @@ const LegalPurityFounders: React.FC<Props> = observer(
     const [isValid, setIsValid] = useState<boolean>(true);
     const { previousFounder, currentFounder } = values;
 
-    const store = useStores();
-
-    console.log("apartment", store.createObjectStore.apartment);
-
     const isValidCurrentFounderNames =
       !!currentFounder.firstFounderName.length &&
       (currentFounder.secondFouderName !== undefined

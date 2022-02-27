@@ -6,6 +6,7 @@ import { datetoDayFormat } from "../../../../lib/mapping/objectDates";
 
 import imgMoc from "../../../../components/tabs/Account/Agent/components/PersonalCabinetTab/AccountInfo/logoFalse.svg";
 import { IGuide } from "../../../stores/objects/GuidesStore";
+import { LandApi } from "../../../../api/obj/land";
 
 export interface IObject {
   id: number;
@@ -98,13 +99,19 @@ class AgentAdsStore {
       let res;
       do {
         res = await ApartmentApi.getAllApartment(i * 10, 10);
-        obj = obj ? [...obj, ...res?.data] : [...res?.data];
+        obj = obj ? [...obj, ...res?.data] : res?.data ? [...res?.data] : [];
         i++;
       } while (res?.data?.length >= 10);
       i = 0;
       do {
         res = await HouseApi.getAllHouse(i * 10, 10);
-        obj = obj ? [...obj, ...res?.data] : [...res?.data];
+        obj = obj ? [...obj, ...res?.data] : res?.data ? [...res?.data] : [];
+        i++;
+      } while (res?.data?.length >= 10);
+      i = 0;
+      do {
+        res = await LandApi.getAllLand(i * 10, 10);
+        obj = obj ? [...obj, ...res?.data] : res?.data ? [...res?.data] : [];
         i++;
       } while (res?.data?.length >= 10);
 

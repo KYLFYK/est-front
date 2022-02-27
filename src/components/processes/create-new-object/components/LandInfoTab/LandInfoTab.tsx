@@ -4,17 +4,13 @@ import { useStores } from "../../../../../hooks/useStores";
 import { ICreateLandInfoTab } from "../../../../../mobx/types/CreateObjectStoresTypes/CreateLandStoreType";
 import { ObjectTypes } from "../../../../../utils/interfaces/objects";
 import { BaseDropDown } from "../../../../shared/BaseDropDown/BaseDropDown";
-import {
-  INFO_TAB_HEATING_TYPE,
-  INFO_TAB_HOUSE_TYPE,
-  INFO_TAB_SEWAGE_SYSTEM_TYPE,
-  INFO_TAB_WATER_SUPPLY_TYPE,
-} from "../../config";
+import { INFO_TAB_HOUSE_TYPE } from "../../config";
 import ButtonPanel, {
   ICreateObjectControls,
 } from "../ButtonsPanel/ButtonsPanel";
 import InputsGroup from "../InputsGroup/InputsGroup";
 import s from "./LandInfoTab.module.scss";
+import { ObjectGuides } from "../../../../../mobx/stores/objects/GuidesStore";
 
 interface Props extends ICreateObjectControls {
   objectType: ObjectTypes.LAND;
@@ -22,6 +18,7 @@ interface Props extends ICreateObjectControls {
 
 const LandInfoTab: React.FC<Props> = observer(({ onNextTab, onPrevTab }) => {
   const { createObjectStore } = useStores();
+  const guidesStore = ObjectGuides;
 
   const [values, setValues] = React.useState<ICreateLandInfoTab>(
     createObjectStore.land.info
@@ -48,36 +45,64 @@ const LandInfoTab: React.FC<Props> = observer(({ onNextTab, onPrevTab }) => {
       setIsValid(false);
     }
   };
+
+  const waterType = guidesStore.readyToWork?.find(
+    (el) => el.type_en === "water"
+  );
+
+  const heatingType = guidesStore.readyToWork?.find(
+    (el) => el.type_en === "heating"
+  );
+
+  const sewerageType = guidesStore.readyToWork?.find(
+    (el) => el.type_en === "sewerage"
+  );
+
   return (
     <ButtonPanel onNextTab={handleNextTab} onPrevTab={onPrevTab}>
       <InputsGroup title="Инженерные коммуникации">
-        <BaseDropDown
-          value={values.waterPipe}
-          className={s.dropdownSm}
-          label="Водопровод"
-          options={INFO_TAB_WATER_SUPPLY_TYPE}
-          placeholder="Водопровод"
-          onChange={(value) => onChangeDropDown(value, "waterPipe")}
-          isError={!isValid && !isValidWaterPipe}
-        />
-        <BaseDropDown
-          value={values.heating}
-          className={s.dropdownSm}
-          label="Отопление"
-          options={INFO_TAB_HEATING_TYPE}
-          placeholder="Отопление"
-          onChange={(value) => onChangeDropDown(value, "heating")}
-          isError={!isValid && !isValidHeating}
-        />
-        <BaseDropDown
-          value={values.sewerage}
-          className={s.dropdownSm}
-          label="Канализация"
-          options={INFO_TAB_SEWAGE_SYSTEM_TYPE}
-          placeholder="Канализация"
-          onChange={(value) => onChangeDropDown(value, "sewerage")}
-          isError={!isValid && !isValidSewerage}
-        />
+        {waterType && (
+          <BaseDropDown
+            value={values.waterPipe}
+            className={s.dropdownSm}
+            label="Водопровод"
+            options={waterType.values.map((el) => ({
+              label: el.value,
+              value: el.id.toString(),
+            }))}
+            placeholder="Водопровод"
+            onChange={(value) => onChangeDropDown(value, "waterPipe")}
+            isError={!isValid && !isValidWaterPipe}
+          />
+        )}
+        {heatingType && (
+          <BaseDropDown
+            value={values.heating}
+            className={s.dropdownSm}
+            label="Отопление"
+            options={heatingType.values.map((el) => ({
+              label: el.value,
+              value: el.id.toString(),
+            }))}
+            placeholder="Отопление"
+            onChange={(value) => onChangeDropDown(value, "heating")}
+            isError={!isValid && !isValidHeating}
+          />
+        )}
+        {sewerageType && (
+          <BaseDropDown
+            value={values.sewerage}
+            className={s.dropdownSm}
+            label="Канализация"
+            options={sewerageType.values.map((el) => ({
+              label: el.value,
+              value: el.id.toString(),
+            }))}
+            placeholder="Канализация"
+            onChange={(value) => onChangeDropDown(value, "sewerage")}
+            isError={!isValid && !isValidSewerage}
+          />
+        )}
       </InputsGroup>
       <div className={s.divider} />
       <InputsGroup title="Строения">
