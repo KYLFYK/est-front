@@ -69,30 +69,6 @@ const HouseInfoDetailsTab: React.FC<Props> = observer(
       valueField: keyof TInfoState
     ) => setValues({ ...values, [valueField]: event.target.value });
 
-    const handleNextTab = () => {
-      const isValidInputs = isValidInputsHouseDetailsTab(
-        objectType,
-        isValidHouseType,
-        isValidFundament,
-        isValidRoof,
-        isValidWalls,
-        isValidTechComment,
-        isValidWaterPipe,
-        isValidHeating,
-        isValidSewerage,
-        isValidElectricity,
-        isValidVent,
-        isValidInternet,
-        isValidEngineeringComment,
-        isValidParking,
-        isValidParkingPrice
-      );
-      if (isValidInputs) {
-        createObjectStore.saveHouseInfoTab(values, objectType);
-        onNextTab && onNextTab();
-      } else setIsValid(false);
-    };
-
     const houseType = guidesStore.readyToWork?.find(
       (el) => el.type_en === "construction"
     );
@@ -132,6 +108,30 @@ const HouseInfoDetailsTab: React.FC<Props> = observer(
     const internetType = guidesStore.readyToWork?.find(
       (el) => el.type_en === "internet"
     );
+
+    const handleNextTab = () => {
+      const isValidInputs = isValidInputsHouseDetailsTab(
+        objectType,
+        isValidHouseType,
+        isValidFundament,
+        isValidRoof,
+        isValidWalls,
+        isValidTechComment,
+        isValidWaterPipe,
+        isValidHeating,
+        isValidSewerage,
+        isValidElectricity,
+        isValidVent,
+        isValidInternet || !internetType,
+        isValidEngineeringComment,
+        isValidParking,
+        isValidParkingPrice
+      );
+      if (isValidInputs) {
+        createObjectStore.saveHouseInfoTab(values, objectType);
+        onNextTab && onNextTab();
+      } else setIsValid(false);
+    };
 
     return (
       <ButtonPanel onNextTab={handleNextTab} onPrevTab={onPrevTab}>

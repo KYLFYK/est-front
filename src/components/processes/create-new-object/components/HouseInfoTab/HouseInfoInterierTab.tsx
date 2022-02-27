@@ -48,14 +48,6 @@ const HouseInfoInterierTab: React.FC<Props> = observer(
     const onChangeDropDown = (value: string, valueField: keyof TInfoState) =>
       setValues({ ...values, [valueField]: value });
 
-    const handleNextTab = () => {
-      const isValidInputs = isValidPlumbing && isValidRenovation;
-      if (isValidInputs) {
-        createObjectStore.saveHouseInfoTab(values, objectType);
-        onNextTab && onNextTab();
-      } else setIsValid(false);
-    };
-
     const bathroomType = guidesStore.readyToWork?.find(
       (el) => el.type_en === "bathroom"
     );
@@ -63,6 +55,15 @@ const HouseInfoInterierTab: React.FC<Props> = observer(
     const furnitureType = guidesStore.readyToWork?.find(
       (el) => el.type_en === "furniture"
     );
+
+    const handleNextTab = () => {
+      const isValidInputs =
+        (isValidPlumbing || !bathroomType) && isValidRenovation;
+      if (isValidInputs) {
+        createObjectStore.saveHouseInfoTab(values, objectType);
+        onNextTab && onNextTab();
+      } else setIsValid(false);
+    };
 
     return (
       <ButtonPanel onNextTab={handleNextTab} onPrevTab={onPrevTab}>

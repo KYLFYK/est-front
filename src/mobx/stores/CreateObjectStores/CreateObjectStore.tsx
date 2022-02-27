@@ -347,7 +347,7 @@ class CreateObjectStore implements ICreateObject {
         console.log("response apartment-error", e);
       }
     }
-    if (objectType === 1) {
+    if (objectType === 1 || objectType === 2) {
       const newHouse: any = data;
 
       const guides = [];
@@ -496,34 +496,6 @@ class CreateObjectStore implements ICreateObject {
 
       try {
         const res = await createObjectAPI.createObjectHouse(houseObject);
-        console.log("response apartment", res);
-        return res;
-      } catch (e) {
-        console.log("response apartment-error", e);
-      }
-    }
-    if (objectType === 2) {
-      const townhouseObjectCreateBackEnd = {
-        name: data.about.name,
-        description: data.generalInfo.description,
-        address: data.about.address,
-        longitude: "31.45",
-        latitude: "31.45",
-        region: 1,
-        owner: idOwner.id,
-        status: 1,
-        markAsDelete: false,
-        // "guides": [   // справочник доделывается (Справочник - get ) передаться номер
-        //     0
-        // ],
-        file: [0],
-        price: data.about.cost,
-        complex: null,
-      };
-      try {
-        const res = await createObjectAPI.createObjectTownhouse(
-          townhouseObjectCreateBackEnd
-        );
         console.log("response apartment", res);
         return res;
       } catch (e) {
