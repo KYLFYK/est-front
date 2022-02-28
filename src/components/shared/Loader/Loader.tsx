@@ -5,7 +5,7 @@ import Typography from '../Typography/Typography'
 export const Loader = () => {
   
   return (
-    <Typography size={'header'}>Loading...</Typography>
+    <Typography size={'header'}>Загрузка...</Typography>
   )
 
 };
