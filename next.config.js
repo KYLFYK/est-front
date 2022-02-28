@@ -8,9 +8,8 @@ module.exports = {
       "cdn.pixabay.com",
       "images.unsplash.com",
       "images.ctfassets.net",
-      "s3.dtln.ru:80",
+      "http://s3.dtln.ru",
     ],
-    loader: "custom",
   },
 
   eslint: {
