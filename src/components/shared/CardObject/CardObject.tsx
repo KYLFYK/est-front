@@ -17,7 +17,6 @@ const CardObject: FC<CardObjectType> = ({ children, img, className }) => {
         width={"229px"}
         className={css.image}
         alt={"photo"}
-        loader={() => img}
       />
       <div style={{ width: "100%" }} className={className}>
         {children}
