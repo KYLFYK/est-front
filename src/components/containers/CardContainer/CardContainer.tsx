@@ -40,7 +40,7 @@ const useStyles = makeStyles(() => ({
 const CardContainer: React.FC<Props> = observer(({ mapData, view, setView }) => {
     const searchStore = useSearchStore()
     const classes = useStyles()
-    console.log(searchStore.getInitialData())
+
     const [sort, setSort] = useState(SORT_FILTER_OPTIONS[0].value)
 
     let sortedData: any = []
