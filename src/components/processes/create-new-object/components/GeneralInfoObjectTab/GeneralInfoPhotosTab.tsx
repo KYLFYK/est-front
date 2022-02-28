@@ -61,6 +61,7 @@ const GeneralInfoPhotosTab: React.FC<Props> = observer(
         return;
       }
       createObjectStore.saveGeneralTab(values, objectType);
+      createObjectStore.uploadFileList(values.photos.map((el) => el.file));
       onNextTab && onNextTab();
     };
 

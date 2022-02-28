@@ -17,8 +17,9 @@ import ButtonPanel, {
   ICreateObjectControls,
 } from "../ButtonsPanel/ButtonsPanel";
 import InputsGroup from "../InputsGroup/InputsGroup";
-import s from "./HouseInfoTab.module.scss";
 import { ObjectGuides } from "../../../../../mobx/stores/objects/GuidesStore";
+
+import s from "./HouseInfoTab.module.scss";
 
 interface Props extends ICreateObjectControls {
   objectType: Exclude<ObjectTypes, ObjectTypes.LAND>;

@@ -49,6 +49,14 @@ import CreateTownhouseStore from "./CreateTownhouseStore";
 import { createObjectAPI } from "../../../api/createObjects/createObject";
 import jwt_decode from "jwt-decode";
 import { IObjType } from "../../../components/tabs/Account/Agent/components/Others/MyAdsContainer/MyAdsContainer";
+import { instance } from "../../../api/instance";
+
+interface IUploadedFile {
+  size: number;
+  mimeType: string;
+  fileName: string;
+  url: string;
+}
 
 class CreateObjectStore implements ICreateObject {
   apartment: CreateApartmentStore = new CreateApartmentStore();
@@ -56,6 +64,7 @@ class CreateObjectStore implements ICreateObject {
   land: CreateLandStore = new CreateLandStore();
   house: CreateHouseStore = new CreateHouseStore();
   objType: IObjType = "sale";
+  uploadedFiles: IUploadedFile[] = [];
 
   resetFields() {
     this.apartment = new CreateApartmentStore();
@@ -63,6 +72,7 @@ class CreateObjectStore implements ICreateObject {
     this.land = new CreateLandStore();
     this.house = new CreateHouseStore();
     this.objType = "sale";
+    this.uploadedFiles = [];
   }
 
   saveAboutTab(data: TAboutTabState, objectType: ObjectTypes) {
@@ -177,6 +187,29 @@ class CreateObjectStore implements ICreateObject {
     const fakeRequest = () =>
       new Promise<IOption[]>((res) => res(INFO_TAB_HOUSE_FURNITURE));
     return yield fakeRequest();
+  }
+
+  async uploadFile(file: File) {
+    try {
+      const formData = new FormData();
+      formData.set("file", file);
+
+      const result = await instance.post(`media/s3-upload`, formData, {
+        headers: {
+          authorization: `Bearer ${localStorage.getItem("accessEstatum")}`,
+        },
+      });
+
+      this.uploadedFiles = [...this.uploadedFiles, result.data];
+    } catch (e) {
+      console.error("Can't upload file", e);
+    }
+  }
+
+  async uploadFileList(fileList: File[]) {
+    fileList.forEach((file) => {
+      this.uploadFile(file);
+    });
   }
 
   // Fake request method for sending data and receiving response in the future
@@ -303,14 +336,7 @@ class CreateObjectStore implements ICreateObject {
           ],
         },
         guides: guides,
-        files: [
-          {
-            fileName: "string",
-            mimeType: "string",
-            size: "string",
-            url: "string",
-          },
-        ],
+        files: this.uploadedFiles,
         property: {
           floor: newData.about.floor,
           totalFloor: newData.about.floorsAmmount,
@@ -464,14 +490,7 @@ class CreateObjectStore implements ICreateObject {
           ],
         },
         guides: guides,
-        files: [
-          {
-            fileName: "string",
-            mimeType: "string",
-            size: "string",
-            url: "string",
-          },
-        ],
+        files: this.uploadedFiles,
         property: {
           totalFloor: newHouse.generalInfo.floors.count,
           area: Number(newHouse.generalInfo.generalSquare),
@@ -519,6 +538,8 @@ class CreateObjectStore implements ICreateObject {
     if (objectType === 3) {
       const newLand: any = data;
 
+      console.log(newLand);
+
       const owners = [];
       const guides = [];
 
@@ -529,7 +550,10 @@ class CreateObjectStore implements ICreateObject {
       if (newLand.about.type) {
         guides.push(Number(newLand.about.type));
       }
-      if (newLand.infrastructure.view.length > 0) {
+      if (
+        newLand.infrastructure.view &&
+        newLand.infrastructure.view.length > 0
+      ) {
         guides.push(
           ...newLand.infrastructure.view.map((el: string) => Number(el))
         );
@@ -586,7 +610,6 @@ class CreateObjectStore implements ICreateObject {
         owner: idOwner.id,
         status: 1,
         price: newLand.about.cost,
-        complex: 1,
         legalPurity: {
           address: newLand.legalPurity.realEstateRegister.address,
           areaValue: Number(
@@ -628,14 +651,11 @@ class CreateObjectStore implements ICreateObject {
           ],
         },
         guides: guides,
-        files: [
-          {
-            fileName: "string",
-            mimeType: "string",
-            size: "string",
-            url: "string",
-          },
-        ],
+        files: this.uploadedFiles,
+        property: {
+          area: Number(newLand.generalInfo.landGeneralSquare),
+          infrastructure: newLand.infrastructure.description,
+        },
       };
 
       try {
@@ -646,15 +666,6 @@ class CreateObjectStore implements ICreateObject {
         console.log("response apartment-error", e);
       }
     }
-
-    // const fakeRequest = () => new Promise<string>((res, rej) => setTimeout(() => res('1'), 1000)) //  fake return publish -ID-
-    // try {
-    //     const response = await fakeRequest()
-    //     return response
-    // }
-    // catch (e) {
-    //     console.warn(e, 'error')
-    // }
   }
 
   constructor() {

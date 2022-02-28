@@ -3,10 +3,10 @@ import { makeAutoObservable } from "mobx";
 import { ApartmentApi } from "../../../../api/obj/apartment";
 import { HouseApi } from "../../../../api/obj/house";
 import { datetoDayFormat } from "../../../../lib/mapping/objectDates";
-
-import imgMoc from "../../../../components/tabs/Account/Agent/components/PersonalCabinetTab/AccountInfo/logoFalse.svg";
 import { IGuide } from "../../../stores/objects/GuidesStore";
 import { LandApi } from "../../../../api/obj/land";
+
+import imgMoc from "../../../../components/tabs/Account/Agent/components/PersonalCabinetTab/AccountInfo/logoFalse.svg";
 
 export interface IObject {
   id: number;
