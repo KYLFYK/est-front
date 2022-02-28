@@ -48,8 +48,6 @@ export const MyAdsItem: FC<Props> = ({ maxCardWidth, menu, home }) => {
     }
   });
 
-  console.log(home);
-
   return (
     <div
       key={home.id}
