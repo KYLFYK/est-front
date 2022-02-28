@@ -49,9 +49,9 @@ const ButtonPanel: React.FC<Props> = ({
               Предпросмотр перед публикацией
             </Typography>
           )}
-          <BaseButton buttonHTMLType={"button"} type="secondary">
+          {/*<BaseButton buttonHTMLType={"button"} type="secondary">
             <Typography size="small"> В черновик </Typography>
-          </BaseButton>
+          </BaseButton>*/}
           {onPublish ? (
             <BaseButton
               buttonHTMLType={"button"}

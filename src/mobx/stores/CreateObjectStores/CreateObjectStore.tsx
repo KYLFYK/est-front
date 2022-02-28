@@ -214,8 +214,10 @@ class CreateObjectStore implements ICreateObject {
       if (newData.about.type) {
         guides.push(Number(newData.about.type));
       }
-      if (newData.infrastructure.view) {
-        guides.push(Number(newData.infrastructure.view));
+      if (newData.infrastructure.view.length > 0) {
+        guides.push(
+          ...newData.infrastructure.view.map((el: string) => Number(el))
+        );
       }
       if (newData.info.construction) {
         guides.push(Number(newData.info.construction));
@@ -367,8 +369,10 @@ class CreateObjectStore implements ICreateObject {
       if (newHouse.about.type) {
         guides.push(Number(newHouse.about.type));
       }
-      if (newHouse.infrastructure.view) {
-        guides.push(Number(newHouse.infrastructure.view));
+      if (newHouse.infrastructure.view.length > 0) {
+        guides.push(
+          ...newHouse.infrastructure.view.map((el: string) => Number(el))
+        );
       }
       if (newHouse.info.construction) {
         guides.push(Number(newHouse.info.construction));
@@ -515,8 +519,10 @@ class CreateObjectStore implements ICreateObject {
       if (newLand.about.type) {
         guides.push(Number(newLand.about.type));
       }
-      if (newLand.infrastructure.view) {
-        guides.push(Number(newLand.infrastructure.view));
+      if (newLand.infrastructure.view.length > 0) {
+        guides.push(
+          ...newLand.infrastructure.view.map((el: string) => Number(el))
+        );
       }
       if (newLand.info.construction) {
         guides.push(Number(newLand.info.construction));

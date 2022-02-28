@@ -50,7 +50,7 @@ export interface ICreateTownhouseGeneralInfo {
 
 export interface ICreateTownhouseInfrastructure {
   description: string;
-  view: string;
+  view: string[];
 }
 
 export interface ICreateTownhouseInfoTab {

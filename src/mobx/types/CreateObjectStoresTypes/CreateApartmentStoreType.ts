@@ -41,7 +41,7 @@ export interface ICreateApartsGeneralInfo {
 
 export interface ICreateApartsInfrastructure {
   description: string;
-  view: string;
+  view: string[];
 }
 
 export interface ICreateApartsInfoTab {

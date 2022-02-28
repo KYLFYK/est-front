@@ -30,7 +30,7 @@ class CreateApartmentStore implements ICreateObjectAparts {
   };
   infrastructure: ICreateObjectAparts["infrastructure"] = {
     description: "",
-    view: "",
+    view: [],
   };
   info: ICreateObjectAparts["info"] = {
     houseType: "",

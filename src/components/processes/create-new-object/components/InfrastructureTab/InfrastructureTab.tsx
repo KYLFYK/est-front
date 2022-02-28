@@ -2,7 +2,6 @@ import { observer } from "mobx-react-lite";
 import React, { useState } from "react";
 import { useStores } from "../../../../../hooks/useStores";
 import { ObjectTypes } from "../../../../../utils/interfaces/objects";
-import { BaseDropDown } from "../../../../shared/BaseDropDown/BaseDropDown";
 import { BaseTextarea } from "../../../../shared/BaseTextarea/BaseTextarea";
 import {
   getInitialStateInfrastructureTab,
@@ -13,8 +12,10 @@ import ButtonPanel, {
   ICreateObjectControls,
 } from "../ButtonsPanel/ButtonsPanel";
 import InputsGroup from "../InputsGroup/InputsGroup";
-import s from "./InfrastructureTab.module.scss";
 import { ObjectGuides } from "../../../../../mobx/stores/objects/GuidesStore";
+import { SelectEstate } from "../../../../shared/SelectEstate/SelectEstate";
+
+import s from "./InfrastructureTab.module.scss";
 
 interface Props extends ICreateObjectControls {
   objectType: ObjectTypes;
@@ -40,7 +41,15 @@ const InfrastructureTab: React.FC<Props> = observer(
     };
 
     const onChangeView = (value: string) => {
-      setValues({ ...values, view: value });
+      if ("view" in values) {
+        setValues({
+          ...values,
+          view:
+            values.view.indexOf(value) > -1
+              ? values.view.filter((el) => el !== value)
+              : [...values.view, value],
+        });
+      }
     };
 
     const handleNextTab = () => {
@@ -59,6 +68,20 @@ const InfrastructureTab: React.FC<Props> = observer(
       (el) => el.type_en === "window"
     );
 
+    const hetViewString: () => string = () => {
+      if ("view" in values && viewType) {
+        return values.view
+          .map((el) =>
+            viewType.values.find((x) => x.id === Number(el))
+              ? viewType.values.find((x) => x.id === Number(el))?.value
+              : ""
+          )
+          .join(", ");
+      }
+
+      return "";
+    };
+
     return (
       <ButtonPanel onNextTab={handleNextTab} onPrevTab={onPrevTab}>
         <InputsGroup title="Описание">
@@ -75,17 +98,23 @@ const InfrastructureTab: React.FC<Props> = observer(
             <div className={s.divider} />
             {viewType && (
               <InputsGroup title="Вид из окон">
-                <BaseDropDown
-                  value={values.view}
-                  className={s.dropdown}
+                <SelectEstate
                   options={viewType.values.map((el) => ({
                     label: el.value,
                     value: el.id.toString(),
                   }))}
-                  placeholder="Выберите один или несколько"
-                  label="Выберите один или несколько"
+                  value={
+                    values.view.length > 1
+                      ? hetViewString()
+                      : values.view.join(",")
+                  }
                   onChange={onChangeView}
-                  isError={!isValidView && !isValid}
+                  placeholder={
+                    values.view.length > 1
+                      ? hetViewString()
+                      : "Выберите один или несколько"
+                  }
+                  multi
                 />
               </InputsGroup>
             )}

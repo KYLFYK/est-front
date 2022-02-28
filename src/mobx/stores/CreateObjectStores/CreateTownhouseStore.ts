@@ -41,7 +41,7 @@ class CreateTownhouseStore implements ICreateObjectTownhouse {
 
   infrastructure: ICreateObjectTownhouse["infrastructure"] = {
     description: "",
-    view: "",
+    view: [],
   };
 
   info: ICreateObjectTownhouse["info"] = {

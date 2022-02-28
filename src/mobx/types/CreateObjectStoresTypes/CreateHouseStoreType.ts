@@ -49,7 +49,7 @@ export interface ICreateHouseGeneralInfo {
 
 export interface ICreateHouseInfrastructure {
   description: string;
-  view: string;
+  view: string[];
 }
 
 export interface ICreateHouseInfoTab {

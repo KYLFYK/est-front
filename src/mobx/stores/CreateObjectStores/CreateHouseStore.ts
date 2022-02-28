@@ -38,7 +38,7 @@ class CreateHouseStore implements ICreateObjectHouse {
   };
   infrastructure: ICreateObjectHouse["infrastructure"] = {
     description: "",
-    view: "",
+    view: [],
   };
   info: ICreateObjectHouse["info"] = {
     houseType: "",
