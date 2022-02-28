@@ -1,12 +1,13 @@
 import React, { createRef, FC, useEffect, useState } from "react";
 import { IObject } from "../../../../../../../mobx/role/agent/ads/AgentAds";
-import css from "./Active.module.scss";
 import CardObject from "../../../../../../shared/CardObject/CardObject";
 import LineV1 from "../../../../../../shared/CardObject/Lines/LineV1";
 import LineAddressV1 from "../../../../../../shared/CardObject/Lines/LineAddressV1";
 import LineArray from "../../../../../../shared/CardObject/Lines/LineArray";
 import Typography from "../../../../../../shared/Typography/Typography";
 import { getObjType, IObjType, searchColor } from "./MyAdsContainer";
+
+import css from "./Active.module.scss";
 
 interface Props {
   maxCardWidth: number | "unset";
@@ -47,6 +48,8 @@ export const MyAdsItem: FC<Props> = ({ maxCardWidth, menu, home }) => {
     }
   });
 
+  console.log(home);
+
   return (
     <div
       key={home.id}
@@ -57,7 +60,7 @@ export const MyAdsItem: FC<Props> = ({ maxCardWidth, menu, home }) => {
         textOverflow: "ellipsis",
       }}
     >
-      <CardObject img={home.img.src}>
+      <CardObject img={home.files[0] ? home.files[0].url : home.img}>
         <div className={css.paddingCard}>
           <LineV1
             id={home.id.toString()}

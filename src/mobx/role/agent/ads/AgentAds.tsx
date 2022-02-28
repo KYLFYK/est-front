@@ -20,6 +20,15 @@ export interface IObject {
   price: string;
   mainSpecifications: Array<string>;
   markAsDelete: boolean;
+  files: {
+    createAt: string;
+    fileName: string;
+    id: number;
+    mimeType: string;
+    size: string;
+    updateAt: string;
+    url: string;
+  }[];
   agent: {
     adminProperty: null;
     agencyProperty: number;
@@ -83,6 +92,7 @@ class AgentAdsStore {
         dateStart: "",
         dateEnd: "",
         status: null,
+        files: [],
         address: "",
       },
     ],
@@ -140,6 +150,7 @@ class AgentAdsStore {
       status: o.status,
       address: o.address,
       markAsDelete: o.markAsDelete,
+      files: o.files,
     }));
 
     this.initialData.loading = false;

@@ -126,7 +126,6 @@ const AboutObjectTab: React.FC<Props> = observer(
       setValues({ ...values, name: event.target.value });
     };
     const onChangeType = (value: string) => {
-      console.log(value);
       setValues({ ...values, type: value });
     };
     // const onChangeComplexName = (value: string) => {
