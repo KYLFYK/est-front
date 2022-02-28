@@ -160,7 +160,7 @@ export const BestOffers: FC<BestOffersType> = observer(({tagsButton}) => {
                                         <ObjectCard
                                             route={t.type}
                                             typeObject={"new"}
-                                            houseData={mapDat}
+                                            houseData={t}
                                             data={t}
                                         />
                                     </div>

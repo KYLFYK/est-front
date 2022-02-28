@@ -70,16 +70,36 @@ class MortGageStore  {
         this.initialData.createPayload = {...this.initialData.createPayload, "phone": value}
     }
     setStatePrice(value: any) {
-        this.initialData.createPayload = {...this.initialData.createPayload, "statePrice": value}
+        this.initialData.createPayload = {
+            ...this.initialData.createPayload, 
+            "statePrice": value,
+            "creditTotal": this.initialData.createPayload.statePrice - this.initialData.createPayload.initialPayment,
+            //"monthlyPayment": 
+        }
     }
     setInitialPayment(value: any) {
-        this.initialData.createPayload = {...this.initialData.createPayload, "initialPayment": value}
+        this.initialData.createPayload = {
+            ...this.initialData.createPayload, 
+            "initialPayment": value,
+            "creditTotal": this.initialData.createPayload.statePrice - this.initialData.createPayload.initialPayment,
+            //"monthlyPayment": 
+        }
     }
     setCreditTerm(value: any) {
-        this.initialData.createPayload = {...this.initialData.createPayload, "creditTerm": value}
+        this.initialData.createPayload = {
+            ...this.initialData.createPayload, 
+            "creditTerm": value,
+            /*"monthlyPayment": this.getEarlyPayments().every((er: any) => er.summ < 1) 
+                ? (this.initialData.createPayload.statePrice - this.initialData.createPayload.initialPayment) * (this.initialData.createPayload.percentageRate / 1200 + ((this.initialData.createPayload.percentageRate / 1200) / (Math.pow(1 + this.initialData.createPayload.percentageRate / 1200, value * 12) - 1)))
+                : */
+        }
     }
     setPercentageRate(value: any) {
-        this.initialData.createPayload = {...this.initialData.createPayload, "percentageRate": value}
+        this.initialData.createPayload = {
+            ...this.initialData.createPayload, 
+            "percentageRate": value,
+            //"monthlyPayment":
+        }
     }
     setEarlyPayment(value: any) {
         this.initialData.createPayload = {...this.initialData.createPayload, "earlyPayment": value}
@@ -119,7 +139,7 @@ class MortGageStore  {
         this.initialData.createPayload.earlyPayment = this.initialData.createPayload.earlyPayment.map((e: any) => {
             return (
                 {
-                    "dateOfPayment": e.date,
+                    "dateOfPayment": new Date(e.date.split('-')),
                     "frequencyPayment": e.select,
                     "frequencyPrice": e.summ,
                     "reduce": e.buttons,
@@ -146,6 +166,10 @@ class MortGageStore  {
 
     getEarlyPayments() {
         return JSON.parse(JSON.stringify([ ...this.initialData.createPayload.earlyPayment]))
+    }
+
+    getInitialEarlyPayments() {
+        return JSON.parse(JSON.stringify([ ...this.initialData.getAllData.filter((ad) => ad.id === this.initialData.detail.id)]))
     }
 
     get() {
