@@ -12,7 +12,7 @@ import styles from "./OrderInfo.module.scss";
 
 export const OrderInfoPage: FC<any> = observer(({req}) => {
   const store = useMortGageStore()
-
+  console.log('store.getEarlyPayments', store.getInitialEarlyPayments().length)
   return (
     <div className={commonStyles.pageWrapper}>
       <div className={commonStyles.header}>
@@ -105,25 +105,31 @@ export const OrderInfoPage: FC<any> = observer(({req}) => {
               <span className={styles.value}>{req && req.percentageRate} %</span>
             </div>
           </div>
-          {/*<span className={styles.title}>Досрочный платёж 1</span>
-          <div className={styles.sectionList}>
-            <div className={styles.sectionElem}>
-              <span className={styles.key}>Дата платежа</span>
-              <span className={styles.value}>16.08.21</span>
-            </div>
-            <div className={styles.sectionElem}>
-              <span className={styles.key}>Периодичность платежей</span>
-              <span className={styles.value}>Единовременно</span>
-            </div>
-            <div className={styles.sectionElem}>
-              <span className={styles.key}>Уменьшить</span>
-              <span className={styles.value}>Срок</span>
-            </div>
-            <div className={styles.sectionElem}>
-              <span className={styles.key}>Сумма</span>
-              <span className={styles.value}>10 000 ₽</span>
-            </div>
-          </div>*/}
+          {req && store.getEarlyPayments().length > 0 && req.earlyPayment.map((ep: any, i: number) => {
+            return (
+              <>
+                <span className={styles.title}>{`Досрочный платёж ${i+1}`}</span>
+                <div className={styles.sectionList}>
+                  <div className={styles.sectionElem}>
+                    <span className={styles.key}>Дата платежа</span>
+                    <span className={styles.value}>{ep.dateOfPayment}</span>
+                  </div>
+                  <div className={styles.sectionElem}>
+                    <span className={styles.key}>Периодичность платежей</span>
+                    <span className={styles.value}>{ep.frequencyPayment}</span>
+                  </div>
+                  <div className={styles.sectionElem}>
+                    <span className={styles.key}>Уменьшить</span>
+                    <span className={styles.value}>{ep.reduce}</span>
+                  </div>
+                  <div className={styles.sectionElem}>
+                    <span className={styles.key}>Сумма</span>
+                    <span className={styles.value}>{ep.frequencyPrice}</span>
+                  </div>
+                </div>
+              </>
+              )}
+            )}
           <span className={styles.title}>Итоговый расчёт</span>
           <div className={styles.sectionList}>
             <div className={styles.sectionElem}>

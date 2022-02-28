@@ -11,7 +11,7 @@ import {observer} from "mobx-react-lite";
 
 interface Props {
     route: string | string[] | undefined,
-    houseData: APIObject.types.IObjectEntry,
+    houseData: any,
     typeObject?: string | string[] | undefined, 
     data?: any,
 }
@@ -22,9 +22,9 @@ const MAX_SLIDERS_AMMOUNT = 7
 const ObjectCard: React.FC<Props> = observer(({ route, houseData, typeObject, data }) => {
 
     //const houseImages = houseData.images.length > MAX_SLIDERS_AMMOUNT ? houseData.images.slice(0, MAX_SLIDERS_AMMOUNT) : houseData.images
-
-    const houseImages = mapData[0].images
-    const imagesUrls = houseImages.map((image) => image.url)
+    
+    const houseImages = houseData.files && houseData.files.length > 0 ? houseData.files : mapData[0].images
+    const imagesUrls = houseImages.map((image: any) => image.url)
 
     function numberWithSpaces(price:any) {
         return price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ");

@@ -7,6 +7,7 @@ import BaseSlider from '../../shared/BaseSlider/BaseSlider';
 import Typography from '../../shared/Typography/Typography';
 import { formatNumbersToCurrency } from '../../../utils/general';
 import {observer} from "mobx-react-lite";
+import {IMAGES_SET} from './config';
 
 interface Props {
     images: string[],
@@ -16,11 +17,12 @@ interface Props {
 
 const GeneralInfo: React.FC<Props> = observer(({ images, price, info }) => {
 
+    const imagesUrl = images.length === 0 ? IMAGES_SET : images.map((i: any) => i.url)
     return (
         <div className={s.container}>
             <div className={s.sliderContainer}>
                 <BaseSlider
-                    images={images}
+                    images={imagesUrl}
                     height={600} withArrows withFavorite={typeof window !== "undefined" && localStorage.getItem("roleEstatum") ? true : false} onClickFavorite={() => {}}/>
             </div>
             <div className={s.infoContainer}>

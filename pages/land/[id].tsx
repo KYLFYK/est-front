@@ -73,7 +73,7 @@ const Land = observer((props: ObjectLandType) => {
 
     useEffect(() => {
         setRefs([general.current, specs.current, infra.current, legal.current, record.current])
-        breadCrumbsStore.addBreadCrumbs(`${FILTER_ACTIONS_OPTIONS.filter((a: any) => props.orderType === a.value)[0].label} ${FILTER_HOUSE_TYPE_OPTIONS.filter((a: any) => props.type === a.value)[0].label}`, 1)
+        breadCrumbsStore.addBreadCrumbs(`${FILTER_ACTIONS_OPTIONS.filter((a: any) => props.orderType === a.value) ? FILTER_ACTIONS_OPTIONS.filter((a: any) => props.orderType === a.value)[0].label : 'нет сделки'} ${FILTER_HOUSE_TYPE_OPTIONS.filter((a: any) => props.type === a.value)[0] ? FILTER_HOUSE_TYPE_OPTIONS.filter((a: any) => props.type === a.value)[0].label : 'нет типа'}`, 1)
         breadCrumbsStore.addBreadCrumbs(props.name, 2)
     }, [router.query.id])
 

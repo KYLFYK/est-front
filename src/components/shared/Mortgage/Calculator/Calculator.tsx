@@ -93,7 +93,7 @@ export const Calculator: React.FC<Props> = observer(({setModal}) => {
     const [startSummEarlyRepayment, setStartSummEarlyRepayment] = useState<number>(10000)
     // стартовая дата для новой карточки досрочного платежа, далее по аналогии ЦИАН - берётся из предыдущего выбора + 1мес
     let startDateEarlyRepayment = currentDate()
-    console.log('earlyRepayment', store.getEarlyPayments())
+
     // добавление досрочного платежа в коллекцию состояний
     const OnAddEarlyPayment = () => {
         setEarlyPayment([...store.getEarlyPayments(),
