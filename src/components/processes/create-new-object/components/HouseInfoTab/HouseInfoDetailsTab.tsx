@@ -7,10 +7,7 @@ import { ObjectTypes } from "../../../../../utils/interfaces/objects";
 import { BaseDropDown } from "../../../../shared/BaseDropDown/BaseDropDown";
 import { BaseInput } from "../../../../shared/BaseInput/Input";
 import Typography from "../../../../shared/Typography/Typography";
-import {
-  INFO_TAB_internet_TYPE,
-  INFO_TAB_ventilation_TYPE,
-} from "../../config";
+import { INFO_TAB_ventilation_TYPE } from "../../config";
 import {
   getInitialStateInfoTab,
   isValidInputsHouseDetailsTab,
@@ -22,7 +19,6 @@ import ButtonPanel, {
 import InputsGroup from "../InputsGroup/InputsGroup";
 import s from "./HouseInfoTab.module.scss";
 import { ObjectGuides } from "../../../../../mobx/stores/objects/GuidesStore";
-import { toJS } from "mobx";
 
 interface Props extends ICreateObjectControls {
   objectType: Exclude<ObjectTypes, ObjectTypes.LAND>;

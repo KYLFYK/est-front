@@ -350,6 +350,8 @@ class CreateObjectStore implements ICreateObject {
       }
     }
     if (objectType === 1 || objectType === 2) {
+      console.log(data);
+
       const newHouse: any = data;
 
       const guides = [];
@@ -471,30 +473,38 @@ class CreateObjectStore implements ICreateObject {
           },
         ],
         property: {
-          floor: newHouse.about.floor,
-          totalFloor: newHouse.about.floorsAmmount,
+          totalFloor: newHouse.generalInfo.floors.count,
           area: Number(newHouse.generalInfo.generalSquare),
           livingArea: Number(newHouse.generalInfo.livingSquare),
           bathroomArea: Number(newHouse.generalInfo.bathroom),
           kitchenArea: Number(newHouse.generalInfo.kitchen),
-          roomsArea: [],
-          amountBathrooms: 1,
-          amountBedrooms: 1,
-          amountShowers: 1,
-          buildingNumber: 1,
-          heightCeilings: 3.3,
-          deadline: "2022-02-25T17:53:38.800Z",
-          interior: "string",
-          infrastructure: "string",
-          rooms: "one",
-          threeD: "https://www.youtube.com/embed/Ke3qyQYNob4",
-          vr: "https://3d-tur.ru/010/",
+          rooms: "two", //newHouse.info.bedrooms.toString(),
+          amountBathrooms: newHouse.info.bathrooms,
+          amountBedrooms: newHouse.info.bedrooms,
+          amountShowers: newHouse.info.lavatories,
           constructionFeatures: [
             {
-              title: newHouse.generalInfo.interiorDescription,
+              title: newHouse.info.technicalComment,
               value: "foundation",
             },
           ],
+          floors: newHouse.generalInfo.floors.items.map(
+            (el: {
+              label: {
+                description: string;
+                height: string;
+              };
+              value: number;
+            }) => ({
+              floor: el.label.description,
+              value: el.label.height,
+            })
+          ),
+          infrastructure: newHouse.infrastructure.description,
+          landArea: Number(newHouse.generalInfo.land),
+          threeD: "https://www.youtube.com/embed/Ke3qyQYNob4",
+          vr: "https://3d-tur.ru/010/",
+          totalArea: Number(newHouse.generalInfo.generalSquare),
         },
       };
 
