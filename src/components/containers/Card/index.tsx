@@ -25,7 +25,7 @@ const ObjectCard: React.FC<Props> = observer(({ route, houseData, typeObject, da
     
     const houseImages = data.files && data.files.length > 0 ? data.files : mapData[0].images
     const imagesUrls = houseImages.map((image: any) => image.url.includes('public') ? mapData[0].images[0].url : image.url)
-    console.log(imagesUrls)
+
     function numberWithSpaces(price:any) {
         return price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ");
     }
