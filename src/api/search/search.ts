@@ -6,6 +6,7 @@ export const SearchApi = {
         try{
             const res = await instance.get(`${UrlSearch.search}`, 
                 { params: { ...params, 
+                    'order-type': (params['order-type'] === 'buy' && 'sale') || (params['order-type'] === 'sale' && 'buy') || 'rent',
                     'rooms-in-apartment': params['rooms-in-apartment']?.split(','), 
                     'rooms-in-house': params['rooms-in-house']?.split(','), 
                     benefit: params.benefit?.split(',') 
