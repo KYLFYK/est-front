@@ -1,21 +1,22 @@
 import { FC, useState } from "react";
-import {useMortGageStore} from '../../../../../mobx/role/bank/mortgage/MortGage'
+import {useMortGageStore} from '../../../../../mobx/role/bank/mortgage/MortGage';
+import { observer } from "mobx-react-lite";
 import Link from "next/link";
 import { BackIcon } from "../../../../../icons/BackIcon";
 import { BaseDropDown } from "../../../../shared/BaseDropDown/BaseDropDown";
-import {datetoDayFormat, datetoTimeFormat} from '../../../../../lib/mapping/objectDates'
+import {datetoDayFormat, datetoTimeFormat} from '../../../../../lib/mapping/objectDates';
+import {LEADS_REQS_OPTIONS} from './Config';
 
 import commonStyles from "../../Admin/components/UsersTab/agency/agency.module.scss";
 import styles from "./OrderInfo.module.scss";
 
-export const OrderInfoPage: FC<any> = ({req}) => {
-  const [status, setStatus] = useState<"new" | "expired">("new");
+export const OrderInfoPage: FC<any> = observer(({req}) => {
   const store = useMortGageStore()
-  console.log(store.get())
+
   return (
     <div className={commonStyles.pageWrapper}>
       <div className={commonStyles.header}>
-        <div onClick={() => store.setDetail(false, 0)} className={commonStyles.link}>
+        <div onClick={() => store.setDetail(false, 0)} style={{cursor: 'pointer'}} className={commonStyles.link}>
           <BackIcon width={24} height={24} color={"#3D4550"} />
           <span>Информация о заявке</span>
         </div>
@@ -37,21 +38,12 @@ export const OrderInfoPage: FC<any> = ({req}) => {
               <span className={styles.value}>
                 <BaseDropDown
                   onChange={(obj) => {
-                    setStatus(obj as "new" | "expired");
+                    store.updateLead(req.id, LEADS_REQS_OPTIONS.filter((o: any) => o.value === obj)[0].label)
                   }}
                   className={`${styles.select}${
-                    status === "new" ? ` ${styles.green}` : ""
+                    req && req.status === "Новая заявка" ? ` ${styles.green}` : ""
                   }`}
-                  options={[
-                    {
-                      label: "Новая заявка",
-                      value: "new",
-                    },
-                    {
-                      label: "Завершено",
-                      value: "expired",
-                    },
-                  ]}
+                  options={LEADS_REQS_OPTIONS}
                   placeholder={req && req.status}
                   value={req && req.status}
                 />
@@ -159,4 +151,4 @@ export const OrderInfoPage: FC<any> = ({req}) => {
       </div>
     </div>
   );
-};
+});

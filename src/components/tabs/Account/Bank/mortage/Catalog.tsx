@@ -13,10 +13,6 @@ export const Catalog: FC = observer(() => {
     store.fetchAllLeads()
   }, [])
 
-  const setStatus = (obj: any) => {
-    console.log(obj)
-  }
-
   return (
     <div className={styles.wrapper}>
       <table>
@@ -66,7 +62,7 @@ export const Catalog: FC = observer(() => {
         </tr>
         {store.initialData.loading 
           ? <Loader/>
-          : store.initialData.getAllData.map((d) => <CatalogItem data={d} setStatus={setStatus} id={d.id}/>)
+          : store.initialData.getAllData.map((d) => <CatalogItem data={d} id={d.id}/>)
         }
       </table>
     </div>

@@ -11,6 +11,7 @@ import {Loader} from '../../../../../shared/Loader/Loader';
 import styles from "./ResComplexes.module.scss";
 import css from "../../../Agent/components/Others/MyAdsContainer/Active.module.scss";
 import {useStoreDeveloperMyObjectStore} from "../../../../../../mobx/role/developer/myObject/DeveloperMyObject";
+import {accFromToken} from '../../../../../../lib/localStorage/localStorage';
 
 type ResComplexesType ={
   onComplex: Dispatch<SetStateAction<boolean>>
@@ -22,7 +23,7 @@ export const ResComplexes: FC<ResComplexesType> = observer(({onComplex, setCompl
   const store = useStoreDeveloperMyObjectStore()
 
   useEffect(() => {
-    store.fetchAllComplexByOwnerId(19)
+    store.fetchAllComplexByOwnerId(accFromToken().id)
   },[])
 
   const onSetCompex = (id: number, name: string) => {

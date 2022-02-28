@@ -21,10 +21,14 @@ class MortGageStore  {
             "initialPayment": 0,
             "creditTerm": 0,
             "percentageRate": 0,
-            "dateOfPayment": "",
-            "frequencyPayment": 0,
-            "reduce": 0,
-            "frequencyPrice": 0,
+            "earlyPayment": [
+                {
+                  "dateOfPayment": "",
+                  "frequencyPayment": 0,
+                  "frequencyPrice": 0,
+                  "reduce": 0
+                },
+            ],
             "monthlyPayment": 0,
             "creditTotal": 0,
             "percentTotal": 0,
@@ -41,10 +45,7 @@ class MortGageStore  {
             "initialPayment": 0,
             "creditTerm": 10,
             "percentageRate": 6,
-            "dateOfPayment": new Date(),
-            "frequencyPayment": 0,
-            "reduce": 0,
-            "frequencyPrice": 0,
+            "earlyPayment": [],
             "monthlyPayment": 0,
             "creditTotal": 0,
             "percentTotal": 0,
@@ -80,14 +81,8 @@ class MortGageStore  {
     setPercentageRate(value: any) {
         this.initialData.createPayload = {...this.initialData.createPayload, "percentageRate": value}
     }
-    setFrequencyPayment(value: any) {
-        this.initialData.createPayload = {...this.initialData.createPayload, "frequencyPayment": value}
-    }
-    setReduce(value: any) {
-        this.initialData.createPayload = {...this.initialData.createPayload, "reduce": value}
-    }
-    setFrequencyPrice(value: any) {
-        this.initialData.createPayload = {...this.initialData.createPayload, "frequencyPrice": value}
+    setEarlyPayment(value: any) {
+        this.initialData.createPayload = {...this.initialData.createPayload, "earlyPayment": value}
     }
     setMonthlyPayment(value: any) {
         this.initialData.createPayload = {...this.initialData.createPayload, "monthlyPayment": value}
@@ -120,15 +115,25 @@ class MortGageStore  {
 
     async postLead() {
         //this.initialData.loading = true
+        //@ts-expect-error
+        this.initialData.createPayload.earlyPayment = this.initialData.createPayload.earlyPayment.map((e: any) => {
+            return (
+                {
+                    "dateOfPayment": e.date,
+                    "frequencyPayment": e.select,
+                    "frequencyPrice": e.summ,
+                    "reduce": e.buttons,
+                }
+            )
+        })
         const res = await leadsAPI.createLead(this.initialData.createPayload)
         //this.initialData.data = res.data
         //this.initialData.loading = false
     }
 
     async updateLead(id: number, payload: string) {
-        //this.initialData.loading = true
         const res = await leadsAPI.updateLead(id, {'status': payload})
-        //this.initialData.data = res.data
+        this.initialData.getAllData.filter((ad: any) => ad.id === id)[0].status = payload
         //this.initialData.loading = false
     }
 
@@ -139,8 +144,12 @@ class MortGageStore  {
         //this.initialData.loading = false
     }
 
+    getEarlyPayments() {
+        return JSON.parse(JSON.stringify([ ...this.initialData.createPayload.earlyPayment]))
+    }
+
     get() {
-        console.log(JSON.parse(JSON.stringify({ ...this.initialData})))
+        return JSON.parse(JSON.stringify({ ...this.initialData}))
     }
 }
 
