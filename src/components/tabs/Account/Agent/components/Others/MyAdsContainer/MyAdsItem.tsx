@@ -58,7 +58,7 @@ export const MyAdsItem: FC<Props> = ({ maxCardWidth, menu, home }) => {
         textOverflow: "ellipsis",
       }}
     >
-      <CardObject img={home.files[0].url}>
+      <CardObject img={home.files[0] ? home.files[0].url : home.img}>
         <div className={css.paddingCard}>
           <LineV1
             id={home.id.toString()}

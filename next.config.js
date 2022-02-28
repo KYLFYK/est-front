@@ -10,7 +10,6 @@ module.exports = {
       "images.ctfassets.net",
       "http://s3.dtln.ru",
     ],
-    loader: "custom",
   },
 
   eslint: {
