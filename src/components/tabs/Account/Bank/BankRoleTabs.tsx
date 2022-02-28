@@ -5,6 +5,7 @@ import { ActiveLink } from "../Admin/AdminCabinetWrapper";
 import css from "../../../shared/VerticalTabs/VerticalTabs.module.scss";
 
 export const BankRoleTabs: FC = ({ children }) => {
+
   return (
     <MainContainer footerColor={"accent"} cabinetStyle={true}>
       <div className={css.body}>

@@ -1,15 +1,19 @@
-import { FC, useState } from "react"
+import { FC } from "react"
+import { observer } from "mobx-react-lite";
 import { BaseDropDown } from "../../../../shared/BaseDropDown/BaseDropDown"
 import {useMortGageStore} from '../../../../../mobx/role/bank/mortgage/MortGage'
 import styles from "./Catalog.module.scss"
 import {datetoDayFormat, datetoTimeFormat} from '../../../../../lib/mapping/objectDates'
+import {LEADS_REQS_OPTIONS} from './Config';
 
-export const CatalogItem: FC<any> = ({data, setStatus, id}) => {
-  //const [status, setStatus] = useState<"new" | "expired">("new");
+export const CatalogItem: FC<any> = observer(({data, id}) => {
+
   const store = useMortGageStore()
-
+  
   return (
-    <tr onClick={() => store.setDetail(true, id)}>
+    <tr style={{cursor: 'pointer'}} onClick={(e: any) => {
+      !e.target.value && store.setDetail(true, id)
+    }}>
       <td>
         <span>{data.fio}</span>
       </td>
@@ -20,7 +24,7 @@ export const CatalogItem: FC<any> = ({data, setStatus, id}) => {
         <span>{data.email}</span>
       </td>
       <td>
-        <span>{`${datetoDayFormat(data.dateOfPayment)} ${datetoTimeFormat(data.dateOfPayment)}`}</span>
+        <span>{`${datetoDayFormat(data.createAt)} ${datetoTimeFormat(data.createAt)}`}</span>
       </td>
       {/*<td>
         <span>3-этажный коттедж</span>
@@ -34,21 +38,12 @@ export const CatalogItem: FC<any> = ({data, setStatus, id}) => {
         >
           <BaseDropDown
             onChange={(obj) => {
-              store.updateLead(id, obj);
+              store.updateLead(id, LEADS_REQS_OPTIONS.filter((o: any) => o.value === obj)[0].label);
             }}
             className={`${styles.select}${
-              status === "new" ? ` ${styles.green}` : ""
+              data.status === "Новая заявка" ? ` ${styles.green}` : ""
             }`}
-            options={[
-              {
-                label: "Новая заявка",
-                value: "new",
-              },
-              {
-                label: "Завершено",
-                value: "expired",
-              },
-            ]}
+            options={LEADS_REQS_OPTIONS}
             placeholder={data.status}
             value={data.status}
           />
@@ -56,4 +51,4 @@ export const CatalogItem: FC<any> = ({data, setStatus, id}) => {
       </td>
     </tr>
   );
-};
+});

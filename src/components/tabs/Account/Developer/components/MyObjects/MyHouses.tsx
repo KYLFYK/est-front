@@ -11,15 +11,16 @@ import {Loader} from '../../../../../shared/Loader/Loader';
 import styles from "./ResComplexes.module.scss";
 import css from "../../../Agent/components/Others/MyAdsContainer/Active.module.scss";
 import {useStoreDeveloperMyObjectStore} from "../../../../../../mobx/role/developer/myObject/DeveloperMyObject";
+import {accFromToken} from '../../../../../../lib/localStorage/localStorage';
 
 export const MyHouses: FC = observer(() => {
   
   const store = useStoreDeveloperMyObjectStore()
 
   useEffect(() => {
-    store.fetchAllHousesByOwnerId(19)
+    store.fetchAllHousesByOwnerId(accFromToken().id)
   }, [])
-  store.get()
+
   const recover = (id: string) => {
     console.log(id, "recover");
   };
