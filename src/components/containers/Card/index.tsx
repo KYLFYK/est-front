@@ -20,10 +20,10 @@ const TEMP_LINK = '/'
 const MAX_SLIDERS_AMMOUNT = 7
 
 const ObjectCard: React.FC<Props> = observer(({ route, houseData, typeObject, data }) => {
-
+    
     //const houseImages = houseData.images.length > MAX_SLIDERS_AMMOUNT ? houseData.images.slice(0, MAX_SLIDERS_AMMOUNT) : houseData.images
     
-    const houseImages = houseData.files && houseData.files.length > 0 ? houseData.files : mapData[0].images
+    const houseImages = data.files && data.files.length > 0 ? data.files : mapData[0].images
     const imagesUrls = houseImages.map((image: any) => image.url)
 
     function numberWithSpaces(price:any) {
