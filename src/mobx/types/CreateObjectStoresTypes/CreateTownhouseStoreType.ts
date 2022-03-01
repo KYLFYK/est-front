@@ -20,6 +20,7 @@ export interface ICreateTownhouseAboutTab {
   region: string;
   cost: number;
   index: number;
+  type: string;
 }
 
 export interface ICreateTownhouseGeneralInfo {
@@ -46,6 +47,8 @@ export interface ICreateTownhouseGeneralInfo {
     count: number;
     items: IOption<{ description: string; height?: string }>[];
   };
+  vrTour: string;
+  video: string;
 }
 
 export interface ICreateTownhouseInfrastructure {

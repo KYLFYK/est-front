@@ -1,9 +1,10 @@
-import React, { FC, useEffect, useRef, useState } from "react";
+import React, { CSSProperties, FC, useEffect, useRef, useState } from "react";
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 import Box from "@mui/material/Box";
-import css from "./HorizontalTabs.module.scss";
 import Typography from "../Typography/Typography";
+
+import css from "./HorizontalTabs.module.scss";
 
 export interface ITabItem {
   title: string;
@@ -14,10 +15,15 @@ interface Props {
   tabs: ITabItem[];
   refs?: any[];
   wrapperClassName?: string;
+  style?: CSSProperties;
 }
 
-export const HorizontalTabs: FC<Props> = ({ tabs, refs, wrapperClassName }) => {
-  
+export const HorizontalTabs: FC<Props> = ({
+  tabs,
+  refs,
+  wrapperClassName,
+  style,
+}) => {
   const [selectedTabIdx, setSelectedTabIdx] = useState(0);
   const activeTabRef = useRef<HTMLDivElement | null>(null);
   const [activeTabMargin, setActiveTabMargin] = useState(30);
@@ -44,6 +50,7 @@ export const HorizontalTabs: FC<Props> = ({ tabs, refs, wrapperClassName }) => {
         className={`${css.menu}${
           wrapperClassName ? ` ${wrapperClassName}` : ""
         }`}
+        style={style}
       >
         <Box sx={{ width: "100%" }}>
           <Tabs
@@ -63,7 +70,7 @@ export const HorizontalTabs: FC<Props> = ({ tabs, refs, wrapperClassName }) => {
               <Tab
                 key={index}
                 value={index}
-                style={{ textTransform: "none",padding:'12px 16px' }}
+                style={{ textTransform: "none", padding: "12px 16px" }}
                 onClick={tab.onClick}
                 ref={index === selectedTabIdx ? activeTabRef : null}
                 label={

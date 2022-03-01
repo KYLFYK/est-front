@@ -20,6 +20,7 @@ export interface ICreateHouseAboutTab {
   address: string;
   cost: number;
   index: number;
+  type: string;
 }
 
 export interface ICreateHouseGeneralInfo {
@@ -45,6 +46,8 @@ export interface ICreateHouseGeneralInfo {
     count: number;
     items: IOption<{ description: string; height?: string }>[];
   };
+  vrTour: string;
+  video: string;
 }
 
 export interface ICreateHouseInfrastructure {

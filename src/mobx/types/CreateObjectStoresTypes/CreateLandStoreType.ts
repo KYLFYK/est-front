@@ -18,6 +18,7 @@ export interface ICreateLandAboutTab {
   address: string;
   cost: number;
   region: string;
+  type: string;
 }
 
 export interface ICreateLandGeneralInfo {
@@ -26,6 +27,8 @@ export interface ICreateLandGeneralInfo {
   cottageVillageName: string;
   landGeneralSquare: string;
   landStatus: string;
+  vrTour: string;
+  video: string;
 }
 
 export interface ICreateLandInfrastructure {

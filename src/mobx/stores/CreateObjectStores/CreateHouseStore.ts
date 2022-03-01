@@ -11,6 +11,7 @@ class CreateHouseStore implements ICreateObjectHouse {
     address: "",
     region: "",
     cost: 0,
+    type: "",
   };
   generalInfo: ICreateObjectHouse["generalInfo"] = {
     description: "",
@@ -35,6 +36,8 @@ class CreateHouseStore implements ICreateObjectHouse {
       count: 0,
       items: [],
     },
+    vrTour: "",
+    video: "",
   };
   infrastructure: ICreateObjectHouse["infrastructure"] = {
     description: "",

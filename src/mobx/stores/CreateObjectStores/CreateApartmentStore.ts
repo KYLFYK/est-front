@@ -27,6 +27,8 @@ class CreateApartmentStore implements ICreateObjectAparts {
     kitchen: "",
     customRooms: [],
     interiorDescription: "",
+    vrTour: "",
+    video: "",
   };
   infrastructure: ICreateObjectAparts["infrastructure"] = {
     description: "",

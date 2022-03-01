@@ -10,6 +10,7 @@ class CreateLandStore implements ICreateObjectLand {
     address: "",
     region: "",
     cost: 0,
+    type: "",
   };
 
   generalInfo: ICreateObjectLand["generalInfo"] = {
@@ -18,6 +19,8 @@ class CreateLandStore implements ICreateObjectLand {
     landGeneralSquare: "",
     cottageVillageName: "",
     landStatus: "",
+    vrTour: "",
+    video: "",
   };
 
   infrastructure: ICreateObjectLand["infrastructure"] = {
