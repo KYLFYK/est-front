@@ -62,7 +62,7 @@ class AgentCabinetStore {
       : "";
     const viber = "viber";
 
-    const info = [
+    this.initialData.info = [
       { label: "Имя", value: name, placeholder: "" },
       { label: "Статус", value: status, placeholder: "" },
       { label: "Стаж", value: experience, placeholder: "" },
@@ -72,7 +72,6 @@ class AgentCabinetStore {
       { label: "WhatsApp", value: whatsApp, placeholder: "89996667722" },
       { label: "Viber", value: viber, placeholder: "" },
     ];
-    this.initialData.info = info;
     this.initialData.id = res.data.id;
     this.initialData.statusVerification = res.data.isConfirmed
       ? "confirmed"
