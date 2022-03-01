@@ -121,7 +121,8 @@ class MainPageStore {
                     object_id: object.id,
                     name: object.name,
                     description: '',
-                }
+                },
+                files: object.files ? object.files.sort((a: any, b: any) => a.id > b.id ? 1 : -1) : [],
             }
         ))
 
