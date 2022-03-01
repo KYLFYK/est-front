@@ -16,7 +16,6 @@ type BidPropsType = {
 export const Bid: React.FC<BidPropsType> = observer(({setBidSuccess, setModal}) => {
 
     const store = useMortGageStore()
-    console.log('store.get()', store.get())
 
     const setFIO = (value: any) => {
         store.setFIO(value)

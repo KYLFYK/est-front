@@ -8,7 +8,6 @@ import {Views} from '../../src/components/shared/Views/Views'
 import {NameEstate} from '../../src/components/shared/NameEstate/NameEstate'
 import {AdressEstate} from '../../src/components/shared/AdressEstate/AdressEstate'
 import { HorizontalTabs } from '../../src/components/shared/HorizontalTabs/HorizontalTabs'
-import {IMAGES_SET} from '../../src/components/containers/GeneralInfo/config'
 import GeneralInfo from '../../src/components/containers/GeneralInfo/GeneralInfo'
 import ObjectDescription from '../../src/components/containers/ObjectDescription/ObjectDescription'
 import ToursContainer from "../../src/components/containers/ToursContainer/ToursContainer"
@@ -43,12 +42,11 @@ const personalAccount = [{title: 'Личный кабинет', href: '/User', m
 const infrastructureInfo = 'В 15 минутах езды расположена Ялта со своей знаменитой набережной, театр Чехова, авквариум и дельфинарий. Знаменитые дворцы, парки, ботанические сады и винные заводы расположены в получасовой доступности.'
 
 const Apartment: NextPage =  observer((props: any) => {
-
   const store = useStore()
   const breadCrumbsStore = useBreadcrumbsStore()
   const tabs = [
     {title: "Общая информация",},
-    {title: "Онлайн-тур",},
+    props.online_tour && {title: "Онлайн-тур",},
     {title: "Архитектура",},
     {title: "Инфраструктура",},
     props.object_developer_info && {title: "Застройщик"},
@@ -69,7 +67,7 @@ const Apartment: NextPage =  observer((props: any) => {
   const views = [datetoDayFormat(props.publish), props.views, props?.agency]
 
   useEffect(() => {
-    setRefs([general.current, tours.current, architec.current, infra.current, props.object_developer_info && develop.current, props.legalPurityData && legal.current, record.current]);
+    setRefs([general.current, props.online_tour && tours.current, architec.current, infra.current, props.object_developer_info && develop.current, props.legalPurityData && legal.current, record.current]);
     store.fetch(router.query.id)
     breadCrumbsStore.addBreadCrumbs(`${FILTER_ACTIONS_OPTIONS.filter((a: any) => props.orderType === a.value) ? FILTER_ACTIONS_OPTIONS.filter((a: any) => props.orderType === a.value)[0].label : 'нет сделки'} ${FILTER_HOUSE_TYPE_OPTIONS.filter((a: any) => props.type === a.value)[0] ? FILTER_HOUSE_TYPE_OPTIONS.filter((a: any) => props.type === a.value)[0].label : 'нет типа'}`, 1)
     breadCrumbsStore.addBreadCrumbs(props.name, 2)
@@ -83,12 +81,13 @@ const Apartment: NextPage =  observer((props: any) => {
         <AdressEstate item={props.address}/>
         <HorizontalTabs refs={refs} tabs={tabs}/>
         <div ref={general}>
-          <GeneralInfo info={MappingGeneralInfo(props.info_options, props.object_specs)} price={props.price} images={IMAGES_SET} />
+          <GeneralInfo info={MappingGeneralInfo(props.info_options, props.object_specs)} price={props.price} images={props.images} />
         </div>
         <ObjectDescription items={MappingDescription(props.description_items)}/>
-        <div ref={tours}>
-          <ToursContainer Online_tour={props.online_tour}/>
-        </div>
+        {props.online_tour && 
+          <div ref={tours}>
+            <ToursContainer Online_tour={props.online_tour}/>
+          </div>}
         <div ref={architec}>
           <ObjectSpecifications specificationsLists={sortObject_specsTypeGuide(props.object_specs.map((guid: any) => sortGuide(guid,guid.subtitle_ru)).filter((f: any) => f !== undefined))} title={"Архитектурно-планировочные решения"}/>
         </div>
@@ -97,13 +96,13 @@ const Apartment: NextPage =  observer((props: any) => {
         </div>
 
         {props.object_developer_info && 
-        <div ref={develop}>
-          <ObjectDeveloper developerData={MappingDeveloperInfo(props.object_developer_info)}/>
-        </div>}
+          <div ref={develop}>
+            <ObjectDeveloper developerData={MappingDeveloperInfo(props.object_developer_info)}/>
+          </div>}
         {props.legalPurityData && 
-        <div ref={legal}>
-          {props.legalPurityData && <ObjectLegalPurity legalPurityData={MappingLegalPurity(props.legalPurityData)}/>}
-        </div>}
+          <div ref={legal}>
+            {props.legalPurityData && <ObjectLegalPurity legalPurityData={MappingLegalPurity(props.legalPurityData)}/>}
+          </div>}
 
         <Mortgage/>
         <div ref={record}>

@@ -26,6 +26,6 @@ export const Mortage = observer(() => {
   return (
     !store.initialData.detail.detail 
       ? <HorizontalTabs wrapperClassName={commonStyles.horizontalTabs} tabs={BankMortageTabs}/> 
-      : <OrderInfoPage req={store.initialData.getAllData.filter((d: any) => d.id === store.initialData.detail.id)[0]}/>
+      : <OrderInfoPage req={store.get().getAllData.filter((d: any) => d.id === store.get().detail.id)[0]}/>
   );
 });

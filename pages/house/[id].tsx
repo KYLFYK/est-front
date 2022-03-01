@@ -85,7 +85,7 @@ const House = observer((props: any) => {
 
     const tabs = [
         {title: "Общая информация",},
-        {title: "Онлайн-тур",},
+        props.online_tour && {title: "Онлайн-тур",},
         {title: "Архитектура",},
         {title: "Инфраструктура",},
         props.legalPurityData && {title: "Юридическая чистота"},
@@ -219,7 +219,7 @@ const House = observer((props: any) => {
     const views = [conversionDate(props.publish), props.views, props.agency]
 
     useEffect(() => {
-        setRefs([general.current, tours.current, architec.current, infra.current, props.legalPurityData && legal.current, 
+        setRefs([general.current, props.online_tour && tours.current, architec.current, infra.current, props.legalPurityData && legal.current, 
             payback.current, props.object_developer_info && developer.current, record.current])
 
         breadCrumbsStore.addBreadCrumbs(`${FILTER_ACTIONS_OPTIONS.filter((a: any) => props.orderType === a.value) ? FILTER_ACTIONS_OPTIONS.filter((a: any) => props.orderType === a.value)[0].label : 'нет сделки'} ${FILTER_HOUSE_TYPE_OPTIONS.filter((a: any) => props.type === a.value)[0] ? FILTER_HOUSE_TYPE_OPTIONS.filter((a: any) => props.type === a.value)[0].label : 'нет типа'}`, 1)

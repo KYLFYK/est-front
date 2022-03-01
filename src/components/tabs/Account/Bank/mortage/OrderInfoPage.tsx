@@ -12,7 +12,8 @@ import styles from "./OrderInfo.module.scss";
 
 export const OrderInfoPage: FC<any> = observer(({req}) => {
   const store = useMortGageStore()
-  console.log('store.getEarlyPayments', store.getInitialEarlyPayments().length)
+  //console.log('req', req)
+  //console.log('store.getEarlyPayments', req.earlyPayment.length)
   return (
     <div className={commonStyles.pageWrapper}>
       <div className={commonStyles.header}>

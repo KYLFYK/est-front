@@ -99,7 +99,7 @@ const Land = observer((props: ObjectLandType) => {
                         <AdressEstate item={props.address}/>
                         <HorizontalTabs tabs={tabs} refs={refs}/>
                         <div ref={general}>
-                            <GeneralInfo info={props.info_options} price={props.price} images={IMAGES_SET}/>
+                            <GeneralInfo info={props.info_options} price={props.price} images={props.images}/>
                         </div>
                         <ObjectDescription items={props.description_items}/>
                         <div ref={specs}>

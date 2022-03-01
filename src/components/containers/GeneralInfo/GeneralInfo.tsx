@@ -10,13 +10,13 @@ import {observer} from "mobx-react-lite";
 import {IMAGES_SET} from './config';
 
 interface Props {
-    images: string[],
+    images: string[] | { url: string; id: number; }[],
     price?: number,
     info: IOption[]
 }
 
 const GeneralInfo: React.FC<Props> = observer(({ images, price, info }) => {
-
+    console.log('images', images)
     const imagesUrl = images.length === 0 ? IMAGES_SET : images.map((i: any) => i.url && i.url.includes('public') ? IMAGES_SET[0] : i.url || i)
 
     return (
