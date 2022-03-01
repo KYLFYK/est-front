@@ -43,25 +43,18 @@ const personalAccount = [{title: 'Личный кабинет', href: '/User', m
 const infrastructureInfo = 'В 15 минутах езды расположена Ялта со своей знаменитой набережной, театр Чехова, авквариум и дельфинарий. Знаменитые дворцы, парки, ботанические сады и винные заводы расположены в получасовой доступности.'
 
 const Apartment: NextPage =  observer((props: any) => {
-  console.log(props)
+
   const store = useStore()
   const breadCrumbsStore = useBreadcrumbsStore()
-  const tabs = [{
-    title: "Общая информация",
-  },
-  {
-    title: "Онлайн-тур",
-  },
-  {
-    title: "Архитектура",
-  },
-  {
-    title: "Инфраструктура",
-  },
-  props.secondary_type === 'Новостройка' ? {title: "Застройщик"} : {title: "Юридическая чистота"},
-  {
-    title: "Записаться на просмотр",
-  }]
+  const tabs = [
+    {title: "Общая информация",},
+    {title: "Онлайн-тур",},
+    {title: "Архитектура",},
+    {title: "Инфраструктура",},
+    props.object_developer_info && {title: "Застройщик"},
+    props.legalPurityData && {title: "Юридическая чистота"},
+    {title: "Записаться на просмотр",},
+  ]
   const general = useRef(null)
   const tours = useRef(null)
   const architec = useRef(null)
@@ -76,7 +69,7 @@ const Apartment: NextPage =  observer((props: any) => {
   const views = [datetoDayFormat(props.publish), props.views, props?.agency]
 
   useEffect(() => {
-    setRefs([general.current, tours.current, architec.current, infra.current, props.secondary_type === 'Новостройка' ? develop.current : legal.current, record.current]);
+    setRefs([general.current, tours.current, architec.current, infra.current, props.object_developer_info && develop.current, props.legalPurityData && legal.current, record.current]);
     store.fetch(router.query.id)
     breadCrumbsStore.addBreadCrumbs(`${FILTER_ACTIONS_OPTIONS.filter((a: any) => props.orderType === a.value) ? FILTER_ACTIONS_OPTIONS.filter((a: any) => props.orderType === a.value)[0].label : 'нет сделки'} ${FILTER_HOUSE_TYPE_OPTIONS.filter((a: any) => props.type === a.value)[0] ? FILTER_HOUSE_TYPE_OPTIONS.filter((a: any) => props.type === a.value)[0].label : 'нет типа'}`, 1)
     breadCrumbsStore.addBreadCrumbs(props.name, 2)
@@ -103,11 +96,12 @@ const Apartment: NextPage =  observer((props: any) => {
           <Map currentHouse={props} location={'infrastructure'} InfrastructureInfo={infrastructureInfo}/>
         </div>
 
-        {props.secondary_type === 'Новостройка' 
-        ? <div ref={develop}>
+        {props.object_developer_info && 
+        <div ref={develop}>
           <ObjectDeveloper developerData={MappingDeveloperInfo(props.object_developer_info)}/>
-        </div>
-        : <div ref={legal}>
+        </div>}
+        {props.legalPurityData && 
+        <div ref={legal}>
           {props.legalPurityData && <ObjectLegalPurity legalPurityData={MappingLegalPurity(props.legalPurityData)}/>}
         </div>}
 

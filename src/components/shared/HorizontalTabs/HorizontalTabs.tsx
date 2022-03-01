@@ -17,6 +17,7 @@ interface Props {
 }
 
 export const HorizontalTabs: FC<Props> = ({ tabs, refs, wrapperClassName }) => {
+  
   const [selectedTabIdx, setSelectedTabIdx] = useState(0);
   const activeTabRef = useRef<HTMLDivElement | null>(null);
   const [activeTabMargin, setActiveTabMargin] = useState(30);
@@ -58,7 +59,7 @@ export const HorizontalTabs: FC<Props> = ({ tabs, refs, wrapperClassName }) => {
               },
             }}
           >
-            {tabs.map((tab, index) => (
+            {tabs.filter((tab) => tab).map((tab, index) => (
               <Tab
                 key={index}
                 value={index}

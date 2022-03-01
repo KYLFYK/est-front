@@ -17,7 +17,7 @@ interface Props {
 
 const GeneralInfo: React.FC<Props> = observer(({ images, price, info }) => {
 
-    const imagesUrl = images.length === 0 ? IMAGES_SET : images.map((i: any) => i.url.includes('public') ? IMAGES_SET[0] : i.url)
+    const imagesUrl = images.length === 0 ? IMAGES_SET : images.map((i: any) => i.url && i.url.includes('public') ? IMAGES_SET[0] : i.url || i)
 
     return (
         <div className={s.container}>

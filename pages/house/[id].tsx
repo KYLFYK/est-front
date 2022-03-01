@@ -37,32 +37,6 @@ const personalAccount = [{title: 'Личный кабинет', href: '/User', m
     {title: 'Проверка объекта', href: '/User', message: 0},
 ]
 
-const tabs = [{
-    title: "Общая информация",
-},
-    {
-        title: "Онлайн-тур",
-    },
-    {
-        title: "Архитектура",
-    },
-    {
-        title: "Инфраструктура",
-    },
-    {
-        title: "Юридическая чистота",
-    },
-    {
-        title: "Окупаемость",
-    },
-    {
-        title: "Застройщик",
-    },
-    {
-        title: "Записаться на просмотр",
-    },
-]
-
 const averagePrice = {
     price: '150 001 240',
     priceUSD: ' 2 025 221.09',
@@ -108,6 +82,18 @@ const sortInfoOptions = (option: {}) => {                             // сор�
 }
 
 const House = observer((props: any) => {
+
+    const tabs = [
+        {title: "Общая информация",},
+        {title: "Онлайн-тур",},
+        {title: "Архитектура",},
+        {title: "Инфраструктура",},
+        props.legalPurityData && {title: "Юридическая чистота"},
+        {title: "Окупаемость",},
+        props.object_developer_info && {title: "Застройщик"},
+        {title: "Записаться на просмотр",},
+    ]
+
     let floors = props.info_options.floors ? props.info_options.floors : [{floor: '', value: ''}]
     const construction_feat = props.info_options.construction_features ? props.info_options.construction_features : [{title: '', value: ''}]
     const construction_features = [...construction_feat]
@@ -233,7 +219,8 @@ const House = observer((props: any) => {
     const views = [conversionDate(props.publish), props.views, props.agency]
 
     useEffect(() => {
-        setRefs([general.current, tours.current, architec.current, infra.current, legal.current, payback.current, developer.current, record.current])
+        setRefs([general.current, tours.current, architec.current, infra.current, props.legalPurityData && legal.current, 
+            payback.current, props.object_developer_info && developer.current, record.current])
 
         breadCrumbsStore.addBreadCrumbs(`${FILTER_ACTIONS_OPTIONS.filter((a: any) => props.orderType === a.value) ? FILTER_ACTIONS_OPTIONS.filter((a: any) => props.orderType === a.value)[0].label : 'нет сделки'} ${FILTER_HOUSE_TYPE_OPTIONS.filter((a: any) => props.type === a.value)[0] ? FILTER_HOUSE_TYPE_OPTIONS.filter((a: any) => props.type === a.value)[0].label : 'нет типа'}`, 1)
         breadCrumbsStore.addBreadCrumbs(props.name, 2)
