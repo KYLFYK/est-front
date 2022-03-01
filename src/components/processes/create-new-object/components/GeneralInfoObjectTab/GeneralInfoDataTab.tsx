@@ -76,8 +76,7 @@ const GeneralInfoDataTab: React.FC<Props> = observer(
 
     const onChangeFloors = (value: number) => {
       if ("floors" in values!) {
-        let newFloorsList: IOption<{ description: string; height?: string }>[] =
-          [];
+        let newFloorsList: IOption<{ description: string; height?: string }>[];
         const newFloor: IOption<{ description: string; height?: string }> = {
           value: value,
           label: {

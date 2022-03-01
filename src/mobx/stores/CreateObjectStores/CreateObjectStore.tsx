@@ -356,8 +356,8 @@ class CreateObjectStore implements ICreateObject {
           interior: "string",
           infrastructure: "string",
           rooms: "one",
-          threeD: "https://www.youtube.com/embed/Ke3qyQYNob4",
-          vr: "https://3d-tur.ru/010/",
+          threeD: newData.generalInfo.video,
+          vr: newData.generalInfo.vrTour,
           constructionFeatures: [
             {
               title: newData.generalInfo.interiorDescription,
@@ -376,8 +376,6 @@ class CreateObjectStore implements ICreateObject {
       }
     }
     if (objectType === 1 || objectType === 2) {
-      console.log(data);
-
       const newHouse: any = data;
 
       const guides = [];
@@ -521,8 +519,8 @@ class CreateObjectStore implements ICreateObject {
           ),
           infrastructure: newHouse.infrastructure.description,
           landArea: Number(newHouse.generalInfo.land),
-          threeD: "https://www.youtube.com/embed/Ke3qyQYNob4",
-          vr: "https://3d-tur.ru/010/",
+          threeD: newHouse.generalInfo.video,
+          vr: newHouse.generalInfo.vrTour,
           totalArea: Number(newHouse.generalInfo.generalSquare),
         },
       };
@@ -537,8 +535,6 @@ class CreateObjectStore implements ICreateObject {
     }
     if (objectType === 3) {
       const newLand: any = data;
-
-      console.log(newLand);
 
       const owners = [];
       const guides = [];

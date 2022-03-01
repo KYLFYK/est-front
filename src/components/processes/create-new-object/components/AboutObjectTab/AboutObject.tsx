@@ -179,27 +179,26 @@ const AboutObjectTab: React.FC<Props> = observer(
               isError={!isValid && !isValidName}
               name={"objectName"}
             />
+            {buildingType && (
+              <BaseDropDown
+                className={s.inputSm}
+                options={buildingType.values.map((el) => ({
+                  label: el.value,
+                  value: el.id.toString(),
+                }))}
+                placeholder={"Тип жилья"}
+                value={values.type}
+                onChange={onChangeType}
+                label="Тип жилья"
+                isError={!isValid && !isValidType}
+                name={"type"}
+              />
+            )}
             {"complexName" in values &&
               "floor" in values &&
               "floorsAmmount" in values &&
               "type" in values && (
                 <>
-                  {buildingType && (
-                    <BaseDropDown
-                      className={s.inputSm}
-                      options={buildingType.values.map((el) => ({
-                        label: el.value,
-                        value: el.id.toString(),
-                      }))}
-                      placeholder={"Тип жилья"}
-                      value={values.type}
-                      onChange={onChangeType}
-                      label="Тип жилья"
-                      isError={!isValid && !isValidType}
-                      name={"type"}
-                    />
-                  )}
-
                   {/*<BaseDropDown*/}
                   {/*  className={s.inputSm}*/}
                   {/*  options={DROPDOWN_FILTER_OPTIONS}*/}

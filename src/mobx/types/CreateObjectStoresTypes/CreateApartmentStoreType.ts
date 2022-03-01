@@ -20,10 +20,10 @@ export interface ICreateApartmentAboutTab {
   address: string;
   cost: number;
   index: number;
-  type: string;
   complexName: string;
   floor: number;
   floorsAmmount: number;
+  type: string;
 }
 
 export interface ICreateApartsGeneralInfo {
@@ -37,6 +37,8 @@ export interface ICreateApartsGeneralInfo {
   kitchen: string;
   customRooms: IOption[];
   interiorDescription: string;
+  vrTour: string;
+  video: string;
 }
 
 export interface ICreateApartsInfrastructure {

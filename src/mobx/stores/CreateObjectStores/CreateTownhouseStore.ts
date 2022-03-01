@@ -11,6 +11,7 @@ class CreateTownhouseStore implements ICreateObjectTownhouse {
     region: "",
     address: "",
     cost: 0,
+    type: "",
   };
 
   generalInfo: ICreateObjectTownhouse["generalInfo"] = {
@@ -37,6 +38,8 @@ class CreateTownhouseStore implements ICreateObjectTownhouse {
       count: 0,
       items: [],
     },
+    vrTour: "",
+    video: "",
   };
 
   infrastructure: ICreateObjectTownhouse["infrastructure"] = {

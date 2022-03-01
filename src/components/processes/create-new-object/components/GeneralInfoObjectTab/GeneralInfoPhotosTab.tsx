@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { ChangeEvent, useState } from "react";
 import PlusIcon from "../../../../../icons/PlusIcon/PlusIcon";
 import Typography from "../../../../shared/Typography/Typography";
 import ButtonPanel, {
@@ -13,6 +13,7 @@ import { getInitialStateGeneralInfoTab, TGeneralInfoState } from "../../lib";
 import { useStores } from "../../../../../hooks/useStores";
 import { CrossIcon } from "../../../../../icons/MapControlsIcons/PlaceIcons/CrossIcon";
 import { observer } from "mobx-react-lite";
+import { BaseInput } from "../../../../shared/BaseInput/Input";
 
 const dashedBorder = `url("data:image/svg+xml,%3csvg width='100%25' height='100%25' xmlns='http://www.w3.org/2000/svg'%3e%3crect width='100%25' height='100%25' fill='none' rx='6' ry='6' stroke='black' stroke-width='1' stroke-dasharray='8%2c 8' stroke-dashoffset='12' stroke-linecap='square'/%3e%3c/svg%3e")`;
 interface Props extends ICreateObjectControls {
@@ -32,6 +33,7 @@ const GeneralInfoPhotosTab: React.FC<Props> = observer(
     const [values, setValues] = React.useState<TGeneralInfoState>(
       getInitialStateGeneralInfoTab(objectType, createObjectStore)
     );
+
     const isValidFiles = !!values.photos.length;
 
     const { getRootProps, getInputProps } = useDropzone({
@@ -55,13 +57,23 @@ const GeneralInfoPhotosTab: React.FC<Props> = observer(
       setValues({ ...values, photos: newList });
     };
 
+    const onChangeVrTour = (e: ChangeEvent<HTMLInputElement>) => {
+      setValues({ ...values, vrTour: e.target.value });
+    };
+
+    const onChangeVideo = (e: ChangeEvent<HTMLInputElement>) => {
+      setValues({ ...values, video: e.target.value });
+    };
+
     const handleNextTab = () => {
       if (!isValidFiles || !!errorMsg) {
         if (!errorMsg) setErrorMsg("Фотографии не загружены");
         return;
       }
       createObjectStore.saveGeneralTab(values, objectType);
-      createObjectStore.uploadFileList(values.photos.map((el) => el.file));
+      createObjectStore
+        .uploadFileList(values.photos.map((el) => el.file))
+        .then();
       onNextTab && onNextTab();
     };
 
@@ -109,6 +121,24 @@ const GeneralInfoPhotosTab: React.FC<Props> = observer(
         <Typography color="red" size="small" className={s.error}>
           {errorMsg}
         </Typography>
+        {objectType !== 3 && (
+          <InputsGroup title={"Дополнительно"}>
+            <BaseInput
+              value={values.vrTour}
+              type="text"
+              label="Ссылка на VR тур"
+              className={s.inputMd}
+              onChange={onChangeVrTour}
+            />
+            <BaseInput
+              value={values.video}
+              type="text"
+              label="Ссылка на 3D тур"
+              className={s.inputMd}
+              onChange={onChangeVideo}
+            />
+          </InputsGroup>
+        )}
       </ButtonPanel>
     );
   }
