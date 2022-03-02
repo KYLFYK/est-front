@@ -8,19 +8,19 @@ import AccountEditAgent from "./AccountEditAgent/AccountEditAgent";
 import { useStoreAgentCabinet } from "../../../../../../mobx/role/agent/cabinet/AgentCabinet";
 import { observer } from "mobx-react-lite";
 
-export type InfoAccountAgencyType = {
-  info: Array<{ label: string; value: string }>;
-  id: string;
-  img: string;
-  statusVerification: "confirmed" | "waiting" | "notConfirmed" | "resend";
-};
+// export type InfoAccountAgencyType = {
+//   info: Array<{ label: string; value: string }>;
+//   id: string;
+//   img: string;
+//   statusVerification: "confirmed" | "waiting" | "notConfirmed" | "resend";
+// };
 
 const PersonalCabinetTab = observer(() => {
   const [edit, setEdit] = useState<boolean>(false);
   const store = useStoreAgentCabinet();
 
   useEffect(() => {
-    store.fetch();
+    store.fetch().then();
   }, [store]);
 
   return (

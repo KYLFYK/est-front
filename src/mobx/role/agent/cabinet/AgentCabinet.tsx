@@ -5,6 +5,7 @@ import {
   UpdateAgentCabinetType,
 } from "../../../../api/cabinet/cabinet";
 import imgMoc from "../../../../components/tabs/Account/Agent/components/PersonalCabinetTab/AccountInfo/logoFalse.svg";
+import { instance } from "../../../../api/instance";
 
 class AgentCabinetStore {
   constructor() {
@@ -25,7 +26,6 @@ class AgentCabinetStore {
     id: 1,
     img: imgMoc,
     statusVerification: "notConfirmed",
-
     name: "",
     status: "Agency",
     experience: "Смоленская обл. г.Смоленск",
@@ -34,10 +34,14 @@ class AgentCabinetStore {
     telegram: "estatum.com",
     whatsApp: "estatum.com",
     viber: "estatum.com",
-
     phoneArray: [""],
-
     loading: true,
+    file: [] as {
+      fileName: string;
+      mimeType: string;
+      size: number;
+      url: string;
+    }[],
   };
 
   async fetch() {
@@ -91,13 +95,38 @@ class AgentCabinetStore {
     this.initialData.telegram = telegram;
     this.initialData.whatsApp = whatsApp;
     this.initialData.viber = viber;
-
+    this.initialData.file = res.data.agentProperty.file;
     this.initialData.loading = false;
   }
 
   async update(id: number, updateValue: UpdateAgentCabinetType) {
     console.log(id, updateValue);
-    const res = await cabinetAPI.updateAgentsCabinet(id, updateValue);
+    await cabinetAPI.updateAgentsCabinet(id, updateValue);
+  }
+
+  async updateAvatar(data: FormData) {
+    const response = await instance.post(`media/s3-upload`, data, {
+      headers: {
+        authorization: `Bearer ${localStorage.getItem("accessEstatum")}`,
+      },
+    });
+
+    this.initialData.file = [response.data];
+
+    await instance.patch(
+      "agent/%7BaccountId%7D",
+      {
+        file: [response.data],
+      },
+      {
+        headers: {
+          authorization: `Bearer ${localStorage.getItem("accessEstatum")}`,
+        },
+        params: {
+          accountId: this.initialData.id,
+        },
+      }
+    );
   }
 
   get() {

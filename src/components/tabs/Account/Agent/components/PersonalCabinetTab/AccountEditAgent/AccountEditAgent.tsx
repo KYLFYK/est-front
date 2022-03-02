@@ -1,11 +1,9 @@
 import React, { FC, useState } from "react";
-import Image from "next/image";
 import importImage from "./ImportImage.svg";
 import css from "./AccountEdit.module.scss";
 import BackPage from "../../Others/BackPage/BackPage";
 import Typography from "../../../../../../shared/Typography/Typography";
 import { BaseInput } from "../../../../../../shared/BaseInput/Input";
-import { myLoader } from "../../../../../../../utils/image/image";
 import BaseButton from "../../../../../../shared/BaseButton/BaseButtons";
 import { Modal } from "src/components/shared/Modal/Modal";
 import { LogoIcon } from "../../../../../../../icons/Header/LogoIcon";
@@ -99,6 +97,7 @@ const AccountEditAgent: FC<AccountEditType> = observer(({ onEdit }) => {
         whatsApp: valueWhatsApp,
         telegram: valueTelegram,
       },
+      file: store.initialData.file,
     };
 
     await store.update(store.initialData.id, updateValue);
@@ -131,6 +130,7 @@ const AccountEditAgent: FC<AccountEditType> = observer(({ onEdit }) => {
         whatsApp: valueWhatsApp,
         telegram: valueTelegram,
       },
+      file: store.initialData.file,
     };
 
     await store.update(store.initialData.id, updateValue);
@@ -146,6 +146,10 @@ const AccountEditAgent: FC<AccountEditType> = observer(({ onEdit }) => {
   const backPageNoSave = () => {
     setComparison(false);
     onEdit();
+  };
+
+  const changeAvatar = (data: FormData) => {
+    store.updateAvatar(data).then();
   };
 
   return (
@@ -263,7 +267,17 @@ const AccountEditAgent: FC<AccountEditType> = observer(({ onEdit }) => {
             className={css.dashed}
           >
             <div className={css.marginImage}>
-              <AvatarSection src={importImage} changeable activeUpload />
+              <AvatarSection
+                src={
+                  store.initialData.file && store.initialData.file[0]
+                    ? store.initialData.file[0].url
+                    : importImage
+                }
+                onChange={changeAvatar}
+                changeable
+                activeUpload
+                size={200}
+              />
             </div>
           </div>
         </div>

@@ -186,10 +186,10 @@ const AboutObjectTab: React.FC<Props> = observer(
                   label: el.value,
                   value: el.id.toString(),
                 }))}
-                placeholder={"Тип жилья"}
+                placeholder={objectType === 3 ? "Тип земли" : "Тип жилья"}
                 value={values.type}
                 onChange={onChangeType}
-                label="Тип жилья"
+                label={objectType === 3 ? "Тип земли" : "Тип жилья"}
                 isError={!isValid && !isValidType}
                 name={"type"}
               />

@@ -1,4 +1,4 @@
-import { FC, useState } from "react";
+import { FC, useEffect, useState } from "react";
 import Image from "next/image";
 import BaseButton from "../BaseButton/BaseButtons";
 import { v4 as uuidv4 } from "uuid";
@@ -32,6 +32,10 @@ export const AvatarSection: FC<Props> = observer(
       setFileSrc(URL.createObjectURL(file));
     };
 
+    useEffect(() => {
+      setFileSrc(src ? src : "");
+    }, [src]);
+
     return (
       <div className={styles.wrapper}>
         <div className={styles.image}>
@@ -43,6 +47,7 @@ export const AvatarSection: FC<Props> = observer(
             loader={(e) => myLoader(e.src, e.width, e.quality)}
             width={size}
             height={size}
+            objectFit={"cover"}
           />
         </div>
         {changeable && (

@@ -34,7 +34,6 @@ const PersonalCabinetAccountInfo: FC<PersonalCabinetAccountInfoType> = observer(
 
     const statusVerification = store.initialData.statusVerification;
     const info = store.initialData.info;
-    const img = store.initialData.img;
 
     const apiStatus = () => {
       console.log("apiStatus");
@@ -51,7 +50,11 @@ const PersonalCabinetAccountInfo: FC<PersonalCabinetAccountInfoType> = observer(
                 marginBottom: 30,
               }}
             >
-              <AvatarSection size={80} src={img ? img : imgMoc} />
+              {store.initialData.file.length > 0 ? (
+                <AvatarSection src={store.initialData.file[0].url} />
+              ) : (
+                <AvatarSection size={80} src={imgMoc} />
+              )}
             </div>
           </div>
           <div className={css.df}>
