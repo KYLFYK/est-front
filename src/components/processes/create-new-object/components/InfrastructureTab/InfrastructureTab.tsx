@@ -33,11 +33,19 @@ const InfrastructureTab: React.FC<Props> = observer(
     const isValidDescription =
       "description" in values && !!values.description.length;
     const isValidView = "view" in values && !!values.view.length;
+    const isValidInfrastructure =
+      "infrastructure" in values && !!values.infrastructure;
 
     const onChangeDescription = (
       event: React.ChangeEvent<HTMLTextAreaElement>
     ) => {
       setValues({ ...values, description: event.target.value });
+    };
+
+    const onChangeInfrastructure = (
+      event: React.ChangeEvent<HTMLTextAreaElement>
+    ) => {
+      setValues({ ...values, infrastructure: event.target.value });
     };
 
     const onChangeView = (value: string) => {
@@ -56,7 +64,8 @@ const InfrastructureTab: React.FC<Props> = observer(
       const isValidInputs = isValidInputsInfrastructureTab(
         objectType,
         isValidDescription,
-        isValidView
+        isValidView,
+        isValidInfrastructure
       );
       if (isValidInputs) {
         createObjectStore.saveInfrastructureTab(values, objectType);
@@ -85,13 +94,24 @@ const InfrastructureTab: React.FC<Props> = observer(
     return (
       <ButtonPanel onNextTab={handleNextTab} onPrevTab={onPrevTab}>
         <InputsGroup title="Описание">
-          <BaseTextarea
-            value={values.description}
-            onChange={onChangeDescription}
-            label="Опишите особенности в инфраструктуре вашего объекта"
-            className={s.textarea}
-            isError={!isValid && !isValidDescription}
-          />
+          {objectType === 4 && "infrastructure" in values && (
+            <BaseTextarea
+              value={values.infrastructure}
+              onChange={onChangeInfrastructure}
+              label="Опишите особенности в инфраструктуре вашего ЖК"
+              className={s.textarea}
+              isError={!isValid && !isValidInfrastructure}
+            />
+          )}
+          {"description" in values && (
+            <BaseTextarea
+              value={values.description}
+              onChange={onChangeDescription}
+              label="Опишите особенности в инфраструктуре вашего объекта"
+              className={s.textarea}
+              isError={!isValid && !isValidDescription}
+            />
+          )}
         </InputsGroup>
         {"view" in values && (
           <>

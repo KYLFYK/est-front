@@ -95,7 +95,8 @@ const AboutObjectTab: React.FC<Props> = observer(
         isValidCity,
         isValidIndex,
         isValidAddress,
-        isValidCost
+        isValidCost,
+        isValidRegion
       );
       if (isValid) {
         saveAboutTab(values!, objectType);
@@ -171,7 +172,9 @@ const AboutObjectTab: React.FC<Props> = observer(
         <ButtonPanel onNextTab={handleNext} onPrevTab={handlePrev}>
           <InputsGroup title={"Объект"}>
             <BaseInput
-              label="Придумайте название объекта"
+              label={
+                objectType === 4 ? "Название ЖК" : "Придумайте название объекта"
+              }
               className={s.inputXl}
               type="text"
               value={values.name}
@@ -292,19 +295,23 @@ const AboutObjectTab: React.FC<Props> = observer(
               name={"address"}
             />
           </InputsGroup>
-          <div className={s.divider} />
-          <InputsGroup title={"Стоимость"}>
-            <BaseInput
-              onChange={onChangeCost}
-              value={values.cost}
-              label="Укажите стоимость в рублях"
-              className={s.inputMd}
-              type="number"
-              isError={!isValid && !isValidCost}
-              icon={<Typography color="tertiary">₽</Typography>}
-              name={"cost"}
-            />
-          </InputsGroup>
+          {"cost" in values && (
+            <>
+              <div className={s.divider} />
+              <InputsGroup title={"Стоимость"}>
+                <BaseInput
+                  onChange={onChangeCost}
+                  value={values.cost}
+                  label="Укажите стоимость в рублях"
+                  className={s.inputMd}
+                  type="number"
+                  isError={!isValid && !isValidCost}
+                  icon={<Typography color="tertiary">₽</Typography>}
+                  name={"cost"}
+                />
+              </InputsGroup>
+            </>
+          )}
         </ButtonPanel>
       </FormController>
     );

@@ -5,6 +5,7 @@ export enum UrlCreateObject {
   house = "/house", // post
   land = "/land", // post
   townhouse = "/townhouse", // post
+  complex = "/complex", // post
 }
 
 export const createObjectAPI = {
@@ -44,6 +45,17 @@ export const createObjectAPI = {
   createObjectTownhouse: async (data: any) => {
     try {
       return await instance.post(`${UrlCreateObject.townhouse}`, data, {
+        headers: {
+          authorization: `Bearer ${localStorage.getItem("accessEstatum")}`,
+        },
+      });
+    } catch (e: any) {
+      return e;
+    }
+  },
+  createObjectResComplex: async (data: any) => {
+    try {
+      return await instance.post(`${UrlCreateObject.complex}`, data, {
         headers: {
           authorization: `Bearer ${localStorage.getItem("accessEstatum")}`,
         },

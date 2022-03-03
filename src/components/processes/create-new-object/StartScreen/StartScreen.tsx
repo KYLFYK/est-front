@@ -62,7 +62,7 @@ const StartScreen: React.FC<Props> = ({
       <div className={s.content}>
         <div className={s.row}>
           <Typography weight="medium">
-            {role === "developer" ? "Создать ЖК или послеок" : "Новый объект"}
+            {role === "developer" ? "Создать ЖК или посёлок" : "Новый объект"}
           </Typography>
 
           <div className={s.cardList}>
@@ -99,7 +99,7 @@ const StartScreen: React.FC<Props> = ({
                     <TownhouseIcon />
                   </div>
                   <Typography size="subheaderBig" weight="medium">
-                    Послёлок
+                    Посёлок
                   </Typography>
                 </div>
               </>

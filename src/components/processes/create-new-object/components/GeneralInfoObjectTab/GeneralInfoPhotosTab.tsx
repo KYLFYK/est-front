@@ -79,7 +79,9 @@ const GeneralInfoPhotosTab: React.FC<Props> = observer(
 
     return (
       <ButtonPanel onNextTab={handleNextTab} onPrevTab={onPrevTab}>
-        <InputsGroup title={"Фотографии объекта"}>
+        <InputsGroup
+          title={objectType === 4 ? "Фотографии ЖК" : "Фотографии объекта"}
+        >
           <div className={s.wrapper}>
             <Typography className={s.subTitle}>
               Добавьте как минимум одно изображение
@@ -121,17 +123,17 @@ const GeneralInfoPhotosTab: React.FC<Props> = observer(
         <Typography color="red" size="small" className={s.error}>
           {errorMsg}
         </Typography>
-        {objectType !== 3 && (
+        {objectType !== 3 && objectType !== 4 && (
           <InputsGroup title={"Дополнительно"}>
             <BaseInput
-              value={values.vrTour}
+              value={"vrTour" in values ? values.vrTour : ""}
               type="text"
               label="Ссылка на VR тур"
               className={s.inputMd}
               onChange={onChangeVrTour}
             />
             <BaseInput
-              value={values.video}
+              value={"video" in values ? values.video : ""}
               type="text"
               label="Ссылка на 3D тур"
               className={s.inputMd}

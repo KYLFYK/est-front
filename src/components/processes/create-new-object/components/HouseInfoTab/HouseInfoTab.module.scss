@@ -38,3 +38,12 @@
     margin-right: 30px;
     margin-bottom: 20px;
 }
+
+.group {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+.inputMd {
+    width: 280px !important
+}

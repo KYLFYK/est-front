@@ -44,7 +44,11 @@ const GeneralInfoDescriptionTab: React.FC<Props> = observer(
         <InputsGroup title={"Описание"}>
           <BaseTextarea
             className={s.textarea}
-            label="Опишите сильные стороны вашего объекта"
+            label={
+              objectType === 4
+                ? "Опишите сильные стороны вашего ЖК"
+                : "Опишите сильные стороны вашего объекта"
+            }
             value={values.description}
             onChange={onChangeDescription}
             isError={!isValidDescription && !isValid}

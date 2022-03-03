@@ -73,6 +73,81 @@ const GeneralInfoDataTab: React.FC<Props> = observer(
     const isValidInteriorDescription = !!(
       "interiorDescription" in values && values.interiorDescription.length
     );
+    const isAmountObjects = !!(
+      "amountObjects" in values && values.amountObjects
+    );
+
+    const isAmountBuildings = !!(
+      "amountBuildings" in values && values.amountBuildings
+    );
+
+    const isAmountFloors = !!("amountFloors" in values && values.amountFloors);
+    const isHeightCeilings = !!(
+      "heightCeilings" in values && values.heightCeilings
+    );
+
+    const isPriceObjectMin = !!(
+      "priceObjectMin" in values && values.priceObjectMin
+    );
+    const isPriceObjectMax = !!(
+      "priceObjectMax" in values && values.priceObjectMax
+    );
+
+    const isAreaObjectMin = !!(
+      "areaObjectMin" in values && values.areaObjectMin
+    );
+
+    const isAreaObjectMax = !!(
+      "areaObjectMax" in values && values.areaObjectMax
+    );
+
+    const onChangeAmountObjects = (
+      event: React.ChangeEvent & { target: HTMLInputElement }
+    ) => {
+      setValues({ ...values, amountObjects: Number(event.target.value) });
+    };
+
+    const onChangeAmountBuildings = (
+      event: React.ChangeEvent & { target: HTMLInputElement }
+    ) => {
+      setValues({ ...values, amountBuildings: Number(event.target.value) });
+    };
+
+    const onChangeAmountFloors = (
+      event: React.ChangeEvent & { target: HTMLInputElement }
+    ) => {
+      setValues({ ...values, amountFloors: Number(event.target.value) });
+    };
+
+    const onChangeHeightCeilings = (
+      event: React.ChangeEvent & { target: HTMLInputElement }
+    ) => {
+      setValues({ ...values, heightCeilings: Number(event.target.value) });
+    };
+
+    const onChangeAreaObjectMax = (
+      event: React.ChangeEvent & { target: HTMLInputElement }
+    ) => {
+      setValues({ ...values, areaObjectMax: Number(event.target.value) });
+    };
+
+    const onChangeAreaObjectMin = (
+      event: React.ChangeEvent & { target: HTMLInputElement }
+    ) => {
+      setValues({ ...values, areaObjectMin: Number(event.target.value) });
+    };
+
+    const onChangePriceObjectMax = (
+      event: React.ChangeEvent & { target: HTMLInputElement }
+    ) => {
+      setValues({ ...values, priceObjectMax: Number(event.target.value) });
+    };
+
+    const onChangePriceObjectMin = (
+      event: React.ChangeEvent & { target: HTMLInputElement }
+    ) => {
+      setValues({ ...values, priceObjectMin: Number(event.target.value) });
+    };
 
     const onChangeFloors = (value: number) => {
       if ("floors" in values!) {
@@ -279,7 +354,15 @@ const GeneralInfoDataTab: React.FC<Props> = observer(
         isValidPoolSquare,
         isValidCottageVillage,
         isValidLandStatus,
-        isValidInteriorDescription
+        isValidInteriorDescription,
+        isAmountObjects,
+        isAmountBuildings,
+        isAmountFloors,
+        isHeightCeilings,
+        isPriceObjectMin,
+        isPriceObjectMax,
+        isAreaObjectMin,
+        isAreaObjectMax
       );
       if (isValidInputs) {
         createObjectStore.saveGeneralTab(values, objectType);
@@ -292,6 +375,40 @@ const GeneralInfoDataTab: React.FC<Props> = observer(
     return (
       <ButtonPanel onNextTab={handleNextTab} onPrevTab={onPrevTab}>
         <InputsGroup title="Размеры объекта">
+          {objectType === 4 && (
+            <>
+              {"amountObjects" in values && (
+                <BaseInput
+                  type="number"
+                  onChange={onChangeAmountObjects}
+                  label="Кол-во квартир"
+                  className={s.inputSm}
+                  value={values.amountObjects}
+                  isError={!isValid && !isAmountObjects}
+                />
+              )}
+              {"amountBuildings" in values && (
+                <BaseInput
+                  type="number"
+                  onChange={onChangeAmountBuildings}
+                  label="Кол-во домов"
+                  className={s.inputSm}
+                  value={values.amountBuildings}
+                  isError={!isValid && !isAmountBuildings}
+                />
+              )}
+              {"amountFloors" in values && (
+                <BaseInput
+                  type="number"
+                  onChange={onChangeAmountFloors}
+                  label="Кол-во этажей"
+                  className={s.inputSm}
+                  value={values.amountFloors}
+                  isError={!isValid && !isAmountFloors}
+                />
+              )}
+            </>
+          )}
           {"generalSquare" in values && (
             <BaseInput
               type="number"
@@ -381,7 +498,50 @@ const GeneralInfoDataTab: React.FC<Props> = observer(
         <div className={s.divider} />
 
         {objectType !== ObjectTypes.LAND && (
-          <InputsGroup title="Внутренние размеры объекта">
+          <InputsGroup
+            title={
+              objectType === 4
+                ? "Размеры квартир"
+                : "Внутренние размеры объекта"
+            }
+          >
+            {objectType === 4 && (
+              <>
+                {"areaObjectMin" in values && (
+                  <BaseInput
+                    type="number"
+                    onChange={onChangeAreaObjectMin}
+                    label="Площадь квартиры (Мин)"
+                    className={s.inputSmP}
+                    value={values.areaObjectMin}
+                    isError={!isValid && !isAreaObjectMin}
+                    icon={<Typography className={s.iconColor}>м²</Typography>}
+                  />
+                )}
+                {"areaObjectMax" in values && (
+                  <BaseInput
+                    type="number"
+                    onChange={onChangeAreaObjectMax}
+                    label="Площадь квартиры (Макс)"
+                    className={s.inputSmP}
+                    value={values.areaObjectMax}
+                    isError={!isValid && !isAreaObjectMax}
+                    icon={<Typography className={s.iconColor}>м²</Typography>}
+                  />
+                )}
+                {"heightCeilings" in values && (
+                  <BaseInput
+                    type="number"
+                    onChange={onChangeHeightCeilings}
+                    label="Высота потолков"
+                    className={s.inputSm}
+                    value={values.heightCeilings}
+                    isError={!isValid && !isHeightCeilings}
+                    icon={<Typography className={s.iconColor}>м</Typography>}
+                  />
+                )}
+              </>
+            )}
             {"bathroom" in values && (
               <BaseInput
                 type="number"
@@ -484,6 +644,33 @@ const GeneralInfoDataTab: React.FC<Props> = observer(
               </>
             )}
           </InputsGroup>
+        )}
+        {objectType === 4 && (
+          <>
+            <div className={s.divider} />
+            <InputsGroup title="Стоимость жилья">
+              {"priceObjectMin" in values && (
+                <BaseInput
+                  type="number"
+                  onChange={onChangePriceObjectMin}
+                  label="Минимальная"
+                  className={s.inputSm}
+                  value={values.priceObjectMin}
+                  isError={!isValid && !isPriceObjectMin}
+                />
+              )}
+              {"priceObjectMax" in values && (
+                <BaseInput
+                  type="number"
+                  onChange={onChangePriceObjectMax}
+                  label="Максимальная"
+                  className={s.inputSm}
+                  value={values.priceObjectMax}
+                  isError={!isValid && !isPriceObjectMax}
+                />
+              )}
+            </InputsGroup>
+          </>
         )}
         {"cottageVillageName" in values && "landStatus" in values && (
           <>

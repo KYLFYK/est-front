@@ -120,6 +120,21 @@ const FormScreen: FC<Props> = observer(
                 onPrevTab={handlePrevTab}
               />,
             ]
+          : objectType === ObjectTypes.RESCOMPLEX
+          ? [
+              <HouseInfoInterierTab
+                objectType={objectType}
+                key={4253}
+                onNextTab={handleNextTab}
+                onPrevTab={handlePrevTab}
+              />,
+              <HouseInfoDetailsTab
+                objectType={objectType}
+                key={364213}
+                onPublish={handlePublish}
+                onPrevTab={handlePrevTab}
+              />,
+            ]
           : [
               <HouseInfoDetailsTab
                 objectType={objectType}
@@ -136,7 +151,7 @@ const FormScreen: FC<Props> = observer(
             ];
       const aboutTabLabel =
         objectType === ObjectTypes.LAND ? "Об учатске" : "О доме";
-      setTabsProp([
+      const tabs = [
         {
           isDone: activeTabIdx > 0,
           label: "Об объекте",
@@ -188,10 +203,13 @@ const FormScreen: FC<Props> = observer(
         },
         {
           isDone: activeTabIdx > 3,
-          label: aboutTabLabel,
+          label: objectType === 4 ? "Информация о ЖК" : aboutTabLabel,
           Components: AboutTabComponents,
         },
-        {
+      ];
+
+      if (objectType !== 4) {
+        tabs.push({
           isDone: activeTabIdx > 4,
           label: "Юридическая чистота",
           Components: [
@@ -208,8 +226,10 @@ const FormScreen: FC<Props> = observer(
               onPublish={handlePublish}
             />,
           ],
-        },
-      ]);
+        });
+      }
+
+      setTabsProp(tabs);
     }, [handleNextTab, handlePrevTab, activeTabIdx, objectType]);
 
     if (succesAdvertisementId) {

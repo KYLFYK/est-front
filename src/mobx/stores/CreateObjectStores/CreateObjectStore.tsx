@@ -52,6 +52,13 @@ import { IObjType } from "../../../components/tabs/Account/Agent/components/Othe
 import { instance } from "../../../api/instance";
 import { CreateComplexStore } from "./CreateComplexStore";
 import { CreateVillageStore } from "./CreateVillageStore";
+import {
+  ICreateComplexAboutTab,
+  ICreateComplexGeneralInfo,
+  ICreateComplexInfoTab,
+  ICreateComplexInfrastructure,
+  ICreateObjectComplex,
+} from "../../types/CreateObjectStoresTypes/CreateComplexStoreTypes";
 
 interface IUploadedFile {
   size: number;
@@ -93,6 +100,8 @@ class CreateObjectStore implements ICreateObject {
       case ObjectTypes.LAND:
         this.land.about = data as ICreateLandAboutTab;
         break;
+      case ObjectTypes.RESCOMPLEX:
+        this.complex.about = data as ICreateComplexAboutTab;
       default:
         break;
     }
@@ -112,6 +121,8 @@ class CreateObjectStore implements ICreateObject {
       case ObjectTypes.LAND:
         this.land.generalInfo = data as ICreateLandGeneralInfo;
         break;
+      case ObjectTypes.RESCOMPLEX:
+        this.complex.generalInfo = data as ICreateComplexGeneralInfo;
       default:
         break;
     }
@@ -131,6 +142,8 @@ class CreateObjectStore implements ICreateObject {
       case ObjectTypes.LAND:
         this.land.infrastructure = data as ICreateLandInfrastructure;
         break;
+      case ObjectTypes.RESCOMPLEX:
+        this.complex.infrastructure = data as ICreateComplexInfrastructure;
       default:
         break;
     }
@@ -149,6 +162,9 @@ class CreateObjectStore implements ICreateObject {
         break;
       case ObjectTypes.TOWNHOUSE:
         this.townhouse.info = data as ICreateTownhouseInfoTab;
+        break;
+      case ObjectTypes.RESCOMPLEX:
+        this.complex.info = data as ICreateComplexInfoTab;
         break;
       default:
         break;
@@ -222,7 +238,8 @@ class CreateObjectStore implements ICreateObject {
       | ICreateObjectHouse
       | ICreateObjectLand
       | ICreateObjectTownhouse
-      | ICreateObjectAparts,
+      | ICreateObjectAparts
+      | ICreateObjectComplex,
     objectType: ObjectTypes
   ): Promise<string | undefined> {
     const idOwner: any = jwt_decode(
@@ -664,6 +681,45 @@ class CreateObjectStore implements ICreateObject {
         return res;
       } catch (e) {
         console.log("response apartment-error", e);
+      }
+    }
+
+    if (objectType === 4) {
+      const complexDataS: ICreateObjectComplex = data as ICreateObjectComplex;
+
+      const complexData = {
+        objectType: "sale",
+        name: complexDataS.about.name,
+        description: complexDataS.generalInfo.description,
+        address: complexDataS.about.address,
+        postcode: complexDataS.about.index,
+        longitude: 44.948237,
+        latitude: 34.100318,
+        region: complexDataS.about.region,
+        country: complexDataS.about.country,
+        city: complexDataS.about.city,
+        owner: idOwner.id,
+        status: 1,
+        guides: complexDataS.info.guides,
+        files: this.uploadedFiles,
+        property: {
+          priceObjectMin: complexDataS.generalInfo.priceObjectMin,
+          priceObjectMax: complexDataS.generalInfo.priceObjectMax,
+          areaObjectMin: complexDataS.generalInfo.areaObjectMin,
+          areaObjectMax: complexDataS.generalInfo.areaObjectMax,
+          amountObjects: complexDataS.generalInfo.amountObjects,
+          amountBuildings: complexDataS.generalInfo.amountBuildings,
+          amountFloors: complexDataS.generalInfo.amountFloors,
+          heightCeilings: complexDataS.generalInfo.heightCeilings,
+          infrastructure: complexDataS.infrastructure.infrastructure,
+        },
+        constructionProgress: complexDataS.info.constructionProgress,
+      };
+
+      try {
+        return await createObjectAPI.createObjectResComplex(complexData);
+      } catch (e) {
+        console.log("response complex-error", e);
       }
     }
   }
