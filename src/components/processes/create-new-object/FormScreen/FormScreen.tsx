@@ -45,6 +45,10 @@ const objEnumToString: (type: ObjectTypes) => GuideObject = (type) => {
       return "land";
     case ObjectTypes.TOWNHOUSE:
       return "townhouse";
+    case ObjectTypes.RESCOMPLEX:
+      return "complex";
+    case ObjectTypes.VILLAGE:
+      return "village";
   }
 };
 

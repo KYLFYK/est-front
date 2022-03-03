@@ -5,6 +5,7 @@ import {
   UpdateAgentCabinetType,
 } from "../../../../api/cabinet/cabinet";
 import imgMoc from "../../../../components/tabs/Account/Agent/components/PersonalCabinetTab/AccountInfo/logoFalse.svg";
+import { instance } from "../../../../api/instance";
 
 class AgencyCabinetStore {
   constructor() {
@@ -32,8 +33,13 @@ class AgencyCabinetStore {
     email: "",
     website: "",
     description: "",
-
     loading: true,
+    file: [] as {
+      fileName: string;
+      mimeType: string;
+      size: number;
+      url: string;
+    }[],
   };
 
   async fetch() {
@@ -74,6 +80,31 @@ class AgencyCabinetStore {
 
   async update(id: number, updateValue: UpdateAgentCabinetType) {
     await cabinetAPI.updateAgencyCabinet(id, updateValue);
+  }
+
+  async updateAvatar(data: FormData) {
+    const response = await instance.post(`media/s3-upload`, data, {
+      headers: {
+        authorization: `Bearer ${localStorage.getItem("accessEstatum")}`,
+      },
+    });
+
+    this.initialData.file = [response.data];
+
+    await instance.patch(
+      "agent/%7BaccountId%7D",
+      {
+        file: [response.data],
+      },
+      {
+        headers: {
+          authorization: `Bearer ${localStorage.getItem("accessEstatum")}`,
+        },
+        params: {
+          accountId: this.initialData.id,
+        },
+      }
+    );
   }
 
   get() {

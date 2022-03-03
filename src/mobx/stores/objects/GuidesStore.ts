@@ -6,7 +6,8 @@ export type GuideObject =
   | "house"
   | "townhouse"
   | "land"
-  | "complex";
+  | "complex"
+  | "village";
 
 export type GuideType =
   | "lang"

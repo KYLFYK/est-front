@@ -1,27 +1,28 @@
 interface IPaging {
-    total_pages: number,
-    page_size: number,
+  total_pages: number;
+  page_size: number;
 }
 
-
 export interface IGeneralObjectResponse<T> {
-    objects: T[],
-    paging: IPaging
+  objects: T[];
+  paging: IPaging;
 }
 
 export enum NewObjectActionTypes {
-    SELL,
-    RENT
+  SELL,
+  RENT,
 }
 
 export enum FoundersTypes {
-    SINGLE = 'single',
-    PAIR = 'pair'
+  SINGLE = "single",
+  PAIR = "pair",
 }
 
 export enum ObjectTypes {
-    APARTMENTS,
-    HOUSE,
-    TOWNHOUSE,
-    LAND,
+  APARTMENTS,
+  HOUSE,
+  TOWNHOUSE,
+  LAND,
+  RESCOMPLEX,
+  VILLAGE,
 }

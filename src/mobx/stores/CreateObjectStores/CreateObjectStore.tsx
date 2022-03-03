@@ -50,6 +50,8 @@ import { createObjectAPI } from "../../../api/createObjects/createObject";
 import jwt_decode from "jwt-decode";
 import { IObjType } from "../../../components/tabs/Account/Agent/components/Others/MyAdsContainer/MyAdsContainer";
 import { instance } from "../../../api/instance";
+import { CreateComplexStore } from "./CreateComplexStore";
+import { CreateVillageStore } from "./CreateVillageStore";
 
 interface IUploadedFile {
   size: number;
@@ -63,6 +65,8 @@ class CreateObjectStore implements ICreateObject {
   townhouse: CreateTownhouseStore = new CreateTownhouseStore();
   land: CreateLandStore = new CreateLandStore();
   house: CreateHouseStore = new CreateHouseStore();
+  complex: CreateComplexStore = new CreateComplexStore();
+  village: CreateVillageStore = new CreateVillageStore();
   objType: IObjType = "sale";
   uploadedFiles: IUploadedFile[] = [];
 
