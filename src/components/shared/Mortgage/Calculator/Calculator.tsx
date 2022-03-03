@@ -22,6 +22,7 @@ import {RadioIconChecked, RadioIconUnChecked} from "../icons/RadioIcon";
 import {makeStyles} from "@material-ui/core";
 import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
 import { dateToDigit, digitToDate, currentDate } from '../../../../lib/mortgage/date';
+import {paymentSchedule} from './helpers';
 
 export const formatNumbersToCurrency = (value: number, currency: "RUB" ) => {
     return new Intl.NumberFormat('ru-RU').format(value)
@@ -62,10 +63,11 @@ export const useStyles = makeStyles(() => ({
 }))
 
 export const Calculator: React.FC<Props> = observer(({setModal}) => {
+
     // const price = Number(String(choosedHouse.price || "").replace(/[^0-9]+/g, ""));
     const store = useMortGageStore()
     const classes = useStyles()
-    
+
     /*отклонение координат всплывашки с подсказкой, относительно координаты курсора,
     cardX - динамический, чтобы всплывашка находилась дальше от края экрана(не растягивала экран на мобильниках)*/
     const [cardX, setCardX] = useState(0);
@@ -157,7 +159,7 @@ export const Calculator: React.FC<Props> = observer(({setModal}) => {
     }
     const setPercentageRate = (value: any) => {
         store.setPercentageRate(value)
-    }
+    } 
 
     // стартовые состояния ренджей
     const term = store.initialData.createPayload.creditTerm
@@ -182,19 +184,6 @@ export const Calculator: React.FC<Props> = observer(({setModal}) => {
     let payment = (store.initialData.createPayload.statePrice - store.initialData.createPayload.initialPayment) * (rate / 1200 + ((rate / 1200) / (Math.pow(1 + rate / 1200, term * 12) - 1)))
     // переменная для сохранения начального значения, для расчёта разницы
     let startPayment = (store.initialData.createPayload.statePrice - store.initialData.createPayload.initialPayment) * (rate / 1200 + ((rate / 1200) / (Math.pow(1 + rate / 1200, term * 12) - 1)))
-    
-    const setMonthlyPayment = (value: any) => {
-        store.setMonthlyPayment(value)
-    }
-    const setCreditTotal = (value: any) => {
-        store.setCreditTotal(value)
-    }
-    const setPercentTotal = (value: any) => {
-        store.setPercentTotal(value)
-    }
-    const setMonthlyIncome = (value: any) => {
-        store.setMonthlyIncome(value)
-    }
     
     // сведение данных по периодичным платежам
     let termPeriodPayments: IPeriodPayments[] = []
@@ -225,39 +214,14 @@ export const Calculator: React.FC<Props> = observer(({setModal}) => {
 
     // создание графика платежей
     let payments: IPaymentGraph[] = [{month: 0, payment: 0, debt: 0, percent: 0, remainder: store.initialData.createPayload.statePrice}];
-    let flagRecountPayment: boolean
-    for (let i = 1; i <= store.initialData.createPayload.creditTerm * 12; i++) {
-        // переменная для накопления суммы досрочных платежей за каждый из месяцев
-        let summEarlyPay = 0;
-        flagRecountPayment = false;
-        termPeriodPayments.forEach((pp) => {
-            if (pp.month === i && pp.payment > 0) {
-                summEarlyPay += pp.payment
-            }
-        });
-        for (let j = 0; j < payPeriodPayments.length; j++) {
-            if (payPeriodPayments[j].month === i && payPeriodPayments[j].payment > 0) {
-                flagRecountPayment = true;
-                summEarlyPay += payPeriodPayments[j].payment;
-            }
-        }
-        payments.push({
-            month: i,
-            payment: payments[i - 1].remainder < payment - payments[i - 1].remainder * rate / Number((12 * 100).toFixed(0))
-                ? payments[i - 1].remainder + Number((payments[i - 1].remainder * rate / (12 * 100)).toFixed(0))
-                : Number(payment.toFixed(0)) - Number(summEarlyPay),                                                        // fix date(payment) - срок - отображение (Ваш ежемесячный прятёж)
-            debt: payments[i - 1].remainder < payment - payments[i - 1].remainder * rate / Number((12 * 100).toFixed(0))
-                ? payments[i - 1].remainder + Number((payments[i - 1].remainder * rate / (12 * 100)).toFixed(0)) - Number((payments[i - 1].remainder * rate / (12 * 100)).toFixed(0))
-                : Number(payment.toFixed(0)) + Number(summEarlyPay) - Number((payments[i - 1].remainder * rate / (12 * 100)).toFixed(0)),
-            percent: Number((payments[i - 1].remainder * rate / (12 * 100)).toFixed(0)),
-            remainder: payments[i - 1].remainder < payment - payments[i - 1].remainder * rate / Number((12 * 100).toFixed(0))
-                ? 0
-                : Number(payments[i - 1].remainder) - (Number((payment - payments[i - 1].remainder * rate / (12 * 100)).toFixed(0)) + Number(summEarlyPay)),
-        })
-        if (flagRecountPayment) {
-            payment = payments[i].remainder * (rate / 1200 + ((rate / 1200) / (Math.pow(1 + rate / 1200, store.initialData.createPayload.creditTerm * 12 - i) - 1)))
-        }
-    }
+    paymentSchedule(
+        payments,
+        term, 
+        termPeriodPayments,
+        payPeriodPayments,
+        payment, 
+        rate
+    )
 
     // переменная для подсчёта общих платежей при досрочных платежах, сравнивается с переменной без досрочных платежей
     let payAfterEarlyPayments = 0

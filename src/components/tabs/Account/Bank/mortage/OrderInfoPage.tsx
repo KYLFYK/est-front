@@ -5,15 +5,15 @@ import Link from "next/link";
 import { BackIcon } from "../../../../../icons/BackIcon";
 import { BaseDropDown } from "../../../../shared/BaseDropDown/BaseDropDown";
 import {datetoDayFormat, datetoTimeFormat} from '../../../../../lib/mapping/objectDates';
-import {LEADS_REQS_OPTIONS} from './Config';
+import {LEADS_REQS_OPTIONS, SYNTAX_REQS_OPTIONS} from './Config';
 
 import commonStyles from "../../Admin/components/UsersTab/agency/agency.module.scss";
 import styles from "./OrderInfo.module.scss";
 
 export const OrderInfoPage: FC<any> = observer(({req}) => {
   const store = useMortGageStore()
-  //console.log('req', req)
-  //console.log('store.getEarlyPayments', req.earlyPayment.length)
+  console.log('req', req)
+  req && console.log('store.getEarlyPayments', req.earlyPayment.length)
   return (
     <div className={commonStyles.pageWrapper}>
       <div className={commonStyles.header}>
@@ -94,7 +94,7 @@ export const OrderInfoPage: FC<any> = observer(({req}) => {
               <span className={styles.value}>{req && req.statePrice}</span>
             </div>
             <div className={styles.sectionElem}>
-              <span className={styles.key}>Первоначальная взнос</span>
+              <span className={styles.key}>Первоначальный взнос</span>
               <span className={styles.value}>{req && req.initialPayment}</span>
             </div>
             <div className={styles.sectionElem}>
@@ -106,7 +106,7 @@ export const OrderInfoPage: FC<any> = observer(({req}) => {
               <span className={styles.value}>{req && req.percentageRate} %</span>
             </div>
           </div>
-          {req && store.getEarlyPayments().length > 0 && req.earlyPayment.map((ep: any, i: number) => {
+          {req && req.earlyPayment.length && req.earlyPayment.map((ep: any, i: number) => {
             return (
               <>
                 <span className={styles.title}>{`Досрочный платёж ${i+1}`}</span>
@@ -117,11 +117,11 @@ export const OrderInfoPage: FC<any> = observer(({req}) => {
                   </div>
                   <div className={styles.sectionElem}>
                     <span className={styles.key}>Периодичность платежей</span>
-                    <span className={styles.value}>{ep.frequencyPayment}</span>
+                    <span className={styles.value}>{SYNTAX_REQS_OPTIONS.filter((s) => s.value === ep.frequencyPayment)[0].label}</span>
                   </div>
                   <div className={styles.sectionElem}>
                     <span className={styles.key}>Уменьшить</span>
-                    <span className={styles.value}>{ep.reduce}</span>
+                    <span className={styles.value}>{SYNTAX_REQS_OPTIONS.filter((s) => s.value === ep.reduce)[0].label}</span>
                   </div>
                   <div className={styles.sectionElem}>
                     <span className={styles.key}>Сумма</span>

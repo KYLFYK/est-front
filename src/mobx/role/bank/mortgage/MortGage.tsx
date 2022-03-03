@@ -2,6 +2,8 @@ import {createContext, FC, useContext} from "react"
 import {makeAutoObservable} from "mobx"
 import {leadsAPI} from '../../../../api/cabinet/mortgage'
 import {datetoDayFormat} from '../../../../lib/mapping/objectDates'
+import {paymentSchedule, pivotData} from '../../../../components/shared/Mortgage/Calculator/helpers'
+import {IPaymentGraph, IPeriodPayments} from '../../../../components/shared/Mortgage/Calculator/ipotek'
 
 class MortGageStore  {
     constructor() {
@@ -26,7 +28,7 @@ class MortGageStore  {
                   "dateOfPayment": "",
                   "frequencyPayment": 0,
                   "frequencyPrice": 0,
-                  "reduce": 0
+                  "reduce": 0,
                 },
             ],
             "monthlyPayment": 0,
@@ -43,7 +45,7 @@ class MortGageStore  {
             "status": "Новая заявка",
             "statePrice": 10000000,
             "initialPayment": 0,
-            "creditTerm": 10,
+            "creditTerm": 2,
             "percentageRate": 6,
             "earlyPayment": [],
             "monthlyPayment": 0,
@@ -73,48 +75,31 @@ class MortGageStore  {
         this.initialData.createPayload = {
             ...this.initialData.createPayload, 
             "statePrice": value,
-            "creditTotal": this.initialData.createPayload.statePrice - this.initialData.createPayload.initialPayment,
-            //"monthlyPayment": 
         }
     }
     setInitialPayment(value: any) {
         this.initialData.createPayload = {
             ...this.initialData.createPayload, 
             "initialPayment": value,
-            "creditTotal": this.initialData.createPayload.statePrice - this.initialData.createPayload.initialPayment,
-            //"monthlyPayment": 
         }
     }
     setCreditTerm(value: any) {
         this.initialData.createPayload = {
             ...this.initialData.createPayload, 
             "creditTerm": value,
-            /*"monthlyPayment": this.getEarlyPayments().every((er: any) => er.summ < 1) 
-                ? (this.initialData.createPayload.statePrice - this.initialData.createPayload.initialPayment) * (this.initialData.createPayload.percentageRate / 1200 + ((this.initialData.createPayload.percentageRate / 1200) / (Math.pow(1 + this.initialData.createPayload.percentageRate / 1200, value * 12) - 1)))
-                : */
         }
     }
     setPercentageRate(value: any) {
         this.initialData.createPayload = {
             ...this.initialData.createPayload, 
             "percentageRate": value,
-            //"monthlyPayment":
         }
     }
     setEarlyPayment(value: any) {
-        this.initialData.createPayload = {...this.initialData.createPayload, "earlyPayment": value}
-    }
-    setMonthlyPayment(value: any) {
-        this.initialData.createPayload = {...this.initialData.createPayload, "monthlyPayment": value}
-    }
-    setCreditTotal(value: any) {
-        this.initialData.createPayload = {...this.initialData.createPayload, "creditTotal": value}
-    }
-    setPercentTotal(value: any) {
-        this.initialData.createPayload = {...this.initialData.createPayload, "percentTotal": value}
-    }
-    setMonthlyIncome(value: any) {
-        this.initialData.createPayload = {...this.initialData.createPayload, "monthlyIncome": value}
+        this.initialData.createPayload = {
+            ...this.initialData.createPayload,
+            "earlyPayment": value,
+        }
     }
 
     setDetail(detail: boolean, id: number) {
@@ -146,7 +131,43 @@ class MortGageStore  {
                 }
             )
         })
-        const res = await leadsAPI.createLead(this.initialData.createPayload)
+        
+        let termPeriodPayments: IPeriodPayments[] = []
+        let payPeriodPayments: IPeriodPayments[] = []
+        pivotData(
+            this.initialData.createPayload.creditTerm,
+            termPeriodPayments,
+            payPeriodPayments,
+            this.initialData.createPayload.earlyPayment
+        )
+
+        let payments: IPaymentGraph[] = [{month: 0, payment: 0, debt: 0, percent: 0, remainder: this.initialData.createPayload.statePrice}];
+        paymentSchedule(
+            payments,
+            this.initialData.createPayload.creditTerm, 
+            termPeriodPayments,
+            payPeriodPayments,
+            this.initialData.createPayload.monthlyPayment, 
+            this.initialData.createPayload.percentageRate
+        )
+        let averagePayment = 0
+        let payAfterEarlyPayments = 0
+        payments.forEach((p) => {
+            payAfterEarlyPayments += p.percent;
+            averagePayment += p.payment / (payments.length - 1);
+        })
+
+        const res = await leadsAPI.createLead({
+            ...this.initialData.createPayload,
+            "monthlyPayment": this.initialData.createPayload.earlyPayment.every((er: any) => er.summ < 1) 
+                ? +((this.initialData.createPayload.statePrice - this.initialData.createPayload.initialPayment) * (this.initialData.createPayload.percentageRate / 1200 + ((this.initialData.createPayload.percentageRate / 1200) / (Math.pow(1 + this.initialData.createPayload.percentageRate / 1200, this.initialData.createPayload.creditTerm * 12) - 1)))).toFixed(0)
+                : averagePayment,
+            "monthlyIncome": 12702 + +((this.initialData.createPayload.statePrice - this.initialData.createPayload.initialPayment) * (this.initialData.createPayload.percentageRate / 1200 + ((this.initialData.createPayload.percentageRate / 1200) / (Math.pow(1 + this.initialData.createPayload.percentageRate / 1200, this.initialData.createPayload.creditTerm * 12) - 1)))).toFixed(0),
+            "creditTotal": this.initialData.createPayload.statePrice - this.initialData.createPayload.initialPayment,
+            "percentTotal": this.initialData.createPayload.earlyPayment.every((er: any) => er.summ < 1)
+                ? +((this.initialData.createPayload.statePrice - this.initialData.createPayload.initialPayment) * (this.initialData.createPayload.percentageRate / 1200 + ((this.initialData.createPayload.percentageRate / 1200) / (Math.pow(1 + this.initialData.createPayload.percentageRate / 1200, this.initialData.createPayload.creditTerm * 12) - 1)))).toFixed(0) * this.initialData.createPayload.creditTerm * 12 - (this.initialData.createPayload.statePrice - this.initialData.createPayload.initialPayment)
+                : payAfterEarlyPayments,
+        })
         //this.initialData.data = res.data
         //this.initialData.loading = false
     }
@@ -166,6 +187,9 @@ class MortGageStore  {
 
     getEarlyPayments() {
         return JSON.parse(JSON.stringify([ ...this.initialData.createPayload.earlyPayment]))
+    }
+    getPayload() {
+        return JSON.parse(JSON.stringify({ ...this.initialData.createPayload}))
     }
 
     getInitialEarlyPayments() {

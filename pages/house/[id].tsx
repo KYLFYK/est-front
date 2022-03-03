@@ -7,7 +7,6 @@ import {Views} from '../../src/components/shared/Views/Views'
 import {NameEstate} from '../../src/components/shared/NameEstate/NameEstate'
 import {AdressEstate} from '../../src/components/shared/AdressEstate/AdressEstate'
 import {HorizontalTabs} from '../../src/components/shared/HorizontalTabs/HorizontalTabs'
-import {IMAGES_SET} from '../../src/components/containers/GeneralInfo/config'
 import GeneralInfo from '../../src/components/containers/GeneralInfo/GeneralInfo'
 import ObjectDescription from '../../src/components/containers/ObjectDescription/ObjectDescription'
 import ToursContainer from "../../src/components/containers/ToursContainer/ToursContainer"
@@ -45,8 +44,6 @@ const averagePrice = {
     priceMetreUSD: '1 0066.61',
     priceMetreEU: '910.31',
 }
-
-const infrastructureInfo = 'В 15 минутах езды расположена Ялта со своей знаменитой набережной, театр Чехова, авквариум и дельфинарий. Знаменитые дворцы, парки, ботанические сады и винные заводы расположены в получасовой доступности.'
 
 const sortInfoOptions = (option: {}) => {                             // сортировка в нужный формат - info_options
     const infoOptions = []
