@@ -13,6 +13,7 @@ interface Props {
 
 const ConstructProgress: React.FC<Props> = ({ images, info }) => {
     const [value, setValue] = useState<any>(0)
+
     if (info) {
         return (
             <div className={s.container}>
@@ -21,7 +22,7 @@ const ConstructProgress: React.FC<Props> = ({ images, info }) => {
                 </Typography>
                 <div className={s.df}>
                     <div className={s.sliderContainer}>
-                        <BaseSlider images={images} height={295} withArrows withFavorite={false} onClickFavorite={() => {}}/>
+                        <BaseSlider images={info[value].images && info[value].images.length ? info[value].images : images} height={295} withArrows withFavorite={false} onClickFavorite={() => {}}/>
                     </div>
                     <div className={s.infoContainer}>
                         <BaseDropDown options={info} value={info[Number(value)].value} placeholder="Выбрерите опцию" onChange={(e) => {setValue(e)}} />

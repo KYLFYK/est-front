@@ -31,7 +31,7 @@ const BaseSlider: React.FC<Props> = ({ images, height, withArrows, withFavorite,
         beforeChange: (...currentAndNext) => setSelectedSlide(currentAndNext[1]),
     };
 
-    const renderImages = images.length ? (
+    const renderImages = images && images.length ? (
         images.map((i) => (
             <Box className={s.imgContainer} key={i}>
                 <div style={{ height }}>

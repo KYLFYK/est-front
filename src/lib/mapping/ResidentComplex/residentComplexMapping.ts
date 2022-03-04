@@ -94,11 +94,12 @@ export const MappingDeveloperInfo = (info: any) => {
 
 export const MappingShedule = (objs: any) => {
     let returnedObjs: Array<any> = [];
-    objs && objs.forEach((o: any) => {
+    objs && objs.forEach((o: any, index: any) => {
         returnedObjs.push({
             label: datetoMonthFormat(o.date),
-            value: o.id - 1,
+            value: index,
             title: o.description,
+            images: o.file.map((f: any) => f.url )
         })
     })
     return returnedObjs;
