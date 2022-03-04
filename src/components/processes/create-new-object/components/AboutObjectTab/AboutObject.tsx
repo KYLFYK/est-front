@@ -61,13 +61,20 @@ const AboutObjectTab: React.FC<Props> = observer(
 
     const developerStore = useStoreDeveloperMyObjectStore();
 
-    const idOwner: any = jwt_decode(
-      localStorage.getItem("accessEstatum")
-        ? (localStorage.getItem("accessEstatum") as string)
-        : "123"
-    );
+    const [idOwner, setIdOwner] = useState({
+      id: "",
+      role: "",
+    });
 
     useEffect(() => {
+      const idOwner: any = jwt_decode(
+        localStorage.getItem("accessEstatum")
+          ? (localStorage.getItem("accessEstatum") as string)
+          : "123"
+      );
+
+      setIdOwner(idOwner);
+
       if (idOwner.role === "developer") {
         developerStore.fetchAllComplexByOwnerId(accFromToken().id).then();
       }
