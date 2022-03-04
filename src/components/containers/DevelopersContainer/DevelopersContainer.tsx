@@ -64,8 +64,8 @@ const DevelopersContainer :FC<DevelopersContainerType> = observer(({title}) => {
 
     useEffect(()=>{
         store.fetchDevelopers()
-    },[])
-
+    },[])   
+    
     return (
         <div className={css.containerDevelopersBlock}>
             <HeadLine title={title} >

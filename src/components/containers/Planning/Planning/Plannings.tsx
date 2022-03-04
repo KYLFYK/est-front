@@ -8,7 +8,7 @@ import {datetoQuarterFormat} from '../../../../lib/mapping/objectDates'
 // TODO: Take types from 'model' folder, when global state gets its types
 
 interface IObjectPlanningItem {
-    image: string,
+    file: {id: number, url: string}[],
     price: number,
     title: string,
     housing: number,
@@ -30,8 +30,8 @@ const Planning: React.FC<Props> = ({ FilterComponent, planningList }) => {
                     {FilterComponent}
                 </div>
                 <div className={s.content}>
-                    {planningList && planningList.map(({ image, price, title, housing, deadline, floor }, idx) =>
-                        <Card key={idx} image={image} price={price} title={title} housing={housing} deadline={datetoQuarterFormat(deadline)} floor={floor} />)}
+                    {planningList && planningList.map(({ file, price, title, housing, deadline, floor }, idx) =>
+                        <Card key={idx} image={file ? file[0].url : ''} price={price} title={title} housing={housing} deadline={datetoQuarterFormat(deadline)} floor={floor} />)}
                 </div>
             </HeadLine>
         </div>
