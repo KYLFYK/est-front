@@ -316,13 +316,12 @@ class DeveloperMyObjectStore {
   async fetchAllObjectsByComplexId(complexId: number) {
     this.initialData.loading = true;
     const res = await ComplexApi.getAllObjectsByComplexId(complexId);
-    console.log(res);
     this.initialData.complexObjects = res?.data;
     this.initialData.loading = false;
   }
 
   get() {
-    console.log(JSON.parse(JSON.stringify({ ...this.initialData })));
+    return JSON.parse(JSON.stringify({ ...this.initialData }))
   }
 }
 

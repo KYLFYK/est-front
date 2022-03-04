@@ -2405,7 +2405,7 @@ class ResidentialComplexStore  {
         if(id==='5')this.initialData = complex5
     }
     get() {
-        console.log(JSON.parse(JSON.stringify({ ...this.initialData})))
+        return JSON.parse(JSON.stringify({ ...this.initialData}))
     }
 }
 

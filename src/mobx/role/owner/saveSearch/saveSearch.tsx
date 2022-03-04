@@ -29,7 +29,7 @@ class OwnerSaveSearchStore {
     }
 
     get() {
-        console.log(JSON.parse(JSON.stringify({...this.initialData})))
+        return JSON.parse(JSON.stringify({...this.initialData}))
     }
 }
 

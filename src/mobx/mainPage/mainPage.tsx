@@ -56,7 +56,7 @@ class MainPageStore {
     }
 
     async fetchAgents() {
-        const res = await mailPage.getAgentOur(3)
+        const res = await mailPage.getAgentOur(5)
         const date = new Date()
         const years = date.getFullYear()
         this.initialData.agents = res.data.map((agent: any) => (
@@ -154,7 +154,7 @@ class MainPageStore {
     }
 
     get() {
-        return JSON.parse(JSON.stringify({...this.initialData.agents}))
+        return JSON.parse(JSON.stringify([...this.initialData.agents]))
     }
 }
 

@@ -14,6 +14,7 @@ interface Props {
 }
 
 const Card: React.FC<Props> = ({ image, price, title, housing, floor, deadline }) => {
+
     return (
         <div className={s.wrapper}>
             <div className={s.imgContainer}>

@@ -36,6 +36,7 @@ export const AgentInfo: React.FC<AgentDataPropsType> = ({ img,connection,infoAge
     return (
         <>
             <Image
+                unoptimized
                 className={css.photoAgent}
                 src={img}
                 alt="agent"
