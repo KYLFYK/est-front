@@ -60,7 +60,7 @@ export const ResComplexes: FC<ResComplexesType> = observer(
                 key={index}
                 onClick={() => onSetCompex(+home.id, home.name)}
               >
-                <CardObject img={home.img}>
+                <CardObject img={home.files[0] ? home.files[0].url : home.img}>
                   <div className={css.paddingCard}>
                     <LineV1
                       id={home.id}
@@ -79,7 +79,7 @@ export const ResComplexes: FC<ResComplexesType> = observer(
                         color={"tertiary"}
                         className={css.paddingRight_5}
                       >
-                        Агент:
+                        Застройщик:
                       </Typography>
                       <Typography
                         color={"tertiary"}

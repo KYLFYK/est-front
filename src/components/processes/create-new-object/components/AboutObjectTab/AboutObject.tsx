@@ -25,6 +25,9 @@ import { IObjType } from "../../../../tabs/Account/Agent/components/Others/MyAds
 import { AddressGuides } from "../../../../../mobx/stores/objects/AddressGuidesStore";
 
 import s from "./AboutObject.module.scss";
+import jwt_decode from "jwt-decode";
+import { useStoreDeveloperMyObjectStore } from "../../../../../mobx/role/developer/myObject/DeveloperMyObject";
+import { accFromToken } from "../../../../../lib/localStorage/localStorage";
 
 interface Props extends ICreateObjectControls {
   objectType: ObjectTypes;
@@ -56,6 +59,27 @@ const AboutObjectTab: React.FC<Props> = observer(
     const guidesStore = ObjectGuides;
     const addressStore = AddressGuides;
 
+    const developerStore = useStoreDeveloperMyObjectStore();
+
+    const [idOwner, setIdOwner] = useState({
+      id: "",
+      role: "",
+    });
+
+    useEffect(() => {
+      const idOwner: any = jwt_decode(
+        localStorage.getItem("accessEstatum")
+          ? (localStorage.getItem("accessEstatum") as string)
+          : "123"
+      );
+
+      setIdOwner(idOwner);
+
+      if (idOwner.role === "developer") {
+        developerStore.fetchAllComplexByOwnerId(accFromToken().id).then();
+      }
+    }, []);
+
     const [form] = useForm<IForm>({
       type: "",
       objectName: "",
@@ -76,8 +100,7 @@ const AboutObjectTab: React.FC<Props> = observer(
 
     const isValidName = "name" in values && !!values.name.length; // REPLACE BY VALIDATION SERVICE
     const isValidType = "type" in values && !!values.type.length; // REPLACE BY VALIDATION SERVICE
-    // const isValidComplexName =
-    //   "complexName" in values && !!values.complexName.length; // REPLACE BY VALIDATION SERVICE
+    const isValidComplexName = "complexName" in values && !!values.complexName; // REPLACE BY VALIDATION SERVICE
     const isValidCountry = "country" in values && !!values.country; // REPLACE BY VALIDATION SERVICE
     const isValidCity = "city" in values && !!values.city; // REPLACE BY VALIDATION SERVICE
     const isValidIndex = "index" in values && !!values.index; // REPLACE BY VALIDATION SERVICE
@@ -90,7 +113,7 @@ const AboutObjectTab: React.FC<Props> = observer(
         objectType,
         isValidName,
         isValidType,
-        true,
+        idOwner.role === "developer" ? isValidComplexName : true,
         isValidCountry,
         isValidCity,
         isValidIndex,
@@ -129,9 +152,12 @@ const AboutObjectTab: React.FC<Props> = observer(
     const onChangeType = (value: string) => {
       setValues({ ...values, type: value });
     };
-    // const onChangeComplexName = (value: string) => {
-    //   setValues({ ...values, complexName: value });
-    // };
+    const onChangeComplexName = (value: string) => {
+      if (idOwner.role === "developer") {
+        // @ts-ignore
+        setValues({ ...values, complexName: Number(value) });
+      }
+    };
     const onChangeFloor = (value: number) => {
       setValues({ ...values, floor: value });
     };
@@ -166,6 +192,21 @@ const AboutObjectTab: React.FC<Props> = observer(
     const buildingType = guidesStore.readyToWork?.find(
       (el) => el.type_en === "buildingType"
     );
+
+    useEffect(() => {
+      const history = window ? window.location.search : undefined;
+
+      if (history) {
+        const complex = history
+          .split("&")
+          .filter((el) => el.indexOf("complex") > -1)[0]
+          .split("=")[1];
+
+        if (complex) {
+          onChangeComplexName(complex);
+        }
+      }
+    }, []);
 
     return (
       <FormController<IForm> form={form}>
@@ -202,16 +243,23 @@ const AboutObjectTab: React.FC<Props> = observer(
               "floorsAmmount" in values &&
               "type" in values && (
                 <>
-                  {/*<BaseDropDown*/}
-                  {/*  className={s.inputSm}*/}
-                  {/*  options={DROPDOWN_FILTER_OPTIONS}*/}
-                  {/*  placeholder={"ЖК"}*/}
-                  {/*  onChange={onChangeComplexName}*/}
-                  {/*  value={values.complexName}*/}
-                  {/*  label="ЖК"*/}
-                  {/*  isError={!isValid && !isValidComplexName}*/}
-                  {/*  name={"lcd"}*/}
-                  {/*/>*/}
+                  {idOwner.role === "developer" && (
+                    <BaseDropDown
+                      className={s.inputSm}
+                      options={developerStore.initialData.complex.map(
+                        (complex) => ({
+                          label: complex.name,
+                          value: complex.id,
+                        })
+                      )}
+                      placeholder={"ЖК"}
+                      onChange={onChangeComplexName}
+                      value={values.complexName}
+                      label="ЖК"
+                      isError={!isValid && !isValidComplexName}
+                      name={"lcd"}
+                    />
+                  )}
 
                   <CounterButtons
                     onChange={onChangeFloor}

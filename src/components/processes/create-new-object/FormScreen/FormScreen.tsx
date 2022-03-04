@@ -28,6 +28,7 @@ import {
 import { useAgentAdsStore } from "../../../../mobx/role/agent/ads/AgentAds";
 
 import s from "./FormScreen.module.scss";
+import { useStoreDeveloperMyObjectStore } from "../../../../mobx/role/developer/myObject/DeveloperMyObject";
 
 interface Props {
   objectType: ObjectTypes;
