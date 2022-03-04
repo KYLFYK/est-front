@@ -315,7 +315,7 @@ class CreateObjectStore implements ICreateObject {
         owner: idOwner.id,
         status: 1,
         price: newData.about.cost,
-        complex: 1,
+        complex: newData.about.complexName ? newData.about.complexName : 1,
         legalPurity: {
           address: newData.legalPurity.realEstateRegister.address,
           areaValue: Number(
