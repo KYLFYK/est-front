@@ -24,7 +24,7 @@ export const MappingDeveloperInfo = (info: any) => {
     const news: any = []
     info.developerProperty && info.developerProperty.press?.forEach((p: any) => {news.push({link: p.link, date: p.date, title: p.title, description: p.text, icon: p.logo, id: p.id})})
     const statistics: any = []
-    info.developerProperty && info.developerProperty.statistics?.forEach((s: any) => {statistics.push({value: s.title, label: s.items.map((i: any) => {
+    info.developerProperty && info.developerProperty.statistics?.forEach((s: any) => {statistics.push({value: s.title, label: s.items && s.items.map((i: any) => {
       return {title: i.value, text: i.item}
     })})})
     const object_developer_info = {
@@ -79,7 +79,7 @@ export const MappingDeveloperInfo = (info: any) => {
                 { value: "authorityBusiness", label: { title: "Регистрирующий орган, в котором находится регистрационное дело", text: info.developerProperty ? info.developerProperty.registeringAuthorityLocated : "" }}
               ]
           },
-          activities: {primary: info.developerProperty ? [info.developerProperty.mainOccupation] : [], secondary: info.developerProperty ? [...info.developerProperty.extraOccupations.map((eo: any) => eo.value )] : []},
+          activities: {primary: info.developerProperty ? [info.developerProperty.mainOccupation] : [], secondary: info.developerProperty && info.developerProperty.extraOccupations ? [...info.developerProperty.extraOccupations.map((eo: any) => eo.value )] : []},
           news: news,
           statistics: statistics,
           risks: [
@@ -99,7 +99,7 @@ export const MappingShedule = (objs: any) => {
             label: datetoMonthFormat(o.date),
             value: index,
             title: o.description,
-            images: o.file.map((f: any) => f.url )
+            images: o.file && o.file.map((f: any) => f.url )
         })
     })
     return returnedObjs;
