@@ -18,7 +18,7 @@ export const cabinetAPI = {
   },
   updateDeveloper: async (id: number, updateDeveloper: {}) => {
     try {
-      return await instance.put(
+      return await instance.patch(
         `/developer/{accountId}?accountId=${id}`,
         updateDeveloper,
         {
