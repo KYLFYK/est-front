@@ -76,8 +76,8 @@ const FilterSearch: FC<Props> = ({ type = "agent", className }) => {
             Сохранить поиск
           </BaseButton>
         )}
-        <PrinterIcon onClick={printer} />
-        <Upload onClick={upload} />
+        {/*<PrinterIcon onClick={printer} />
+        <Upload onClick={upload} />*/}
         {type === "professional" && (
           <>
             <Oval onClick={oval} />
