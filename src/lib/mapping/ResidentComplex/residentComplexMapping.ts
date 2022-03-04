@@ -27,6 +27,7 @@ export const MappingDeveloperInfo = (info: any) => {
     info.developerProperty && info.developerProperty.statistics?.forEach((s: any) => {statistics.push({value: s.title, label: s.items && s.items.map((i: any) => {
       return {title: i.value, text: i.item}
     })})})
+
     const object_developer_info = {
         name: info.developerProperty ? info.developerProperty.name : "",
         developerType: info.developerProperty ? info.developerProperty.type : "",
@@ -35,7 +36,7 @@ export const MappingDeveloperInfo = (info: any) => {
         leasedAmmount: `${info.developerProperty ? info.developerProperty.completedBuildingAmount : ""} дома в ${info.developerProperty ? info.developerProperty.completedBuildingAmount : ""} ЖК`,
         inProgressAmmount: `${info.developerProperty ? info.developerProperty.inProgressBuildingAmount : ""} домов в ${info.developerProperty ? info.developerProperty.inProgressComplexAmount : ""} ЖК`,
         tabsData: {
-          about: [info.developerProperty ? info.developerProperty.description : ""],
+          about: info.developerProperty && info.developerProperty.description ? [info.developerProperty.description] : [],
           contacts: [
             { value: "tel", label: { title: "Телефон", text: info ? info.phone : "" }},
             { value: "email", label: { title: "E-mail", text: info ? info.email : "" }},

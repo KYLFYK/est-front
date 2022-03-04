@@ -64,7 +64,7 @@ const tabs = [
 ];
 
 const ResidentialComplex: NextPage = observer((props: any) => {
-
+  console.log(props)
   const store = useStore();
   const breadCrumbsStore = useBreadcrumbsStore();
   const router = useRouter();

@@ -31,6 +31,7 @@ interface Props {
 }
 
 const DeveloperTabs: React.FC<Props> = ({ tabsData: { news, statistics, risks, activities, owners, requisits, contacts, about } }) => {
+    
     let tab = []
     if (about && about.length) tab.push({ title: "О застройщике", Component: <DeveloperAbout paragraphs={about} /> })
     if (contacts && contacts.length) tab.push({ title: "Контакты", Component: <DeveloperContacts items={contacts} /> })
