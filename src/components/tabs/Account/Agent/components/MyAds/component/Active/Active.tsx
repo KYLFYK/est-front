@@ -4,6 +4,7 @@ import MyAdsContainer from "../../../Others/MyAdsContainer/MyAdsContainer";
 import { useAgentAdsStore } from "../../../../../../../../mobx/role/agent/ads/AgentAds";
 import { toJS } from "mobx";
 import jwt_decode from "jwt-decode";
+import { Loader } from "src/components/shared/Loader/Loader";
 
 const MyAdsActive = observer(() => {
   const adsStore = useAgentAdsStore();
@@ -21,7 +22,7 @@ const MyAdsActive = observer(() => {
   );
 
   return adsStore.get().loading ? (
-    <h1>Загрузка...</h1>
+    <Loader/>
   ) : (
     <MyAdsContainer
       objects={toJS(adsStore.initialData.data).filter(

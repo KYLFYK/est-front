@@ -29,7 +29,7 @@ type AgentsContainerType = {
 export const AgentsContainer: FC<AgentsContainerType> = observer(({  title }) => {
 
     const store = useStoreMainPage()
-
+    console.log(store.get())
     useEffect(()=>{
         store.fetchAgents()
     },[])
