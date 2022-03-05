@@ -1,10 +1,11 @@
-import React from 'react'
+import React, {useState} from 'react'
 import Link from 'next/link'
 import HeadLine from '../../../shared/HeadLine/HeadLine'
 import SampleImage from '../assets/planning_sample.png'
 import Card from '../Card/Card'
 import s from './Plannings.module.scss'
 import {datetoQuarterFormat} from '../../../../lib/mapping/objectDates'
+import PlanningFilter from "../../../../../src/components/containers/PlanningFilter/PlanningFilter"
 
 // TODO: Take types from 'model' folder, when global state gets its types
 
@@ -25,11 +26,22 @@ interface Props {
 
 const Planning: React.FC<Props> = ({ FilterComponent, planningList }) => {
 
+    const [sort, setSort] = useState('default')
+
+    let list: any = []
+    if(sort === 'default'){
+        list = planningList?.sort((a: any, b: any) => a.id > b.id ? 1 : -1)
+    } else if(sort === 'bigger'){
+        list = planningList?.sort((a: any, b: any) => a.price > b.price ? 1 : -1)
+    } else if(sort === 'smaller'){
+        list = planningList?.sort((a: any, b: any) => a.price < b.price ? 1 : -1)
+    }
+
     return (
         <div className={s.container}>
             <HeadLine title="Квартиры и аппартаменты">
                 <div className={s.filterWrapper}>
-                    {FilterComponent}
+                    <PlanningFilter sort={sort} setSort={setSort}/>
                 </div>
                 <div className={s.content}>
                     {planningList && planningList.map(({ file, price, name, buildingNumber, deadline, floor, id }, idx) =>

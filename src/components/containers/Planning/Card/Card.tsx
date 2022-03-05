@@ -18,7 +18,14 @@ const Card: React.FC<Props> = ({ image, price, title, housing, floor, deadline }
     return (
         <div className={s.wrapper}>
             <div className={s.imgContainer}>
-                {image && <Image loader={() => image} unoptimized src={image} layout={'fill'} alt="Planning image" className={s.img} />}
+                {image && <Image 
+                            loader={() => image} 
+                            unoptimized src={image} 
+                            layout={'fill'} 
+                            alt="Planning image" 
+                            className={s.img} 
+                        />
+                }
             </div>
             <div className={s.content}>
                 <div className={s.contentRow}>

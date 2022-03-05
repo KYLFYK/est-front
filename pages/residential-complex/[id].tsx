@@ -91,14 +91,7 @@ const ResidentialComplex: NextPage = observer((props: any) => {
       developer.current,
     ]);
     store.fetch(router.query.id);
-    breadCrumbsStore.addBreadCrumbs(
-      `${
-        FILTER_ACTIONS_OPTIONS.filter(
-          (a: any) => props.orderType === a.value
-        )[0].label
-      }`,
-      1
-    );
+    breadCrumbsStore.addBreadCrumbs(`${FILTER_ACTIONS_OPTIONS.filter((a: any) => props.orderType === a.value)[0].label}`,1);
     breadCrumbsStore.addBreadCrumbs(props.name, 2);
   }, [router.query.id, store]);
 

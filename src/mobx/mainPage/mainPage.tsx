@@ -56,7 +56,7 @@ class MainPageStore {
     }
 
     async fetchAgents() {
-        const res = await mailPage.getAgentOur(5)
+        const res = await mailPage.getAgentOur(3)
         const date = new Date()
         const years = date.getFullYear()
         this.initialData.agents = res.data.map((agent: any) => (

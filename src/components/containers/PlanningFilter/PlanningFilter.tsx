@@ -9,7 +9,10 @@ import Typography from "../../shared/Typography/Typography"
 import { DROPDOWN_FILTER_OPTIONS, DROPDOWN_PLACEHOLDER, SORT_FILTER_OPTIONS, TOGGLE_BUTTONS_OPTIONS } from "./config"
 import css from './PlanningFilter.module.css'
 
-interface Props {}
+interface Props {
+    sort?: string,
+    setSort?: React.Dispatch<React.SetStateAction<string>>,
+}
 
 const useStyles = makeStyles(() => ({
     floorInput: {
@@ -49,15 +52,17 @@ const useStyles = makeStyles(() => ({
 // onSubmit and Filter Values will come from global state and observers
 // MyAdsContainer values should store in local state
 
-const PlanningFilter: React.FC<Props> = () => {
+const PlanningFilter: React.FC<Props> = ({sort, setSort}) => {
     const classes = useStyles()
     useEffect(() => {
         // here's action for load some filter values from backend and hold it in global store
     }, [])
-    const tempFunc = () => { }
+    const tempFunc = (e: any) => { 
+        setSort && setSort(e)
+    }
     return (
         <>
-            <div className={classes.contentRow}>
+            {/*<div className={classes.contentRow}>
                 <BaseDropDown
                     className={classes.dropdown}
                     onChange={tempFunc}
@@ -73,14 +78,14 @@ const PlanningFilter: React.FC<Props> = () => {
                     </InputsUnion>
                     <BaseButton type="primary"> <Typography color="secondary" size="small">Применить</Typography> </BaseButton>
                 </div>
-            </div>
+            </div>*/}
             <div className={classes.contentRow}>
                 <BaseDropDown
                     className={classes.sortDropdown}
                     onChange={tempFunc}
-                    placeholder={DROPDOWN_PLACEHOLDER}
+                    placeholder={SORT_FILTER_OPTIONS.filter((so: any) => so.value === sort)[0].label}
                     options={SORT_FILTER_OPTIONS}
-                    value={SORT_FILTER_OPTIONS[0].value as string} />
+                    value={sort}/>
             </div>
         </>
     )
