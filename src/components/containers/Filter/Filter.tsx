@@ -291,7 +291,7 @@ export const Filter: React.FC<Props> = observer(({ location }) => {
             />*/}
 
       {searchStore.getFilter()["object-type"] !== "land" && (
-        <SelectEstate
+        <BaseDropDown
           options={FILTER_BUILDING_TYPE_OPTIONS}
           value={searchStore.getFilter()["building-type"]}
           onChange={onChangeBuildingType}
@@ -327,7 +327,7 @@ export const Filter: React.FC<Props> = observer(({ location }) => {
                 className={s.dropdown}
             />*/}
       {searchStore.getFilter()["object-type"] !== "apartment" && (
-        <SelectEstate
+        <BaseDropDown
           options={FILTER_LAND_SPECS_OPTIONS}
           value={searchStore.getFilter()["benefit"]}
           onChange={onChooseImprovment}
