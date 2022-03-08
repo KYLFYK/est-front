@@ -39,7 +39,7 @@ type infoAgent = {
 }
 
 export const AgentBlock: React.FC<AgentBlockPropsType> = ({img, connection, infoAgent}) => {
-    console.log(img)
+
     const [edit, setEdit] = useState<boolean>(false)
 
     return (

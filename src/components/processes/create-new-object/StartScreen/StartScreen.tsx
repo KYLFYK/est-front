@@ -91,7 +91,7 @@ const StartScreen: React.FC<Props> = ({
                     choosedAction
                   )}
                   onClick={() => {
-                    onChooseObjectType(ObjectTypes.VILLAGE);
+                    onChooseObjectType(ObjectTypes.RESCOMPLEX);
                     onChooseAction(NewObjectActionTypes.SELL);
                   }}
                 >

@@ -274,7 +274,7 @@ const House = observer((props: any) => {
                 }
             </div>
             <div ref={payback}>
-                <PaybackContainer averagePrice={averagePrice}/>
+                <PaybackContainer currentHouse={JSON.parse(JSON.stringify(props))} averagePrice={averagePrice}/>
             </div>
             <div ref={developer}>
                 {/*<ObjectDeveloper developerData={store.initialData.object_developer_info}/>*/}

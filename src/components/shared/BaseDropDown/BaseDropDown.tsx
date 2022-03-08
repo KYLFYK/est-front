@@ -41,7 +41,7 @@ export const BaseDropDown: React.FC<SelectPropsType> = ({
 }) => {
   const [open, setOpen] = useState(false);
   const [array, setArray] = useState<Array<number>>([]);
-  console.log(value)
+
   const { innerBorderRef } = useOnOutsideClick(() =>
     setTimeout(() => setOpen(false), 0)
   );

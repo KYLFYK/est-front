@@ -12,9 +12,10 @@ import TableColumn from "../../tabs/Account/Agent/components/Others/Tables/Table
 import PaybackPeriodColumn from "../../shared/PaybackPeriodColumn/PaybackPeriodColumn";
 
 type PaybackContainerType = {
-    averagePrice:{
-        price:string,
-        priceUSD:string,
+    currentHouse?: any
+    averagePrice: {
+        price:string
+        priceUSD:string
         priceEU:string
         priceMetre:string
         priceMetreUSD:string
@@ -56,7 +57,8 @@ const numberApplications = [
     },
 ];
 
-const PaybackContainer :FC<PaybackContainerType> = ({averagePrice}) => {
+const PaybackContainer :FC<PaybackContainerType> = ({averagePrice, currentHouse}) => {
+
     return (
         <div className={css.marginContainer}>
             <HeadLine title={'Окупаемость'}>

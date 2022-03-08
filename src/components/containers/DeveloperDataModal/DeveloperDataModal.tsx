@@ -31,7 +31,6 @@ export const DeveloperDataModal: FC<DeveloperDataPropsType> = observer(({ img, d
 
     useEffect(()=>{
         if (isActive) store.fetchComplexDeveloper(id)
-
     },[isActive, store, id])
 
     return (
