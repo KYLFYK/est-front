@@ -31,7 +31,7 @@ const FilterSearch: FC<Props> = ({ type = "agent", className }) => {
   const classes = useStyles();
   const [value, setValue] = useState<string>(option[0].value);
   const [active, setActive] = useState<"map" | "table">("table");
-
+  console.log(value)
   const printer = () => {
     console.log("printer");
   };
@@ -62,7 +62,7 @@ const FilterSearch: FC<Props> = ({ type = "agent", className }) => {
     >
       <BaseDropDown
         options={option}
-        placeholder={`Сортировать:${value}`}
+        placeholder={`Сортировать: ${value}`}
         onChange={setValue}
         className={classes.select}
       />

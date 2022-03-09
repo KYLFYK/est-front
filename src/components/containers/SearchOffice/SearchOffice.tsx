@@ -15,6 +15,8 @@ interface Props {
   inputIconPlacement?: "right" | "left";
   className?: string;
   altPadding?: boolean;
+  value?: string;
+  onChange?: any;
 }
 
 export const SearchOffice: FC<Props> = ({
@@ -25,7 +27,10 @@ export const SearchOffice: FC<Props> = ({
   inputIcon,
   inputIconPlacement,
   className,
+  value,
+  onChange,
 }) => {
+  
   const searchTitle = (type: string) => {
     switch (type) {
       case "archive":
@@ -36,8 +41,6 @@ export const SearchOffice: FC<Props> = ({
         return "Добавить объект";
     }
   };
-  console.log("menu");
-  console.log(type);
   const searchColorText = (type: string) => {
     switch (type) {
       case "archive":
@@ -68,6 +71,8 @@ export const SearchOffice: FC<Props> = ({
             iconPlacement={inputIconPlacement}
             placeholder={placeholder}
             className={className}
+            onChange={onChange && onChange}
+            value={value && value}
           />
         </div>
         {/*<IconOption />*/}

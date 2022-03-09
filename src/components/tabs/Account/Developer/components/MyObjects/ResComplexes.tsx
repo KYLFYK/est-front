@@ -1,4 +1,4 @@
-import React, { FC, useEffect, SetStateAction, Dispatch } from "react";
+import React, { FC, useEffect, SetStateAction, Dispatch, useState } from "react";
 import { observer } from "mobx-react-lite";
 import FilterSearch from "../../../../../shared/FilterSearch/FilterSearch";
 import { SearchOffice } from "../../../../../containers/SearchOffice/SearchOffice";
@@ -21,6 +21,8 @@ type ResComplexesType = {
 export const ResComplexes: FC<ResComplexesType> = observer(
   ({ onComplex, setComplexId }) => {
     const store = useStoreDeveloperMyObjectStore();
+    const [textFilter, setTextFilter] = useState('')
+    const [sort, setSort] = useState('')
 
     useEffect(() => {
       store.fetchAllComplexByOwnerId(accFromToken().id);
@@ -30,7 +32,7 @@ export const ResComplexes: FC<ResComplexesType> = observer(
       onComplex(true);
       setComplexId({ id: id, name: name });
     };
-    store.get();
+    console.log(store.get());
     const recover = (id: string) => {
       console.log(id, "recover");
     };
@@ -44,17 +46,20 @@ export const ResComplexes: FC<ResComplexesType> = observer(
       console.log(id, "publish");
     };
 
+    const onChange = (e: any) => {
+      setTextFilter(e.target.value)
+    }
+
     return (
       <div className={styles.wrapper}>
-        <SearchOffice placeholder={"Поиск"} />
+        <SearchOffice placeholder={"Поиск"} value={textFilter} onChange={onChange}/>
         <FilterSearch className={styles.filter} type="agent" />
         <div className={styles.objectsList}>
           {/*{Data.objects.map((home, index) => (*/}
           {store.initialData.loading ? (
             <Loader />
           ) : (
-            store.initialData.complex &&
-            store.initialData.complex.map((home, index) => (
+            store.get()?.complex?.filter((d: any) => textFilter !== '' && d.name.includes(textFilter) || true).map((home: any, index: number) => (
               <div
                 className={styles.object}
                 key={index}

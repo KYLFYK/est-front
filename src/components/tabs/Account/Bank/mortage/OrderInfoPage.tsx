@@ -6,13 +6,13 @@ import { BackIcon } from "../../../../../icons/BackIcon";
 import { BaseDropDown } from "../../../../shared/BaseDropDown/BaseDropDown";
 import {datetoDayFormat, datetoTimeFormat} from '../../../../../lib/mapping/objectDates';
 import {LEADS_REQS_OPTIONS, SYNTAX_REQS_OPTIONS} from './Config';
-
+import {formatNumbersToCurrency} from '../../../../../lib/syntax/syntax';
 import commonStyles from "../../Admin/components/UsersTab/agency/agency.module.scss";
 import styles from "./OrderInfo.module.scss";
 
 export const OrderInfoPage: FC<any> = observer(({req}) => {
   const store = useMortGageStore()
-
+  
   return (
     <div className={commonStyles.pageWrapper}>
       <div className={commonStyles.header}>
@@ -40,12 +40,11 @@ export const OrderInfoPage: FC<any> = observer(({req}) => {
                   onChange={(obj) => {
                     store.updateLead(req.id, LEADS_REQS_OPTIONS.filter((o: any) => o.value === obj)[0].label)
                   }}
-                  className={`${styles.select}${
-                    req && req.status === "Новая заявка" ? ` ${styles.green}` : ""
-                  }`}
+                  className={`${styles.select}`}
                   options={LEADS_REQS_OPTIONS}
                   placeholder={req && req.status}
                   value={req && req.status}
+                  location={'bank'}
                 />
               </span>
             </div>
@@ -90,11 +89,11 @@ export const OrderInfoPage: FC<any> = observer(({req}) => {
           <div className={styles.sectionList}>
             <div className={styles.sectionElem}>
               <span className={styles.key}>Стоимость недвижимости</span>
-              <span className={styles.value}>{req && req.statePrice}</span>
+              <span className={styles.value}>{req && formatNumbersToCurrency(req.statePrice)}</span>
             </div>
             <div className={styles.sectionElem}>
               <span className={styles.key}>Первоначальный взнос</span>
-              <span className={styles.value}>{req && req.initialPayment}</span>
+              <span className={styles.value}>{req && formatNumbersToCurrency(req.initialPayment)}</span>
             </div>
             <div className={styles.sectionElem}>
               <span className={styles.key}>Срок кредита</span>
@@ -112,7 +111,7 @@ export const OrderInfoPage: FC<any> = observer(({req}) => {
                 <div className={styles.sectionList}>
                   <div className={styles.sectionElem}>
                     <span className={styles.key}>Дата платежа</span>
-                    <span className={styles.value}>{ep.dateOfPayment}</span>
+                    <span className={styles.value}>{datetoDayFormat(ep.dateOfPayment)}</span>
                   </div>
                   <div className={styles.sectionElem}>
                     <span className={styles.key}>Периодичность платежей</span>
@@ -124,33 +123,33 @@ export const OrderInfoPage: FC<any> = observer(({req}) => {
                   </div>
                   <div className={styles.sectionElem}>
                     <span className={styles.key}>Сумма</span>
-                    <span className={styles.value}>{ep.frequencyPrice}</span>
+                    <span className={styles.value}>{formatNumbersToCurrency(ep.frequencyPrice)}</span>
                   </div>
                 </div>
               </>
-              )}
-            )}
+            )}  
+          )}
           <span className={styles.title}>Итоговый расчёт</span>
           <div className={styles.sectionList}>
             <div className={styles.sectionElem}>
               <span className={styles.key}>Ежемесячный платёж</span>
-              <span className={styles.value}>285 474 ₽</span>
+              <span className={styles.value}>{req && formatNumbersToCurrency(req.monthlyPayment)}</span>
             </div>
             <div className={styles.sectionElem}>
               <span className={styles.key}>Кредит</span>
-              <span className={styles.value}>98 999 999 ₽</span>
+              <span className={styles.value}>{req && formatNumbersToCurrency(req.creditTotal)}</span>
             </div>
             <div className={styles.sectionElem}>
               <span className={styles.key}>Проценты</span>
-              <span className={styles.value}>89 513 816 ₽</span>
+              <span className={styles.value}>{req && formatNumbersToCurrency(req.percentTotal)}</span>
             </div>
             <div className={styles.sectionElem}>
               <span className={styles.key}>Проценты + кредит</span>
-              <span className={styles.value}>188 513 805 ₽</span>
+              <span className={styles.value}>{req && formatNumbersToCurrency(req.creditTotal + req.percentTotal)}</span>
             </div>
             <div className={styles.sectionElem}>
               <span className={styles.key}>Необходимый доход</span>
-              <span className={styles.value}>1 309 124 ₽</span>
+              <span className={styles.value}>{req && formatNumbersToCurrency(req.monthlyIncome)}</span>
             </div>
           </div>
         </section>
