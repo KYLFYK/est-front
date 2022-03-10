@@ -12,7 +12,7 @@ import { BaseDropDown } from "../../../../../shared/BaseDropDown/BaseDropDown";
 import { useStoreDeveloperMyObjectStore } from "../../../../../../mobx/role/developer/myObject/DeveloperMyObject";
 import ObjectCard from "../../../../../containers/Card";
 import BaseLink from "../../../../../shared/BaseLink/BaseLink";
-import {Loader, Empty} from '../../../../../shared/Loader/Loader';
+import { Loader, Empty } from "../../../../../shared/Loader/Loader";
 import css from "./ResComplexes.module.scss";
 
 type ResComplexObjectsType = {
@@ -26,25 +26,32 @@ const ResComplexObjects: FC<ResComplexObjectsType> = observer(
     const [corpus, setCompus] = useState<number>(0);
     const [floor, setFloor] = useState<number>(0);
 
-    let defaultOptionCorpus = [
-      { value: 0, label: 'Показаны все корпуса' },
-    ]
-    let defaultOptionFloor = [
-      { value: 0, label: 'Показаны все этажи' },
-    ]
+    let defaultOptionCorpus = [{ value: 0, label: "Показаны все корпуса" }];
+    let defaultOptionFloor = [{ value: 0, label: "Показаны все этажи" }];
     useEffect(() => {
       store.fetchAllObjectsByComplexId(complexId.id);
     }, []);
 
-    let filteredData: any = []
-    if(corpus === 0 && floor === 0) {
-      filteredData = store.get().complexObjects
-    } else if(corpus === 0 && floor !== 0) {
-      filteredData = store.get().complexObjects.filter((d: any) => d.property.floor === floor)
-    } else if(corpus !== 0 && floor === 0) {
-      filteredData = store.get().complexObjects.filter((d: any) => d.property.buildingNumber === corpus)
-    } else if(corpus !== 0 && floor !== 0) {
-      filteredData = store.get().complexObjects.filter((d: any) => d.property.floor === floor && d.property.buildingNumber === corpus)
+    let filteredData: any = [];
+    if (corpus === 0 && floor === 0) {
+      filteredData = store.get().complexObjects;
+    } else if (corpus === 0 && floor !== 0) {
+      filteredData = store
+        .get()
+        .complexObjects.filter((d: any) => d.property.floor === floor);
+    } else if (corpus !== 0 && floor === 0) {
+      filteredData = store
+        .get()
+        .complexObjects.filter(
+          (d: any) => d.property.buildingNumber === corpus
+        );
+    } else if (corpus !== 0 && floor !== 0) {
+      filteredData = store
+        .get()
+        .complexObjects.filter(
+          (d: any) =>
+            d.property.floor === floor && d.property.buildingNumber === corpus
+        );
     }
 
     return (
@@ -56,14 +63,36 @@ const ResComplexObjects: FC<ResComplexObjectsType> = observer(
         <div style={{ display: "flex" }}>
           <BaseDropDown
             className={css.marginR_10}
-            options={defaultOptionCorpus.concat(Array.from(new Set(store.get()?.complexObjects?.map((d: any) => d.property.buildingNumber))).map((el: any) => {return { value: el, label: `Корпус ${el}` }}).sort((a, b) => a.value > b.value ? 1 : -1))}
-            placeholder={'Показаны все корпуса'}
+            options={defaultOptionCorpus.concat(
+              Array.from(
+                new Set(
+                  store
+                    .get()
+                    ?.complexObjects?.map((d: any) => d.property.buildingNumber)
+                )
+              )
+                .map((el: any) => {
+                  return { value: el, label: `Корпус ${el}` };
+                })
+                .sort((a, b) => (a.value > b.value ? 1 : -1))
+            )}
+            placeholder={"Показаны все корпуса"}
             onChange={setCompus}
             value={corpus}
           />
           <BaseDropDown
-            options={defaultOptionFloor.concat(Array.from(new Set(store.get()?.complexObjects?.map((d: any) => d.property.floor))).map((el: any) => {return { value: el, label: `${el} этаж` }}).sort((a, b) => a.value > b.value ? 1 : -1))}
-            placeholder={'Показаны все этажи'}
+            options={defaultOptionFloor.concat(
+              Array.from(
+                new Set(
+                  store.get()?.complexObjects?.map((d: any) => d.property.floor)
+                )
+              )
+                .map((el: any) => {
+                  return { value: el, label: `${el} этаж` };
+                })
+                .sort((a, b) => (a.value > b.value ? 1 : -1))
+            )}
+            placeholder={"Показаны все этажи"}
             onChange={setFloor}
             value={floor}
           />
@@ -80,21 +109,22 @@ const ResComplexObjects: FC<ResComplexObjectsType> = observer(
           </div>
         </div>
         <div className={css.grid4}>
-          {store.get().loading 
-            ? <Loader/>
-            : filteredData 
-              ? filteredData.map((object: any) => (
-                <ObjectCard
-                  key={object.id}
-                  route={"apartment"}
-                  typeObject={"new"}
-                  houseData={object}
-                  data={object}
-                  hideLike
-                />
-              ))
-              : <Empty/>
-          }
+          {store.get().loading ? (
+            <Loader />
+          ) : filteredData ? (
+            filteredData.map((object: any) => (
+              <ObjectCard
+                key={object.id}
+                route={"apartment"}
+                typeObject={"new"}
+                houseData={object}
+                data={object}
+                hideLike
+              />
+            ))
+          ) : (
+            <Empty />
+          )}
         </div>
       </div>
     );
