@@ -4,6 +4,7 @@ import BaseButton from "../../../../shared/BaseButton/BaseButtons";
 import Typography from "../../../../shared/Typography/Typography";
 
 import s from "./ButtonsPanel.module.scss";
+import { IEditInfo, IInfoLoaded } from "../../../../../hooks/useEditObject";
 
 export interface ICreateObjectControls {
   onPrevTab: () => void;
@@ -17,6 +18,8 @@ interface Props {
   onNextTab?: () => void;
   onPublish?: () => void;
   onPreview?: () => void;
+  presets?: IEditInfo;
+  info?: IInfoLoaded;
 }
 
 const ButtonPanel: React.FC<Props> = ({
@@ -25,6 +28,8 @@ const ButtonPanel: React.FC<Props> = ({
   onPrevTab,
   onPreview,
   onPublish,
+  presets,
+  info,
 }) => {
   const onNextTab1 = () => {
     onNextTab && onNextTab();
@@ -44,7 +49,7 @@ const ButtonPanel: React.FC<Props> = ({
           <Typography size="small"> К предыдущему этапу </Typography>
         </BaseButton>
         <div className={s.buttonsGroup}>
-          {onPreview && (
+          {onPreview && (!presets || !presets.editMode) && (
             <Typography color="accent" size="small">
               Предпросмотр перед публикацией
             </Typography>
@@ -59,8 +64,9 @@ const ButtonPanel: React.FC<Props> = ({
               onClick={onPublish}
             >
               <Typography size="small" color="secondary">
-                {" "}
-                Опубликовать{" "}
+                {presets && presets.editMode
+                  ? " Сохранить изменения "
+                  : " Опубликовать "}
               </Typography>
             </BaseButton>
           ) : (

@@ -1,3 +1,5 @@
+// noinspection JSNonASCIINames
+
 import { action, flow, makeObservable, observable } from "mobx";
 import { INFO_TAB_HOUSE_FURNITURE } from "../../../components/processes/create-new-object/config";
 import {
@@ -59,8 +61,12 @@ import {
   ICreateComplexInfrastructure,
   ICreateObjectComplex,
 } from "../../types/CreateObjectStoresTypes/CreateComplexStoreTypes";
+import { IGuide } from "../objects/GuidesStore";
+import { ICustomFile } from "../../../components/processes/create-new-object/components/GeneralInfoObjectTab/GeneralInfoPhotosTab";
+import moment from "moment";
+import { editObjectApi } from "../../../api/editObjects/editObjects";
 
-interface IUploadedFile {
+export interface IUploadedFile {
   size: number;
   mimeType: string;
   fileName: string;
@@ -76,6 +82,7 @@ class CreateObjectStore implements ICreateObject {
   village: CreateVillageStore = new CreateVillageStore();
   objType: IObjType = "sale";
   uploadedFiles: IUploadedFile[] = [];
+  forceRerender: boolean = true;
 
   resetFields() {
     this.apartment = new CreateApartmentStore();
@@ -194,6 +201,302 @@ class CreateObjectStore implements ICreateObject {
     }
   }
 
+  setExistObject(objectType: ObjectTypes, data: any) {
+    switch (objectType) {
+      case ObjectTypes.APARTMENTS:
+        this.apartment.about.name = data.name;
+        this.apartment.about.address = data.address;
+        this.apartment.about.complexName = data.complex;
+        this.apartment.about.cost = data.price;
+        this.apartment.about.city = data.cityId;
+        this.apartment.about.country = data.countryId;
+        if (data.secondary_type) {
+          this.apartment.about.type = data.secondary_type;
+        }
+        this.apartment.about.floorsAmmount = data.info_options.total_floors;
+        this.apartment.about.floor = data.info_options.floor;
+        if (data.postcode) {
+          this.apartment.about.index = Number(data.postcode);
+        }
+        this.apartment.generalInfo.description = data.description;
+        this.apartment.generalInfo.generalSquare = data.info_options.total_area
+          ? data.info_options.total_area.toString()
+          : "";
+        this.apartment.generalInfo.livingSquare = data.info_options.living_area
+          ? data.info_options.living_area.toString()
+          : "";
+        this.apartment.generalInfo.bathroom = data.info_options.bathroom_area
+          ? data.info_options.bathroom_area.toString()
+          : "";
+        this.apartment.generalInfo.kitchen = data.info_options.kitchen_area
+          ? data.info_options.kitchen_area.toString()
+          : "";
+        this.apartment.generalInfo.customRooms = data.info_options.rooms_area
+          ? data.info_options.rooms_area.map((el: number) => ({
+              label: el,
+              value: el,
+            }))
+          : [];
+        this.apartment.generalInfo.rooms = data.info_options.rooms_area
+          ? data.info_options.rooms_area.length
+          : 0;
+        this.apartment.generalInfo.video = data.online_tour.threeD_tour.url;
+        this.apartment.generalInfo.vrTour = data.online_tour.vr_tour.url;
+        this.apartment.generalInfo.interiorDescription =
+          data.info_options.construction_features[0].title;
+        this.apartment.legalPurity.realEstateRegister.address =
+          data.legalPurityData.address;
+        this.apartment.legalPurity.realEstateRegister.generalSquare =
+          data.legalPurityData.areaValue.toString();
+        this.apartment.legalPurity.realEstateRegister.cadastralNumber =
+          data.legalPurityData.cadastalNumber;
+        this.apartment.legalPurity.realEstateRegister.cadastralCost =
+          data.legalPurityData.cadastralPrice.toString();
+        this.apartment.legalPurity.currentFounder.firstFounderName =
+          data.legalPurityData.currentOwnerName;
+        this.apartment.legalPurity.currentFounder.ownershipFrom = moment(
+          data.legalPurityData.currentOwnerStartDate
+        ).toDate();
+        this.apartment.legalPurity.previousFounder.ownershipFrom = moment(
+          data.legalPurityData.previewOwners.startDate
+        ).toDate();
+        this.apartment.legalPurity.previousFounder.ownershipTo = moment(
+          data.legalPurityData.previewOwners.finishDate
+        ).toDate();
+        this.apartment.legalPurity.previousFounder.firstFounderName =
+          data.legalPurityData.previewOwners.owners[0];
+        this.uploadedFiles = data.images;
+        this.apartment.generalInfo.photos = data.images;
+        this.apartment.generalInfo.ceilingHeight =
+          data.info_options.height_сeilings;
+        this.apartment.legalPurity.realEstateRegister.address =
+          data.legalPurityData.address;
+        this.apartment.legalPurity.realEstateRegister.generalSquare =
+          data.legalPurityData.areaValue.toString();
+        this.apartment.legalPurity.realEstateRegister.cadastralNumber =
+          data.legalPurityData.cadastalNumber;
+        this.apartment.legalPurity.realEstateRegister.cadastralCost =
+          data.legalPurityData.cadastralPrice.toString();
+        this.apartment.legalPurity.realEstateRegister.floors =
+          data.legalPurityData.floor.toString();
+
+        data.object_specs.forEach((item: IGuide) => {
+          switch (item.type_en) {
+            case "buildingType":
+              this.apartment.about.type = item.id.toString();
+              break;
+            case "heating":
+              this.apartment.info.heating = item.id.toString();
+              break;
+            case "electricity":
+              this.apartment.info.electricity = item.id.toString();
+              break;
+            case "window":
+              this.apartment.infrastructure.view = this.apartment.infrastructure
+                .view
+                ? [...this.apartment.infrastructure.view, item.id.toString()]
+                : [item.id.toString()];
+              break;
+            case "sewerage":
+              this.apartment.info.sewerage = item.id.toString();
+              break;
+            case "roof":
+              this.apartment.info.roof = item.id.toString();
+              break;
+            case "parking":
+              this.apartment.info.parking = item.id.toString();
+              break;
+            case "furniture":
+              this.apartment.info.furnitureList = this.apartment.info
+                .furnitureList
+                ? [...this.apartment.info.furnitureList, item.id.toString()]
+                : [item.id.toString()];
+              break;
+          }
+        });
+        break;
+      case ObjectTypes.HOUSE:
+        this.house.about.name = data.name;
+        this.house.about.address = data.address;
+        this.house.about.cost = data.price;
+        if (data.postcode) {
+          this.house.about.index = Number(data.postcode);
+        }
+        this.house.about.city = data.cityId;
+        this.house.about.country = data.countryId;
+        if (data.secondary_type) {
+          this.house.about.type = data.secondary_type;
+        }
+        this.house.generalInfo.description = data.description;
+        this.house.infrastructure.description = data.description_items;
+        this.uploadedFiles = data.images;
+        this.house.generalInfo.photos = data.images;
+        this.house.generalInfo.generalSquare = data.info_options.total_area
+          ? data.info_options.total_area.toString()
+          : "";
+        this.house.generalInfo.livingSquare = data.info_options.living_area
+          ? data.info_options.living_area.toString()
+          : "";
+        this.house.generalInfo.bathroom = data.info_options.bathroom_area
+          ? data.info_options.bathroom_area.toString()
+          : "";
+        this.house.generalInfo.kitchen = data.info_options.kitchen_area
+          ? data.info_options.kitchen_area.toString()
+          : "";
+        this.house.generalInfo.land = data.info_options.land_area.toString();
+        this.house.generalInfo.houseSquare = data.info_options.area.toString();
+        this.house.generalInfo.video = data.online_tour.threeD_tour.url;
+        this.house.generalInfo.vrTour = data.online_tour.vr_tour.url;
+        this.house.generalInfo.floors.count = data.info_options.total_floor;
+        this.house.generalInfo.floors.items = data.info_options.floors.map(
+          (el: { floor: string; value: string }, index: number) => ({
+            label: {
+              description: el.floor,
+              height: el.value,
+            },
+            value: index + 1,
+          })
+        );
+        this.house.info.technicalComment =
+          data.info_options.construction_features &&
+          data.info_options.construction_features[0] &&
+          data.info_options.construction_features[0].title
+            ? data.info_options.construction_features[0].title
+            : "";
+
+        this.house.legalPurity.realEstateRegister.address =
+          data.legalPurityData.address;
+        this.house.legalPurity.realEstateRegister.generalSquare =
+          data.legalPurityData.areaValue.toString();
+        this.house.legalPurity.realEstateRegister.cadastralNumber =
+          data.legalPurityData.cadastalNumber;
+        this.house.legalPurity.realEstateRegister.cadastralCost =
+          data.legalPurityData.cadastralPrice.toString();
+        this.house.legalPurity.realEstateRegister.floors =
+          data.legalPurityData.floor.toString();
+        this.house.legalPurity.realEstateRegister.address =
+          data.legalPurityData.address;
+        this.house.legalPurity.realEstateRegister.generalSquare =
+          data.legalPurityData.areaValue.toString();
+        this.house.legalPurity.realEstateRegister.cadastralNumber =
+          data.legalPurityData.cadastalNumber;
+        this.house.legalPurity.realEstateRegister.cadastralCost =
+          data.legalPurityData.cadastralPrice.toString();
+        this.house.legalPurity.currentFounder.firstFounderName =
+          data.legalPurityData.currentOwnerName;
+        this.house.legalPurity.currentFounder.ownershipFrom = moment(
+          data.legalPurityData.currentOwnerStartDate
+        ).toDate();
+        this.house.legalPurity.previousFounder.ownershipFrom = moment(
+          data.legalPurityData.previewOwners.startDate
+        ).toDate();
+        this.house.legalPurity.previousFounder.ownershipTo = moment(
+          data.legalPurityData.previewOwners.finishDate
+        ).toDate();
+        this.house.legalPurity.previousFounder.firstFounderName =
+          data.legalPurityData.previewOwners.owners[0];
+
+        data.object_specs.forEach((item: IGuide) => {
+          switch (item.type_en) {
+            case "buildingType":
+              this.house.about.type = item.id.toString();
+              break;
+            case "heating":
+              this.house.info.heating = item.id.toString();
+              break;
+            case "electricity":
+              this.house.info.electricity = item.id.toString();
+              break;
+            case "window":
+              this.house.infrastructure.view = this.house.infrastructure.view
+                ? [...this.house.infrastructure.view, item.id.toString()]
+                : [item.id.toString()];
+              break;
+            case "sewerage":
+              this.house.info.sewerage = item.id.toString();
+              break;
+            case "roof":
+              this.house.info.roof = item.id.toString();
+              break;
+            case "furniture":
+              this.house.info.furnitureList = this.house.info.furnitureList
+                ? [...this.house.info.furnitureList, item.id.toString()]
+                : [item.id.toString()];
+              break;
+            case "internet":
+              this.house.info.internet = item.id.toString();
+              break;
+          }
+        });
+
+        break;
+      case ObjectTypes.LAND:
+        this.land.about.name = data.name;
+        this.land.about.address = data.address;
+        this.land.about.cost = data.price;
+        this.land.about.city = data.cityId;
+        this.land.about.country = data.countryId;
+        this.land.about.type = "Вторичка";
+        this.land.generalInfo.description = data.description;
+        this.uploadedFiles = data.images;
+        this.land.generalInfo.photos = data.images;
+
+        this.land.legalPurity.realEstateRegister.address =
+          data.legalPurityData.address;
+        this.land.legalPurity.realEstateRegister.generalSquare =
+          data.legalPurityData.areaValue.toString();
+        this.land.legalPurity.realEstateRegister.cadastralNumber =
+          data.legalPurityData.cadastalNumber;
+        this.land.legalPurity.realEstateRegister.cadastralCost =
+          data.legalPurityData.cadastralPrice.toString();
+        this.land.legalPurity.realEstateRegister.address =
+          data.legalPurityData.address;
+        this.land.legalPurity.realEstateRegister.generalSquare =
+          data.legalPurityData.areaValue.toString();
+        this.land.legalPurity.realEstateRegister.cadastralNumber =
+          data.legalPurityData.cadastalNumber;
+        this.land.legalPurity.realEstateRegister.cadastralCost =
+          data.legalPurityData.cadastralPrice.toString();
+        this.land.legalPurity.currentFounder.firstFounderName =
+          data.legalPurityData.currentOwnerName;
+        this.land.legalPurity.currentFounder.ownershipFrom = moment(
+          data.legalPurityData.currentOwnerStartDate
+        ).toDate();
+        this.land.legalPurity.previousFounder.ownershipFrom = moment(
+          data.legalPurityData.previewOwners.startDate
+        ).toDate();
+        this.land.legalPurity.previousFounder.ownershipTo = moment(
+          data.legalPurityData.previewOwners.finishDate
+        ).toDate();
+        this.land.legalPurity.previousFounder.firstFounderName =
+          data.legalPurityData.previewOwners.owners[0];
+
+        this.land.generalInfo.landGeneralSquare = data.info_options
+          .find((x: any) => x.label === "Общая площадь")
+          .value.split(" ")[0];
+
+        this.land.infrastructure.description = data.description_Info;
+
+        data.object_specs.forEach((item: IGuide) => {
+          switch (item.type_en) {
+            case "buildingType":
+              this.land.about.type = item.id.toString();
+              break;
+            case "heating":
+              this.land.info.heating = item.id.toString();
+              break;
+            case "sewerage":
+              this.land.info.sewerage = item.id.toString();
+              break;
+          }
+        });
+
+        break;
+    }
+
+    this.forceRerender = !this.forceRerender;
+  }
+
   setObjType(type: IObjType) {
     this.objType = type;
   }
@@ -220,15 +523,24 @@ class CreateObjectStore implements ICreateObject {
         },
       });
 
-      this.uploadedFiles = [...this.uploadedFiles, result.data];
+      this.uploadedFiles = [
+        ...this.uploadedFiles.filter((el) => el.url !== result.data.url),
+        result.data,
+      ];
     } catch (e) {
       console.error("Can't upload file", e);
     }
   }
 
-  async uploadFileList(fileList: File[]) {
+  async uploadFileList(fileList: Array<IUploadedFile | ICustomFile>) {
+    this.uploadedFiles = [];
+
     fileList.forEach((file) => {
-      this.uploadFile(file);
+      if ("file" in file && file.file) {
+        this.uploadFile(file.file);
+      } else {
+        this.uploadedFiles.push(file as IUploadedFile);
+      }
     });
   }
 
@@ -240,7 +552,9 @@ class CreateObjectStore implements ICreateObject {
       | ICreateObjectTownhouse
       | ICreateObjectAparts
       | ICreateObjectComplex,
-    objectType: ObjectTypes
+    objectType: ObjectTypes,
+    isEdit: boolean,
+    id?: string | number
   ): Promise<string | undefined> {
     const idOwner: any = jwt_decode(
       localStorage.getItem("accessEstatum")
@@ -248,10 +562,13 @@ class CreateObjectStore implements ICreateObject {
         : "123"
     );
 
+    console.log("Edit mode", isEdit);
+    console.log("Edit obj id", id);
+
     if (objectType === 0) {
       const newData: any = data;
 
-      const guides = [];
+      const guides: number[] = [];
       const owners = [];
 
       if ("furnitureList" in data.info) {
@@ -301,21 +618,24 @@ class CreateObjectStore implements ICreateObject {
         guides.push(Number(newData.info.parking));
       }
 
-      const apartmentData = {
+      guides.filter((item, pos) => {
+        return guides.indexOf(item) == pos;
+      });
+
+      const apartmentData: any = {
         name: newData.about.name,
         objectType: this.getObjType(),
         description: newData.generalInfo.description,
         address: newData.about.address,
         postcode: String(newData.about.index),
-        longitude: "31.45",
-        latitude: "31.45",
+        longitude: 31.45,
+        latitude: 31.45,
         region: data.about.region,
         country: data.about.country,
         city: data.about.city,
         owner: idOwner.id,
         status: 1,
         price: newData.about.cost,
-        complex: newData.about.complexName ? newData.about.complexName : 1,
         legalPurity: {
           address: newData.legalPurity.realEstateRegister.address,
           areaValue: Number(
@@ -372,7 +692,7 @@ class CreateObjectStore implements ICreateObject {
           amountBedrooms: 1,
           amountShowers: 1,
           buildingNumber: 1,
-          heightCeilings: 3.3,
+          heightCeilings: newData.generalInfo.heightCeilings,
           deadline: "2022-02-25T17:53:38.800Z",
           interior: "string",
           infrastructure: "string",
@@ -388,10 +708,25 @@ class CreateObjectStore implements ICreateObject {
         },
       };
 
+      if (newData.about.complexName) {
+        apartmentData.complex = newData.about.complexName;
+      }
+
       try {
-        const res = await createObjectAPI.createObjectApartment(apartmentData);
-        console.log("response apartment", res);
-        return res;
+        if (isEdit) {
+          const res = await editObjectApi.createObjectApartment(
+            apartmentData,
+            id as string | number
+          );
+          console.log("response apartment", res);
+          return res;
+        } else {
+          const res = await createObjectAPI.createObjectApartment(
+            apartmentData
+          );
+          console.log("response apartment", res);
+          return res;
+        }
       } catch (e) {
         console.log("response apartment-error", e);
       }
@@ -399,7 +734,7 @@ class CreateObjectStore implements ICreateObject {
     if (objectType === 1 || objectType === 2) {
       const newHouse: any = data;
 
-      const guides = [];
+      const guides: number[] = [];
       const owners = [];
 
       if ("furnitureList" in data.info) {
@@ -452,14 +787,18 @@ class CreateObjectStore implements ICreateObject {
         guides.push(Number(newHouse.info.internet));
       }
 
+      guides.filter((item, pos) => {
+        return guides.indexOf(item) == pos;
+      });
+
       const houseObject = {
         name: newHouse.about.name,
         objectType: this.getObjType(),
         description: newHouse.generalInfo.description,
         address: newHouse.about.address,
         postcode: String(newHouse.about.index),
-        longitude: "31.45",
-        latitude: "31.45",
+        longitude: 31.45,
+        latitude: 31.45,
         region: data.about.region,
         country: data.about.country,
         city: data.about.city,
@@ -547,9 +886,18 @@ class CreateObjectStore implements ICreateObject {
       };
 
       try {
-        const res = await createObjectAPI.createObjectHouse(houseObject);
-        console.log("response apartment", res);
-        return res;
+        if (isEdit) {
+          const res = await editObjectApi.createObjectHouse(
+            houseObject,
+            id as string | number
+          );
+          console.log("response apartment", res);
+          return res;
+        } else {
+          const res = await createObjectAPI.createObjectHouse(houseObject);
+          console.log("response apartment", res);
+          return res;
+        }
       } catch (e) {
         console.log("response apartment-error", e);
       }
@@ -558,7 +906,7 @@ class CreateObjectStore implements ICreateObject {
       const newLand: any = data;
 
       const owners = [];
-      const guides = [];
+      const guides: number[] = [];
 
       if ("furnitureList" in data.info) {
         guides.push(...data.info.furnitureList.map((el) => Number(el)));
@@ -613,14 +961,18 @@ class CreateObjectStore implements ICreateObject {
         owners.push(newLand.legalPurity.previousFounder.secondFouderName);
       }
 
+      guides.filter((item, pos) => {
+        return guides.indexOf(item) == pos;
+      });
+
       const landData = {
         name: newLand.about.name,
         objectType: this.getObjType(),
         description: newLand.generalInfo.description,
         address: newLand.about.address,
         postcode: String(newLand.about.index),
-        longitude: "31.45",
-        latitude: "31.45",
+        longitude: 31.45,
+        latitude: 31.45,
         region: data.about.region,
         country: data.about.country,
         city: data.about.city,
@@ -676,9 +1028,18 @@ class CreateObjectStore implements ICreateObject {
       };
 
       try {
-        const res = await createObjectAPI.createObjectLand(landData);
-        console.log("response apartment", res);
-        return res;
+        if (isEdit) {
+          const res = await editObjectApi.createObjectLand(
+            landData,
+            id as string | number
+          );
+          console.log("response land", res);
+          return res;
+        } else {
+          const res = await createObjectAPI.createObjectLand(landData);
+          console.log("response land", res);
+          return res;
+        }
       } catch (e) {
         console.log("response apartment-error", e);
       }
@@ -717,7 +1078,14 @@ class CreateObjectStore implements ICreateObject {
       };
 
       try {
-        return await createObjectAPI.createObjectResComplex(complexData);
+        if (isEdit) {
+          return await editObjectApi.createObjectResComplex(
+            complexData,
+            id as number | string
+          );
+        } else {
+          return await createObjectAPI.createObjectResComplex(complexData);
+        }
       } catch (e) {
         console.log("response complex-error", e);
       }

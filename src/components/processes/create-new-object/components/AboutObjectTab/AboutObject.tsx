@@ -23,11 +23,11 @@ import { FormController, useForm } from "../../../../containers/FormController";
 import { ObjectGuides } from "../../../../../mobx/stores/objects/GuidesStore";
 import { IObjType } from "../../../../tabs/Account/Agent/components/Others/MyAdsContainer/MyAdsContainer";
 import { AddressGuides } from "../../../../../mobx/stores/objects/AddressGuidesStore";
-
-import s from "./AboutObject.module.scss";
 import jwt_decode from "jwt-decode";
 import { useStoreDeveloperMyObjectStore } from "../../../../../mobx/role/developer/myObject/DeveloperMyObject";
 import { accFromToken } from "../../../../../lib/localStorage/localStorage";
+
+import s from "./AboutObject.module.scss";
 
 interface Props extends ICreateObjectControls {
   objectType: ObjectTypes;
@@ -61,24 +61,11 @@ const AboutObjectTab: React.FC<Props> = observer(
 
     const developerStore = useStoreDeveloperMyObjectStore();
 
-    const [idOwner, setIdOwner] = useState({
-      id: "",
-      role: "",
-    });
-
-    useEffect(() => {
-      const idOwner: any = jwt_decode(
-        localStorage.getItem("accessEstatum")
-          ? (localStorage.getItem("accessEstatum") as string)
-          : "123"
-      );
-
-      setIdOwner(idOwner);
-
-      if (idOwner.role === "developer") {
-        developerStore.fetchAllComplexByOwnerId(accFromToken().id).then();
-      }
-    }, []);
+    const idOwner: any = jwt_decode(
+      localStorage.getItem("accessEstatum")
+        ? (localStorage.getItem("accessEstatum") as string)
+        : "123"
+    );
 
     const [form] = useForm<IForm>({
       type: "",
@@ -142,8 +129,11 @@ const AboutObjectTab: React.FC<Props> = observer(
     }, []);
 
     const handlePrev = () => {
-      onPrevTab();
+      if (onPrevTab) {
+        onPrevTab();
+      }
     };
+
     const onChangeName = (
       event: React.ChangeEvent & { target: HTMLInputElement }
     ) => {
@@ -171,7 +161,20 @@ const AboutObjectTab: React.FC<Props> = observer(
       setValues({ ...values, region: value });
     };
     const onChangeCity = (value: string) => {
-      setValues({ ...values, city: value });
+      setValues((prev) => ({ ...prev, city: value }));
+
+      if (!values.region && value) {
+        const regionId = addressStore.cities?.find(
+          (el) => el.id === Number(value)
+        )?.region.id;
+        if (regionId) {
+          // @ts-ignore
+          setValues((prev) => ({
+            ...prev,
+            region: regionId,
+          }));
+        }
+      }
     };
     const onChangeIndex = (
       event: React.ChangeEvent & { target: HTMLInputElement }
@@ -189,22 +192,49 @@ const AboutObjectTab: React.FC<Props> = observer(
       setValues({ ...values, cost: +event.target.value });
     };
 
+    useEffect(() => {
+      if (values.region.length === 0 && values.city) {
+        onChangeCity(values.city);
+      }
+    }, [values.city]);
+
     const buildingType = guidesStore.readyToWork?.find(
       (el) => el.type_en === "buildingType"
     );
 
     useEffect(() => {
-      const history = window ? window.location.search : undefined;
+      if (guidesStore.loaded) {
+        if (
+          getInitStateAboutTab(objectType, createObjectStore).type.length > 2
+        ) {
+          const typeId = buildingType?.values.find(
+            (el) => el.value === values.type
+          )?.id;
 
-      if (history) {
-        const complex = history
-          .split("&")
-          .filter((el) => el.indexOf("complex") > -1)[0]
-          .split("=")[1];
-
-        if (complex) {
-          onChangeComplexName(complex);
+          if (typeId) {
+            // @ts-ignore
+            onChangeType(typeId.toString());
+          }
         }
+      }
+    }, [guidesStore, values.type]);
+
+    useEffect(() => {
+      if (idOwner.role === "developer") {
+        developerStore.fetchAllComplexByOwnerId(accFromToken().id).then(() => {
+          const history = window ? window.location.search : undefined;
+
+          if (history) {
+            const complex = history
+              .split("&")
+              .filter((el) => el.indexOf("complex") > -1)[0]
+              ?.split("=")[1];
+
+            if (complex) {
+              onChangeComplexName(complex);
+            }
+          }
+        });
       }
     }, []);
 
@@ -311,10 +341,16 @@ const AboutObjectTab: React.FC<Props> = observer(
               <BaseDropDown
                 value={values.city}
                 className={s.inputMd}
-                options={addressStore.cities.map((el) => ({
-                  label: el.name,
-                  value: el.id,
-                }))}
+                options={addressStore.cities
+                  .filter((el) =>
+                    values.region
+                      ? el.region.id === Number(values.region)
+                      : true
+                  )
+                  .map((el) => ({
+                    label: el.name,
+                    value: el.id,
+                  }))}
                 placeholder={"Город"}
                 onChange={onChangeCity}
                 label="Город"

@@ -2,6 +2,7 @@ import { ICustomFile } from "../../../components/processes/create-new-object/com
 import { IOption } from "../../../utils/interfaces/general";
 import { FoundersTypes } from "../../../utils/interfaces/objects";
 import { ICreateObjectModel } from "./CreateObjectStoreType";
+import { IUploadedFile } from "../../stores/CreateObjectStores/CreateObjectStore";
 
 export interface ICreateObjectAparts
   extends ICreateObjectModel<
@@ -28,7 +29,7 @@ export interface ICreateApartmentAboutTab {
 
 export interface ICreateApartsGeneralInfo {
   description: string;
-  photos: ICustomFile[];
+  photos: Array<ICustomFile | IUploadedFile>;
   generalSquare: string;
   livingSquare: string;
   ceilingHeight: string;

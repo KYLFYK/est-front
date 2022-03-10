@@ -7,6 +7,7 @@ import { IObject } from "../../../../../../../mobx/role/agent/ads/AgentAds";
 import { MyAdsItem } from "./MyAdsItem";
 
 import css from "./Active.module.scss";
+import { ObjectTypes } from "../../../../../../../utils/interfaces/objects";
 
 export const searchColor = (status: string) => {
   switch (status) {
@@ -25,6 +26,8 @@ export const searchColor = (status: string) => {
 type ActiveType = {
   menu?: "active" | "archive" | "draft";
   objects: IObject[];
+  deleteObject?: (id: number, type: ObjectTypes) => void;
+  restoreObject?: (id: number, type: ObjectTypes) => void;
 };
 
 export type IObjType = "rent" | "sale" | "buy";
@@ -40,7 +43,12 @@ export const getObjType: (type: IObjType) => string = (type) => {
   }
 };
 
-const MyAdsContainer: FC<ActiveType> = ({ menu, objects }) => {
+const MyAdsContainer: FC<ActiveType> = ({
+  menu,
+  objects,
+  deleteObject,
+  restoreObject,
+}) => {
   const [maxCardWidth, setMaxCardWidth] = useState<number | "unset">("unset");
   const [textFilter, setTextFilter] = useState('')
   const [sort, setSort] = useState('default')
@@ -98,6 +106,8 @@ const MyAdsContainer: FC<ActiveType> = ({ menu, objects }) => {
             home={home}
             maxCardWidth={maxCardWidth}
             menu={menu}
+            deleteObject={deleteObject}
+            restoreObject={restoreObject}
           />
         ))
       ) : (

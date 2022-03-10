@@ -391,7 +391,7 @@ const GeneralInfoDataTab: React.FC<Props> = observer(
                 <BaseInput
                   type="number"
                   onChange={onChangeAmountBuildings}
-                  label="Кол-во домов"
+                  label="Кол-во корпусов"
                   className={s.inputSm}
                   value={values.amountBuildings}
                   isError={!isValid && !isAmountBuildings}
@@ -434,7 +434,9 @@ const GeneralInfoDataTab: React.FC<Props> = observer(
           )}
           {"livingSquare" in values && (
             <BaseInput
-              value={values.livingSquare}
+              value={Number(
+                values.livingSquare.toString().replaceAll(",", ".")
+              )}
               type="number"
               label="Жилая площадь"
               isError={!isValid && !isValidLivingSquare}
@@ -482,7 +484,7 @@ const GeneralInfoDataTab: React.FC<Props> = observer(
             <CounterButtons
               isError={!isValid && !isValidRooms}
               className={s.extraSpace}
-              label="Комнат в доме"
+              label="Кол-во комнат"
               initValue={values.rooms}
               onChange={onChangeRooms}
             />

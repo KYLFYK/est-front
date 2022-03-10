@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from "react";
+import React, { useState, useMemo, useEffect } from "react";
 import { IconArrowDown } from "./IconArrowDown";
 import { useOnOutsideClick } from "./SelectLogic";
 import { Checked } from "./Checked";
@@ -25,6 +25,21 @@ export const SelectEstate: React.FC<SelectPropsType> = ({
 }) => {
   const [open, setOpen] = useState(false);
   const [array, setArray] = useState<Array<number>>([]);
+
+  useEffect(() => {
+    if (value && value.split && value.split(", ").length > 0) {
+      const values = value.split(", ");
+      const newValue: number[] = [];
+
+      options.forEach((opt, index) => {
+        if (values.indexOf(opt.label) > -1) {
+          newValue.push(index);
+        }
+      });
+
+      setArray(newValue);
+    }
+  }, []);
 
   const { innerBorderRef } = useOnOutsideClick(() =>
     setTimeout(() => setOpen(false), 0)
