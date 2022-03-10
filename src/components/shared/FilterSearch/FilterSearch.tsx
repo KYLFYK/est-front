@@ -28,11 +28,16 @@ interface Props {
   setSort?: any;
 }
 
-const FilterSearch: FC<Props> = ({ type = "agent", className, sort, setSort }) => {
+const FilterSearch: FC<Props> = ({
+  type = "agent",
+  className,
+  sort,
+  setSort,
+}) => {
   const classes = useStyles();
-  
+
   const [active, setActive] = useState<"map" | "table">("table");
-  
+
   const printer = () => {
     console.log("printer");
   };
@@ -63,7 +68,13 @@ const FilterSearch: FC<Props> = ({ type = "agent", className, sort, setSort }) =
     >
       <BaseDropDown
         options={option}
-        placeholder={`Сортировать: ${option.filter((o: any) => o.value === sort)[0].label}`}
+        placeholder={
+          sort
+            ? `Сортировать: ${
+                option.filter((o: any) => o.value === sort)[0].label
+              }`
+            : "Сортировать: по умолчанию"
+        }
         onChange={setSort}
         className={classes.select}
       />
