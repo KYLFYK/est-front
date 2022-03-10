@@ -111,6 +111,7 @@ const GeneralInfoPhotosTab: React.FC<Props> = observer(
                       loader={() => ("preview" in img ? img.preview : img.url)}
                       src={"preview" in img ? img.preview : img.url}
                       alt="Uploaded image"
+                      unoptimized
                     />
                   </div>
                 );
