@@ -9,21 +9,27 @@ import styles from "./Catalog.module.scss";
 export const Catalog: FC = observer(() => {
   const store = useMortGageStore()
 
-  const [dateSort, setDateSort] = useState(false)
-  const [statusSort, setStatusSort] = useState(false)
+  const [dateSort, setDateSort] = useState('default')
+  const [statusSort, setStatusSort] = useState('default')
 
   useEffect(() => {
     store.fetchAllLeads()
   }, [])
 
   let sortedData: any = []
-  if(dateSort){
+  if(dateSort === 'high'){
       sortedData = [...store.get()?.getAllData.sort((a: any, b: any) => a.createAt > b.createAt ? 1 : -1)]
   } 
-  if(statusSort){
+  if(dateSort === 'low'){
+    sortedData = [...store.get()?.getAllData.sort((a: any, b: any) => a.createAt < b.createAt ? 1 : -1)]
+  } 
+  if(statusSort === 'high'){
       sortedData = [...store.get()?.getAllData.sort((a: any, b: any) => a.status > b.status ? 1 : -1)]
   } 
-  if(!dateSort && !statusSort){
+  if(statusSort === 'low'){
+    sortedData = [...store.get()?.getAllData.sort((a: any, b: any) => a.status < b.status ? 1 : -1)]
+  } 
+  if(dateSort === 'default' && statusSort === 'default'){
       sortedData = [...store.get()?.getAllData]
   }
 
@@ -44,15 +50,15 @@ export const Catalog: FC = observer(() => {
             <div
               className={styles.flex}
               onClick={() => {
-                setDateSort(true)
-                setStatusSort(false)
+                setDateSort(dateSort === 'default' || dateSort === 'low' ? 'high' : 'low')
+                setStatusSort('default')
               }}
               style={{
                 cursor: "pointer",
               }}
             >
               <span>Дата заявки</span>
-              <div style={{transform: dateSort ? 'rotate(180deg)' : ''}}><IconDown /></div>
+              <div style={{transform: dateSort === 'high' ? 'rotate(180deg)' : ''}}><IconDown /></div>
             </div>
           </th>
           {/*<th>
@@ -70,15 +76,15 @@ export const Catalog: FC = observer(() => {
             <div
               className={styles.flex}
               onClick={() => {
-                setDateSort(false)
-                setStatusSort(true)
+                setDateSort('default')
+                setStatusSort(statusSort === 'default' || statusSort === 'low' ? 'high' : 'low')
               }}
               style={{
                 cursor: "pointer",
               }}
             >
               <span>Статус</span>
-              <div style={{transform: statusSort ? 'rotate(180deg)' : ''}}><IconDown /></div>
+              <div style={{transform: statusSort === 'high' ? 'rotate(180deg)' : ''}}><IconDown /></div>
             </div>
           </th>
         </tr>

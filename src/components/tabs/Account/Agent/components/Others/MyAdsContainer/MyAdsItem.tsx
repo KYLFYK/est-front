@@ -16,6 +16,7 @@ interface Props {
 }
 
 export const MyAdsItem: FC<Props> = ({ maxCardWidth, menu, home }) => {
+
   const LineRef = createRef<HTMLDivElement>();
 
   const recover = (id: string) => {

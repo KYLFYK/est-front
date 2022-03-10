@@ -42,6 +42,19 @@ export const getObjType: (type: IObjType) => string = (type) => {
 
 const MyAdsContainer: FC<ActiveType> = ({ menu, objects }) => {
   const [maxCardWidth, setMaxCardWidth] = useState<number | "unset">("unset");
+  const [textFilter, setTextFilter] = useState('')
+  const [sort, setSort] = useState('default')
+
+  let sortedData: any = []
+  if(sort === 'high'){
+    sortedData = [...objects.sort((a: any, b: any) => a.price > b.price ? 1 : -1)]
+  } 
+  if(sort === 'low'){
+    sortedData = [...objects.sort((a: any, b: any) => a.price < b.price ? 1 : -1)]
+  } 
+  if(sort === 'default'){
+    sortedData = [...objects]
+  }
 
   useEffect(() => {
     const listener = () => {
@@ -62,6 +75,10 @@ const MyAdsContainer: FC<ActiveType> = ({ menu, objects }) => {
     };
   }, []);
 
+  const onChange = (e: any) => {
+    setTextFilter(e.target.value)
+  }
+
   return (
     <div>
       <SearchOffice
@@ -69,13 +86,15 @@ const MyAdsContainer: FC<ActiveType> = ({ menu, objects }) => {
         inputIcon={<GlassIcon />}
         inputIconPlacement={"right"}
         placeholder={"Поиск..."}
+        value={textFilter} 
+        onChange={onChange}
         className={`${css.placeholder} ${css.altPadding}`}
       />
-      <FilterSearch />
-      {objects.length > 0 ? (
-        objects.map((home) => (
+      <FilterSearch sort={sort} setSort={setSort}/>
+      {sortedData?.length > 0 ? (
+        sortedData?.filter((d: any) => d.name.toLowerCase().includes(textFilter.toLowerCase())).map((home: any, id: number) => (
           <MyAdsItem
-            key={home.id}
+            key={id}
             home={home}
             maxCardWidth={maxCardWidth}
             menu={menu}

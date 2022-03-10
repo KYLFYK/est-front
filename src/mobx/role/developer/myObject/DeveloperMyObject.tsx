@@ -266,7 +266,8 @@ class DeveloperMyObjectStore {
         img: "https://i.pinimg.com/736x/6a/30/8d/6a308d4d949bcf10e4382c9b4a455721.jpg",
         type: r.status.status,
         name: r.name,
-        price: "",
+        priceMin: r.property.priceObjectMin,
+        priceMax: r.property.priceObjectMax,
         mainSpecifications: r.guides
           .filter(
             (guide: IGuide) =>

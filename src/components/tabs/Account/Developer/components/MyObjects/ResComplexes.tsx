@@ -22,17 +22,28 @@ export const ResComplexes: FC<ResComplexesType> = observer(
   ({ onComplex, setComplexId }) => {
     const store = useStoreDeveloperMyObjectStore();
     const [textFilter, setTextFilter] = useState('')
-    const [sort, setSort] = useState('')
+    const [sort, setSort] = useState('default')
 
     useEffect(() => {
       store.fetchAllComplexByOwnerId(accFromToken().id);
     }, []);
 
+    let sortedData: any = []
+    if(sort === 'high'){
+      sortedData = [...store.get()?.complex.sort((a: any, b: any) => a.priceMax > b.priceMax ? 1 : -1)]
+    } 
+    if(sort === 'low'){
+      sortedData = [...store.get()?.complex.sort((a: any, b: any) => a.priceMax < b.priceMax ? 1 : -1)]
+    } 
+    if(sort === 'default'){
+        sortedData = [...store.get()?.complex]
+    }
+
     const onSetCompex = (id: number, name: string) => {
       onComplex(true);
       setComplexId({ id: id, name: name });
     };
-    console.log(store.get());
+
     const recover = (id: string) => {
       console.log(id, "recover");
     };
@@ -53,13 +64,13 @@ export const ResComplexes: FC<ResComplexesType> = observer(
     return (
       <div className={styles.wrapper}>
         <SearchOffice placeholder={"Поиск"} value={textFilter} onChange={onChange}/>
-        <FilterSearch className={styles.filter} type="agent" />
+        <FilterSearch className={styles.filter} type="agent" sort={sort} setSort={setSort}/>
         <div className={styles.objectsList}>
           {/*{Data.objects.map((home, index) => (*/}
           {store.initialData.loading ? (
             <Loader />
           ) : (
-            store.get()?.complex?.filter((d: any) => textFilter !== '' && d.name.includes(textFilter) || true).map((home: any, index: number) => (
+            sortedData?.filter((d: any) => d.name.toLowerCase().includes(textFilter.toLowerCase())).map((home: any, index: number) => (
               <div
                 className={styles.object}
                 key={index}

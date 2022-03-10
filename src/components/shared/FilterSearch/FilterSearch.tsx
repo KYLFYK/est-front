@@ -7,9 +7,9 @@ import css from "./FilterSearch.module.scss";
 
 //label - Отображение
 const option = [
-  { value: "По умолчанию", label: "По умочанию" },
-  { value: "Цене - убыванию", label: "Цене - убыванию" },
-  { value: "Цене - возрастанию", label: "Цене - возрастанию" },
+  { value: "default", label: "По умолчанию" },
+  { value: "low", label: "Цене - убыванию" },
+  { value: "high", label: "Цене - возрастанию" },
 ];
 
 export const useStyles = makeStyles(() => ({
@@ -18,20 +18,21 @@ export const useStyles = makeStyles(() => ({
     width: 300,
     borderRadius: 6,
     height: 40,
-    overflow: "hidden",
   },
 }));
 
 interface Props {
   type?: "agent" | "professional" | "owner";
   className?: string;
+  sort?: string;
+  setSort?: any;
 }
 
-const FilterSearch: FC<Props> = ({ type = "agent", className }) => {
+const FilterSearch: FC<Props> = ({ type = "agent", className, sort, setSort }) => {
   const classes = useStyles();
-  const [value, setValue] = useState<string>(option[0].value);
+  
   const [active, setActive] = useState<"map" | "table">("table");
-  console.log(value)
+  
   const printer = () => {
     console.log("printer");
   };
@@ -62,8 +63,8 @@ const FilterSearch: FC<Props> = ({ type = "agent", className }) => {
     >
       <BaseDropDown
         options={option}
-        placeholder={`Сортировать: ${value}`}
-        onChange={setValue}
+        placeholder={`Сортировать: ${option.filter((o: any) => o.value === sort)[0].label}`}
+        onChange={setSort}
         className={classes.select}
       />
       <div style={{ display: "flex" }}>
