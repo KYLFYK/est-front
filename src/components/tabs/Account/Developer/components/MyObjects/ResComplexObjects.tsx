@@ -9,10 +9,11 @@ import { observer } from "mobx-react-lite";
 import BackPage from "../../../Agent/components/Others/BackPage/BackPage";
 import Typography from "../../../../../shared/Typography/Typography";
 import { BaseDropDown } from "../../../../../shared/BaseDropDown/BaseDropDown";
-import css from "./ResComplexes.module.scss";
 import { useStoreDeveloperMyObjectStore } from "../../../../../../mobx/role/developer/myObject/DeveloperMyObject";
 import ObjectCard from "../../../../../containers/Card";
 import BaseLink from "../../../../../shared/BaseLink/BaseLink";
+
+import css from "./ResComplexes.module.scss";
 
 type ResComplexObjectsType = {
   onComplex: Dispatch<SetStateAction<boolean>>;

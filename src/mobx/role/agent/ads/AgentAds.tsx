@@ -7,6 +7,9 @@ import { IGuide } from "../../../stores/objects/GuidesStore";
 import { LandApi } from "../../../../api/obj/land";
 
 import imgMoc from "../../../../components/tabs/Account/Agent/components/PersonalCabinetTab/AccountInfo/logoFalse.svg";
+import { ObjectTypes } from "../../../../utils/interfaces/objects";
+import { markAsDeleted } from "../../../../api/obj/markAsDeleted";
+import { reestablishObject } from "../../../../api/obj/reestablishObject";
 
 export interface IObject {
   id: number;
@@ -52,6 +55,7 @@ export interface IObject {
     status: string;
   } | null;
   address: string;
+  objType: ObjectTypes;
 }
 
 class AgentAdsStore {
@@ -94,6 +98,7 @@ class AgentAdsStore {
         status: null,
         files: [],
         address: "",
+        objType: 0,
       },
     ],
   };
@@ -109,19 +114,73 @@ class AgentAdsStore {
       let res;
       do {
         res = await ApartmentApi.getAllApartment(i * 10, 10);
-        obj = obj ? [...obj, ...res?.data] : res?.data ? [...res?.data] : [];
+        obj = obj
+          ? [
+              ...obj,
+              ...res?.data.map((el: any) => ({
+                ...el,
+                objType: ObjectTypes.APARTMENTS,
+              })),
+            ]
+          : res?.data.map((el: any) => ({
+              ...el,
+              objType: ObjectTypes.APARTMENTS,
+            }))
+          ? [
+              ...res?.data.map((el: any) => ({
+                ...el,
+                objType: ObjectTypes.APARTMENTS,
+              })),
+            ]
+          : [];
         i++;
       } while (res?.data?.length >= 10);
       i = 0;
       do {
         res = await HouseApi.getAllHouse(i * 10, 10);
-        obj = obj ? [...obj, ...res?.data] : res?.data ? [...res?.data] : [];
+        obj = obj
+          ? [
+              ...obj,
+              ...res?.data.map((el: any) => ({
+                ...el,
+                objType: ObjectTypes.HOUSE,
+              })),
+            ]
+          : res?.data.map((el: any) => ({
+              ...el,
+              objType: ObjectTypes.HOUSE,
+            }))
+          ? [
+              ...res?.data.map((el: any) => ({
+                ...el,
+                objType: ObjectTypes.HOUSE,
+              })),
+            ]
+          : [];
         i++;
       } while (res?.data?.length >= 10);
       i = 0;
       do {
         res = await LandApi.getAllLand(i * 10, 10);
-        obj = obj ? [...obj, ...res?.data] : res?.data ? [...res?.data] : [];
+        obj = obj
+          ? [
+              ...obj,
+              ...res?.data.map((el: any) => ({
+                ...el,
+                objType: ObjectTypes.LAND,
+              })),
+            ]
+          : res?.data.map((el: any) => ({
+              ...el,
+              objType: ObjectTypes.LAND,
+            }))
+          ? [
+              ...res?.data.map((el: any) => ({
+                ...el,
+                objType: ObjectTypes.LAND,
+              })),
+            ]
+          : [];
         i++;
       } while (res?.data?.length >= 10);
 
@@ -151,9 +210,44 @@ class AgentAdsStore {
       address: o.address,
       markAsDelete: o.markAsDelete,
       files: o.files,
+      objType: o.objType,
     }));
 
     this.initialData.loading = false;
+  }
+
+  async markAsDeleted(id: number, type: ObjectTypes) {
+    try {
+      await markAsDeleted(id, type);
+
+      this.initialData.data = this.initialData.data.map((el) => {
+        if (el.id === id && el.objType === type) {
+          return {
+            ...el,
+            markAsDelete: true,
+          };
+        } else return el;
+      });
+    } catch (e) {
+      console.error("Delete error", e);
+    }
+  }
+
+  async reestablishObj(id: number, type: ObjectTypes) {
+    try {
+      await reestablishObject(id, type);
+
+      this.initialData.data = this.initialData.data.map((el) => {
+        if (el.id === id && el.objType === type) {
+          return {
+            ...el,
+            markAsDelete: false,
+          };
+        } else return el;
+      });
+    } catch (e) {
+      console.error("Reestablish error", e);
+    }
   }
 
   get() {

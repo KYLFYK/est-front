@@ -8,21 +8,36 @@ import Typography from "../../../../../../shared/Typography/Typography";
 import { getObjType, IObjType, searchColor } from "./MyAdsContainer";
 
 import css from "./Active.module.scss";
+import { ObjectTypes } from "../../../../../../../utils/interfaces/objects";
 
 interface Props {
   maxCardWidth: number | "unset";
   menu?: "active" | "archive" | "draft";
   home: IObject;
+  deleteObject?: (id: number, type: ObjectTypes) => void;
+  restoreObject?: (id: number, type: ObjectTypes) => void;
 }
 
-export const MyAdsItem: FC<Props> = ({ maxCardWidth, menu, home }) => {
+export const MyAdsItem: FC<Props> = ({
+  maxCardWidth,
+  menu,
+  home,
+  deleteObject,
+  restoreObject,
+}) => {
   const LineRef = createRef<HTMLDivElement>();
 
-  const recover = (id: string) => {
-    console.log(id, "recover");
+  const recover = () => {
+    if (restoreObject) {
+      restoreObject(home.id, home.objType);
+    }
+    console.log(home.id, "recover");
   };
-  const del = (id: string) => {
-    console.log(id, "del");
+  const del = () => {
+    if (deleteObject) {
+      deleteObject(home.id, home.objType);
+    }
+    console.log(home.id, "deleted");
   };
   const edit = (id: string) => {
     console.log(id, "edit");
@@ -68,9 +83,10 @@ export const MyAdsItem: FC<Props> = ({ maxCardWidth, menu, home }) => {
             price={home.price}
             name={home.name}
             typeObject={getObjType(home.type as IObjType)}
-            type={home.status ? home.status.status : ""}
+            type={menu === "archive" ? "Архив" : "Свободна"}
             onEdit={edit}
             onDelete={del}
+            enumedType={home.objType}
           />
           <LineAddressV1 address={home.address} />
           <div

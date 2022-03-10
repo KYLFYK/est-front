@@ -1,13 +1,13 @@
-import s from "./styles.module.scss";
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
 import React from "react";
 import Link from "next/link";
-import { APIObject } from "../../../api";
 import BaseSlider from "../../shared/BaseSlider/BaseSlider";
 import Typography from "../../shared/Typography/Typography";
 import { mapData } from "../CardContainer/config";
 import { observer } from "mobx-react-lite";
+
+import s from "./styles.module.scss";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 
 interface Props {
   route: string | string[] | undefined;
@@ -18,7 +18,7 @@ interface Props {
 }
 
 const TEMP_LINK = "/";
-const MAX_SLIDERS_AMMOUNT = 7;
+// const MAX_SLIDERS_AMMOUNT = 7;
 
 const ObjectCard: React.FC<Props> = observer(
   ({ route, houseData, typeObject, data, hideLike }) => {

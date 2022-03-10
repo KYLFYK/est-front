@@ -1,11 +1,15 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import MyAdsContainer from "../../../Others/MyAdsContainer/MyAdsContainer";
 import { useAgentAdsStore } from "../../../../../../../../mobx/role/agent/ads/AgentAds";
 import { toJS } from "mobx";
 import jwt_decode from "jwt-decode";
+import { ObjectTypes } from "../../../../../../../../utils/interfaces/objects";
+import { Loader } from "../../../../../../../shared/Loader/Loader";
 
 const Archive = () => {
   const adsStore = useAgentAdsStore();
+
+  const [force, forceUpdate] = useState(false);
 
   useEffect(() => {
     if (adsStore.get().loading) {
@@ -19,14 +23,20 @@ const Archive = () => {
       : ("123" as string)
   );
 
+  const handleRestoreObject = async (id: number, type: ObjectTypes) => {
+    await adsStore.reestablishObj(id, type);
+    forceUpdate(!force);
+  };
+
   return adsStore.get().loading ? (
-    <h1>Загрузка...</h1>
+    <Loader />
   ) : (
     <MyAdsContainer
-      objects={toJS(adsStore.initialData.data).filter(
+      objects={adsStore.initialData.data.filter(
         (el) => el.agent?.id === idOwner.id && el.markAsDelete
       )}
       menu={"archive"}
+      restoreObject={handleRestoreObject}
     />
   );
 };

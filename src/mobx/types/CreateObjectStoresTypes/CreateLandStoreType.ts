@@ -1,6 +1,7 @@
 import { ICustomFile } from "../../../components/processes/create-new-object/components/GeneralInfoObjectTab/GeneralInfoPhotosTab";
 import { FoundersTypes } from "../../../utils/interfaces/objects";
 import { ICreateObjectModel } from "./CreateObjectStoreType";
+import { IUploadedFile } from "../../stores/CreateObjectStores/CreateObjectStore";
 
 export interface ICreateObjectLand
   extends ICreateObjectModel<
@@ -23,7 +24,7 @@ export interface ICreateLandAboutTab {
 
 export interface ICreateLandGeneralInfo {
   description: string;
-  photos: ICustomFile[];
+  photos: Array<ICustomFile | IUploadedFile>;
   cottageVillageName: string;
   landGeneralSquare: string;
   landStatus: string;

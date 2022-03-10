@@ -1,5 +1,6 @@
 import { ICustomFile } from "../../../components/processes/create-new-object/components/GeneralInfoObjectTab/GeneralInfoPhotosTab";
 import { ICreateObjectModel } from "./CreateObjectStoreType";
+import { IUploadedFile } from "../../stores/CreateObjectStores/CreateObjectStore";
 
 export interface ICreateObjectComplex
   extends ICreateObjectModel<
@@ -22,7 +23,7 @@ export interface ICreateComplexAboutTab {
 
 export interface ICreateComplexGeneralInfo {
   description: string;
-  photos: ICustomFile[];
+  photos: Array<ICustomFile | IUploadedFile>;
   priceObjectMin: number;
   priceObjectMax: number;
   areaObjectMin: number;
