@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import VerticalTabs from "../../../shared/VerticalTabs/VerticalTabs";
-import PersonalAccount from "./components/PersonalAccount/PersonalAccount";
 import Favourites from "./components/Favourites/Favourites";
 import SavedSearches from "./components/SavedSearches/SavedSearches";
 import Message from "./components/Message/Message";
@@ -8,6 +7,7 @@ import MyObjects from "./components/MyObjects/MyObjects";
 import CheckingObject from "./components/CheckingObject/CheckingObject";
 import AgentsNotifications from "../Agent/components/Notifications/Notifications";
 import { useStoreDeveloperNotificationsStore } from "../../../../mobx/role/developer/notifications/notifications";
+import PersonalAccount from "./components/PersonalAccount/PersonalAccount";
 
 const OwnerRoleTabs = () => {
   const store = useStoreDeveloperNotificationsStore();
