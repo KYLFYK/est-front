@@ -146,51 +146,51 @@ export const Settings: FC = observer(() => {
             handleFieldChange("login", e.currentTarget.value);
           }}
         />
-        <BaseInput
-          classNameWrapper={styles.inputWrapper}
-          className={styles.input}
-          errorLabel=""
-          label={"Старый пароль"}
-          type={passwordVis.oldPassword ? "text" : "password"}
-          name={"oldPassword"}
-          value={formValues.oldPassword}
-          onChange={(e) => {
-            handleFieldChange("oldPassword", e.currentTarget.value);
-          }}
-          icon={
-            <IconVis
-              setPasswordVis={setPasswordVis}
-              passwordVis={passwordVis}
-              type={"oldPassword"}
-            />
-          }
-        />
-        <BaseInput
-          classNameWrapper={styles.inputWrapper}
-          className={styles.input}
-          errorLabel=""
-          label={"Новый пароль"}
-          type={passwordVis.newPassword ? "text" : "password"}
-          name={"newPassword"}
-          value={formValues.newPassword}
-          onChange={(e) => {
-            handleFieldChange("newPassword", e.currentTarget.value);
-          }}
-          icon={
-            <IconVis
-              setPasswordVis={setPasswordVis}
-              passwordVis={passwordVis}
-              type={"newPassword"}
-            />
-          }
-        />
-        <BaseButton
-          buttonHTMLType={"button"}
-          className={styles.save}
-          type={"blank"}
-        >
-          Сохранить
-        </BaseButton>
+        {/*<BaseInput*/}
+        {/*  classNameWrapper={styles.inputWrapper}*/}
+        {/*  className={styles.input}*/}
+        {/*  errorLabel=""*/}
+        {/*  label={"Старый пароль"}*/}
+        {/*  type={passwordVis.oldPassword ? "text" : "password"}*/}
+        {/*  name={"oldPassword"}*/}
+        {/*  value={formValues.oldPassword}*/}
+        {/*  onChange={(e) => {*/}
+        {/*    handleFieldChange("oldPassword", e.currentTarget.value);*/}
+        {/*  }}*/}
+        {/*  icon={*/}
+        {/*    <IconVis*/}
+        {/*      setPasswordVis={setPasswordVis}*/}
+        {/*      passwordVis={passwordVis}*/}
+        {/*      type={"oldPassword"}*/}
+        {/*    />*/}
+        {/*  }*/}
+        {/*/>*/}
+        {/*<BaseInput*/}
+        {/*  classNameWrapper={styles.inputWrapper}*/}
+        {/*  className={styles.input}*/}
+        {/*  errorLabel=""*/}
+        {/*  label={"Новый пароль"}*/}
+        {/*  type={passwordVis.newPassword ? "text" : "password"}*/}
+        {/*  name={"newPassword"}*/}
+        {/*  value={formValues.newPassword}*/}
+        {/*  onChange={(e) => {*/}
+        {/*    handleFieldChange("newPassword", e.currentTarget.value);*/}
+        {/*  }}*/}
+        {/*  icon={*/}
+        {/*    <IconVis*/}
+        {/*      setPasswordVis={setPasswordVis}*/}
+        {/*      passwordVis={passwordVis}*/}
+        {/*      type={"newPassword"}*/}
+        {/*    />*/}
+        {/*  }*/}
+        {/*/>*/}
+        {/*<BaseButton*/}
+        {/*  buttonHTMLType={"button"}*/}
+        {/*  className={styles.save}*/}
+        {/*  type={"blank"}*/}
+        {/*>*/}
+        {/*  Сохранить*/}
+        {/*</BaseButton>*/}
       </section>
       <section className={styles.settingsSec}>
         <span className={styles.title}>Уведомления</span>

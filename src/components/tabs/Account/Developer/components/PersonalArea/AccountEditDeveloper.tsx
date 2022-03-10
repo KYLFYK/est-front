@@ -235,8 +235,8 @@ const AccountEditDeveloper: FC<AccountEditType> = observer(({onEdit}) => {
                         <div className={css.marginImage}>
                             <AvatarSection
                                 src={
-                                    store.initialData.file && store.initialData.file[0]
-                                        ? store.initialData.file[0].url
+                                    store.initialData.account && store.initialData.account.src
+                                        ? store.initialData.account.src
                                         : importImage
                                 }
                                 onChange={changeAvatar}

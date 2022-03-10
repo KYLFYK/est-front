@@ -40,6 +40,7 @@ class DeveloperCabinetStore {
     async fetch() {
         const res :CabinetAgentType = await cabinetAPI.getCabinetDeveloper()
         this.initialData.account.id = res.data.id
+        this.initialData.account.src = res.data.developerProperty.logo
         this.initialData.account.profileForm.type = res.data.developerProperty.type ? res.data.developerProperty.type :''
         this.initialData.account.profileForm.name = res.data.developerProperty.name
         this.initialData.account.profileForm.address = res.data.developerProperty.address ? res.data.developerProperty.address : ''
