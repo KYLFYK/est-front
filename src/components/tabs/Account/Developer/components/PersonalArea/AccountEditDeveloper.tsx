@@ -12,6 +12,7 @@ import {LogoIcon} from "../../../../../../icons/Header/LogoIcon";
 import importImage from './ImportImage.svg'
 import {useStoreDeveloperCabinet} from "../../../../../../mobx/role/developer/cabinet/DeveloperCabinet";
 import {BaseTextarea} from "../../../../../shared/BaseTextarea/BaseTextarea";
+import {AvatarSection} from "../../../../../shared/AvatarSection";
 
 
 export type infoDeveloperType = {
@@ -119,6 +120,17 @@ const AccountEditDeveloper: FC<AccountEditType> = observer(({onEdit}) => {
         setComparison(false)
         onEdit()
     }
+    console.log(123, agentInfo.name !== valueName
+        , agentInfo.type !== valueType
+        , agentInfo.address !== valueAddress
+        , agentInfo.phone !== valuePhone
+        , agentInfo.email !== valueEmail
+        , agentInfo.site !== valueSite
+        , agentInfo.description !== valueDescription)
+
+    const changeAvatar = (data: FormData) => {
+        store.updateAvatar(data).then();
+    };
 
     return (
         <div>
@@ -200,7 +212,7 @@ const AccountEditDeveloper: FC<AccountEditType> = observer(({onEdit}) => {
 
                             </div>
                             <div >
-                                <div className={css.marginColumn} style={{width: "25%",display:'flex',flexDirection:"column"}}>
+                                <div className={css.marginColumn} style={{display:'flex',flexDirection:"column"}}>
                                     <BaseTextarea
                                         classNameWrapper={css.baseTextarea}
                                         className={css.baseTextarea}
@@ -221,18 +233,29 @@ const AccountEditDeveloper: FC<AccountEditType> = observer(({onEdit}) => {
                     </Typography>
                     <div style={{backgroundImage: image}} className={css.dashed}>
                         <div className={css.marginImage}>
-                            <Image
-                                loader={e => myLoader(e.src, e.width, e.quality)}
-                                src={importImage}
-                                width={200}
-                                height={200}
-                                alt={'photo'}
+                            <AvatarSection
+                                src={
+                                    store.initialData.file && store.initialData.file[0]
+                                        ? store.initialData.file[0].url
+                                        : importImage
+                                }
+                                onChange={changeAvatar}
+                                changeable
+                                activeUpload
+                                size={200}
                             />
+                            {/*<Image*/}
+                            {/*    loader={e => myLoader(e.src, e.width, e.quality)}*/}
+                            {/*    src={importImage}*/}
+                            {/*    width={200}*/}
+                            {/*    height={200}*/}
+                            {/*    alt={'photo'}*/}
+                            {/*/>*/}
                         </div>
                     </div>
                 </div>
             </div>
-            <div style={{display: 'flex', width: "100%", flexDirection: 'row-reverse'}}>
+            <div style={{marginTop:"60px",display: 'flex', width: "100%", flexDirection: 'row-reverse'}}>
                 <BaseButton
                     type={"secondary"}
                     isActive className={css.marginButton}

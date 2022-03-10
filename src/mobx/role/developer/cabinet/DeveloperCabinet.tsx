@@ -1,6 +1,7 @@
 import {createContext, FC, useContext} from "react";
 import {makeAutoObservable} from "mobx";
 import {cabinetAPI, CabinetAgentType} from "../../../../api/cabinet/cabinet";
+import {instance} from "../../../../api/instance";
 
 class DeveloperCabinetStore {
     constructor() {
@@ -29,6 +30,10 @@ class DeveloperCabinetStore {
             noticePhone: "",
             noticeEmail: "",
         },
+        file:[{fileName: "2fe95d2797f26d5f6f0b7b63d5604771.jpg",
+            mimeType: "image/jpeg",
+            size: 707409,
+            url: "http://s3.dtln.ru:80/mp-data/2fe95d2797f26d5f6f0b7b63d5604771.jpg"}],
         loading:false
     }
 
@@ -53,6 +58,32 @@ class DeveloperCabinetStore {
     }
     async updateDeveloper(id:number,updateDeveloper:{}){
         await cabinetAPI.updateDeveloper(id,updateDeveloper)
+    }
+
+    async updateAvatar(data: FormData) {
+        const response = await instance.post(`media/s3-upload`, data, {
+            headers: {
+                authorization: `Bearer ${localStorage.getItem("accessEstatum")}`,
+            },
+        });
+
+        // @ts-ignore
+        this.initialData.file = [response.data];
+
+        await instance.patch(
+            "developer/%7BaccountId%7D",
+            {
+                file: [response.data],
+            },
+            {
+                headers: {
+                    authorization: `Bearer ${localStorage.getItem("accessEstatum")}`,
+                },
+                params: {
+                    accountId: this.initialData.account.id,
+                },
+            }
+        );
     }
 
     get() {

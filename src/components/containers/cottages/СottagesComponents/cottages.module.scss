@@ -1,0 +1,84 @@
+.cardVillage{
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap:15px;
+  background-color: #fff;
+  border: 1px solid #f2f2f2;
+  width: 430px;
+  height: 480px;
+  padding: 20px !important;
+  box-sizing: border-box;
+}
+.cardPadding{
+  box-sizing: border-box;
+  width: 120px;
+  height: 135px;
+  padding: 0 ;
+  background-color: #fff;
+  border: 2px solid #f2f2f2;
+  &:hover{
+    border: 2px solid #C5A28E;
+    cursor: pointer;
+  }
+}
+.image{
+  border-radius: 8px 8px 0 0;
+}
+.cardObject{
+  display: grid;
+  grid-template-columns: 580px 2px 289px ;
+  background-color: #fff;
+  border: 1px solid #f2f2f2;
+  padding: 0;
+  box-sizing: border-box;
+  margin-left: 20px ;
+  //margin-right: 60px ;
+}
+.imagePlaning{
+  width:406px;
+  height:359px;
+}
+.buttonToggle{
+  height: 40px;
+  padding: 7px 2px ;
+  width: auto;
+  color:#96A2B5;
+  display: flex;
+  align-items: center;
+  &:active{
+    color:#1A4862 !important;
+  }
+}
+.margin_4{
+  margin: 4px;
+}
+.verticalLine{
+  border: 1px solid #f2f2f2;
+  margin: 20px 0;
+}
+.df_jc_fd{
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+  height: 100%;
+}
+.dg_gtc{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  margin: 20px;
+  gap:25px
+}
+.villageInfo{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100px;
+  padding: 15px;
+  flex-wrap: wrap;
+  width: 170px;
+}
+.buttonStyle{
+  display: flex;
+  justify-content: center;
+  margin: 20px;
+}

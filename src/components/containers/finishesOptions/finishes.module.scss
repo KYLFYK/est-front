@@ -1,0 +1,15 @@
+.containerFinishes{
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap:15px;
+}
+.imageStyle{
+  border-radius: 6px;
+}
+.styleTypography{
+  margin: 0 5px;
+  cursor: pointer;
+}
+.df{
+  display: flex;
+}
