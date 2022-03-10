@@ -6,9 +6,6 @@ import CardCottages from './СottagesComponents/CardCottages';
 import CardObjectVillage from './СottagesComponents/CardObjectCottages';
 import VillageIcons from './СottagesComponents/CottagesIcons';
 import BaseButton from 'src/components/shared/BaseButton/BaseButtons';
-import Image from 'next/image'
-import {myLoader} from "../../../utils/image/image";
-import Typography from "../../shared/Typography/Typography";
 import {FinishesOptions} from "../finishesOptions/finishesOptions";
 
 const cottages = [

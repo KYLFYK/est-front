@@ -61,7 +61,7 @@ class DeveloperCabinetStore {
         await cabinetAPI.updateDeveloper(id,updateDeveloper)
     }
 
-    async updateAvatar(data: FormData) {
+    async updateAvatar(data: FormData,id:number) {
         const response = await instance.post(`media/s3-upload`, data, {
             headers: {
                 authorization: `Bearer ${localStorage.getItem("accessEstatum")}`,
@@ -72,19 +72,18 @@ class DeveloperCabinetStore {
         this.initialData.file = [response.data];
 
         await instance.patch(
-            "developer/%7BaccountId%7D",
+            `developer/%7BaccountId%7D?accountId=${id}`,
             {
-                file: [response.data],
+                logo:response.data.url,
+
             },
             {
                 headers: {
                     authorization: `Bearer ${localStorage.getItem("accessEstatum")}`,
                 },
-                params: {
-                    accountId: this.initialData.account.id,
-                },
             }
         );
+        this.initialData.account.src = response.data.url
     }
 
     get() {
