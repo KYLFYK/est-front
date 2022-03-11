@@ -58,7 +58,7 @@ const Apartment: NextPage = observer((props: any) => {
   const breadCrumbsStore = useBreadcrumbsStore();
   const tabs = [
     { title: "Общая информация" },
-    props.online_tour && { title: "Онлайн-тур" },
+    (props?.online_tour?.threeD_tour?.url || props?.online_tour?.vr_tour?.url) && { title: "Онлайн-тур" },
     { title: "Архитектура" },
     { title: "Инфраструктура" },
     props.object_developer_info && { title: "Застройщик" },
@@ -129,7 +129,7 @@ const Apartment: NextPage = observer((props: any) => {
         />
       </div>
       <ObjectDescription items={MappingDescription(props.description_items)} />
-      {props.online_tour && (
+      {(props?.online_tour?.threeD_tour?.url || props?.online_tour?.vr_tour?.url) && (
         <div ref={tours}>
           <ToursContainer Online_tour={props.online_tour} />
         </div>

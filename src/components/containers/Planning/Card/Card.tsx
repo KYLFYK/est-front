@@ -10,7 +10,7 @@ interface Props {
     title: string,
     housing: number,
     floor: number,
-    deadline: string
+    deadline: string | undefined
 }
 
 const Card: React.FC<Props> = ({ image, price, title, housing, floor, deadline }) => {

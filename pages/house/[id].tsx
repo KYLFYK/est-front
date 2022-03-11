@@ -252,7 +252,7 @@ const House = observer((props: any) => {
                 }
             <div ref={tours}>
                 {
-                    props.online_tour && <ToursContainer Online_tour={props.online_tour}/>
+                    (props?.online_tour?.threeD_tour?.url || props?.online_tour?.vr_tour?.url) && <ToursContainer Online_tour={props.online_tour}/>
                 }
             </div>
             <div ref={architec}>
