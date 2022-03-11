@@ -24,6 +24,7 @@ import {sortGuide, sortObject_specsTypeGuide} from "../../src/utils/conversionIc
 import {conversionDate} from "../../src/utils/conversionDate/conversionDate";
 import PaybackContainer from "../../src/components/containers/PaybackContainer/PaybackContainer";
 import {plusUnitMeasurement} from "../../src/utils/plusUnitMeasurement/plusUnitMeasurement";
+import css from "../../styles/slider.module.scss";
 
 const city = ['Москва', 'Крым', 'Сочи']
 
@@ -244,6 +245,7 @@ const House = observer((props: any) => {
                         info={plusUnitMeasurement(infoOptions)}
                         price={props.price}
                         images={props.images}
+                        // classSlider={css.image}
                     />
                 }
             </div>

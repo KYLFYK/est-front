@@ -13,9 +13,10 @@ interface Props {
     images: string[] | { url: string; id: number; }[],
     price?: number,
     info: IOption[]
+    classSlider?:string
 }
 
-const GeneralInfo: React.FC<Props> = observer(({ images, price, info }) => {
+const GeneralInfo: React.FC<Props> = observer(({ images, price, info,classSlider }) => {
 
     const imagesUrl = images.length === 0 ? IMAGES_SET : images.map((i: any) => i.url && i.url.includes('public') ? IMAGES_SET[0] : i.url || i)
 
@@ -24,7 +25,12 @@ const GeneralInfo: React.FC<Props> = observer(({ images, price, info }) => {
             <div className={s.sliderContainer}>
                 <BaseSlider
                     images={imagesUrl}
-                    height={600} withArrows withFavorite={typeof window !== "undefined" && localStorage.getItem("roleEstatum") ? true : false} onClickFavorite={() => {}}/>
+                    height={600}
+                    withArrows
+                    withFavorite={typeof window !== "undefined" && localStorage.getItem("roleEstatum") ? true : false}
+                    onClickFavorite={() => {}}
+                    classSlider={classSlider}
+                />
             </div>
             <div className={s.infoContainer}>
                 {price && <Typography size="big" color="nude">{formatNumbersToCurrency(price)} ₽</Typography>}

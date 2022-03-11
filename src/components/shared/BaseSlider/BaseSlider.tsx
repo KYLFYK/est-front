@@ -10,6 +10,7 @@ import BaseButton from "../BaseButton/BaseButtons";
 import { SliderDocIcon } from "../../../icons/SliderDot/SliderDotIcon";
 import FavoriteIcon from "../../../icons/Favorite/Favorite";
 import {myLoader} from "../../../utils/image/image";
+import classNames from "classnames";
 
 interface Props {
     images: string[],
@@ -17,9 +18,10 @@ interface Props {
     withArrows?: boolean
     withFavorite?: boolean,
     onClickFavorite?: () => void
+    classSlider?:string
 }
 
-const BaseSlider: React.FC<Props> = ({ images, height, withArrows, withFavorite, onClickFavorite }) => {
+const BaseSlider: React.FC<Props> = ({ images, height, withArrows, withFavorite, onClickFavorite,classSlider }) => {
     const [selectedSlider, setSelectedSlide] = React.useState<number>(0)
 
     const settings: Settings = {
@@ -35,14 +37,14 @@ const BaseSlider: React.FC<Props> = ({ images, height, withArrows, withFavorite,
         images.map((i) => (
             <Box className={s.imgContainer} key={i}>
                 <div style={{ height }}>
-                    <Image unoptimized src={i} className={s.image} height={'200px'} width={'315px'} alt={`Slider Screen`}  loader={e=>myLoader(e.src,e.width,e.quality)} />
+                    <Image unoptimized src={i} className={classNames(s.image,classSlider)} height={'200px'} width={'315px'} alt={`Slider Screen`}  loader={e=>myLoader(e.src,e.width,e.quality)} />
                 </div>
             </Box>
         ))
     ) : (
         <Box className={s.imgContainer} style={{ height }}>
             <div style={{ height }}>
-                <Image unoptimized src={placeholderImage} height={'200px'} width={'315px'} className={s.image} alt={`Slider Screen Placeholder`} loader={e=>myLoader(e.src,e.width,e.quality)}  />
+                <Image unoptimized src={placeholderImage} height={'200px'} width={'315px'} className={classNames(s.image,classSlider)} alt={`Slider Screen Placeholder`} loader={e=>myLoader(e.src,e.width,e.quality)}  />
             </div>
         </Box>
     )

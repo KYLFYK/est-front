@@ -15,13 +15,14 @@ interface Props {
   typeObject?: string | string[] | undefined;
   data?: any;
   hideLike?: boolean;
+  classSlider?:string
 }
 
 const TEMP_LINK = "/";
 // const MAX_SLIDERS_AMMOUNT = 7;
 
 const ObjectCard: React.FC<Props> = observer(
-  ({ route, houseData, typeObject, data, hideLike }) => {
+  ({ route, houseData, typeObject, data, hideLike,classSlider }) => {
     //const houseImages = houseData.images.length > MAX_SLIDERS_AMMOUNT ? houseData.images.slice(0, MAX_SLIDERS_AMMOUNT) : houseData.images
 
     const houseImages =

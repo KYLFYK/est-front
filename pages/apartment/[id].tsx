@@ -38,6 +38,7 @@ import {
   FILTER_ACTIONS_OPTIONS,
   FILTER_HOUSE_TYPE_OPTIONS,
 } from "../../src/components/containers/Filter/config";
+import css from '../../styles/slider.module.scss'
 
 const city = ["Москва", "Санкт-Петербург", "Крым", "Сочи", "Нижний Новгород"];
 const personalAccount = [
@@ -126,6 +127,7 @@ const Apartment: NextPage = observer((props: any) => {
           info={MappingGeneralInfo(props.info_options, props.object_specs)}
           price={props.price}
           images={props.images}
+          classSlider={css.image}
         />
       </div>
       <ObjectDescription items={MappingDescription(props.description_items)} />

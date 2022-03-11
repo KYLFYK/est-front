@@ -24,6 +24,7 @@ import {sortObject_specsTypeGuide, sortGuide} from "../../src/utils/conversionIc
 import {useBreadcrumbsStore} from '../../src/mobx/stores/BreadcrumbsStore/BreadcrumbsStore'
 import {FILTER_ACTIONS_OPTIONS, FILTER_HOUSE_TYPE_OPTIONS} from '../../src/components/containers/Filter/config'
 import ErrorPage from "../404";
+import css from "../../styles/slider.module.scss";
 
 const city = ['Москва', 'Крым', 'Сочи']
 const personalAccount = [{title: 'Личный кабинет', href: '/User', message: 0},
@@ -99,7 +100,12 @@ const Land = observer((props: ObjectLandType) => {
                         <AdressEstate item={props.address}/>
                         <HorizontalTabs tabs={tabs} refs={refs}/>
                         <div ref={general}>
-                            <GeneralInfo info={props.info_options} price={props.price} images={props.images}/>
+                            <GeneralInfo
+                                info={props.info_options}
+                                price={props.price}
+                                images={props.images}
+                                classSlider={css.image}
+                            />
                         </div>
                         <ObjectDescription items={props.description_items}/>
                         <div ref={specs}>
