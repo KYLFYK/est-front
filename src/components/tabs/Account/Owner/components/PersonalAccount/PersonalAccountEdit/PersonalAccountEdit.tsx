@@ -58,7 +58,6 @@ const PersonalAccountEdit :FC<PersonalAccountEditType> = observer(({onEdit}) => 
         onEdit();
     };
 
-
     return (
         <div>
             <BackPage onBackPage={backPage} title={"Редактирование аккаунта"} />
