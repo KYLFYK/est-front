@@ -44,7 +44,14 @@ export const MyObjects: FC = () => {
                 />
               ),
             },
-            { title: "Мои дома", Component: <MyHouses /> },
+            { 
+              title: "Мои дома", 
+              Component: (
+                <MyHouses 
+                
+                />
+              ) 
+            },
           ]}
           wrapperClassName={styles.tabsWrapper}
         />

@@ -34,6 +34,28 @@
     width: 83px;
 }
 
+.dropdownAction {
+    width: 200px;
+}
+.dropdownHouseType {
+    width: 200px;
+}
+.dropdownPrivateType {
+    width: 200px;
+}
+.dropdownBuildingType {
+    width: 200px;
+}
+.dropdownFloor {
+    width: 360px !important
+}
+.dropdownIRB {
+    width: 200px;
+}
+.dropdownImprovement {
+    width: 200px;
+}
+
 .submit {
     @include button;
     @include ROBOTOREGULAR16;
@@ -69,10 +91,6 @@
 
 .searchInput {
     width: 400px;
-}
-
-.dropdownFloor {
-    width: 360px !important
 }
 
 .link {

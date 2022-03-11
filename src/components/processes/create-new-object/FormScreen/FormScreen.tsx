@@ -26,14 +26,18 @@ import {
   ObjectGuides,
 } from "../../../../mobx/stores/objects/GuidesStore";
 import { useAgentAdsStore } from "../../../../mobx/role/agent/ads/AgentAds";
+import { IEditInfo, IInfoLoaded } from "../../../../hooks/useEditObject";
+import { useStores } from "../../../../hooks/useStores";
 
 import s from "./FormScreen.module.scss";
-import { useStoreDeveloperMyObjectStore } from "../../../../mobx/role/developer/myObject/DeveloperMyObject";
 
 interface Props {
   objectType: ObjectTypes;
   clearObjectType: () => void;
   action: NewObjectActionTypes;
+  presets?: IEditInfo;
+  info?: IInfoLoaded;
+  resetEditState?: () => void;
 }
 
 const objEnumToString: (type: ObjectTypes) => GuideObject = (type) => {
@@ -54,9 +58,10 @@ const objEnumToString: (type: ObjectTypes) => GuideObject = (type) => {
 };
 
 const FormScreen: FC<Props> = observer(
-  ({ clearObjectType, objectType, action }) => {
+  ({ clearObjectType, objectType, action, info, presets, resetEditState }) => {
     const guidesStore = ObjectGuides;
     const adsStore = useAgentAdsStore();
+    const { createObjectStore } = useStores();
 
     const [activeTabIdx, setActiveTabIdx] = useState<number>(0);
     const [activeSubTabIdx, setActiveSubTabIdx] = useState<number>(0);
@@ -68,6 +73,29 @@ const FormScreen: FC<Props> = observer(
     const lastTabIdx = tabsProp.length - 1;
     const isLastScreen =
       activeTabIdx === lastTabIdx && activeSubTabIdx === lastSubTabIdx;
+
+    useEffect(() => {}, [createObjectStore.forceRerender]);
+
+    useEffect(() => {
+      return () => {
+        createObjectStore.resetFields();
+      };
+    }, []);
+
+    useEffect(() => {
+      if (
+        info &&
+        presets &&
+        presets.type !== undefined &&
+        info.loaded &&
+        info.loadedId === presets.object
+      ) {
+        createObjectStore.setExistObject(
+          presets.type ? presets.type : 0,
+          info.object
+        );
+      }
+    }, [info, presets]);
 
     const handleNextTab = useCallback(() => {
       if (isLastScreen) return;
@@ -82,6 +110,12 @@ const FormScreen: FC<Props> = observer(
     }, [activeTabIdx, activeSubTabIdx, isLastScreen, lastSubTabIdx]);
 
     const handlePrevTab = useCallback(() => {
+      if (activeTabIdx === 0 && activeSubTabIdx === 0 && presets?.editMode) {
+        clearObjectType();
+        history.back();
+        return;
+      }
+
       if (activeTabIdx === 0 && activeSubTabIdx === 0) {
         clearObjectType();
         return;
@@ -111,6 +145,18 @@ const FormScreen: FC<Props> = observer(
     }, [objectType, guidesStore]);
 
     useEffect(() => {
+      if (
+        presets &&
+        info?.loaded &&
+        info &&
+        info.object !== null &&
+        info.loadedId == presets.object
+      ) {
+        createObjectStore.forceRerender = !createObjectStore.forceRerender;
+      }
+    }, [info, presets]);
+
+    useEffect(() => {
       const AboutTabComponents: JSX.Element[] =
         objectType === ObjectTypes.LAND
           ? [
@@ -134,6 +180,8 @@ const FormScreen: FC<Props> = observer(
                 key={364213}
                 onPublish={handlePublish}
                 onPrevTab={handlePrevTab}
+                presets={presets}
+                info={info}
               />,
             ]
           : [
@@ -152,6 +200,7 @@ const FormScreen: FC<Props> = observer(
             ];
       const aboutTabLabel =
         objectType === ObjectTypes.LAND ? "Об учатске" : "О доме";
+
       const tabs = [
         {
           isDone: activeTabIdx > 0,
@@ -225,6 +274,8 @@ const FormScreen: FC<Props> = observer(
               key={231}
               onPrevTab={handlePrevTab}
               onPublish={handlePublish}
+              presets={presets}
+              info={info}
             />,
           ],
         });
@@ -269,7 +320,9 @@ const FormScreen: FC<Props> = observer(
             <Link href="/ads">
               <a className={s.link}>
                 <Typography weight="medium" icon={<NavArrowIcon />}>
-                  Новый объект
+                  {presets?.editMode
+                    ? "Редактирование объекта"
+                    : "Новый объект"}
                 </Typography>
               </a>
             </Link>
@@ -281,11 +334,24 @@ const FormScreen: FC<Props> = observer(
           </div>
           <div className={s.divider} />
         </div>
-        <MultipleHorizontalTab
-          activeSubTabIdx={activeSubTabIdx}
-          activeTabIdx={activeTabIdx}
-          tabs={tabsProp}
-        />
+        {presets?.editMode ? (
+          info &&
+          info.loaded &&
+          info.object &&
+          info.loadedId == presets.object ? (
+            <MultipleHorizontalTab
+              activeSubTabIdx={activeSubTabIdx}
+              activeTabIdx={activeTabIdx}
+              tabs={tabsProp}
+            />
+          ) : null
+        ) : (
+          <MultipleHorizontalTab
+            activeSubTabIdx={activeSubTabIdx}
+            activeTabIdx={activeTabIdx}
+            tabs={tabsProp}
+          />
+        )}
       </div>
     );
   }

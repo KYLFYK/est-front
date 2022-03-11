@@ -27,15 +27,18 @@ import moment from "moment";
 import BaseButton from "../../../../shared/BaseButton/BaseButtons";
 
 import s from "./HouseInfoTab.module.scss";
+import { IEditInfo, IInfoLoaded } from "../../../../../hooks/useEditObject";
 
 interface Props extends ICreateObjectControls {
   objectType: Exclude<ObjectTypes, ObjectTypes.LAND>;
+  presets?: IEditInfo;
+  info?: IInfoLoaded;
 }
 
 const MAX_LENGTH = 250;
 
 const HouseInfoDetailsTab: React.FC<Props> = observer(
-  ({ onNextTab, onPrevTab, objectType, onPublish }) => {
+  ({ onNextTab, onPrevTab, objectType, onPublish, info, presets }) => {
     const guidesStore = ObjectGuides;
     const { createObjectStore } = useStores();
     const [values, setValues] = useState<TInfoState>(
@@ -224,7 +227,9 @@ const HouseInfoDetailsTab: React.FC<Props> = observer(
 
         const response = await createObjectStore.sendObjectData(
           dataToSend,
-          objectType
+          objectType,
+          !!(presets && presets.editMode),
+          info?.loadedId
         );
         if (response && onPublish) onPublish(response); // Передаем сюда айди успешного объявления
         createObjectStore.resetFields();
@@ -236,6 +241,8 @@ const HouseInfoDetailsTab: React.FC<Props> = observer(
         onNextTab={objectType === 4 ? undefined : handleNextTab}
         onPrevTab={onPrevTab}
         onPublish={objectType === 4 ? handlePublish : undefined}
+        presets={presets}
+        info={info}
       >
         {objectType === 4 ? (
           <InputsGroup title="Процесс строительства">

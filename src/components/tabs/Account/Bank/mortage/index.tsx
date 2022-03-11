@@ -15,10 +15,10 @@ const BankMortageTabs: ITabItem[] = [
     title: "Каталог заявок",
     Component: <Catalog />,
   },
-  {
+  /*{
     title: "Статистика",
     Component: <Statistics />,
-  },
+  },*/
 ];
 
 export const Mortage = observer(() => {

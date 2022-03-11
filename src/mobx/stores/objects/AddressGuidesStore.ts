@@ -7,9 +7,14 @@ interface DataResponse {
   name: string;
 }
 
-const fetchCities: () => Promise<AxiosResponse<DataResponse[]>> = async () => {
-  return await instance.get("city");
-};
+interface ExtendedResponse extends DataResponse {
+  region: DataResponse;
+}
+
+const fetchCities: () => Promise<AxiosResponse<ExtendedResponse[]>> =
+  async () => {
+    return await instance.get("city");
+  };
 
 const fetchRegions: () => Promise<AxiosResponse<DataResponse[]>> = async () => {
   return await instance.get("region");
@@ -19,14 +24,14 @@ const fetchCountry: () => Promise<AxiosResponse<DataResponse[]>> = async () => {
   return await instance.get("country");
 };
 
-class AddressGuidesStore {
+export class AddressGuidesStore {
   constructor() {
     makeAutoObservable(this);
   }
 
   loaded: boolean = false;
   errorOnLoad: boolean = false;
-  cities: null | DataResponse[] = null;
+  cities: null | ExtendedResponse[] = null;
   regions: null | DataResponse[] = null;
   countries: null | DataResponse[] = null;
 
@@ -41,6 +46,8 @@ class AddressGuidesStore {
       this.cities = result[0].data;
       this.regions = result[1].data;
       this.countries = result[2].data;
+      this.loaded = true;
+      this.errorOnLoad = false;
     } catch (e) {
       this.errorOnLoad = true;
       this.loaded = false;

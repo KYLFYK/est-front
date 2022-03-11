@@ -19,13 +19,16 @@ import {
   TLegalPurityTabState,
 } from "../../lib";
 import { observer } from "mobx-react-lite";
+import { IEditInfo, IInfoLoaded } from "../../../../../hooks/useEditObject";
 
 interface Props extends ICreateObjectControls {
   objectType: ObjectTypes;
+  presets?: IEditInfo;
+  info?: IInfoLoaded;
 }
 
 const LegalPurityFounders: React.FC<Props> = observer(
-  ({ onPublish, onPrevTab, objectType }) => {
+  ({ onPublish, onPrevTab, objectType, presets, info }) => {
     const { createObjectStore } = useStores();
     const [values, setValues] = useState<TLegalPurityTabState>(
       getInitialStateLegalPurityTab(objectType, createObjectStore)
@@ -201,7 +204,9 @@ const LegalPurityFounders: React.FC<Props> = observer(
 
         const response = await createObjectStore.sendObjectData(
           dataToSend,
-          objectType
+          objectType,
+          !!(presets && presets.editMode),
+          info?.loadedId
         );
         if (response && onPublish) onPublish(response); // Передаем сюда айди успешного объявления
         createObjectStore.resetFields();
@@ -217,6 +222,8 @@ const LegalPurityFounders: React.FC<Props> = observer(
         onPublish={handlePublish}
         onPreview={handlePreview}
         onPrevTab={onPrevTab}
+        presets={presets}
+        info={info}
       >
         <InputsGroup title="Текущие владельцы">
           <BaseDropDown

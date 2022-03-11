@@ -2,7 +2,7 @@ import { FC } from "react"
 import { observer } from "mobx-react-lite";
 import { BaseDropDown } from "../../../../shared/BaseDropDown/BaseDropDown"
 import {useMortGageStore} from '../../../../../mobx/role/bank/mortgage/MortGage'
-import styles from "./Catalog.module.scss"
+import s from "./Catalog.module.scss"
 import {datetoDayFormat, datetoTimeFormat} from '../../../../../lib/mapping/objectDates'
 import {LEADS_REQS_OPTIONS} from './Config';
 
@@ -12,7 +12,7 @@ export const CatalogItem: FC<any> = observer(({data, id}) => {
   
   return (
     <tr style={{cursor: 'pointer'}} onClick={(e: any) => {
-      !e.target.value && store.setDetail(true, id)
+      !e.target.className && store.setDetail(true, id)
     }}>
       <td>
         <span>{data.fio}</span>
@@ -40,12 +40,13 @@ export const CatalogItem: FC<any> = observer(({data, id}) => {
             onChange={(obj) => {
               store.updateLead(id, LEADS_REQS_OPTIONS.filter((o: any) => o.value === obj)[0].label);
             }}
-            className={`${styles.select}${
-              data.status === "Новая заявка" ? ` ${styles.green}` : ""
+            className={`${s.select}${
+              data.status === "Новая заявка" ? ` ${s.green}` : ""
             }`}
             options={LEADS_REQS_OPTIONS}
             placeholder={data.status}
             value={data.status}
+            location={'bank'}
           />
         </span>
       </td>

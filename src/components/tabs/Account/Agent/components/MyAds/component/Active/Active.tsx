@@ -1,13 +1,15 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { observer } from "mobx-react-lite";
 import MyAdsContainer from "../../../Others/MyAdsContainer/MyAdsContainer";
 import { useAgentAdsStore } from "../../../../../../../../mobx/role/agent/ads/AgentAds";
-import { toJS } from "mobx";
 import jwt_decode from "jwt-decode";
 import { Loader } from "src/components/shared/Loader/Loader";
+import { ObjectTypes } from "../../../../../../../../utils/interfaces/objects";
 
 const MyAdsActive = observer(() => {
   const adsStore = useAgentAdsStore();
+
+  const [force, forceUpdate] = useState(false);
 
   useEffect(() => {
     if (adsStore.get().loading) {
@@ -21,14 +23,21 @@ const MyAdsActive = observer(() => {
       : ("123" as string)
   );
 
+  const handleDeleteObject = async (id: number, type: ObjectTypes) => {
+    await adsStore.markAsDeleted(id, type);
+    forceUpdate(!force);
+    console.log("");
+  };
+
   return adsStore.get().loading ? (
-    <Loader/>
+    <Loader />
   ) : (
     <MyAdsContainer
-      objects={toJS(adsStore.initialData.data).filter(
-        (el) => el.agent?.id === idOwner.id
+      objects={adsStore.initialData.data.filter(
+        (el) => el.agent?.id === idOwner.id && !el.markAsDelete
       )}
       menu={"active"}
+      deleteObject={handleDeleteObject}
     />
   );
 });

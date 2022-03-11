@@ -25,7 +25,6 @@ import { useBreadcrumbsStore } from "src/mobx/stores/BreadcrumbsStore/Breadcrumb
 import s from "./Filter.module.scss";
 import { paramsForGet } from "../../../lib/params/params";
 import { makeStyles } from "@material-ui/core";
-import { SelectEstate } from "../../shared/SelectEstate/SelectEstate";
 
 interface Props {
   location?: "start" | "search";
@@ -193,14 +192,14 @@ export const Filter: React.FC<Props> = observer(({ location }) => {
           value={searchStore.getFilter()["order-type"]}
           onChange={onChangeActionType}
           placeholder={FILTER_ACTIONS_OPTIONS[0].label}
-          className={classes.root}
+          className={s.dropdownAction}
         />
         <BaseDropDown
           options={FILTER_HOUSE_TYPE_OPTIONS}
           value={searchStore.getFilter()["object-type"]}
           onChange={onChangeHouseType}
           placeholder={FILTER_HOUSE_TYPE_OPTIONS[0].label}
-          className={classes.root}
+          className={s.dropdownHouseType}
         />
       </InputsUnion>
 
@@ -210,7 +209,7 @@ export const Filter: React.FC<Props> = observer(({ location }) => {
           value={searchStore.getFilter()["privateType"]}
           onChange={onChangePrivateType}
           placeholder={FILTER_PRIVATE_HOUSE_OPTIONS[0].label}
-          className={s.dropdown}
+          className={s.dropdownPrivateType}
         />
       )}
 
@@ -296,6 +295,7 @@ export const Filter: React.FC<Props> = observer(({ location }) => {
           value={searchStore.getFilter()["building-type"]}
           onChange={onChangeBuildingType}
           placeholder={searchStore.getFilter()["building-type"]}
+          className={s.dropdownBuildingType}
         />
       )}
 
@@ -315,7 +315,7 @@ export const Filter: React.FC<Props> = observer(({ location }) => {
           value={searchStore.getFilter()["building"]}
           onChange={onChangeIrb}
           placeholder="Выбрать c ИЖС или без"
-          className={s.dropdown}
+          className={s.dropdownIRB}
         />
       )}
 
@@ -337,6 +337,7 @@ export const Filter: React.FC<Props> = observer(({ location }) => {
               : "Выбрать благоустроенность"
           }
           multi
+          className={s.dropdownImprovement}
         />
       )}
 

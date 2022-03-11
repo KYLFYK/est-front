@@ -1,4 +1,4 @@
-import React, { FC, useEffect, SetStateAction, Dispatch } from "react";
+import React, { FC, useEffect, SetStateAction, Dispatch, useState } from "react";
 import { observer } from "mobx-react-lite";
 import FilterSearch from "../../../../../shared/FilterSearch/FilterSearch";
 import { SearchOffice } from "../../../../../containers/SearchOffice/SearchOffice";
@@ -21,16 +21,29 @@ type ResComplexesType = {
 export const ResComplexes: FC<ResComplexesType> = observer(
   ({ onComplex, setComplexId }) => {
     const store = useStoreDeveloperMyObjectStore();
+    const [textFilter, setTextFilter] = useState('')
+    const [sort, setSort] = useState('default')
 
     useEffect(() => {
       store.fetchAllComplexByOwnerId(accFromToken().id);
     }, []);
 
+    let sortedData: any = []
+    if(sort === 'high'){
+      sortedData = [...store.get()?.complex.sort((a: any, b: any) => a.priceMax > b.priceMax ? 1 : -1)]
+    } 
+    if(sort === 'low'){
+      sortedData = [...store.get()?.complex.sort((a: any, b: any) => a.priceMax < b.priceMax ? 1 : -1)]
+    } 
+    if(sort === 'default'){
+        sortedData = [...store.get()?.complex]
+    }
+
     const onSetCompex = (id: number, name: string) => {
       onComplex(true);
       setComplexId({ id: id, name: name });
     };
-    store.get();
+
     const recover = (id: string) => {
       console.log(id, "recover");
     };
@@ -44,17 +57,20 @@ export const ResComplexes: FC<ResComplexesType> = observer(
       console.log(id, "publish");
     };
 
+    const onChange = (e: any) => {
+      setTextFilter(e.target.value)
+    }
+
     return (
       <div className={styles.wrapper}>
-        <SearchOffice placeholder={"Поиск"} />
-        <FilterSearch className={styles.filter} type="agent" />
+        <SearchOffice placeholder={"Поиск"} value={textFilter} onChange={onChange}/>
+        <FilterSearch className={styles.filter} type="agent" sort={sort} setSort={setSort}/>
         <div className={styles.objectsList}>
           {/*{Data.objects.map((home, index) => (*/}
           {store.initialData.loading ? (
             <Loader />
           ) : (
-            store.initialData.complex &&
-            store.initialData.complex.map((home, index) => (
+            sortedData?.filter((d: any) => d.name.toLowerCase().includes(textFilter.toLowerCase())).map((home: any, index: number) => (
               <div
                 className={styles.object}
                 key={index}

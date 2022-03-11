@@ -23,10 +23,7 @@ import {makeStyles} from "@material-ui/core";
 import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
 import { dateToDigit, digitToDate, currentDate } from '../../../../lib/mortgage/date';
 import {paymentSchedule} from './helpers';
-
-export const formatNumbersToCurrency = (value: number, currency: "RUB" ) => {
-    return new Intl.NumberFormat('ru-RU').format(value)
-}
+import {formatNumbersToCurrency} from '../../../../lib/syntax/syntax';
 
 export const removeStringSpaces = (string: string) => {
     return string.replace(/\s+/g, "")

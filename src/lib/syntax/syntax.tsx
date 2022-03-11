@@ -4,3 +4,8 @@ export const digitToSyntax = (num: number) => {
     if(num % 10 === 1) return ''
     if(num % 10 > 1 && num % 10 < 5) return 'a'
 }
+
+// для перевода в формат денег
+export const formatNumbersToCurrency = (value: number, currency = "RUB" ) => {
+    return `${new Intl.NumberFormat('ru-RU').format(value)} ₽`
+}

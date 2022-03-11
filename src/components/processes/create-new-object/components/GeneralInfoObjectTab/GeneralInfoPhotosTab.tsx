@@ -14,6 +14,7 @@ import { useStores } from "../../../../../hooks/useStores";
 import { CrossIcon } from "../../../../../icons/MapControlsIcons/PlaceIcons/CrossIcon";
 import { observer } from "mobx-react-lite";
 import { BaseInput } from "../../../../shared/BaseInput/Input";
+import { IUploadedFile } from "../../../../../mobx/stores/CreateObjectStores/CreateObjectStore";
 
 const dashedBorder = `url("data:image/svg+xml,%3csvg width='100%25' height='100%25' xmlns='http://www.w3.org/2000/svg'%3e%3crect width='100%25' height='100%25' fill='none' rx='6' ry='6' stroke='black' stroke-width='1' stroke-dasharray='8%2c 8' stroke-dashoffset='12' stroke-linecap='square'/%3e%3c/svg%3e")`;
 interface Props extends ICreateObjectControls {
@@ -53,7 +54,9 @@ const GeneralInfoPhotosTab: React.FC<Props> = observer(
     });
 
     const onDeleteImage = (id: string) => {
-      const newList = values.photos.filter((img) => img.id !== id);
+      const newList = values.photos.filter(
+        (img, index) => index.toString() !== id
+      );
       setValues({ ...values, photos: newList });
     };
 
@@ -72,7 +75,9 @@ const GeneralInfoPhotosTab: React.FC<Props> = observer(
       }
       createObjectStore.saveGeneralTab(values, objectType);
       createObjectStore
-        .uploadFileList(values.photos.map((el) => el.file))
+        .uploadFileList(
+          values.photos.map((el: ICustomFile | IUploadedFile) => el)
+        )
         .then();
       onNextTab && onNextTab();
     };
@@ -96,16 +101,17 @@ const GeneralInfoPhotosTab: React.FC<Props> = observer(
                   <div key={idx} className={s.imgContainer}>
                     <div
                       className={s.imgHover}
-                      onClick={() => onDeleteImage(img.id)}
+                      onClick={() => onDeleteImage(idx.toString())}
                     >
                       <CrossIcon className={s.imgHoverCross} />
                     </div>
                     <Image
                       className={s.img}
                       layout="fill"
-                      loader={() => img.preview}
-                      src={img.preview}
+                      loader={() => ("preview" in img ? img.preview : img.url)}
+                      src={"preview" in img ? img.preview : img.url}
                       alt="Uploaded image"
+                      unoptimized
                     />
                   </div>
                 );

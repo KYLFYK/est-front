@@ -1,4 +1,5 @@
 import React, { useState, useMemo } from "react";
+import classNames from "classnames";
 import { IconArrowDown } from "../SelectEstate/IconArrowDown";
 import { useOnOutsideClick } from "../SelectEstate/SelectLogic";
 import { Checked } from "../SelectEstate/Checked";
@@ -6,7 +7,7 @@ import { Unchecked } from "../SelectEstate/Unchecked";
 import { IOption } from "../../../utils/interfaces/general";
 import Typography from "../Typography/Typography";
 
-import css from "../SelectEstate/select.module.scss";
+import css from "./dropdown.module.scss";
 
 type SelectPropsType = {
   // пропсы нового дропдауна
@@ -15,7 +16,7 @@ type SelectPropsType = {
   placeholder: string;
   value?: any;
   multi?: boolean;
-
+  location?: string;
   // оставшиеся пропсы от прежнего дропдауна, нужно будет перебрать их
   label?: string;
   className?: string;
@@ -31,7 +32,7 @@ export const BaseDropDown: React.FC<SelectPropsType> = ({
   value,
   onChange,
   multi,
-
+  location,
   label,
   className,
   classNameWrapper,
@@ -69,15 +70,15 @@ export const BaseDropDown: React.FC<SelectPropsType> = ({
   };
 
   return (
-    <div className={css.dropdown}>
+    <div className={classNames(className ? className : '', css.dropdown)}>
       <div
         style={{ borderColor: open ? "#C5A28E" : "#CAD1DA" }}
-        className={css.dropdown_btn}
+        className={classNames(css.dropdown_btn, location==='bank' ? '' : css.border)}
         onClick={() => {
           setOpen(!open);
         }}
       >
-        <div className={css.ellipsisText}>{renderValue(value)}</div>
+        <div className={classNames(css.ellipsisText, renderValue(value) === 'Новая заявка' ? css.green : '')}>{renderValue(value)}</div>
       </div>
       {open && (
         <div className={css.dropdown_content}>

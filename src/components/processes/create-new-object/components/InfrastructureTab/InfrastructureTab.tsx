@@ -123,14 +123,10 @@ const InfrastructureTab: React.FC<Props> = observer(
                     label: el.value,
                     value: el.id.toString(),
                   }))}
-                  value={
-                    values.view.length > 1
-                      ? hetViewString()
-                      : values.view.join(",")
-                  }
+                  value={values.view.length > 0 ? hetViewString() : values.view}
                   onChange={onChangeView}
                   placeholder={
-                    values.view.length > 1
+                    values.view.length > 0
                       ? hetViewString()
                       : "Выберите один или несколько"
                   }
