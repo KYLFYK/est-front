@@ -15,9 +15,9 @@ export interface ICreateObjectHouse
 
 export interface ICreateHouseAboutTab {
   name: string;
-  country: string;
-  region: string;
-  city: string;
+  country: number;
+  region: number;
+  city: number;
   address: string;
   cost: number;
   index: number;

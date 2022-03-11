@@ -15,10 +15,10 @@ export interface ICreateObjectTownhouse
 
 export interface ICreateTownhouseAboutTab {
   name: string;
-  country: string;
-  city: string;
+  country: number;
+  city: number;
   address: string;
-  region: string;
+  region: number;
   cost: number;
   index: number;
   type: string;

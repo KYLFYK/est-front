@@ -12,7 +12,7 @@ export interface ITabItem {
 }
 
 interface Props {
-  tabs: ITabItem[];
+  tabs: any;
   className?: string;
   link?: boolean;
   storybook?: boolean;
@@ -22,7 +22,7 @@ const VerticalTabs: React.FC<Props> = ({ tabs, className, link }) => {
   const router = useRouter();
   // search index ( tabs - title - color ) : number
   const searchColor = tabs
-    .map((tab, index) =>
+    .map((tab: any, index: number) =>
       searchNamePage(tab.title) === (router ? router.asPath.substr(1) : "/")
         ? index
         : 0
@@ -31,12 +31,12 @@ const VerticalTabs: React.FC<Props> = ({ tabs, className, link }) => {
     .pop();
 
   const tabsVision = tabs.filter(
-    (tab) =>
+    (tab: any) =>
       searchNamePage(tab.title) === (router ? router.asPath.substr(1) : "/")
   );
 
   const [active, setActive] = useState<number>(searchColor ? searchColor : 0);
-  const tabsUrl = tabs.map((tab) => searchNamePage(tab.title));
+  const tabsUrl = tabs.map((tab: any) => searchNamePage(tab.title));
 
   const movePage = (page: number) => {
     if (link) {
@@ -50,7 +50,7 @@ const VerticalTabs: React.FC<Props> = ({ tabs, className, link }) => {
       <MenuUser
         active={active}
         onActive={movePage}
-        menu={tabs.map((tab) => tab.title)}
+        menu={tabs.map((tab: any) => tab.title)}
       />
       <div className={`${css.information}${className ? ` ${className}` : ""}`}>
         {link === undefined

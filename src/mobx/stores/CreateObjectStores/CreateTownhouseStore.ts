@@ -5,10 +5,10 @@ import { ICreateObjectTownhouse } from "../../types/CreateObjectStoresTypes/Crea
 class CreateTownhouseStore implements ICreateObjectTownhouse {
   about: ICreateObjectTownhouse["about"] = {
     name: "",
-    country: "",
-    city: "",
+    country: 0,
+    city: 0,
     index: 0,
-    region: "",
+    region: 0,
     address: "",
     cost: 0,
     type: "",

@@ -10,9 +10,9 @@ import {
 export class CreateVillageStore implements ICreateObjectComplex {
   about: ICreateComplexAboutTab = {
     name: "",
-    country: "",
-    city: "",
-    region: "",
+    country: 0,
+    city: 0,
+    region: 0,
     address: "",
     index: 0,
     type: "",
