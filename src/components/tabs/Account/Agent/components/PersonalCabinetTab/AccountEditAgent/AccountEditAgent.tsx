@@ -151,7 +151,7 @@ const AccountEditAgent: FC<AccountEditType> = observer(({ onEdit }) => {
   const changeAvatar = (data: FormData) => {
     store.updateAvatar(data,store.initialData.id).then();
   };
-  console.log("store.initialData.file", store.initialData.file[0].url)
+
   return (
     <div>
       <BackPage onBackPage={backPage} title={"Редактирование аккаунта"} />
