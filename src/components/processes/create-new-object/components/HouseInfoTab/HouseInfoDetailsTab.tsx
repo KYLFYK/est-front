@@ -4,7 +4,6 @@ import React from "react";
 import { useState } from "react";
 import { useStores } from "../../../../../hooks/useStores";
 import { ObjectTypes } from "../../../../../utils/interfaces/objects";
-import { BaseDropDown } from "../../../../shared/BaseDropDown/BaseDropDown";
 import { BaseInput } from "../../../../shared/BaseInput/Input";
 import Typography from "../../../../shared/Typography/Typography";
 import { INFO_TAB_ventilation_TYPE } from "../../config";
@@ -25,9 +24,10 @@ import {
 } from "../../../../../mobx/types/CreateObjectStoresTypes/CreateComplexStoreTypes";
 import moment from "moment";
 import BaseButton from "../../../../shared/BaseButton/BaseButtons";
+import { IEditInfo, IInfoLoaded } from "../../../../../hooks/useEditObject";
+import { NewDropDown } from "../../../../shared/BaseDropDown/NewDropDown";
 
 import s from "./HouseInfoTab.module.scss";
-import { IEditInfo, IInfoLoaded } from "../../../../../hooks/useEditObject";
 
 interface Props extends ICreateObjectControls {
   objectType: Exclude<ObjectTypes, ObjectTypes.LAND>;
@@ -312,7 +312,7 @@ const HouseInfoDetailsTab: React.FC<Props> = observer(
           <>
             <InputsGroup title="Строительно-техническая экспертиза">
               {houseType && "houseType" in values && (
-                <BaseDropDown
+                <NewDropDown
                   isError={!isValid && !isValidHouseType}
                   value={values.houseType}
                   className={s.dropdownSm}
@@ -327,7 +327,7 @@ const HouseInfoDetailsTab: React.FC<Props> = observer(
                 />
               )}
               {groundType && "fundament" in values && (
-                <BaseDropDown
+                <NewDropDown
                   value={values.fundament}
                   className={s.dropdownSm}
                   label="Фундамент"
@@ -342,7 +342,7 @@ const HouseInfoDetailsTab: React.FC<Props> = observer(
                 />
               )}
               {roofType && "roof" in values && (
-                <BaseDropDown
+                <NewDropDown
                   value={values.roof}
                   className={s.dropdownSm}
                   label="Кровля"
@@ -357,7 +357,7 @@ const HouseInfoDetailsTab: React.FC<Props> = observer(
                 />
               )}
               {wallType && "walls" in values && (
-                <BaseDropDown
+                <NewDropDown
                   value={values.walls}
                   className={s.dropdownSm}
                   label="Стены"
@@ -393,7 +393,7 @@ const HouseInfoDetailsTab: React.FC<Props> = observer(
             <div className={s.divider} />
             <InputsGroup title="Инженерные коммуникации">
               {waterType && "waterPipe" in values && (
-                <BaseDropDown
+                <NewDropDown
                   value={values.waterPipe}
                   className={s.dropdownSm}
                   label="Водопровод"
@@ -408,7 +408,7 @@ const HouseInfoDetailsTab: React.FC<Props> = observer(
                 />
               )}
               {heatingType && "heating" in values && (
-                <BaseDropDown
+                <NewDropDown
                   value={values.heating}
                   className={s.dropdownSm}
                   label="Отопление"
@@ -423,7 +423,7 @@ const HouseInfoDetailsTab: React.FC<Props> = observer(
                 />
               )}
               {sewerageType && "sewerage" in values && (
-                <BaseDropDown
+                <NewDropDown
                   value={values.sewerage}
                   className={s.dropdownSm}
                   label="Канализация"
@@ -438,7 +438,7 @@ const HouseInfoDetailsTab: React.FC<Props> = observer(
                 />
               )}
               {electricityType && "electricity" in values && (
-                <BaseDropDown
+                <NewDropDown
                   value={values.electricity}
                   className={s.dropdownSm}
                   label="Электричество"
@@ -453,7 +453,7 @@ const HouseInfoDetailsTab: React.FC<Props> = observer(
                 />
               )}
               {"vent" in values && (
-                <BaseDropDown
+                <NewDropDown
                   value={values.vent}
                   className={s.dropdownSm}
                   label="Вентиляция"
@@ -466,7 +466,7 @@ const HouseInfoDetailsTab: React.FC<Props> = observer(
                 />
               )}
               {internetType && "internet" in values && (
-                <BaseDropDown
+                <NewDropDown
                   value={values.internet}
                   isError={!isValid && !isValidInternet}
                   className={s.dropdownSm}
@@ -506,7 +506,7 @@ const HouseInfoDetailsTab: React.FC<Props> = observer(
                   <div className={s.divider} />
                   {parkingType && (
                     <InputsGroup title="Парковка">
-                      <BaseDropDown
+                      <NewDropDown
                         value={values.parking}
                         className={s.dropdownSm}
                         label="Парковка"

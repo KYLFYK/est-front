@@ -5,11 +5,11 @@ import { ICreateObjectHouse } from "../../types/CreateObjectStoresTypes/CreateHo
 class CreateHouseStore implements ICreateObjectHouse {
   about: ICreateObjectHouse["about"] = {
     name: "",
-    country: "",
-    city: "",
+    country: 0,
+    city: 0,
     index: 0,
     address: "",
-    region: "",
+    region: 0,
     cost: 0,
     type: "",
   };

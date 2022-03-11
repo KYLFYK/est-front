@@ -28,6 +28,7 @@ import { useStoreDeveloperMyObjectStore } from "../../../../../mobx/role/develop
 import { accFromToken } from "../../../../../lib/localStorage/localStorage";
 
 import s from "./AboutObject.module.scss";
+import { NewDropDown } from "../../../../shared/BaseDropDown/NewDropDown";
 
 interface Props extends ICreateObjectControls {
   objectType: ObjectTypes;
@@ -154,13 +155,13 @@ const AboutObjectTab: React.FC<Props> = observer(
     const onChangeFloorsAmmount = (value: number) => {
       setValues({ ...values, floorsAmmount: value });
     };
-    const onChangeCountry = (value: string) => {
+    const onChangeCountry = (value: number) => {
       setValues({ ...values, country: value });
     };
-    const onChangeRegion = (value: string) => {
+    const onChangeRegion = (value: number) => {
       setValues({ ...values, region: value });
     };
-    const onChangeCity = (value: string) => {
+    const onChangeCity = (value: number) => {
       setValues((prev) => ({ ...prev, city: value }));
 
       if (!values.region && value) {
@@ -193,7 +194,7 @@ const AboutObjectTab: React.FC<Props> = observer(
     };
 
     useEffect(() => {
-      if (values.region.length === 0 && values.city) {
+      if (!values.region && values.region !== 0 && values.city) {
         onChangeCity(values.city);
       }
     }, [values.city]);
@@ -309,8 +310,8 @@ const AboutObjectTab: React.FC<Props> = observer(
           <div className={s.divider} />
           <InputsGroup title={"Адрес"}>
             {addressStore.countries && (
-              <BaseDropDown
-                value={values.country}
+              <NewDropDown
+                value={Number(values.country)}
                 className={s.inputMd}
                 options={addressStore.countries.map((el) => ({
                   label: el.name,
@@ -324,8 +325,8 @@ const AboutObjectTab: React.FC<Props> = observer(
               />
             )}
             {addressStore.regions && (
-              <BaseDropDown
-                value={values.region}
+              <NewDropDown
+                value={Number(values.region)}
                 className={s.inputMd}
                 options={addressStore.regions.map((el) => ({
                   label: el.name,
@@ -339,8 +340,8 @@ const AboutObjectTab: React.FC<Props> = observer(
               />
             )}
             {addressStore.cities && (
-              <BaseDropDown
-                value={values.city}
+              <NewDropDown
+                value={Number(values.city)}
                 className={s.inputMd}
                 options={addressStore.cities
                   .filter((el) =>

@@ -1,4 +1,4 @@
-import React, { useState, useMemo, ReactElement } from "react";
+import React, { useState, useMemo } from "react";
 import classNames from "classnames";
 import { IconArrowDown } from "../SelectEstate/IconArrowDown";
 import { useOnOutsideClick } from "../SelectEstate/SelectLogic";
@@ -9,12 +9,12 @@ import Typography from "../Typography/Typography";
 
 import css from "./dropdown.module.scss";
 
-type SelectPropsType<T> = {
+type SelectPropsType = {
   // пропсы нового дропдауна
-  options: IOption<string, T>[];
+  options: IOption[];
   onChange: (option: any) => void;
   placeholder: string;
-  value: T;
+  value?: any;
   multi?: boolean;
   location?: string;
   // оставшиеся пропсы от прежнего дропдауна, нужно будет перебрать их
@@ -22,13 +22,11 @@ type SelectPropsType<T> = {
   className?: string;
   classNameWrapper?: string;
   isError?: boolean;
-  errorLabel?: string | number | "123";
+  errorLabel?: string;
   name?: string;
 };
 
-export const BaseDropDown: <T = string>(
-  props: SelectPropsType<T>
-) => ReactElement = ({
+export const BaseDropDown: React.FC<SelectPropsType> = ({
   options,
   placeholder,
   value,
@@ -125,82 +123,3 @@ export const BaseDropDown: <T = string>(
     </div>
   );
 };
-
-/*
-import { MenuItem, Select } from "@material-ui/core";
-import classNames from "classnames";
-import React from "react";
-import { SmallArrowIcon } from "../../../icons/SmallArrow/SmallArrow";
-import { IOption } from "../../../utils/interfaces/general";
-import Typography from "../Typography/Typography";
-import { useStyles } from "./styles";
-
-interface Props {
-  options: IOption[];
-  value?: any;
-  label?: string;
-  placeholder: any;
-  className?: string;
-  classNameWrapper?: string;
-  isError?: boolean;
-  errorLabel?: string;
-  onChange: (value: string) => void;
-  name?: string;
-}
-
-export const BaseDropDown: React.FC<Props> = ({
-  isError,
-  errorLabel = "Выберите значение",
-  options,
-  value,
-  placeholder,
-  className,
-  label,
-  classNameWrapper,
-  onChange,
-  name,
-}) => {
-  const classes = useStyles();
-  const handleOnChange = (
-    event: React.ChangeEvent<{ name?: string | unknown; value: unknown }>
-  ) => {
-    onChange(event.target.value as string);
-  };
-  const optionsMapMemo = React.useMemo(() => {
-    const map = new Map<any, string>();
-    for (const option of options) map.set(option.value, option.label);
-    return map;
-  }, [options]);
-  const renderValue = (value: any) => {
-    const _value = optionsMapMemo.get(value);
-    return _value ? _value : placeholder;
-  };
-  return (
-    <div className={classNames(classes.wrapper, classNameWrapper)}>
-      {label && <Typography className={classes.label}>{label}</Typography>}
-      <Select
-        IconComponent={({ className }) => (
-          <SmallArrowIcon className={classNames(className, classes.icon)} />
-        )}
-        className={classNames(classes.root, className)}
-        renderValue={renderValue}
-        displayEmpty={true}
-        value={value === undefined || value === null ? "" : value}
-        onChange={handleOnChange}
-        name={name}
-      >
-        {options.map(({ value, label }) => (
-          <MenuItem key={value} value={value}>
-            {label}
-          </MenuItem>
-        ))}
-      </Select>
-      {isError && (
-        <Typography size="small" color="red" className={classes.error}>
-          {errorLabel}
-        </Typography>
-      )}
-    </div>
-  );
-};
-*/

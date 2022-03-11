@@ -4,7 +4,6 @@ import React from "react";
 import { useState } from "react";
 import { useStores } from "../../../../../hooks/useStores";
 import { ObjectTypes } from "../../../../../utils/interfaces/objects";
-import { BaseDropDown } from "../../../../shared/BaseDropDown/BaseDropDown";
 import CounterButtons from "../../../../shared/CounterButtons/CounterButtons";
 import Typography from "../../../../shared/Typography/Typography";
 import { Checkbox } from "../../../../widget/Login/registration/checkbox/Checkbox";
@@ -14,12 +13,14 @@ import ButtonPanel, {
   ICreateObjectControls,
 } from "../ButtonsPanel/ButtonsPanel";
 import InputsGroup from "../InputsGroup/InputsGroup";
-import s from "./HouseInfoTab.module.scss";
 import {
   IRTWGuide,
   ObjectGuides,
 } from "../../../../../mobx/stores/objects/GuidesStore";
 import { toJS } from "mobx";
+import { NewDropDown } from "../../../../shared/BaseDropDown/NewDropDown";
+
+import s from "./HouseInfoTab.module.scss";
 
 interface Props extends ICreateObjectControls {
   objectType: Exclude<ObjectTypes, ObjectTypes.LAND>;
@@ -75,7 +76,7 @@ const HouseInfoInterierTab: React.FC<Props> = observer(
     });
 
     const [guides, setGuides] = useState<{
-      [key: string]: number | undefined;
+      [key: string]: number[] | number | undefined;
     }>(
       guidesStore.readyToWork
         ? Object.fromEntries(
@@ -86,10 +87,10 @@ const HouseInfoInterierTab: React.FC<Props> = observer(
         : {}
     );
 
-    const handleGuideChange = (name: string, value: string) => {
+    const handleGuideChange = (name: string, value: number) => {
       setGuides({
         ...guides,
-        [name]: Number(value),
+        [name]: value,
       });
     };
 
@@ -111,10 +112,24 @@ const HouseInfoInterierTab: React.FC<Props> = observer(
         });
 
         if (valid) {
+          const resultGuides: number[] = [];
+
+          Object.keys(guides).forEach((el) => {
+            if (Array.isArray(guides[el])) {
+              const thisArray: number[] = guides[el] as number[];
+
+              thisArray.forEach((thisArEl) => {
+                resultGuides.push(Number(thisArEl));
+              });
+            } else {
+              resultGuides.push(Number(guides[el]));
+            }
+          });
+
           createObjectStore.saveHouseInfoTab(
             {
               ...values,
-              guides: Object.keys(guides).map((el) => guides[el] as number),
+              guides: resultGuides,
             },
             objectType
           );
@@ -131,26 +146,31 @@ const HouseInfoInterierTab: React.FC<Props> = observer(
               <React.Fragment key={el}>
                 <InputsGroup title={el}>
                   {complexGuides[el].map((guide) => (
-                    <>
-                      {guides[guide.type_en] !== undefined && (
-                        <BaseDropDown<string>
-                          key={guide.type_en}
-                          value={guides[guide.type_en]?.toString() as string}
-                          className={classNames(s.dropdownSm, s.extraSpace)}
-                          options={guide.values.map((el) => ({
-                            label: el.value,
-                            value: el.id.toString(),
-                          }))}
-                          onChange={(value) => {
-                            handleGuideChange(guide.type_en, value);
-                          }}
-                          placeholder={guide.type_ru}
-                          label={guide.type_ru}
-                          isError={!isValid && !guides[guide.type_en]}
-                          multi={guide.isMulti}
-                        />
-                      )}
-                    </>
+                    <NewDropDown<number>
+                      key={guide.type_en}
+                      // @ts-ignore
+                      value={
+                        guide.isMulti
+                          ? guides[guide.type_en]
+                            ? guides[guide.type_en]
+                            : []
+                          : guides[guide.type_en]
+                          ? guides[guide.type_en]
+                          : undefined
+                      }
+                      className={classNames(s.dropdownSm, s.extraSpace)}
+                      options={guide.values.map((el) => ({
+                        label: el.value,
+                        value: el.id,
+                      }))}
+                      onChange={(value) => {
+                        handleGuideChange(guide.type_en, value);
+                      }}
+                      placeholder={guide.type_ru}
+                      label={guide.type_ru}
+                      isError={!isValid && !guides[guide.type_en]}
+                      multi={guide.isMulti}
+                    />
                   ))}
                 </InputsGroup>
                 <div className={s.divider} />
@@ -185,7 +205,7 @@ const HouseInfoInterierTab: React.FC<Props> = observer(
                 />
               )}
               {bathroomType && "plumbing" in values && (
-                <BaseDropDown
+                <NewDropDown
                   value={values.plumbing}
                   className={classNames(s.dropdownSm, s.extraSpace)}
                   options={bathroomType.values.map((el) => ({
@@ -200,7 +220,7 @@ const HouseInfoInterierTab: React.FC<Props> = observer(
                 />
               )}
               {"renovation" in values && (
-                <BaseDropDown
+                <NewDropDown
                   className={s.dropdownSm}
                   value={values.renovation}
                   options={INFO_TAB_repair_TYPE}

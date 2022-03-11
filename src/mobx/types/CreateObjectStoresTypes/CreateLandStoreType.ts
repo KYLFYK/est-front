@@ -14,11 +14,11 @@ export interface ICreateObjectLand
 
 export interface ICreateLandAboutTab {
   name: string;
-  country: string;
-  city: string;
+  country: number;
+  city: number;
   address: string;
   cost: number;
-  region: string;
+  region: number;
   type: string;
 }
 
