@@ -73,6 +73,7 @@ const LandInfoTab: React.FC<Props> = observer(({ onNextTab, onPrevTab }) => {
             placeholder="Водопровод"
             onChange={(value) => onChangeDropDown(value, "waterPipe")}
             isError={!isValid && !isValidWaterPipe}
+            multi={waterType.isMulti}
           />
         )}
         {heatingType && (
@@ -87,6 +88,7 @@ const LandInfoTab: React.FC<Props> = observer(({ onNextTab, onPrevTab }) => {
             placeholder="Отопление"
             onChange={(value) => onChangeDropDown(value, "heating")}
             isError={!isValid && !isValidHeating}
+            multi={heatingType.isMulti}
           />
         )}
         {sewerageType && (
@@ -101,6 +103,7 @@ const LandInfoTab: React.FC<Props> = observer(({ onNextTab, onPrevTab }) => {
             placeholder="Канализация"
             onChange={(value) => onChangeDropDown(value, "sewerage")}
             isError={!isValid && !isValidSewerage}
+            multi={sewerageType.isMulti}
           />
         )}
       </InputsGroup>

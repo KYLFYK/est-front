@@ -131,21 +131,26 @@ const HouseInfoInterierTab: React.FC<Props> = observer(
               <React.Fragment key={el}>
                 <InputsGroup title={el}>
                   {complexGuides[el].map((guide) => (
-                    <BaseDropDown
-                      key={guide.type_en}
-                      value={guides[guide.type_en]?.toString()}
-                      className={classNames(s.dropdownSm, s.extraSpace)}
-                      options={guide.values.map((el) => ({
-                        label: el.value,
-                        value: el.id.toString(),
-                      }))}
-                      onChange={(value) => {
-                        handleGuideChange(guide.type_en, value);
-                      }}
-                      placeholder={guide.type_ru}
-                      label={guide.type_ru}
-                      isError={!isValid && !guides[guide.type_en]}
-                    />
+                    <>
+                      {guides[guide.type_en] !== undefined && (
+                        <BaseDropDown<string>
+                          key={guide.type_en}
+                          value={guides[guide.type_en]?.toString() as string}
+                          className={classNames(s.dropdownSm, s.extraSpace)}
+                          options={guide.values.map((el) => ({
+                            label: el.value,
+                            value: el.id.toString(),
+                          }))}
+                          onChange={(value) => {
+                            handleGuideChange(guide.type_en, value);
+                          }}
+                          placeholder={guide.type_ru}
+                          label={guide.type_ru}
+                          isError={!isValid && !guides[guide.type_en]}
+                          multi={guide.isMulti}
+                        />
+                      )}
+                    </>
                   ))}
                 </InputsGroup>
                 <div className={s.divider} />
@@ -191,6 +196,7 @@ const HouseInfoInterierTab: React.FC<Props> = observer(
                   placeholder="Сан. узел"
                   label="Сан. узел"
                   isError={!isValid && !isValidPlumbing}
+                  multi={bathroomType.isMulti}
                 />
               )}
               {"renovation" in values && (

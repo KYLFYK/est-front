@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from "react";
+import React, { useState, useMemo, ReactElement } from "react";
 import classNames from "classnames";
 import { IconArrowDown } from "../SelectEstate/IconArrowDown";
 import { useOnOutsideClick } from "../SelectEstate/SelectLogic";
@@ -9,12 +9,12 @@ import Typography from "../Typography/Typography";
 
 import css from "./dropdown.module.scss";
 
-type SelectPropsType = {
+type SelectPropsType<T> = {
   // пропсы нового дропдауна
-  options: IOption[];
+  options: IOption<string, T>[];
   onChange: (option: any) => void;
   placeholder: string;
-  value?: any;
+  value: T;
   multi?: boolean;
   location?: string;
   // оставшиеся пропсы от прежнего дропдауна, нужно будет перебрать их
@@ -22,11 +22,13 @@ type SelectPropsType = {
   className?: string;
   classNameWrapper?: string;
   isError?: boolean;
-  errorLabel?: string;
+  errorLabel?: string | number | "123";
   name?: string;
 };
 
-export const BaseDropDown: React.FC<SelectPropsType> = ({
+export const BaseDropDown: <T = string>(
+  props: SelectPropsType<T>
+) => ReactElement = ({
   options,
   placeholder,
   value,
@@ -70,15 +72,25 @@ export const BaseDropDown: React.FC<SelectPropsType> = ({
   };
 
   return (
-    <div className={classNames(className ? className : '', css.dropdown)}>
+    <div className={classNames(className ? className : "", css.dropdown)}>
       <div
         style={{ borderColor: open ? "#C5A28E" : "#CAD1DA" }}
-        className={classNames(css.dropdown_btn, location==='bank' ? '' : css.border)}
+        className={classNames(
+          css.dropdown_btn,
+          location === "bank" ? "" : css.border
+        )}
         onClick={() => {
           setOpen(!open);
         }}
       >
-        <div className={classNames(css.ellipsisText, renderValue(value) === 'Новая заявка' ? css.green : '')}>{renderValue(value)}</div>
+        <div
+          className={classNames(
+            css.ellipsisText,
+            renderValue(value) === "Новая заявка" ? css.green : ""
+          )}
+        >
+          {renderValue(value)}
+        </div>
       </div>
       {open && (
         <div className={css.dropdown_content}>

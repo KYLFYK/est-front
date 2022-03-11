@@ -323,6 +323,7 @@ const HouseInfoDetailsTab: React.FC<Props> = observer(
                   }))}
                   placeholder="Тип дома"
                   onChange={(value) => onChangeDropDown(value, "houseType")}
+                  multi={houseType.isMulti}
                 />
               )}
               {groundType && "fundament" in values && (
@@ -337,6 +338,7 @@ const HouseInfoDetailsTab: React.FC<Props> = observer(
                   placeholder="Фундамент"
                   onChange={(value) => onChangeDropDown(value, "fundament")}
                   isError={!isValid && !isValidFundament}
+                  multi={groundType.isMulti}
                 />
               )}
               {roofType && "roof" in values && (
@@ -351,6 +353,7 @@ const HouseInfoDetailsTab: React.FC<Props> = observer(
                   placeholder="Кровля"
                   onChange={(value) => onChangeDropDown(value, "roof")}
                   isError={!isValid && !isValidRoof}
+                  multi={roofType.isMulti}
                 />
               )}
               {wallType && "walls" in values && (
@@ -365,6 +368,7 @@ const HouseInfoDetailsTab: React.FC<Props> = observer(
                   placeholder="Стены"
                   onChange={(value) => onChangeDropDown(value, "walls")}
                   isError={!isValid && !isValidWalls}
+                  multi={wallType.isMulti}
                 />
               )}
               {"technicalComment" in values && (
@@ -400,6 +404,7 @@ const HouseInfoDetailsTab: React.FC<Props> = observer(
                   placeholder="Водопровод"
                   onChange={(value) => onChangeDropDown(value, "waterPipe")}
                   isError={!isValid && !isValidWaterPipe}
+                  multi={waterType.isMulti}
                 />
               )}
               {heatingType && "heating" in values && (
@@ -414,6 +419,7 @@ const HouseInfoDetailsTab: React.FC<Props> = observer(
                   placeholder="Отопление"
                   onChange={(value) => onChangeDropDown(value, "heating")}
                   isError={!isValid && !isValidHeating}
+                  multi={heatingType.isMulti}
                 />
               )}
               {sewerageType && "sewerage" in values && (
@@ -428,6 +434,7 @@ const HouseInfoDetailsTab: React.FC<Props> = observer(
                   placeholder="Канализация"
                   onChange={(value) => onChangeDropDown(value, "sewerage")}
                   isError={!isValid && !isValidSewerage}
+                  multi={sewerageType.isMulti}
                 />
               )}
               {electricityType && "electricity" in values && (
@@ -442,6 +449,7 @@ const HouseInfoDetailsTab: React.FC<Props> = observer(
                   placeholder="Электричество"
                   onChange={(value) => onChangeDropDown(value, "electricity")}
                   isError={!isValid && !isValidElectricity}
+                  multi={electricityType.isMulti}
                 />
               )}
               {"vent" in values && (
@@ -469,6 +477,7 @@ const HouseInfoDetailsTab: React.FC<Props> = observer(
                   }))}
                   placeholder="Интернет"
                   onChange={(value) => onChangeDropDown(value, "internet")}
+                  multi={internetType.isMulti}
                 />
               )}
               {"engineeringComment" in values && (
@@ -510,6 +519,7 @@ const HouseInfoDetailsTab: React.FC<Props> = observer(
                           onChangeDropDown(value, "parking" as keyof TInfoState)
                         }
                         isError={!isValid && !isValidParking}
+                        multi={parkingType.isMulti}
                       />
                       <BaseInput
                         onChange={(event) =>

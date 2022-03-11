@@ -266,6 +266,7 @@ const AboutObjectTab: React.FC<Props> = observer(
                 label={objectType === 3 ? "Тип земли" : "Тип жилья"}
                 isError={!isValid && !isValidType}
                 name={"type"}
+                multi={buildingType.isMulti}
               />
             )}
             {"complexName" in values &&

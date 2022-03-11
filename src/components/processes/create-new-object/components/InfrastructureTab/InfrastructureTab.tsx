@@ -130,7 +130,7 @@ const InfrastructureTab: React.FC<Props> = observer(
                       ? hetViewString()
                       : "Выберите один или несколько"
                   }
-                  multi
+                  multi={viewType.isMulti}
                 />
               </InputsGroup>
             )}
