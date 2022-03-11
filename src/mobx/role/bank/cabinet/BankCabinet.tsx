@@ -77,7 +77,7 @@ class BankCabinetStore {
 
     }
     async update(id:number, updateValue: UpdateAgentCabinetType){
-        const res = await cabinetAPI.updateAgentsCabinet(id,updateValue)
+        const res = await cabinetAPI.updateBankCabinet(id,updateValue)
     }
 
     get() {

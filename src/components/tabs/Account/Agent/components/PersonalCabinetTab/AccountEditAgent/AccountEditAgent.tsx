@@ -149,7 +149,7 @@ const AccountEditAgent: FC<AccountEditType> = observer(({ onEdit }) => {
   };
 
   const changeAvatar = (data: FormData) => {
-    store.updateAvatar(data).then();
+    store.updateAvatar(data,store.initialData.id).then();
   };
 
   return (

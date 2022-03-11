@@ -1,0 +1,54 @@
+.column{
+  padding-top: 20px;
+}
+.df{
+  display: flex;
+  margin: 10px 0;
+}
+.typographyWidth{
+  width: 140px;
+}
+.marginTop30{
+  margin-top: 30px;
+}
+.inputStyle{
+  width: 290px;
+  border: none;
+  position: relative;
+  right: 20px;
+  &:disabled{
+    background-color: #fff;
+  }
+}
+.image{
+  border: 1px solid #CAD1DA;
+  border-radius: 6px;
+  margin-bottom: 9px;
+  width: 200px;
+  height: 200px;
+}
+.buttonUpload{
+  width: 100%;
+  border: 1px solid #CAD1DA;
+}
+.buttonColumn{
+  display: flex;
+  height: 40px;
+}
+.mR_15{
+  margin-right: 15px;
+}
+.headerTitle{
+  display: flex;
+  justify-content: space-between;
+}
+.headerAccount{
+  margin: 20px 0;
+}
+.typographyMargin{
+  margin: 10px 0 0 0;
+  color:#CAD1DA
+}
+.styleButtonAgent{
+  font-size: 14px;
+}

@@ -33,7 +33,8 @@ export const AvatarSection: FC<Props> = observer(
     };
 
     useEffect(() => {
-      setFileSrc(src ? src : "");
+        setTimeout(()=>setFileSrc(src ? src : ""),100)
+      // setFileSrc(src ? src : "");
     }, [src]);
 
     return (

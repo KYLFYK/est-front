@@ -78,12 +78,27 @@ export const cabinetAPI = {
       return false;
     }
   },
-  updateAgentsCabinet: async (
+  updateBankCabinet: async (
     id: number,
     updateValue: UpdateAgentCabinetType
   ) => {
     try {
       const res = await instance.patch(`account/${id}`, updateValue, {
+        headers: {
+          authorization: `Bearer ${localStorage.getItem("accessEstatum")}`,
+        },
+      });
+      console.log("updateAgentsCabinet", res);
+    } catch (e) {
+      return false;
+    }
+  },
+  updateAgentsCabinet: async (
+    id: number,
+    updateValue: UpdateAgentCabinetType
+  ) => {
+    try {
+      const res = await instance.patch(`agent/${id}`, updateValue, {
         headers: {
           authorization: `Bearer ${localStorage.getItem("accessEstatum")}`,
         },
@@ -134,6 +149,7 @@ export type CabinetAgentType = {
   data: {
     createAt: string;
     developerProperty: {
+      logo:string
       INN: null | number;
       KPP: null | number;
       OGRN: null | number;

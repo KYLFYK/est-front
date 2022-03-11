@@ -104,7 +104,7 @@ class AgentCabinetStore {
     await cabinetAPI.updateAgentsCabinet(id, updateValue);
   }
 
-  async updateAvatar(data: FormData) {
+  async updateAvatar(data: FormData,id:number) {
     const response = await instance.post(`media/s3-upload`, data, {
       headers: {
         authorization: `Bearer ${localStorage.getItem("accessEstatum")}`,
@@ -114,7 +114,7 @@ class AgentCabinetStore {
     this.initialData.file = [response.data];
 
     await instance.patch(
-      "agent/%7BaccountId%7D",
+      `agent/${id}`,
       {
         file: [response.data],
       },
@@ -122,11 +122,9 @@ class AgentCabinetStore {
         headers: {
           authorization: `Bearer ${localStorage.getItem("accessEstatum")}`,
         },
-        params: {
-          accountId: this.initialData.id,
-        },
       }
     );
+    this.initialData.file = [response.data];
   }
 
   get() {

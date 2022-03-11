@@ -10,9 +10,8 @@ class OwnerCabinetStore {
     makeAutoObservable(this);
   }
   initialData = {
-    firstName: "",
-    secondName: "",
-    dateBirth: "",
+    name:'',
+    dateBirth:"",
     phone: "",
     email: "",
     password: "",
@@ -22,10 +21,10 @@ class OwnerCabinetStore {
 
   async fetch() {
     const res: CabinetDeveloperType = await cabinetAPI.getCabinetDeveloper();
-    this.initialData.firstName = res.data.email;
-    this.initialData.secondName = "";
-    this.initialData.email = res.data.email;
-    this.initialData.phone = res.data.phone;
+    this.initialData.name = "Иван Иванов";
+    this.initialData.dateBirth = "10.12.1994";
+    this.initialData.email = 'ivanov@mail.ru';
+    this.initialData.phone = '+7 999 888 77 22';
   }
 
   get() {
