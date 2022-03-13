@@ -58,7 +58,6 @@ const AboutObjectTab: React.FC<Props> = observer(
   ({ onNextTab, onPrevTab, objectType, action }) => {
     const guidesStore = ObjectGuides;
     const addressStore = AddressGuides;
-
     const developerStore = useStoreDeveloperMyObjectStore();
 
     const idOwner: any = jwt_decode(

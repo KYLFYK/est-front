@@ -34,7 +34,7 @@ const HouseInfoInterierTab: React.FC<Props> = observer(
       getInitialStateInfoTab(objectType, createObjectStore)
     );
     const [isValid, setIsValid] = useState<boolean>(true);
-
+    
     const isValidPlumbing = "plumbing" in values && !!values.plumbing.length;
     const isValidRenovation =
       "renovation" in values && !!values.renovation.length;
@@ -67,6 +67,7 @@ const HouseInfoInterierTab: React.FC<Props> = observer(
     } = {};
 
     guidesStore.readyToWork?.forEach((elem) => {
+      console.log(toJS(elem))
       if (elem.subtitle_ru) {
         complexGuides[elem.subtitle_ru] = complexGuides[elem.subtitle_ru]
           ? [...complexGuides[elem.subtitle_ru], toJS(elem)]
