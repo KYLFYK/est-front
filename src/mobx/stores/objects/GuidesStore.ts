@@ -39,6 +39,7 @@ export interface IGuide {
   subtitle_ru: string | null;
   type_en: GuideType;
   type_ru: string;
+  isMulti: boolean;
   value: string;
 }
 
@@ -47,6 +48,7 @@ export interface IRTWGuide {
   subtitle_ru: string | null;
   type_en: GuideType;
   type_ru: string;
+  isMulti: boolean;
   values: {
     id: number;
     value: string;
@@ -107,6 +109,7 @@ class GuidesStore {
             subtitle_ru: item.subtitle_ru,
             type_en: item.type_en,
             type_ru: item.type_ru,
+            isMulti: item.isMulti,
             values: [
               {
                 id: item.id,

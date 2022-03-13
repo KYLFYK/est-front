@@ -64,7 +64,7 @@ const settings = {
     initialSlide: 0,
     responsive: [
         {
-            breakpoint: 1024,
+            breakpoint: 1430,
             settings: {
                 slidesToShow: 3,
                 slidesToScroll: 3,
@@ -73,18 +73,23 @@ const settings = {
             }
         },
         {
-            breakpoint: 600,
+            breakpoint: 1125,
             settings: {
                 slidesToShow: 2,
                 slidesToScroll: 2,
-                initialSlide: 2
+                initialSlide: 2,
+                infinite: true,
+                dots: true
             }
         },
         {
-            breakpoint: 480,
+            breakpoint: 790,
             settings: {
                 slidesToShow: 1,
-                slidesToScroll: 1
+                slidesToScroll: 1,
+                initialSlide: 1,
+                infinite: true,
+                dots: true
             }
         }
     ],
@@ -157,12 +162,15 @@ export const BestOffers: FC<BestOffersType> = observer(({tagsButton}) => {
                             store.initialData.bestOffers
                                 && store.initialData.bestOffers.map((t: any, index) => (
                                     <div key={index} style={{padding: '5px', marginTop: index > 1 ? "24px" : '0px'}}>
-                                        <ObjectCard
-                                            route={t.type}
-                                            typeObject={"new"}
-                                            houseData={t}
-                                            data={t}
-                                        />
+                                        <div>
+                                            <ObjectCard
+                                                route={t.type}
+                                                typeObject={"new"}
+                                                houseData={t}
+                                                data={t}
+                                            />
+                                        </div>
+
                                     </div>
                                 ))
                         }

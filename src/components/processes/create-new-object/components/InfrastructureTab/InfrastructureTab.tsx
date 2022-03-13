@@ -16,6 +16,7 @@ import { ObjectGuides } from "../../../../../mobx/stores/objects/GuidesStore";
 import { SelectEstate } from "../../../../shared/SelectEstate/SelectEstate";
 
 import s from "./InfrastructureTab.module.scss";
+import { NewDropDown } from "../../../../shared/BaseDropDown/NewDropDown";
 
 interface Props extends ICreateObjectControls {
   objectType: ObjectTypes;
@@ -48,14 +49,11 @@ const InfrastructureTab: React.FC<Props> = observer(
       setValues({ ...values, infrastructure: event.target.value });
     };
 
-    const onChangeView = (value: string) => {
+    const onChangeView = (value: number[]) => {
       if ("view" in values) {
         setValues({
           ...values,
-          view:
-            values.view.indexOf(value) > -1
-              ? values.view.filter((el) => el !== value)
-              : [...values.view, value],
+          view: value.map((el) => el.toString()),
         });
       }
     };
@@ -118,19 +116,19 @@ const InfrastructureTab: React.FC<Props> = observer(
             <div className={s.divider} />
             {viewType && (
               <InputsGroup title="Вид из окон">
-                <SelectEstate
+                <NewDropDown<number[]>
                   options={viewType.values.map((el) => ({
                     label: el.value,
-                    value: el.id.toString(),
+                    value: el.id,
                   }))}
-                  value={values.view.length > 0 ? hetViewString() : values.view}
+                  value={values.view.map((el) => Number(el))}
                   onChange={onChangeView}
                   placeholder={
                     values.view.length > 0
                       ? hetViewString()
                       : "Выберите один или несколько"
                   }
-                  multi
+                  multi={viewType.isMulti}
                 />
               </InputsGroup>
             )}

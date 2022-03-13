@@ -109,6 +109,7 @@ class CreateObjectStore implements ICreateObject {
         break;
       case ObjectTypes.RESCOMPLEX:
         this.complex.about = data as ICreateComplexAboutTab;
+        break;
       default:
         break;
     }
@@ -130,6 +131,7 @@ class CreateObjectStore implements ICreateObject {
         break;
       case ObjectTypes.RESCOMPLEX:
         this.complex.generalInfo = data as ICreateComplexGeneralInfo;
+        break;
       default:
         break;
     }
@@ -151,6 +153,7 @@ class CreateObjectStore implements ICreateObject {
         break;
       case ObjectTypes.RESCOMPLEX:
         this.complex.infrastructure = data as ICreateComplexInfrastructure;
+        break;
       default:
         break;
     }

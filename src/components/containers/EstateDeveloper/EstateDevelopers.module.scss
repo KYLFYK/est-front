@@ -9,11 +9,12 @@
 .img {
   width: 200px;
   height: 80px;
-  background-color: whitesmoke;
+  background-color: #FFFFFF;
   border-radius: 8px;
   display: inline-block;
-  object-fit: cover;
+  object-fit: contain;
   cursor: pointer;
+  background-size: cover;
 }
 
 .infoCompany{

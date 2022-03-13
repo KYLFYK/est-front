@@ -116,7 +116,9 @@ export const Record: FC<AgentRecordType> = ({Record, title}) => {
             phone:phone,
             status:'Новая заявка',
             comfortableTimeFrom:timeStart,
-            comfortableTimeTo:timeEnd
+            comfortableTimeTo:timeEnd,
+            orderType: "buy",
+            agentName: "string", // ????
         })
         onBlurHandler('')
         setFormValid(false)

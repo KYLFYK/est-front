@@ -13,9 +13,9 @@ export interface ICreateObjectComplex
 
 export interface ICreateComplexAboutTab {
   name: string;
-  country: string;
-  city: string;
-  region: string;
+  country: number;
+  city: number;
+  region: number;
   address: string;
   index: number;
   type: string;

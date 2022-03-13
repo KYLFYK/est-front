@@ -5,10 +5,10 @@ import { ICreateObjectAparts } from "../../types/CreateObjectStoresTypes/CreateA
 class CreateApartmentStore implements ICreateObjectAparts {
   about: ICreateObjectAparts["about"] = {
     name: "",
-    country: "",
-    city: "",
+    country: 0,
+    city: 0,
     address: "",
-    region: "",
+    region: 0,
     cost: 0,
     index: 0,
     type: "",

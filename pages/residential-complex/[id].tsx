@@ -30,6 +30,7 @@ import { useBreadcrumbsStore } from "../../src/mobx/stores/BreadcrumbsStore/Brea
 import { useStore } from "../../src/mobx/stores/ComplexStore/ComplexStore";
 import { UrlObj } from "../../src/api/instance";
 import { FILTER_ACTIONS_OPTIONS } from "../../src/components/containers/Filter/config";
+import css from "../../styles/slider.module.scss";
 
 const city = ["Москва", "Санкт-Петербург", "Крым", "Сочи", "Нижний Новгород"];
 const personalAccount = [
@@ -123,6 +124,7 @@ const ResidentialComplex: NextPage = observer((props: any) => {
               ? props.images.map((el: { id: number; url: string }) => el.url)
               : IMAGES_SET
           }
+          // classSlider={css.image}
         />
       </div>
       <div ref={specs}>

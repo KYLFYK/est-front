@@ -5,10 +5,10 @@ import { ICreateObjectLand } from "../../types/CreateObjectStoresTypes/CreateLan
 class CreateLandStore implements ICreateObjectLand {
   about: ICreateObjectLand["about"] = {
     name: "",
-    country: "",
-    city: "",
+    country: 0,
+    city: 0,
     address: "",
-    region: "",
+    region: 0,
     cost: 0,
     type: "",
   };

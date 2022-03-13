@@ -11,6 +11,7 @@ import ButtonPanel, {
 import InputsGroup from "../InputsGroup/InputsGroup";
 import s from "./LandInfoTab.module.scss";
 import { ObjectGuides } from "../../../../../mobx/stores/objects/GuidesStore";
+import { NewDropDown } from "../../../../shared/BaseDropDown/NewDropDown";
 
 interface Props extends ICreateObjectControls {
   objectType: ObjectTypes.LAND;
@@ -62,7 +63,7 @@ const LandInfoTab: React.FC<Props> = observer(({ onNextTab, onPrevTab }) => {
     <ButtonPanel onNextTab={handleNextTab} onPrevTab={onPrevTab}>
       <InputsGroup title="Инженерные коммуникации">
         {waterType && (
-          <BaseDropDown
+          <NewDropDown
             value={values.waterPipe}
             className={s.dropdownSm}
             label="Водопровод"
@@ -73,10 +74,11 @@ const LandInfoTab: React.FC<Props> = observer(({ onNextTab, onPrevTab }) => {
             placeholder="Водопровод"
             onChange={(value) => onChangeDropDown(value, "waterPipe")}
             isError={!isValid && !isValidWaterPipe}
+            multi={waterType.isMulti}
           />
         )}
         {heatingType && (
-          <BaseDropDown
+          <NewDropDown
             value={values.heating}
             className={s.dropdownSm}
             label="Отопление"
@@ -87,10 +89,11 @@ const LandInfoTab: React.FC<Props> = observer(({ onNextTab, onPrevTab }) => {
             placeholder="Отопление"
             onChange={(value) => onChangeDropDown(value, "heating")}
             isError={!isValid && !isValidHeating}
+            multi={heatingType.isMulti}
           />
         )}
         {sewerageType && (
-          <BaseDropDown
+          <NewDropDown
             value={values.sewerage}
             className={s.dropdownSm}
             label="Канализация"
@@ -101,12 +104,13 @@ const LandInfoTab: React.FC<Props> = observer(({ onNextTab, onPrevTab }) => {
             placeholder="Канализация"
             onChange={(value) => onChangeDropDown(value, "sewerage")}
             isError={!isValid && !isValidSewerage}
+            multi={sewerageType.isMulti}
           />
         )}
       </InputsGroup>
       <div className={s.divider} />
       <InputsGroup title="Строения">
-        <BaseDropDown
+        <NewDropDown
           value={values.buildings}
           className={s.dropdownMd}
           label="Выберите одно или несколько"
