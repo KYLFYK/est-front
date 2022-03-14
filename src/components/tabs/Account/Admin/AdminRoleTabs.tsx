@@ -15,10 +15,10 @@ const AdminTabs: ITabItem[] = [
     title: "Объявления",
     Component: <AdsTabs />,
   },
-  {
+  /*{
     title: "Сообщения",
     Component: <Messages />,
-  },
+  },*/
 ];
 
 export const AdminRoleTabs: FC = () => {

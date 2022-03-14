@@ -49,7 +49,7 @@ export const IconsCreator: React.FC<Props> = ({locationProject, color, title, cl
                     className={s.marker}
                     style={{backgroundColor: color}}
                   />
-                : <> 
+                : <>  
                     {
                       (type === 'house' || type === 'apartment' || type === 'residential-complex' || type === 'plat')
                         ? <div style={{width: '100px', height: '100px', backgroundColor: '#000', borderRadius: '100%', 

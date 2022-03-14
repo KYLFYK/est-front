@@ -23,10 +23,10 @@ const AdminUsersTabs: ITabItem[] = [
     title: "Собственники",
     Component: <OwnersTab />,
   },
-  {
+  /*{
     title: "Статистика",
     Component: <StatisticsTab />,
-  },
+  },*/
 ];
 
 export const UsersTab: FC = () => {

@@ -33,7 +33,7 @@ interface IAdminAgent {
   imgUrl?: string;
 }
 
-type ListType = IAdminAgent[] | null;
+type ListType = IAdminAgent[] | [];
 
 class AgenciesList {
   constructor() {
@@ -42,7 +42,7 @@ class AgenciesList {
 
   loaded: boolean = false;
   errorOnLoad: boolean = false;
-  list: ListType = null;
+  list: ListType = [];
 
   uploadList: () => void = async () => {
     try {
@@ -59,6 +59,11 @@ class AgenciesList {
       this.errorOnLoad = true;
     }
   };
+
+  get() {
+    return JSON.parse(JSON.stringify([ ...this.list ]))
+  }
+
 }
 
 export const AgencyListStore = new AgenciesList();

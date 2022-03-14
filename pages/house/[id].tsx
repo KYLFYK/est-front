@@ -29,12 +29,8 @@ import {
 } from "../../src/utils/conversionIcons/conversionIcons";
 import { conversionDate } from "../../src/utils/conversionDate/conversionDate";
 import PaybackContainer from "../../src/components/containers/PaybackContainer/PaybackContainer";
-<<<<<<< HEAD
-import { plusUnitMeasurement } from "../../src/utils/plusUnitMeasurement/plusUnitMeasurement";
-=======
 import {plusUnitMeasurement} from "../../src/utils/plusUnitMeasurement/plusUnitMeasurement";
 import css from "../../styles/slider.module.scss";
->>>>>>> c204c9de0845a5698b6dae563b22d66aeae60145
 
 const city = ["Москва", "Крым", "Сочи"];
 
@@ -297,77 +293,6 @@ const House = observer((props: any) => {
     breadCrumbsStore.addBreadCrumbs(props.name, 2);
   }, [router.query.id]);
 
-<<<<<<< HEAD
-  return (
-    <MainContainer
-      keywords={props.name}
-      title={props.name}
-      city={city}
-      personalAccount={personalAccount}
-      footerColor={"nude"}
-      refs={refs}
-    >
-      <Breadcrumbs location={"object"} />
-      <Views items={views} />
-      <NameEstate item={props.name} />
-      <AdressEstate item={props.address} />
-      <HorizontalTabs tabs={tabs} refs={refs} />
-      <div ref={general}>
-        {infoOptions && (
-          <GeneralInfo
-            info={plusUnitMeasurement(infoOptions)}
-            price={props.price}
-            images={props.images}
-          />
-        )}
-      </div>
-      {props.description && <ObjectDescription items={[props.description]} />}
-      <div ref={tours}>
-        {(props?.online_tour?.threeD_tour?.url ||
-          props?.online_tour?.vr_tour?.url) && (
-          <ToursContainer Online_tour={props.online_tour} />
-        )}
-      </div>
-      <div ref={architec}>
-        {object_specs && (
-          <ObjectSpecifications
-            specificationsLists={object_specs}
-            title={"Архитектурно-планировочные решения"}
-          />
-        )}
-      </div>
-      <div ref={infra}>
-        <Map
-          currentHouse={JSON.parse(JSON.stringify(props))}
-          infrastructura={infrastructura}
-          location={"infrastructure"}
-          InfrastructureInfo={
-            props.description_items ? props.description_items : ""
-          }
-        />
-      </div>
-      <div ref={legal}>
-        {legalPurityData && (
-          <ObjectLegalPurity legalPurityData={legalPurityData} />
-        )}
-      </div>
-      <div ref={payback}>
-        <PaybackContainer
-          currentHouse={JSON.parse(JSON.stringify(props))}
-          averagePrice={averagePrice}
-        />
-      </div>
-      <div ref={developer}>
-        {/*<ObjectDeveloper developerData={store.initialData.object_developer_info}/>*/}
-      </div>
-      <Mortgage />
-      <div ref={record}>
-        <Record Record={RecordAgent.Record} title={"дом"} />
-      </div>
-    </MainContainer>
-  );
-});
-=======
     return (
         <MainContainer
             keywords={props.name}
@@ -432,7 +357,6 @@ const House = observer((props: any) => {
         </MainContainer>
     )
 })
->>>>>>> c204c9de0845a5698b6dae563b22d66aeae60145
 
 export default House;
 
