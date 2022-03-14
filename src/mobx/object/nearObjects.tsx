@@ -93,7 +93,7 @@ class ObjectInStore {
                 distance: d.distance,
                 type : "Квартира",
             }
-        })
+        }).sort((a: any, b: any) => a.distance > b.distance ? 1 : -1).slice(0, 10)
     }
 
     get() {

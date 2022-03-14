@@ -26,10 +26,10 @@ export const DevelopersTab: FC = observer(() => {
 
   let sortedData: any = []
   if(sort === 'high'){
-    sortedData = [...store.get()?.sort((a: any, b: any) => a.agencyName > b.agencyName ? 1 : -1)]
+    sortedData = [...store.get()?.sort((a: any, b: any) => a.developerName > b.developerName ? 1 : -1)]
   } 
   if(sort === 'low'){
-    sortedData = [...store.get()?.sort((a: any, b: any) => a.agencyName < b.agencyName ? 1 : -1)]
+    sortedData = [...store.get()?.sort((a: any, b: any) => a.developerName < b.developerName ? 1 : -1)]
   } 
   if(sort === 'default'){
       sortedData = [...store.get()]
@@ -39,7 +39,7 @@ export const DevelopersTab: FC = observer(() => {
     setTextFilter(e.target.value)
   }
 
-  return sortedData !== null ? (
+  return list ? (
     <div className={commonStyles.wrapper}>
       <div className={styles.filtersortWrapper}>
         <BaseDropDown 
