@@ -4,6 +4,25 @@ import {observer} from "mobx-react-lite";
 import Typography from "../../../../../shared/Typography/Typography";
 import css from './editing.module.scss'
 
+import {GuideItem} from "./GuidesItem";
+
+export const translate = (title: string) => {
+    switch (title) {
+        case 'house':
+            return 'Дома'
+        case 'apartment':
+            return 'Апартаменты'
+        case 'townhouse':
+            return 'Таунхаусы'
+        case 'complex':
+            return 'ЖК'
+        case 'land':
+            return 'Участоки'
+        default:
+            return title
+    }
+}
+
 const Editing = observer(() => {
 
     const {fetch, initialState} = AdminEditingStore
@@ -15,9 +34,10 @@ const Editing = observer(() => {
     return (
         <div>
             {
-                initialState?.map((t: any, index) => (
+                initialState?.map((t: any, index:number) => (
                     <GuidesHeader
                         key={index}
+                        indexGuides={index}
                         guidesHeader={t}
                     />
 
@@ -31,11 +51,13 @@ export default Editing;
 
 type GuidesHeaderType = {
     guidesHeader: any
+    indexGuides:number
 }
 
-const GuidesHeader: FC<GuidesHeaderType> = ({guidesHeader}) => {
+const GuidesHeader: FC<GuidesHeaderType> = observer(({guidesHeader,indexGuides}) => {
 
     const [menu, setMenu] = useState<boolean>(false)
+
 
     return (
         <div>
@@ -50,61 +72,9 @@ const GuidesHeader: FC<GuidesHeaderType> = ({guidesHeader}) => {
                 menu &&
                 <GuideItem
                     guides={guidesHeader}
+                    indexGuides={indexGuides}
                 />
             }
         </div>
     )
-}
-
-type GuideItemType = {
-    guides: any
-}
-
-const GuideItem: FC<GuideItemType> = ({guides}) => {
-
-    const [edit, setEdit] = useState<null | string>(null)
-    const [guideInfo, setGuideInfo] = useState<any>('')
-
-    const activeMenu = (e:string | null, guide:any) => {
-        setEdit(e)
-        setGuideInfo(guide)
-        if(e === edit){
-            setEdit(null)
-        }
-    }
-
-    return (
-        <div style={{display:'flex'}}>
-            <div >
-                {
-                    guides.info.map((t: any) => (
-                        <div key={t.value} onClick={()=>activeMenu(t.value,t)}>
-                            <Typography
-                                className={css.guide}
-                                size={"small"}
-                                color={edit===t.value?'nude': "tertiary"}
-                            >
-                                {t.value}
-                            </Typography>
-                        </div>
-
-                    ))
-                }
-            </div>
-            <div style={{marginLeft : '40px'}}>
-                {
-                    edit !==null &&
-                    <div>
-                        {
-                            guideInfo.for.map((objType:any)=>(
-                                <div key={objType}>
-                                    {objType}
-                                </div>
-                            ))
-                        }
-                    </div>
-                }
-            </div>
-        </div>
-    )
-}
+})

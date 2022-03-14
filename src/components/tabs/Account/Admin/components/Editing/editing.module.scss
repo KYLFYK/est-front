@@ -6,3 +6,18 @@
   margin: 0 10px 5px 0;
   cursor: pointer;
 }
+.marginColumn{
+  margin: 0 5px;
+}
+.grid_3{
+  display: grid;
+  grid-template-columns: 200px 100px 1fr;
+}
+.checkbox{
+  display: flex;
+  justify-content: center;
+}
+.label{
+  display: flex;
+  cursor: pointer;;
+}

@@ -1,5 +1,6 @@
 import { makeAutoObservable } from "mobx";
 import {instance} from "../../../../api/instance";
+import {GuideInfoType} from "../../../../components/tabs/Account/Admin/components/Editing/GuidesItem";
 
 type IEditingProfile={
 
@@ -9,7 +10,7 @@ type IEditingProfile={
 const InitialData: IEditingProfile = {
     initialState:{
 
-    },
+    }
 
 };
 
@@ -20,7 +21,19 @@ class AdminEditing {
 
     loaded: boolean = false;
     errorOnLoad: boolean = false;
-    initialState: null | Array<{}> = null;
+    initialState: null |
+        Array<{ type_en : string, type_ru : string, info : Array<GuideInfoType>}> = null;
+
+    update: (e:any,indexGuides:number,activeType:number)=> void = (e:any,indexGuides:number,activeType:number)=> {
+        debugger
+        if ( this.initialState !== null){
+            this.initialState[indexGuides].info[activeType].for = e
+            console.log("newItems",JSON.parse(JSON.stringify(this.initialState[indexGuides].info[activeType].for)))
+            console.log("newItems123",JSON.parse(JSON.stringify(this.initialState)))
+            console.log("newItems",e)
+        }
+
+    }
 
     fetch: ()=> void = async ()=> {
          const res = await instance.get(`guide`)
@@ -48,8 +61,9 @@ class AdminEditing {
                 arrayItems.map( (t:any,index:number)=> t.type_en === res.data[x].subtitle_en && newItems[index].info.push(res.data[x])  )
             }
         }
+
         this.initialState = newItems
-        console.log(newItems)
+        console.log("newItems",newItems)
     }
 }
 
