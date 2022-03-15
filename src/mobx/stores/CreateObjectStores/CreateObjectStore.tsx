@@ -495,6 +495,30 @@ class CreateObjectStore implements ICreateObject {
         });
 
         break;
+      case ObjectTypes.RESCOMPLEX:
+        this.complex.about.name = data.name;
+        this.complex.about.address = data.address;
+        this.complex.about.city = data.cityId;
+        this.complex.about.country = data.countryId;
+        this.complex.generalInfo.description = data.description;
+        this.uploadedFiles = data.images;
+        this.complex.generalInfo.photos = data.images;
+        this.complex.generalInfo.amountObjects = data.property;
+
+        // property amountBuildings: 23
+        // amountFloors: 30
+        // amountObjects: 12
+        // areaObjectMax: 202
+        // areaObjectMin: 2
+        // heightCeilings: 4
+        // id: 1
+        // infrastructure: "Опишите особенности в инфраструктуре вашего ЖК"
+        // priceObjectMax: 141240
+        // priceObjectMin: 12
+
+        if (data.postcode) {
+          this.complex.about.index = Number(data.postcode);
+        }
     }
 
     this.forceRerender = !this.forceRerender;
@@ -808,7 +832,6 @@ class CreateObjectStore implements ICreateObject {
         owner: idOwner.id,
         status: 1,
         price: newHouse.about.cost,
-        complex: 1,
         legalPurity: {
           address: newHouse.legalPurity.realEstateRegister.address,
           areaValue: Number(

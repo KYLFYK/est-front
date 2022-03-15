@@ -17,6 +17,7 @@ export const createObjectAPI = {
         },
       });
     } catch (e: any) {
+      alert("Error");
       return e;
     }
   },
@@ -28,6 +29,7 @@ export const createObjectAPI = {
         },
       });
     } catch (e: any) {
+      alert("Error");
       return e;
     }
   },
@@ -39,6 +41,7 @@ export const createObjectAPI = {
         },
       });
     } catch (e: any) {
+      alert("Error");
       return e;
     }
   },
@@ -50,6 +53,7 @@ export const createObjectAPI = {
         },
       });
     } catch (e: any) {
+      alert("Error");
       return e;
     }
   },
@@ -61,6 +65,7 @@ export const createObjectAPI = {
         },
       });
     } catch (e: any) {
+      alert("Error");
       return e;
     }
   },
