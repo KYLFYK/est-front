@@ -495,6 +495,44 @@ class CreateObjectStore implements ICreateObject {
         });
 
         break;
+      case ObjectTypes.RESCOMPLEX:
+        this.complex.about.name = data.name;
+        this.complex.about.address = data.address;
+        this.complex.about.city = data.cityId;
+        this.complex.about.country = data.countryId;
+        this.complex.generalInfo.description = data.description;
+        this.uploadedFiles = data.images;
+        this.complex.generalInfo.photos = data.images;
+        this.complex.generalInfo.amountObjects =
+          data.info_options[0].amountObjects;
+        this.complex.generalInfo.priceObjectMin =
+          data.info_options[0].priceObjectMin;
+        this.complex.generalInfo.priceObjectMax =
+          data.info_options[0].priceObjectMax;
+        this.complex.generalInfo.amountBuildings =
+          data.info_options[0].amountBuildings;
+        this.complex.generalInfo.heightCeilings =
+          data.info_options[0].heightCeilings;
+        this.complex.generalInfo.amountFloors =
+          data.info_options[0].amountFloors;
+        this.complex.generalInfo.areaObjectMax =
+          data.info_options[0].areaObjectMax;
+        this.complex.generalInfo.areaObjectMin =
+          data.info_options[0].areaObjectMin;
+        this.complex.infrastructure.infrastructure =
+          data.info_options[0].infrastructure;
+        this.complex.info.guides = data.object_specs.map((el: IGuide) => el.id);
+
+        this.complex.info.constructionProgress = data.schedule.map(
+          (el: any) => ({
+            date: moment(el.date).format("DD.MM.YYYY"),
+            description: el.description,
+          })
+        );
+
+        if (data.postcode) {
+          this.complex.about.index = Number(data.postcode);
+        }
     }
 
     this.forceRerender = !this.forceRerender;
@@ -636,7 +674,6 @@ class CreateObjectStore implements ICreateObject {
         region: data.about.region,
         country: data.about.country,
         city: data.about.city,
-        owner: idOwner.id,
         status: 1,
         price: newData.about.cost,
         legalPurity: {
@@ -724,6 +761,7 @@ class CreateObjectStore implements ICreateObject {
           console.log("response apartment", res);
           return res;
         } else {
+          apartmentData.owner = idOwner.id;
           const res = await createObjectAPI.createObjectApartment(
             apartmentData
           );
@@ -794,7 +832,7 @@ class CreateObjectStore implements ICreateObject {
         return guides.indexOf(item) == pos;
       });
 
-      const houseObject = {
+      const houseObject: any = {
         name: newHouse.about.name,
         objectType: this.getObjType(),
         description: newHouse.generalInfo.description,
@@ -805,10 +843,8 @@ class CreateObjectStore implements ICreateObject {
         region: data.about.region,
         country: data.about.country,
         city: data.about.city,
-        owner: idOwner.id,
         status: 1,
         price: newHouse.about.cost,
-        complex: 1,
         legalPurity: {
           address: newHouse.legalPurity.realEstateRegister.address,
           areaValue: Number(
@@ -897,6 +933,7 @@ class CreateObjectStore implements ICreateObject {
           console.log("response apartment", res);
           return res;
         } else {
+          houseObject.owner = idOwner.id;
           const res = await createObjectAPI.createObjectHouse(houseObject);
           console.log("response apartment", res);
           return res;
@@ -968,7 +1005,7 @@ class CreateObjectStore implements ICreateObject {
         return guides.indexOf(item) == pos;
       });
 
-      const landData = {
+      const landData: any = {
         name: newLand.about.name,
         objectType: this.getObjType(),
         description: newLand.generalInfo.description,
@@ -979,7 +1016,6 @@ class CreateObjectStore implements ICreateObject {
         region: data.about.region,
         country: data.about.country,
         city: data.about.city,
-        owner: idOwner.id,
         status: 1,
         price: newLand.about.cost,
         legalPurity: {
@@ -1039,6 +1075,7 @@ class CreateObjectStore implements ICreateObject {
           console.log("response land", res);
           return res;
         } else {
+          landData.owner = idOwner.id;
           const res = await createObjectAPI.createObjectLand(landData);
           console.log("response land", res);
           return res;
@@ -1051,7 +1088,7 @@ class CreateObjectStore implements ICreateObject {
     if (objectType === 4) {
       const complexDataS: ICreateObjectComplex = data as ICreateObjectComplex;
 
-      const complexData = {
+      const complexData: any = {
         objectType: "sale",
         name: complexDataS.about.name,
         description: complexDataS.generalInfo.description,
@@ -1062,7 +1099,6 @@ class CreateObjectStore implements ICreateObject {
         region: complexDataS.about.region,
         country: complexDataS.about.country,
         city: complexDataS.about.city,
-        owner: idOwner.id,
         status: 1,
         guides: complexDataS.info.guides,
         files: this.uploadedFiles,
@@ -1087,6 +1123,7 @@ class CreateObjectStore implements ICreateObject {
             id as number | string
           );
         } else {
+          complexData.owner = idOwner.id;
           return await createObjectAPI.createObjectResComplex(complexData);
         }
       } catch (e) {

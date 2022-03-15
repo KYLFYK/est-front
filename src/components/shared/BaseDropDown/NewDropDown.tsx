@@ -64,8 +64,6 @@ export const NewDropDown: <T extends ValueVariants | Array<ValueVariants>>(
   };
 
   const renderValue = useMemo(() => {
-    console.log(value);
-
     if (value) {
       if (Array.isArray(value)) {
         if (value.length > 0) {

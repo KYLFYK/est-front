@@ -23,6 +23,7 @@ export const searchColor = (status: string) => {
       return "tertiary";
   }
 };
+
 type ActiveType = {
   menu?: "active" | "archive" | "draft";
   objects: IObject[];
@@ -31,6 +32,17 @@ type ActiveType = {
 };
 
 export type IObjType = "rent" | "sale" | "buy";
+
+export const ObjTypeToRu: (type: IObjType) => string = (type) => {
+  switch (type) {
+    case "buy":
+      return "Покупка";
+    case "sale":
+      return "Продажа";
+    case "rent":
+      return "Аренда";
+  }
+};
 
 export const getObjType: (type: IObjType) => string = (type) => {
   switch (type) {
@@ -50,18 +62,22 @@ const MyAdsContainer: FC<ActiveType> = ({
   restoreObject,
 }) => {
   const [maxCardWidth, setMaxCardWidth] = useState<number | "unset">("unset");
-  const [textFilter, setTextFilter] = useState('')
-  const [sort, setSort] = useState('default')
+  const [textFilter, setTextFilter] = useState("");
+  const [sort, setSort] = useState("default");
 
-  let sortedData: any = []
-  if(sort === 'high'){
-    sortedData = [...objects.sort((a: any, b: any) => a.price > b.price ? 1 : -1)]
-  } 
-  if(sort === 'low'){
-    sortedData = [...objects.sort((a: any, b: any) => a.price < b.price ? 1 : -1)]
-  } 
-  if(sort === 'default'){
-    sortedData = [...objects]
+  let sortedData: any = [];
+  if (sort === "high") {
+    sortedData = [
+      ...objects.sort((a: any, b: any) => (a.price > b.price ? 1 : -1)),
+    ];
+  }
+  if (sort === "low") {
+    sortedData = [
+      ...objects.sort((a: any, b: any) => (a.price < b.price ? 1 : -1)),
+    ];
+  }
+  if (sort === "default") {
+    sortedData = [...objects];
   }
 
   useEffect(() => {
@@ -84,8 +100,8 @@ const MyAdsContainer: FC<ActiveType> = ({
   }, []);
 
   const onChange = (e: any) => {
-    setTextFilter(e.target.value)
-  }
+    setTextFilter(e.target.value);
+  };
 
   return (
     <div>
@@ -94,22 +110,26 @@ const MyAdsContainer: FC<ActiveType> = ({
         inputIcon={<GlassIcon />}
         inputIconPlacement={"right"}
         placeholder={"Поиск..."}
-        value={textFilter} 
+        value={textFilter}
         onChange={onChange}
         className={`${css.placeholder} ${css.altPadding}`}
       />
-      <FilterSearch sort={sort} setSort={setSort}/>
+      <FilterSearch sort={sort} setSort={setSort} />
       {sortedData?.length > 0 ? (
-        sortedData?.filter((d: any) => d.name.toLowerCase().includes(textFilter.toLowerCase())).map((home: any, id: number) => (
-          <MyAdsItem
-            key={id}
-            home={home}
-            maxCardWidth={maxCardWidth}
-            menu={menu}
-            deleteObject={deleteObject}
-            restoreObject={restoreObject}
-          />
-        ))
+        sortedData
+          ?.filter((d: any) =>
+            d.name.toLowerCase().includes(textFilter.toLowerCase())
+          )
+          .map((home: any, id: number) => (
+            <MyAdsItem
+              key={id}
+              home={home}
+              maxCardWidth={maxCardWidth}
+              menu={menu}
+              deleteObject={deleteObject}
+              restoreObject={restoreObject}
+            />
+          ))
       ) : (
         <div
           style={{

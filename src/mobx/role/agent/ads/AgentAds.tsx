@@ -10,6 +10,140 @@ import imgMoc from "../../../../components/tabs/Account/Agent/components/Persona
 import { ObjectTypes } from "../../../../utils/interfaces/objects";
 import { markAsDeleted } from "../../../../api/obj/markAsDeleted";
 import { reestablishObject } from "../../../../api/obj/reestablishObject";
+import { IUploadedFile } from "../../../stores/CreateObjectStores/CreateObjectStore";
+import { ComplexApi } from "../../../../api/obj/complex";
+
+export const loadAllData: () => any = async () => {
+  let i = 0;
+  let obj: any = [];
+  let res;
+
+  do {
+    res = await ApartmentApi.getAllApartment(i * 10, 10);
+    obj = obj
+      ? [
+          ...obj,
+          ...res?.data.map((el: any) => ({
+            ...el,
+            objType: ObjectTypes.APARTMENTS,
+          })),
+        ]
+      : res?.data.map((el: any) => ({
+          ...el,
+          objType: ObjectTypes.APARTMENTS,
+        }))
+      ? [
+          ...res?.data.map((el: any) => ({
+            ...el,
+            objType: ObjectTypes.APARTMENTS,
+          })),
+        ]
+      : [];
+    i++;
+  } while (res?.data?.length >= 10);
+  i = 0;
+  do {
+    res = await HouseApi.getAllHouse(i * 10, 10);
+    obj = obj
+      ? [
+          ...obj,
+          ...res?.data.map((el: any) => ({
+            ...el,
+            objType: ObjectTypes.HOUSE,
+          })),
+        ]
+      : res?.data.map((el: any) => ({
+          ...el,
+          objType: ObjectTypes.HOUSE,
+        }))
+      ? [
+          ...res?.data.map((el: any) => ({
+            ...el,
+            objType: ObjectTypes.HOUSE,
+          })),
+        ]
+      : [];
+    i++;
+  } while (res?.data?.length >= 10);
+  i = 0;
+  do {
+    res = await LandApi.getAllLand(i * 10, 10);
+    obj = obj
+      ? [
+          ...obj,
+          ...res?.data.map((el: any) => ({
+            ...el,
+            objType: ObjectTypes.LAND,
+          })),
+        ]
+      : res?.data.map((el: any) => ({
+          ...el,
+          objType: ObjectTypes.LAND,
+        }))
+      ? [
+          ...res?.data.map((el: any) => ({
+            ...el,
+            objType: ObjectTypes.LAND,
+          })),
+        ]
+      : [];
+    i++;
+  } while (res?.data?.length >= 10);
+  i = 0;
+  do {
+    res = await ComplexApi.getAllComplex(i * 10, 10);
+
+    if (res?.data && Array.isArray(res.data)) {
+      obj = obj
+        ? [
+            ...obj,
+            ...res?.data.map((el: any) => ({
+              ...el,
+              objType: ObjectTypes.RESCOMPLEX,
+            })),
+          ]
+        : res?.data.map((el: any) => ({
+            ...el,
+            objType: ObjectTypes.RESCOMPLEX,
+          }))
+        ? [
+            ...res?.data.map((el: any) => ({
+              ...el,
+              objType: ObjectTypes.RESCOMPLEX,
+            })),
+          ]
+        : [];
+      i++;
+    } else {
+      break;
+    }
+  } while (res?.data?.length >= 10);
+
+  return obj;
+};
+
+export interface IFile extends IUploadedFile {
+  createAt: string;
+  updateAt: string;
+  id: number;
+}
+
+export interface IOwner {
+  adminProperty: null;
+  agencyProperty: number;
+  agentProperty: null;
+  bankProperty: null;
+  createAt: string;
+  customerProperty: null;
+  developerProperty: null;
+  email: string;
+  id: number;
+  isConfirmed: boolean;
+  markAsDelete: boolean;
+  phone: string;
+  role: string;
+  updateAt: string;
+}
 
 export interface IObject {
   id: number;
@@ -23,31 +157,8 @@ export interface IObject {
   price: string;
   mainSpecifications: Array<string>;
   markAsDelete: boolean;
-  files: {
-    createAt: string;
-    fileName: string;
-    id: number;
-    mimeType: string;
-    size: string;
-    updateAt: string;
-    url: string;
-  }[];
-  agent: {
-    adminProperty: null;
-    agencyProperty: number;
-    agentProperty: null;
-    bankProperty: null;
-    createAt: string;
-    customerProperty: null;
-    developerProperty: null;
-    email: string;
-    id: number;
-    isConfirmed: boolean;
-    markAsDelete: boolean;
-    phone: string;
-    role: string;
-    updateAt: string;
-  } | null;
+  files: IFile[];
+  agent: IOwner | null;
   dateStart: string;
   dateEnd: string;
   status: {
@@ -108,85 +219,6 @@ class AgentAdsStore {
   }
 
   async fetch() {
-    const loadAllData: () => any = async () => {
-      let i = 0;
-      let obj: any = [];
-      let res;
-      do {
-        res = await ApartmentApi.getAllApartment(i * 10, 10);
-        obj = obj
-          ? [
-              ...obj,
-              ...res?.data.map((el: any) => ({
-                ...el,
-                objType: ObjectTypes.APARTMENTS,
-              })),
-            ]
-          : res?.data.map((el: any) => ({
-              ...el,
-              objType: ObjectTypes.APARTMENTS,
-            }))
-          ? [
-              ...res?.data.map((el: any) => ({
-                ...el,
-                objType: ObjectTypes.APARTMENTS,
-              })),
-            ]
-          : [];
-        i++;
-      } while (res?.data?.length >= 10);
-      i = 0;
-      do {
-        res = await HouseApi.getAllHouse(i * 10, 10);
-        obj = obj
-          ? [
-              ...obj,
-              ...res?.data.map((el: any) => ({
-                ...el,
-                objType: ObjectTypes.HOUSE,
-              })),
-            ]
-          : res?.data.map((el: any) => ({
-              ...el,
-              objType: ObjectTypes.HOUSE,
-            }))
-          ? [
-              ...res?.data.map((el: any) => ({
-                ...el,
-                objType: ObjectTypes.HOUSE,
-              })),
-            ]
-          : [];
-        i++;
-      } while (res?.data?.length >= 10);
-      i = 0;
-      do {
-        res = await LandApi.getAllLand(i * 10, 10);
-        obj = obj
-          ? [
-              ...obj,
-              ...res?.data.map((el: any) => ({
-                ...el,
-                objType: ObjectTypes.LAND,
-              })),
-            ]
-          : res?.data.map((el: any) => ({
-              ...el,
-              objType: ObjectTypes.LAND,
-            }))
-          ? [
-              ...res?.data.map((el: any) => ({
-                ...el,
-                objType: ObjectTypes.LAND,
-              })),
-            ]
-          : [];
-        i++;
-      } while (res?.data?.length >= 10);
-
-      return obj;
-    };
-
     const fetchResult = await loadAllData();
 
     this.initialData.data = fetchResult.map((o: any) => ({
