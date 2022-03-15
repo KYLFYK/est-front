@@ -5,6 +5,7 @@ import {
 } from "../../../../../shared/HorizontalTabs/HorizontalTabs";
 import { Account } from "./Account";
 import { Settings } from "./Settings";
+import { LegalInfoEditDeveloper } from "./LegalInfoEditDeveloper";
 
 import styles from "./Account.module.scss";
 import { observer } from "mobx-react-lite";
@@ -15,7 +16,7 @@ export const PersonalArea: FC = observer(() => {
   const [edit, setEdit] = useState<boolean>(false);
 
   const store = useStoreDeveloperCabinet();
-  store.get();
+
   useEffect(() => {
     store.fetch();
   }, [store]);
@@ -33,6 +34,10 @@ export const PersonalArea: FC = observer(() => {
             {
               title: "Настройки",
               Component: <Settings />,
+            },
+            {
+              title: "Юр.Чистота",
+              Component: <LegalInfoEditDeveloper />,
             },
           ]}
         />

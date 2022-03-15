@@ -14,6 +14,7 @@ import {useStoreDeveloperCabinet} from "../../../../../../mobx/role/developer/ca
 import {BaseTextarea} from "../../../../../shared/BaseTextarea/BaseTextarea";
 import {AvatarSection} from "../../../../../shared/AvatarSection";
 
+
 export type infoDeveloperType = {
     name: string,
     type: string,
