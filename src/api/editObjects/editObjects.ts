@@ -59,7 +59,7 @@ export const editObjectApi = {
   },
   createObjectResComplex: async (data: any, id: string | number) => {
     try {
-      return await instance.put(`${UrlEditObject.complex}/${id}`, data, {
+      return await instance.patch(`${UrlEditObject.complex}/${id}`, data, {
         headers: {
           authorization: `Bearer ${localStorage.getItem("accessEstatum")}`,
         },
