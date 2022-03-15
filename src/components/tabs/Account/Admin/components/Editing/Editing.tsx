@@ -3,7 +3,6 @@ import {AdminEditingStore} from "../../../../../../mobx/role/admin/editing/editi
 import {observer} from "mobx-react-lite";
 import Typography from "../../../../../shared/Typography/Typography";
 import css from './editing.module.scss'
-
 import {GuideItem} from "./GuidesItem";
 
 export const translate = (title: string) => {
@@ -34,7 +33,7 @@ const Editing = observer(() => {
     return (
         <div>
             {
-                initialState?.map((t: any, index:number) => (
+                initialState?.map((t: any, index: number) => (
                     <GuidesHeader
                         key={index}
                         indexGuides={index}
@@ -51,22 +50,23 @@ export default Editing;
 
 type GuidesHeaderType = {
     guidesHeader: any
-    indexGuides:number
+    indexGuides: number
 }
 
-const GuidesHeader: FC<GuidesHeaderType> = observer(({guidesHeader,indexGuides}) => {
+const GuidesHeader: FC<GuidesHeaderType> = observer(({guidesHeader, indexGuides}) => {
 
     const [menu, setMenu] = useState<boolean>(false)
 
-
     return (
         <div>
-            <div onClick={() => setMenu(!menu)}>
-                <Typography weight={"medium"} className={css.guideHearer}>
-                    {
-                        guidesHeader.type_ru
-                    }
-                </Typography>
+            <div style={{display: 'flex'}}>
+                <div onClick={() => setMenu(!menu)}>
+                    <Typography weight={"medium"} className={css.guideHearer}>
+                        {
+                            guidesHeader.type_ru
+                        }
+                    </Typography>
+                </div>
             </div>
             {
                 menu &&
@@ -75,6 +75,7 @@ const GuidesHeader: FC<GuidesHeaderType> = observer(({guidesHeader,indexGuides})
                     indexGuides={indexGuides}
                 />
             }
+
         </div>
     )
 })
