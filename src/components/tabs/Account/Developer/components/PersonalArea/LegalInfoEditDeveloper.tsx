@@ -1,24 +1,82 @@
 import { FC, useState } from "react";
 import { BaseInput } from "../../../../../shared/BaseInput/Input";
-import {useStoreDeveloperCabinet} from "../../../../../../mobx/role/developer/cabinet/DeveloperCabinet";
-import {observer} from "mobx-react-lite";
+import { useStoreDeveloperCabinet } from "../../../../../../mobx/role/developer/cabinet/DeveloperCabinet";
+import { observer } from "mobx-react-lite";
 import styles from "../../../Admin/components/UsersTab/agency/agency.module.scss";
 import BaseButton from "../../../../../shared/BaseButton/BaseButtons";
-import css from './AccountEditDeveloper.module.scss';
+import css from "./AccountEditDeveloper.module.scss";
 
 export const LegalInfoEditDeveloper: FC = observer(() => {
   const [activityKinds, setActivityKinds] = useState<string[]>([""]);
 
-  const store = useStoreDeveloperCabinet()
-  const errorFields = !((store.get().legal.authorizedCapital instanceof Number || typeof store.get().legal.authorizedCapital === 'number') && !isNaN(store.get().legal.authorizedCapital) && store.get().legal.authorizedCapital >= 0) 
-  || !(`${store.get().legal.INN}`.length === 12 && `${store.get().legal.INN}`.split('').filter((n: any) => n >= 0 && n <= 9).join('').length === 12) || !(`${store.get().legal.OGRN}`.length === 13 && `${store.get().legal.OGRN}`.split('').filter((n: any) => n >= 0 && n <= 9).join('').length === 13) 
-  || !(`${store.get().legal.KPP}`.length === 9 && `${store.get().legal.KPP}`.split('').filter((n: any) => n >= 0 && n <= 9).join('').length === 9) || !((store.get().legal.enterpriseSize instanceof Number || typeof store.get().legal.enterpriseSize === 'number') && !isNaN(store.get().legal.enterpriseSize) && store.get().legal.enterpriseSize >= 0) 
-  || !((store.get().legal.numberOfStaff instanceof Number || typeof store.get().legal.numberOfStaff === 'number') && !isNaN(store.get().legal.numberOfStaff) && store.get().legal.numberOfStaff >= 0) || !((store.get().legal.branch instanceof Number || typeof store.get().legal.branch === 'number') && !isNaN(store.get().legal.branch) && store.get().legal.branch >= 0) 
-  || !((store.get().legal.revenue instanceof Number || typeof store.get().legal.revenue === 'number') && !isNaN(store.get().legal.revenue) && store.get().legal.revenue >= 0) || !((store.get().legal.netProfit instanceof Number || typeof store.get().legal.netProfit === 'number') && !isNaN(store.get().legal.netProfit))
-  || !((store.get().legal.netAssets instanceof Number || typeof store.get().legal.netAssets === 'number') && !isNaN(store.get().legal.netAssets))
+  const store = useStoreDeveloperCabinet();
+  const errorFields =
+    !(
+      (store.get().legal.authorizedCapital instanceof Number ||
+        typeof store.get().legal.authorizedCapital === "number") &&
+      !isNaN(store.get().legal.authorizedCapital) &&
+      store.get().legal.authorizedCapital >= 0
+    ) ||
+    !(
+      `${store.get().legal.INN}`.length === 12 &&
+      `${store.get().legal.INN}`
+        .split("")
+        .filter((n: any) => n >= 0 && n <= 9)
+        .join("").length === 12
+    ) ||
+    !(
+      `${store.get().legal.OGRN}`.length === 13 &&
+      `${store.get().legal.OGRN}`
+        .split("")
+        .filter((n: any) => n >= 0 && n <= 9)
+        .join("").length === 13
+    ) ||
+    !(
+      `${store.get().legal.KPP}`.length === 9 &&
+      `${store.get().legal.KPP}`
+        .split("")
+        .filter((n: any) => n >= 0 && n <= 9)
+        .join("").length === 9
+    ) ||
+    !(
+      (store.get().legal.enterpriseSize instanceof Number ||
+        typeof store.get().legal.enterpriseSize === "number") &&
+      !isNaN(store.get().legal.enterpriseSize) &&
+      store.get().legal.enterpriseSize >= 0
+    ) ||
+    !(
+      (store.get().legal.numberOfStaff instanceof Number ||
+        typeof store.get().legal.numberOfStaff === "number") &&
+      !isNaN(store.get().legal.numberOfStaff) &&
+      store.get().legal.numberOfStaff >= 0
+    ) ||
+    !(
+      (store.get().legal.branch instanceof Number ||
+        typeof store.get().legal.branch === "number") &&
+      !isNaN(store.get().legal.branch) &&
+      store.get().legal.branch >= 0
+    ) ||
+    !(
+      (store.get().legal.revenue instanceof Number ||
+        typeof store.get().legal.revenue === "number") &&
+      !isNaN(store.get().legal.revenue) &&
+      store.get().legal.revenue >= 0
+    ) ||
+    !(
+      (store.get().legal.netProfit instanceof Number ||
+        typeof store.get().legal.netProfit === "number") &&
+      !isNaN(store.get().legal.netProfit)
+    ) ||
+    !(
+      (store.get().legal.netAssets instanceof Number ||
+        typeof store.get().legal.netAssets === "number") &&
+      !isNaN(store.get().legal.netAssets)
+    );
   const save = () => {
-    store.updateDeveloper(store.initialData.account.id, {...store.get().legal})
-  }
+    store.updateDeveloper(store.initialData.account.id, {
+      ...store.get().legal,
+    });
+  };
 
   return (
     <div
@@ -57,7 +115,14 @@ export const LegalInfoEditDeveloper: FC = observer(() => {
           <BaseInput
             classNameWrapper={styles.largeWrapper}
             className={styles.large}
-            isError={!((store.get().legal.authorizedCapital instanceof Number || typeof store.get().legal.authorizedCapital === 'number') && !isNaN(store.get().legal.authorizedCapital) && store.get().legal.authorizedCapital >= 0)}
+            isError={
+              !(
+                (store.get().legal.authorizedCapital instanceof Number ||
+                  typeof store.get().legal.authorizedCapital === "number") &&
+                !isNaN(store.get().legal.authorizedCapital) &&
+                store.get().legal.authorizedCapital >= 0
+              )
+            }
             errorLabel="Необходимо положительное число"
             label="Уставный капитал"
             type="text"
@@ -107,7 +172,15 @@ export const LegalInfoEditDeveloper: FC = observer(() => {
             <BaseInput
               classNameWrapper={styles.smallWrapper}
               className={styles.small}
-              isError={!(`${store.get().legal.INN}`.length === 12 && `${store.get().legal.INN}`.split('').filter((n: any) => n >= 0 && n <= 9).join('').length === 12)}
+              isError={
+                !(
+                  `${store.get().legal.INN}`.length === 12 &&
+                  `${store.get().legal.INN}`
+                    .split("")
+                    .filter((n: any) => n >= 0 && n <= 9)
+                    .join("").length === 12
+                )
+              }
               errorLabel="Необходимо 12-ть цифр"
               label="ИНН"
               type="text"
@@ -120,7 +193,15 @@ export const LegalInfoEditDeveloper: FC = observer(() => {
             <BaseInput
               classNameWrapper={styles.smallWrapper}
               className={styles.small}
-              isError={!(`${store.get().legal.OGRN}`.length === 13 && `${store.get().legal.OGRN}`.split('').filter((n: any) => n >= 0 && n <= 9).join('').length === 13)}
+              isError={
+                !(
+                  `${store.get().legal.OGRN}`.length === 13 &&
+                  `${store.get().legal.OGRN}`
+                    .split("")
+                    .filter((n: any) => n >= 0 && n <= 9)
+                    .join("").length === 13
+                )
+              }
               errorLabel="Необходимо 13-ть цифр"
               label="ОГРН"
               type="text"
@@ -133,7 +214,15 @@ export const LegalInfoEditDeveloper: FC = observer(() => {
             <BaseInput
               classNameWrapper={styles.smallWrapper}
               className={styles.small}
-              isError={!(`${store.get().legal.KPP}`.length === 9 && `${store.get().legal.KPP}`.split('').filter((n: any) => n >= 0 && n <= 9).join('').length === 9)}
+              isError={
+                !(
+                  `${store.get().legal.KPP}`.length === 9 &&
+                  `${store.get().legal.KPP}`
+                    .split("")
+                    .filter((n: any) => n >= 0 && n <= 9)
+                    .join("").length === 9
+                )
+              }
               errorLabel="Необходимо 9-ть цифр"
               label="КПП"
               type="text"
@@ -223,7 +312,14 @@ export const LegalInfoEditDeveloper: FC = observer(() => {
             <BaseInput
               classNameWrapper={styles.mediumWrapper}
               className={styles.medium}
-              isError={!((store.get().legal.enterpriseSize instanceof Number || typeof store.get().legal.enterpriseSize === 'number') && !isNaN(store.get().legal.enterpriseSize) && store.get().legal.enterpriseSize >= 0)}
+              isError={
+                !(
+                  (store.get().legal.enterpriseSize instanceof Number ||
+                    typeof store.get().legal.enterpriseSize === "number") &&
+                  !isNaN(store.get().legal.enterpriseSize) &&
+                  store.get().legal.enterpriseSize >= 0
+                )
+              }
               errorLabel="Необходимо положительное число"
               label="Размер предприятия"
               type="text"
@@ -236,7 +332,14 @@ export const LegalInfoEditDeveloper: FC = observer(() => {
             <BaseInput
               classNameWrapper={styles.mediumWrapper}
               className={styles.medium}
-              isError={!((store.get().legal.numberOfStaff instanceof Number || typeof store.get().legal.numberOfStaff === 'number') && !isNaN(store.get().legal.numberOfStaff) && store.get().legal.numberOfStaff >= 0)}
+              isError={
+                !(
+                  (store.get().legal.numberOfStaff instanceof Number ||
+                    typeof store.get().legal.numberOfStaff === "number") &&
+                  !isNaN(store.get().legal.numberOfStaff) &&
+                  store.get().legal.numberOfStaff >= 0
+                )
+              }
               errorLabel="Необходимо положительное число"
               label="Численность персонала"
               type="text"
@@ -249,7 +352,14 @@ export const LegalInfoEditDeveloper: FC = observer(() => {
             <BaseInput
               classNameWrapper={styles.mediumWrapper}
               className={styles.medium}
-              isError={!((store.get().legal.branch instanceof Number || typeof store.get().legal.branch === 'number') && !isNaN(store.get().legal.branch) && store.get().legal.branch >= 0)}
+              isError={
+                !(
+                  (store.get().legal.branch instanceof Number ||
+                    typeof store.get().legal.branch === "number") &&
+                  !isNaN(store.get().legal.branch) &&
+                  store.get().legal.branch >= 0
+                )
+              }
               errorLabel="Необходимо положительное число"
               label="Филиалы"
               type="text"
@@ -262,7 +372,14 @@ export const LegalInfoEditDeveloper: FC = observer(() => {
             <BaseInput
               classNameWrapper={styles.mediumWrapper}
               className={styles.medium}
-              isError={!((store.get().legal.revenue instanceof Number || typeof store.get().legal.revenue === 'number') && !isNaN(store.get().legal.revenue) && store.get().legal.revenue >= 0)}
+              isError={
+                !(
+                  (store.get().legal.revenue instanceof Number ||
+                    typeof store.get().legal.revenue === "number") &&
+                  !isNaN(store.get().legal.revenue) &&
+                  store.get().legal.revenue >= 0
+                )
+              }
               errorLabel="Необходимо положительное число"
               label="Выручка"
               type="text"
@@ -275,7 +392,13 @@ export const LegalInfoEditDeveloper: FC = observer(() => {
             <BaseInput
               classNameWrapper={styles.mediumWrapper}
               className={styles.medium}
-              isError={!((store.get().legal.netProfit instanceof Number || typeof store.get().legal.netProfit === 'number') && !isNaN(store.get().legal.netProfit))}
+              isError={
+                !(
+                  (store.get().legal.netProfit instanceof Number ||
+                    typeof store.get().legal.netProfit === "number") &&
+                  !isNaN(store.get().legal.netProfit)
+                )
+              }
               errorLabel="Необходимо число"
               label="Чистая прибыль"
               type="text"
@@ -288,7 +411,13 @@ export const LegalInfoEditDeveloper: FC = observer(() => {
             <BaseInput
               classNameWrapper={styles.mediumWrapper}
               className={styles.medium}
-              isError={!((store.get().legal.netAssets instanceof Number || typeof store.get().legal.netAssets === 'number') && !isNaN(store.get().legal.netAssets))}
+              isError={
+                !(
+                  (store.get().legal.netAssets instanceof Number ||
+                    typeof store.get().legal.netAssets === "number") &&
+                  !isNaN(store.get().legal.netAssets)
+                )
+              }
               errorLabel="Необходимо число"
               label="Чистые активы"
               type="text"
@@ -367,31 +496,72 @@ export const LegalInfoEditDeveloper: FC = observer(() => {
               store.setmainOccupation(e.target.value);
             }}
           />
-          {store.get().legal.extraOccupations?.map((d: {ord: number, value: string}, index: number) => {
-            return (
-              <BaseInput
-                icon={<>-</>}
-                iconClassName={styles.iconDelete}
-                iconOnClick={() => {
-                  store.setextraOccupations(store.get().legal.extraOccupations.filter((dd: {ord: number, value: string}) => dd.ord !== d.ord))
-                }}
-                classNameWrapper={styles.largeWrapper}
-                className={styles.large}
-                errorLabel=""
-                label={index === 0 ? "Дополнительные виды деятельности" : undefined}
-                type="text"
-                name={"phoneNumber"}
-                value={d.value}
-                onChange={(e) => {
-                  store.setextraOccupations([...store.get().legal.extraOccupations.filter((dd: {ord: number, value: string}) => dd.ord < d.ord), {ord: d.ord, value: e.target.value}, ...store.get().legal.extraOccupations.filter((dd: {ord: number, value: string}) => dd.ord > d.ord)]);
-                }}
-              />
-            )
-          })}
+          {store
+            .get()
+            .legal.extraOccupations?.map(
+              (d: { ord: number; value: string }, index: number) => {
+                return (
+                  <BaseInput
+                    icon={<>-</>}
+                    iconClassName={styles.iconDelete}
+                    iconOnClick={() => {
+                      store.setextraOccupations(
+                        store
+                          .get()
+                          .legal.extraOccupations.filter(
+                            (dd: { ord: number; value: string }) =>
+                              dd.ord !== d.ord
+                          )
+                      );
+                    }}
+                    classNameWrapper={styles.largeWrapper}
+                    className={styles.large}
+                    errorLabel=""
+                    label={
+                      index === 0
+                        ? "Дополнительные виды деятельности"
+                        : undefined
+                    }
+                    type="text"
+                    name={"phoneNumber"}
+                    value={d.value}
+                    onChange={(e) => {
+                      store.setextraOccupations([
+                        ...store
+                          .get()
+                          .legal.extraOccupations.filter(
+                            (dd: { ord: number; value: string }) =>
+                              dd.ord < d.ord
+                          ),
+                        { ord: d.ord, value: e.target.value },
+                        ...store
+                          .get()
+                          .legal.extraOccupations.filter(
+                            (dd: { ord: number; value: string }) =>
+                              dd.ord > d.ord
+                          ),
+                      ]);
+                    }}
+                  />
+                );
+              }
+            )}
           <span
             className={styles.addNumber}
             onClick={() => {
-              store.setextraOccupations([...store.get().legal.extraOccupations, {ord: store.get().legal.extraOccupations?.length ? Math.max(...store.get().legal.extraOccupations?.map((eo: any) => eo.ord)) + 1 : 1, value: ''}]);
+              store.setextraOccupations([
+                ...store.get().legal.extraOccupations,
+                {
+                  ord: store.get().legal.extraOccupations?.length
+                    ? Math.max(
+                        ...store
+                          .get()
+                          .legal.extraOccupations?.map((eo: any) => eo.ord)
+                      ) + 1
+                    : 1,
+                  value: "",
+                },
+              ]);
             }}
           >
             + Добавить вид деятельности
@@ -399,13 +569,13 @@ export const LegalInfoEditDeveloper: FC = observer(() => {
         </section>
       </div>
       <BaseButton
-                    type={"secondary"}
-                    isActive className={css.marginButton}
-                    onClick={errorFields ? () => {} : save}
-      > 
-                    {errorFields ? 'Исправьте значения' : 'Сохранить'}
+        type={"secondary"}
+        isActive
+        className={css.marginButton}
+        onClick={errorFields ? () => {} : save}
+      >
+        {errorFields ? "Исправьте значения" : "Сохранить"}
       </BaseButton>
-      
     </div>
   );
 });
