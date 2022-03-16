@@ -33,11 +33,11 @@ export const Account: FC<AccountDeveloperType> = observer(({onEdit}) => {
                         </div>
 
                         <div style={{display:"flex"}}>
-                            <div style={{height:'40px'}}>
+                            {/*<div style={{height:'40px'}}>
                                 <BaseButton className={styles.buttonHeight}  isActive type={"secondary"}>
                                     Пройти идентификацию
                                 </BaseButton>
-                            </div>
+                            </div>*/}
                             <div style={{height:'40px'}}>
                                 <BaseButton onClick={onEdit} className={styles.buttonHeight} type={"secondary"}>
                                     Редактировать аккаунт

@@ -18,6 +18,7 @@ interface Props
   iconClassName?: string;
   altPadding?: boolean;
   iconOnClick?: () => void;
+  val?: any;
 }
 
 export const BaseInput: React.FC<Props> = ({
@@ -31,8 +32,13 @@ export const BaseInput: React.FC<Props> = ({
   textArea,
   iconClassName,
   iconOnClick,
+  val,
   ...props
 }) => {
+  if(val){  
+    
+  }
+  
   return (
     <div className={classNameWrapper}>
       {label && (
