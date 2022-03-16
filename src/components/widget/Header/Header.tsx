@@ -92,6 +92,7 @@ const personalAcc = [
     { title: "Объявления", href: "/ads", message: 0 },
     { title: "Сообщения", href: "/messages", message: 4 },
     { title: "Редактирование", href: "/editing", message: 0 },
+    { title: "Локация", href: "/location", message: 0 },
   ],
   [
     //'bank'

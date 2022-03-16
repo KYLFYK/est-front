@@ -65,6 +65,7 @@ export const AdminCabinetWrapper: FC = ({ children }) => {
           <ActiveLink href={"/ads"}>Объявления</ActiveLink>
           <ActiveLink href={"/messages"}>Сообщения</ActiveLink>
           <ActiveLink href={"/editing"}>Редактирование</ActiveLink>
+          <ActiveLink href={"/location"}>Локация</ActiveLink>
         </div>
         <div className={css.information}>{children}</div>
       </div>
