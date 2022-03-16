@@ -52,6 +52,10 @@
 .colorDisable{
   color:#CAD1DA;
 }
+.colorDelete2{
+  color: #3D4550;
+  cursor:pointer;
+}
 .styleModalRemove{
   display: flex;
   text-align: center;
@@ -66,4 +70,25 @@
 }
 .m_RL_10{
   margin: 0 10px;
+}
+.input{
+
+  font-family: RobotoRegular ;
+  border: 1px solid white ;
+  width: 230px;
+  padding:1px 0;
+  font-size: 14px;
+  border-radius: 4px;
+  outline:none;
+  &:focus{
+    border: 1px solid #CAD1DA ;
+  }
+  &:active{
+    border: 1px solid #CAD1DA ;
+  }
+  &:hover{
+    border: 1px solid #CAD1DA;
+  }
+
+
 }

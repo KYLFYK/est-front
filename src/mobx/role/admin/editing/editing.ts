@@ -37,6 +37,13 @@ class AdminEditing {
         }
     }
 
+    updateValueGuidePut: (id: number, guide: GuideInfoType) => void = async (id: number, guide: GuideInfoType) => {
+        await instance.put(`guide/${id}`,guide, {
+            headers: {
+                authorization: `Bearer ${localStorage.getItem('accessEstatum')}`
+            }
+        })
+    }
 
     addGuide: (newGuide: GuideInfoType) => void = async (newGuide) => {
         await instance.post(`guide`, newGuide, {
@@ -45,18 +52,22 @@ class AdminEditing {
             }
         })
     }
-    removeGuide: (id: number) => void = async (id) => {
+    removeGuide: (id: number, indexGuides: number, activeType: number) => void = async (id, indexGuides: number, activeType: number) => {
         await instance.delete(`guide/${id}`, {
             headers: {
                 authorization: `Bearer ${localStorage.getItem('accessEstatum')}`
             }
         })
+        // if (this.initialState !== null) {
+        //     this.initialState = this.initialState[activeType].info.filter(t=> t.id !== id)
+        // }
     }
 
     fetch: () => void = async () => {
         const res = await instance.get(`guide`)
-        const newItemEn = res.data.map((e: any) => e.subtitle_en !== null && e.subtitle_en)
-        const newItemRu = res.data.map((e: any) => e.subtitle_ru !== null && e.subtitle_ru)
+        const newItemEn = res.data.map((e: any) => e.subtitle_en !== null ? e.subtitle_en : 'Общие')
+        const newItemRu = res.data.map((e: any) => e.subtitle_ru !== null ? e.subtitle_ru : 'Общие')
+
         const uniqueItemEn: Array<string> = Array.from(new Set(newItemEn))
         const uniqueItemRu: Array<string> = Array.from(new Set(newItemRu))
         const arrayItems: any = []
@@ -74,14 +85,16 @@ class AdminEditing {
         const newItems = arrayItems.map((t: any) => t)
 
         for (let x = 0; x < res.data.length; x++) {
-            const result = uniqueItemEn.some(t => t !== res.data[x].subtitle_en)
+            const subtitle_en = res.data[x].subtitle_en !== null ? res.data[x].subtitle_en : 'Общие'
+            const result = uniqueItemEn.some(t => t !== subtitle_en)
             if (result) {
-                arrayItems.map((t: any, index: number) => t.type_en === res.data[x].subtitle_en && newItems[index].info.push(res.data[x]))
+                arrayItems.map((t: any, index: number) => t.type_en === subtitle_en && newItems[index].info.push(res.data[x]))
             }
         }
-
+        // filter type_ru (null)
+        newItems[0].info = newItems[0].info.filter((f:any)=>f.type_ru !== null)
         this.initialState = newItems
-        // console.log("newItems", newItems)
+        console.log("newItems", newItems)
     }
 }
 

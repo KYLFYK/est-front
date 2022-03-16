@@ -33,56 +33,73 @@ export type GuideInfoType = {
 
 export const GuideItem: FC<GuideItemType> = observer(({guides, indexGuides}) => {
 
-    const {update,addGuide,removeGuide,fetch,updatePut} = AdminEditingStore
+    const {update, addGuide, removeGuide, fetch, updatePut,updateValueGuidePut} = AdminEditingStore
 
-    const [edit, setEdit] = useState<null | string>(null)
-    const [activeType, setActiveType] = useState<number>(0)
-    const [guideInfo, setGuideInfo] = useState<Array<string>>(guides.info[activeType].for)
-    const [objectGuides, setObjectGuides] = useState<any>(guides)
+    const [countEditFor, setCountEditFor] = useState<number>(0) // счетчик для оповещения изменения ( в случае перехода на другой Тип (1 колонка))
+    const [modalCountEditFor, setModalCountEditFor] = useState<boolean>(false) // modal для оповещения в случае перехода без сохранения
+    const [editOld, setEditOld] = useState<null | string>(null) // сообщение о старом типе ( в модалке )
 
-    const [editDisplayFor, setEditDisplayFor] = useState<boolean>(false)
-    const [editType, setEditType] = useState<boolean>(false)
+    const [activeNameType, setActiveNameType] = useState<null | string>(null) //активный "Тип" (1 колонка)
+    const [activeIndexType, setActiveIndexType] = useState<number>(0) //активный "Тип" (1 колонка) - index
+    const [guideInfoFor, setGuideInfoFor] = useState<Array<string>>(guides.info[activeIndexType].for) // Колонка "Отображение" -массив (Апартаменты,ЖК,Дома ...)
+    const [objectGuides, setObjectGuides] = useState<any>(guides) // 1 Объект( Заголовок: Мебель,Общие,Стро... экспертиза)
 
-    const [removeId, setRemoveId] = useState<number>(0)
-    const [removeName, setRemoveName] = useState<string>('')
-    const [modalRemove, setModalRemove] = useState<boolean>(false)
+    const [editDisplayFor, setEditDisplayFor] = useState<boolean>(false) // Активизация Редактирования Колонки "Отображение"
+    const [editType, setEditType] = useState<boolean>(false)// Активизация Редактирования Колонки "Тип"
 
-    const [addType, setAddType] = useState<boolean>(false)
+    const [removeId, setRemoveId] = useState<number>(0) // id guide ( для удаления )
+    const [removeName, setRemoveName] = useState<string>('') // Name (Холодильник,Кондиционер ) для модалка удаления
+    const [modalRemove, setModalRemove] = useState<boolean>(false) // Активизация модалки Удаления
+
+    const [addActiveModal, setAddActiveModal] = useState<boolean>(false) // Активизация модалки Создания
 
     const activeMenu = (e: string | null, index: number, guide: any) => {
-        setEdit(e)
-        setActiveType(index)
-        setGuideInfo(guides.info[index].for)
-        if (e === edit) {
-            setEdit(null)
+        if (countEditFor === 0) {
+            setActiveNameType(e)
+            setActiveIndexType(index)
+            setGuideInfoFor(guides.info[index].for)
+            if (e === activeNameType) {
+                setActiveNameType(null)
+            }
+        } else {
+            setModalCountEditFor(true)
+            setEditOld(activeNameType)
+            setActiveNameType(e)
         }
     }
 
     useEffect(() => {
-        setGuideInfo(guides.info[activeType].for)
+        setGuideInfoFor(guides.info[activeIndexType].for)
         setObjectGuides(guides)
     }, [])
 
     const onCheckedType = (title: string, indexType: number) => {
+        let modalCountEdit = countEditFor
         if (editDisplayFor) {
-            if (guideInfo !== null) {
-                const iconsFor = JSON.parse(JSON.stringify(guideInfo))
+            if (guideInfoFor !== null) {
+                const iconsFor = [...guideInfoFor]
                 let deleteMode = false
-                for (let x = 0; x < guideInfo.length; x++) {
+                for (let x = 0; x < guideInfoFor.length; x++) {
                     if (iconsFor[x] === title) {
                         iconsFor.splice(x, 1)
                         deleteMode = true
                     }
                 }
-                if (!deleteMode) iconsFor.push(title)
-                setGuideInfo(iconsFor)
-                update(iconsFor, indexGuides, activeType)
+                modalCountEdit = countEditFor - 1
+                setCountEditFor(modalCountEdit)
+                if (!deleteMode) {
+                    iconsFor.push(title)
+                    modalCountEdit = countEditFor + 1
+                    setCountEditFor(modalCountEdit)
+                }
+                setGuideInfoFor(iconsFor)
+                update(iconsFor, indexGuides, activeIndexType)
             }
         }
     }
 
     const addTypeGuide = async (type_en: string, type_ru: string, value: string, visionObject: Array<string>) => {
-        const newTypeGuide : GuideInfoType = {
+        const newTypeGuide: GuideInfoType = {
             type_en: type_en,
             type_ru: type_ru,
             value: value,
@@ -92,32 +109,58 @@ export const GuideItem: FC<GuideItemType> = observer(({guides, indexGuides}) => 
             isMulti: objectGuides.info[0].isMulti
         }
         await addGuide(newTypeGuide)
-        setTimeout(()=>{
+        setTimeout(() => {
             fetch()
-        },100)
-        setAddType(!addType)
+        }, 100)
+        setAddActiveModal(!addActiveModal)
     }
 
-    const deleteItem =  (id: number, nameType: string) => {
+    const deleteGuideItem = (id: number, nameType: string) => {
         setRemoveId(id)
         setModalRemove(!modalRemove)
         setRemoveName(nameType)
-        console.log(123123)
     }
 
-    const removeIcon = async() => {
+    const removeIcon = async () => {
         setModalRemove(!modalRemove)
-        await removeGuide(removeId)
+        await removeGuide(removeId, indexGuides, activeIndexType)
         fetch()
-    }
-    const backRemove = () => {
-        setModalRemove(!modalRemove)
     }
 
     const updateGuide = async () => {
-        if(editDisplayFor){
-            await updatePut(objectGuides.info[activeType].id, indexGuides, activeType)
+        if (editDisplayFor) {
+            setCountEditFor(0)
+            await updatePut(objectGuides.info[activeIndexType].id, indexGuides, activeIndexType)
         }
+    }
+
+    const updateValueGuide = async (value:string) =>{
+        const valueArray = value.split('-')
+        const newTypeGuide: GuideInfoType = {
+            type_en: objectGuides.info[activeIndexType].type_en,
+            type_ru: valueArray[0].trim(),
+            value: valueArray[1].trim(),
+            for: guideInfoFor,
+            subtitle_ru: objectGuides.info[0].subtitle_ru,
+            subtitle_en: objectGuides.info[0].subtitle_en,
+            isMulti: objectGuides.info[0].isMulti,
+        }
+        console.log(newTypeGuide)
+        await updateValueGuidePut(objectGuides.info[activeIndexType].id , newTypeGuide)
+        fetch()
+    }
+
+
+    const editModalBackFor = async () => {
+        setCountEditFor(0)
+        setModalCountEditFor(false)
+        await fetch()
+    }
+
+    const editModalFor = async () => {
+        setCountEditFor(0)
+        setModalCountEditFor(false)
+        await updatePut(objectGuides.info[activeIndexType].id, indexGuides, activeIndexType)
     }
 
     // console.log(123, JSON.parse(JSON.stringify(objectGuides)))
@@ -163,12 +206,13 @@ export const GuideItem: FC<GuideItemType> = observer(({guides, indexGuides}) => 
                             objectGuides && objectGuides.info && objectGuides.info.map((guide: any, index: number) => (
                                 <TypeObjectEdit
                                     index={index}
-                                    activeMenu={edit}
+                                    activeMenu={activeNameType}
                                     key={index}
                                     guide={guide}
                                     onClick={(e) => activeMenu(e, index, guide)}
                                     disable={editType}
-                                    onDelete={() => deleteItem(guide.id, `${guide.type_ru} - ${guide.value}`)}
+                                    onDelete={() => deleteGuideItem(guide.id, `${guide.type_ru} - ${guide.value}`)}
+                                    onSaveValue={(value)=>updateValueGuide(value)}
                                 />
                             ))
                         }
@@ -176,15 +220,15 @@ export const GuideItem: FC<GuideItemType> = observer(({guides, indexGuides}) => 
                 </div>
                 <div style={{marginLeft: '40px'}}>
                     {
-                        edit !== null &&
+                        activeNameType !== null &&
                         <div>
                             {
-                                guideInfo && guideInfo.map((vision: any, index: number) => (
+                                guideInfoFor && guideInfoFor.map((vision: any, index: number) => (
                                     <VisionCheckboxType
                                         key={index}
                                         vision={vision}
                                         index={index}
-                                        guideInfo={guideInfo}
+                                        guideInfo={guideInfoFor}
                                         onCheckedType={e => onCheckedType(e, index)}
                                         disable={editDisplayFor}
                                     />
@@ -193,13 +237,13 @@ export const GuideItem: FC<GuideItemType> = observer(({guides, indexGuides}) => 
                             {
                                 <div>
                                     {
-                                        guideInfo && typeObjectsVision.map((vision, index) => {
-                                            const vis = guideInfo.some((guide: any) => guide === vision)
+                                        guideInfoFor && typeObjectsVision.map((vision, index) => {
+                                            const vis = guideInfoFor.some((guide: any) => guide === vision)
                                             return !vis && <VisionCheckboxType
                                                 key={`${index}+"+1312"`}
                                                 vision={vision}
                                                 index={index}
-                                                guideInfo={guideInfo}
+                                                guideInfo={guideInfoFor}
                                                 onCheckedType={e => onCheckedType(e, index)}
                                                 disable={editDisplayFor}
                                             />
@@ -213,28 +257,28 @@ export const GuideItem: FC<GuideItemType> = observer(({guides, indexGuides}) => 
 
             </div>
 
-            <div style={{display:'flex'}}>
-                <BaseButton onClick={() => setAddType(!addType)} type={"secondary"} isActive>
+            <div style={{display: 'flex'}}>
+                <BaseButton onClick={() => setAddActiveModal(!addActiveModal)} type={"secondary"} isActive>
                     <Typography size={"small"} color={"secondary"}>
                         Добавить тип
                     </Typography>
                 </BaseButton>
-                <div style={{marginLeft:"300px"}}>
+                <div style={{marginLeft: "300px"}}>
                     <BaseButton onClick={updateGuide} type={"secondary"} isActive={editDisplayFor}>
-                        <Typography size={"small"} color={editDisplayFor?"secondary":"tertiary"}>
-                            Редактировать
+                        <Typography size={"small"} color={editDisplayFor ? "secondary" : "tertiary"}>
+                            Сохранить
                         </Typography>
                     </BaseButton>
                 </div>
             </div>
             {
                 <Modal
-                    setActive={() => setAddType(!addType)}
-                    active={addType}
+                    setActive={() => setAddActiveModal(!addActiveModal)}
+                    active={addActiveModal}
                     className={css.modalAdd}
                 >
                     <AddGuide
-                        onExit={() => setAddType(false)}
+                        onExit={() => setAddActiveModal(false)}
                         onCreate={(type_en, type_ru, value, visionObject) => addTypeGuide(type_en, type_ru, value, visionObject)}
                     />
                 </Modal>
@@ -245,33 +289,28 @@ export const GuideItem: FC<GuideItemType> = observer(({guides, indexGuides}) => 
                     active={modalRemove}
                     className={css.modalAdd}
                 >
-                    <div className={css.styleModalRemove}>
-                        <Typography>
-                            Подтвердите удаление иконки :
-                        </Typography>
-                        <Typography color={"nude"}>
-                            {
-                                removeName
-                            }
-                        </Typography>
-                        <div className={css.df_mT_20}>
-                            <BaseButton
-                                type={'secondary'}
-                                isActive
-                                className={css.m_RL_10}
-                                onClick={removeIcon}
-                            >
-                                удалить
-                            </BaseButton>
-                            <BaseButton
-                                onClick={backRemove}
-                            >
-                                отмена
-                            </BaseButton>
-                        </div>
-
-                    </div>
-
+                    <EditModalGuide
+                        text={'Подтвердите удаление иконки :'}
+                        editText={removeName}
+                        onRemove={removeIcon}
+                        onBack={()=>setModalRemove(!modalRemove)}
+                        textRemove={'удалить'}
+                    />
+                </Modal>
+            }
+            {
+                <Modal
+                    setActive={() => setModalCountEditFor(!modalCountEditFor)}
+                    active={modalCountEditFor}
+                    className={css.modalAdd}
+                >
+                    <EditModalGuide
+                        text={'Сохранить изменения ?'}
+                        editText={editOld ? editOld : ""}
+                        onRemove={editModalFor}
+                        onBack={editModalBackFor}
+                        textRemove={'изменить'}
+                    />
                 </Modal>
             }
 
@@ -279,3 +318,42 @@ export const GuideItem: FC<GuideItemType> = observer(({guides, indexGuides}) => 
 
     )
 })
+
+type EditModalGuideType = {
+    text: string
+    editText: string
+    onRemove: () => void
+    onBack: () => void
+    textRemove: string
+}
+
+const EditModalGuide: FC<EditModalGuideType> = ({text, editText, onRemove, onBack, textRemove}) => {
+    return (
+        <div className={css.styleModalRemove}>
+            <Typography>
+                {text}
+            </Typography>
+            <Typography color={"nude"}>
+                {
+                    editText
+                }
+            </Typography>
+            <div className={css.df_mT_20}>
+                <BaseButton
+                    type={'secondary'}
+                    isActive
+                    className={css.m_RL_10}
+                    onClick={onRemove}
+                >
+                    {textRemove}
+                </BaseButton>
+                <BaseButton
+                    onClick={onBack}
+                >
+                    отмена
+                </BaseButton>
+            </div>
+
+        </div>
+    )
+}
