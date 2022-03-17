@@ -8,6 +8,8 @@ import {AdminEditingStore} from "../../../../../../mobx/role/admin/editing/editi
 import BaseButton from "../../../../../shared/BaseButton/BaseButtons";
 import {Modal} from "../../../../../shared/Modal/Modal";
 import AddGuide from "./AddGuide";
+import {EditModalGuide} from './EditingModalGuide';
+import IconEdit from "./IconEdit";
 
 type GuideItemType = {
     guides: {
@@ -33,7 +35,7 @@ export type GuideInfoType = {
 
 export const GuideItem: FC<GuideItemType> = observer(({guides, indexGuides}) => {
 
-    const {update, addGuide, removeGuide, fetch, updatePut,updateValueGuidePut} = AdminEditingStore
+    const {update, addGuide, removeGuide, fetch, updatePut, updateValueGuidePut} = AdminEditingStore
 
     const [countEditFor, setCountEditFor] = useState<number>(0) // счетчик для оповещения изменения ( в случае перехода на другой Тип (1 колонка))
     const [modalCountEditFor, setModalCountEditFor] = useState<boolean>(false) // modal для оповещения в случае перехода без сохранения
@@ -134,24 +136,24 @@ export const GuideItem: FC<GuideItemType> = observer(({guides, indexGuides}) => 
         }
     }
 
-    const updateValueGuide = async (value:string) =>{
+    const updateValueGuide = async (value: string) => {
         const valueArray = value.split('-')
         const newTypeGuide: GuideInfoType = {
             type_en: objectGuides.info[activeIndexType].type_en,
             type_ru: valueArray[0].trim(),
             value: valueArray[1].trim(),
             for: guideInfoFor,
-            subtitle_ru: objectGuides.info[0].subtitle_ru === null ?  null : objectGuides.info[0].subtitle_ru,
-            subtitle_en: objectGuides.info[0].subtitle_en === null ?  null : objectGuides.info[0].subtitle_en,
+            subtitle_ru: objectGuides.info[0].subtitle_ru === null ? null : objectGuides.info[0].subtitle_ru,
+            subtitle_en: objectGuides.info[0].subtitle_en === null ? null : objectGuides.info[0].subtitle_en,
             isMulti: objectGuides.info[0].isMulti,
         }
-        if( newTypeGuide.subtitle_ru === null ) {
+        if (newTypeGuide.subtitle_ru === null) {
             // @ts-ignore
             delete newTypeGuide.subtitle_ru
             // @ts-ignore
             delete newTypeGuide.subtitle_en
         }
-        await updateValueGuidePut(objectGuides.info[activeIndexType].id , newTypeGuide)
+        await updateValueGuidePut(objectGuides.info[activeIndexType].id, newTypeGuide)
         fetch()
     }
 
@@ -171,39 +173,33 @@ export const GuideItem: FC<GuideItemType> = observer(({guides, indexGuides}) => 
     return (
         <div>
             <div className={css.grid_3}>
-                <div style={{display: 'flex'}}>
+                <div className={css.df}>
                     <Typography>
                         Тип
                     </Typography>
-                    <div className={css.iconEdit} onClick={() => setEditType(!editType)}>
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path
-                                d="M14.06 9.02L14.98 9.94L5.92 19H5V18.08L14.06 9.02ZM17.66 3C17.41 3 17.15 3.1 16.96 3.29L15.13 5.12L18.88 8.87L20.71 7.04C21.1 6.65 21.1 6.02 20.71 5.63L18.37 3.29C18.17 3.09 17.92 3 17.66 3ZM14.06 6.19L3 17.25V21H6.75L17.81 9.94L14.06 6.19Z"
-                                fill={editType ? "#3D4550" : "#cccccc"}/>
-                        </svg>
-                    </div>
+                    <IconEdit
+                        onEdit={() => setEditType(!editType)}
+                        editType={editType}
+                    />
                 </div>
                 <div className={css.checkbox}>
                     <Typography className={css.marginColumn}>
                         Мулити
                     </Typography>
                 </div>
-                <div style={{display: 'flex'}}>
+                <div className={css.df}>
                     <Typography>
                         Отображение
                     </Typography>
-                    <div className={css.iconEdit} onClick={() => setEditDisplayFor(!editDisplayFor)}>
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path
-                                d="M14.06 9.02L14.98 9.94L5.92 19H5V18.08L14.06 9.02ZM17.66 3C17.41 3 17.15 3.1 16.96 3.29L15.13 5.12L18.88 8.87L20.71 7.04C21.1 6.65 21.1 6.02 20.71 5.63L18.37 3.29C18.17 3.09 17.92 3 17.66 3ZM14.06 6.19L3 17.25V21H6.75L17.81 9.94L14.06 6.19Z"
-                                fill={editDisplayFor ? "#3D4550" : "#cccccc"}/>
-                        </svg>
-                    </div>
+                    <IconEdit
+                        onEdit={() => setEditDisplayFor(!editDisplayFor)}
+                        editType={editDisplayFor}
+                    />
                 </div>
 
             </div>
-            <div style={{display: 'flex', margin: "10px 0"}}>
-                <div style={{display: 'flex'}}>
+            <div className={css.df_mTB_10}>
+                <div className={css.df}>
                     <div>
                         {
                             objectGuides && objectGuides.info && objectGuides.info.map((guide: any, index: number) => (
@@ -215,7 +211,7 @@ export const GuideItem: FC<GuideItemType> = observer(({guides, indexGuides}) => 
                                     onClick={(e) => activeMenu(e, index, guide)}
                                     disable={editType}
                                     onDelete={() => deleteGuideItem(guide.id, `${guide.type_ru} - ${guide.value}`)}
-                                    onSaveValue={(value)=>updateValueGuide(value)}
+                                    onSaveValue={(value) => updateValueGuide(value)}
                                 />
                             ))
                         }
@@ -260,7 +256,7 @@ export const GuideItem: FC<GuideItemType> = observer(({guides, indexGuides}) => 
 
             </div>
 
-            <div style={{display: 'flex'}}>
+            <div className={css.df}>
                 <BaseButton onClick={() => setAddActiveModal(!addActiveModal)} type={"secondary"} isActive>
                     <Typography size={"small"} color={"secondary"}>
                         Добавить тип
@@ -296,7 +292,7 @@ export const GuideItem: FC<GuideItemType> = observer(({guides, indexGuides}) => 
                         text={'Подтвердите удаление иконки :'}
                         editText={removeName}
                         onRemove={removeIcon}
-                        onBack={()=>setModalRemove(!modalRemove)}
+                        onBack={() => setModalRemove(!modalRemove)}
                         textRemove={'удалить'}
                     />
                 </Modal>
@@ -322,41 +318,4 @@ export const GuideItem: FC<GuideItemType> = observer(({guides, indexGuides}) => 
     )
 })
 
-type EditModalGuideType = {
-    text: string
-    editText: string
-    onRemove: () => void
-    onBack: () => void
-    textRemove: string
-}
 
-const EditModalGuide: FC<EditModalGuideType> = ({text, editText, onRemove, onBack, textRemove}) => {
-    return (
-        <div className={css.styleModalRemove}>
-            <Typography>
-                {text}
-            </Typography>
-            <Typography color={"nude"}>
-                {
-                    editText
-                }
-            </Typography>
-            <div className={css.df_mT_20}>
-                <BaseButton
-                    type={'secondary'}
-                    isActive
-                    className={css.m_RL_10}
-                    onClick={onRemove}
-                >
-                    {textRemove}
-                </BaseButton>
-                <BaseButton
-                    onClick={onBack}
-                >
-                    отмена
-                </BaseButton>
-            </div>
-
-        </div>
-    )
-}
