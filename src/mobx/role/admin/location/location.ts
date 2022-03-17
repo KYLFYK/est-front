@@ -20,6 +20,21 @@ class AdminLocation {
         this.city = res.data
         console.log("newItems", res)
     }
+    addCity: (nameCountry:{name:string,regionId:number}) => void = async (nameCountry:{name:string,regionId:number}) => {
+        await instance.post (`city`,nameCountry,{
+            headers: {authorization: `Bearer ${localStorage.getItem('accessEstatum')}`}
+        }) // + key
+        this.fetchCity()
+    }
+    editCity: (id:number,city:{name:string,regionId:number}) => void = async (id:number,city:{name:string,regionId:number}) => {
+       await instance.patch (`city/${id}`,city,{
+            headers: {authorization: `Bearer ${localStorage.getItem('accessEstatum')}`}
+        }) // + key
+        this.fetchCity()
+    }
+    removeCity: (id:number) => void = async (id:number) => {
+        instance.delete (`city/${id}`) // + key
+    }
     fetchRegion: () => void = async () => {
         const res = await instance.get(`region`)
         this.region = res.data
@@ -29,6 +44,15 @@ class AdminLocation {
         const res = await instance.get(`country`)
         this.country = res.data
         console.log("newItems", res)
+    }
+    addCountry: (nameCountry:string) => void = async (nameCountry:string) => {
+        instance.put (`country`,nameCountry) // + key
+    }
+    editCountry: (nameCountry:string,id:number) => void = async (nameCountry:string,id:number) => {
+        instance.patch (`country/${id}`,nameCountry) // + key
+    }
+    removeCountry: (id:number) => void = async (id:number) => {
+        instance.delete (`country${id}`) // + key
     }
 }
 
