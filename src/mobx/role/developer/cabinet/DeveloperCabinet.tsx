@@ -1,6 +1,7 @@
 import { createContext, FC, useContext } from "react";
 import { makeAutoObservable } from "mobx";
 import { cabinetAPI, CabinetAgentType } from "../../../../api/cabinet/cabinet";
+import {AuthApi} from '../../../../api/auth/auth'
 import { instance } from "../../../../api/instance";
 
 class DeveloperCabinetStore {
@@ -69,6 +70,25 @@ class DeveloperCabinetStore {
     },
     loading: true,
   };
+
+  setsettingsMail(value: any) {
+    this.initialData.setting = {
+      ...this.initialData.setting,
+      noticeEmail: value,
+    };
+  }
+  setsettingsPassword(value: any) {
+    this.initialData.setting = {
+      ...this.initialData.setting,
+      newPassword: value,
+    };
+  }
+  setsettingsPhone(value: any) {
+    this.initialData.setting = {
+      ...this.initialData.setting,
+      noticePhone: value,
+    };
+  }
 
   setlegalfullName(value: any) {
     this.initialData.legal = {
@@ -250,8 +270,8 @@ class DeveloperCabinetStore {
           address: res.data.developerProperty.address
             ? res.data.developerProperty.address
             : "",
-          phone: res.data.developerProperty.phone[0].value
-            ? res.data.developerProperty.phone[0].value
+          phone: res.data.phone
+            ? res.data.phone
             : "",
           email: res.data.email,
           site: res.data.developerProperty.site
@@ -309,7 +329,11 @@ class DeveloperCabinetStore {
     };
   }
   async updateDeveloper(id: number, updateDeveloper: {}) {
-    await cabinetAPI.updateDeveloper(id, updateDeveloper);
+    await cabinetAPI.updateDeveloper(id, updateDeveloper)
+  }
+
+  async updatePass(newPassword: string, accountId: number, token: string) {
+    const res = await AuthApi.changePassword(newPassword, accountId, token)
   }
 
   async updateAvatar(data: FormData, id: number) {

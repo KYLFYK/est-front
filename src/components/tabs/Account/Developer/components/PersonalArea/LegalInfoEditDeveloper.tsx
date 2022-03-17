@@ -567,15 +567,15 @@ export const LegalInfoEditDeveloper: FC = observer(() => {
             + Добавить вид деятельности
           </span>
         </section>
+        <BaseButton
+          type={"secondary"}
+          isActive
+          className={css.marginButton}
+          onClick={errorFields ? () => {} : save}
+        >
+          {errorFields ? "Исправьте значения" : "Сохранить"}
+        </BaseButton>
       </div>
-      <BaseButton
-        type={"secondary"}
-        isActive
-        className={css.marginButton}
-        onClick={errorFields ? () => {} : save}
-      >
-        {errorFields ? "Исправьте значения" : "Сохранить"}
-      </BaseButton>
     </div>
   );
 });

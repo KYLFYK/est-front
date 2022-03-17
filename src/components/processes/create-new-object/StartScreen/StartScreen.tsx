@@ -140,7 +140,7 @@ const StartScreen: React.FC<Props> = ({
         <div className={s.row}>
           <Typography weight="medium">
             {role === "developer"
-              ? "Добавить квартиру / участок к объекту"
+              ? "Добавить квартиру к объекту"
               : "Выберите тип недвижимости"}
           </Typography>
           <div className={s.cardList}>
@@ -195,7 +195,7 @@ const StartScreen: React.FC<Props> = ({
                 </div>
               </>
             )}
-            <div
+            {/*<div
               className={cardClassName(ObjectTypes.LAND, choosedObjectType)}
               onClick={() => {
                 onChooseObjectType(ObjectTypes.LAND);
@@ -210,7 +210,7 @@ const StartScreen: React.FC<Props> = ({
               <Typography size="subheaderBig" weight="medium">
                 Участок
               </Typography>
-            </div>
+            </div>*/}
           </div>
         </div>
       </div>

@@ -2,9 +2,23 @@ import { instance } from "../instance";
 
 export enum UrlMainPage {
   accountOur = "auth/me", //get
+  account = 'account'
 }
 
 export const cabinetAPI = {
+
+  getAccountData: async () => {
+    try {
+      return await instance.get<any>(`${UrlMainPage.accountOur}`, {
+        headers: {
+          authorization: `Bearer ${localStorage.getItem("accessEstatum")}`,
+        },
+      });
+    } catch (e: any) {
+      return e;
+    }
+  },
+
   getCabinetDeveloper: async () => {
     try {
       return await instance.get<CabinetAgentType>(`${UrlMainPage.accountOur}`, {

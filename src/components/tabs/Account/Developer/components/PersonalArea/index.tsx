@@ -11,20 +11,29 @@ import styles from "./Account.module.scss";
 import { observer } from "mobx-react-lite";
 import { useStoreDeveloperCabinet } from "../../../../../../mobx/role/developer/cabinet/DeveloperCabinet";
 import AccountEditDeveloper from "./AccountEditDeveloper";
+import {SettingsEditDeveloper} from './SettingEditDeveloper';
 
 export const PersonalArea: FC = observer(() => {
   const [edit, setEdit] = useState<boolean>(false);
-
+  const [current, setCurrent] = useState<number>(0);
   const store = useStoreDeveloperCabinet();
+
+  const onEdit = (tabId: number) => {
+    setEdit(false)
+    setCurrent(tabId)
+  }
 
   useEffect(() => {
     store.fetch();
   }, [store]);
 
+
   return (
     <>
       {!edit ? (
         <HorizontalTabs
+          setCurrent={setCurrent}
+          current={current}
           wrapperClassName={styles.tabsWrapper}
           tabs={[
             {
@@ -33,17 +42,18 @@ export const PersonalArea: FC = observer(() => {
             },
             {
               title: "Настройки",
-              Component: <Settings />,
+              Component: <Settings onEdit={() => setEdit(true)} />,
             },
             {
-              title: "Юр.Чистота",
+              title: "Юр.Данные",
               Component: <LegalInfoEditDeveloper />,
             },
           ]}
         />
-      ) : (
-        <AccountEditDeveloper onEdit={() => setEdit(false)} />
-      )}
+      ) : current === 0 && <AccountEditDeveloper onEdit={onEdit} />
+          ||
+          current === 1 && <SettingsEditDeveloper onEdit={onEdit} />
+      }
     </>
   );
 });

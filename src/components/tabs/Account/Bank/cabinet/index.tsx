@@ -4,7 +4,6 @@ import {
   ITabItem,
 } from "../../../../shared/HorizontalTabs/HorizontalTabs";
 import { Settings } from "./Settings";
-import {accFromToken} from '../../../../../lib/localStorage/localStorage'
 
 import commonStyles from "../../Admin/AdminRoleStyles.module.scss";
 
@@ -16,7 +15,6 @@ const BankTabs: ITabItem[] = [
 ];
 
 export const BankCabinetPage: FC = () => {
-  console.log('accFromToken()', accFromToken())
   return (
     <HorizontalTabs
       wrapperClassName={commonStyles.horizontalTabs}
