@@ -2,14 +2,6 @@ import {makeAutoObservable} from "mobx";
 import {instance} from "../../../../api/instance";
 import {GuideInfoType} from "../../../../components/tabs/Account/Admin/components/Editing/GuidesItem";
 
-type IEditingProfile = {}
-
-
-const InitialData: IEditingProfile = {
-    initialState: {}
-
-};
-
 class AdminEditing {
     constructor() {
         makeAutoObservable(this);
@@ -58,9 +50,6 @@ class AdminEditing {
                 authorization: `Bearer ${localStorage.getItem('accessEstatum')}`
             }
         })
-        // if (this.initialState !== null) {
-        //     this.initialState = this.initialState[activeType].info.filter(t=> t.id !== id)
-        // }
     }
 
     fetch: () => void = async () => {
@@ -94,7 +83,7 @@ class AdminEditing {
         // filter type_ru (null)
         newItems[0].info = newItems[0].info.filter((f:any)=>f.type_ru !== null)
         this.initialState = newItems
-        console.log("newItems", newItems)
+        // console.log("newItems", newItems)
     }
 }
 
