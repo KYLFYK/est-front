@@ -65,7 +65,7 @@ interface IResponse {
   updateAt: Date;
 }
 
-type IListType = IAdminDeveloperCard[] | null;
+type IListType = IAdminDeveloperCard[] | [];
 
 class DevelopersList {
   constructor() {
@@ -74,7 +74,7 @@ class DevelopersList {
 
   loaded: boolean = false;
   errorOnLoad: boolean = false;
-  list: IListType = null;
+  list: IListType = [];
 
   uploadList: () => void = async () => {
     try {
@@ -92,6 +92,10 @@ class DevelopersList {
       this.errorOnLoad = true;
     }
   };
+
+  get() {
+    return JSON.parse(JSON.stringify([ ...this.list ]))
+  }
 }
 
 export const DevelopersListStore = new DevelopersList();

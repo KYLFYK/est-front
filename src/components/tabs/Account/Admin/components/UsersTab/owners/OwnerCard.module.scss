@@ -40,7 +40,7 @@
 
     .des {
       @include ROBOTOREGULAR16;
-
+      word-wrap: break-word;
       color: #3D4550;
     }
 

@@ -4,13 +4,7 @@ import { makeStyles } from "@material-ui/core";
 import BaseButton from "../BaseButton/BaseButtons";
 import FavoriteIcon from "../../../icons/Favorite/Favorite";
 import css from "./FilterSearch.module.scss";
-
-//label - Отображение
-const option = [
-  { value: "default", label: "По умолчанию" },
-  { value: "low", label: "Цене - убыванию" },
-  { value: "high", label: "Цене - возрастанию" },
-];
+import {sortPriceOptions} from '../../../lib/configs/dropdownOptions';
 
 export const useStyles = makeStyles(() => ({
   select: {
@@ -67,11 +61,11 @@ const FilterSearch: FC<Props> = ({
       className={className}
     >
       <BaseDropDown
-        options={option}
+        options={sortPriceOptions}
         placeholder={
           sort
             ? `Сортировать: ${
-                option.filter((o: any) => o.value === sort)[0].label
+              sortPriceOptions.filter((o: any) => o.value === sort)[0].label
               }`
             : "Сортировать: по умолчанию"
         }

@@ -2,10 +2,13 @@ import { FC } from "react";
 import Image from "next/image";
 import { EditIcon } from "../../../../../../../icons/Edit/EditIcon";
 import { Trash } from "../../../../../../../icons/Trash";
+import { myLoader } from "../../../../../../../utils/image/image";
+import Link from "next/link";
+import { ObjectTypes } from "../../../../../../../utils/interfaces/objects";
+import { createEditLink } from "../../../../../../../utils/routes/createEditLink";
 
 import styles from "./AgencyTab.module.scss";
-import image from "../../../../../../../Pics/VillaTour.png";
-import { myLoader } from "../../../../../../../utils/image/image";
+import imageStatic from "../../../../../../../Pics/VillaTour.png";
 
 export interface IObject {
   name: string;
@@ -30,6 +33,10 @@ export interface IObject {
 
 interface Props extends IObject {
   any?: string;
+  image?: string;
+  objType?: ObjectTypes;
+  objId?: number;
+  complexId?: number;
 }
 
 export const AdItem: FC<Props> = ({
@@ -42,15 +49,20 @@ export const AdItem: FC<Props> = ({
   name,
   address,
   footerButton,
+  image,
+  objId,
+  objType,
+  complexId,
 }) => {
   return (
     <div className={styles.item}>
       <div className={styles.image}>
         <Image
           loader={(e) => myLoader(e.src, e.width, e.quality)}
-          src={image}
+          src={image ? image : imageStatic}
           alt={""}
           layout={"fill"}
+          unoptimized
         />
       </div>
       <div className={styles.content}>
@@ -90,7 +102,15 @@ export const AdItem: FC<Props> = ({
                 <span className={styles.textButton}>{textButton}</span>
               ) : (
                 <>
-                  <EditIcon fill={"#3D4550"} className={styles.icon} />
+                  {objId !== undefined && objType !== undefined && (
+                    <Link
+                      href={createEditLink("edit", objId, objType, complexId)}
+                    >
+                      <a>
+                        <EditIcon fill={"#3D4550"} className={styles.icon} />
+                      </a>
+                    </Link>
+                  )}
                   <Trash className={styles.icon} />
                 </>
               )}

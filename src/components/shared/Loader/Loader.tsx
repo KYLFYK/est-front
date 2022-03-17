@@ -17,3 +17,11 @@ export const Empty = () => {
   )
   
 }
+
+export const Error = () => {
+
+  return (
+    <Typography size={'subheaderBig'} color={'red'}>Ошибка запроса</Typography>
+  )
+  
+}

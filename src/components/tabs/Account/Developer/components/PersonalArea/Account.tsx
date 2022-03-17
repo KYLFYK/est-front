@@ -6,6 +6,7 @@ import styles from "./Account.module.scss";
 import {observer} from "mobx-react-lite";
 import BaseButton from "../../../../../shared/BaseButton/BaseButtons";
 import Typography from "../../../../../shared/Typography/Typography";
+import {Loader} from '../../../../../shared/Loader/Loader';
 
 type AccountDeveloperType={
     onEdit:()=>void
@@ -17,8 +18,8 @@ export const Account: FC<AccountDeveloperType> = observer(({onEdit}) => {
   return (
     <div className={styles.wrapper}>
         {
-            store.initialData.loading
-                ?<div style={{width:"100%"}}>
+            store.initialData.loading ? <Loader/>
+                : <div style={{width:"100%"}}>
                     <div style={{display:'flex',justifyContent:'space-between',width:"100%"}}>
                         <div>
                             <Typography weight={"bold"} className={styles.marginB_20}>
@@ -32,11 +33,11 @@ export const Account: FC<AccountDeveloperType> = observer(({onEdit}) => {
                         </div>
 
                         <div style={{display:"flex"}}>
-                            <div style={{height:'40px'}}>
+                            {/*<div style={{height:'40px'}}>
                                 <BaseButton className={styles.buttonHeight}  isActive type={"secondary"}>
                                     Пройти идентификацию
                                 </BaseButton>
-                            </div>
+                            </div>*/}
                             <div style={{height:'40px'}}>
                                 <BaseButton onClick={onEdit} className={styles.buttonHeight} type={"secondary"}>
                                     Редактировать аккаунт
@@ -49,7 +50,6 @@ export const Account: FC<AccountDeveloperType> = observer(({onEdit}) => {
 
                 <ProfileForm profileForm={store.initialData.account.profileForm} onEdit={onEdit} />
                 </div>
-            : <h2>loader </h2>
         }
 
     </div>

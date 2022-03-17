@@ -22,7 +22,7 @@ const Map: React.FC<Props> = observer(({currentHouse, objects, location}) => {
   const mapData = [currentHouse, ...store.get()];
   const [activeMarker, setActivemarker] = useState(0)
   console.log('objects', objects)
-  console.log('mapData', [currentHouse, ...store.get()])
+  console.log('mapData', mapData)
   const [viewport, setViewport] = useState({
     width: "100%",
     height: "100%",

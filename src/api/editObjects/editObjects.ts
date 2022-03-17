@@ -17,6 +17,7 @@ export const editObjectApi = {
         },
       });
     } catch (e: any) {
+      alert("Error");
       return e;
     }
   },
@@ -28,6 +29,7 @@ export const editObjectApi = {
         },
       });
     } catch (e: any) {
+      alert("Error");
       return e;
     }
   },
@@ -39,6 +41,7 @@ export const editObjectApi = {
         },
       });
     } catch (e: any) {
+      alert("Error");
       return e;
     }
   },
@@ -50,17 +53,19 @@ export const editObjectApi = {
         },
       });
     } catch (e: any) {
+      alert("Error");
       return e;
     }
   },
   createObjectResComplex: async (data: any, id: string | number) => {
     try {
-      return await instance.put(`${UrlEditObject.complex}/${id}`, data, {
+      return await instance.patch(`${UrlEditObject.complex}/${id}`, data, {
         headers: {
           authorization: `Bearer ${localStorage.getItem("accessEstatum")}`,
         },
       });
     } catch (e: any) {
+      alert("Error");
       return e;
     }
   },

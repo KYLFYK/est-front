@@ -1,4 +1,4 @@
-import { FC } from "react";
+import { FC, useEffect } from "react";
 import {
   HorizontalTabs,
   ITabItem,
@@ -6,13 +6,14 @@ import {
 import { AgencyTab } from "./agency";
 import { DeveloperTab } from "./DeveloperTab";
 import { OwnerTab } from "./OwnerTab";
-import { Statistic } from "./statistic";
+// import { Statistic } from "./statistic";
+import { AllAdsStore } from "../../../../../../mobx/role/admin/ads";
 
 import commonStyles from "../../AdminRoleStyles.module.scss";
 
 const AdminAdsTabs: ITabItem[] = [
   {
-    title: "Агентства",
+    title: "Агенты",
     Component: <AgencyTab />,
   },
   {
@@ -23,13 +24,21 @@ const AdminAdsTabs: ITabItem[] = [
     title: "Собственники",
     Component: <OwnerTab />,
   },
-  {
+  /*{
     title: "Статистика",
     Component: <Statistic />,
-  },
+  },*/
 ];
 
 export const AdsTabs: FC = () => {
+  const store = AllAdsStore;
+
+  useEffect(() => {
+    if (!store.loaded && !store.errorOnLoad) {
+      store.uploadAllAds().then();
+    }
+  }, []);
+
   return (
     <HorizontalTabs
       wrapperClassName={commonStyles.horizontalTabs}

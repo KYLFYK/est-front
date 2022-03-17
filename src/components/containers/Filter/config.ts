@@ -12,7 +12,7 @@ export const TOGGLE_BUTTONS_OPTIONS_APART: IOption[] = [
 ]
 
 export const TOGGLE_BUTTONS_OPTIONS_HOUSE: IOption[] = [
-    {label: "1", value: "one"},
+    {label: "комнат 1", value: "one"},
     {label: "2", value: "two"},
     {label: "3", value: "three"},
     {label: "4", value: "four"},
@@ -23,7 +23,7 @@ export const TOGGLE_BUTTONS_OPTIONS_HOUSE: IOption[] = [
 export const FILTER_ACTIONS_OPTIONS: IOption[] = [
     {value: "buy", label: "Купить"},
     {value: "sale", label: "Продать"},
-    {value: "rent", label: "Снять"},
+    //{value: "rent", label: "Снять"},
 ]
 
 export const FILTER_HOUSE_TYPE_OPTIONS: IOption[] = [

@@ -62,7 +62,7 @@ const StartScreen: React.FC<Props> = ({
       <div className={s.content}>
         <div className={s.row}>
           <Typography weight="medium">
-            {role === "developer" ? "Создать ЖК или посёлок" : "Новый объект"}
+            {role === "developer" ? "Создать ЖК" : "Новый объект"}
           </Typography>
 
           <div className={s.cardList}>
@@ -85,7 +85,7 @@ const StartScreen: React.FC<Props> = ({
                     ЖК
                   </Typography>
                 </div>
-                <div
+                {/*<div
                   className={cardClassName(
                     NewObjectActionTypes.RENT,
                     choosedAction
@@ -101,7 +101,7 @@ const StartScreen: React.FC<Props> = ({
                   <Typography size="subheaderBig" weight="medium">
                     Посёлок
                   </Typography>
-                </div>
+                </div>*/}
               </>
             ) : (
               <>

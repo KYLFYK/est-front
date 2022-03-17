@@ -29,6 +29,7 @@ import { accFromToken } from "../../../../../lib/localStorage/localStorage";
 
 import s from "./AboutObject.module.scss";
 import { NewDropDown } from "../../../../shared/BaseDropDown/NewDropDown";
+import { AllAdsStore } from "../../../../../mobx/role/admin/ads";
 
 interface Props extends ICreateObjectControls {
   objectType: ObjectTypes;
@@ -59,7 +60,7 @@ const AboutObjectTab: React.FC<Props> = observer(
   ({ onNextTab, onPrevTab, objectType, action }) => {
     const guidesStore = ObjectGuides;
     const addressStore = AddressGuides;
-
+    const adminAdsStore = AllAdsStore;
     const developerStore = useStoreDeveloperMyObjectStore();
 
     const idOwner: any = jwt_decode(
@@ -143,8 +144,9 @@ const AboutObjectTab: React.FC<Props> = observer(
     const onChangeType = (value: string) => {
       setValues({ ...values, type: value });
     };
+
     const onChangeComplexName = (value: string) => {
-      if (idOwner.role === "developer") {
+      if (idOwner.role === "developer" || idOwner.role === "admin") {
         // @ts-ignore
         setValues({ ...values, complexName: Number(value) });
       }
@@ -237,6 +239,38 @@ const AboutObjectTab: React.FC<Props> = observer(
           }
         });
       }
+
+      if (idOwner.role === "admin") {
+        if (!adminAdsStore.loaded) {
+          adminAdsStore.uploadAllAds().then(() => {
+            const history = window ? window.location.search : undefined;
+
+            if (history) {
+              const complex = history
+                .split("&")
+                .filter((el) => el.indexOf("complex") > -1)[0]
+                ?.split("=")[1];
+
+              if (complex) {
+                onChangeComplexName(complex);
+              }
+            }
+          });
+        } else {
+          const history = window ? window.location.search : undefined;
+
+          if (history) {
+            const complex = history
+              .split("&")
+              .filter((el) => el.indexOf("complex") > -1)[0]
+              ?.split("=")[1];
+
+            if (complex) {
+              onChangeComplexName(complex);
+            }
+          }
+        }
+      }
     }, []);
 
     return (
@@ -275,23 +309,37 @@ const AboutObjectTab: React.FC<Props> = observer(
               "floorsAmmount" in values &&
               "type" in values && (
                 <>
-                  {idOwner.role === "developer" && (
-                    <BaseDropDown
-                      className={s.inputSm}
-                      options={developerStore.initialData.complex.map(
-                        (complex) => ({
-                          label: complex.name,
-                          value: complex.id,
-                        })
-                      )}
-                      placeholder={"ЖК"}
-                      onChange={onChangeComplexName}
-                      value={values.complexName}
-                      label="ЖК"
-                      isError={!isValid && !isValidComplexName}
-                      name={"lcd"}
-                    />
-                  )}
+                  {idOwner.role === "developer" ||
+                    (idOwner.role === "admin" && (
+                      <BaseDropDown
+                        className={s.inputSm}
+                        options={
+                          idOwner.role === "developer"
+                            ? developerStore.initialData.complex.map(
+                                (complex) => ({
+                                  label: complex.name,
+                                  value: complex.id,
+                                })
+                              )
+                            : adminAdsStore.adsList
+                            ? adminAdsStore.adsList
+                                .filter(
+                                  (el) => el.objType === ObjectTypes.RESCOMPLEX
+                                )
+                                .map((complex) => ({
+                                  label: complex.name,
+                                  value: complex.id,
+                                }))
+                            : []
+                        }
+                        placeholder={"ЖК"}
+                        onChange={onChangeComplexName}
+                        value={values.complexName}
+                        label="ЖК"
+                        isError={!isValid && !isValidComplexName}
+                        name={"lcd"}
+                      />
+                    ))}
 
                   <CounterButtons
                     onChange={onChangeFloor}

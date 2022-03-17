@@ -1,6 +1,6 @@
 import classNames from "classnames";
 import { observer } from "mobx-react-lite";
-import React from "react";
+import React, { useEffect } from "react";
 import { useState } from "react";
 import { useStores } from "../../../../../hooks/useStores";
 import { ObjectTypes } from "../../../../../utils/interfaces/objects";
@@ -68,6 +68,7 @@ const HouseInfoInterierTab: React.FC<Props> = observer(
     } = {};
 
     guidesStore.readyToWork?.forEach((elem) => {
+      console.log(toJS(elem));
       if (elem.subtitle_ru) {
         complexGuides[elem.subtitle_ru] = complexGuides[elem.subtitle_ru]
           ? [...complexGuides[elem.subtitle_ru], toJS(elem)]
@@ -86,6 +87,46 @@ const HouseInfoInterierTab: React.FC<Props> = observer(
           )
         : {}
     );
+
+    useEffect(() => {
+      if (
+        "guides" in values &&
+        values.guides.length > 0 &&
+        guidesStore.readyToWork
+      ) {
+        const getGuidesList: (
+          guide: IRTWGuide
+        ) => number[] | number | undefined = (guide) => {
+          let result: number[] | number | undefined = undefined;
+
+          guide.values.forEach((guideValue) => {
+            if (values.guides.indexOf(guideValue.id) > -1) {
+              if (guide.isMulti) {
+                if (result) {
+                  if (typeof result !== "number") {
+                    result.push(guideValue.id);
+                  }
+                } else {
+                  result = [guideValue.id];
+                }
+              } else {
+                result = guideValue.id;
+              }
+            }
+          });
+
+          return result;
+        };
+
+        setGuides(
+          Object.fromEntries(
+            guidesStore.readyToWork
+              .filter((el) => el.type_en !== "objectType")
+              .map((el) => [el.type_en, getGuidesList(el)])
+          )
+        );
+      }
+    }, [guidesStore.readyToWork]);
 
     const handleGuideChange = (name: string, value: number) => {
       setGuides({

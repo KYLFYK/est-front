@@ -118,13 +118,23 @@ const HouseInfoDetailsTab: React.FC<Props> = observer(
 
     const [constructionProgress, setConstructionProgress] = useState<
       IConstructionProgressChangeable[]
-    >([
-      {
-        date: "",
-        description: "",
-        id: moment().add(1, "days").toISOString(),
-      },
-    ]);
+    >(
+      "constructionProgress" in values && values.constructionProgress
+        ? values.constructionProgress.map((el, index) => ({
+            date: el.date,
+            description: el.description,
+            id: moment()
+              .add(index + 1, "days")
+              .toISOString(),
+          }))
+        : [
+            {
+              date: "",
+              description: "",
+              id: moment().add(1, "days").toISOString(),
+            },
+          ]
+    );
 
     const handleAddProgress = () => {
       setConstructionProgress([

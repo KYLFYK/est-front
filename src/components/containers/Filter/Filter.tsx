@@ -299,7 +299,7 @@ export const Filter: React.FC<Props> = observer(({ location }) => {
         />
       )}
 
-      {searchStore.getFilter()["object-type"] === "apartment" && (
+      {/*searchStore.getFilter()["object-type"] === "apartment" && (
         <BaseDropDown
           options={FILTER_FLOORS_OPTIONS}
           value={searchStore.getFilter().floor}
@@ -307,7 +307,7 @@ export const Filter: React.FC<Props> = observer(({ location }) => {
           placeholder="Выбрать этаж"
           className={s.dropdownFloor}
         />
-      )}
+      )*/}
 
       {searchStore.getFilter()["object-type"] === "land" && (
         <BaseDropDown
@@ -326,7 +326,7 @@ export const Filter: React.FC<Props> = observer(({ location }) => {
                 placeholder={searchStore.getFilter()['benefit'] ? MultiChoiceBenefits() : "Выбрать благоустроенность"}
                 className={s.dropdown}
             />*/}
-      {searchStore.getFilter()["object-type"] !== "apartment" && (
+      {/*searchStore.getFilter()["object-type"] !== "apartment" && (
         <BaseDropDown
           options={FILTER_LAND_SPECS_OPTIONS}
           value={searchStore.getFilter()["benefit"]}
@@ -339,7 +339,7 @@ export const Filter: React.FC<Props> = observer(({ location }) => {
           multi
           className={s.dropdownImprovement}
         />
-      )}
+      )*/}
 
       {location === "start" || location === "search" ? (
         <BaseButton className={s.submit} type="primary" onClick={onSubmit}>
