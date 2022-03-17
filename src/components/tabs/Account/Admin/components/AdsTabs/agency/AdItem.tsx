@@ -9,6 +9,7 @@ import { createEditLink } from "../../../../../../../utils/routes/createEditLink
 
 import styles from "./AgencyTab.module.scss";
 import imageStatic from "../../../../../../../Pics/VillaTour.png";
+import { AllAdsStore } from "../../../../../../../mobx/role/admin/ads";
 
 export interface IObject {
   name: string;
@@ -37,6 +38,7 @@ interface Props extends IObject {
   objType?: ObjectTypes;
   objId?: number;
   complexId?: number;
+  markedAsDeleted: boolean;
 }
 
 export const AdItem: FC<Props> = ({
@@ -53,7 +55,14 @@ export const AdItem: FC<Props> = ({
   objId,
   objType,
   complexId,
+  markedAsDeleted,
 }) => {
+  const handleSetDeleted = async () => {
+    if (objId !== undefined && objType !== undefined) {
+      await AllAdsStore.setMarkAsDeleted(objId, objType, !markedAsDeleted);
+    }
+  };
+
   return (
     <div className={styles.item}>
       <div className={styles.image}>
@@ -99,7 +108,9 @@ export const AdItem: FC<Props> = ({
             )}
             <div className={styles.buttons}>
               {textButton ? (
-                <span className={styles.textButton}>{textButton}</span>
+                <span onClick={handleSetDeleted} className={styles.textButton}>
+                  {textButton}
+                </span>
               ) : (
                 <>
                   {objId !== undefined && objType !== undefined && (
@@ -111,7 +122,7 @@ export const AdItem: FC<Props> = ({
                       </a>
                     </Link>
                   )}
-                  <Trash className={styles.icon} />
+                  <Trash onClick={handleSetDeleted} className={styles.icon} />
                 </>
               )}
             </div>

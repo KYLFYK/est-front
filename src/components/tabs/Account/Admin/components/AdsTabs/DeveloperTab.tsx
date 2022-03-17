@@ -101,6 +101,7 @@ export const DeveloperTab: FC = observer(() => {
                 image={object.files[0] ? object.files[0].url : undefined}
                 objId={object.id}
                 objType={object.objType}
+                markedAsDeleted={object.markAsDelete}
                 complexId={
                   object.complex && object.objType !== ObjectTypes.RESCOMPLEX
                     ? object.complex.id

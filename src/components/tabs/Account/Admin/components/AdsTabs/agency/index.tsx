@@ -83,6 +83,7 @@ export const AgencyTab: FC = observer(() => {
                 image={object.files[0] ? object.files[0].url : undefined}
                 objId={object.id}
                 objType={object.objType}
+                markedAsDeleted={object.markAsDelete}
               />
             );
           })}
