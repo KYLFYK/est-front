@@ -141,15 +141,19 @@ export const GuideItem: FC<GuideItemType> = observer(({guides, indexGuides}) => 
             type_ru: valueArray[0].trim(),
             value: valueArray[1].trim(),
             for: guideInfoFor,
-            subtitle_ru: objectGuides.info[0].subtitle_ru,
-            subtitle_en: objectGuides.info[0].subtitle_en,
+            subtitle_ru: objectGuides.info[0].subtitle_ru === null ?  null : objectGuides.info[0].subtitle_ru,
+            subtitle_en: objectGuides.info[0].subtitle_en === null ?  null : objectGuides.info[0].subtitle_en,
             isMulti: objectGuides.info[0].isMulti,
         }
-        console.log(newTypeGuide)
+        if( newTypeGuide.subtitle_ru === null ) {
+            // @ts-ignore
+            delete newTypeGuide.subtitle_ru
+            // @ts-ignore
+            delete newTypeGuide.subtitle_en
+        }
         await updateValueGuidePut(objectGuides.info[activeIndexType].id , newTypeGuide)
         fetch()
     }
-
 
     const editModalBackFor = async () => {
         setCountEditFor(0)
@@ -162,7 +166,6 @@ export const GuideItem: FC<GuideItemType> = observer(({guides, indexGuides}) => 
         setModalCountEditFor(false)
         await updatePut(objectGuides.info[activeIndexType].id, indexGuides, activeIndexType)
     }
-
     // console.log(123, JSON.parse(JSON.stringify(objectGuides)))
 
     return (
