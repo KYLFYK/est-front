@@ -35,10 +35,10 @@ const moc = [
     href: "/search?object-type=apartment&order-type=buy&privateType=house",
     title: "Купить",
   },
-  {
+  /*{
     href: "/search?object-type=apartment&order-type=rent&privateType=house",
     title: "Снять",
-  },
+  },*/
   { href: "/calculator", title: "Ипотека" },
   // { href: "/construction", title: "Строящиеся дома" },
   { href: "/#contact", title: "Контакты" },

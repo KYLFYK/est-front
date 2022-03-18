@@ -12,7 +12,7 @@ export const TOGGLE_BUTTONS_OPTIONS_APART: IOption[] = [
 ]
 
 export const TOGGLE_BUTTONS_OPTIONS_HOUSE: IOption[] = [
-    {label: "комнат 1", value: "one"},
+    {label: "1", value: "one"},
     {label: "2", value: "two"},
     {label: "3", value: "three"},
     {label: "4", value: "four"},

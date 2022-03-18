@@ -240,6 +240,7 @@ export const Filter: React.FC<Props> = observer(({ location }) => {
       {(searchStore.getFilter()["object-type"] === "house" ||
         searchStore.getFilter()["object-type"] === "townhouse") && (
         <ToggleButtons
+          title={'комнат'}
           classNameButton={s.toggleButton}
           items={TOGGLE_BUTTONS_OPTIONS_HOUSE}
           activeValue={searchStore.getFilter()["rooms-in-house"]}

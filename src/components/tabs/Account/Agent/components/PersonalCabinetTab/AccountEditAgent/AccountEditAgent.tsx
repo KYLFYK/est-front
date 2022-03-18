@@ -24,7 +24,7 @@ export type infoAgentType = {
 };
 
 type AccountEditType = {
-  onEdit: () => void;
+  onEdit:(tabId: number)=>void
   // infoAgency:infoAgentType
 };
 
@@ -79,7 +79,7 @@ const AccountEditAgent: FC<AccountEditType> = observer(({ onEdit }) => {
       agentInfo.telegram === valueTelegram &&
       agentInfo.viber === valueViber
     ) {
-      onEdit();
+      onEdit(0);
     } else {
       setComparison(true);
     }
@@ -140,12 +140,12 @@ const AccountEditAgent: FC<AccountEditType> = observer(({ onEdit }) => {
     }, 100);
 
     setComparison(false);
-    onEdit();
+    onEdit(0);
   };
 
   const backPageNoSave = () => {
     setComparison(false);
-    onEdit();
+    onEdit(0);
   };
 
   const changeAvatar = (data: FormData) => {
