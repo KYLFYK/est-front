@@ -3,6 +3,9 @@ import { IFile, IOwner, loadAllData } from "../../agent/ads/AgentAds";
 import { IGuide } from "../../../stores/objects/GuidesStore";
 import { IObjType } from "../../../../components/tabs/Account/Agent/components/Others/MyAdsContainer/MyAdsContainer";
 import { ObjectTypes } from "../../../../utils/interfaces/objects";
+import { markAsDeleted } from "../../../../api/obj/markAsDeleted";
+import { reestablishObject } from "../../../../api/obj/reestablishObject";
+import moment from "moment";
 
 interface ILocation {
   id: number;
@@ -68,6 +71,35 @@ class AllAdsStoreEx {
     } catch (e) {
       this.errorOnLoad = true;
       this.loaded = false;
+    }
+  }
+
+  setLoaded(status: boolean) {
+    this.loaded = status;
+    this.errorOnLoad = false;
+  }
+
+  async setMarkAsDeleted(id: number, type: ObjectTypes, deleted: boolean) {
+    if (this.adsList) {
+      try {
+        if (deleted) {
+          await markAsDeleted(id, type);
+        } else {
+          await reestablishObject(id, type);
+        }
+        this.adsList = this.adsList.map((el) => {
+          if (el.id === id && el.objType === type) {
+            return {
+              ...el,
+              markAsDelete: deleted,
+              updateAt: moment().toISOString(),
+            };
+          }
+          return el;
+        });
+      } catch (e) {
+        console.log("Error deleting", e);
+      }
     }
   }
 }

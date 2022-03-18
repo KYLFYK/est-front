@@ -1,9 +1,18 @@
-import { FC } from "react";
+import { FC, useEffect } from "react";
 import Link from "next/link";
-
+import { observer } from "mobx-react-lite";
+import {useBankCabinetStore} from '../../../../../mobx/role/bank/cabinet/BankCabinet'
 import styles from "./Settings.module.scss";
+import {accFromToken} from '../../../../../lib/localStorage/localStorage'
 
-export const Settings: FC = () => {
+export const Settings: FC = observer(() => {
+  const store = useBankCabinetStore()
+  console.log(store.get())
+
+  useEffect(() => {
+    store.fetch()
+  }, [])
+
   return (
     <div className={styles.wrapper}>
       <div className={styles.infoWrapper}>
@@ -54,4 +63,4 @@ export const Settings: FC = () => {
       </div>
     </div>
   );
-};
+});

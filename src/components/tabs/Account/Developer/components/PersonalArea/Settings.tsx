@@ -6,6 +6,10 @@ import BaseButton from "../../../../../shared/BaseButton/BaseButtons";
 import {useStoreDeveloperCabinet} from "../../../../../../mobx/role/developer/cabinet/DeveloperCabinet";
 import {observer} from "mobx-react-lite";
 
+type SettingDeveloperType={
+  onEdit:()=>void
+}
+
 interface IForm {
   phoneNumber: string;
   login: string;
@@ -55,7 +59,7 @@ const IconVis: FC<IconVisProps> = ({ passwordVis, setPasswordVis, type }) => {
   );
 };
 
-export const Settings: FC = observer(() => {
+export const Settings: FC<SettingDeveloperType> = observer(({onEdit}) => {
 
   const store = useStoreDeveloperCabinet()
 
@@ -84,139 +88,41 @@ export const Settings: FC = observer(() => {
 
   return (
     <form className={styles.settings}>
+      <div style={{height:'40px'}}>
+        <BaseButton onClick={onEdit} className={styles.buttonHeight} type={"secondary"}>
+          Редактировать настройки
+        </BaseButton>
+      </div>
       <section className={styles.settingsSec}>
-        <span className={styles.title}>Телефоны</span>
-        {numbersCount.map((num, index) => (
-          <div className={styles.phoneNumber} key={index}>
-            <BaseInput
-              classNameWrapper={styles.inputWrapper}
-              className={styles.input}
-              errorLabel=""
-              label={`Номер телефона ${index + 1}`}
-              type="tel"
-              name={num}
-              value={formValues[num]}
-              onChange={(e) => {
-                handleFieldChange("phoneNumber", e.currentTarget.value);
-              }}
-            />
-            {index === numbersCount.length - 1 && index !== 0 && (
-              <span
-                className={styles.delete}
-                onClick={() => {
-                  setFormValues({
-                    ...formValues,
-                    [num]: "",
-                  });
-                  setNumbersCount([
-                    ...numbersCount.filter(
-                      (val, index) => index !== numbersCount.length - 1
-                    ),
-                  ]);
-                }}
-              >
-                -
-              </span>
-            )}
-          </div>
-        ))}
-        <span
-          className={styles.add}
-          onClick={() => {
-            setNumbersCount([
-              ...numbersCount,
-              `phoneNumber${numbersCount.length + 1}`,
-            ]);
-          }}
-        >
-          + Добавить номер телефона
-        </span>
-      </section>
-      <section className={styles.settingsSec}>
-        <span className={styles.title}>Регистрационные данные</span>
+        <span className={styles.title}>Данные регистрации</span>
         <BaseInput
           classNameWrapper={styles.inputWrapper}
           className={styles.input}
           errorLabel=""
-          label={"Логин"}
-          type="text"
-          name={"login"}
-          value={formValues.login}
-          onChange={(e) => {
-            handleFieldChange("login", e.currentTarget.value);
-          }}
-        />
-        {/*<BaseInput*/}
-        {/*  classNameWrapper={styles.inputWrapper}*/}
-        {/*  className={styles.input}*/}
-        {/*  errorLabel=""*/}
-        {/*  label={"Старый пароль"}*/}
-        {/*  type={passwordVis.oldPassword ? "text" : "password"}*/}
-        {/*  name={"oldPassword"}*/}
-        {/*  value={formValues.oldPassword}*/}
-        {/*  onChange={(e) => {*/}
-        {/*    handleFieldChange("oldPassword", e.currentTarget.value);*/}
-        {/*  }}*/}
-        {/*  icon={*/}
-        {/*    <IconVis*/}
-        {/*      setPasswordVis={setPasswordVis}*/}
-        {/*      passwordVis={passwordVis}*/}
-        {/*      type={"oldPassword"}*/}
-        {/*    />*/}
-        {/*  }*/}
-        {/*/>*/}
-        {/*<BaseInput*/}
-        {/*  classNameWrapper={styles.inputWrapper}*/}
-        {/*  className={styles.input}*/}
-        {/*  errorLabel=""*/}
-        {/*  label={"Новый пароль"}*/}
-        {/*  type={passwordVis.newPassword ? "text" : "password"}*/}
-        {/*  name={"newPassword"}*/}
-        {/*  value={formValues.newPassword}*/}
-        {/*  onChange={(e) => {*/}
-        {/*    handleFieldChange("newPassword", e.currentTarget.value);*/}
-        {/*  }}*/}
-        {/*  icon={*/}
-        {/*    <IconVis*/}
-        {/*      setPasswordVis={setPasswordVis}*/}
-        {/*      passwordVis={passwordVis}*/}
-        {/*      type={"newPassword"}*/}
-        {/*    />*/}
-        {/*  }*/}
-        {/*/>*/}
-        {/*<BaseButton*/}
-        {/*  buttonHTMLType={"button"}*/}
-        {/*  className={styles.save}*/}
-        {/*  type={"blank"}*/}
-        {/*>*/}
-        {/*  Сохранить*/}
-        {/*</BaseButton>*/}
-      </section>
-      <section className={styles.settingsSec}>
-        <span className={styles.title}>Уведомления</span>
-        <BaseInput
-          classNameWrapper={styles.inputWrapper}
-          className={styles.input}
-          errorLabel=""
-          label={"Номер телефона"}
+          label={"Телефон"}
           type="tel"
           name={"noticePhone"}
-          value={formValues.noticePhone}
-          onChange={(e) => {
-            handleFieldChange("noticePhone", e.currentTarget.value);
-          }}
+          value={store.get().setting.noticePhone}
         />
         <BaseInput
           classNameWrapper={styles.inputWrapper}
           className={styles.input}
           errorLabel=""
-          label={"Email"}
+          label={"E-mail"}
+          type="text"
+          name={"login"}
+          value={store.get().setting.noticeEmail}
+        />
+      </section>
+      <section className={styles.settingsSec}>
+        <BaseInput
+          classNameWrapper={styles.inputWrapper}
+          className={styles.input}
+          errorLabel=""
+          label={"Пароль"}
           type="tel"
           name={"noticeEmail"}
-          value={formValues.noticeEmail}
-          onChange={(e) => {
-            handleFieldChange("noticeEmail", e.currentTarget.value);
-          }}
+          value={'***'}
         />
       </section>
     </form>

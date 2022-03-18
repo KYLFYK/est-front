@@ -38,8 +38,8 @@ class BankCabinetStore {
     }
 
     async fetch() {
-        const res  = await cabinetAPI.getCabinetAgent()
-
+        const res  = await cabinetAPI.getAccountData()
+        console.log(res)
         const name = res.data.agentProperty.name ? res.data.agentProperty.name : 'name'
         const status = res.data.role
         const experience = res.data.agentProperty.experience?res.data.agentProperty.experience :'0'
@@ -77,11 +77,11 @@ class BankCabinetStore {
 
     }
     async update(id:number, updateValue: UpdateAgentCabinetType){
-        const res = await cabinetAPI.updateBankCabinet(id,updateValue)
+        const res = await cabinetAPI.updateBankCabinet(id, updateValue)
     }
 
     get() {
-        console.log('getMobx',JSON.parse(JSON.stringify({...this.initialData})))
+        return JSON.parse(JSON.stringify({...this.initialData}))
     }
 }
 

@@ -26,6 +26,12 @@ export const markAsDeleted: (
           authorization: `Bearer ${localStorage.getItem("accessEstatum")}`,
         },
       });
+    case ObjectTypes.RESCOMPLEX:
+      return instance.delete(`complex/${id}`, {
+        headers: {
+          authorization: `Bearer ${localStorage.getItem("accessEstatum")}`,
+        },
+      });
     default:
       return instance.patch(``, undefined, {
         headers: {

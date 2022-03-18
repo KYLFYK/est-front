@@ -44,6 +44,18 @@ export const reestablishObject: (
           },
         }
       );
+    case ObjectTypes.RESCOMPLEX:
+      return instance.patch(
+        `complex/${id}`,
+        {
+          markAsDelete: false,
+        },
+        {
+          headers: {
+            authorization: `Bearer ${localStorage.getItem("accessEstatum")}`,
+          },
+        }
+      );
     default:
       return instance.put(
         ``,

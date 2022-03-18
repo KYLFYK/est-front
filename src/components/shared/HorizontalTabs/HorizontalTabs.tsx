@@ -12,6 +12,8 @@ export interface ITabItem {
   onClick?: () => void;
 }
 interface Props {
+  setCurrent?: any;
+  current?: number;
   tabs: ITabItem[];
   refs?: any[];
   wrapperClassName?: string;
@@ -19,15 +21,16 @@ interface Props {
 }
 
 export const HorizontalTabs: FC<Props> = ({
+  current,
+  setCurrent,
   tabs,
   refs,
   wrapperClassName,
   style,
 }) => {
-  const [selectedTabIdx, setSelectedTabIdx] = useState(0);
+  const [selectedTabIdx, setSelectedTabIdx] = useState(current ? current : 0);
   const activeTabRef = useRef<HTMLDivElement | null>(null);
   const [activeTabMargin, setActiveTabMargin] = useState(30);
-
   useEffect(() => {
     if (activeTabRef && activeTabRef.current) {
       setActiveTabMargin((activeTabRef.current.clientWidth - 50) / 2);
@@ -42,6 +45,7 @@ export const HorizontalTabs: FC<Props> = ({
       });
     }
     setSelectedTabIdx(newValue);
+    setCurrent(newValue);
   };
 
   return (

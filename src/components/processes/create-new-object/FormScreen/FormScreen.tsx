@@ -28,6 +28,8 @@ import {
 import { useAgentAdsStore } from "../../../../mobx/role/agent/ads/AgentAds";
 import { IEditInfo, IInfoLoaded } from "../../../../hooks/useEditObject";
 import { useStores } from "../../../../hooks/useStores";
+import jwt_decode from "jwt-decode";
+import { AllAdsStore } from "../../../../mobx/role/admin/ads";
 
 import s from "./FormScreen.module.scss";
 
@@ -132,6 +134,16 @@ const FormScreen: FC<Props> = observer(
     }, [activeTabIdx, activeSubTabIdx]);
 
     const handlePublish = (advertisementId: string) => {
+      const idOwner: any = jwt_decode(
+        localStorage.getItem("accessEstatum")
+          ? (localStorage.getItem("accessEstatum") as string)
+          : "123"
+      );
+
+      if (idOwner.role === "admin") {
+        AllAdsStore.setLoaded(false);
+      }
+
       setSuccesAdvertisementId(advertisementId);
     };
 

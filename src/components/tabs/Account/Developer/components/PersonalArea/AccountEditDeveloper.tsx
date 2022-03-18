@@ -25,7 +25,7 @@ export type infoDeveloperType = {
 }
 
 type AccountEditType = {
-    onEdit: () => void
+    onEdit: (tabId: number) => void
     // infoAgency:infoAgentType
 }
 
@@ -67,7 +67,7 @@ const AccountEditDeveloper: FC<AccountEditType> = observer(({onEdit}) => {
             && agentInfo.email === valueEmail
             && agentInfo.site === valueSite
             && agentInfo.description === valueDescription) {
-            onEdit()
+            onEdit(0)
         } else {
             setComparison(true)
         }
@@ -113,11 +113,11 @@ const AccountEditDeveloper: FC<AccountEditType> = observer(({onEdit}) => {
             store.fetch()
         }, 100)
         setComparison(false)
-        onEdit()
+        onEdit(0)
     }
     const backPageNoSave = () => {
         setComparison(false)
-        onEdit()
+        onEdit(0)
     }
     console.log(123, agentInfo.name !== valueName
         , agentInfo.type !== valueType

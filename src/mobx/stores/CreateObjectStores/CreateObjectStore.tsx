@@ -1093,7 +1093,7 @@ class CreateObjectStore implements ICreateObject {
         name: complexDataS.about.name,
         description: complexDataS.generalInfo.description,
         address: complexDataS.about.address,
-        postcode: complexDataS.about.index,
+        postcode: complexDataS.about.index.toString(),
         longitude: 44.948237,
         latitude: 34.100318,
         region: complexDataS.about.region,
