@@ -189,7 +189,6 @@ export const GuideItem: FC<GuideItemType> = observer(({guides, indexGuides}) => 
         await updatePut(objectGuides.info[activeIndexType].id, indexGuides, activeIndexType)
         fetch()
     }
-
     // console.log(123, JSON.parse(JSON.stringify(objectGuides)))
 
     return (
