@@ -42,7 +42,7 @@ class AdminLocation {
         console.log("newItems", res)
     }
     addRegion: (name:string) => void = async (name:string) => {
-        await instance.post (`region`,name,{
+        await instance.post (`region`,{name:name},{
             headers: {authorization: `Bearer ${localStorage.getItem('accessEstatum')}`}
         })
         this.fetchRegion()

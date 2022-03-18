@@ -9,7 +9,7 @@ const Location = () => {
         <HorizontalTabs
             wrapperClassName={css.wrapper}
             tabs={[
-            { title: "Страны", Component: <Country/> },
+            // { title: "Страны", Component: <Country/> },
             { title: "Города", Component: <City/> },
             { title: "Регионы", Component: <Region/> },
         ]} />

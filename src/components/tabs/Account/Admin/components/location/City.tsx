@@ -23,7 +23,7 @@ const City = observer(() => {
     },[region])
 
     const [editModalCity, setEditModalCity] = useState<boolean>(false)
-    const [removeModalCity, setRemoveModalCity] = useState<boolean>(false)
+    // const [removeModalCity, setRemoveModalCity] = useState<boolean>(false)
     const [addModalCity, setAddModalCity] = useState<boolean>(false)
 
     const [activeCityObject, setActiveCityObject] = useState<{ id: number, name: string, region: { id: number, name: string } }>(city[0])
@@ -60,11 +60,11 @@ const City = observer(() => {
 
 
     return (
-        <div style={{display:'flex',justifyContent:'space-between'}}>
+        <div className={css.df_jc}>
             <div>
                 {
                     city.map((reg: any, index: number) => (
-                        <div key={reg.id} style={{display: 'flex'}}>
+                        <div key={reg.id} className={css.df}>
                             <Typography className={css.mR_5}>
                                 {
                                     reg.name
@@ -115,7 +115,7 @@ const City = observer(() => {
                                 value={valueDropDown}
                             />
                         </div>
-                        <div className={css.mT_10} style={{display:'flex'}}>
+                        <div className={css.df_mT_10}>
                             <BaseButton
                                 type={"secondary"}
                                 isActive
@@ -159,7 +159,7 @@ const City = observer(() => {
                         placeholder={'Выбериге Регион'}
                         value={valueDropDown}
                     />
-                    <div className={css.mT_10} style={{display:'flex'}}>
+                    <div className={css.df_mT_10} >
                         <BaseButton
                             type={"secondary"}
                             isActive

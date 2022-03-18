@@ -50,14 +50,12 @@ const Region = observer(() => {
 
     }
 
-
-
     return (
-        <div style={{display: 'flex', justifyContent: 'space-between'}}>
+        <div className={css.df_jc}>
             <div>
                 {
                     region.map((reg: any) => (
-                        <div key={reg.id} style={{display: 'flex'}}>
+                        <div key={reg.id} className={css.df}>
                             <Typography key={reg.id} className={css.mR_5}>
                                 {
                                     reg.name
@@ -95,7 +93,7 @@ const Region = observer(() => {
                             value={valueRegion}
                             onChange={e => setValueRegion(e.currentTarget.value)}
                         />
-                        <div className={css.mT_10} style={{display: 'flex'}}>
+                        <div className={css.df_mT_10} >
                             <BaseButton
                                 type={"secondary"}
                                 isActive
@@ -130,7 +128,7 @@ const Region = observer(() => {
                             value={valueRegion}
                             onChange={e => setValueRegion(e.currentTarget.value)}
                         />
-                        <div className={css.mT_10} style={{display: 'flex'}}>
+                        <div className={css.df_mT_10}>
                             <BaseButton
                                 type={"secondary"}
                                 isActive
