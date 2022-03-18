@@ -55,7 +55,7 @@ export const GuideItem: FC<GuideItemType> = observer(({guides, indexGuides}) => 
 
     const [addActiveModal, setAddActiveModal] = useState<boolean>(false) // Активизация модалки Создания
 
-    const [optionAddDropDown, setOptionAddDropDown]= useState<Array<{label:string,value:string}>>(objectGuides.info.map((t:any)=>({value:t.type_en, label:t.type_ru})))
+    // const [optionAddDropDown, setOptionAddDropDown]= useState<Array<{label:string,value:string}>>(objectGuides.info.map((t:any)=>({value:t.type_en, label:t.type_ru})))
     const [valueOptionAddDropDown, setValueOptionAddDropDown]= useState<string>("Выберите тип")
 
     const activeMenu = (e: string | null, index: number, guide: any) => {
@@ -94,8 +94,6 @@ export const GuideItem: FC<GuideItemType> = observer(({guides, indexGuides}) => 
         }
     }
 
-
-
     const onCheckedType = (title: string, indexType: number) => {
         let modalCountEdit = countEditFor
         if (editDisplayFor) {
@@ -124,7 +122,7 @@ export const GuideItem: FC<GuideItemType> = observer(({guides, indexGuides}) => 
     const addTypeGuide = async (type_en: string,  value: string, visionObject: Array<string>) => {
         const newTypeGuide: GuideInfoType = {
             type_en: type_en,
-            type_ru: option.filter((opt:any)=> opt.value !== type_en)[0].label,
+            type_ru: option.length === 1 ? option[0].label :  option.filter((opt:any)=> opt.value !== type_en)[0].label,
             value: value,
             for: visionObject,
             subtitle_ru: objectGuides.info[0].subtitle_ru,
@@ -192,9 +190,7 @@ export const GuideItem: FC<GuideItemType> = observer(({guides, indexGuides}) => 
         fetch()
     }
 
-    console.log(123, JSON.parse(JSON.stringify(objectGuides)))
-
-
+    // console.log(123, JSON.parse(JSON.stringify(objectGuides)))
 
     return (
         <div>
