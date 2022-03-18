@@ -58,7 +58,6 @@ const City = observer(() => {
         setEditModalCity(!editModalCity)
     }
 
-
     return (
         <div className={css.df_jc}>
             <div>
