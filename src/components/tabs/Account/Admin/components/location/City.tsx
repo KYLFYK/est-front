@@ -29,7 +29,6 @@ const City = observer(() => {
     const [activeCityObject, setActiveCityObject] = useState<{ id: number, name: string, region: { id: number, name: string } }>(city[0])
     const [valueCity,setValueCity]=useState<string>('')
 
-
     const [valueDropDown, setValueDropDown]=useState<string>("")
     const [valueOptionDropDown, setValueOptionDropDown]=useState<Array<{label:string,value:string}>>( [] )
 
