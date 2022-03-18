@@ -23,6 +23,9 @@ class AgentCabinetStore {
       { label: "WhatsApp", value: "", placeholder: "" },
       { label: "Viber", value: "", placeholder: "" },
     ],
+    setting: {
+      newPassword: '',
+    },
     id: 1,
     img: imgMoc,
     statusVerification: "notConfirmed",
@@ -43,6 +46,13 @@ class AgentCabinetStore {
       url: string;
     }[],
   };
+
+  setsettingsPassword(value: any) {
+    this.initialData.setting = {
+      ...this.initialData.setting,
+      newPassword: value,
+    };
+  }
 
   async fetch() {
     const res = await cabinetAPI.getCabinetAgent();
