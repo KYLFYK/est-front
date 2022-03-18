@@ -64,9 +64,7 @@ const City = observer(() => {
                     city.map((reg: any, index: number) => (
                         <div key={reg.id} className={css.df}>
                             <Typography className={css.mR_5}>
-                                {
-                                    reg.name
-                                }
+                                {`${reg.name} - (${reg.region.name})`}
                             </Typography>
                             <div onClick={() => onActiveEditCity(index)} style={{cursor: 'pointer'}}>
                                 <ModeEditOutlineOutlinedIcon fontSize={'small'}/>
@@ -142,19 +140,20 @@ const City = observer(() => {
                     </svg>
 
                      <Typography weight={"medium"} className={css.mT_20}>
-                         Добавить Город
+                         Добавить город
                      </Typography>
+                    <div className={css.mT_10}>
+                        <BaseInput
+                            value={valueCity}
+                            onChange={e=>setValueCity(e.currentTarget.value)}
+                        />
+                    </div>
 
-                    <BaseInput
-                        className={css.mT_10}
-                        value={valueCity}
-                        onChange={e=>setValueCity(e.currentTarget.value)}
-                    />
                     <BaseDropDown
                         className={css.mT_10}
                         options={valueOptionDropDown}
                         onChange={(e)=>setValueDropDown(e)}
-                        placeholder={'Выбериге Регион'}
+                        placeholder={'Выберите Регион'}
                         value={valueDropDown}
                     />
                     <div className={css.df_mT_10} >

@@ -55,6 +55,9 @@ export const GuideItem: FC<GuideItemType> = observer(({guides, indexGuides}) => 
 
     const [addActiveModal, setAddActiveModal] = useState<boolean>(false) // Активизация модалки Создания
 
+    const [optionAddDropDown, setOptionAddDropDown]= useState<Array<{label:string,value:string}>>(objectGuides.info.map((t:any)=>({value:t.type_en, label:t.type_ru})))
+    const [valueOptionAddDropDown, setValueOptionAddDropDown]= useState<string>("Выберите тип")
+
     const activeMenu = (e: string | null, index: number, guide: any) => {
         if (countEditFor === 0) {
             setActiveNameType(e)
@@ -73,7 +76,25 @@ export const GuideItem: FC<GuideItemType> = observer(({guides, indexGuides}) => 
     useEffect(() => {
         setGuideInfoFor(guides.info[activeIndexType].for)
         setObjectGuides(guides)
-    }, [])
+    }, [guides])
+
+    const array = objectGuides.info.map((t:any)=>({value:t.type_en, label:t.type_ru}))
+    const arrayName:any = objectGuides.info.map((t:any)=>t.type_ru)
+    // @ts-ignore
+    const arrayName1 = [...new Set(arrayName)] // 'asdf','asdf','123'
+
+    const option:any = []
+
+    for(let x = 0 ; x < arrayName1.length ; x++){
+        for (let i = 0 ; i < array.length ; i++){
+            if( array[i].label===arrayName1[x]) {
+                option.push(array[i])
+                break
+            }
+        }
+    }
+
+
 
     const onCheckedType = (title: string, indexType: number) => {
         let modalCountEdit = countEditFor
@@ -100,10 +121,10 @@ export const GuideItem: FC<GuideItemType> = observer(({guides, indexGuides}) => 
         }
     }
 
-    const addTypeGuide = async (type_en: string, type_ru: string, value: string, visionObject: Array<string>) => {
+    const addTypeGuide = async (type_en: string,  value: string, visionObject: Array<string>) => {
         const newTypeGuide: GuideInfoType = {
             type_en: type_en,
-            type_ru: type_ru,
+            type_ru: option.filter((opt:any)=> opt.value !== type_en)[0].label,
             value: value,
             for: visionObject,
             subtitle_ru: objectGuides.info[0].subtitle_ru,
@@ -118,9 +139,10 @@ export const GuideItem: FC<GuideItemType> = observer(({guides, indexGuides}) => 
     }
 
     const deleteGuideItem = (id: number, nameType: string) => {
-        setRemoveId(id)
-        setModalRemove(!modalRemove)
-        setRemoveName(nameType)
+            setActiveIndexType(0)
+            setRemoveId(id)
+            setModalRemove(!modalRemove)
+            setRemoveName(nameType)
     }
 
     const removeIcon = async () => {
@@ -167,8 +189,12 @@ export const GuideItem: FC<GuideItemType> = observer(({guides, indexGuides}) => 
         setCountEditFor(0)
         setModalCountEditFor(false)
         await updatePut(objectGuides.info[activeIndexType].id, indexGuides, activeIndexType)
+        fetch()
     }
-    // console.log(123, JSON.parse(JSON.stringify(objectGuides)))
+
+    console.log(123, JSON.parse(JSON.stringify(objectGuides)))
+
+
 
     return (
         <div>
@@ -184,7 +210,7 @@ export const GuideItem: FC<GuideItemType> = observer(({guides, indexGuides}) => 
                 </div>
                 <div className={css.checkbox}>
                     <Typography className={css.marginColumn}>
-                        Мулити
+                        Мульти
                     </Typography>
                 </div>
                 <div className={css.df}>
@@ -210,7 +236,9 @@ export const GuideItem: FC<GuideItemType> = observer(({guides, indexGuides}) => 
                                     guide={guide}
                                     onClick={(e) => activeMenu(e, index, guide)}
                                     disable={editType}
-                                    onDelete={() => deleteGuideItem(guide.id, `${guide.type_ru} - ${guide.value}`)}
+                                    onDelete={() => {
+                                        if(editType)deleteGuideItem(guide.id, `${guide.type_ru} - ${guide.value}`)
+                                    }}
                                     onSaveValue={(value) => updateValueGuide(value)}
                                 />
                             ))
@@ -277,8 +305,11 @@ export const GuideItem: FC<GuideItemType> = observer(({guides, indexGuides}) => 
                     className={css.modalAdd}
                 >
                     <AddGuide
+                        option={option}
+                        valueDropDown={valueOptionAddDropDown}
+                        onDropDown={e=>setValueOptionAddDropDown(e)}
                         onExit={() => setAddActiveModal(false)}
-                        onCreate={(type_en, type_ru, value, visionObject) => addTypeGuide(type_en, type_ru, value, visionObject)}
+                        onCreate={(type_en, value, visionObject) => addTypeGuide(type_en, value, visionObject)}
                     />
                 </Modal>
             }

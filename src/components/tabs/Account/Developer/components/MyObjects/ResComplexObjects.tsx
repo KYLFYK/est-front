@@ -58,7 +58,7 @@ const ResComplexObjects: FC<ResComplexObjectsType> = observer(
       <div>
         <BackPage onBackPage={() => onComplex(false)} title={complexId.name} />
         <Typography weight={"bold"} className={css.marginB_20}>
-          Квартиры и аппартаменты
+          Квартиры и апартаменты
         </Typography>
         <div style={{ display: "flex" }}>
           <BaseDropDown

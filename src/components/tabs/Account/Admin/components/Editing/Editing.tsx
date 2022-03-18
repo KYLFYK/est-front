@@ -16,7 +16,7 @@ export const translate = (title: string) => {
         case 'complex':
             return 'ЖК'
         case 'land':
-            return 'Участоки'
+            return 'Участки'
         default:
             return title
     }
