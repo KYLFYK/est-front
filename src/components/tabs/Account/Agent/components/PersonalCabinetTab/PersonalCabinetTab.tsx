@@ -2,10 +2,10 @@
 import { useEffect, useState } from "react";
 import { HorizontalTabs } from "../../../../../shared/HorizontalTabs/HorizontalTabs";
 // import PersonalCabinetStatistics from "./Statistics/Statistics";
-import {Settings} from "./Settings/Settings";
+import { Settings } from "./Settings/Settings";
 import PersonalCabinetAccountInfo from "./AccountInfo/AccountInfo";
 import AccountEditAgent from "./AccountEditAgent/AccountEditAgent";
-import {SettingsEditAgent} from './Settings/SettingsEditAgent';
+import { SettingsEditAgent } from "./Settings/SettingsEditAgent";
 import { useStoreAgentCabinet } from "../../../../../../mobx/role/agent/cabinet/AgentCabinet";
 import { observer } from "mobx-react-lite";
 
@@ -20,14 +20,14 @@ const PersonalCabinetTab = observer(() => {
   const [edit, setEdit] = useState<boolean>(false);
   const [current, setCurrent] = useState<number>(0);
   const store = useStoreAgentCabinet();
-
+  
   const onEdit = (tabId: number) => {
-    setEdit(false)
-    setCurrent(tabId)
-  }
+    setEdit(false);
+    setCurrent(tabId);
+  };
 
   useEffect(() => {
-    store.fetch().then();
+    store.fetch();
   }, [store]);
 
   return (
@@ -44,17 +44,20 @@ const PersonalCabinetTab = observer(() => {
                 <PersonalCabinetAccountInfo onEdit={() => setEdit(true)} />
               ),
             },
-            { title: "Настройки", Component: <Settings onEdit={() => setEdit(true)} /> },
+            {
+              title: "Настройки",
+              Component: <Settings onEdit={() => setEdit(true)} />,
+            },
           ]}
           style={{
             margin: 0,
             marginBottom: 20,
           }}
         />
-      ) : current === 0 && <AccountEditAgent onEdit={onEdit} />
-          ||
-          current === 1 && <SettingsEditAgent onEdit={onEdit} />
-      }
+      ) : (
+        (current === 0 && <AccountEditAgent onEdit={onEdit} />) ||
+        (current === 1 && <SettingsEditAgent onEdit={onEdit} />)
+      )}
     </>
   );
 });

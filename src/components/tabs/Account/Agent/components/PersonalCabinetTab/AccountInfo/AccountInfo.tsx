@@ -32,7 +32,6 @@ const PersonalCabinetAccountInfo: FC<PersonalCabinetAccountInfoType> = observer(
   ({ onEdit }) => {
     const store = useStoreAgentCabinet();
 
-    const statusVerification = store.initialData.statusVerification;
     const info = store.initialData.info;
 
     const apiStatus = () => {
@@ -72,7 +71,7 @@ const PersonalCabinetAccountInfo: FC<PersonalCabinetAccountInfoType> = observer(
               onClick={apiStatus}
             >
               <Typography size={"small"} color={"secondary"}>
-                {statusVerificationTitle(statusVerification)}
+                {statusVerificationTitle(store.get().statusVerification)}
               </Typography>
             </BaseButton>
           </div>
@@ -81,12 +80,12 @@ const PersonalCabinetAccountInfo: FC<PersonalCabinetAccountInfoType> = observer(
           Аккаунт
         </Typography>
         <div className={css.df_w}>
-          {info.map(({ label, value, placeholder }, index) => (
+          {store.get().info.map((i: {label: string, value: string, placeholder: string}, index: number) => (
             <DataTypography
               key={index}
-              title={label}
-              value={value}
-              placeholder={placeholder}
+              title={i.label}
+              value={i.value}
+              placeholder={i.placeholder}
             />
           ))}
         </div>

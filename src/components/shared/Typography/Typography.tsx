@@ -11,7 +11,7 @@ interface Props extends IPropsGeneral {
     inline?: boolean
 }
 
-const Typography: React.FC<Props> = ({onClick, className, color = 'default', size = 'default', weight = 'regular', iconPosition = 'start', icon, inline, children }) => {
+const Typography: React.FC<Props> = ({onClick, className, color = 'default', size = 'default', weight = 'regular', iconPosition = 'start', icon, inline, children}) => {
     return (
         <p 
             onClick={onClick} 

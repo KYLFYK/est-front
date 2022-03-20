@@ -129,14 +129,9 @@ export type UpdateAgencyCabinetType = {};
 export type UpdateAgentCabinetType = {
   phone: Array<{ ord: number; value: string }>;
   name: string;
-  position: string;
   experience: string;
   rating: number;
   inviteLink: string;
-  messengers: {
-    whatsApp: string;
-    telegram: string;
-  };
   file: {
     fileName: string;
     mimeType: string;
