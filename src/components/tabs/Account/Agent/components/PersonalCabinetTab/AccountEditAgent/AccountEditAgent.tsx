@@ -14,13 +14,9 @@ import { AvatarSection } from "../../../../../../shared/AvatarSection";
 
 export type infoAgentType = {
   name: string;
-  status: string;
   experience: string;
   phone: string;
   email: string;
-  telegram: string;
-  whatsApp: string;
-  viber: string;
 };
 
 type AccountEditType = {
@@ -38,17 +34,13 @@ const AccountEditAgent: FC<AccountEditType> = observer(({ onEdit }) => {
 
   const infoAgency = {
     name: store.initialData.name,
-    status: store.initialData.status,
     experience: store.initialData.experience,
     phone: store.initialData.phone,
     email: store.initialData.email,
-    telegram: store.initialData.telegram,
-    whatsApp: store.initialData.whatsApp,
-    viber: store.initialData.viber,
   };
 
   const [agentInfo, setAgentInfo] = useState<infoAgentType>(infoAgency);
-
+  
   // for input date user
   const date = new Date();
   const dateReal = date.toISOString().substr(0, 4); // year
@@ -56,28 +48,20 @@ const AccountEditAgent: FC<AccountEditType> = observer(({ onEdit }) => {
   const yearsExperience = agentInfo.experience.substr(0, 4); // start years Experience
 
   const [valueName, setValueName] = useState(agentInfo.name);
-  const [valueStatus, setValueStatus] = useState(agentInfo.status);
   const [valueExperience, setValueExperience] = useState<number>(
     +dateReal - +yearsExperience
   );
   const [valuePhone, setValuePhone] = useState(agentInfo.phone);
   const [valueEmail, setValueEmail] = useState(agentInfo.email);
-  const [valueWhatsApp, setValueWhatsApp] = useState(agentInfo.whatsApp);
-  const [valueTelegram, setValueTelegram] = useState(agentInfo.telegram);
-  const [valueViber, setValueViber] = useState(agentInfo.viber);
 
   const [comparison, setComparison] = useState<boolean>(false);
 
   const backPage = () => {
     if (
       agentInfo.name === valueName &&
-      agentInfo.status === valueStatus &&
       +dateReal - +yearsExperience === +valueExperience &&
       agentInfo.phone === valuePhone &&
-      agentInfo.email === valueEmail &&
-      agentInfo.whatsApp === valueWhatsApp &&
-      agentInfo.telegram === valueTelegram &&
-      agentInfo.viber === valueViber
+      agentInfo.email === valueEmail 
     ) {
       onEdit(0);
     } else {
@@ -89,14 +73,9 @@ const AccountEditAgent: FC<AccountEditType> = observer(({ onEdit }) => {
     const updateValue: UpdateAgentCabinetType = {
       phone: [{ ord: 1, value: valuePhone }],
       name: valueName,
-      position: valueStatus,
       experience: +dateReal - valueExperience + "-" + mountAndDay,
       rating: 0,
       inviteLink: "string",
-      messengers: {
-        whatsApp: valueWhatsApp,
-        telegram: valueTelegram,
-      },
       file: store.initialData.file,
     };
 
@@ -104,32 +83,21 @@ const AccountEditAgent: FC<AccountEditType> = observer(({ onEdit }) => {
 
     setAgentInfo({
       name: valueName,
-      status: valueStatus,
       experience: +dateReal - valueExperience + "-" + mountAndDay,
       phone: valuePhone,
       email: valueEmail,
-      telegram: valueTelegram,
-      whatsApp: valueWhatsApp,
-      viber: valueViber,
     });
 
-    setTimeout(() => {
-      store.fetch();
-    }, 100);
+    store.fetch();
   };
 
   const saveBack = async () => {
     const updateValue: UpdateAgentCabinetType = {
       phone: [{ ord: 1, value: valuePhone }],
       name: valueName,
-      position: valueStatus,
       experience: +dateReal - valueExperience + "-" + mountAndDay,
       rating: 0,
       inviteLink: "string",
-      messengers: {
-        whatsApp: valueWhatsApp,
-        telegram: valueTelegram,
-      },
       file: store.initialData.file,
     };
 
@@ -168,18 +136,6 @@ const AccountEditAgent: FC<AccountEditType> = observer(({ onEdit }) => {
                   <BaseInput
                     value={valueName}
                     onChange={(e) => setValueName(e.currentTarget.value)}
-                    className={css.styleButton}
-                  />
-                </div>
-                <div className={css.marginColumn} style={{ width: "40%" }}>
-                  <Typography color={"tertiary"} className={css.marginTypo}>
-                    Статус
-                  </Typography>
-                  <BaseInput
-                    disabled={true}
-                    // value={valueStatus}
-                    placeholder={valueStatus}
-                    onChange={(e) => setValueStatus(e.currentTarget.value)}
                     className={css.styleButton}
                   />
                 </div>
@@ -224,38 +180,6 @@ const AccountEditAgent: FC<AccountEditType> = observer(({ onEdit }) => {
                 </div>
               </div>
               <div className={css.df}>
-                <div className={css.marginColumn} style={{ width: "25%" }}>
-                  <Typography color={"tertiary"} className={css.marginTypo}>
-                    Telegram
-                  </Typography>
-                  <BaseInput
-                    placeholder={"estatum"}
-                    value={valueTelegram}
-                    onChange={(e) => setValueTelegram(e.currentTarget.value)}
-                    className={!valueTelegram ? css.styleButton : ""}
-                  />
-                </div>
-                <div className={css.marginColumn} style={{ width: "25%" }}>
-                  <Typography color={"tertiary"} className={css.marginTypo}>
-                    WhatsApp
-                  </Typography>
-                  <BaseInput
-                    placeholder={"89996665522"}
-                    value={valueWhatsApp}
-                    onChange={(e) => setValueWhatsApp(e.currentTarget.value)}
-                    className={!valueTelegram ? css.styleButton : ""}
-                  />
-                </div>
-                <div className={css.marginColumn} style={{ width: "25%" }}>
-                  <Typography color={"tertiary"} className={css.marginTypo}>
-                    Viber
-                  </Typography>
-                  <BaseInput
-                    value={valueViber}
-                    onChange={(e) => setValueViber(e.currentTarget.value)}
-                    className={!valueTelegram ? css.styleButton : ""}
-                  />
-                </div>
               </div>
             </div>
           </div>
@@ -294,13 +218,9 @@ const AccountEditAgent: FC<AccountEditType> = observer(({ onEdit }) => {
           Сохранить
         </BaseButton>
         {agentInfo.name !== valueName ||
-          agentInfo.status !== valueStatus ||
           +dateReal - +yearsExperience !== +valueExperience ||
           agentInfo.phone !== valuePhone ||
-          agentInfo.email !== valueEmail ||
-          agentInfo.whatsApp !== valueWhatsApp ||
-          agentInfo.telegram !== valueTelegram ||
-          (agentInfo.viber !== valueViber && (
+          agentInfo.email !== valueEmail && (
             <div
               style={{
                 display: "flex",
@@ -312,7 +232,7 @@ const AccountEditAgent: FC<AccountEditType> = observer(({ onEdit }) => {
                 Есть несохраненные изменения
               </Typography>
             </div>
-          ))}
+          )}
       </div>
       {
         <Modal setActive={() => setComparison(!comparison)} active={comparison}>

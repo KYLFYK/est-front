@@ -62,7 +62,7 @@ const IconVis: FC<IconVisProps> = ({ passwordVis, setPasswordVis, type }) => {
 export const Settings: FC<SettingDeveloperType> = observer(({onEdit}) => {
 
   const store = useStoreAgentCabinet()
-
+  console.log('store.get()', store.get())
   return (
     <form className={styles.settings}>
       <div style={{height:'40px'}}>

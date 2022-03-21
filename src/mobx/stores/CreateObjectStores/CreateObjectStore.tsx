@@ -83,6 +83,7 @@ class CreateObjectStore implements ICreateObject {
   objType: IObjType = "sale";
   uploadedFiles: IUploadedFile[] = [];
   forceRerender: boolean = true;
+  newOwner: number | null = null;
 
   resetFields() {
     this.apartment = new CreateApartmentStore();
@@ -91,6 +92,11 @@ class CreateObjectStore implements ICreateObject {
     this.house = new CreateHouseStore();
     this.objType = "sale";
     this.uploadedFiles = [];
+    this.newOwner = null;
+  }
+
+  setOwner(ownerId: number) {
+    this.newOwner = ownerId;
   }
 
   saveAboutTab(data: TAboutTabState, objectType: ObjectTypes) {
@@ -754,6 +760,10 @@ class CreateObjectStore implements ICreateObject {
 
       try {
         if (isEdit) {
+          if (idOwner.role === "admin" && this.newOwner !== null) {
+            apartmentData.owner = this.newOwner;
+          }
+
           const res = await editObjectApi.createObjectApartment(
             apartmentData,
             id as string | number
@@ -926,6 +936,10 @@ class CreateObjectStore implements ICreateObject {
 
       try {
         if (isEdit) {
+          if (idOwner.role === "admin" && this.newOwner !== null) {
+            houseObject.owner = this.newOwner;
+          }
+
           const res = await editObjectApi.createObjectHouse(
             houseObject,
             id as string | number
@@ -1068,6 +1082,10 @@ class CreateObjectStore implements ICreateObject {
 
       try {
         if (isEdit) {
+          if (idOwner.role === "admin" && this.newOwner !== null) {
+            landData.owner = this.newOwner;
+          }
+
           const res = await editObjectApi.createObjectLand(
             landData,
             id as string | number
@@ -1118,6 +1136,10 @@ class CreateObjectStore implements ICreateObject {
 
       try {
         if (isEdit) {
+          if (idOwner.role === "admin" && this.newOwner !== null) {
+            complexData.owner = this.newOwner;
+          }
+
           return await editObjectApi.createObjectResComplex(
             complexData,
             id as number | string

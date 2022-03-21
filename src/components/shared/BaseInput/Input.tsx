@@ -1,7 +1,9 @@
 import classNames from "classnames";
-import React from "react";
+import React, { useState, useRef } from "react";
 import Typography from "../Typography/Typography";
+import { IconExclamAlt } from "../../../icons/Login/IconExclamAlt";
 import s from "./Input.module.scss";
+import { Card } from "../Mortgage/Card";
 
 interface Props
   extends React.DetailedHTMLProps<
@@ -33,7 +35,10 @@ export const BaseInput: React.FC<Props> = ({
   iconOnClick,
   ...props
 }) => {
-  
+  const refInput = useRef<any>(null);
+  const refText = useRef<any>(null);
+  const [hover, setHover] = useState<boolean>(false);
+
   return (
     <div className={classNameWrapper}>
       {label && (
@@ -68,11 +73,13 @@ export const BaseInput: React.FC<Props> = ({
           </textarea>
         ) : (
           <input
+            ref={refInput}
             {...props}
             className={classNames(
               s.input,
               { [s.iconPadding]: !!icon },
-              className
+              className,
+              isError && s.error
             )}
           />
         )}
@@ -85,10 +92,35 @@ export const BaseInput: React.FC<Props> = ({
           </span>
         )}
         {isError && (
-          <Typography color="red" size="small" className={s.error}>
-            {errorLabel}
-          </Typography>
+          <div
+            onMouseEnter={() => setHover(true)}
+            onMouseLeave={() => setHover(false)}
+            style={{
+              cursor: "pointer",
+              position: "relative",
+              right: "-10px",
+              top: "10px",
+            }}
+          >
+            <IconExclamAlt />
+          </div>
         )}
+        {hover && (
+          <Card
+            style={{
+              backgroundColor: "#FFFFFF",
+              position: "absolute",
+              top: `30px`,
+              left: `${refInput.current?.offsetWidth + 34}px`,
+              padding: "10px",
+              border: "1px solid #F2F2F2",
+              borderRadius: "6px",
+              boxShadow: "0px 0px 16px rgba(26, 72, 98, 0.15)",
+            }}
+          >
+            <Typography className={s.wrapWidth}>{errorLabel}</Typography>
+          </Card>
+          )}
       </div>
     </div>
   );

@@ -9,7 +9,7 @@
   cursor: pointer;
 }
 .dropdown .dropdown_btn {
-  padding: 10px 16px 10px 10px; 
+  padding: 10px 16px 10px 10px;
   background: #FFFFFF;
   color: #333;
   display: flex;
@@ -23,7 +23,7 @@
 }
 
 .dropdown .dropdown_btn:active {
-  
+
 }
 .dropdown .dropdown_content {
   position: absolute;
@@ -41,6 +41,17 @@
   display: flex;
   padding: 4px;
   transition: all 0.3s;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  width: 160px;
+
+  p {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    width: 160px;
+  }
 }
 .dropdown .dropdown_content .dropdown_item:hover {
   background: #F2F2F2;;
@@ -49,8 +60,8 @@
 
 .title {
   max-width: 190px !important;
-  white-space: nowrap; 
-  overflow: hidden; 
+  white-space: nowrap;
+  overflow: hidden;
   text-overflow: ellipsis;
 }
 
@@ -70,9 +81,19 @@
 .ellipsisText {
   font-family: "RobotoRegular";
   color: $BLACK;
-  white-space: nowrap; 
-  overflow: hidden; 
+  white-space: nowrap;
+  overflow: hidden;
   text-overflow: ellipsis;
+}
+
+.searchInput {
+  font-family: "RobotoRegular";
+  border: none;
+  color: $BLACK;
+  outline: none;
+  width: 100%;
+  height: 100%;
+  padding-right: 10px;
 }
 
 .green {
