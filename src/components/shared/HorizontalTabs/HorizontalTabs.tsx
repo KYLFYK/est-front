@@ -45,7 +45,7 @@ export const HorizontalTabs: FC<Props> = ({
       });
     }
     setSelectedTabIdx(newValue);
-    setCurrent(newValue);
+    setCurrent && setCurrent(newValue);
   };
 
   return (
