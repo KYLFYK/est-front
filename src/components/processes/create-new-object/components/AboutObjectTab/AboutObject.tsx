@@ -30,6 +30,8 @@ import { accFromToken } from "../../../../../lib/localStorage/localStorage";
 import s from "./AboutObject.module.scss";
 import { NewDropDown } from "../../../../shared/BaseDropDown/NewDropDown";
 import { AllAdsStore } from "../../../../../mobx/role/admin/ads";
+import { OwnersSelectStore } from "../../../../../mobx/object/ownersSelect";
+import { SearchDropDown } from "../../../../shared/SearchDropDown";
 
 interface Props extends ICreateObjectControls {
   objectType: ObjectTypes;
@@ -61,6 +63,7 @@ const AboutObjectTab: React.FC<Props> = observer(
     const guidesStore = ObjectGuides;
     const addressStore = AddressGuides;
     const adminAdsStore = AllAdsStore;
+    const ownersList = OwnersSelectStore;
     const developerStore = useStoreDeveloperMyObjectStore();
 
     const idOwner: any = jwt_decode(
@@ -273,6 +276,14 @@ const AboutObjectTab: React.FC<Props> = observer(
       }
     }, []);
 
+    const onChangeOwner = (newData: string) => {
+      createObjectStore.setOwner(Number(newData));
+    };
+
+    const onSearch = async (query: string) => {
+      await ownersList.handleLoad(query);
+    };
+
     return (
       <FormController<IForm> form={form}>
         <ButtonPanel onNextTab={handleNext} onPrevTab={handlePrev}>
@@ -304,56 +315,75 @@ const AboutObjectTab: React.FC<Props> = observer(
                 multi={buildingType.isMulti}
               />
             )}
-            {"complexName" in values &&
-              "floor" in values &&
-              "floorsAmmount" in values &&
-              "type" in values && (
-                <>
-                  {idOwner.role === "developer" ||
-                    (idOwner.role === "admin" && (
-                      <BaseDropDown
-                        className={s.inputSm}
-                        options={
-                          idOwner.role === "developer"
-                            ? developerStore.initialData.complex.map(
-                                (complex) => ({
-                                  label: complex.name,
-                                  value: complex.id,
-                                })
-                              )
-                            : adminAdsStore.adsList
-                            ? adminAdsStore.adsList
-                                .filter(
-                                  (el) => el.objType === ObjectTypes.RESCOMPLEX
-                                )
-                                .map((complex) => ({
-                                  label: complex.name,
-                                  value: complex.id,
-                                }))
-                            : []
-                        }
-                        placeholder={"ЖК"}
-                        onChange={onChangeComplexName}
-                        value={values.complexName}
-                        label="ЖК"
-                        isError={!isValid && !isValidComplexName}
-                        name={"lcd"}
-                      />
-                    ))}
-
-                  <CounterButtons
-                    onChange={onChangeFloor}
-                    initValue={values.floor}
-                    label="Этаж"
+            {"complexName" in values && (
+              <>
+                {(idOwner.role === "developer" || idOwner.role === "admin") && (
+                  <BaseDropDown
+                    className={s.inputSm}
+                    options={
+                      idOwner.role === "developer"
+                        ? developerStore.initialData.complex.map((complex) => ({
+                            label: complex.name,
+                            value: complex.id,
+                          }))
+                        : adminAdsStore.adsList
+                        ? adminAdsStore.adsList
+                            .filter(
+                              (el) => el.objType === ObjectTypes.RESCOMPLEX
+                            )
+                            .map((complex) => ({
+                              label: complex.name,
+                              value: complex.id,
+                            }))
+                        : []
+                    }
+                    placeholder={"ЖК"}
+                    onChange={onChangeComplexName}
+                    value={values.complexName}
+                    label="ЖК"
+                    isError={!isValid && !isValidComplexName}
+                    name={"lcd"}
                   />
-
-                  <CounterButtons
-                    onChange={onChangeFloorsAmmount}
-                    initValue={values.floorsAmmount}
-                    label="Этажей в доме"
-                  />
-                </>
-              )}
+                )}
+              </>
+            )}
+            {"floor" in values && (
+              <CounterButtons
+                onChange={onChangeFloor}
+                initValue={values.floor}
+                label="Этаж"
+              />
+            )}
+            {"floorsAmmount" in values && (
+              <CounterButtons
+                onChange={onChangeFloorsAmmount}
+                initValue={values.floorsAmmount}
+                label="Этажей в доме"
+              />
+            )}
+            {idOwner.role === "admin" && (
+              <SearchDropDown
+                className={s.inputSm}
+                options={
+                  ownersList.data
+                    ? ownersList.data.map((el) => ({
+                        label: el.email,
+                        value: el.id.toString(),
+                      }))
+                    : []
+                }
+                placeholder={"Ответственный"}
+                onChange={onChangeOwner}
+                value={
+                  createObjectStore.newOwner !== null
+                    ? createObjectStore.newOwner.toString()
+                    : undefined
+                }
+                isError={!isValid && !isValidComplexName}
+                name={"lcd"}
+                onSearch={onSearch}
+              />
+            )}
           </InputsGroup>
           <div className={s.divider} />
           <InputsGroup title={"Адрес"}>
