@@ -132,7 +132,7 @@ const AccountEditDeveloper: FC<AccountEditType> = observer(({onEdit}) => {
     };
 
     return (
-        <div>
+        <div style={{margin:"20px"}}>
             <BackPage onBackPage={backPage} title={'Редактирование аккаунта'}/>
             <div className={css.df_jc}>
                 <div>
@@ -164,7 +164,7 @@ const AccountEditDeveloper: FC<AccountEditType> = observer(({onEdit}) => {
                                 </div>
 
                             </div>
-                            <div className={css.marginColumn} style={{width: "98%"}}>
+                            <div className={css.marginColumn} style={{width: "98%",marginTop:"20px"}} >
                                 <Typography color={'tertiary'} className={css.marginTypo}>
                                     Адрес
                                 </Typography>

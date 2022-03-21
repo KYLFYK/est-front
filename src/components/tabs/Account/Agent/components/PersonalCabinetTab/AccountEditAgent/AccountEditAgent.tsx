@@ -121,7 +121,7 @@ const AccountEditAgent: FC<AccountEditType> = observer(({ onEdit }) => {
   };
 
   return (
-    <div>
+    <div style={{marginTop:'10px'}}>
       <BackPage onBackPage={backPage} title={"Редактирование аккаунта"} />
       <div className={css.df_jc}>
         <div>
