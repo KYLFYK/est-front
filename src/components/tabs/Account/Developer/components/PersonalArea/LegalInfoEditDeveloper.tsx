@@ -81,9 +81,7 @@ export const LegalInfoEditDeveloper: FC = observer(() => {
   return (
     <div
       className={styles.formWrapper}
-      style={{
-        paddingTop: 20,
-      }}
+      style={{padding: "0 20px"}}
     >
       <div className={styles.form}>
         <section>

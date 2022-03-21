@@ -163,7 +163,7 @@ export const Chart: React.FC<Props> = ({
     <div
       style={{
         display: "grid",
-        padding: "20px",
+        padding: "20px 30px 10px 0px",
         overflowX: overflowX ? overflowX : "initial",
       }}
     >

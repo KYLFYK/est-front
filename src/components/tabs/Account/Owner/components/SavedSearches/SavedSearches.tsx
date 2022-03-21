@@ -14,7 +14,7 @@ const SavedSearches: FC<SavedSearchesType> = ({}) => {
     const store = useStoreOwnerSaveSearch()
 
     return (
-        <div>
+        <div style={{padding:"20px 20px"}}>
             <Typography weight={"bold"} className={css.title}>Мои поиски</Typography>
             {
                 store.initialData.search.map((search) => (

@@ -33,6 +33,7 @@ export const MyObjects: FC = () => {
     <>
       {!complex ? (
         <HorizontalTabs
+
           tabs={[
             /*{title: "Статистика", Component: <Statistic/>,},*/
             {

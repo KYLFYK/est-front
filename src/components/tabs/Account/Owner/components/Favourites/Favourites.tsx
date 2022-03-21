@@ -19,7 +19,7 @@ type CardOwnerTypeMoc={
 const Favourites :FC<FavouritesType>= ({count=0}) => {
     const store = useStoreOwnerFavorites()
     return (
-        <div>
+        <div style={{padding:"20px 20px"}}>
             <Typography weight={"bold"}>
                 Мои избранные объявление
             </Typography>

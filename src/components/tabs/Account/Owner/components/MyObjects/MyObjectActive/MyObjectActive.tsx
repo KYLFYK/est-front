@@ -13,7 +13,7 @@ import {useStoreOwnerMyObjects} from "../../../../../../../mobx/role/owner/myObj
 const MyObjectActive = () => {
     const store = useStoreOwnerMyObjects()
     return (
-        <div>
+        <div style={{padding:"0px 20px"}}>
             <SearchOffice type={'active'}/>
             <FilterSearch/>
             {

@@ -19,7 +19,7 @@ const AgentsNotifications :FC<AgentsNotificationsType> = ({notification , onRead
     const [modalInfo,setModalInfo]=useState('')
 
     return (
-        <div>
+        <div style={{padding:"0px 20px"}}>
             <div className={css.grid}>
                 <Typography>Дата</Typography>
                 <Typography>Сообщение</Typography>

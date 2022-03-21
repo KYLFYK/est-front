@@ -4,12 +4,19 @@ import AccountOwnerOptions from "./AccountOwnerOptions/AccountOwnerOptions";
 import PersonalAccountOwner from "./PersonalAccountOwner/PersonalAccountOwner";
 import PersonalAccountEdit from "./PersonalAccountEdit/PersonalAccountEdit";
 
+const style={
+    margin:'0 10px'
+}
+
+
 const PersonalAccount = () => {
     const [edit, setEdit] = useState<boolean>(false)
     return (
         <>
             {
-                !edit?<HorizontalTabs tabs={[
+                !edit?<HorizontalTabs
+                        style={style}
+                        tabs={[
                         {title: "Аккаунт", Component: <PersonalAccountOwner onEdit={()=>setEdit(!edit)}/>},
                         {title: "Настройки", Component: <AccountOwnerOptions/>},
                     ]}/>
