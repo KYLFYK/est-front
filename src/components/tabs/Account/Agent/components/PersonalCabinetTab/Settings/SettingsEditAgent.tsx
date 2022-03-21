@@ -7,7 +7,7 @@ import Typography from "../../../../../../shared/Typography/Typography";
 import {BaseInput} from "../../../../../../shared/BaseInput/Input";
 import BaseButton from "../../../../../../shared/BaseButton/BaseButtons";
 import {LogoIcon} from "../../../../../../../icons/Header/LogoIcon";
-import {useStoreDeveloperCabinet} from "../../../../../../../mobx/role/developer/cabinet/DeveloperCabinet";
+import { useStoreAgentCabinet } from "../../../../../../../mobx/role/agent/cabinet/AgentCabinet";
 
 import styles from "../../../../Admin/components/UsersTab/agency/agency.module.scss";
 import css from './Settings.module.scss'
@@ -33,17 +33,17 @@ const image = "data:image/svg+xml;utf8,<svg width=\'100%\' height=\'100%\' " +
 
 export const SettingsEditAgent: FC<SettingDeveloperType> = observer(({onEdit}) => {
 
-    const store = useStoreDeveloperCabinet()
+    const store = useStoreAgentCabinet()
     const infoAgency = {
-        name: store.initialData.account.profileForm.name,
-        type: store.initialData.account.profileForm.type,
-        address: store.initialData.account.profileForm.address,
-        phone: store.initialData.account.profileForm.phone,
-        email: store.initialData.account.profileForm.email,
-        site: store.initialData.account.profileForm.site,
-        description: store.initialData.account.profileForm.description,
+        name: store.get().account.profileForm.name,
+        type: store.get().account.profileForm.type,
+        address: store.get().account.profileForm.address,
+        phone: store.get().account.profileForm.phone,
+        email: store.get().account.profileForm.email,
+        site: store.get().account.profileForm.site,
+        description: store.get().account.profileForm.description,
     }
-
+    console.log('edit', store.get())
     const [agentInfo, setAgentInfo] = useState<infoDeveloperType>(infoAgency)
 
     const [valueName, setValueName] = useState<string>(agentInfo.name)
@@ -72,10 +72,10 @@ export const SettingsEditAgent: FC<SettingDeveloperType> = observer(({onEdit}) =
 
     const save = () => {
         store.updatePass(store.get().setting.newPassword, store.get().account.id, localStorage.getItem('accessEstatum') as string)
-        store.updateDeveloper(store.initialData.account.id, {
+        /*store.update(store.get().account.id, {
             "phone": [{"ord": 1, "value": store.get().setting.noticePhone,}],
             "email": store.get().setting.noticeEmail,
-        })
+        })*/
     }
     const saveBack = async () => {
         

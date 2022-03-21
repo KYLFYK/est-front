@@ -108,7 +108,6 @@ export const BaseInput: React.FC<Props> = ({
         {hover && (
           <Card
             style={{
-              width: `${refText.current?.offsetWidth}`,
               backgroundColor: "#FFFFFF",
               position: "absolute",
               top: `30px`,
@@ -119,11 +118,9 @@ export const BaseInput: React.FC<Props> = ({
               boxShadow: "0px 0px 16px rgba(26, 72, 98, 0.15)",
             }}
           >
-            <div ref={refText}>
-              <Typography>{errorLabel}</Typography>
-            </div>
+            <Typography className={s.wrapWidth}>{errorLabel}</Typography>
           </Card>
-        )}
+          )}
       </div>
     </div>
   );

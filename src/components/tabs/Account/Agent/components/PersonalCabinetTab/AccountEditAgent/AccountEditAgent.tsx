@@ -40,7 +40,7 @@ const AccountEditAgent: FC<AccountEditType> = observer(({ onEdit }) => {
   };
 
   const [agentInfo, setAgentInfo] = useState<infoAgentType>(infoAgency);
-
+  
   // for input date user
   const date = new Date();
   const dateReal = date.toISOString().substr(0, 4); // year
