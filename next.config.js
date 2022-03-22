@@ -12,6 +12,11 @@ module.exports = {
     ],
   },
 
+  env: {
+    // Reference a variable that was defined in the .env.* file and make it available at Build Time
+    HOST: process.env.HOST,
+  },
+
   eslint: {
     // Warning: This allows production builds to successfully complete even if
     // your project has ESLint errors.
