@@ -45,7 +45,7 @@ const Planning: React.FC<Props> = ({ FilterComponent, planningList }) => {
                 </div>
                 <div className={s.content}>
                     {planningList && planningList.map(({ file, price, name, buildingNumber, deadline, floor, id }, idx) =>
-                        <Link href={`/apartment/${id}`}>
+                        <Link href={`/apartment/${id}`} key={id}>
                             <a className={s.link}>
                                 <Card 
                                     key={idx} 

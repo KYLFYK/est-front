@@ -73,7 +73,7 @@ const personalAcc = [
     { title: "Личный кабинет", href: "/cabinet", message: 0 },
     { title: "Избранное", href: "/favorites", message: 0 },
     { title: "Сохраненые поиски", href: "/saved-searches", message: 0 },
-    { title: "Сообщения", href: "/messages", message: 12 },
+    // { title: "Сообщения", href: "/messages", message: 12 },
     { title: "Уведомления", href: "/notifications", message: 3 },
     { title: "Мои объекты", href: "/ads", message: 0 },
     { title: "Проверка объекта", href: "/check-object", message: 0 },
@@ -90,9 +90,9 @@ const personalAcc = [
     { title: "Профиль: Админ", href: "/", message: 0 },
     { title: "Пользователи", href: "/cabinet", message: 0 },
     { title: "Объявления", href: "/ads", message: 0 },
-    { title: "Сообщения", href: "/messages", message: 4 },
+    // { title: "Сообщения", href: "/messages", message: 4 },
     { title: "Редактирование", href: "/editing", message: 0 },
-    { title: "Локация", href: "/location", message: 0 },
+    // { title: "Локация", href: "/location", message: 0 },
   ],
   [
     //'bank'

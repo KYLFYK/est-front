@@ -13,17 +13,17 @@ import commonStyles from "../../AdminRoleStyles.module.scss";
 
 const AdminAdsTabs: ITabItem[] = [
   {
-    title: "Агенты",
+    title: "от Агентов",
     Component: <AgencyTab />,
   },
   {
-    title: "Застройщики",
+    title: "от Застройщиков",
     Component: <DeveloperTab />,
   },
-  {
-    title: "Собственники",
-    Component: <OwnerTab />,
-  },
+  // {
+  //   title: "Собственники",
+  //   Component: <OwnerTab />,
+  // },
   /*{
     title: "Статистика",
     Component: <Statistic />,
@@ -31,6 +31,7 @@ const AdminAdsTabs: ITabItem[] = [
 ];
 
 export const AdsTabs: FC = () => {
+
   const store = AllAdsStore;
 
   useEffect(() => {
