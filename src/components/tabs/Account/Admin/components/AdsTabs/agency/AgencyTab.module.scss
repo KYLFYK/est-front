@@ -198,3 +198,10 @@
     }
   }
 }
+.text_300{
+  width: 330px;
+  white-space: nowrap;
+  overflow: hidden;
+  padding: 5px;
+  text-overflow: ellipsis;
+}

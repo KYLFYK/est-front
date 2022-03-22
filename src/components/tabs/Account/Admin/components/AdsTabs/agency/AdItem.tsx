@@ -82,9 +82,9 @@ export const AdItem: FC<Props> = ({
             }`}
           >
             <span className={styles.name}>{name}</span>
-            <div>
+            <div style={{display:'flex'}}>
               <span className={styles.key}>Адрес: </span>
-              <span className={styles.value}>{address}</span>
+              <div className={styles.text_300} >{address}</div>
             </div>
           </div>
           <div
