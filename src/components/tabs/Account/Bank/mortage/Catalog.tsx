@@ -90,7 +90,7 @@ export const Catalog: FC = observer(() => {
         </tr>
         {store.initialData.loading 
           ? <Loader/>
-          : sortedData.map((d: any) => <CatalogItem data={d} id={d.id}/>)
+          : sortedData.map((d: any) => <CatalogItem data={d} id={d.id} key={d.id}/>)
         }
       </table>
     </div>

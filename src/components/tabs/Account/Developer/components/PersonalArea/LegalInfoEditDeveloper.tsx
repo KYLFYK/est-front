@@ -500,6 +500,7 @@ export const LegalInfoEditDeveloper: FC = observer(() => {
               (d: { ord: number; value: string }, index: number) => {
                 return (
                   <BaseInput
+                    key={index}
                     icon={<>-</>}
                     iconClassName={styles.iconDelete}
                     iconOnClick={() => {
