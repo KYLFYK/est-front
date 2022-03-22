@@ -19,7 +19,7 @@ before_script:
   - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
 
 build:
-  stage: build
+  stage: build:production
   script:
     - docker pull $CI_REGISTRY_IMAGE:latest || true
     - docker build --cache-from $CI_REGISTRY_IMAGE:latest
@@ -48,12 +48,12 @@ build:
 
 deploy:
   stage: deploy
-  before_script: 
-     - mkdir -p ~/.ssh     
-     - echo -e "$SSH_PRIVATE_KEY" > ~/.ssh/id_rsa     
-     - chmod 600 ~/.ssh/id_rsa     
-     - '[[ -f /.dockerenv ]] && echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config' 
-       
+  before_script:
+     - mkdir -p ~/.ssh
+     - echo -e "$SSH_PRIVATE_KEY" > ~/.ssh/id_rsa
+     - chmod 600 ~/.ssh/id_rsa
+     - '[[ -f /.dockerenv ]] && echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config'
+
   script:
      - ssh deployer@$DEPLOY_SERVER "cd /data/marketplace-front && ./deploy.sh"
   only:
