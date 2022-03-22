@@ -11,9 +11,7 @@ import { typeToRuString } from "../../../../../../../utils/interfaces/objects";
 import styles from "./AgencyTab.module.scss";
 
 export const AgencyTab: FC = observer(() => {
-
   const store = AllAdsStore;
-
   const [sort, setSort]=useState<string>('default')
 
   return store.adsList &&
