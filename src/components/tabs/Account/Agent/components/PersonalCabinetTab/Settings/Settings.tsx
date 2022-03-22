@@ -1,6 +1,6 @@
 import { FC, useState } from "react";
 import { BaseInput } from "../../../../../../shared/BaseInput/Input";
-
+import Typography from "../../../../../../shared/Typography/Typography";
 import styles from "./Settings.module.scss";
 import BaseButton from "../../../../../../shared/BaseButton/BaseButtons";
 import { useStoreAgentCabinet } from "../../../../../../../mobx/role/agent/cabinet/AgentCabinet";
@@ -71,7 +71,7 @@ export const Settings: FC<SettingDeveloperType> = observer(({onEdit}) => {
         </BaseButton>
       </div>
       <section className={styles.settingsSec}>
-        <span className={styles.title}>Данные регистрации</span>
+        <Typography weight={"bold"}>Данные регистрации</Typography>
         <BaseInput
           classNameWrapper={styles.inputWrapper}
           className={styles.input}
@@ -79,7 +79,7 @@ export const Settings: FC<SettingDeveloperType> = observer(({onEdit}) => {
           label={"Телефон"}
           type="tel"
           name={"noticePhone"}
-          value={store.get().setting.noticePhone}
+          value={store.get().setting.phone}
         />
         <BaseInput
           classNameWrapper={styles.inputWrapper}
@@ -88,7 +88,7 @@ export const Settings: FC<SettingDeveloperType> = observer(({onEdit}) => {
           label={"E-mail"}
           type="text"
           name={"login"}
-          value={store.get().setting.noticeEmail}
+          value={store.get().setting.email}
         />
       </section>
       <section className={styles.settingsSec}>

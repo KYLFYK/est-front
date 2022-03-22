@@ -35,7 +35,7 @@ const PersonalCabinetAccountInfo: FC<PersonalCabinetAccountInfoType> = observer(
     const info = store.initialData.info;
 
     const apiStatus = () => {
-      console.log("apiStatus");
+
     };
 
     return (

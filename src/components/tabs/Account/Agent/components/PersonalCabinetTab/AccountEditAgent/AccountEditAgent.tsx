@@ -40,7 +40,7 @@ const AccountEditAgent: FC<AccountEditType> = observer(({ onEdit }) => {
   };
 
   const [agentInfo, setAgentInfo] = useState<infoAgentType>(infoAgency);
-
+  
   // for input date user
   const date = new Date();
   const dateReal = date.toISOString().substr(0, 4); // year
@@ -121,7 +121,7 @@ const AccountEditAgent: FC<AccountEditType> = observer(({ onEdit }) => {
   };
 
   return (
-    <div>
+    <div style={{marginTop:'10px'}}>
       <BackPage onBackPage={backPage} title={"Редактирование аккаунта"} />
       <div className={css.df_jc}>
         <div>

@@ -15,7 +15,7 @@ const ClosedApplicationsMonth :FC<ClosedApplicationsMonthType> = ({title,table})
         <div>
             <Typography weight={"bold"}>{title}</Typography>
             <Card className={css.cardStyle}>
-                <Chart heightValue={0} language={'ru'} table={table} divider={10} height={244} width={497} />
+                <Chart heightValue={0} language={'ru'} table={table} divider={10} height={214} width={467} />
             </Card>
         </div>
     );

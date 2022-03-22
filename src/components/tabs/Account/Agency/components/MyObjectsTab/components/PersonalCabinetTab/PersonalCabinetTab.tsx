@@ -7,7 +7,7 @@ import PersonalCabinetSettings from "./components/Settings/Settings";
 import PersonalCabinetStatistics from "./components/Statistics/Statistics";
 import AccountEditAgency from "./components/AccountEdit/AccountEditAgency";
 import { useStoreAgencyCabinet } from "../../../../../../../../mobx/role/agency/cabinet/AgencyCabinet";
-
+import css from './PersonalCabinet.module.scss'
 export type InfoAccountAgencyType = {
   info: Array<{ label: string; value: string }>;
   id: string;
@@ -68,6 +68,7 @@ const PersonalCabinetTab = () => {
     <>
       {!edit ? (
         <HorizontalTabs
+            wrapperClassName={css.wrapper}
           tabs={[
             { title: "Статистика", Component: <PersonalCabinetStatistics /> },
             {

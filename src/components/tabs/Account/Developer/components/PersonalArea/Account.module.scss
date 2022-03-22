@@ -3,12 +3,13 @@
 
 .tabsWrapper {
   margin: 0 0 20px 0;
-
+  padding: 0 10px;
 }
 
 .wrapper {
   display: flex;
   gap: 30px;
+  padding: 0 20px;
 }
 
 .profile {
@@ -59,7 +60,7 @@
   align-items: flex-start;
   flex-direction: column;
   gap: 20px;
-  height: 150px;
+  //height: 150px;
   border: none;
   background: #FFFFFF;
   textarea{
@@ -100,7 +101,7 @@
   display: flex;
   flex-direction: column;
   gap: 20px;
-
+  padding: 0 20px;
   &Sec {
     display: flex;
     flex-direction: column;

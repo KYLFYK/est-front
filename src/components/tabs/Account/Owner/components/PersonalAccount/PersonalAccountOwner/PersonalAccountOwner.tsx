@@ -23,7 +23,7 @@ const PersonalAccountOwner: FC<PersonalAccountType> = observer(({onEdit}) => {
     // const [valueNewPassword, setValueNewPassword] = useState<string>("");
 
     return (
-        <div>
+        <div className={css.padding}>
             <div className={css.headerTitle}>
                 <Typography weight={"bold"}>
                     {store.initialData.name}

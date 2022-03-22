@@ -31,7 +31,7 @@ const Editing = observer(() => {
     }, [])
 
     return (
-        <div>
+        <div style={{padding:"0 20px"}}>
             {
                 initialState?.map((t: any, index: number) => (
                     <GuidesHeader

@@ -99,7 +99,7 @@ export const SettingsEditDeveloper: FC<SettingDeveloperType> = observer(({onEdit
         , agentInfo.description !== valueDescription)
 
     return (
-        <div>
+        <div style={{margin:"20px"}}>
             <BackPage onBackPage={backPage} title={'Редактирование настроек'}/>
             <div className={css.df_jc}>
                 <div>

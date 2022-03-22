@@ -59,7 +59,7 @@ const PersonalAccountEdit :FC<PersonalAccountEditType> = observer(({onEdit}) => 
     };
 
     return (
-        <div>
+        <div style={{margin:"20px"}}>
             <BackPage onBackPage={backPage} title={"Редактирование аккаунта"} />
             <div className={css.column}>
                 <div style={{width:"100%",height:"400px"}}>

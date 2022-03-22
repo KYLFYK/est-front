@@ -6,6 +6,7 @@ import {
 } from "../../../../api/cabinet/cabinet";
 import imgMoc from "../../../../components/tabs/Account/Agent/components/PersonalCabinetTab/AccountInfo/logoFalse.svg";
 import { instance } from "../../../../api/instance";
+import { AuthApi } from "../../../../api/auth/auth";
 
 class AgentCabinetStore {
   constructor() {
@@ -25,6 +26,8 @@ class AgentCabinetStore {
     ],
     setting: {
       newPassword: "",
+      email: "",
+      phone: "",
     },
     id: 0,
     img: imgMoc,
@@ -47,10 +50,22 @@ class AgentCabinetStore {
     }[],
   };
 
+  setsettingsMail(value: any) {
+    this.initialData.setting = {
+      ...this.initialData.setting,
+      email: value,
+    };
+  }
   setsettingsPassword(value: any) {
     this.initialData.setting = {
       ...this.initialData.setting,
       newPassword: value,
+    };
+  }
+  setsettingsPhone(value: any) {
+    this.initialData.setting = {
+      ...this.initialData.setting,
+      phone: value,
     };
   }
 
@@ -100,13 +115,15 @@ class AgentCabinetStore {
       ],
       setting: {
         newPassword: "",
+        email: "",
+        phone: "",
       },
       id: res.data.id,
       img: imgMoc,
       statusVerification: res.data.isConfirmed ? "confirmed" : "notConfirmed",
       name: res.data.agentProperty.name ? res.data.agentProperty.name : "name",
       status: res.data.role,
-      experience: res.data.experience,
+      experience: res.data.agentProperty?.experience,
       phone: res.data.agentProperty.phone[0].value
         ? res.data.agentProperty.phone[0].value
         : "",
@@ -127,9 +144,12 @@ class AgentCabinetStore {
     };
   }
 
-  async update(id: number, updateValue: UpdateAgentCabinetType) {
-    console.log(id, updateValue);
+  async update(id: number, updateValue: any) {
     await cabinetAPI.updateAgentsCabinet(id, updateValue);
+  }
+
+  async updatePass(newPassword: string, accountId: number, token: string) {
+    const res = await AuthApi.changePassword(newPassword, accountId, token);
   }
 
   async updateAvatar(data: FormData, id: number) {

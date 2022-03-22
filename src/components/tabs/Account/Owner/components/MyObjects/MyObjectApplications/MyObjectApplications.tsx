@@ -18,7 +18,7 @@ const MyObjectApplications = () => {
     }
 
     return (
-        <div>
+        <div style={{padding:"0px 20px"}}>
             <SearchOffice type={'owner'}/>
             <FilterSearch/>
             {
