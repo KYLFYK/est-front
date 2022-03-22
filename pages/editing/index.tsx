@@ -1,11 +1,11 @@
 import React from 'react';
 import {AdminCabinetWrapper} from "../../src/components/tabs/Account/Admin/AdminCabinetWrapper";
-import Editing from "../../src/components/tabs/Account/Admin/components/Editing/Editing";
+import Location from "../../src/components/tabs/Account/Admin/components/location/Location";
 
 const Index = () => {
     return (
         <AdminCabinetWrapper>
-            <Editing/>
+            <Location/>
         </AdminCabinetWrapper>
     );
 };

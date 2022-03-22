@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import React, { FC, useState } from "react";
 import { PageFilter } from "../common/PageFilter";
 import FilterSearch from "../../../../../shared/FilterSearch/FilterSearch";
 import { AdItem } from "./agency/AdItem";
@@ -16,11 +16,19 @@ import styles from "./agency/AgencyTab.module.scss";
 export const DeveloperTab: FC = observer(() => {
   const store = AllAdsStore;
 
+  const [sort,setSort]=useState<string>('default')
+
   return store.adsList &&
     store.adsList.filter((el) => el.owner.role === "developer").length > 0 ? (
     <div className={styles.wrapper}>
       <PageFilter buttonText={"Добавить объект"} />
-      <FilterSearch />
+      <FilterSearch
+        sort={sort}
+        setSort={(e:any)=>{
+          setSort(e)
+          store.filter(e,'developer')
+        }}
+      />
       <div className={styles.list}>
         {store.adsList
           .filter((el) => el.owner.role === "developer")

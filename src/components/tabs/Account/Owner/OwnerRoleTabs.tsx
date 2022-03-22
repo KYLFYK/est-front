@@ -40,7 +40,7 @@ const OwnerRoleTabs = () => {
         { title: "Личный кабинет", Component: <PersonalAccount /> },
         { title: "Избранное", Component: <Favourites /> },
         { title: "Сохранённые поиски", Component: <SavedSearches /> },
-        { title: "Сообщения", Component: <Message /> },
+        // { title: "Сообщения", Component: <Message /> },
         {
           title: "Уведомления",
           Component: (
@@ -53,7 +53,7 @@ const OwnerRoleTabs = () => {
           ),
         },
         { title: "Мои объекты", Component: <MyObjects /> },
-        { title: "Проверка объекта", Component: <CheckingObject /> },
+        // { title: "Проверка объекта", Component: <CheckingObject /> },
       ]}
     />
   );
