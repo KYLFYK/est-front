@@ -72,7 +72,6 @@ class AgentCabinetStore {
   async fetch() {
     this.initialData.loading = true;
     const res = await cabinetAPI.getCabinetAgent();
-    console.log("res", res);
     this.initialData = {
       info: [
         {
@@ -145,8 +144,7 @@ class AgentCabinetStore {
     };
   }
 
-  async update(id: number, updateValue: UpdateAgentCabinetType) {
-    console.log(id, updateValue);
+  async update(id: number, updateValue: any) {
     await cabinetAPI.updateAgentsCabinet(id, updateValue);
   }
 
