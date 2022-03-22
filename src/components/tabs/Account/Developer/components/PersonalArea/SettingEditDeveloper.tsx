@@ -90,13 +90,6 @@ export const SettingsEditDeveloper: FC<SettingDeveloperType> = observer(({onEdit
         setComparison(false)
         onEdit(1)
     }
-    console.log(123, agentInfo.name !== valueName
-        , agentInfo.type !== valueType
-        , agentInfo.address !== valueAddress
-        , agentInfo.phone !== valuePhone
-        , agentInfo.email !== valueEmail
-        , agentInfo.site !== valueSite
-        , agentInfo.description !== valueDescription)
 
     return (
         <div style={{margin:"20px"}}>

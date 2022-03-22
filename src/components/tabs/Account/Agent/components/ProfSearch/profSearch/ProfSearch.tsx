@@ -60,7 +60,7 @@ const professionalSearch =[
 
 const ProfSearch = () => {
     const click = (id:string) =>{
-        console.log(id,'click')
+
     }
     // + Link - url
     return (

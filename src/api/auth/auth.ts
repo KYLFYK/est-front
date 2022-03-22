@@ -127,7 +127,6 @@ export const testApi = {
     },
     getApi: async () => {
         const res = await axios.get('https://estatum.f-case.ru/api/agent/our')
-        console.log(res)
     }
 }
 

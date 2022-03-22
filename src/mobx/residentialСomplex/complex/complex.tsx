@@ -2396,7 +2396,6 @@ class ResidentialComplexStore  {
         planningList : [{ image: 'https://metrika.com/sites/default/files/debyut.png', price: 144444, title: "Большой домина", housing: 3, deadline: "2 квартал 2023г", floor: 4 },]
     }
     fetch(id:string) {
-        console.log(id)
         if(id==='0')this.initialData = complex0
         if(id==='1')this.initialData = complex1
         if(id==='2')this.initialData = complex2

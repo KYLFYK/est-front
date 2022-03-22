@@ -25,7 +25,7 @@ class OwnerSaveSearchStore {
     }
 
     fetch(id: string) {
-        console.log("DeveloperCabinetStore", id)
+
     }
 
     get() {

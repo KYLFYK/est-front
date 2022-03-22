@@ -33,20 +33,18 @@ const FilterSearch: FC<Props> = ({
   const [active, setActive] = useState<"map" | "table">("table");
 
   const printer = () => {
-    console.log("printer");
+
   };
   const upload = () => {
-    console.log("upload");
+
   };
   const oval = () => {
-    console.log("oval");
+
   };
   const onClickMap = () => {
-    console.log("onClickMap");
     setActive("map");
   };
   const onClickTable = () => {
-    console.log("onClickTable");
     setActive("table");
   };
 

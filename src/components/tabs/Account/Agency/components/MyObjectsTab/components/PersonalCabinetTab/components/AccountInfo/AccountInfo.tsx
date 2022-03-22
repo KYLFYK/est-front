@@ -28,7 +28,7 @@ const PersonalCabinetAccountInfo: React.FC<PersonalCabinetAccountInfoType> = obs
     const store = useStoreAgencyCabinet()
 
     const apiStatus = () => {
-        console.log('apiStatus')
+
     }
 
     return (

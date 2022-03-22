@@ -32,8 +32,6 @@ const PersonalCabinetAccountInfo: FC<PersonalCabinetAccountInfoType> = observer(
   ({ onEdit }) => {
     const store = useStoreAgentCabinet();
 
-    const info = store.initialData.info;
-
     const apiStatus = () => {
 
     };
@@ -107,25 +105,14 @@ const DataTypography: FC<DataTypographyType> = ({ title, value }) => {
 
   return (
     <div className={css.marginTextBlock}>
-      {title === "Стаж" ? (
-        <>
-          <Typography color={"tertiary"} className={css.marginText}>
-            {title}
-          </Typography>
-          <Typography color={"accent"} className={css.marginText}>
-            {+date.toISOString().substr(0, 4) - +value.substr(0, 4)}
-          </Typography>
-        </>
-      ) : (
-        <>
-          <Typography color={"tertiary"} className={css.marginText}>
-            {title}
-          </Typography>
-          <Typography color={"accent"} className={css.marginText}>
-            {value}
-          </Typography>
-        </>
-      )}
+      <>
+        <Typography color={"tertiary"} className={css.marginText}>
+          {title}
+        </Typography>
+        <Typography color={"accent"} className={css.marginText}>
+          {value}
+        </Typography>
+      </>
     </div>
   );
 };

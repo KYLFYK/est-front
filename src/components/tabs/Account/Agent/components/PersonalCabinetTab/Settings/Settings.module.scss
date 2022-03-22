@@ -1,34 +1,48 @@
-.marginColumn{
+.marginColumn {
   margin-right: 20px;
-  margin-top: 10px
+  margin-top: 10px;
 }
 
-.marginButton{
+.marginButton {
   margin-right: 20px;
   margin-top: 37px;
   min-width: 208px;
   height: 42px;
 }
-.marginInput{
+.marginInput {
   margin-right: 20px;
   margin-top: 10px;
   min-width: 208px;
 }
 
-.marginSubTitle{
+.marginSubTitle {
   margin: 20px 0;
 }
-.marginTypo{
+.marginTypo {
   margin: 0 0 10px 0;
 }
-.redact{
-  padding:10px 20px;
+.redact {
+  padding: 10px 20px;
   font-size: 14px;
-  background:#1A4862 ;
-  color:#FFFFFF;
+  background: #1a4862;
+  color: #ffffff;
 }
-.redact_border{
-  padding:10px 20px;
+.redact_border {
+  padding: 10px 20px;
   font-size: 14px;
-  border: 1px solid #F2F2F2;
+  border: 1px solid #f2f2f2;
+}
+.settingsSec {
+  display: flex;
+  column-gap: 100px;
+}
+.headLine {
+  height: 40px;
+  display: flex;
+  justify-content: space-between;
+}
+.item {
+  display: flex;
+  flex-direction: column;
+
 }

@@ -40,7 +40,7 @@ class DeveloperNotificationsStore {
     }
 
     fetch(id: string) {
-        console.log("DeveloperMyObjectStore", id)
+
     }
 
     get() {

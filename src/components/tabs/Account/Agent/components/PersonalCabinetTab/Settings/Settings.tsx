@@ -6,6 +6,8 @@ import BaseButton from "../../../../../../shared/BaseButton/BaseButtons";
 import { useStoreAgentCabinet } from "../../../../../../../mobx/role/agent/cabinet/AgentCabinet";
 import {observer} from "mobx-react-lite";
 
+import css from "../AccountInfo/AccountInfo.module.scss";
+
 type SettingDeveloperType={
   onEdit:()=>void
 }
@@ -62,45 +64,42 @@ const IconVis: FC<IconVisProps> = ({ passwordVis, setPasswordVis, type }) => {
 export const Settings: FC<SettingDeveloperType> = observer(({onEdit}) => {
 
   const store = useStoreAgentCabinet()
-
+  
   return (
     <form className={styles.settings}>
-      <div style={{height:'40px'}}>
+      <div className={styles.headLine}>
+        <Typography weight={"bold"}>Данные регистрации</Typography>
         <BaseButton onClick={onEdit} className={styles.buttonHeight} type={"secondary"}>
           Редактировать настройки
         </BaseButton>
       </div>
       <section className={styles.settingsSec}>
-        <Typography weight={"bold"}>Данные регистрации</Typography>
-        <BaseInput
-          classNameWrapper={styles.inputWrapper}
-          className={styles.input}
-          errorLabel=""
-          label={"Телефон"}
-          type="tel"
-          name={"noticePhone"}
-          value={store.get().setting.phone}
-        />
-        <BaseInput
-          classNameWrapper={styles.inputWrapper}
-          className={styles.input}
-          errorLabel=""
-          label={"E-mail"}
-          type="text"
-          name={"login"}
-          value={store.get().setting.email}
-        />
+        <div className={styles.item}>
+          <Typography color={"tertiary"} className={css.marginText}>
+            Телефон
+          </Typography>
+          <Typography color={"accent"} className={css.marginText}>
+            {store.get().setting.phone}
+          </Typography>
+        </div>
+        <div className={styles.item}>
+          <Typography color={"tertiary"} className={css.marginText}>
+            E-mail
+          </Typography>
+          <Typography color={"accent"} className={css.marginText}>
+            {store.get().setting.email}
+          </Typography>
+        </div>
       </section>
       <section className={styles.settingsSec}>
-        <BaseInput
-          classNameWrapper={styles.inputWrapper}
-          className={styles.input}
-          errorLabel=""
-          label={"Пароль"}
-          type="tel"
-          name={"noticeEmail"}
-          value={'***'}
-        />
+        <div className={styles.item}>
+          <Typography color={"tertiary"} className={css.marginText}>
+            Пароль
+          </Typography>
+          <Typography color={"accent"} className={css.marginText}>
+            ***
+          </Typography>
+        </div>
       </section>
     </form>
   );

@@ -78,7 +78,6 @@ const ViewingBell: FC<ViewingBellType> = ({
             }
             setValue('')
             onAddMessage(message)
-            console.log(message)
         }
     }
 

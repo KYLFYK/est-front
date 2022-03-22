@@ -86,7 +86,7 @@ class AgentCabinetStore {
           label: "Стаж",
           value: res.data.agentProperty.experience
             ? res.data.agentProperty.experience
-            : "0",
+            : new Date().toISOString().substring(0, 10),
           placeholder: "",
         },
         {
@@ -115,15 +115,19 @@ class AgentCabinetStore {
       ],
       setting: {
         newPassword: "",
-        email: "",
-        phone: "",
+        email: res.data.email,
+        phone: res.data.agentProperty.phone[0].value
+          ? res.data.agentProperty.phone[0].value
+          : "",
       },
       id: res.data.id,
       img: imgMoc,
       statusVerification: res.data.isConfirmed ? "confirmed" : "notConfirmed",
       name: res.data.agentProperty.name ? res.data.agentProperty.name : "name",
       status: res.data.role,
-      experience: res.data.agentProperty?.experience,
+      experience: res.data.agentProperty.experience
+        ? res.data.agentProperty.experience
+        : new Date().toISOString().substring(0, 10),
       phone: res.data.agentProperty.phone[0].value
         ? res.data.agentProperty.phone[0].value
         : "",

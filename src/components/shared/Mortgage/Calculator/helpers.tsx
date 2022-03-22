@@ -55,7 +55,6 @@ export const pivotData = (term: any, termPeriodPayments: any, payPeriodPayments:
     for (let i = 0; i < term * 12; i++) {
         earlyPayments.filter((er: any) => er.diff === termPeriodPayments[i].month && er.select === PaymentPeriodSelectTypes.ONCE && er.buttons === EarlyPaymentButtonsTypes.TERM).forEach((er: any) => {
             termPeriodPayments[i].payment += er.summ;
-            console.log(`${i}`, termPeriodPayments)
         });
         earlyPayments.filter((er: any) => er.diff === payPeriodPayments[i].month && er.select === PaymentPeriodSelectTypes.ONCE && er.buttons === EarlyPaymentButtonsTypes.PAYMENT).forEach((er: any) => {
             payPeriodPayments[i].payment += er.summ;

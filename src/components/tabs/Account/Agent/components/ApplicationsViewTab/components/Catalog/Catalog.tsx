@@ -142,7 +142,6 @@ const ApplicationsViewCatalog: React.FC<any> = ({agents, setEdit}) => {
     };
 
     const handleChangeRowsPerPage = (event: React.ChangeEvent<HTMLInputElement>) => {
-        console.log(event.target.value)
         setRowsPerPage(parseInt(event.target.value, 10));
         setPage(0);
     };

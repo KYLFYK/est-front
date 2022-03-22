@@ -65,15 +65,6 @@ const AccountEditAgency: FC<AccountEditType> = observer(({ onEdit }) => {
     }
   };
 
-  console.log(
-    infoAgency.name !== valueName,
-    infoAgency.status !== valueStatus,
-    infoAgency.address !== valueAddress,
-    infoAgency.phone !== valuePhone,
-    infoAgency.email !== valueEmail,
-    infoAgency.website !== valueWebsite,
-    infoAgency.description !== valueDescription
-  );
   const save = async () => {
     const infoAgency = {
       phone: [

@@ -10,6 +10,7 @@ export const LegalInfoEditDeveloper: FC = observer(() => {
   const [activityKinds, setActivityKinds] = useState<string[]>([""]);
 
   const store = useStoreDeveloperCabinet();
+
   const errorFields =
     !(
       (store.get().legal.authorizedCapital instanceof Number ||
@@ -436,7 +437,7 @@ export const LegalInfoEditDeveloper: FC = observer(() => {
             className={styles.medium}
             errorLabel=""
             label="Дата регистрации"
-            type="text"
+            type='date'
             name={"phoneNumber"}
             value={store.get().legal.registrationDate}
             onChange={(e) => {

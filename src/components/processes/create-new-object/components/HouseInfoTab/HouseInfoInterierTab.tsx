@@ -68,7 +68,6 @@ const HouseInfoInterierTab: React.FC<Props> = observer(
     } = {};
 
     guidesStore.readyToWork?.forEach((elem) => {
-      console.log(toJS(elem));
       if (elem.subtitle_ru) {
         complexGuides[elem.subtitle_ru] = complexGuides[elem.subtitle_ru]
           ? [...complexGuides[elem.subtitle_ru], toJS(elem)]

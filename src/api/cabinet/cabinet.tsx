@@ -102,7 +102,6 @@ export const cabinetAPI = {
           authorization: `Bearer ${localStorage.getItem("accessEstatum")}`,
         },
       });
-      console.log("updateAgentsCabinet", res);
     } catch (e) {
       return false;
     }
@@ -117,7 +116,6 @@ export const cabinetAPI = {
           authorization: `Bearer ${localStorage.getItem("accessEstatum")}`,
         },
       });
-      console.log("updateAgentsCabinet", res);
     } catch (e) {
       return false;
     }

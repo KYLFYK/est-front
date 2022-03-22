@@ -7,7 +7,6 @@ import {accFromToken} from '../../../../../lib/localStorage/localStorage'
 
 export const Settings: FC = observer(() => {
   const store = useBankCabinetStore()
-  console.log(store.get())
 
   useEffect(() => {
     store.fetch()

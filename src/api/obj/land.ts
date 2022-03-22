@@ -18,7 +18,6 @@ export const LandApi = {
   getLandById: async (id: number) => {
     try {
       const res: IgetLandIdType = await instance.get(`${UrlObj.land}/${id}`);
-      console.log("res", res);
       //@ts-ignore
       let object_specsGuide:
         | Array<{ value: string; label: { title: string; text: string } }>
@@ -159,8 +158,6 @@ export const LandApi = {
           },
         },
       };
-      console.log("res", res.data);
-      console.log("objectPlat", objectPlat);
       return objectPlat;
     } catch (e: any) {
       console.log("error", e);

@@ -34,7 +34,7 @@ const Map: React.FC<Props> = observer(({mapData, location, viewport, setViewport
     lat: 45.16,
     lng: 36.90
   }
-  console.log('rfhnf')
+
   const [activeMarker, setActivemarker] = useState(0)
   const [choosedPlaces, setChoosedplaces] = useState<any>([])
   const [open, setOpen] = useState(false)

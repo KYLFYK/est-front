@@ -15,10 +15,10 @@ const MyObjectArchives = () => {
     const store = useStoreOwnerMyObjects()
 
     const onDelete = (id:string) => {
-        console.log(id,'onDelete')
+
     }
     const onEdit = (id:string) => {
-        console.log(id,'onDelete')
+
     }
 
     return (

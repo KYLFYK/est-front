@@ -214,7 +214,7 @@ const LegalPurityFounders: React.FC<Props> = observer(
     };
 
     const handlePreview = () => {
-      console.log("preview feature in future");
+
     };
 
     return (

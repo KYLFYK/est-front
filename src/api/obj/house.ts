@@ -19,7 +19,6 @@ export const HouseApi = {
   getHouseById: async (id: number) => {
     try {
       const res = await instance.get(`${UrlObj.house}/${id}`);
-      // console.log('resApiHouse',res.data)
 
       //@ts-ignore  переформатирование(1 из 2) - ( object_specs )
       let object_specsGuide:

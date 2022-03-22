@@ -74,7 +74,6 @@ class AgencyCabinetStore {
     this.initialData.description = description;
 
     this.initialData.info = info;
-    console.log("getCabinetAgency", res);
     this.initialData.loading = false;
   }
 

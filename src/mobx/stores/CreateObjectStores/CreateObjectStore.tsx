@@ -609,9 +609,6 @@ class CreateObjectStore implements ICreateObject {
         : "123"
     );
 
-    console.log("Edit mode", isEdit);
-    console.log("Edit obj id", id);
-
     if (objectType === 0) {
       const newData: any = data;
 
@@ -768,14 +765,12 @@ class CreateObjectStore implements ICreateObject {
             apartmentData,
             id as string | number
           );
-          console.log("response apartment", res);
           return res;
         } else {
           apartmentData.owner = idOwner.id;
           const res = await createObjectAPI.createObjectApartment(
             apartmentData
           );
-          console.log("response apartment", res);
           return res;
         }
       } catch (e) {
@@ -944,12 +939,10 @@ class CreateObjectStore implements ICreateObject {
             houseObject,
             id as string | number
           );
-          console.log("response apartment", res);
           return res;
         } else {
           houseObject.owner = idOwner.id;
           const res = await createObjectAPI.createObjectHouse(houseObject);
-          console.log("response apartment", res);
           return res;
         }
       } catch (e) {
@@ -1090,12 +1083,10 @@ class CreateObjectStore implements ICreateObject {
             landData,
             id as string | number
           );
-          console.log("response land", res);
           return res;
         } else {
           landData.owner = idOwner.id;
           const res = await createObjectAPI.createObjectLand(landData);
-          console.log("response land", res);
           return res;
         }
       } catch (e) {

@@ -29,7 +29,7 @@ export const OwnerForm: FC = () => {
   });
 
   const handleConfirm = () => {
-    console.log(Form.getValues());
+
   };
 
   const setValue = () => {

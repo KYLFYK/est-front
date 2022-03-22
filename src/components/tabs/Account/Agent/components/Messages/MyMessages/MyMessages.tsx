@@ -240,7 +240,6 @@ const MyMessages :FC<MyMessagesType> = ({archive=false}) => {
 
     const addDescription = (e: KeyboardEvent) => {
         if (e.key === 'Enter') {
-            console.log(messageValue)
             const date = new Date
             const day = date.getDate()
             const year = date.getFullYear()
@@ -321,7 +320,7 @@ const MyMessages :FC<MyMessagesType> = ({archive=false}) => {
         }
 
     const recover = (active:number) =>{
-        console.log(active,'recover')
+
     }
 
     return (

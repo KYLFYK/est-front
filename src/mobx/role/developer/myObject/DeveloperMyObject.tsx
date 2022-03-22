@@ -179,7 +179,7 @@ class DeveloperMyObjectStore {
     ],
   };
   fetch(id: string) {
-    console.log("DeveloperMyObjectStore", id);
+
   }
   async fetchAllComplexByOwnerId(ownerId: number) {
     this.initialData.loading = true;

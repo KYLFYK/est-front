@@ -14,8 +14,6 @@ export const TownHouseApi  = {
     getTownHouseById: async (id: number) =>{
         try{
             const res = await instance.get(`${UrlObj.townhouse}/${id}`)
-
-            console.log("res", res.data)
         }
         catch (e){
             console.log('error', e)

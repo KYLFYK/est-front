@@ -46,8 +46,6 @@ export class AddressGuidesStore {
       this.cities = result[0].data;
       this.regions = result[1].data;
       this.countries = result[2].data;
-      console.log(JSON.stringify(this.countries))
-      console.log(JSON.parse(JSON.stringify(this.regions)))
       this.loaded = true;
       this.errorOnLoad = false;
     } catch (e) {

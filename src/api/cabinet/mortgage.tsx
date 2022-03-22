@@ -24,7 +24,6 @@ export const leadsAPI = {
     },
 
     createLead: async (payload: any) => {
-        console.log('payload', payload)
         try{
             const res = await instance.post(`${UrlMainPage.leads}`, payload)
             return res

@@ -190,8 +190,6 @@ export const GuideItem: FC<GuideItemType> = observer(({guides, indexGuides}) => 
         fetch()
     }
 
-    // console.log(123, JSON.parse(JSON.stringify(objectGuides)))
-
     return (
         <div>
             <div className={css.grid_3}>

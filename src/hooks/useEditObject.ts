@@ -111,7 +111,6 @@ export const useEditObject: (
   >(reducer, initialState);
 
   const resetData = () => {
-    console.log("reset");
     dispatch({ type: "RESET" });
   };
 

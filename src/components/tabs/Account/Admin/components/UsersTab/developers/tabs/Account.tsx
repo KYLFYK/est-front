@@ -25,7 +25,7 @@ export const Account: FC = () => {
             name={"companyName"}
             defaultValue={" "}
             onChange={() => {
-              console.log("sd");
+
             }}
           />
           <BaseInput
@@ -37,7 +37,7 @@ export const Account: FC = () => {
             name={"developerType"}
             defaultValue={" "}
             onChange={() => {
-              console.log("sd");
+
             }}
           />
           <BaseInput
@@ -49,7 +49,7 @@ export const Account: FC = () => {
             name={"address"}
             defaultValue={" "}
             onChange={() => {
-              console.log("sd");
+
             }}
           />
           <BaseInput
@@ -61,7 +61,7 @@ export const Account: FC = () => {
             name={"phoneNumber"}
             defaultValue={" "}
             onChange={() => {
-              console.log("sd");
+
             }}
           />
           <BaseInput
@@ -73,7 +73,7 @@ export const Account: FC = () => {
             name={"email"}
             defaultValue={" "}
             onChange={() => {
-              console.log("sd");
+
             }}
           />
           <BaseInput
@@ -85,7 +85,7 @@ export const Account: FC = () => {
             name={"cite"}
             defaultValue={" "}
             onChange={() => {
-              console.log("sd");
+
             }}
           />
           <BaseInput
@@ -98,7 +98,7 @@ export const Account: FC = () => {
             defaultValue={" "}
             textArea
             onChange={() => {
-              console.log("sd");
+
             }}
           />
         </section>

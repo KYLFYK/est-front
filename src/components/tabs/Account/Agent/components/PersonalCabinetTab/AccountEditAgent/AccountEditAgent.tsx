@@ -38,28 +38,25 @@ const AccountEditAgent: FC<AccountEditType> = observer(({ onEdit }) => {
     phone: store.initialData.phone,
     email: store.initialData.email,
   };
-
-  const [agentInfo, setAgentInfo] = useState<infoAgentType>(infoAgency);
   
+  const [agentInfo, setAgentInfo] = useState<infoAgentType>(infoAgency);
+
   // for input date user
-  const date = new Date();
+  /*const date = new Date();
   const dateReal = date.toISOString().substr(0, 4); // year
   const mountAndDay = agentInfo.experience.substr(5, 5); // save for api ( mountAndDay )
-  const yearsExperience = agentInfo.experience.substr(0, 4); // start years Experience
+  const yearsExperience = agentInfo.experience.substr(0, 4);*/ // start years Experience
 
-  const [valueName, setValueName] = useState(agentInfo.name);
-  const [valueExperience, setValueExperience] = useState<number>(
-    +dateReal - +yearsExperience
-  );
+  const [valueName, setValueName] = useState(store.get().name);
+  const [valueExperience, setValueExperience] = useState<string>(store.get().experience);
   const [valuePhone, setValuePhone] = useState(agentInfo.phone);
   const [valueEmail, setValueEmail] = useState(agentInfo.email);
 
   const [comparison, setComparison] = useState<boolean>(false);
-
   const backPage = () => {
     if (
       agentInfo.name === valueName &&
-      +dateReal - +yearsExperience === +valueExperience &&
+     //+dateReal - +yearsExperience === +valueExperience &&
       agentInfo.phone === valuePhone &&
       agentInfo.email === valueEmail 
     ) {
@@ -73,7 +70,7 @@ const AccountEditAgent: FC<AccountEditType> = observer(({ onEdit }) => {
     const updateValue: UpdateAgentCabinetType = {
       phone: [{ ord: 1, value: valuePhone }],
       name: valueName,
-      experience: +dateReal - valueExperience + "-" + mountAndDay,
+      experience: valueExperience,
       rating: 0,
       inviteLink: "string",
       file: store.initialData.file,
@@ -83,7 +80,7 @@ const AccountEditAgent: FC<AccountEditType> = observer(({ onEdit }) => {
 
     setAgentInfo({
       name: valueName,
-      experience: +dateReal - valueExperience + "-" + mountAndDay,
+      experience: valueExperience,
       phone: valuePhone,
       email: valueEmail,
     });
@@ -92,10 +89,10 @@ const AccountEditAgent: FC<AccountEditType> = observer(({ onEdit }) => {
   };
 
   const saveBack = async () => {
-    const updateValue: UpdateAgentCabinetType = {
+    const updateValue: any = {
       phone: [{ ord: 1, value: valuePhone }],
       name: valueName,
-      experience: +dateReal - valueExperience + "-" + mountAndDay,
+
       rating: 0,
       inviteLink: "string",
       file: store.initialData.file,
@@ -145,11 +142,9 @@ const AccountEditAgent: FC<AccountEditType> = observer(({ onEdit }) => {
                   </Typography>
                   <BaseInput
                     value={valueExperience}
-                    type={"number"}
+                    type={'date'}
                     onChange={(e) => {
-                      if (+e.currentTarget.value < 60) {
-                        setValueExperience(+e.currentTarget.value);
-                      }
+                      setValueExperience(e.target.value)
                     }}
                     className={css.styleButton}
                   />
@@ -218,7 +213,7 @@ const AccountEditAgent: FC<AccountEditType> = observer(({ onEdit }) => {
           Сохранить
         </BaseButton>
         {agentInfo.name !== valueName ||
-          +dateReal - +yearsExperience !== +valueExperience ||
+          //+dateReal - +yearsExperience !== +valueExperience ||
           agentInfo.phone !== valuePhone ||
           agentInfo.email !== valueEmail && (
             <div

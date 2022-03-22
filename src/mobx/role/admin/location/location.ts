@@ -18,7 +18,6 @@ class AdminLocation {
     fetchCity: () => void = async () => {
         const res = await instance.get(`city`)
         this.city = res.data
-        console.log("newItems", res)
     }
     addCity: (nameCountry:{name:string,regionId:number}) => void = async (nameCountry:{name:string,regionId:number}) => {
         await instance.post (`city`,nameCountry,{
@@ -39,7 +38,6 @@ class AdminLocation {
     fetchRegion: () => void = async () => {
         const res = await instance.get(`region`)
         this.region = res.data
-        console.log("newItems", res)
     }
     addRegion: (name:string) => void = async (name:string) => {
         await instance.post (`region`,{name:name},{
@@ -57,7 +55,6 @@ class AdminLocation {
     fetchCountry: () => void = async () => {
         const res = await instance.get(`country`)
         this.country = res.data
-        console.log("newItems", res)
     }
     addCountry: (nameCountry:string) => void = async (nameCountry:string) => {
         instance.put (`country`,nameCountry) // + key

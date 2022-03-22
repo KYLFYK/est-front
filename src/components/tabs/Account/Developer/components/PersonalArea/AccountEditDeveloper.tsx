@@ -119,13 +119,6 @@ const AccountEditDeveloper: FC<AccountEditType> = observer(({onEdit}) => {
         setComparison(false)
         onEdit(0)
     }
-    console.log(123, agentInfo.name !== valueName
-        , agentInfo.type !== valueType
-        , agentInfo.address !== valueAddress
-        , agentInfo.phone !== valuePhone
-        , agentInfo.email !== valueEmail
-        , agentInfo.site !== valueSite
-        , agentInfo.description !== valueDescription)
 
     const changeAvatar = (data: FormData) => {
         store.updateAvatar(data,store.initialData.account.id).then();

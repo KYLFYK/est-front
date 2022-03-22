@@ -168,7 +168,7 @@ export const Record: FC<AgentRecordType> = ({Record, title}) => {
             setPhoneError('')
         }
     }
-    console.log("nameError--", setName)
+
     const onBlurHandler = (e: string) => {
         switch (e) {
             case 'name':

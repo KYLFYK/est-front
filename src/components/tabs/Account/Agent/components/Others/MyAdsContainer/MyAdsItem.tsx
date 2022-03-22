@@ -31,19 +31,17 @@ export const MyAdsItem: FC<Props> = ({
     if (restoreObject) {
       restoreObject(home.id, home.objType);
     }
-    console.log(home.id, "recover");
   };
   const del = () => {
     if (deleteObject) {
       deleteObject(home.id, home.objType);
     }
-    console.log(home.id, "deleted");
   };
   const edit = (id: string) => {
-    console.log(id, "edit");
+
   };
   const publish = (id: string) => {
-    console.log(id, "publish");
+
   };
 
   const [thisGuides, setThisGuides] = useState<string[]>(

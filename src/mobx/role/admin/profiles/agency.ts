@@ -120,7 +120,6 @@ class AgentProfile {
   profile: null | IAgentProfile = null;
 
   uploadProfile: (id: string) => void = async (id) => {
-    console.log(id);
     this.loaded = true;
     this.errorOnLoad = false;
     this.profile = InitialData;

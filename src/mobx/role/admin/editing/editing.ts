@@ -83,7 +83,6 @@ class AdminEditing {
         // filter type_ru (null)
         newItems[0].info = newItems[0].info.filter((f:any)=>f.type_ru !== null)
         this.initialState = newItems
-        // console.log("newItems", newItems)
     }
 }
 

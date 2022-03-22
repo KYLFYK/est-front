@@ -15,7 +15,7 @@ const MyObjectDraft = () => {
     const store = useStoreOwnerMyObjects()
 
     const onDelete = (id: string) => {
-        console.log(id, 'onDelete')
+
     }
     return (
         <div style={{padding:"0px 20px"}}>

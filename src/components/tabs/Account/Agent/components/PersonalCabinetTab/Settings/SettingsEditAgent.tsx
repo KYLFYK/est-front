@@ -33,7 +33,7 @@ export const SettingsEditAgent: FC<SettingDeveloperType> = observer(
       phone: store.get().setting.phone,
       email: store.get().setting.email,
     };
-
+    console.log(store.get())
     const [agentInfo, setAgentInfo] = useState<infoDeveloperType>(infoAgency);
     const [valuePhone, setValuePhone] = useState<string>(agentInfo.phone);
     const [valueEmail, setValueEmail] = useState<string>(agentInfo.email);
@@ -48,17 +48,17 @@ export const SettingsEditAgent: FC<SettingDeveloperType> = observer(
       }
     };
     
-    const save = () => {
-      store.updatePass(
+    const save = async () => {
+      await store.updatePass(
         store.get().setting.newPassword,
         store.get().id,
         localStorage.getItem("accessEstatum") as string
       );
-      store.update(store.get().id, {
+      await store.update(store.get().id, {
         phone: [{"ord": 1, "value": store.get().setting.phone}],
         email: store.get().setting.email,
       });
-      store.fetch()
+      await store.fetch()
       onEdit(1);
     };
     const saveBack = async () => {
@@ -77,33 +77,36 @@ export const SettingsEditAgent: FC<SettingDeveloperType> = observer(
       <div style={{ marginTop: "10px" }}>
         <BackPage onBackPage={backPage} title={"Редактирование настроек"} />
         <div className={css.df_jc}>
-          <div>
             <Typography weight={"bold"}>Данные регистрации</Typography>
-
-            <BaseInput
-              classNameWrapper={styles.largeWrapper}
-              className={styles.large}
-              errorLabel=""
-              label="Телефон"
-              type="text"
-              name={"phoneNumber"}
-              value={store.get().setting.phone}
-              onChange={(e) => {
-                store.setsettingsPhone(e.target.value);
-              }}
-            />
-            <BaseInput
-              classNameWrapper={styles.largeWrapper}
-              className={styles.large}
-              errorLabel=""
-              label="E-mail"
-              type="text"
-              name={"phoneNumber"}
-              value={store.get().setting.email}
-              onChange={(e) => {
-                store.setsettingsMail(e.target.value);
-              }}
-            />
+            <div>
+              <BaseInput
+                classNameWrapper={styles.smallWrapper}
+                className={styles.small}
+                isError={store.get().setting.phone === ''}
+                errorLabel="Поле не может быть пустым"
+                label="Телефон"
+                type="text"
+                name={"phoneNumber"}
+                value={store.get().setting.phone}
+                onChange={(e) => {
+                  store.setsettingsPhone(e.target.value);
+                }}
+              />
+              <BaseInput
+                classNameWrapper={styles.smallWrapper}
+                className={styles.small}
+                isError={store.get().setting.email === ''}
+                errorLabel="Поле не может быть пустым"
+                label="E-mail"
+                type="text"
+                name={"phoneNumber"}
+                value={store.get().setting.email}
+                onChange={(e) => {
+                  store.setsettingsMail(e.target.value);
+                }}
+              />
+            </div>
+            
             {/*<BaseInput
                         classNameWrapper={styles.largeWrapper}
                         className={styles.large}
@@ -117,9 +120,10 @@ export const SettingsEditAgent: FC<SettingDeveloperType> = observer(
                         }}
                     />*/}
             <BaseInput
-              classNameWrapper={styles.largeWrapper}
-              className={styles.large}
-              errorLabel=""
+              classNameWrapper={styles.smallWrapper}
+              className={styles.small}
+              isError={store.get().setting.newPassword === ''}
+              errorLabel="Поле не может быть пустым"
               label="Новый пароль"
               type="text"
               name={"phoneNumber"}
@@ -128,7 +132,6 @@ export const SettingsEditAgent: FC<SettingDeveloperType> = observer(
                 store.setsettingsPassword(e.target.value);
               }}
             />
-          </div>
         </div>
         <div
           style={{

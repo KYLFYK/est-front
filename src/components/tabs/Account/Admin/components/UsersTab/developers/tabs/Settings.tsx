@@ -38,7 +38,7 @@ export const Settings: FC = () => {
             name={"login"}
             defaultValue={" "}
             onChange={() => {
-              console.log("sd");
+
             }}
           />
           <BaseInput
@@ -50,7 +50,7 @@ export const Settings: FC = () => {
             name={"password"}
             defaultValue={" "}
             onChange={() => {
-              console.log("sd");
+
             }}
           />
           <BaseInput
@@ -62,7 +62,7 @@ export const Settings: FC = () => {
             name={"email"}
             defaultValue={" "}
             onChange={() => {
-              console.log("sd");
+
             }}
           />
           <BaseInput
@@ -74,7 +74,7 @@ export const Settings: FC = () => {
             name={"phoneNumber"}
             defaultValue={" "}
             onChange={() => {
-              console.log("sd");
+   
             }}
           />
           {phoneNumbers.map((number, index) => (
@@ -97,7 +97,7 @@ export const Settings: FC = () => {
                 }
               }}
               onChange={() => {
-                console.log("sd");
+
               }}
             />
           ))}

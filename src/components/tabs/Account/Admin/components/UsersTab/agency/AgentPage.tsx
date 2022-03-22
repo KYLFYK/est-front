@@ -19,7 +19,6 @@ export const AgentPage: FC<Props> = observer(({ id }) => {
   useEffect(() => {
     if ((!loaded && !errorOnLoad) || (profile?.id !== id && !errorOnLoad)) {
       uploadProfile(id);
-      console.log("update");
     }
   }, [loaded, errorOnLoad, uploadProfile, id, profile]);
 

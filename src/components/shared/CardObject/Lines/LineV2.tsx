@@ -20,7 +20,7 @@ const LineV2: FC<LinesV2Type> = ({
   id,
 }) => {
   const favoriteOff = (id: string) => {
-    console.log(id, "favoriteOff");
+
   };
 
   return (

@@ -13,7 +13,6 @@ export const InputEmail: React.FC<InputPropsType> = ({placeholder}) => {
     const searchValue = (e: string) => {
         setValue(e)
         // dispatch (... (e))
-        // console.log(e)
     }
 
     return (

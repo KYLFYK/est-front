@@ -18,7 +18,6 @@ interface PasswordProps {
 const PasswordField: FC<PasswordProps> = ({ placeholder, defaultValue }) => {
   const [visible, setVisible] = useState<boolean>(false);
   const store = useBankCabinetStore()
-  console.log(store.get())
   return (
     <span className={styles.input}>
       <input

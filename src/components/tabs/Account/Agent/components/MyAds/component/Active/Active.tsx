@@ -26,7 +26,6 @@ const MyAdsActive = observer(() => {
   const handleDeleteObject = async (id: number, type: ObjectTypes) => {
     await adsStore.markAsDeleted(id, type);
     forceUpdate(!force);
-    console.log("");
   };
 
   return adsStore.get().loading ? (

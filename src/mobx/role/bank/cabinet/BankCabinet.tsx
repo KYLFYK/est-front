@@ -39,7 +39,6 @@ class BankCabinetStore {
 
     async fetch() {
         const res  = await cabinetAPI.getAccountData()
-        console.log(res)
         const name = res.data.agentProperty.name ? res.data.agentProperty.name : 'name'
         const status = res.data.role
         const experience = res.data.agentProperty.experience?res.data.agentProperty.experience :'0'

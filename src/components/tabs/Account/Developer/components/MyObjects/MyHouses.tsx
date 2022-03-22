@@ -22,16 +22,16 @@ export const MyHouses: FC = observer(() => {
   }, [])
 
   const recover = (id: string) => {
-    console.log(id, "recover");
+
   };
   const del = (id: string) => {
-    console.log(id, "del");
+
   };
   const edit = (id: string) => {
-    console.log(id, "edit");
+
   };
   const publish = (id: string) => {
-    console.log(id, "publish");
+
   };
 
   return (
