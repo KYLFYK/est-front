@@ -5,7 +5,7 @@ networks:
 services:
   main:
     container_name: estatum-front
-    build: 
+    build:
       context: .
       dockerfile: Dockerfile
     networks:
@@ -16,6 +16,6 @@ services:
       - .env:/app/env
     command: npm run start:prod
     env_file:
-      - .prod.env
+      - .env.production
     ports:
       - 3002:3000
