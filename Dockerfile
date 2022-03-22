@@ -14,7 +14,7 @@ RUN npm install --save-dev typescript
 COPY ./ ./
 
 # Build app
-RUN npm run build
+RUN npm run build:production
 
 # Expose the listening port
 EXPOSE 3000
@@ -24,5 +24,5 @@ ENV PORT 3000
 USER node
 
 # Run npm start script when container starts
-CMD [ "npm", "start" ]
+CMD [ "npm", "start:production" ]
 
