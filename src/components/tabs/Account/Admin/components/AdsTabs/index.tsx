@@ -31,6 +31,7 @@ const AdminAdsTabs: ITabItem[] = [
 ];
 
 export const AdsTabs: FC = () => {
+
   const store = AllAdsStore;
 
   useEffect(() => {
