@@ -31,12 +31,12 @@ deploy_dev:
   stage: deploy_dev
   before_script: 
     - mkdir -p ~/.ssh     
-    - echo -e "$SERVER_DEV_KEY" > ~/.ssh/id_rsa     
+    - echo -e "$SERVER_PROD_KEY" > ~/.ssh/id_rsa     
     - chmod 600 ~/.ssh/id_rsa     
     - 'echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config' 
        
   script:
-    - ssh deployer@$SERVER_DEV_IP "/app/$CI_PROJECT_NAME/deploy.sh --projectName $CI_PROJECT_NAME --user $CI_REGISTRY_USER --token $DOCKER_REPO_TOKEN --tag $CI_COMMIT_SHA"
+    - ssh deployer@$SERVER_PROD_IP "/app/$CI_PROJECT_NAME/deploy.sh --projectName $CI_PROJECT_NAME --user $CI_REGISTRY_USER --token $DOCKER_REPO_TOKEN --tag $CI_COMMIT_SHA"
   only:
     - development
 
