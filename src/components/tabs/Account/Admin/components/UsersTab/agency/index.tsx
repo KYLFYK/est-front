@@ -13,7 +13,7 @@ import { sortNameOptions } from "../../../../../../../lib/configs/dropdownOption
 import commonStyles from "../../../AdminRoleStyles.module.scss";
 import styles from "./agency.module.scss";
 
-const listSortFunction: (
+export const listSortFunction: (
   a: IAdminAgent,
   b: IAdminAgent,
   method: "inc" | "dec"
