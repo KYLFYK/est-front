@@ -2,10 +2,13 @@ import React, { FC, useEffect, useState } from "react";
 import { PageFilter } from "../../common/PageFilter";
 import { AgentCard } from "../agency/AgentCard";
 import { observer } from "mobx-react-lite";
-import { DevelopersListStore } from "../../../../../../../mobx/role/admin/users/developers";
-import {Loader, Empty, Error} from '../../../../../../shared/Loader/Loader';
+import {
+  DevelopersListStore,
+  IAdminDeveloperCard,
+} from "../../../../../../../mobx/role/admin/users/developers";
+import { Loader } from "../../../../../../shared/Loader/Loader";
 import { BaseDropDown } from "src/components/shared/BaseDropDown/BaseDropDown";
-import {sortNameOptions} from '../../../../../../../lib/configs/dropdownOptions';
+import { sortNameOptions } from "../../../../../../../lib/configs/dropdownOptions";
 
 import commonStyles from "../../../AdminRoleStyles.module.scss";
 import styles from "../agency/agency.module.scss";
@@ -13,10 +16,11 @@ import styles from "../agency/agency.module.scss";
 export const DevelopersTab: FC = observer(() => {
   const hrefPrefix = "/developers/";
 
-  const { list, loaded, uploadList, errorOnLoad } = DevelopersListStore;
+  const { list, loaded, uploadList, errorOnLoad, handleDelete, handleRestore } =
+    DevelopersListStore;
   const store = DevelopersListStore;
-  const [textFilter, setTextFilter] = useState('')
-  const [sort, setSort] = useState('default')
+  const [textFilter, setTextFilter] = useState("");
+  const [sort, setSort] = useState("default");
 
   useEffect(() => {
     if (!loaded && !errorOnLoad) {
@@ -24,51 +28,74 @@ export const DevelopersTab: FC = observer(() => {
     }
   }, [loaded, errorOnLoad, uploadList]);
 
-  let sortedData: any = []
-  if(sort === 'high'){
-    sortedData = [...store.get()?.sort((a: any, b: any) => a.developerName > b.developerName ? 1 : -1)]
-  } 
-  if(sort === 'low'){
-    sortedData = [...store.get()?.sort((a: any, b: any) => a.developerName < b.developerName ? 1 : -1)]
-  } 
-  if(sort === 'default'){
-      sortedData = [...store.get()]
-  }
+  const [sortedData, setSortedData] = useState<IAdminDeveloperCard[]>([
+    ...store.get(),
+  ]);
+
+  useEffect(() => {
+    switch (sort) {
+      case "high":
+        setSortedData([
+          ...store
+            .get()
+            .sort((a, b) => (a.developerName > b.developerName ? 1 : -1)),
+        ]);
+        break;
+      case "low":
+        setSortedData([
+          ...store
+            .get()
+            .sort((a, b) => (a.developerName < b.developerName ? 1 : -1)),
+        ]);
+        break;
+      case "default":
+        setSortedData([...store.get()]);
+    }
+  }, [sort, store.list]);
 
   const onChange = (e: any) => {
-    setTextFilter(e.target.value)
-  }
+    setTextFilter(e.target.value);
+  };
 
   return list ? (
     <div className={commonStyles.wrapper}>
       <div className={styles.filtersortWrapper}>
-        <BaseDropDown 
+        <BaseDropDown
           options={sortNameOptions}
           onChange={setSort}
-          placeholder={sort
-            ? `Сортировать: ${
-              sortNameOptions.filter((o: any) => o.value === sort)[0].label
-              }`
-            : "Сортировать: по умолчанию"}
+          placeholder={
+            sort
+              ? `Сортировать: ${
+                  sortNameOptions.filter((o: any) => o.value === sort)[0].label
+                }`
+              : "Сортировать: по умолчанию"
+          }
         />
-        <PageFilter value={textFilter} onChange={onChange}/>
+        <PageFilter hideButton value={textFilter} onChange={onChange} />
       </div>
       <div className={styles.wrapper}>
-        {sortedData?.filter((d: any) => d.developerName.toLowerCase().includes(textFilter.toLowerCase())).map((developer: any, index: number) => (
-          <AgentCard
-            key={index}
-            hrefPrefix={hrefPrefix}
-            description={
-              developer.description ? developer.description : "Не указано"
-            }
-            title={developer.developerName}
-            imgUrl={developer.imgUrl}
-            id={developer.id}
-          />
-        ))}
+        {sortedData
+          .filter((d: any) =>
+            d.developerName.toLowerCase().includes(textFilter.toLowerCase())
+          )
+          .map((developer, index: number) => (
+            <AgentCard
+              key={index}
+              hrefPrefix={hrefPrefix}
+              description={
+                developer.description ? developer.description : "Не указано"
+              }
+              title={developer.developerName}
+              imgUrl={developer.imgUrl}
+              id={developer.id}
+              markAsDeleted={developer.markAsDelete}
+              handleDelete={handleDelete}
+              handleRestore={handleRestore}
+            />
+          ))}
       </div>
     </div>
   ) : (
-    <Loader/>
+    <Loader />
   );
 });

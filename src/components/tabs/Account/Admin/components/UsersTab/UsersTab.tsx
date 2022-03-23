@@ -12,16 +12,12 @@ import commonStyles from "../../AdminRoleStyles.module.scss";
 
 const AdminUsersTabs: ITabItem[] = [
   {
-    title: "Агентства",
+    title: "Агенты",
     Component: <AgencyTab />,
   },
   {
     title: "Застройщики",
     Component: <DevelopersTab />,
-  },
-  {
-    title: "Собственники",
-    Component: <OwnersTab />,
   },
   /*{
     title: "Статистика",
