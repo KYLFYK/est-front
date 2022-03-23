@@ -43,7 +43,7 @@
 
   &Content {
     padding: 10px 10px 20px 20px;
-    cursor: pointer;
+
     .head {
       display: flex;
       justify-content: space-between;
@@ -59,6 +59,13 @@
 
       color: $ACCENT;
       text-transform: uppercase;
+    }
+
+    .restore {
+      @include ROBOTOREGULAR16;
+
+      cursor: pointer;
+      color: #C5A28E;
     }
 
     p {

@@ -18,7 +18,7 @@ interface IResponse {
   agencyProperty: IResponseProps;
   createAt: Date;
   email: string;
-  id: string | number;
+  id: number;
   isConfirmed: boolean;
   markAsDelete: boolean;
   phone: string;
@@ -26,14 +26,15 @@ interface IResponse {
   updateAt: Date;
 }
 
-interface IAdminAgent {
-  id: string | number;
+export interface IAdminAgent {
+  id: number;
   agencyName: string;
   description: string;
   imgUrl?: string;
+  markAsDelete: boolean;
 }
 
-type ListType = IAdminAgent[] | [];
+type ListType = IAdminAgent[];
 
 class AgenciesList {
   constructor() {
@@ -51,6 +52,7 @@ class AgenciesList {
         id: el.id,
         description: el.agencyProperty.description,
         agencyName: el.agencyProperty.name,
+        markAsDelete: el.markAsDelete,
       }));
       this.loaded = true;
       this.errorOnLoad = false;
@@ -60,10 +62,56 @@ class AgenciesList {
     }
   };
 
-  get() {
-    return JSON.parse(JSON.stringify([ ...this.list ]))
-  }
+  handleDelete: (id: number) => void = async (id) => {
+    try {
+      await instance.delete(`account/${id}`, {
+        headers: {
+          authorization: `Bearer ${localStorage.getItem("accessEstatum")}`,
+        },
+      });
+      this.list = this.list.map((el) => {
+        if (el.id === id) {
+          return {
+            ...el,
+            markAsDelete: true,
+          };
+        } else return el;
+      });
+    } catch (e) {
+      console.error("Delete error", e);
+    }
+  };
 
+  handleRestore: (id: number) => void = async (id) => {
+    try {
+      await instance.patch(
+        `account/${id}`,
+        {
+          markAsDelete: false,
+        },
+        {
+          headers: {
+            authorization: `Bearer ${localStorage.getItem("accessEstatum")}`,
+          },
+        }
+      );
+
+      this.list = this.list.map((el) => {
+        if (el.id === id) {
+          return {
+            ...el,
+            markAsDelete: false,
+          };
+        } else return el;
+      });
+    } catch (e) {
+      console.error("Delete error", e);
+    }
+  };
+
+  get: () => ListType = () => {
+    return JSON.parse(JSON.stringify([...this.list]));
+  };
 }
 
 export const AgencyListStore = new AgenciesList();

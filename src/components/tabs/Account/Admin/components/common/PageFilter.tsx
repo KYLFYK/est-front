@@ -7,9 +7,16 @@ interface Props {
   placeHolder?: string;
   value?: string;
   onChange?: (e: any) => void;
+  hideButton?: boolean;
 }
 
-export const PageFilter: FC<Props> = ({ buttonText, placeHolder, value, onChange }) => {
+export const PageFilter: FC<Props> = ({
+  buttonText,
+  placeHolder,
+  value,
+  onChange,
+  hideButton,
+}) => {
   return (
     <SearchOffice
       inputIcon={<SearchIcon />}
@@ -17,8 +24,9 @@ export const PageFilter: FC<Props> = ({ buttonText, placeHolder, value, onChange
       buttonText={buttonText ? buttonText : "Добавить"}
       placeholder={placeHolder ? placeHolder : "Поиск"}
       type={"active"}
-      value={value} 
+      value={value}
       onChange={onChange}
+      hideButton={hideButton}
     />
   );
 };

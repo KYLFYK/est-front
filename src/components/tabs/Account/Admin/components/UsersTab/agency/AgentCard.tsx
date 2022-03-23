@@ -14,6 +14,9 @@ interface Props {
   description2?: string;
   hrefPrefix?: string;
   id: string | number;
+  markAsDeleted?: boolean;
+  handleDelete?: (id: number) => void;
+  handleRestore?: (id: number) => void;
 }
 
 export const AgentCard: FC<Props> = ({
@@ -23,6 +26,9 @@ export const AgentCard: FC<Props> = ({
   id,
   description2,
   hrefPrefix,
+  markAsDeleted,
+  handleDelete,
+  handleRestore,
 }) => {
   return (
     <div className={styles.card}>
@@ -47,7 +53,34 @@ export const AgentCard: FC<Props> = ({
       <div className={styles.cardContent}>
         <div className={styles.head}>
           <span className={styles.title}>{title}</span>
-          <Trash className={styles.icon} />
+          {markAsDeleted ? (
+            <div
+              style={{
+                display: "flex",
+                alignItems: "center",
+              }}
+            >
+              <span
+                onClick={() => {
+                  if (handleRestore) {
+                    handleRestore(id as number);
+                  }
+                }}
+                className={styles.restore}
+              >
+                Восстановить
+              </span>
+            </div>
+          ) : (
+            <Trash
+              onClick={() => {
+                if (handleDelete) {
+                  handleDelete(id as number);
+                }
+              }}
+              className={styles.icon}
+            />
+          )}
         </div>
         <p>{description}</p>
         {description2 && <p>{description2}</p>}
