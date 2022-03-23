@@ -36,7 +36,7 @@ deploy_dev:
     - 'echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config' 
        
   script:
-    - ssh deployer@$SERVER_PROD_IP "/app/$CI_PROJECT_NAME/deploy.sh --projectName $CI_PROJECT_NAME --user $CI_REGISTRY_USER --token $DOCKER_REPO_TOKEN --tag $CI_COMMIT_SHA"
+    - ssh -p 31022 deployer@$SERVER_PROD_IP "/app/$CI_PROJECT_NAME/deploy.sh --projectName $CI_PROJECT_NAME --user $CI_REGISTRY_USER --token $DOCKER_REPO_TOKEN --tag $CI_COMMIT_SHA"
   only:
     - development
 
@@ -62,6 +62,6 @@ deploy_prod:
     - 'echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config'
 
   script:
-    - ssh deployer@$SERVER_PROD_IP "/app/$CI_PROJECT_NAME/deploy.sh --projectName $CI_PROJECT_NAME --user $CI_REGISTRY_USER --token $DOCKER_REPO_TOKEN --tag $CI_COMMIT_SHA"
+    - ssh -p 31022 deployer@$SERVER_PROD_IP "/app/$CI_PROJECT_NAME/deploy.sh --projectName $CI_PROJECT_NAME --user $CI_REGISTRY_USER --token $DOCKER_REPO_TOKEN --tag $CI_COMMIT_SHA"
   only:
     - tags
