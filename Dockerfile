@@ -33,6 +33,7 @@ COPY --from=builder --chown=node /app/public public
 COPY --from=builder --chown=node /app/node_modules node_modules
 COPY --from=builder --chown=node /app/package.json package.json
 COPY --from=builder --chown=node /app/next.config.js next.config.js
+COPY --from=builder --chown=node /app/.env* ./
 
 # Expose the listening port
 EXPOSE 3000
