@@ -22,6 +22,8 @@ RUN npm run build:${ENV_STAGES}
 
 FROM node:16.13.2-alpine3.15
 
+ARG ENV_STAGES
+
 RUN apk --no-cache add curl
 
 USER node
@@ -42,7 +44,7 @@ ENV PORT 3000
 ENV ENV_STAGES=${ENV_STAGES}
 
 # Run npm start script when container starts
-CMD [ "npm", "start:${ENV_STAGES}" ] 
+CMD [ "npm", "run", "start:${ENV_STAGES}" ] 
 
 HEALTHCHECK --start-period=30s \
             --interval=10s \
