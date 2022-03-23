@@ -205,7 +205,7 @@
 
   .large {
     min-width: 290px;
-    width: 100%;
+    width: 75%;
 
     &Wrapper {
       display: flex;
@@ -258,6 +258,29 @@
         white-space: nowrap;
         width: 233px;
         min-width: 233px;
+      }
+    }
+  }
+
+  .mediumPlus {
+    min-width: 790px;
+    width: 100%;
+
+    &Wrapper {
+      display: flex;
+      gap: 20px;
+      width: 80%;
+      margin-bottom: 10px;
+
+      div {
+        width: fit-content;
+      }
+
+      p {
+        white-space: nowrap;
+        width: 233px;
+        min-width: 233px;
+        color: #3D4550;
       }
     }
   }

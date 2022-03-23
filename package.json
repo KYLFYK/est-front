@@ -7,7 +7,7 @@
     "build:development": "env-cmd -f .env.development next build",
     "start:development": "env-cmd -f .env.development next start",
     "start:production": "env-cmd -f .env.production next start",
-    "l": "env-cmd -f .env.production next build && next start",
+    "l": "next dev",
     "lint": "next lint",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook"

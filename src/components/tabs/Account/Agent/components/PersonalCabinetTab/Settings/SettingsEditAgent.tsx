@@ -76,12 +76,11 @@ export const SettingsEditAgent: FC<SettingDeveloperType> = observer(
     return (
       <div style={{ marginTop: "10px" }}>
         <BackPage onBackPage={backPage} title={"Редактирование настроек"} />
-        <div className={css.df_jc}>
+        <div>
             <Typography weight={"bold"}>Данные регистрации</Typography>
             <div>
               <BaseInput
-                classNameWrapper={styles.smallWrapper}
-                className={styles.small}
+                className={css.width}
                 isError={store.get().setting.phone === ''}
                 errorLabel="Поле не может быть пустым"
                 label="Телефон"
@@ -93,8 +92,7 @@ export const SettingsEditAgent: FC<SettingDeveloperType> = observer(
                 }}
               />
               <BaseInput
-                classNameWrapper={styles.smallWrapper}
-                className={styles.small}
+                className={css.width}
                 isError={store.get().setting.email === ''}
                 errorLabel="Поле не может быть пустым"
                 label="E-mail"
@@ -120,8 +118,7 @@ export const SettingsEditAgent: FC<SettingDeveloperType> = observer(
                         }}
                     />*/}
             <BaseInput
-              classNameWrapper={styles.smallWrapper}
-              className={styles.small}
+              className={css.width}
               isError={store.get().setting.newPassword === ''}
               errorLabel="Поле не может быть пустым"
               label="Новый пароль"

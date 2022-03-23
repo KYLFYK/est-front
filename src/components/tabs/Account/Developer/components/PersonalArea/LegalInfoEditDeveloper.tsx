@@ -88,8 +88,8 @@ export const LegalInfoEditDeveloper: FC = observer(() => {
         <section>
           <span className={styles.formSubTitle}>Реквизиты</span>
           <BaseInput
-            classNameWrapper={styles.largeWrapper}
-            className={styles.large}
+            classNameWrapper={styles.mediumPlusWrapper}
+            className={styles.mediumPlus}
             errorLabel=""
             label="Полное название организации"
             type="text"
@@ -100,8 +100,8 @@ export const LegalInfoEditDeveloper: FC = observer(() => {
             }}
           />
           <BaseInput
-            classNameWrapper={styles.largeWrapper}
-            className={styles.large}
+            classNameWrapper={styles.mediumPlusWrapper}
+            className={styles.mediumPlus}
             errorLabel=""
             label="Адрес"
             type="text"
@@ -112,8 +112,8 @@ export const LegalInfoEditDeveloper: FC = observer(() => {
             }}
           />
           <BaseInput
-            classNameWrapper={styles.largeWrapper}
-            className={styles.large}
+            classNameWrapper={styles.mediumPlusWrapper}
+            className={styles.mediumPlus}
             isError={
               !(
                 (store.get().legal.authorizedCapital instanceof Number ||
@@ -132,8 +132,8 @@ export const LegalInfoEditDeveloper: FC = observer(() => {
             }}
           />
           <BaseInput
-            classNameWrapper={styles.largeWrapper}
-            className={styles.large}
+            classNameWrapper={styles.mediumPlusWrapper}
+            className={styles.mediumPlus}
             errorLabel=""
             label="ОКФС"
             type="text"
@@ -144,8 +144,8 @@ export const LegalInfoEditDeveloper: FC = observer(() => {
             }}
           />
           <BaseInput
-            classNameWrapper={styles.largeWrapper}
-            className={styles.large}
+            classNameWrapper={styles.mediumPlusWrapper}
+            className={styles.mediumPlus}
             errorLabel=""
             label="ОКОПФ"
             type="text"
@@ -156,8 +156,8 @@ export const LegalInfoEditDeveloper: FC = observer(() => {
             }}
           />
           <BaseInput
-            classNameWrapper={styles.largeWrapper}
-            className={styles.large}
+            classNameWrapper={styles.mediumPlusWrapper}
+            className={styles.mediumPlus}
             errorLabel=""
             label="ОКОГУ"
             type="text"
@@ -272,8 +272,8 @@ export const LegalInfoEditDeveloper: FC = observer(() => {
         <section>
           <span className={styles.formSubTitle}>Информация о компании</span>
           <BaseInput
-            classNameWrapper={styles.largeWrapper}
-            className={styles.large}
+            classNameWrapper={styles.mediumPlusWrapper}
+            className={styles.mediumPlus}
             errorLabel=""
             label="Статус компании"
             type="text"
@@ -284,8 +284,8 @@ export const LegalInfoEditDeveloper: FC = observer(() => {
             }}
           />
           <BaseInput
-            classNameWrapper={styles.largeWrapper}
-            className={styles.large}
+            classNameWrapper={styles.mediumPlusWrapper}
+            className={styles.mediumPlus}
             errorLabel=""
             label="Руководитель"
             type="text"
@@ -296,8 +296,8 @@ export const LegalInfoEditDeveloper: FC = observer(() => {
             }}
           />
           <BaseInput
-            classNameWrapper={styles.largeWrapper}
-            className={styles.large}
+            classNameWrapper={styles.mediumPlusWrapper}
+            className={styles.mediumPlus}
             errorLabel=""
             label="Учредители"
             type="text"
