@@ -5,6 +5,8 @@ ARG ENV_STAGES
 # Set working directory
 WORKDIR /app
 
+ENV ENV_STAGES=${ENV_STAGES}
+
 # Copy package.json before other files
 # Utilise Docker cache to save re-installing dependencies if unchanged
 COPY ./package.json ./
