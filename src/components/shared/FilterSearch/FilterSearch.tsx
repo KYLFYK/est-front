@@ -4,13 +4,7 @@ import { makeStyles } from "@material-ui/core";
 import BaseButton from "../BaseButton/BaseButtons";
 import FavoriteIcon from "../../../icons/Favorite/Favorite";
 import css from "./FilterSearch.module.scss";
-
-//label - Отображение
-const option = [
-  { value: "По умолчанию", label: "По умочанию" },
-  { value: "Цене - убыванию", label: "Цене - убыванию" },
-  { value: "Цене - возрастанию", label: "Цене - возрастанию" },
-];
+import {sortPriceOptions} from '../../../lib/configs/dropdownOptions';
 
 export const useStyles = makeStyles(() => ({
   select: {
@@ -18,35 +12,39 @@ export const useStyles = makeStyles(() => ({
     width: 300,
     borderRadius: 6,
     height: 40,
-    overflow: "hidden",
   },
 }));
 
 interface Props {
   type?: "agent" | "professional" | "owner";
   className?: string;
+  sort?: string;
+  setSort?: any;
 }
 
-const FilterSearch: FC<Props> = ({ type = "agent", className }) => {
+const FilterSearch: FC<Props> = ({
+  type = "agent",
+  className,
+  sort,
+  setSort,
+}) => {
   const classes = useStyles();
-  const [value, setValue] = useState<string>(option[0].value);
+
   const [active, setActive] = useState<"map" | "table">("table");
 
   const printer = () => {
-    console.log("printer");
+
   };
   const upload = () => {
-    console.log("upload");
+
   };
   const oval = () => {
-    console.log("oval");
+
   };
   const onClickMap = () => {
-    console.log("onClickMap");
     setActive("map");
   };
   const onClickTable = () => {
-    console.log("onClickTable");
     setActive("table");
   };
 
@@ -61,9 +59,15 @@ const FilterSearch: FC<Props> = ({ type = "agent", className }) => {
       className={className}
     >
       <BaseDropDown
-        options={option}
-        placeholder={`Сортировать:${value}`}
-        onChange={setValue}
+        options={sortPriceOptions}
+        placeholder={
+          sort
+            ? `Сортировать: ${
+              sortPriceOptions.filter((o: any) => o.value === sort)[0].label
+              }`
+            : "Сортировать: по умолчанию"
+        }
+        onChange={setSort}
         className={classes.select}
       />
       <div style={{ display: "flex" }}>
@@ -76,8 +80,8 @@ const FilterSearch: FC<Props> = ({ type = "agent", className }) => {
             Сохранить поиск
           </BaseButton>
         )}
-        <PrinterIcon onClick={printer} />
-        <Upload onClick={upload} />
+        {/*<PrinterIcon onClick={printer} />
+        <Upload onClick={upload} />*/}
         {type === "professional" && (
           <>
             <Oval onClick={oval} />

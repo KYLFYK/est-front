@@ -1,114 +1,29 @@
-import React, {FC, useEffect, useState} from 'react';
-import Typography from "../../../../../shared/Typography/Typography";
-import BaseButton from "../../../../../shared/BaseButton/BaseButtons";
-import {BaseInput} from "../../../../../shared/BaseInput/Input";
-import css from './PersonalAccount.module.scss'
-import UploadImage from "./UploadImage";
-import {useStoreOwnerCabinet} from "../../../../../../mobx/role/owner/cabinet/OwnerCabinet";
-import {observer} from "mobx-react-lite";
+import React, {useState} from 'react';
+import {HorizontalTabs} from "../../../../../shared/HorizontalTabs/HorizontalTabs";
+import AccountOwnerOptions from "./AccountOwnerOptions/AccountOwnerOptions";
+import PersonalAccountOwner from "./PersonalAccountOwner/PersonalAccountOwner";
+import PersonalAccountEdit from "./PersonalAccountEdit/PersonalAccountEdit";
 
-
-type PersonalAccountType = {
+const style={
+    margin:'0 10px'
 }
 
-const PersonalAccount: FC<PersonalAccountType> = observer(() => {
 
-    const store = useStoreOwnerCabinet()
-
-    useEffect(()=>{
-        store.fetch()
-    },[store])
-
-    const [valueNewPassword, setValueNewPassword]=useState<string>('')
-
+const PersonalAccount = () => {
+    const [edit, setEdit] = useState<boolean>(false)
     return (
-        <div>
-            <Typography weight={"bold"}>{store.initialData.firstName} {store.initialData.secondName}</Typography>
-            <div className={css.column}>
-                <div>
-                    <UploadImage image={store.initialData.image}/>
-                </div>
-                <div>
-                    <Typography weight={"bold"}>
-                        Личный данные
-                    </Typography>
-                    <div className={css.df}>
-                        <Typography className={css.typographyWidth}>
-                           Имя
-                        </Typography>
-                        <BaseInput
-                            value={store.initialData.firstName}
-                            className={css.inputWidth}
-                        />
-                    </div>
-                    <div className={css.df}>
-                        <Typography className={css.typographyWidth}>
-                            Фамилия
-                        </Typography>
-                        <BaseInput
-                            value={store.initialData.secondName}
-                            className={css.inputWidth}
-                        />
-                    </div>
-                    <div className={css.df}>
-                        <Typography className={css.typographyWidth}>
-                            Дата рождения
-                        </Typography>
-                        <BaseInput
-                            value={store.initialData.dateBirth}
-                            className={css.inputWidth}
-                        />
-                    </div>
-                    <Typography weight={"bold"} className={css.marginTop30}>
-                        Контактные данные
-                    </Typography>
-                    <div className={css.df}>
-                        <Typography className={css.typographyWidth}>
-                            Номер телефона
-                        </Typography>
-                        <BaseInput
-                            value={store.initialData.phone}
-                            className={css.inputWidth}
-                        />
-                    </div>
-                    <div className={css.df}>
-                        <Typography className={css.typographyWidth}>
-                            Email
-                        </Typography>
-                        <BaseInput value={store.initialData.email} className={css.inputWidth}/>
-                    </div>
-                    <Typography weight={"bold"} className={css.marginTop30}>
-                        Сменить пароль
-                    </Typography>
-                    <div className={css.df}>
-                        <Typography className={css.typographyWidth}>
-                            Старый пароль
-                        </Typography>
-                        <BaseInput
-                            value={store.initialData.password}
-                            className={css.inputWidth}
-                        />
-                    </div>
-                    <div className={css.df}>
-                        <Typography className={css.typographyWidth}>
-                            Новый пароль
-                        </Typography>
-                        <BaseInput
-                            value={valueNewPassword}
-                            onChange={e=>setValueNewPassword(e.currentTarget.value)}
-                            className={css.inputWidth}
-                        />
-                    </div>
-                    <div>
-                        <BaseButton>Сохранить</BaseButton>
-                    </div>
-                </div>
-                <div>
-                    <BaseButton>Стать агентом</BaseButton>
-                </div>
-            </div>
-        </div>
+        <>
+            {
+                !edit?<HorizontalTabs
+                        style={style}
+                        tabs={[
+                        {title: "Аккаунт", Component: <PersonalAccountOwner onEdit={()=>setEdit(!edit)}/>},
+                        {title: "Настройки", Component: <AccountOwnerOptions/>},
+                    ]}/>
+                    : <PersonalAccountEdit onEdit={()=>setEdit(!edit)}/>
+            }
+        </>
     );
-})
+};
 
 export default PersonalAccount;

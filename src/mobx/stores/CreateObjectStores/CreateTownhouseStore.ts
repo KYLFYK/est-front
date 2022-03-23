@@ -5,11 +5,13 @@ import { ICreateObjectTownhouse } from "../../types/CreateObjectStoresTypes/Crea
 class CreateTownhouseStore implements ICreateObjectTownhouse {
   about: ICreateObjectTownhouse["about"] = {
     name: "",
-    country: "",
-    city: "",
+    country: 0,
+    city: 0,
     index: 0,
+    region: 0,
     address: "",
     cost: 0,
+    type: "",
   };
 
   generalInfo: ICreateObjectTownhouse["generalInfo"] = {
@@ -36,11 +38,13 @@ class CreateTownhouseStore implements ICreateObjectTownhouse {
       count: 0,
       items: [],
     },
+    vrTour: "",
+    video: "",
   };
 
   infrastructure: ICreateObjectTownhouse["infrastructure"] = {
     description: "",
-    view: "",
+    view: [],
   };
 
   info: ICreateObjectTownhouse["info"] = {
@@ -71,7 +75,7 @@ class CreateTownhouseStore implements ICreateObjectTownhouse {
     },
     currentFounder: {
       founderType: FoundersTypes.SINGLE,
-      firstFounderName: '',
+      firstFounderName: "",
       secondFouderName: undefined,
       cadastralNumber: "",
       ownershipFrom: new Date(),
@@ -79,14 +83,13 @@ class CreateTownhouseStore implements ICreateObjectTownhouse {
     },
     previousFounder: {
       founderType: FoundersTypes.SINGLE,
-      firstFounderName: '',
+      firstFounderName: "",
       secondFouderName: undefined,
       cadastralNumber: "",
       ownershipFrom: new Date(),
       ownershipTo: new Date(),
     },
   };
-
 }
 
 export default CreateTownhouseStore;

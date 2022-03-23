@@ -1,6 +1,7 @@
 import { ICustomFile } from "../../../components/processes/create-new-object/components/GeneralInfoObjectTab/GeneralInfoPhotosTab";
 import { FoundersTypes } from "../../../utils/interfaces/objects";
 import { ICreateObjectModel } from "./CreateObjectStoreType";
+import { IUploadedFile } from "../../stores/CreateObjectStores/CreateObjectStore";
 
 export interface ICreateObjectLand
   extends ICreateObjectModel<
@@ -13,18 +14,22 @@ export interface ICreateObjectLand
 
 export interface ICreateLandAboutTab {
   name: string;
-  country: string;
-  city: string;
+  country: number;
+  city: number;
   address: string;
   cost: number;
+  region: number;
+  type: string;
 }
 
 export interface ICreateLandGeneralInfo {
   description: string;
-  photos: ICustomFile[];
+  photos: Array<ICustomFile | IUploadedFile>;
   cottageVillageName: string;
   landGeneralSquare: string;
   landStatus: string;
+  vrTour: string;
+  video: string;
 }
 
 export interface ICreateLandInfrastructure {
@@ -38,28 +43,27 @@ export interface ICreateLandInfoTab {
   buildings: string;
 }
 
-
 export interface ICreateLandLegalPurity {
   realEstateRegister: {
-    address: string,
-    cadastralNumber: string,
-    cadastralCost: string,
-    generalSquare: string,
-  },
+    address: string;
+    cadastralNumber: string;
+    cadastralCost: string;
+    generalSquare: string;
+  };
   currentFounder: {
-    founderType: FoundersTypes,
-    firstFounderName: string,
-    secondFouderName?: string,
-    cadastralNumber: string,
-    ownershipFrom: Date,
-    ownershipTo: Date, 
-  },
+    founderType: FoundersTypes;
+    firstFounderName: string;
+    secondFouderName?: string;
+    cadastralNumber: string;
+    ownershipFrom: Date;
+    ownershipTo: Date;
+  };
   previousFounder: {
-    founderType: FoundersTypes,
-    firstFounderName: string,
-    secondFouderName?: string,
-    cadastralNumber: string,
-    ownershipFrom: Date,
-    ownershipTo: Date, 
-  }
+    founderType: FoundersTypes;
+    firstFounderName: string;
+    secondFouderName?: string;
+    cadastralNumber: string;
+    ownershipFrom: Date;
+    ownershipTo: Date;
+  };
 }

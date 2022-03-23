@@ -2,6 +2,7 @@ import { ICustomFile } from "../../../components/processes/create-new-object/com
 import { IOption } from "../../../utils/interfaces/general";
 import { FoundersTypes } from "../../../utils/interfaces/objects";
 import { ICreateObjectModel } from "./CreateObjectStoreType";
+import { IUploadedFile } from "../../stores/CreateObjectStores/CreateObjectStore";
 
 export interface ICreateObjectAparts
   extends ICreateObjectModel<
@@ -14,20 +15,21 @@ export interface ICreateObjectAparts
 
 export interface ICreateApartmentAboutTab {
   name: string;
-  country: string;
-  city: string;
+  country: number;
+  city: number;
+  region: number;
   address: string;
   cost: number;
   index: number;
-  type: string;
   complexName: string;
   floor: number;
   floorsAmmount: number;
+  type: string;
 }
 
 export interface ICreateApartsGeneralInfo {
   description: string;
-  photos: ICustomFile[];
+  photos: Array<ICustomFile | IUploadedFile>;
   generalSquare: string;
   livingSquare: string;
   ceilingHeight: string;
@@ -36,11 +38,13 @@ export interface ICreateApartsGeneralInfo {
   kitchen: string;
   customRooms: IOption[];
   interiorDescription: string;
+  vrTour: string;
+  video: string;
 }
 
 export interface ICreateApartsInfrastructure {
   description: string;
-  view: string;
+  view: string[];
 }
 
 export interface ICreateApartsInfoTab {
@@ -65,26 +69,26 @@ export interface ICreateApartsInfoTab {
 
 export interface ICreateApartsLegalPurity {
   realEstateRegister: {
-    address: string,
-    cadastralNumber: string,
-    cadastralCost: string,
-    generalSquare: string,
-    floors: string,
-  },
+    address: string;
+    cadastralNumber: string;
+    cadastralCost: string;
+    generalSquare: string;
+    floors: string;
+  };
   currentFounder: {
-    founderType: FoundersTypes,
-    firstFounderName: string,
-    secondFouderName?: string,
-    cadastralNumber: string,
-    ownershipFrom: Date,
-    ownershipTo: Date, 
-  },
+    founderType: FoundersTypes;
+    firstFounderName: string;
+    secondFouderName?: string;
+    cadastralNumber: string;
+    ownershipFrom: Date;
+    ownershipTo: Date;
+  };
   previousFounder: {
-    founderType: FoundersTypes,
-    firstFounderName: string,
-    secondFouderName?: string,
-    cadastralNumber: string,
-    ownershipFrom: Date,
-    ownershipTo: Date, 
-  }
+    founderType: FoundersTypes;
+    firstFounderName: string;
+    secondFouderName?: string;
+    cadastralNumber: string;
+    ownershipFrom: Date;
+    ownershipTo: Date;
+  };
 }

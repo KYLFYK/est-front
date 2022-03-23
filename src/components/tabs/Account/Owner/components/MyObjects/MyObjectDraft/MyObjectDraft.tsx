@@ -15,10 +15,10 @@ const MyObjectDraft = () => {
     const store = useStoreOwnerMyObjects()
 
     const onDelete = (id: string) => {
-        console.log(id, 'onDelete')
+
     }
     return (
-        <div>
+        <div style={{padding:"0px 20px"}}>
             <SearchOffice type={'archive'}/>
             <FilterSearch/>
             {

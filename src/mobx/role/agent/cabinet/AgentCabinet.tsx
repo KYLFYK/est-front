@@ -1,98 +1,198 @@
-import {createContext, FC, useContext} from "react";
-import {makeAutoObservable} from "mobx";
-import {cabinetAPI, UpdateAgentCabinetType} from "../../../../api/cabinet/cabinet";
+import { createContext, FC, useContext } from "react";
+import { makeAutoObservable } from "mobx";
+import {
+  cabinetAPI,
+  UpdateAgentCabinetType,
+} from "../../../../api/cabinet/cabinet";
 import imgMoc from "../../../../components/tabs/Account/Agent/components/PersonalCabinetTab/AccountInfo/logoFalse.svg";
+import { instance } from "../../../../api/instance";
+import { AuthApi } from "../../../../api/auth/auth";
 
 class AgentCabinetStore {
-    constructor() {
-        makeAutoObservable(this);
-    }
+  constructor() {
+    makeAutoObservable(this);
+  }
 
-    initialData = {
-        info:[
-            {label: 'Имя', value: '',placeholder:''},
-            {label: 'Статус', value: '',placeholder:''},
-            {label: 'Стаж', value: '' ,placeholder:''},
-            {label: 'Телефон', value:'',placeholder:''},
-            {label: 'E-mail', value: '',placeholder:''},
-            {label: 'Telegram', value: '',placeholder:''},
-            {label: 'WhatsApp', value: '',placeholder:''},
-            {label: 'Viber', value: '',placeholder:''},
-        ],
-        id: 1,
-        img:imgMoc,
-        statusVerification:'notConfirmed',
+  initialData = {
+    info: [
+      { label: "Имя", value: "", placeholder: "" },
+      //{ label: "Статус", value: "", placeholder: "" },
+      { label: "Стаж", value: "", placeholder: "" },
+      { label: "Телефон", value: "", placeholder: "" },
+      { label: "E-mail", value: "", placeholder: "" },
+      //{ label: "Telegram", value: "", placeholder: "" },
+      //{ label: "WhatsApp", value: "", placeholder: "" },
+      //{ label: "Viber", value: "", placeholder: "" },
+    ],
+    setting: {
+      newPassword: "",
+      email: "",
+      phone: "",
+    },
+    id: 0,
+    img: imgMoc,
+    statusVerification: "notConfirmed",
+    name: "",
+    status: "Agency",
+    experience: "",
+    phone: "",
+    email: "estatum@mail.com",
+    telegram: "estatum.com",
+    whatsApp: "estatum.com",
+    viber: "estatum.com",
+    phoneArray: [],
+    loading: true,
+    file: [] as {
+      fileName: string;
+      mimeType: string;
+      size: number;
+      url: string;
+    }[],
+  };
 
-        name: '',
-        status: 'Agency',
-        experience: 'Смоленская обл. г.Смоленск',
-        phone: '',
-        email: 'estatum@mail.com',
-        telegram: 'estatum.com',
-        whatsApp: 'estatum.com',
-        viber: 'estatum.com',
+  setsettingsMail(value: any) {
+    this.initialData.setting = {
+      ...this.initialData.setting,
+      email: value,
+    };
+  }
+  setsettingsPassword(value: any) {
+    this.initialData.setting = {
+      ...this.initialData.setting,
+      newPassword: value,
+    };
+  }
+  setsettingsPhone(value: any) {
+    this.initialData.setting = {
+      ...this.initialData.setting,
+      phone: value,
+    };
+  }
 
-        phoneArray: [''],
+  async fetch() {
+    this.initialData.loading = true;
+    const res = await cabinetAPI.getCabinetAgent();
+    this.initialData = {
+      info: [
+        {
+          label: "Имя",
+          value: res.data.agentProperty.name
+            ? res.data.agentProperty.name
+            : "name",
+          placeholder: "",
+        },
+        //{ label: "Статус", value: res.data.role, placeholder: "" },
+        {
+          label: "Стаж",
+          value: res.data.agentProperty.experience
+            ? res.data.agentProperty.experience
+            : new Date().toISOString().substring(0, 10),
+          placeholder: "",
+        },
+        {
+          label: "Телефон",
+          value: res.data.agentProperty.phone[0].value
+            ? res.data.agentProperty.phone[0].value
+            : "",
+          placeholder: "",
+        },
+        { label: "E-mail", value: res.data.email, placeholder: "E-mail" },
+        /*{
+          label: "Telegram",
+          value: res.data.agentProperty.messengers?.telegram
+            ? res.data.agentProperty.messengers.telegram
+            : "",
+          placeholder: "estatum",
+        },
+        {
+          label: "WhatsApp",
+          value: res.data.agentProperty.messengers?.whatsApp
+            ? res.data.agentProperty.messengers.whatsApp
+            : "",
+          placeholder: "89996667722",
+        },
+        { label: "Viber", value: "viber", placeholder: "" },*/
+      ],
+      setting: {
+        newPassword: "",
+        email: res.data.email,
+        phone: res.data.agentProperty.phone[0].value
+          ? res.data.agentProperty.phone[0].value
+          : "",
+      },
+      id: res.data.id,
+      img: imgMoc,
+      statusVerification: res.data.isConfirmed ? "confirmed" : "notConfirmed",
+      name: res.data.agentProperty.name ? res.data.agentProperty.name : "name",
+      status: res.data.role,
+      experience: res.data.agentProperty.experience
+        ? res.data.agentProperty.experience
+        : new Date().toISOString().substring(0, 10),
+      phone: res.data.agentProperty.phone[0].value
+        ? res.data.agentProperty.phone[0].value
+        : "",
+      email: res.data.email,
+      telegram: res.data.agentProperty.messengers?.telegram
+        ? res.data.agentProperty.messengers.telegram
+        : "",
+      whatsApp: res.data.agentProperty.messengers?.whatsApp
+        ? res.data.agentProperty.messengers.whatsApp
+        : "",
+      viber: "viber",
+      phoneArray:
+        res.data.agentProperty.phone.length > 0
+          ? res.data.agentProperty.phone.map((p: any) => p.value)
+          : [],
+      loading: false,
+      file: res.data.agentProperty.file,
+    };
+  }
 
-        loading:true
-    }
+  async update(id: number, updateValue: any) {
+    await cabinetAPI.updateAgentsCabinet(id, updateValue);
+  }
 
-    async fetch() {
-        const res  = await cabinetAPI.getCabinetAgent()
+  async updatePass(newPassword: string, accountId: number, token: string) {
+    const res = await AuthApi.changePassword(newPassword, accountId, token);
+  }
 
-        const name = res.data.agentProperty.name ? res.data.agentProperty.name : 'name'
-        const status = res.data.role
-        const experience = res.data.agentProperty.experience?res.data.agentProperty.experience :'0'
-        const phone = res.data.agentProperty.phone[0].value?res.data.agentProperty.phone[0].value:''
-        const email = res.data.email
-        const telegram = res.data.agentProperty.messengers?.telegram ? res.data.agentProperty.messengers.telegram :''
-        const whatsApp = res.data.agentProperty.messengers?.whatsApp  ? res.data.agentProperty.messengers.whatsApp : ''
-        const viber = 'viber'
+  async updateAvatar(data: FormData, id: number) {
+    const response = await instance.post(`media/s3-upload`, data, {
+      headers: {
+        authorization: `Bearer ${localStorage.getItem("accessEstatum")}`,
+      },
+    });
 
-        const info = [
-            {label: 'Имя', value: name ,placeholder:''},
-            {label: 'Статус', value: status ,placeholder:''},
-            {label: 'Стаж', value: experience  ,placeholder:''},
-            {label: 'Телефон', value: phone ,placeholder:''},
-            {label: 'E-mail', value: email ,placeholder:'E-mail'},
-            {label: 'Telegram', value: telegram ,placeholder:'estatum'},
-            {label: 'WhatsApp', value: whatsApp ,placeholder:'89996667722'},
-            {label: 'Viber', value: viber,placeholder:''},
-        ]
-        this.initialData.info = info
-        this.initialData.id = res.data.id
-        this.initialData.statusVerification = res.data.isConfirmed ? "confirmed" : "notConfirmed"
+    this.initialData.file = [response.data];
 
-        this.initialData.name = name
-        this.initialData.status = status
-        this.initialData.experience = experience
-        this.initialData.phone = res.data.agentProperty.phone[0].value?res.data.agentProperty.phone[0].value:''
-        this.initialData.phoneArray = res.data.agentProperty.phone.length>0?res.data.agentProperty.phone.map((p:any)=>p.value):['']
-        this.initialData.email = email
-        this.initialData.telegram = telegram
-        this.initialData.whatsApp = whatsApp
-        this.initialData.viber = viber
+    await instance.patch(
+      `agent/${id}`,
+      {
+        file: [response.data],
+      },
+      {
+        headers: {
+          authorization: `Bearer ${localStorage.getItem("accessEstatum")}`,
+        },
+      }
+    );
+    this.initialData.file = [response.data];
+  }
 
-        this.initialData.loading = false
-
-    }
-    async update(id:number, updateValue: UpdateAgentCabinetType){
-        const res = await cabinetAPI.updateAgentsCabinet(id,updateValue)
-    }
-
-    get() {
-        console.log('getMobx',JSON.parse(JSON.stringify({...this.initialData})))
-    }
+  get() {
+    return JSON.parse(JSON.stringify({ ...this.initialData }));
+  }
 }
 
 const StoreContext = createContext<AgentCabinetStore>(new AgentCabinetStore());
 
-const StoreProvider: FC<{ store: AgentCabinetStore }> = ({children, store}) => (
-    <StoreContext.Provider value={store}>{children}</StoreContext.Provider>
-)
+const StoreProvider: FC<{ store: AgentCabinetStore }> = ({
+  children,
+  store,
+}) => <StoreContext.Provider value={store}>{children}</StoreContext.Provider>;
 
 const useStoreAgentCabinet = () => {
-    return useContext(StoreContext);
+  return useContext(StoreContext);
 };
 
-export {AgentCabinetStore, StoreProvider, useStoreAgentCabinet};
+export { AgentCabinetStore, StoreProvider, useStoreAgentCabinet };

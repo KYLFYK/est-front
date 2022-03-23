@@ -23,7 +23,6 @@ const NewPassword :FC<NewPasswordType> = ({onEdit,onBack,password,onPassword}) =
 
     const nameAccount : {email:string , id:number, role:string} =  jwt_decode(tokenConformation ?tokenConformation.toString() :''  )
 
-    console.log('tolen',nameAccount)
     const newPassword = async () =>{
         if(password.trim() !== ''){
             const res =  await AuthApi.changePassword(password,nameAccount.id,tokenConformation ?tokenConformation.toString() :'' )

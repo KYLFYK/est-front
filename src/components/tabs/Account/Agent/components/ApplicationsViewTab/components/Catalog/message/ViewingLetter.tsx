@@ -80,7 +80,6 @@ const ViewingLetter: FC<ViewingLetterType> = ({
             }
             setValue('')
             onAddMessage(message)
-            console.log(message)
         }
     }
     return (

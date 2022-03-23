@@ -38,7 +38,7 @@ const AgencyRoleTabs: React.FC<Props> = ({storybook }) => {
     }
     return (
         <VerticalTabs
-            // className={css.verticalTabsMargin}
+            className={css.verticalTabsMargin}
             link={true}
             storybook={storybook}
             tabs={[
@@ -47,7 +47,7 @@ const AgencyRoleTabs: React.FC<Props> = ({storybook }) => {
                 { title: "Мои объявления", Component: <MyAds /> },
                 { title: "Тарифы размещения", Component: <PlacementRates /> },
                 { title: "Профпоиск", Component: <ProfSearch /> },
-                { title: "Сообщения", Component: <Messages /> },
+                // { title: "Сообщения", Component: <Messages /> },
                 { title: "Уведомления", Component:  <AgentsNotifications
                 onRead={onRead}
                 onReadAll={onReadAll}

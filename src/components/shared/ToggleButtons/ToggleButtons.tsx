@@ -1,8 +1,10 @@
 import classNames from 'classnames'
 import { IOption } from '../../../utils/interfaces/general'
 import s from './ToggleButtons.module.scss'
+import Typography from '../Typography/Typography'
 
 interface Props {
+    title?: string,
     items: IOption[],
     activeValue?: string,
     onChange: (value: string) => void,
@@ -13,7 +15,7 @@ interface Props {
     multiple?: boolean,
 }
 
-export const ToggleButtons: React.FC<Props> = ({ items, activeValue, classNameButton, multiple, onChange }) => {
+export const ToggleButtons: React.FC<Props> = ({title, items, activeValue, classNameButton, multiple, onChange }) => {
 
     const checkIsActive = (value: string | number) => {
         return multiple ? activeValue?.split(',').includes(String(value)) : activeValue === value
@@ -21,7 +23,7 @@ export const ToggleButtons: React.FC<Props> = ({ items, activeValue, classNameBu
 
     return (
         <div className={s.wrapper}>
-
+            {title && <Typography className={s.title}>комнат:</Typography>}
             {items.map((button, idx) => <span className={s.elemWrap} key={idx}>
                 <button  className={classNames(
                     s.button, 

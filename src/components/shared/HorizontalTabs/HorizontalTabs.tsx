@@ -1,9 +1,10 @@
-import React, { FC, useEffect, useRef, useState } from "react";
+import React, { CSSProperties, FC, useEffect, useRef, useState } from "react";
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 import Box from "@mui/material/Box";
-import css from "./HorizontalTabs.module.scss";
 import Typography from "../Typography/Typography";
+
+import css from "./HorizontalTabs.module.scss";
 
 export interface ITabItem {
   title: string;
@@ -11,16 +12,25 @@ export interface ITabItem {
   onClick?: () => void;
 }
 interface Props {
+  setCurrent?: any;
+  current?: number;
   tabs: ITabItem[];
   refs?: any[];
   wrapperClassName?: string;
+  style?: CSSProperties;
 }
 
-export const HorizontalTabs: FC<Props> = ({ tabs, refs, wrapperClassName }) => {
-  const [selectedTabIdx, setSelectedTabIdx] = useState(0);
+export const HorizontalTabs: FC<Props> = ({
+  current,
+  setCurrent,
+  tabs,
+  refs,
+  wrapperClassName,
+  style,
+}) => {
+  const [selectedTabIdx, setSelectedTabIdx] = useState(current ? current : 0);
   const activeTabRef = useRef<HTMLDivElement | null>(null);
   const [activeTabMargin, setActiveTabMargin] = useState(30);
-
   useEffect(() => {
     if (activeTabRef && activeTabRef.current) {
       setActiveTabMargin((activeTabRef.current.clientWidth - 50) / 2);
@@ -35,6 +45,7 @@ export const HorizontalTabs: FC<Props> = ({ tabs, refs, wrapperClassName }) => {
       });
     }
     setSelectedTabIdx(newValue);
+    setCurrent && setCurrent(newValue);
   };
 
   return (
@@ -43,6 +54,7 @@ export const HorizontalTabs: FC<Props> = ({ tabs, refs, wrapperClassName }) => {
         className={`${css.menu}${
           wrapperClassName ? ` ${wrapperClassName}` : ""
         }`}
+        style={style}
       >
         <Box sx={{ width: "100%" }}>
           <Tabs
@@ -58,11 +70,11 @@ export const HorizontalTabs: FC<Props> = ({ tabs, refs, wrapperClassName }) => {
               },
             }}
           >
-            {tabs.map((tab, index) => (
+            {tabs.filter((tab) => tab).map((tab, index) => (
               <Tab
                 key={index}
                 value={index}
-                style={{ textTransform: "none",padding:'12px 16px' }}
+                style={{ textTransform: "none", padding: "12px 16px" }}
                 onClick={tab.onClick}
                 ref={index === selectedTabIdx ? activeTabRef : null}
                 label={

@@ -5,11 +5,13 @@ import { ICreateObjectHouse } from "../../types/CreateObjectStoresTypes/CreateHo
 class CreateHouseStore implements ICreateObjectHouse {
   about: ICreateObjectHouse["about"] = {
     name: "",
-    country: "",
-    city: "",
+    country: 0,
+    city: 0,
     index: 0,
     address: "",
+    region: 0,
     cost: 0,
+    type: "",
   };
   generalInfo: ICreateObjectHouse["generalInfo"] = {
     description: "",
@@ -22,22 +24,24 @@ class CreateHouseStore implements ICreateObjectHouse {
     bathroom: "",
     kitchen: "",
     garage: {
-      has: '',
+      has: "",
       capacity: "",
       square: "",
     },
     pool: {
-      has: '',
+      has: "",
       square: "",
     },
     floors: {
       count: 0,
       items: [],
     },
+    vrTour: "",
+    video: "",
   };
   infrastructure: ICreateObjectHouse["infrastructure"] = {
     description: "",
-    view: "",
+    view: [],
   };
   info: ICreateObjectHouse["info"] = {
     houseType: "",
@@ -61,7 +65,7 @@ class CreateHouseStore implements ICreateObjectHouse {
   };
   legalPurity: ICreateObjectHouse["legalPurity"] = {
     realEstateRegister: {
-      address: '',
+      address: "",
       cadastralNumber: "",
       cadastralCost: "",
       generalSquare: "",
@@ -69,23 +73,21 @@ class CreateHouseStore implements ICreateObjectHouse {
     },
     currentFounder: {
       founderType: FoundersTypes.SINGLE,
-      firstFounderName: '',
+      firstFounderName: "",
       secondFouderName: undefined,
       cadastralNumber: "",
       ownershipFrom: new Date(),
-      ownershipTo: new Date(), 
+      ownershipTo: new Date(),
     },
     previousFounder: {
       founderType: FoundersTypes.SINGLE,
-      firstFounderName: '',
+      firstFounderName: "",
       secondFouderName: undefined,
       cadastralNumber: "",
       ownershipFrom: new Date(),
-      ownershipTo: new Date(), 
-    }
+      ownershipTo: new Date(),
+    },
   };
-
-  
 }
 
 export default CreateHouseStore;

@@ -1,10 +1,13 @@
 @import "src/app/styles/typography";
 @import "src/app/styles/colours";
+@import "src/app/styles/colours";
+@import "src/app/styles/scrollbars";
 
 .wrapper {
   display: flex;
   flex-direction: column;
   gap: 10px;
+  padding: 0 20px;
 }
 
 .horizontalTabs {
@@ -15,6 +18,12 @@
   display: flex;
   flex-direction: column;
   gap: 20px;
+  overflow: auto;
+  scrollbar-width: 1px;
+  height: calc(100vh - 490px);
+  @include MapScrollbar;
+  padding-right: 10px;
+  margin-right: -10px;
 }
 
 .item {
@@ -25,7 +34,7 @@
   box-sizing: border-box;
   border-radius: 6px;
   overflow: hidden;
-  height: 126px;
+  min-height: 126px;
 
   .image {
     width: 230px;
@@ -67,7 +76,6 @@
 
         .key, .value {
           @include ROBOTOREGULAR16;
-
           color: #3D4550;
         }
 
@@ -99,7 +107,7 @@
 
         .key, .value {
           @include ROBOTOREGULAR16;
-
+          white-space: nowrap;
           color: #9495A7;
         }
 
@@ -197,3 +205,17 @@
     }
   }
 }
+
+.text{
+  //width: 330px;
+  width: calc(100vh - 510px);
+  white-space: nowrap;
+  overflow: hidden;
+  padding: 0 5px;
+  text-overflow: ellipsis;
+}
+.df{
+  display: flex;
+}
+
+

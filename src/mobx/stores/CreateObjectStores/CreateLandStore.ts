@@ -5,10 +5,12 @@ import { ICreateObjectLand } from "../../types/CreateObjectStoresTypes/CreateLan
 class CreateLandStore implements ICreateObjectLand {
   about: ICreateObjectLand["about"] = {
     name: "",
-    country: "",
-    city: "",
+    country: 0,
+    city: 0,
     address: "",
+    region: 0,
     cost: 0,
+    type: "",
   };
 
   generalInfo: ICreateObjectLand["generalInfo"] = {
@@ -17,6 +19,8 @@ class CreateLandStore implements ICreateObjectLand {
     landGeneralSquare: "",
     cottageVillageName: "",
     landStatus: "",
+    vrTour: "",
+    video: "",
   };
 
   infrastructure: ICreateObjectLand["infrastructure"] = {
@@ -32,29 +36,28 @@ class CreateLandStore implements ICreateObjectLand {
 
   legalPurity: ICreateObjectLand["legalPurity"] = {
     realEstateRegister: {
-      address: '',
+      address: "",
       cadastralNumber: "",
       cadastralCost: "",
       generalSquare: "",
     },
     currentFounder: {
       founderType: FoundersTypes.SINGLE,
-      firstFounderName: '',
+      firstFounderName: "",
       secondFouderName: undefined,
       cadastralNumber: "",
       ownershipFrom: new Date(),
-      ownershipTo: new Date(), 
+      ownershipTo: new Date(),
     },
     previousFounder: {
       founderType: FoundersTypes.SINGLE,
-      firstFounderName: '',
+      firstFounderName: "",
       secondFouderName: undefined,
       cadastralNumber: "",
       ownershipFrom: new Date(),
-      ownershipTo: new Date(), 
-    }
+      ownershipTo: new Date(),
+    },
   };
-
 }
 
 export default CreateLandStore;

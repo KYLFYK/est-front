@@ -26,25 +26,37 @@ import {
   ICreateTownhouseLegalPurity,
 } from "../../../mobx/types/CreateObjectStoresTypes/CreateTownhouseStoreType";
 import { ObjectTypes } from "../../../utils/interfaces/objects";
+import {
+  IConstructionProgressChangeable,
+  ICreateComplexAboutTab,
+  ICreateComplexGeneralInfo,
+  ICreateComplexInfoTab,
+  ICreateComplexInfrastructure,
+  ICreateComplexLegalPurity,
+} from "../../../mobx/types/CreateObjectStoresTypes/CreateComplexStoreTypes";
 
 export type TGeneralInfoState =
   | ICreateApartsGeneralInfo
   | ICreateHouseGeneralInfo
   | ICreateTownhouseGeneralInfo
-  | ICreateLandGeneralInfo;
+  | ICreateLandGeneralInfo
+  | ICreateComplexGeneralInfo;
 export type TInfoState =
   | ICreateHouseInfoTab
   | ICreateTownhouseInfoTab
-  | ICreateApartsInfoTab;
+  | ICreateApartsInfoTab
+  | ICreateComplexInfoTab;
 export type TInfrastructureState =
   | ICreateHouseInfrastructure
   | ICreateTownhouseInfrastructure
   | ICreateLandInfrastructure
-  | ICreateApartsInfrastructure;
+  | ICreateApartsInfrastructure
+  | ICreateComplexInfrastructure;
 export type TAboutTabState =
   | ICreateApartmentAboutTab
   | ICreateHouseAboutTab
-  | ICreateLandAboutTab;
+  | ICreateLandAboutTab
+  | ICreateComplexAboutTab;
 export type TLegalPurityTabState =
   | ICreateApartsLegalPurity
   | ICreateHouseLegalPurity
@@ -64,10 +76,16 @@ export const getInitStateAboutTab = (
       return createObjectStore.townhouse.about;
     case ObjectTypes.LAND:
       return createObjectStore.land.about;
+    case ObjectTypes.RESCOMPLEX:
+      return createObjectStore.complex.about;
 
     default:
       return createObjectStore.land.about;
   }
+};
+
+export const getObjType = (createObjectStore: ICreateObject) => {
+  return createObjectStore.objType;
 };
 
 export const getInitialStateGeneralInfoTab = (
@@ -83,6 +101,8 @@ export const getInitialStateGeneralInfoTab = (
       return createObjectStore.townhouse.generalInfo;
     case ObjectTypes.LAND:
       return createObjectStore.land.generalInfo;
+    case ObjectTypes.RESCOMPLEX:
+      return createObjectStore.complex.generalInfo;
     default:
       return createObjectStore.apartment.generalInfo;
   }
@@ -101,6 +121,8 @@ export const getInitialStateInfrastructureTab = (
       return createObjectStore.townhouse.infrastructure;
     case ObjectTypes.LAND:
       return createObjectStore.land.infrastructure;
+    case ObjectTypes.RESCOMPLEX:
+      return createObjectStore.complex.infrastructure;
     default:
       return createObjectStore.apartment.infrastructure;
   }
@@ -117,6 +139,8 @@ export const getInitialStateInfoTab = (
       return createObjectStore.house.info;
     case ObjectTypes.TOWNHOUSE:
       return createObjectStore.townhouse.info;
+    case ObjectTypes.RESCOMPLEX:
+      return createObjectStore.complex.info;
     default:
       return createObjectStore.apartment.info;
   }
@@ -135,6 +159,8 @@ export const getInitialStateLegalPurityTab = (
       return createObjectStore.townhouse.legalPurity;
     case ObjectTypes.LAND:
       return createObjectStore.land.legalPurity;
+    case ObjectTypes.RESCOMPLEX:
+      return createObjectStore.land.legalPurity;
     default:
       return createObjectStore.apartment.legalPurity;
   }
@@ -149,7 +175,8 @@ export const isValidInputsAboutTab = (
   city: boolean,
   index: boolean,
   address: boolean,
-  cost: boolean
+  cost: boolean,
+  region: boolean
 ): boolean => {
   switch (objectType) {
     case ObjectTypes.APARTMENTS:
@@ -169,6 +196,8 @@ export const isValidInputsAboutTab = (
       return !!(name && country && city && index && address && cost);
     case ObjectTypes.LAND:
       return !!(name && country && city && address && cost);
+    case ObjectTypes.RESCOMPLEX:
+      return name && country && city && address && index && region;
     default:
       return false;
   }
@@ -192,7 +221,15 @@ export const isValidInputsGeneralTab = (
   poolSquare: boolean,
   cottageVillageName: boolean,
   landStatus: boolean,
-  interiorDescription: boolean
+  interiorDescription: boolean,
+  isAmountObjects: boolean,
+  isAmountBuildings: boolean,
+  isAmountFloors: boolean,
+  isHeightCeilings: boolean,
+  isPriceObjectMin: boolean,
+  isPriceObjectMax: boolean,
+  isAreaObjectMin: boolean,
+  isAreaObjectMax: boolean
 ): boolean => {
   switch (objectType) {
     case ObjectTypes.APARTMENTS:
@@ -237,6 +274,17 @@ export const isValidInputsGeneralTab = (
       );
     case ObjectTypes.LAND:
       return !!(landGeneralSquare && cottageVillageName && landStatus);
+    case ObjectTypes.RESCOMPLEX:
+      return (
+        isAmountObjects &&
+        isAmountBuildings &&
+        isAmountFloors &&
+        isHeightCeilings &&
+        isPriceObjectMin &&
+        isPriceObjectMax &&
+        isAreaObjectMin &&
+        isAreaObjectMax
+      );
     default:
       return false;
   }
@@ -245,7 +293,8 @@ export const isValidInputsGeneralTab = (
 export const isValidInputsInfrastructureTab = (
   objectType: ObjectTypes,
   description: boolean,
-  view: boolean
+  view: boolean,
+  infrastructure: boolean
 ): boolean => {
   switch (objectType) {
     case ObjectTypes.APARTMENTS:
@@ -254,6 +303,8 @@ export const isValidInputsInfrastructureTab = (
       return view && description;
     case ObjectTypes.LAND:
       return description;
+    case ObjectTypes.RESCOMPLEX:
+      return infrastructure;
     default:
       return false;
   }
@@ -274,7 +325,8 @@ export const isValidInputsHouseDetailsTab = (
   internet: boolean,
   engineeringComment: boolean,
   parking: boolean,
-  parkingPrice: boolean
+  parkingPrice: boolean,
+  process: IConstructionProgressChangeable[]
 ): boolean => {
   switch (objectType) {
     case ObjectTypes.APARTMENTS:
@@ -318,6 +370,16 @@ export const isValidInputsHouseDetailsTab = (
         electricity &&
         internet
       );
+    case ObjectTypes.RESCOMPLEX:
+      let result = true;
+
+      process.forEach((item) => {
+        if (!item.date || !item.description) {
+          result = false;
+        }
+      });
+
+      return result;
 
     default:
       return false;
@@ -368,7 +430,8 @@ export const getActualObjectTypeData = (
       return createObjectStore.house;
     case ObjectTypes.LAND:
       return createObjectStore.land;
-
+    case ObjectTypes.RESCOMPLEX:
+      return createObjectStore.complex;
     default:
       break;
   }

@@ -13,7 +13,7 @@ import {useStoreOwnerMyObjects} from "../../../../../../../mobx/role/owner/myObj
 const MyObjectActive = () => {
     const store = useStoreOwnerMyObjects()
     return (
-        <div>
+        <div style={{padding:"0px 20px"}}>
             <SearchOffice type={'active'}/>
             <FilterSearch/>
             {
@@ -25,8 +25,8 @@ const MyObjectActive = () => {
                             >
                                 <LineV6
                                     id={object.id}
-                                    onDelete={(id) => console.log(id)}
-                                    onEdit={(id) => console.log(id)}
+                                    onDelete={(id) => ''}
+                                    onEdit={(id) => ''}
                                     nameObject={object.nameObject}
                                     totalArea={object.totalArea}
                                     dateUpdate={object.dateUpdate}

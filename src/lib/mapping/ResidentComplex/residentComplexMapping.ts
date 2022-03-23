@@ -24,9 +24,10 @@ export const MappingDeveloperInfo = (info: any) => {
     const news: any = []
     info.developerProperty && info.developerProperty.press?.forEach((p: any) => {news.push({link: p.link, date: p.date, title: p.title, description: p.text, icon: p.logo, id: p.id})})
     const statistics: any = []
-    info.developerProperty && info.developerProperty.statistics?.forEach((s: any) => {statistics.push({value: s.title, label: s.items.map((i: any) => {
+    info.developerProperty && info.developerProperty.statistics?.forEach((s: any) => {statistics.push({value: s.title, label: s.items && s.items.map((i: any) => {
       return {title: i.value, text: i.item}
     })})})
+
     const object_developer_info = {
         name: info.developerProperty ? info.developerProperty.name : "",
         developerType: info.developerProperty ? info.developerProperty.type : "",
@@ -35,7 +36,7 @@ export const MappingDeveloperInfo = (info: any) => {
         leasedAmmount: `${info.developerProperty ? info.developerProperty.completedBuildingAmount : ""} дома в ${info.developerProperty ? info.developerProperty.completedBuildingAmount : ""} ЖК`,
         inProgressAmmount: `${info.developerProperty ? info.developerProperty.inProgressBuildingAmount : ""} домов в ${info.developerProperty ? info.developerProperty.inProgressComplexAmount : ""} ЖК`,
         tabsData: {
-          about: [info.developerProperty ? info.developerProperty.description : ""],
+          about: info.developerProperty && info.developerProperty.description ? [info.developerProperty.description] : [],
           contacts: [
             { value: "tel", label: { title: "Телефон", text: info ? info.phone : "" }},
             { value: "email", label: { title: "E-mail", text: info ? info.email : "" }},
@@ -79,7 +80,7 @@ export const MappingDeveloperInfo = (info: any) => {
                 { value: "authorityBusiness", label: { title: "Регистрирующий орган, в котором находится регистрационное дело", text: info.developerProperty ? info.developerProperty.registeringAuthorityLocated : "" }}
               ]
           },
-          activities: {primary: info.developerProperty ? [info.developerProperty.mainOccupation] : [], secondary: info.developerProperty ? [...info.developerProperty.extraOccupations.map((eo: any) => eo.value )] : []},
+          activities: {primary: info.developerProperty ? [info.developerProperty.mainOccupation] : [], secondary: info.developerProperty && info.developerProperty.extraOccupations ? [...info.developerProperty.extraOccupations.map((eo: any) => eo.value )] : []},
           news: news,
           statistics: statistics,
           risks: [
@@ -94,11 +95,12 @@ export const MappingDeveloperInfo = (info: any) => {
 
 export const MappingShedule = (objs: any) => {
     let returnedObjs: Array<any> = [];
-    objs && objs.forEach((o: any) => {
+    objs && objs.forEach((o: any, index: any) => {
         returnedObjs.push({
             label: datetoMonthFormat(o.date),
-            value: o.id - 1,
+            value: index,
             title: o.description,
+            images: o.file && o.file.map((f: any) => f.url )
         })
     })
     return returnedObjs;

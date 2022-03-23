@@ -1,8 +1,8 @@
 import React, { FC } from 'react';
 import Image from 'next/image'
-import css from './PersonalAccount.module.scss'
-import BaseButton from "../../../../../shared/BaseButton/BaseButtons";
-import {myLoader} from "../../../../../../utils/image/image";
+import css from './PersonalAccountOwner.module.scss'
+import BaseButton from "../../../../../../shared/BaseButton/BaseButtons";
+import {myLoader} from "../../../../../../../utils/image/image";
 
 type UploadImageType={
     image:string

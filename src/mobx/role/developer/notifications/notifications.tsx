@@ -40,11 +40,11 @@ class DeveloperNotificationsStore {
     }
 
     fetch(id: string) {
-        console.log("DeveloperMyObjectStore", id)
+
     }
 
     get() {
-        console.log(JSON.parse(JSON.stringify({...this.initialData})))
+        return JSON.parse(JSON.stringify({...this.initialData}))
     }
 }
 

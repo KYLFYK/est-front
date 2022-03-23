@@ -23,9 +23,12 @@ const BlockWallet :FC<BlockWalletType> = ({title,info,typeIcon}) => {
     }
 
     return (
-        <div style={{display:'flex',flexDirection:'column',justifyContent:'center',alignItems:'center',height:'100%'}}>
+        <div style={{display:'flex',flexDirection:'column',justifyContent:'center',alignItems:'center',height:'100%',whiteSpace: 'nowrap',textOverflow: 'ellipsis',width:"150px"}}>
             {searchIcon(typeIcon)}
-            <Typography className={css.margin_5px}>{title}</Typography>
+            <div title={title}>
+                <Typography className={css.margin_5_substr}>{title}</Typography>
+            </div>
+
             <Typography color={"nude"}>{info}</Typography>
         </div>
     );

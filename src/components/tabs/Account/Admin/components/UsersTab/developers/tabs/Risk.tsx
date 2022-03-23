@@ -21,7 +21,7 @@ export const Risk: FC = () => {
             name={"companyName"}
             defaultValue={" "}
             onChange={() => {
-              console.log("sd");
+
             }}
           />
           <BaseInput
@@ -33,7 +33,7 @@ export const Risk: FC = () => {
             name={"companyName"}
             defaultValue={" "}
             onChange={() => {
-              console.log("sd");
+  
             }}
           />
           <BaseInput
@@ -45,7 +45,7 @@ export const Risk: FC = () => {
             name={"companyName"}
             defaultValue={" "}
             onChange={() => {
-              console.log("sd");
+     
             }}
           />
         </section>

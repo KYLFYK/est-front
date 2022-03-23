@@ -12,6 +12,7 @@
   box-sizing: border-box;
   border-radius: 6px;
   padding: 8px 0;
+  height: fit-content;
 }
 .menuItem{
   padding: 8px 10px;
@@ -19,11 +20,13 @@
   text-decoration: none;
 }
 .information{
-  margin: 0 60px 0 20px ;
+  margin: 0 0 0 20px ;
   background: #FFFFFF;
   border: 1px solid #F2F2F2;
   box-sizing: border-box;
   border-radius: 6px;
-  padding: 23px 30px;
+  //padding: 23px 30px;
+  padding: 5px 0;
   //width: calc(100vw - 283px);
+  height: calc(100vh - 260px) !important;
 }

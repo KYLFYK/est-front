@@ -40,7 +40,6 @@ export const Registration: React.FC<RegistrationPropsType> = ({enterLogin, onEdi
     const [valuePhone, setValuePhone] = useState<string>('')
 
     const infoRegistration = async () => {
-        console.log(valueLogin, valueEmail, valuePassword, valueName, valuePhone, confirmation, selectChange)
         const valid= [valueLogin, valueEmail, valuePassword, valueName, valuePhone, selectChange]
         const error = valid.every(t=>t.trim() !== '')
         if(error && confirmation){

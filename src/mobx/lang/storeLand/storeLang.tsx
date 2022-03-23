@@ -963,7 +963,7 @@ class PlatStore  {
         if(id==='5')this.initialData = lang5
     }
     get() {
-        console.log(JSON.parse(JSON.stringify({ ...this.initialData})))
+        return JSON.parse(JSON.stringify({ ...this.initialData}))
     }
 }
 

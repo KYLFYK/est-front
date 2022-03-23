@@ -16,7 +16,7 @@ export const useStyles = makeStyles(() => ({
             width: 200,
             border: '0px solid #CAD1DA',
             color: '#C5A28E',
-            fontFamily: "RobotoMedium"
+            fontFamily: "RobotoMedium",
         }
     }
 ))
@@ -101,7 +101,6 @@ const PersonalCabinetStatistics: React.FC<Props> = observer(() => {
                     className={classes.dropDown}
                 />
             </div>
-
             <div className={css.columnGrid}>
                 <ClosedApplicationsMonth table={tableClosingByMonth} title={"Закрытые заявки по месяцам"}/>
                 <ActionPeriod

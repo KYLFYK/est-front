@@ -1,10 +1,12 @@
-import { FC } from "react";
+import { observer } from "mobx-react-lite";
+import {useMortGageStore} from '../../../../../mobx/role/bank/mortgage/MortGage'
 import {
   HorizontalTabs,
   ITabItem,
 } from "../../../../shared/HorizontalTabs/HorizontalTabs";
 import { Catalog } from "./Catalog";
 import { Statistics } from "./Statistics";
+import {OrderInfoPage} from './OrderInfoPage';
 
 import commonStyles from "../../Admin/AdminRoleStyles.module.scss";
 
@@ -13,17 +15,17 @@ const BankMortageTabs: ITabItem[] = [
     title: "Каталог заявок",
     Component: <Catalog />,
   },
-  {
+  /*{
     title: "Статистика",
     Component: <Statistics />,
-  },
+  },*/
 ];
 
-export const Mortage: FC = () => {
+export const Mortage = observer(() => {
+  const store = useMortGageStore()
   return (
-    <HorizontalTabs
-      wrapperClassName={commonStyles.horizontalTabs}
-      tabs={BankMortageTabs}
-    />
+    !store.initialData.detail.detail 
+      ? <HorizontalTabs wrapperClassName={commonStyles.horizontalTabs} tabs={BankMortageTabs}/> 
+      : <OrderInfoPage req={store.get().getAllData.filter((d: any) => d.id === store.get().detail.id)[0]}/>
   );
-};
+});

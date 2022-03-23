@@ -25,7 +25,7 @@ export const LegalInfo: FC = () => {
             name={"fullCompanyName"}
             defaultValue={" "}
             onChange={() => {
-              console.log("sd");
+
             }}
           />
           <BaseInput
@@ -37,7 +37,7 @@ export const LegalInfo: FC = () => {
             name={"address"}
             defaultValue={" "}
             onChange={() => {
-              console.log("sd");
+
             }}
           />
           <BaseInput
@@ -49,7 +49,7 @@ export const LegalInfo: FC = () => {
             name={"capital"}
             defaultValue={" "}
             onChange={() => {
-              console.log("sd");
+    
             }}
           />
           <BaseInput
@@ -61,7 +61,7 @@ export const LegalInfo: FC = () => {
             name={"okfs"}
             defaultValue={" "}
             onChange={() => {
-              console.log("sd");
+       
             }}
           />
           <BaseInput
@@ -73,7 +73,7 @@ export const LegalInfo: FC = () => {
             name={"okopf"}
             defaultValue={" "}
             onChange={() => {
-              console.log("sd");
+ 
             }}
           />
           <BaseInput
@@ -85,7 +85,7 @@ export const LegalInfo: FC = () => {
             name={"okogu"}
             defaultValue={" "}
             onChange={() => {
-              console.log("sd");
+
             }}
           />
           <div className={styles.subSection}>
@@ -98,7 +98,7 @@ export const LegalInfo: FC = () => {
               name={"inn"}
               defaultValue={" "}
               onChange={() => {
-                console.log("sd");
+
               }}
             />
             <BaseInput
@@ -110,7 +110,7 @@ export const LegalInfo: FC = () => {
               name={"ogrn"}
               defaultValue={" "}
               onChange={() => {
-                console.log("sd");
+     
               }}
             />
             <BaseInput
@@ -122,7 +122,7 @@ export const LegalInfo: FC = () => {
               name={"kpp"}
               defaultValue={" "}
               onChange={() => {
-                console.log("sd");
+    
               }}
             />
             <BaseInput
@@ -134,7 +134,7 @@ export const LegalInfo: FC = () => {
               name={"okato"}
               defaultValue={" "}
               onChange={() => {
-                console.log("sd");
+   
               }}
             />
             <BaseInput
@@ -146,7 +146,7 @@ export const LegalInfo: FC = () => {
               name={"okpo"}
               defaultValue={" "}
               onChange={() => {
-                console.log("sd");
+
               }}
             />
             <BaseInput
@@ -158,7 +158,7 @@ export const LegalInfo: FC = () => {
               name={"oktmo"}
               defaultValue={" "}
               onChange={() => {
-                console.log("sd");
+
               }}
             />
           </div>
@@ -174,7 +174,7 @@ export const LegalInfo: FC = () => {
             name={"companyStatus"}
             defaultValue={" "}
             onChange={() => {
-              console.log("sd");
+
             }}
           />
           <BaseInput
@@ -186,7 +186,7 @@ export const LegalInfo: FC = () => {
             name={"companyStatus"}
             defaultValue={" "}
             onChange={() => {
-              console.log("sd");
+
             }}
           />
           <BaseInput
@@ -198,7 +198,7 @@ export const LegalInfo: FC = () => {
             name={"companyStatus"}
             defaultValue={" "}
             onChange={() => {
-              console.log("sd");
+
             }}
           />
           <div className={styles.subSection}>
@@ -211,7 +211,7 @@ export const LegalInfo: FC = () => {
               name={"phoneNumber"}
               defaultValue={" "}
               onChange={() => {
-                console.log("sd");
+
               }}
             />
             <BaseInput
@@ -223,7 +223,7 @@ export const LegalInfo: FC = () => {
               name={"phoneNumber"}
               defaultValue={" "}
               onChange={() => {
-                console.log("sd");
+
               }}
             />
             <BaseInput
@@ -235,7 +235,7 @@ export const LegalInfo: FC = () => {
               name={"phoneNumber"}
               defaultValue={" "}
               onChange={() => {
-                console.log("sd");
+
               }}
             />
             <BaseInput
@@ -247,7 +247,7 @@ export const LegalInfo: FC = () => {
               name={"phoneNumber"}
               defaultValue={" "}
               onChange={() => {
-                console.log("sd");
+    
               }}
             />
             <BaseInput
@@ -259,7 +259,7 @@ export const LegalInfo: FC = () => {
               name={"phoneNumber"}
               defaultValue={" "}
               onChange={() => {
-                console.log("sd");
+
               }}
             />
             <BaseInput
@@ -271,7 +271,7 @@ export const LegalInfo: FC = () => {
               name={"phoneNumber"}
               defaultValue={" "}
               onChange={() => {
-                console.log("sd");
+
               }}
             />
           </div>
@@ -289,7 +289,7 @@ export const LegalInfo: FC = () => {
             name={"phoneNumber"}
             defaultValue={" "}
             onChange={() => {
-              console.log("sd");
+
             }}
           />
           <BaseInput
@@ -301,7 +301,7 @@ export const LegalInfo: FC = () => {
             name={"phoneNumber"}
             defaultValue={" "}
             onChange={() => {
-              console.log("sd");
+
             }}
           />
           <BaseInput
@@ -313,7 +313,7 @@ export const LegalInfo: FC = () => {
             name={"phoneNumber"}
             defaultValue={" "}
             onChange={() => {
-              console.log("sd");
+
             }}
           />
           <BaseInput
@@ -325,7 +325,7 @@ export const LegalInfo: FC = () => {
             name={"phoneNumber"}
             defaultValue={" "}
             onChange={() => {
-              console.log("sd");
+
             }}
           />
         </section>
@@ -340,7 +340,7 @@ export const LegalInfo: FC = () => {
             name={"phoneNumber"}
             defaultValue={" "}
             onChange={() => {
-              console.log("sd");
+  
             }}
           />
           <BaseInput
@@ -352,7 +352,7 @@ export const LegalInfo: FC = () => {
             name={"phoneNumber"}
             defaultValue={" "}
             onChange={() => {
-              console.log("sd");
+
             }}
           />
           {activityKinds.map((active, index) => (
@@ -376,7 +376,7 @@ export const LegalInfo: FC = () => {
                 }
               }}
               onChange={() => {
-                console.log("sd");
+      
               }}
             />
           ))}

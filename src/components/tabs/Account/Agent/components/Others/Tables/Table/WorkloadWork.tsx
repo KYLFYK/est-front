@@ -14,7 +14,7 @@ const WorkloadWork :FC<WorkloadWorkType> = ({title,table}) => {
         <div>
             <Typography weight={"bold"}>{title}</Typography>
             <Card className={css.cardStyle}>
-                <Chart heightValue={0} language={'ru'} table={table} divider={10} height={244} width={497} />
+                <Chart heightValue={0} language={'ru'} table={table} divider={10} height={204} width={467} />
             </Card>
         </div>
     );

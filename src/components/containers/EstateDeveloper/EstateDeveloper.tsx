@@ -43,6 +43,7 @@ export const EstateDeveloper: FC<EstateDevelopersPropsType> = ({
       )}
       <div onClick={() => !hideModal && setEdit(true)} className={css.hover}>
         <Image
+          unoptimized
           width={200}
           height={80}
           className={css.img}

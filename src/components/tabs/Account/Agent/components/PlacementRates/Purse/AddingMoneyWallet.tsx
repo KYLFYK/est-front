@@ -14,7 +14,7 @@ type AddingMoneyWalletType = {
 const arrMOc = [
     {title:'Банковская карта',info:'Без комиссии',type:'Bank'},
     {title:'Кошелек',info:'Без комиссии',type:'Wallet'},
-    {title:'Наличность',info:'Без комиссии',type:'Сash'},
+    {title:'Пополнить баланс ',info:'Без комиссии',type:'Сash'},
     {title:'Сервис 1',info:'Без комиссии',type:''},
     {title:'Сервис 2',info:'Без комиссии',type:''},
     {title:'Сервис 3',info:'Без комиссии',type:''},

@@ -1,49 +1,44 @@
-import React from 'react';
+import React, { useEffect, useState } from "react";
+import { observer } from "mobx-react-lite";
 import MyAdsContainer from "../../../Others/MyAdsContainer/MyAdsContainer";
+import { useAgentAdsStore } from "../../../../../../../../mobx/role/agent/ads/AgentAds";
+import jwt_decode from "jwt-decode";
+import { Loader } from "src/components/shared/Loader/Loader";
+import { ObjectTypes } from "../../../../../../../../utils/interfaces/objects";
 
-const mocActive = [{
-    id: '1',
-    img: 'https://i.pinimg.com/736x/6a/30/8d/6a308d4d949bcf10e4382c9b4a455721.jpg',
-    type: 'Аренда',
-    name: '3-этажный коттедж',
-    price: '100 000р/mec',
-    mainSpecifications: ['600м', '3 этажа', 'Бассейн', 'Гараж 50м2', 'Терраса 20 m2'],
-    agent: 'Виталий Панкратов',
-    dateStart: '31/08/2021',
-    dateEnd: '05/09/21',
-    status: 'Забронирован',
-    address: 'Крым, Ялта'
-}, {
-    id: '2',
-    img: 'https://i.pinimg.com/736x/6a/30/8d/6a308d4d949bcf10e4382c9b4a455721.jpg',
-    type: 'Продажа',
-    name: '5-этажный коттедж',
-    price: '30 000 000р',
-    mainSpecifications: ['900м', '5 этажей', 'Бассейн', 'Гараж 150м2', 'Терраса 120 m2'],
-    agent: 'Виталий Панкратов',
-    dateStart: '31/08/2021',
-    dateEnd: '05/09/21',
-    status: 'Свободна',
-    address: 'Крым, Ялта'
-}, {
-    id: '3',
-    img: 'https://i.pinimg.com/736x/6a/30/8d/6a308d4d949bcf10e4382c9b4a455721.jpg',
-    type: 'Аренда',
-    name: '5-этажный коттедж',
-    price: '30 000 000р',
-    mainSpecifications: ['900м', '5 этажей', 'Бассейн', 'Гараж 150м2', 'Терраса 120 m2'],
-    agent: 'Виталий Панкратов',
-    dateStart: '31/08/2021',
-    dateEnd: '05/09/21',
-    status: 'Забронирован',
-    address: 'Крым, Ялта'
-},
-]
+const MyAdsActive = observer(() => {
+  const adsStore = useAgentAdsStore();
 
-const MyAdsActive = () => {
-    return (
-        <MyAdsContainer objects={mocActive} menu={'active'}/>
-    );
-};
+  const [force, forceUpdate] = useState(false);
+
+  useEffect(() => {
+    if (adsStore.get().loading) {
+      adsStore.fetch();
+    }
+  }, []);
+
+  const idOwner: any = jwt_decode(
+    localStorage.getItem("accessEstatum")
+      ? (localStorage.getItem("accessEstatum") as string)
+      : ("123" as string)
+  );
+
+  const handleDeleteObject = async (id: number, type: ObjectTypes) => {
+    await adsStore.markAsDeleted(id, type);
+    forceUpdate(!force);
+  };
+
+  return adsStore.get().loading ? (
+    <Loader />
+  ) : (
+    <MyAdsContainer
+      objects={adsStore.initialData.data.filter(
+        (el) => el.agent?.id === idOwner.id && !el.markAsDelete
+      )}
+      menu={"active"}
+      deleteObject={handleDeleteObject}
+    />
+  );
+});
 
 export default MyAdsActive;

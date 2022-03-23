@@ -4,8 +4,17 @@ module.exports = {
   reactStrictMode: true,
 
   images: {
-    domains: ["cdn.pixabay.com", "images.unsplash.com", "images.ctfassets.net"],
-    loader: "custom",
+    domains: [
+      "cdn.pixabay.com",
+      "images.unsplash.com",
+      "images.ctfassets.net",
+      "http://s3.dtln.ru",
+    ],
+  },
+
+  env: {
+    // Reference a variable that was defined in the .env.* file and make it available at Build Time
+    HOST: process.env.HOST,
   },
 
   eslint: {

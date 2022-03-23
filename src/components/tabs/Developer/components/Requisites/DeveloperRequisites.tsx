@@ -40,7 +40,6 @@ const DeveloperRequisites: React.FC<Props> = ({ items }) => {
         rest: []
     })
 
-    console.log(articles)
     return (
         <div className={s.wrapper}>
             <div className={s.article}>

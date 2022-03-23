@@ -1,5 +1,7 @@
 FROM node:16.13.2-alpine3.15 as builder
 
+ARG ENV_STAGES
+
 # Set working directory
 WORKDIR /app
 
@@ -14,7 +16,7 @@ RUN npm install --save-dev typescript
 COPY ./ ./
 
 # Build app
-RUN npm run build
+RUN npm run build:${ENV_STAGES}
 
 FROM node:16.13.2-alpine3.15
 
@@ -34,9 +36,10 @@ COPY --from=builder --chown=node /app/next.config.js next.config.js
 EXPOSE 3000
 
 ENV PORT 3000
+ENV ENV_STAGES=${ENV_STAGES}
 
 # Run npm start script when container starts
-CMD [ "npm", "start" ] 
+CMD [ "npm", "start:${ENV_STAGES}" ] 
 
 HEALTHCHECK --start-period=30s \
             --interval=10s \

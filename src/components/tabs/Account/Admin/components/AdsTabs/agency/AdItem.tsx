@@ -2,10 +2,14 @@ import { FC } from "react";
 import Image from "next/image";
 import { EditIcon } from "../../../../../../../icons/Edit/EditIcon";
 import { Trash } from "../../../../../../../icons/Trash";
+import { myLoader } from "../../../../../../../utils/image/image";
+import Link from "next/link";
+import { ObjectTypes } from "../../../../../../../utils/interfaces/objects";
+import { createEditLink } from "../../../../../../../utils/routes/createEditLink";
 
 import styles from "./AgencyTab.module.scss";
-import image from "../../../../../../../Pics/VillaTour.png";
-import { myLoader } from "../../../../../../../utils/image/image";
+import imageStatic from "../../../../../../../Pics/VillaTour.png";
+import { AllAdsStore } from "../../../../../../../mobx/role/admin/ads";
 
 export interface IObject {
   name: string;
@@ -30,6 +34,11 @@ export interface IObject {
 
 interface Props extends IObject {
   any?: string;
+  image?: string;
+  objType?: ObjectTypes;
+  objId?: number;
+  complexId?: number;
+  markedAsDeleted: boolean;
 }
 
 export const AdItem: FC<Props> = ({
@@ -42,15 +51,27 @@ export const AdItem: FC<Props> = ({
   name,
   address,
   footerButton,
+  image,
+  objId,
+  objType,
+  complexId,
+  markedAsDeleted,
 }) => {
+  const handleSetDeleted = async () => {
+    if (objId !== undefined && objType !== undefined) {
+      await AllAdsStore.setMarkAsDeleted(objId, objType, !markedAsDeleted);
+    }
+  };
+
   return (
     <div className={styles.item}>
       <div className={styles.image}>
         <Image
           loader={(e) => myLoader(e.src, e.width, e.quality)}
-          src={image}
+          src={image ? image : imageStatic}
           alt={""}
           layout={"fill"}
+          unoptimized
         />
       </div>
       <div className={styles.content}>
@@ -61,9 +82,11 @@ export const AdItem: FC<Props> = ({
             }`}
           >
             <span className={styles.name}>{name}</span>
-            <div>
+            <div className={styles.df}>
               <span className={styles.key}>Адрес: </span>
-              <span className={styles.value}>{address}</span>
+              <div className={styles.text}>
+                <span className={styles.value} >{address}</span>
+              </div>
             </div>
           </div>
           <div
@@ -87,11 +110,21 @@ export const AdItem: FC<Props> = ({
             )}
             <div className={styles.buttons}>
               {textButton ? (
-                <span className={styles.textButton}>{textButton}</span>
+                <span onClick={handleSetDeleted} className={styles.textButton}>
+                  {textButton}
+                </span>
               ) : (
                 <>
-                  <EditIcon fill={"#3D4550"} className={styles.icon} />
-                  <Trash className={styles.icon} />
+                  {objId !== undefined && objType !== undefined && (
+                    <Link
+                      href={createEditLink("edit", objId, objType, complexId)}
+                    >
+                      <a>
+                        <EditIcon fill={"#3D4550"} className={styles.icon} />
+                      </a>
+                    </Link>
+                  )}
+                  <Trash onClick={handleSetDeleted} className={styles.icon} />
                 </>
               )}
             </div>

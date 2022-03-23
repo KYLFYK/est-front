@@ -81,7 +81,7 @@ export const AgentForm: FC<Props> = ({ profile }) => {
             name={"name"}
             defaultValue={profile.agencyName}
             onChange={() => {
-              console.log("sd");
+
             }}
           />
           <BaseInput
@@ -93,7 +93,7 @@ export const AgentForm: FC<Props> = ({ profile }) => {
             name={"lastName"}
             defaultValue={profile.status}
             onChange={() => {
-              console.log("sd");
+
             }}
           />
           <BaseInput
@@ -105,7 +105,7 @@ export const AgentForm: FC<Props> = ({ profile }) => {
             name={"birthdayDate"}
             defaultValue={profile.experience}
             onChange={() => {
-              console.log("sd");
+   
             }}
           />
           <BaseInput
@@ -117,7 +117,7 @@ export const AgentForm: FC<Props> = ({ profile }) => {
             name={"birthdayDate"}
             defaultValue={profile.agencyEmail}
             onChange={() => {
-              console.log("sd");
+   
             }}
           />
           <BaseInput
@@ -129,7 +129,7 @@ export const AgentForm: FC<Props> = ({ profile }) => {
             name={"birthdayDate"}
             defaultValue={profile.citeUrl}
             onChange={() => {
-              console.log("sd");
+     
             }}
           />
           <BaseInput
@@ -142,7 +142,7 @@ export const AgentForm: FC<Props> = ({ profile }) => {
             defaultValue={profile.description}
             textArea
             onChange={() => {
-              console.log("sd");
+    
             }}
           />
         </section>
@@ -157,7 +157,7 @@ export const AgentForm: FC<Props> = ({ profile }) => {
             name={"login"}
             defaultValue={profile.login}
             onChange={() => {
-              console.log("sd");
+     
             }}
           />
           <BaseInput
@@ -169,7 +169,7 @@ export const AgentForm: FC<Props> = ({ profile }) => {
             name={"password"}
             defaultValue={profile.password}
             onChange={() => {
-              console.log("sd");
+
             }}
           />
           <BaseInput
@@ -181,7 +181,7 @@ export const AgentForm: FC<Props> = ({ profile }) => {
             name={"email"}
             defaultValue={profile.email}
             onChange={() => {
-              console.log("sd");
+
             }}
           />
           {phoneNumbers.map((number, index) => (
@@ -208,7 +208,7 @@ export const AgentForm: FC<Props> = ({ profile }) => {
                 }
               }}
               onChange={() => {
-                console.log("sd");
+         
               }}
             />
           ))}

@@ -48,7 +48,6 @@ export const mailPage = {
     bestObjectsModalDeveloper: async (id: number) => {
         try {
             const res = await instance.get<Array<bestObjectsComplexDeveloperType>>(`${UrlMainPage.bestObjectDeveloper}/${id}`)
-            console.log("bestObjectsModalDeveloper", res.data)
             return res.data
         } catch (e) {
             return [{id: '', name: ''}]

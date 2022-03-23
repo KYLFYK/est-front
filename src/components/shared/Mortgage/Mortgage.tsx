@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import {Calculator} from './Calculator/Calculator'
 import {Success} from './Success/Success'
 import { Modal } from '../Modal/Modal'
@@ -11,7 +11,7 @@ export const Mortgage: React.FC = ({}) => {
 
     return (
         <>
-            {bidSuccess ? <Success/> : <Calculator setModal={setModal} />}
+            {bidSuccess ? <Success/> : <Calculator setModal={setModal} />} 
             <Modal setActive={() => setModal(!modal)} active={modal}>
                 <Bid setBidSuccess={setBidSuccess} setModal={setModal}></Bid>
             </Modal>

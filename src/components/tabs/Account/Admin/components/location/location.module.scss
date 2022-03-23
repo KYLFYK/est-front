@@ -1,0 +1,37 @@
+.wrapper{
+  margin: 0 ;
+}
+.mT_20{
+  margin-top: 20px;
+  width: 300px;
+}
+.mT_5{
+  margin-top: 5px;
+  width: 300px;
+}
+.mT_10{
+  margin-top: 10px;
+  width: 300px;
+}
+.df_mT_10{
+  display: flex;
+  margin-top: 10px;
+  width: 300px;
+}
+.mR_5{
+  margin-right: 5px;
+}
+.mR_10px{
+  margin-right: 10px;
+}
+.colorGrey{
+  color:#CAD1DA;
+}
+.df{
+  display: flex;
+}
+.df_jc{
+  display: flex;
+  justify-content: space-between;
+  padding: 0 20px;
+}

@@ -1,11 +1,12 @@
 import { makeAutoObservable } from "mobx";
 import { instance } from "../../../../api/instance";
 
-interface IAdminDeveloperCard {
+export interface IAdminDeveloperCard {
   id: string | number;
   description: string | null;
   developerName: string;
   imgUrl?: string;
+  markAsDelete: boolean;
 }
 
 interface IResponseProps {
@@ -65,7 +66,7 @@ interface IResponse {
   updateAt: Date;
 }
 
-type IListType = IAdminDeveloperCard[] | null;
+type IListType = IAdminDeveloperCard[];
 
 class DevelopersList {
   constructor() {
@@ -74,7 +75,7 @@ class DevelopersList {
 
   loaded: boolean = false;
   errorOnLoad: boolean = false;
-  list: IListType = null;
+  list: IListType = [];
 
   uploadList: () => void = async () => {
     try {
@@ -84,6 +85,7 @@ class DevelopersList {
         description: el.developerProperty.description,
         developerName: el.developerProperty.name,
         imgUrl: el.developerProperty.logo,
+        markAsDelete: el.markAsDelete,
       }));
       this.loaded = true;
       this.errorOnLoad = false;
@@ -91,6 +93,57 @@ class DevelopersList {
       this.loaded = false;
       this.errorOnLoad = true;
     }
+  };
+
+  handleDelete: (id: number) => void = async (id) => {
+    try {
+      await instance.delete(`account/${id}`, {
+        headers: {
+          authorization: `Bearer ${localStorage.getItem("accessEstatum")}`,
+        },
+      });
+      this.list = this.list.map((el) => {
+        if (el.id === id) {
+          return {
+            ...el,
+            markAsDelete: true,
+          };
+        } else return el;
+      });
+    } catch (e) {
+      console.error("Delete error", e);
+    }
+  };
+
+  handleRestore: (id: number) => void = async (id) => {
+    try {
+      await instance.patch(
+        `account/${id}`,
+        {
+          markAsDelete: false,
+        },
+        {
+          headers: {
+            authorization: `Bearer ${localStorage.getItem("accessEstatum")}`,
+          },
+        }
+      );
+
+      this.list = this.list.map((el) => {
+        if (el.id === id) {
+          return {
+            ...el,
+            markAsDelete: false,
+          };
+        } else return el;
+      });
+    } catch (e) {
+      console.error("Delete error", e);
+    }
+  };
+
+  get: () => IListType = () => {
+    return JSON.parse(JSON.stringify([...this.list]));
   };
 }
 

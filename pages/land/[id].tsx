@@ -24,6 +24,7 @@ import {sortObject_specsTypeGuide, sortGuide} from "../../src/utils/conversionIc
 import {useBreadcrumbsStore} from '../../src/mobx/stores/BreadcrumbsStore/BreadcrumbsStore'
 import {FILTER_ACTIONS_OPTIONS, FILTER_HOUSE_TYPE_OPTIONS} from '../../src/components/containers/Filter/config'
 import ErrorPage from "../404";
+import css from "../../styles/slider.module.scss";
 
 const city = ['Москва', 'Крым', 'Сочи']
 const personalAccount = [{title: 'Личный кабинет', href: '/User', message: 0},
@@ -73,7 +74,7 @@ const Land = observer((props: ObjectLandType) => {
 
     useEffect(() => {
         setRefs([general.current, specs.current, infra.current, legal.current, record.current])
-        breadCrumbsStore.addBreadCrumbs(`${FILTER_ACTIONS_OPTIONS.filter((a: any) => props.orderType === a.value)[0].label} ${FILTER_HOUSE_TYPE_OPTIONS.filter((a: any) => props.type === a.value)[0].label}`, 1)
+        breadCrumbsStore.addBreadCrumbs(`${FILTER_ACTIONS_OPTIONS.filter((a: any) => props.orderType === a.value) ? FILTER_ACTIONS_OPTIONS.filter((a: any) => props.orderType === a.value)[0].label : 'нет сделки'} ${FILTER_HOUSE_TYPE_OPTIONS.filter((a: any) => props.type === a.value)[0] ? FILTER_HOUSE_TYPE_OPTIONS.filter((a: any) => props.type === a.value)[0].label : 'нет типа'}`, 1)
         breadCrumbsStore.addBreadCrumbs(props.name, 2)
     }, [router.query.id])
 
@@ -99,7 +100,12 @@ const Land = observer((props: ObjectLandType) => {
                         <AdressEstate item={props.address}/>
                         <HorizontalTabs tabs={tabs} refs={refs}/>
                         <div ref={general}>
-                            <GeneralInfo info={props.info_options} price={props.price} images={IMAGES_SET}/>
+                            <GeneralInfo
+                                info={props.info_options}
+                                price={props.price}
+                                images={props.images}
+                                classSlider={css.image}
+                            />
                         </div>
                         <ObjectDescription items={props.description_items}/>
                         <div ref={specs}>

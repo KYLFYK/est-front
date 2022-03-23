@@ -1,4 +1,6 @@
 import React, {ChangeEvent, SyntheticEvent, useState, Dispatch, SetStateAction} from 'react';
+import { observer } from "mobx-react-lite"
+import {useMortGageStore} from '../../../../mobx/role/bank/mortgage/MortGage'
 import s from './Calculator.module.scss';
 import classNames from 'classnames';
 import QuestionIcon from '../icons/QuestionIcon.svg';
@@ -20,10 +22,8 @@ import {RadioIconChecked, RadioIconUnChecked} from "../icons/RadioIcon";
 import {makeStyles} from "@material-ui/core";
 import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
 import { dateToDigit, digitToDate, currentDate } from '../../../../lib/mortgage/date';
-
-export const formatNumbersToCurrency = (value: number, currency: "RUB" ) => {
-    return new Intl.NumberFormat('ru-RU').format(value)
-}
+import {paymentSchedule} from './helpers';
+import {formatNumbersToCurrency} from '../../../../lib/syntax/syntax';
 
 export const removeStringSpaces = (string: string) => {
     return string.replace(/\s+/g, "")
@@ -59,11 +59,12 @@ export const useStyles = makeStyles(() => ({
     },
 }))
 
-export const Calculator: React.FC<Props> = ({setModal}) => {
+export const Calculator: React.FC<Props> = observer(({setModal}) => {
+
     // const price = Number(String(choosedHouse.price || "").replace(/[^0-9]+/g, ""));
-    const price = 10000000
+    const store = useMortGageStore()
     const classes = useStyles()
-    
+
     /*отклонение координат всплывашки с подсказкой, относительно координаты курсора,
     cardX - динамический, чтобы всплывашка находилась дальше от края экрана(не растягивала экран на мобильниках)*/
     const [cardX, setCardX] = useState(0);
@@ -82,8 +83,11 @@ export const Calculator: React.FC<Props> = ({setModal}) => {
         setHover(false);
     }*/
 
+    const setEarlyPayment = (value: any) => {
+        store.setEarlyPayment(value)
+    }
+
     // коллекция состояний набранных досрочных платежей
-    const [earlyRepayment, setEarlyRepayment] = useState<IEarlyPaymentState[]>([])
     // стартовая сумма для новой карточки досрочного платежа, берётся из предыдущего выбора
     const [startSummEarlyRepayment, setStartSummEarlyRepayment] = useState<number>(10000)
     // стартовая дата для новой карточки досрочного платежа, далее по аналогии ЦИАН - берётся из предыдущего выбора + 1мес
@@ -91,15 +95,15 @@ export const Calculator: React.FC<Props> = ({setModal}) => {
 
     // добавление досрочного платежа в коллекцию состояний
     const OnAddEarlyPayment = () => {
-        setEarlyRepayment([...earlyRepayment,
+        setEarlyPayment([...store.getEarlyPayments(),
             {
                 id: String(Date.now()),
                 summ: startSummEarlyRepayment,
-                date: earlyRepayment.length > 0
-                    ? digitToDate(dateToDigit(earlyRepayment.filter((er, i) => earlyRepayment.length - 1 === i)[0].date) + 1)
+                date: store.getEarlyPayments().length > 0
+                    ? digitToDate(dateToDigit(store.getEarlyPayments().filter((er: any, i: number) => store.getEarlyPayments().length - 1 === i)[0].date) + 1)
                     : currentDate(),
-                diff: earlyRepayment.length > 0
-                    ? dateToDigit(earlyRepayment.filter((er, i) => earlyRepayment.length - 1 === i)[0].date) - dateToDigit(currentDate()) + 2
+                diff: store.getEarlyPayments().length > 0
+                    ? dateToDigit(store.getEarlyPayments().filter((er: any, i: number) => store.getEarlyPayments().length - 1 === i)[0].date) - dateToDigit(currentDate()) + 2
                     : dateToDigit(startDateEarlyRepayment) - dateToDigit(currentDate()) + 1,
                 select: PaymentPeriodSelectTypes.ONCE,
                 buttons: EarlyPaymentButtonsTypes.TERM,
@@ -141,14 +145,25 @@ export const Calculator: React.FC<Props> = ({setModal}) => {
         top: '20px',
     }
 
-    // стартовые состояния ренджей
-    const [cost, setCost] = useState(price);
-    const [contrib, setContrib] = useState(0);
-    const [term, setTerm] = useState(10);
-    const [rate, setRate] = useState(6);
+    const setStatePrice = (value: any) => {
+        store.setStatePrice(value)
+    }
+    const setInitialPayment = (value: any) => {
+        store.setInitialPayment(value)
+    }
+    const setCreditTerm = (value: any) => {
+        store.setCreditTerm(value)
+    }
+    const setPercentageRate = (value: any) => {
+        store.setPercentageRate(value)
+    } 
 
-    const maxCost = price * 2;
-    const maxContribution = cost - 100000;
+    // стартовые состояния ренджей
+    const term = store.initialData.createPayload.creditTerm
+    const rate = store.initialData.createPayload.percentageRate
+
+    const maxCost = 20000000;
+    const maxContribution = store.initialData.createPayload.statePrice - 100000;
     const maxTerm = 25;
     const maxRate = 25;
 
@@ -163,31 +178,31 @@ export const Calculator: React.FC<Props> = ({setModal}) => {
     //const payment = ((cost - contrib) * Math.pow(Math.pow(1 + rate / 100, 1 / 12), 12 * term) * (Math.pow(1 + rate / 100, 1 / 12) - 1)) / (Math.pow(Math.pow(1 + rate / 100, 1 / 12), 12 * term) - 1);
 
     // формула, которая используется на ЦИАН
-    let payment = (cost - contrib) * (rate / 1200 + ((rate / 1200) / (Math.pow(1 + rate / 1200, term * 12) - 1)))
+    let payment = (store.initialData.createPayload.statePrice - store.initialData.createPayload.initialPayment) * (rate / 1200 + ((rate / 1200) / (Math.pow(1 + rate / 1200, term * 12) - 1)))
     // переменная для сохранения начального значения, для расчёта разницы
-    let startPayment = (cost - contrib) * (rate / 1200 + ((rate / 1200) / (Math.pow(1 + rate / 1200, term * 12) - 1)))
-
+    let startPayment = (store.initialData.createPayload.statePrice - store.initialData.createPayload.initialPayment) * (rate / 1200 + ((rate / 1200) / (Math.pow(1 + rate / 1200, term * 12) - 1)))
+    
     // сведение данных по периодичным платежам
     let termPeriodPayments: IPeriodPayments[] = []
     let payPeriodPayments: IPeriodPayments[] = []
-    for (let i = 0; i < term * 12; i++) {
+    for (let i = 0; i < store.initialData.createPayload.creditTerm * 12; i++) {
         termPeriodPayments.push({month: i + 1, payment: 0,})
         payPeriodPayments.push({month: i + 1, payment: 0})
     }
 
-    for (let i = 0; i < term * 12; i++) {
-        earlyRepayment.filter((er) => er.diff === termPeriodPayments[i].month && er.select === PaymentPeriodSelectTypes.ONCE && er.buttons === EarlyPaymentButtonsTypes.TERM).forEach((er) => {
+    for (let i = 0; i < store.initialData.createPayload.creditTerm * 12; i++) {
+        store.getEarlyPayments().filter((er: any) => er.diff === termPeriodPayments[i].month && er.select === PaymentPeriodSelectTypes.ONCE && er.buttons === EarlyPaymentButtonsTypes.TERM).forEach((er: any) => {
             termPeriodPayments[i].payment += er.summ;
         });
-        earlyRepayment.filter((er) => er.diff === payPeriodPayments[i].month && er.select === PaymentPeriodSelectTypes.ONCE && er.buttons === EarlyPaymentButtonsTypes.PAYMENT).forEach((er) => {
+        store.getEarlyPayments().filter((er: any) => er.diff === payPeriodPayments[i].month && er.select === PaymentPeriodSelectTypes.ONCE && er.buttons === EarlyPaymentButtonsTypes.PAYMENT).forEach((er: any) => {
             payPeriodPayments[i].payment += er.summ;
         });
-        earlyRepayment.filter((er) => er.diff === termPeriodPayments[i].month && er.select === PaymentPeriodSelectTypes.MONTHLY && er.buttons === EarlyPaymentButtonsTypes.TERM).forEach((er) => {
+        store.getEarlyPayments().filter((er: any) => er.diff === termPeriodPayments[i].month && er.select === PaymentPeriodSelectTypes.MONTHLY && er.buttons === EarlyPaymentButtonsTypes.TERM).forEach((er: any) => {
             for (let j = er.diff; j < termPeriodPayments.length; j++) {
                 termPeriodPayments[j].payment += er.summ
             }
         });
-        earlyRepayment.filter((er) => er.diff === payPeriodPayments[i].month && er.select === PaymentPeriodSelectTypes.MONTHLY && er.buttons === EarlyPaymentButtonsTypes.PAYMENT).forEach((er) => {
+        store.getEarlyPayments().filter((er: any) => er.diff === payPeriodPayments[i].month && er.select === PaymentPeriodSelectTypes.MONTHLY && er.buttons === EarlyPaymentButtonsTypes.PAYMENT).forEach((er: any) => {
             for (let j = er.diff; j < payPeriodPayments.length; j++) {
                 payPeriodPayments[j].payment += er.summ
             }
@@ -195,40 +210,15 @@ export const Calculator: React.FC<Props> = ({setModal}) => {
     }
 
     // создание графика платежей
-    let payments: IPaymentGraph[] = [{month: 0, payment: 0, debt: 0, percent: 0, remainder: cost}];
-    let flagRecountPayment: boolean
-    for (let i = 1; i <= term * 12; i++) {
-        // переменная для накопления суммы досрочных платежей за каждый из месяцев
-        let summEarlyPay = 0;
-        flagRecountPayment = false;
-        termPeriodPayments.forEach((pp) => {
-            if (pp.month === i && pp.payment > 0) {
-                summEarlyPay += pp.payment
-            }
-        });
-        for (let j = 0; j < payPeriodPayments.length; j++) {
-            if (payPeriodPayments[j].month === i && payPeriodPayments[j].payment > 0) {
-                flagRecountPayment = true;
-                summEarlyPay += payPeriodPayments[j].payment;
-            }
-        }
-        payments.push({
-            month: i,
-            payment: payments[i - 1].remainder < payment - payments[i - 1].remainder * rate / Number((12 * 100).toFixed(0))
-                ? payments[i - 1].remainder + Number((payments[i - 1].remainder * rate / (12 * 100)).toFixed(0))
-                : Number(payment.toFixed(0)) - Number(summEarlyPay),                                                        // fix date(payment) - срок - отображение (Ваш ежемесячный прятёж)
-            debt: payments[i - 1].remainder < payment - payments[i - 1].remainder * rate / Number((12 * 100).toFixed(0))
-                ? payments[i - 1].remainder + Number((payments[i - 1].remainder * rate / (12 * 100)).toFixed(0)) - Number((payments[i - 1].remainder * rate / (12 * 100)).toFixed(0))
-                : Number(payment.toFixed(0)) + Number(summEarlyPay) - Number((payments[i - 1].remainder * rate / (12 * 100)).toFixed(0)),
-            percent: Number((payments[i - 1].remainder * rate / (12 * 100)).toFixed(0)),
-            remainder: payments[i - 1].remainder < payment - payments[i - 1].remainder * rate / Number((12 * 100).toFixed(0))
-                ? 0
-                : Number(payments[i - 1].remainder) - (Number((payment - payments[i - 1].remainder * rate / (12 * 100)).toFixed(0)) + Number(summEarlyPay)),
-        })
-        if (flagRecountPayment) {
-            payment = payments[i].remainder * (rate / 1200 + ((rate / 1200) / (Math.pow(1 + rate / 1200, term * 12 - i) - 1)))
-        }
-    }
+    let payments: IPaymentGraph[] = [{month: 0, payment: 0, debt: 0, percent: 0, remainder: store.initialData.createPayload.statePrice}];
+    paymentSchedule(
+        payments,
+        term, 
+        termPeriodPayments,
+        payPeriodPayments,
+        payment, 
+        rate
+    )
 
     // переменная для подсчёта общих платежей при досрочных платежах, сравнивается с переменной без досрочных платежей
     let payAfterEarlyPayments = 0
@@ -238,10 +228,10 @@ export const Calculator: React.FC<Props> = ({setModal}) => {
         averagePayment += p.payment / (payments.length - 1);
     })
 
-    const renderResult = earlyRepayment.every((er) => er.summ < 1) ? payment : averagePayment
+    const renderResult = store.getEarlyPayments().every((er: any) => er.summ < 1) ? payment : averagePayment
 
     const onChangePaymentPeriod = (value: string, id: string) => {
-        const newRepaymentList = earlyRepayment.map((em) => {
+        const newRepaymentList = store.getEarlyPayments().map((em: any) => {
             if (em.id === id) {
                 return {
                     id: em.id,
@@ -254,7 +244,7 @@ export const Calculator: React.FC<Props> = ({setModal}) => {
             }
             return em
         })
-        setEarlyRepayment(newRepaymentList)
+        store.setEarlyPayment(newRepaymentList)
     }
 
     const onChangePaymentSumm = (e: SyntheticEvent & { target: HTMLInputElement }) => {
@@ -262,7 +252,7 @@ export const Calculator: React.FC<Props> = ({setModal}) => {
         if (isNaN(newValue)) return
 
         setStartSummEarlyRepayment(newValue)
-        setEarlyRepayment(earlyRepayment.map((em) => {
+        store.setEarlyPayment(store.getEarlyPayments().map((em: any) => {
             if (em.id === e.target.id) {
                 return {
                     id: em.id,
@@ -315,13 +305,13 @@ export const Calculator: React.FC<Props> = ({setModal}) => {
                                             Стоимость недвижимости
                                         </Typography>
                                         <Typography>
-                                            {new Intl.NumberFormat('ru-RU').format(cost)}
+                                            {new Intl.NumberFormat('ru-RU').format(store.initialData.createPayload.statePrice)}
                                         </Typography>
                                     </div>
                                     <Typography>₽</Typography>
                                 </Card>
                                 <div style={sliderStyle}>
-                                    <InputRange value={cost} setValue={setCost} max={maxCost} min={100000}/>
+                                    <InputRange value={store.initialData.createPayload.statePrice} setValue={setStatePrice} max={maxCost} min={100000}/>
                                 </div>
                                 <Card style={cardStyle}>
                                     <div>
@@ -329,25 +319,25 @@ export const Calculator: React.FC<Props> = ({setModal}) => {
                                             Первоначальный взнос
                                         </Typography>
                                         <Typography>
-                                            {new Intl.NumberFormat('ru-RU').format(contrib)}
+                                            {new Intl.NumberFormat('ru-RU').format(store.initialData.createPayload.initialPayment)}
                                         </Typography>
                                     </div>
                                     <Typography>₽</Typography>
                                 </Card>
                                 <div style={sliderStyle}>
-                                    <InputRange value={contrib} setValue={setContrib} max={maxContribution} min={0}/>
+                                    <InputRange value={store.initialData.createPayload.initialPayment} setValue={setInitialPayment} max={maxContribution} min={0}/>
                                 </div>
                                 <Card style={cardStyle}>
                                     <div>
                                         <Typography className={s.size} color={'tertiary'} weight={'light'}>
                                             Срок кредита
                                         </Typography>
-                                        <Typography>{term}</Typography>
+                                        <Typography>{store.initialData.createPayload.creditTerm}</Typography>
                                     </div>
                                     <Typography>лет</Typography>
                                 </Card>
                                 <div style={sliderStyle}>
-                                    <InputRange value={term} setValue={setTerm} max={maxTerm} min={1}/>
+                                    <InputRange value={store.initialData.createPayload.creditTerm} setValue={setCreditTerm} max={maxTerm} min={1}/>
                                 </div>
                                 <Card style={cardStyle}>
                                     <div>
@@ -359,7 +349,7 @@ export const Calculator: React.FC<Props> = ({setModal}) => {
                                     <Typography>%</Typography>
                                 </Card>
                                 <div style={sliderStyle}>
-                                    <InputRange value={rate} setValue={setRate} max={maxRate} min={1}/>
+                                    <InputRange value={rate} setValue={setPercentageRate} max={maxRate} min={1}/>
                                 </div>
                             </div>
                             <div>
@@ -387,7 +377,7 @@ export const Calculator: React.FC<Props> = ({setModal}) => {
                                                 />
                                             </Typography>
                                             <Typography
-                                                className={s.subresult}>{`${new Intl.NumberFormat('ru-RU').format(cost - contrib)} ₽`}</Typography>
+                                                className={s.subresult}>{`${new Intl.NumberFormat('ru-RU').format(store.initialData.createPayload.statePrice - store.initialData.createPayload.initialPayment)} ₽`}</Typography>
                                         </div>
                                         <div className={s.position}>
                                             <Typography weight={'medium'} className={s.subtitle}>
@@ -405,15 +395,15 @@ export const Calculator: React.FC<Props> = ({setModal}) => {
                                                 />
                                             </Typography>
                                             <Typography className={s.subresult}>{`${new Intl.NumberFormat('ru-RU').format(
-                                                earlyRepayment.every((er) => er.summ < 1)
-                                                    ? +renderResult.toFixed(0) * term * 12 - (cost - contrib)
+                                                store.getEarlyPayments().every((er: any) => er.summ < 1)
+                                                    ? +renderResult.toFixed(0) * store.initialData.createPayload.creditTerm * 12 - (store.initialData.createPayload.statePrice - store.initialData.createPayload.initialPayment)
                                                     : payAfterEarlyPayments
                                             )} ₽`}
                                             </Typography>
                                         </div>
 
-                                        {!earlyRepayment.every((er) => er.summ < 1) && <div>
-                                            {`${new Intl.NumberFormat('ru-RU').format(payAfterEarlyPayments - (+startPayment.toFixed(0) * term * 12 - (cost - contrib)))} ₽`}
+                                        {!store.getEarlyPayments().every((er: any) => er.summ < 1) && <div>
+                                            {`${new Intl.NumberFormat('ru-RU').format(payAfterEarlyPayments - (+startPayment.toFixed(0) * store.initialData.createPayload.creditTerm * 12 - (store.initialData.createPayload.statePrice - store.initialData.createPayload.initialPayment)))} ₽`}
                                         </div>}
 
                                         <div className={s.position}>
@@ -432,15 +422,15 @@ export const Calculator: React.FC<Props> = ({setModal}) => {
                                                 />
                                             </Typography>
                                             <Typography className={s.subresult}>{`${new Intl.NumberFormat('ru-RU').format(
-                                                earlyRepayment.every((er) => er.summ < 1)
-                                                    ? +renderResult.toFixed(0) * term * 12
-                                                    : payAfterEarlyPayments + cost - contrib
+                                                store.getEarlyPayments().every((er: any) => er.summ < 1)
+                                                    ? +renderResult.toFixed(0) * store.initialData.createPayload.creditTerm * 12
+                                                    : payAfterEarlyPayments + store.initialData.createPayload.statePrice - store.initialData.createPayload.initialPayment
                                             )} ₽`}
                                             </Typography>
                                         </div>
 
-                                        {!earlyRepayment.every((er) => er.summ < 1) && <div>
-                                            {`${new Intl.NumberFormat('ru-RU').format(payAfterEarlyPayments - (+startPayment.toFixed(0) * term * 12 - (cost - contrib)))} ₽`}
+                                        {!store.getEarlyPayments().every((er: any) => er.summ < 1) && <div>
+                                            {`${new Intl.NumberFormat('ru-RU').format(payAfterEarlyPayments - (+startPayment.toFixed(0) * store.initialData.createPayload.creditTerm * 12 - (store.initialData.createPayload.statePrice - store.initialData.createPayload.initialPayment)))} ₽`}
                                         </div>}
 
                                         <div className={s.position}>
@@ -467,7 +457,7 @@ export const Calculator: React.FC<Props> = ({setModal}) => {
                         </div>
                     </Card>
                     <div className={s.request}>
-                        {earlyRepayment.map((r, i) => {
+                        {store.getEarlyPayments().map((r: any, i: number) => {
                             return (
                                 <div key={i} className={s.cardEarlyRepayment}>
                                     <div style={{width:'100%',margin:'0px 40px'}}>
@@ -478,7 +468,7 @@ export const Calculator: React.FC<Props> = ({setModal}) => {
                                             {`Досрочный платёж ${i + 1}`}
                                         </Typography>
                                         {
-                                            earlyRepayment.length-1 === i
+                                            store.getEarlyPayments().length-1 === i
                                                 && <div
                                                     style={{cursor:'pointer', paddingRight:'60px'}}
                                                     onClick={OnAddEarlyPayment}
@@ -500,9 +490,9 @@ export const Calculator: React.FC<Props> = ({setModal}) => {
                                                     className={s.baseInputStyle}
                                                     id={r.id}
                                                     type='date'
-                                                    value={earlyRepayment.filter((ef) => ef.id === r.id)[0] && earlyRepayment.filter((ef) => ef.id === r.id)[0].date}
+                                                    value={store.getEarlyPayments().filter((ef: any) => ef.id === r.id)[0] && store.getEarlyPayments().filter((ef: any) => ef.id === r.id)[0].date}
                                                     onChange={(e: ChangeEvent & { target: HTMLInputElement }) => {
-                                                        setEarlyRepayment(earlyRepayment.map((em) => {
+                                                        store.setEarlyPayment(store.getEarlyPayments().map((em: any) => {
                                                             if (em.id === e.target.id) {
                                                                 return {
                                                                     id: em.id,
@@ -542,7 +532,7 @@ export const Calculator: React.FC<Props> = ({setModal}) => {
                                                 <BaseButton
                                                     className={classNames(s.earlyPaymentChooseButton, r.buttons === EarlyPaymentButtonsTypes.PAYMENT && s.earlyPaymentButtonActive)}
                                                     onClick={() => {
-                                                        setEarlyRepayment(earlyRepayment.map((em) => {
+                                                        store.setEarlyPayment(store.getEarlyPayments().map((em: any) => {
                                                             if (em.id === r.id) {
                                                                 return {
                                                                     id: em.id,
@@ -569,7 +559,7 @@ export const Calculator: React.FC<Props> = ({setModal}) => {
                                                 <BaseButton
                                                     className={classNames(s.earlyPaymentChooseButton, r.buttons === EarlyPaymentButtonsTypes.TERM && s.earlyPaymentButtonActive)}
                                                     onClick={() => {
-                                                        setEarlyRepayment(earlyRepayment.map((em) => {
+                                                        store.setEarlyPayment(store.getEarlyPayments().map((em: any) => {
                                                             if (em.id === r.id) {
                                                                 return {
                                                                     id: em.id,
@@ -605,13 +595,13 @@ export const Calculator: React.FC<Props> = ({setModal}) => {
                                                 type="text"
                                                 onChange={onChangePaymentSumm}
                                                 icon={"₽"}
-                                                value={earlyRepayment.filter((ef) => ef.id === r.id)[0] && formatNumbersToCurrency(earlyRepayment.filter((ef) => ef.id === r.id)[0].summ, "RUB")}
+                                                value={store.getEarlyPayments().filter((ef: any) => ef.id === r.id)[0] && formatNumbersToCurrency(store.getEarlyPayments().filter((ef: any) => ef.id === r.id)[0].summ, "RUB")}
                                             />
                                         </Card>
                                         <div
                                             className={s.DeleteIconPosition}
                                             onClick={() => {
-                                            setEarlyRepayment(earlyRepayment.filter((ef) => ef.id !== r.id))}}
+                                                store.setEarlyPayment(store.getEarlyPayments().filter((ef: any) => ef.id !== r.id))}}
                                         >
                                             <DeleteOutlineIcon color={'error'}  />
                                         </div>
@@ -634,4 +624,4 @@ export const Calculator: React.FC<Props> = ({setModal}) => {
             </div>
         </div>
     )
-}
+})

@@ -1,13 +1,13 @@
-import React, { FC } from "react";
+import React, { FC, useEffect, useState } from "react";
 import { SearchOffice } from "../../../../../../containers/SearchOffice/SearchOffice";
 import FilterSearch from "../../../../../../shared/FilterSearch/FilterSearch";
-import CardObject from "../../../../../../shared/CardObject/CardObject";
 import Typography from "../../../../../../shared/Typography/Typography";
+import { GlassIcon } from "../../../../../../../icons/InputIcon/GlassIcon";
+import { IObject } from "../../../../../../../mobx/role/agent/ads/AgentAds";
+import { MyAdsItem } from "./MyAdsItem";
+
 import css from "./Active.module.scss";
-import LineV1 from "../../../../../../shared/CardObject/Lines/LineV1";
-import LineAddressV1 from "../../../../../../shared/CardObject/Lines/LineAddressV1";
-import LineArray from "../../../../../../shared/CardObject/Lines/LineArray";
-import {GlassIcon} from '../../../../../../../icons/InputIcon/GlassIcon';
+import { ObjectTypes } from "../../../../../../../utils/interfaces/objects";
 
 export const searchColor = (status: string) => {
   switch (status) {
@@ -23,110 +23,128 @@ export const searchColor = (status: string) => {
       return "tertiary";
   }
 };
+
 type ActiveType = {
   menu?: "active" | "archive" | "draft";
-  objects: Array<{
-    id: string;
-    img: string;
-    type: string;
-    name: string;
-    price: string;
-    mainSpecifications: Array<string>;
-    agent: string;
-    dateStart: string;
-    dateEnd: string;
-    status: string;
-    address: string;
-  }>;
+  objects: IObject[];
+  deleteObject?: (id: number, type: ObjectTypes) => void;
+  restoreObject?: (id: number, type: ObjectTypes) => void;
 };
 
-const MyAdsContainer: FC<ActiveType> = ({ menu, objects }) => {
-  const recover = (id: string) => {
-    console.log(id, "recover");
+export type IObjType = "rent" | "sale" | "buy";
+
+export const ObjTypeToRu: (type: IObjType) => string = (type) => {
+  switch (type) {
+    case "buy":
+      return "Покупка";
+    case "sale":
+      return "Продажа";
+    case "rent":
+      return "Аренда";
+  }
+};
+
+export const getObjType: (type: IObjType) => string = (type) => {
+  switch (type) {
+    case "rent":
+      return "Аренда";
+    case "sale":
+      return "Продажа";
+    case "buy":
+      return "Покупка";
+  }
+};
+
+const MyAdsContainer: FC<ActiveType> = ({
+  menu,
+  objects,
+  deleteObject,
+  restoreObject,
+}) => {
+  const [maxCardWidth, setMaxCardWidth] = useState<number | "unset">("unset");
+  const [textFilter, setTextFilter] = useState("");
+  const [sort, setSort] = useState("default");
+
+  let sortedData: any = [];
+  if (sort === "high") {
+    sortedData = [
+      ...objects.sort((a: any, b: any) => (a.price > b.price ? 1 : -1)),
+    ];
+  }
+  if (sort === "low") {
+    sortedData = [
+      ...objects.sort((a: any, b: any) => (a.price < b.price ? 1 : -1)),
+    ];
+  }
+  if (sort === "default") {
+    sortedData = [...objects];
+  }
+
+  useEffect(() => {
+    const listener = () => {
+      const wrapper = document.querySelector(".VerticalTabs_body__3JNyP");
+      const menu = document.querySelector(".VerticalTabs_menu__3NuQg");
+
+      if (wrapper && menu) {
+        setMaxCardWidth(wrapper.clientWidth - menu.clientWidth - 80);
+      }
+    };
+
+    listener();
+
+    window.addEventListener("resize", listener);
+
+    return () => {
+      window.removeEventListener("resize", listener);
+    };
+  }, []);
+
+  const onChange = (e: any) => {
+    setTextFilter(e.target.value);
   };
-  const del = (id: string) => {
-    console.log(id, "del");
-  };
-  const edit = (id: string) => {
-    console.log(id, "edit");
-  };
-  const publish = (id: string) => {
-    console.log(id, "publish");
-  };
-  
+
   return (
     <div>
-      <SearchOffice type={menu} inputIcon={<GlassIcon/>} inputIconPlacement={'right'} placeholder={'Поиск...'} className={`${css.placeholder} ${css.altPadding}`}/>
-      <FilterSearch />
-      {objects.map((home) => (
-        <div key={home.id} className={css.borderCard}>
-          <CardObject img={home.img}>
-            <div className={css.paddingCard}>
-              <LineV1
-                id={home.id}
-                onPublish={publish}
-                onRecover={recover}
-                typeMenu={menu}
-                price={home.price}
-                name={home.name}
-                typeObject={home.type}
-                type={home.status}
-                onEdit={edit}
-                onDelete={del}
-              />
-              <LineAddressV1 address={home.address} />
-              <LineArray mainSpecifications={home.mainSpecifications} />
-              <div style={{ display: "flex", paddingBottom: "10px" }}>
-                <Typography
-                  weight={"light"}
-                  color={"tertiary"}
-                  className={css.paddingRight_5}
-                >
-                  Агент:
-                </Typography>
-                <Typography color={"tertiary"} className={css.paddingRight_20}>
-                  {home.agent}
-                </Typography>
-                <Typography
-                  color={"tertiary"}
-                  weight={"light"}
-                  className={css.paddingRight_5}
-                >
-                  От:
-                </Typography>
-                <Typography color={"tertiary"} className={css.paddingRight_20}>
-                  {home.dateStart}
-                </Typography>
-                <Typography
-                  color={"tertiary"}
-                  weight={"light"}
-                  className={css.paddingRight_5}
-                >
-                  Статус:
-                </Typography>
-                <Typography
-                  color={searchColor(home.status)}
-                  className={css.paddingRight_20}
-                >
-                  {home.status}
-                </Typography>
-                {home.status === "Забронирован" && (
-                  <>
-                    <Typography
-                      color={"tertiary"}
-                      weight={"light"}
-                      className={css.paddingRight_5}
-                    >
-                      До:
-                    </Typography>
-                    <Typography color={"tertiary"}>{home.dateEnd}</Typography>
-                  </>
-                )}
-              </div>
-            </div>
-          </CardObject>
+      <SearchOffice
+        type={menu}
+        inputIcon={<GlassIcon />}
+        inputIconPlacement={"right"}
+        placeholder={"Поиск..."}
+        value={textFilter}
+        onChange={onChange}
+        className={`${css.placeholder} ${css.altPadding}`}
+      />
+      <FilterSearch sort={sort} setSort={setSort} />
+      {sortedData?.length > 0 ? (
+        sortedData
+          ?.filter((d: any) =>
+            d.name.toLowerCase().includes(textFilter.toLowerCase())
+          )
+          .map((home: any, id: number) => (
+            <MyAdsItem
+              key={id}
+              home={home}
+              maxCardWidth={maxCardWidth}
+              menu={menu}
+              deleteObject={deleteObject}
+              restoreObject={restoreObject}
+            />
+          ))
+      ) : (
+        <div
+          style={{
+            marginTop: 40,
+          }}
+        >
+          <Typography
+            color={"default"}
+            weight={"bold"}
+            className={css.paddingRight_5}
+          >
+            Нет объявлений
+          </Typography>
         </div>
-      ))}
+      )}
     </div>
   );
 };

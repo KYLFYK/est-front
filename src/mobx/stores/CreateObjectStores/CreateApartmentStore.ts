@@ -5,9 +5,10 @@ import { ICreateObjectAparts } from "../../types/CreateObjectStoresTypes/CreateA
 class CreateApartmentStore implements ICreateObjectAparts {
   about: ICreateObjectAparts["about"] = {
     name: "",
-    country: "",
-    city: "",
+    country: 0,
+    city: 0,
     address: "",
+    region: 0,
     cost: 0,
     index: 0,
     type: "",
@@ -26,10 +27,12 @@ class CreateApartmentStore implements ICreateObjectAparts {
     kitchen: "",
     customRooms: [],
     interiorDescription: "",
+    vrTour: "",
+    video: "",
   };
   infrastructure: ICreateObjectAparts["infrastructure"] = {
     description: "",
-    view: "",
+    view: [],
   };
   info: ICreateObjectAparts["info"] = {
     houseType: "",
@@ -52,7 +55,7 @@ class CreateApartmentStore implements ICreateObjectAparts {
   };
   legalPurity: ICreateObjectAparts["legalPurity"] = {
     realEstateRegister: {
-      address: '',
+      address: "",
       cadastralNumber: "",
       cadastralCost: "",
       generalSquare: "",
@@ -60,22 +63,21 @@ class CreateApartmentStore implements ICreateObjectAparts {
     },
     currentFounder: {
       founderType: FoundersTypes.SINGLE,
-      firstFounderName: '',
+      firstFounderName: "",
       secondFouderName: undefined,
       cadastralNumber: "",
       ownershipFrom: new Date(),
-      ownershipTo: new Date(), 
+      ownershipTo: new Date(),
     },
     previousFounder: {
       founderType: FoundersTypes.SINGLE,
-      firstFounderName: '',
+      firstFounderName: "",
       secondFouderName: undefined,
       cadastralNumber: "",
       ownershipFrom: new Date(),
-      ownershipTo: new Date(), 
-    }
+      ownershipTo: new Date(),
+    },
   };
-
 }
 
 export default CreateApartmentStore;

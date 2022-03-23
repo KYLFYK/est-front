@@ -76,7 +76,7 @@ export const Table: FC<Props> = ({ paymentHistory }) => {
             >
               <BaseDropDown
                 onChange={(obj) => {
-                  console.log(obj);
+
                 }}
                 className={`${styles.select} ${getClassName(pay.status)}`}
                 options={Options}

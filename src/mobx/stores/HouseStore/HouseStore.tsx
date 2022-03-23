@@ -102,7 +102,7 @@ class HouseStore {
           this.fetching = false
   }
     get(){
-        console.log('mobxHouse',JSON.parse(JSON.stringify(this.initialData)))
+        return JSON.parse(JSON.stringify(this.initialData))
     }
 
 }

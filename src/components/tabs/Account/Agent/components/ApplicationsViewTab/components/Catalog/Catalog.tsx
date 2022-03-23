@@ -19,14 +19,18 @@ import css from "./Catalog.module.scss";
 import Typography from "../../../../../../../shared/Typography/Typography";
 
 type Data = {
+    id: string
     name: string
+    email: string
     convenientTime: string
     applicationDate: string
+    applicationTime: string
     agentName: string
     typeContract: string
     object: string
     priceObject: string
     status: string
+    phone: string
 }
 type HeadCell = {
     disablePadding: boolean;
@@ -80,28 +84,29 @@ export const useStyles = makeStyles(() => ({
     }
 }))
 type ActualObjectType = {
-    onClick?:(idOffers:string)=>void
+    setEdit: any
     agents: Array<{
-        name: string
-        phone: string
-        email: string
-        convenientTime: string
-        applicationDate: string
-        applicationTime: string
-        agentName: string
-        typeContract: string
-        object: string
-        priceObject: string
-        status: string
-        idOffers: string
-        url: string
+        id: string;
+        name: any;
+        email: string;
+        phone: string;
+        convenientTime: string;
+        applicationDate: string;
+        applicationTime: string;
+        agentName: string;
+        typeContract: string;
+        object: string;
+        priceObject: string;
+        status: string;
+        idOffers: string;
+        url: string;
     }>
 }
 
-const ApplicationsViewCatalog: React.FC<ActualObjectType> = ({agents,onClick}) => {
+const ApplicationsViewCatalog: React.FC<any> = ({agents, setEdit}) => {
 
     const classes = useStyles()
-
+    
     const [order, setOrder] = React.useState<Order>('asc');
     const [orderBy, setOrderBy] = React.useState<keyof Data>('name');
     const [selected, setSelected] = React.useState<readonly string[]>([]);
@@ -137,12 +142,11 @@ const ApplicationsViewCatalog: React.FC<ActualObjectType> = ({agents,onClick}) =
     };
 
     const handleChangeRowsPerPage = (event: React.ChangeEvent<HTMLInputElement>) => {
-        console.log(event.target.value)
         setRowsPerPage(parseInt(event.target.value, 10));
         setPage(0);
     };
 
-    const isSelected = (name: string) => selected.indexOf(name) !== -1;
+    const isSelected = (name: any) => selected.indexOf('name') !== -1;
 
     // Avoid a layout jump when reaching the last page with empty rows.
     const emptyRows =
@@ -169,23 +173,21 @@ const ApplicationsViewCatalog: React.FC<ActualObjectType> = ({agents,onClick}) =
                             <TableBody>
                                 {/* if you don't need to support IE11, you can replace the `stableSort` call with:
               rows.slice().sort(getComparator(order, orderBy)) */}
-                                {stableSort(agents, getComparator(order, orderBy))
+                                {agents.length > 0 && stableSort(agents, getComparator(order, orderBy))
                                     .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                                     .map((agent, index) => {
                                         const isItemSelected = isSelected(agent.name);
                                         const labelId = `enhanced-table-checkbox-${index}`;
-                                        const fullName = agent.agentName.split(' ')
-                                        const object =agent.object.split(' ')
                                         return (
                                             <TableRow
                                                 hover
                                                 role="checkbox"
                                                 aria-checked={isItemSelected}
                                                 tabIndex={-1}
-                                                key={agent.idOffers}
+                                                key={agent.id}
                                                 selected={isItemSelected}
                                                 onClick={()=>{
-                                                    onClick &&  onClick(agent.idOffers)
+                                                    setEdit && setEdit({edit: true, id: agent.id})
                                                 }}
                                                 className={classes.cursor}
                                             >
@@ -227,10 +229,10 @@ const ApplicationsViewCatalog: React.FC<ActualObjectType> = ({agents,onClick}) =
                                                     align="left"
                                                 >
                                                     <Typography className={css.heightTable}>
-                                                        {fullName[0]}
+                                                        {agent.agentName}
                                                     </Typography>
                                                     <Typography className={css.heightTable}>
-                                                        {fullName[1]}
+                                                        {agent.agentName}
                                                     </Typography>
                                                 </TableCell>
                                                 <TableCell
@@ -242,10 +244,10 @@ const ApplicationsViewCatalog: React.FC<ActualObjectType> = ({agents,onClick}) =
                                                 <TableCell width={'92px'}>
                                                     <div style={{minWidth:"92px"}}>
                                                         <Typography className={css.heightTable}>
-                                                            {object[0]}
+                                                            {agent.object}
                                                         </Typography>
                                                         <Typography className={css.heightTable}>
-                                                            {object[1]}
+                                                            {agent.object}
                                                         </Typography>
                                                     </div>
 

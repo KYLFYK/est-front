@@ -8,11 +8,11 @@ import BaseButton from '../../shared/BaseButton/BaseButtons'
 import FavoriteIcon from '../../../icons/Favorite/Favorite'
 import {GridView} from '../../../icons/FinderPageIcon/GridView'
 import {MapView} from '../../../icons/FinderPageIcon/MapView'
-import { OpenCloseMapButton } from "./OpenCloseMapButton";
+import { OpenCloseMapButton } from "./OpenCloseMapButton"
 import s from './styles.module.scss'
 import { DROPDOWN_PLACEHOLDER, SORT_FILTER_OPTIONS } from "../PlanningFilter/config"
 import { ToggleButtonsWithIcons } from '../../shared/ToggleButtonsWithIcons/ToggleButtonsWithIcons'
-import Typography from '../../shared/Typography/Typography'
+import {Loader, Empty} from '../../shared/Loader/Loader'
 
 // TODO: Take types from 'model' folder, when global state gets its types
 
@@ -40,7 +40,7 @@ const useStyles = makeStyles(() => ({
 const CardContainer: React.FC<Props> = observer(({ mapData, view, setView }) => {
     const searchStore = useSearchStore()
     const classes = useStyles()
-    console.log(searchStore.getInitialData())
+
     const [sort, setSort] = useState(SORT_FILTER_OPTIONS[0].value)
 
     let sortedData: any = []
@@ -87,7 +87,7 @@ const CardContainer: React.FC<Props> = observer(({ mapData, view, setView }) => 
             </div>
             <div className={(searchStore.fetching || !sortedData.length) ? s.contentText : s.content}>
                 {searchStore.fetching 
-                    ? <Typography size={'header'}>Loading...</Typography>
+                    ? <Loader/>
                     : sortedData.length 
                         ? sortedData && sortedData.map((i: any, id: number) => {
                             return(
@@ -101,7 +101,7 @@ const CardContainer: React.FC<Props> = observer(({ mapData, view, setView }) => 
                                 </div>
                             )
                         })
-                        : <Typography size={'subheaderBig'}>Объекты отсутствуют</Typography>
+                        : <Empty/>
                 }
             </div>
             <OpenCloseMapButton view={view} setView={setView}/>

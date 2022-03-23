@@ -9,6 +9,7 @@ import css from './Search.module.scss'
 import BaseButton from "../../../../../../shared/BaseButton/BaseButtons";
 import FavoriteIcon from "../../../../../../../icons/Favorite/Favorite";
 import {myLoader} from "../../../../../../../utils/image/image";
+import {countNameAds} from "../../../../../../../utils/countNameAds";
 
 const professionalSearch =[
     {
@@ -59,14 +60,14 @@ const professionalSearch =[
 
 const ProfSearch = () => {
     const click = (id:string) =>{
-        console.log(id,'click')
+
     }
     // + Link - url
     return (
         <div>
             <Filter />
             <FilterSearch type={'professional'}/>
-            <Typography color={"tertiary"}>Найдено 30 000 объявлений</Typography>
+            <Typography color={"tertiary"}>{ countNameAds(professionalSearch.length) }</Typography>
             {
                 professionalSearch.map((object,index)=>(
                     <div key={index} className={css.border}>

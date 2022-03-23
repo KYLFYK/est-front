@@ -17,7 +17,7 @@ const LineV4: FC<LineV4Type> = ({
   id,
 }) => {
   const favoriteOff = (id: string) => {
-    console.log(id, "favoriteOff");
+
   };
   return (
     <div className={css.lineGridV2}>

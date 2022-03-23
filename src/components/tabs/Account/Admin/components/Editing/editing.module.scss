@@ -1,0 +1,98 @@
+.guideHearer{
+  cursor: pointer;
+  margin: 10px 0;
+}
+.guide{
+  margin: 2px 10px 5px 0;
+  cursor: pointer;
+}
+.marginColumn{
+  margin: 0 5px;
+}
+.grid_3{
+  display: grid;
+  grid-template-columns: 320px 100px 1fr 1fr;
+}
+.grid_4{
+  display: grid;
+  grid-template-columns: 20px 300px 100px 1fr 1fr;
+}
+.checkbox{
+  display: flex;
+  justify-content: center;
+}
+.checkboxVision{
+  display: none;
+}
+.label{
+  display: flex;
+  cursor: pointer;
+  margin: 2px 0;
+}
+.labelDisable{
+  display: flex;
+  margin: 2px 0;
+}
+.df_mTB5{
+  display: flex;
+  margin: 5px 0;
+}
+.mL_5{
+  margin-left: 5px;
+  margin-top: 1px;
+}
+.iconEdit{
+  cursor: pointer;
+  margin: 0 5px;
+}
+.colorDelete{
+  color:#EB5757;
+  cursor:pointer;
+}
+.colorDisable{
+  color:#CAD1DA;
+}
+.colorDelete2{
+  color: #3D4550;
+  cursor:pointer;
+}
+.styleModalRemove{
+  display: flex;
+  text-align: center;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 200px;
+}
+.df_mT_20{
+  display: flex;
+  margin-top: 20px;
+}
+.m_RL_10{
+  margin: 0 10px;
+}
+.input{
+  font-family: RobotoRegular ;
+  border: 1px solid white ;
+  width: 230px;
+  padding:1px 0;
+  font-size: 14px;
+  border-radius: 4px;
+  outline:none;
+  &:focus{
+    border: 1px solid #CAD1DA ;
+  }
+  &:active{
+    border: 1px solid #CAD1DA ;
+  }
+  &:hover{
+    border: 1px solid #CAD1DA;
+  }
+}
+.df_mTB_10{
+  display: flex;
+  margin: 10px 0;
+}
+.df{
+  display: flex;
+}

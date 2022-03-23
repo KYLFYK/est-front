@@ -26,6 +26,7 @@ export const OwnerTab: FC = observer(() => {
           <AdItem
             name={el.name}
             address={el.address}
+            markedAsDeleted={false}
             footerMainElems={[
               {
                 key: "Показов в поиске",

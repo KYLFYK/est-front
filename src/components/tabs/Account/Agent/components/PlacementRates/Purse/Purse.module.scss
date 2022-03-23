@@ -51,6 +51,15 @@
 .margin_5px{
   margin: 5px 0;
 }
+.margin_5_substr{
+  text-align: center;
+  padding: 0 5px 0 0;
+  margin: 5px 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
 
 // Purse
 .marginTitle{

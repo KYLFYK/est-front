@@ -4,6 +4,7 @@
 .wrapper {
   display: flex;
   flex-direction: column;
+  padding: 0 20px;
 }
 
 .filter {
@@ -11,6 +12,7 @@
 }
 
 .object {
+  cursor: pointer;
   border: 1px solid #F2F2F2;
   border-radius: 8px;
 

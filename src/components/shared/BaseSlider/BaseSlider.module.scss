@@ -38,9 +38,11 @@ $borderRadius: 6px;
     left: 0;
     bottom: 0;
     right: 0;
-    object-fit: cover;
+    //object-fit: contain;
     width: 100%;
     height: 100%;
+    background-repeat: no-repeat;
+    background-size: cover ;
 }
 
 .dotsClass {

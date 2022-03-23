@@ -1,28 +1,34 @@
-import { FC, useState } from "react";
-import { BaseDropDown } from "../../../../shared/BaseDropDown/BaseDropDown";
+import { FC } from "react"
+import { observer } from "mobx-react-lite";
+import { BaseDropDown } from "../../../../shared/BaseDropDown/BaseDropDown"
+import {useMortGageStore} from '../../../../../mobx/role/bank/mortgage/MortGage'
+import s from "./Catalog.module.scss"
+import {datetoDayFormat, datetoTimeFormat} from '../../../../../lib/mapping/objectDates'
+import {LEADS_REQS_OPTIONS} from './Config';
 
-import styles from "./Catalog.module.scss";
+export const CatalogItem: FC<any> = observer(({data, id}) => {
 
-export const CatalogItem: FC = () => {
-  const [status, setStatus] = useState<"new" | "expired">("new");
-
+  const store = useMortGageStore()
+  
   return (
-    <tr>
+    <tr style={{cursor: 'pointer'}} onClick={(e: any) => {
+      !e.target.className && store.setDetail(true, id)
+    }}>
       <td>
-        <span>Васильев Евгений Константинович</span>
+        <span>{data.fio}</span>
       </td>
       <td>
-        <span>+7 911 589 56 98</span>
+        <span>{data.phone}</span>
       </td>
       <td>
-        <span>zhenya71@yandex.ru</span>
+        <span>{data.email}</span>
       </td>
       <td>
-        <span>27.08.2021 13:00</span>
+        <span>{`${datetoDayFormat(data.createAt)} ${datetoTimeFormat(data.createAt)}`}</span>
       </td>
-      <td>
+      {/*<td>
         <span>3-этажный коттедж</span>
-      </td>
+      </td>*/}
       <td>
         <span
           style={{
@@ -32,26 +38,18 @@ export const CatalogItem: FC = () => {
         >
           <BaseDropDown
             onChange={(obj) => {
-              setStatus(obj as "new" | "expired");
+              store.updateLead(id, LEADS_REQS_OPTIONS.filter((o: any) => o.value === obj)[0].label);
             }}
-            className={`${styles.select}${
-              status === "new" ? ` ${styles.green}` : ""
+            className={`${s.select}${
+              data.status === "Новая заявка" ? ` ${s.green}` : ""
             }`}
-            options={[
-              {
-                label: "Новая заявка",
-                value: "new",
-              },
-              {
-                label: "Завершено",
-                value: "expired",
-              },
-            ]}
-            placeholder="Выберите статус"
-            value={status}
+            options={LEADS_REQS_OPTIONS}
+            placeholder={data.status}
+            value={data.status}
+            location={'bank'}
           />
         </span>
       </td>
     </tr>
   );
-};
+});

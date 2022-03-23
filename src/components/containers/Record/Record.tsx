@@ -116,7 +116,9 @@ export const Record: FC<AgentRecordType> = ({Record, title}) => {
             phone:phone,
             status:'Новая заявка',
             comfortableTimeFrom:timeStart,
-            comfortableTimeTo:timeEnd
+            comfortableTimeTo:timeEnd,
+            orderType: "buy",
+            agentName: "string", // ????
         })
         onBlurHandler('')
         setFormValid(false)
@@ -166,7 +168,7 @@ export const Record: FC<AgentRecordType> = ({Record, title}) => {
             setPhoneError('')
         }
     }
-    console.log("nameError--", setName)
+
     const onBlurHandler = (e: string) => {
         switch (e) {
             case 'name':

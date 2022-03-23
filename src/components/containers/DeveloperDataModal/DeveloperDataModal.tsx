@@ -10,6 +10,7 @@ import { myLoader } from 'src/utils/image/image';
 import {observer} from "mobx-react-lite";
 import {useStoreMainPage} from "../../../mobx/mainPage/mainPage";
 import Link from 'next/link'
+import { imageConfigDefault } from 'next/dist/server/image-config';
 
 type DeveloperDataPropsType = {
     img: string
@@ -24,22 +25,22 @@ type DeveloperDataPropsType = {
     id:number
 }
 
-export const DeveloperDataModal: FC<DeveloperDataPropsType> = observer(({ img,  developer,isActive, setActive,id }) => {
+export const DeveloperDataModal: FC<DeveloperDataPropsType> = observer(({ img, developer, isActive, setActive, id }) => {
 
     const store = useStoreMainPage()
 
     useEffect(()=>{
         if (isActive) store.fetchComplexDeveloper(id)
-
-    },[isActive,store,id])
+    },[isActive, store, id])
 
     return (
 
         <Modal setActive={() => setActive(false)} active={isActive} >
             <Image
+                unoptimized
                 src={img}
                 width='174px' height='60px' alt="emmar" className={css.img}
-                loader={e=>myLoader(e.src,e.width,e.quality)}
+                loader={e => myLoader(e.src, e.width, e.quality)}
             />
             <Typography size={'default'} color="accent" className={css.title}>
                 {developer.title}

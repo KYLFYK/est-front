@@ -61,6 +61,13 @@
       text-transform: uppercase;
     }
 
+    .restore {
+      @include ROBOTOREGULAR16;
+
+      cursor: pointer;
+      color: #C5A28E;
+    }
+
     p {
       @include ROBOTOREGULAR16;
 
@@ -80,7 +87,7 @@
 
 .pageWrapper {
   color: $BLACK;
-
+  padding: 20px;
   .header {
     @include ROBOTOMEDIUM16;
 
@@ -134,7 +141,8 @@
   display: flex;
   flex-direction: column;
   gap: 30px;
-
+  height: calc(100vh - 370px);
+  overflow-x: auto;
   section {
     .inputWrapper, .largeWrapper, .smallWrapper, .mediumWrapper, .mediumHWrapper {
       &:not(:last-of-type) {
@@ -204,7 +212,7 @@
 
   .large {
     min-width: 290px;
-    width: 100%;
+    width: 75%;
 
     &Wrapper {
       display: flex;
@@ -257,6 +265,29 @@
         white-space: nowrap;
         width: 233px;
         min-width: 233px;
+      }
+    }
+  }
+
+  .mediumPlus {
+    min-width: 790px;
+    width: 100%;
+
+    &Wrapper {
+      display: flex;
+      gap: 20px;
+      width: 80%;
+      margin-bottom: 10px;
+
+      div {
+        width: fit-content;
+      }
+
+      p {
+        white-space: nowrap;
+        width: 233px;
+        min-width: 233px;
+        color: #3D4550;
       }
     }
   }
@@ -397,4 +428,10 @@
   &Wrapper {
 
   }
+}
+
+.filtersortWrapper {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  align-items: center;
 }

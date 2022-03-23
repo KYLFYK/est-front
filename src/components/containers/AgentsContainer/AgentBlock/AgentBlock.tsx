@@ -45,6 +45,7 @@ export const AgentBlock: React.FC<AgentBlockPropsType> = ({img, connection, info
     return (
         <div className={css.agentBlock}>
             <Image
+                unoptimized
                 className={css.photoAgent}
                 src={img}
                 alt="agent"

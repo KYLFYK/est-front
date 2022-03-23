@@ -1,5 +1,7 @@
 import { FC, useState } from "react";
 import Link from "next/link";
+import { observer } from "mobx-react-lite";
+import {useBankCabinetStore} from '../../../../../mobx/role/bank/cabinet/BankCabinet'
 import { BackIcon } from "../../../../../icons/BackIcon";
 import { Trash } from "../../../../../icons/Trash";
 import { ShowPassword } from "../../../../../icons/ShowPassword";
@@ -15,7 +17,7 @@ interface PasswordProps {
 
 const PasswordField: FC<PasswordProps> = ({ placeholder, defaultValue }) => {
   const [visible, setVisible] = useState<boolean>(false);
-
+  const store = useBankCabinetStore()
   return (
     <span className={styles.input}>
       <input
@@ -35,7 +37,7 @@ const PasswordField: FC<PasswordProps> = ({ placeholder, defaultValue }) => {
   );
 };
 
-export const BankEditPage: FC = () => {
+export const BankEditPage: FC = observer(() => {
   return (
     <div className={commonStyles.pageWrapper}>
       <div className={commonStyles.header}>
@@ -158,4 +160,4 @@ export const BankEditPage: FC = () => {
       </div>
     </div>
   );
-};
+});

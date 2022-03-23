@@ -116,10 +116,10 @@ class OwnerMyObjectStore  {
         }]
     }
     fetch(id:string) {
-        console.log("DeveloperCabinetStore",id)
+
     }
     get() {
-        console.log(JSON.parse(JSON.stringify({ ...this.initialData})))
+        return JSON.parse(JSON.stringify({ ...this.initialData}))
     }
 }
 

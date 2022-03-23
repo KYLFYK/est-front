@@ -12,7 +12,7 @@ import {LogoIcon} from "../../../../../../icons/Header/LogoIcon";
 import importImage from './ImportImage.svg'
 import {useStoreDeveloperCabinet} from "../../../../../../mobx/role/developer/cabinet/DeveloperCabinet";
 import {BaseTextarea} from "../../../../../shared/BaseTextarea/BaseTextarea";
-
+import {AvatarSection} from "../../../../../shared/AvatarSection";
 
 export type infoDeveloperType = {
     name: string,
@@ -25,7 +25,7 @@ export type infoDeveloperType = {
 }
 
 type AccountEditType = {
-    onEdit: () => void
+    onEdit: (tabId: number) => void
     // infoAgency:infoAgentType
 }
 
@@ -67,7 +67,7 @@ const AccountEditDeveloper: FC<AccountEditType> = observer(({onEdit}) => {
             && agentInfo.email === valueEmail
             && agentInfo.site === valueSite
             && agentInfo.description === valueDescription) {
-            onEdit()
+            onEdit(0)
         } else {
             setComparison(true)
         }
@@ -113,15 +113,19 @@ const AccountEditDeveloper: FC<AccountEditType> = observer(({onEdit}) => {
             store.fetch()
         }, 100)
         setComparison(false)
-        onEdit()
+        onEdit(0)
     }
     const backPageNoSave = () => {
         setComparison(false)
-        onEdit()
+        onEdit(0)
     }
 
+    const changeAvatar = (data: FormData) => {
+        store.updateAvatar(data,store.initialData.account.id).then();
+    };
+
     return (
-        <div>
+        <div style={{margin:"20px"}}>
             <BackPage onBackPage={backPage} title={'Редактирование аккаунта'}/>
             <div className={css.df_jc}>
                 <div>
@@ -153,7 +157,7 @@ const AccountEditDeveloper: FC<AccountEditType> = observer(({onEdit}) => {
                                 </div>
 
                             </div>
-                            <div className={css.marginColumn} style={{width: "98%"}}>
+                            <div className={css.marginColumn} style={{width: "98%",marginTop:"20px"}} >
                                 <Typography color={'tertiary'} className={css.marginTypo}>
                                     Адрес
                                 </Typography>
@@ -200,12 +204,12 @@ const AccountEditDeveloper: FC<AccountEditType> = observer(({onEdit}) => {
 
                             </div>
                             <div >
-                                <div className={css.marginColumn} style={{width: "25%",display:'flex',flexDirection:"column"}}>
+                                <div className={css.marginColumn} style={{display:'flex',flexDirection:"column"}}>
                                     <BaseTextarea
                                         classNameWrapper={css.baseTextarea}
                                         className={css.baseTextarea}
                                         style={{paddingLeft: '10px'}}
-                                        placeholder={'estatum'}
+                                        placeholder={'Описание...'}
                                         label={"Описание"}
                                         value={valueDescription}
                                         onChange={e => setValueDescription( e.currentTarget.value)}
@@ -221,18 +225,29 @@ const AccountEditDeveloper: FC<AccountEditType> = observer(({onEdit}) => {
                     </Typography>
                     <div style={{backgroundImage: image}} className={css.dashed}>
                         <div className={css.marginImage}>
-                            <Image
-                                loader={e => myLoader(e.src, e.width, e.quality)}
-                                src={importImage}
-                                width={200}
-                                height={200}
-                                alt={'photo'}
+                            <AvatarSection
+                                src={
+                                    store.initialData.account && store.initialData.account.src
+                                        ? store.initialData.account.src
+                                        : importImage
+                                }
+                                onChange={changeAvatar}
+                                changeable
+                                activeUpload
+                                size={200}
                             />
+                            {/*<Image*/}
+                            {/*    loader={e => myLoader(e.src, e.width, e.quality)}*/}
+                            {/*    src={importImage}*/}
+                            {/*    width={200}*/}
+                            {/*    height={200}*/}
+                            {/*    alt={'photo'}*/}
+                            {/*/>*/}
                         </div>
                     </div>
                 </div>
             </div>
-            <div style={{display: 'flex', width: "100%", flexDirection: 'row-reverse'}}>
+            <div style={{marginTop:"60px",display: 'flex', width: "100%", flexDirection: 'row-reverse'}}>
                 <BaseButton
                     type={"secondary"}
                     isActive className={css.marginButton}
@@ -242,13 +257,13 @@ const AccountEditDeveloper: FC<AccountEditType> = observer(({onEdit}) => {
                 </BaseButton>
 
                 {
-                    agentInfo.name !== valueName
+                    (agentInfo.name !== valueName
                     || agentInfo.type !== valueType
                     || agentInfo.address !== valueAddress
                     || agentInfo.phone !== valuePhone
                     || agentInfo.email !== valueEmail
                     || agentInfo.site !== valueSite
-                    || agentInfo.description !== valueDescription &&
+                    || agentInfo.description !== valueDescription) &&
                     <div style={{display:"flex",alignItems:"center",marginRight:'10px'}}>
                         <Typography color={"tertiary"}>
                             Есть несохраненные изменения

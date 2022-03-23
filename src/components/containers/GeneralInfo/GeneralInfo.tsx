@@ -7,21 +7,30 @@ import BaseSlider from '../../shared/BaseSlider/BaseSlider';
 import Typography from '../../shared/Typography/Typography';
 import { formatNumbersToCurrency } from '../../../utils/general';
 import {observer} from "mobx-react-lite";
+import {IMAGES_SET} from './config';
 
 interface Props {
-    images: string[],
+    images: string[] | { url: string; id: number; }[],
     price?: number,
     info: IOption[]
+    classSlider?:string
 }
 
-const GeneralInfo: React.FC<Props> = observer(({ images, price, info }) => {
+const GeneralInfo: React.FC<Props> = observer(({ images, price, info,classSlider }) => {
+
+    const imagesUrl = images.length === 0 ? IMAGES_SET : images.map((i: any) => i.url && i.url.includes('public') ? IMAGES_SET[0] : i.url || i)
 
     return (
         <div className={s.container}>
             <div className={s.sliderContainer}>
                 <BaseSlider
-                    images={images}
-                    height={600} withArrows withFavorite={typeof window !== "undefined" && localStorage.getItem("roleEstatum") ? true : false} onClickFavorite={() => {}}/>
+                    images={imagesUrl}
+                    height={600}
+                    withArrows
+                    withFavorite={typeof window !== "undefined" && localStorage.getItem("roleEstatum") ? true : false}
+                    onClickFavorite={() => {}}
+                    classSlider={classSlider}
+                />
             </div>
             <div className={s.infoContainer}>
                 {price && <Typography size="big" color="nude">{formatNumbersToCurrency(price)} ₽</Typography>}

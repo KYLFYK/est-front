@@ -2,6 +2,7 @@ import {createContext, FC, useContext} from "react";
 import {makeAutoObservable} from "mobx";
 import {mailPage} from "../../api/mainPage/mainPage";
 import {mockObjects} from "../../components/containers/DevelopersContainer/DevelopersContainer";
+import AgentsContainerStories from "src/components/containers/AgentsContainer/AgentsContainer.stories";
 
 class MainPageStore {
     constructor() {
@@ -61,7 +62,9 @@ class MainPageStore {
         this.initialData.agents = res.data.map((agent: any) => (
             {
                 id: agent.id,
-                img: "https://images.unsplash.com/photo-1541963463532-d68292c34b19?ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8Ym9va3xlbnwwfHwwfHw%3D&ixlib=rb-1.2.1&w=1000&q=&q=",
+                img: agent.agentProperty?.file[0]?.url 
+                    ? agent.agentProperty.file[0].url
+                    : "https://images.unsplash.com/photo-1541963463532-d68292c34b19?ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8Ym9va3xlbnwwfHwwfHw%3D&ixlib=rb-1.2.1&w=1000&q=&q=",
                 connection: {
                     whatsApp: agent.agentProperty.messengers?.whatsApp ? agent.agentProperty.messengers.whatsApp : '',
                     telegram: agent.agentProperty.messengers?.telegram ? agent.agentProperty.messengers.telegram : '',
@@ -88,8 +91,10 @@ class MainPageStore {
         const developers = await mailPage.getDeveloperOur(10)
         this.initialData.developers = developers.data.map((developer: any) => (
             {
-                id:developer.id,
-                img: "https://images.unsplash.com/photo-1541963463532-d68292c34b19?ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8Ym9va3xlbnwwfHwwfHw%3D&ixlib=rb-1.2.1&w=1000&q=&q=",
+                id: developer.id,
+                img: developer.developerProperty?.logo 
+                    ? developer.developerProperty.logo 
+                    : "https://images.unsplash.com/photo-1541963463532-d68292c34b19?ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8Ym9va3xlbnwwfHwwfHw%3D&ixlib=rb-1.2.1&w=1000&q=&q=",
                 // img: developer.developerProperty.logo,
                 title: developer.developerProperty.name,
                 description: developer.developerProperty.type,
@@ -121,7 +126,8 @@ class MainPageStore {
                     object_id: object.id,
                     name: object.name,
                     description: '',
-                }
+                },
+                files: object.files ? object.files.sort((a: any, b: any) => a.id > b.id ? 1 : -1) : [],
             }
         ))
 
@@ -148,7 +154,7 @@ class MainPageStore {
     }
 
     get() {
-        console.log(JSON.parse(JSON.stringify({...this.initialData})))
+        return JSON.parse(JSON.stringify([...this.initialData.agents]))
     }
 }
 
