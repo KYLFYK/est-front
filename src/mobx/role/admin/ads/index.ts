@@ -60,17 +60,21 @@ class AllAdsStoreEx {
     }
 
     loaded: boolean = false;
+    statusLoader: string = "loader"
     errorOnLoad: boolean = false;
     adsList: IResponse[] | null = null;
 
     async uploadAllAds() {
+        this.statusLoader = "loader"
         try {
             this.adsList = await loadAllData();
             this.loaded = true;
             this.errorOnLoad = false;
+            this.statusLoader = ""
         } catch (e) {
             this.errorOnLoad = true;
-            this.loaded = false;
+            this.loaded = true;
+            this.statusLoader = "error"
         }
     }
 

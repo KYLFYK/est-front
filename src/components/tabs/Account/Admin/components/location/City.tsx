@@ -9,10 +9,11 @@ import BaseButton from "../../../../../shared/BaseButton/BaseButtons";
 import AddIcon from "@mui/icons-material/Add";
 import {BaseInput} from "../../../../../shared/BaseInput/Input";
 import {BaseDropDown} from "../../../../../shared/BaseDropDown/BaseDropDown";
+import {statusActiveApi} from "../../../../../shared/Loader/Loader";
 
 const City = observer(() => {
 
-    const {fetchCity, city, fetchRegion,region,addCity,editCity} = AdminLocationStore
+    const {fetchCity, city, fetchRegion,region,addCity,editCity , loaded,statusLoaded} = AdminLocationStore
 
     useEffect(() => {
         fetchCity()
@@ -57,11 +58,12 @@ const City = observer(() => {
         setEditModalCity(!editModalCity)
     }
 
+    console.log(loaded)
     return (
         <div className={css.df_jc}>
             <div>
                 {
-                    city.map((reg: any, index: number) => (
+                    loaded ? city.map((reg: any, index: number) => (
                         <div key={reg.id} className={css.df}>
                             <Typography className={css.mR_5}>
                                 {`${reg.name} - (${reg.region.name})`}
@@ -70,8 +72,8 @@ const City = observer(() => {
                                 <ModeEditOutlineOutlinedIcon fontSize={'small'}/>
                             </div>
                         </div>
-
                     ))
+                        : statusActiveApi(statusLoaded)
                 }
             </div>
             <div onClick={() => setAddModalCity(true)}>

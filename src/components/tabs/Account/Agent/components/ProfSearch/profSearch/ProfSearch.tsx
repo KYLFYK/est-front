@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC, useState } from 'react';
 import { Filter } from '../../../../../../containers/Filter/Filter';
 import FilterSearch from "../../../../../../shared/FilterSearch/FilterSearch";
 import Typography from "../../../../../../shared/Typography/Typography";
@@ -24,10 +24,11 @@ const professionalSearch =[
         city:'Ялта',
         dateUpdate:'03.09.2021',
         phone:'+7 999 765 38 21',
+        price:50000000,
         params:[
             {title:'Цена',value:'10 000 000 Р'},
             {title:'Цена за м2',value:'100 000 Р'},
-            {title:'Площадь (жилая/общая)',value:'500/100м2'},
+            {title:'Площадь (жилая/общая)',value:'100/80м2'},
             {title:'Класс',value:'Бизес'},
             {title:'Тип дома',value:'Монолитный'},
             {title:'Бассей',value:'20м2'},
@@ -39,37 +40,76 @@ const professionalSearch =[
         nameObject:'3-х этажный коттедж',
         img:'https://i.pinimg.com/736x/25/7e/7c/257e7c44720ad1f5a9246d15299c9812.jpg',
         webAddress:'',
-        allSquare:'500 м2',
+        allSquare:'1500 м2',
         datePublish:'31.08.2021',
         nameCompanyPublish:'Estatum',
         country:'Крым',
         city:'Ялта',
         dateUpdate:'03.09.2021',
         phone:'+7 999 765 38 21',
+        price:150000000,
         params:[
-            {title:'Цена',value:'10 000 000 Р'},
+            {title:'Цена',value:'150 000 000 Р'},
             {title:'Цена за м2',value:'100 000 Р'},
-            {title:'Площадь (жилая/общая)',value:'500/100м2'},
+            {title:'Площадь (жилая/общая)',value:'200/100м2'},
             {title:'Класс',value:'Бизес'},
             {title:'Тип дома',value:'Монолитный'},
             {title:'Бассей',value:'20м2'},
             {title:'Гараж',value:'5м/м'},
         ]
-    }
+    },{
+        id:'3',
+        nameObject:'3-х этажный коттедж',
+        img:'https://i.pinimg.com/736x/25/7e/7c/257e7c44720ad1f5a9246d15299c9812.jpg',
+        webAddress:'',
+        allSquare:'124 м2',
+        datePublish:'31.08.2021',
+        nameCompanyPublish:'Estatum',
+        country:'Крым',
+        city:'Ялта',
+        dateUpdate:'03.09.2021',
+        phone:'+7 999 765 38 21',
+        price:124000000,
+        params:[
+            {title:'Цена',value:'124 000 000 Р'},
+            {title:'Цена за м2',value:'1 000 000 Р'},
+            {title:'Площадь (жилая/общая)',value:'500/300м2'},
+            {title:'Класс',value:'Бизес'},
+            {title:'Тип дома',value:'Монолитный'},
+            {title:'Бассей',value:'20м2'},
+            {title:'Гараж',value:'5м/м'},
+        ]
+    },
 ]
 
 const ProfSearch = () => {
     const click = (id:string) =>{
 
     }
+    const [state, setState]=useState<Array<any>>(professionalSearch)
+    const [sort, setSort]=useState<string>('default') // need api + filter
+
+    const filterAds = (sort:string) => {
+        if (sort === 'default') setState(professionalSearch)
+        if (sort === 'low' && professionalSearch) setState(professionalSearch.sort((a, b) => a.price - b.price))
+        if (sort === 'high' && professionalSearch) setState(professionalSearch.sort((a, b) => b.price - a.price))
+    }
+
     // + Link - url
     return (
         <div>
             <Filter />
-            <FilterSearch type={'professional'}/>
-            <Typography color={"tertiary"}>{ countNameAds(professionalSearch.length) }</Typography>
+            <FilterSearch
+                type={'professional'}
+                sort={sort}
+                setSort={(e:string)=>{
+                    filterAds(e)
+                    setSort(e)
+                }}
+            />
+            <Typography color={"tertiary"}>{ countNameAds(state.length) }</Typography>
             {
-                professionalSearch.map((object,index)=>(
+                state.map((object,index)=>(
                     <div key={index} className={css.border}>
                         <div className={css.borderImage}>
                             <Image
@@ -97,7 +137,7 @@ const ProfSearch = () => {
                             />
                             <EnumerationColumn>
                                 {
-                                    object.params.map((param,index)=>(
+                                    object.params.map((param:any,index:number)=>(
                                         <ParamsColumn key={index} title={param.title} value={param.value}/>
                                     ))
                                 }

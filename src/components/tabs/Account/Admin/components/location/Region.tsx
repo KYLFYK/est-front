@@ -8,10 +8,11 @@ import {Modal} from "../../../../../shared/Modal/Modal";
 import css from "./location.module.scss";
 import {BaseInput} from "../../../../../shared/BaseInput/Input";
 import ModeEditOutlineOutlinedIcon from "@mui/icons-material/ModeEditOutlineOutlined";
+import {statusActiveApi} from "../../../../../shared/Loader/Loader";
 
 const Region = observer(() => {
 
-    const {fetchRegion, region,editRegion,addRegion} = AdminLocationStore
+    const {fetchRegion, region,editRegion,addRegion, loaded , statusLoaded} = AdminLocationStore
 
     const [addModalRegion, setAddModalRegion] = useState<boolean>(false)
     const [editModalRegion, setEditModalRegion] = useState<boolean>(false)
@@ -54,7 +55,7 @@ const Region = observer(() => {
         <div className={css.df_jc}>
             <div>
                 {
-                    region.map((reg: any) => (
+                    loaded ? region.map((reg: any) => (
                         <div key={reg.id} className={css.df}>
                             <Typography key={reg.id} className={css.mR_5}>
                                 {
@@ -68,6 +69,7 @@ const Region = observer(() => {
                             </div>
                         </div>
                     ))
+                        : statusActiveApi( statusLoaded )
                 }
             </div>
             <div onClick={() => setAddModalRegion(true)}>

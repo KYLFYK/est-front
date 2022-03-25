@@ -4,6 +4,7 @@ import {observer} from "mobx-react-lite";
 import Typography from "../../../../../shared/Typography/Typography";
 import css from './editing.module.scss'
 import {GuideItem} from "./GuidesItem";
+import {statusActiveApi} from "../../../../../shared/Loader/Loader";
 
 export const translate = (title: string) => {
     switch (title) {
@@ -24,7 +25,7 @@ export const translate = (title: string) => {
 
 const Editing = observer(() => {
 
-    const {fetch, initialState} = AdminEditingStore
+    const {fetch, initialState,loaded,statusLoader} = AdminEditingStore
 
     useEffect(() => {
         fetch()
@@ -33,7 +34,7 @@ const Editing = observer(() => {
     return (
         <div style={{padding:"0 20px"}}>
             {
-                initialState?.map((t: any, index: number) => (
+                !loaded ? initialState?.map((t: any, index: number) => (
                     <GuidesHeader
                         key={index}
                         indexGuides={index}
@@ -41,6 +42,7 @@ const Editing = observer(() => {
                     />
 
                 ))
+                    : statusActiveApi(statusLoader)
             }
         </div>
     );
