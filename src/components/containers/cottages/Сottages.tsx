@@ -7,6 +7,7 @@ import CardObjectVillage from './СottagesComponents/CardObjectCottages';
 import VillageIcons from './СottagesComponents/CottagesIcons';
 import BaseButton from 'src/components/shared/BaseButton/BaseButtons';
 import {FinishesOptions} from "../finishesOptions/finishesOptions";
+import {useRouter} from "next/router";
 
 const cottages = [
     {
@@ -309,6 +310,12 @@ const finishesCards =[
 
 const Index = () => {
     const [activeObject, setActiveObject] = useState<number>(0)
+    const router =useRouter()
+    const moveCottages = () => {
+        router.push('/cottages/1')
+    }
+
+
     return (
         <div style={{margin:'0 60px'}}>
             <HeadLine title={'Коттеджи'} >
@@ -346,7 +353,7 @@ const Index = () => {
                                     }
                                 </div>
                                 <div className={css.buttonStyle}>
-                                    <BaseButton type={"primary"}>
+                                    <BaseButton type={"primary"} onClick={moveCottages}>
                                         Выбрать коттедж
                                     </BaseButton>
                                 </div>

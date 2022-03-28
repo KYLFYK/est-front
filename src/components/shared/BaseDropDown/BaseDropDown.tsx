@@ -51,7 +51,7 @@ export const BaseDropDown: React.FC<SelectPropsType> = ({
   );
   const refInput = useRef<any>(null);
   const [hover, setHover] = useState<boolean>(false);
-  console.log(placeholder, isError);
+  // console.log(placeholder, isError);
   const optionsMapMemo = useMemo(() => {
     const map = new Map<any, string>();
     for (const option of options) map.set(option.value, option.label);

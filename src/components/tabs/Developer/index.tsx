@@ -9,6 +9,7 @@ import DeveloperOwners, { IDeveloperCompanyData } from "./components/Owners/Deve
 import DeveloperRequisites from "./components/Requisites/DeveloperRequisites"
 import DeveloperRisksTab from "./components/Risks/DeveloperRisksTab"
 import DeveloperStatisticTab from "./components/Statistic/DeveloperStatisticTab"
+import css from './developerTabs.module.scss'
 
 export interface IDeveloperTabsData {
     about?: string[],
@@ -43,6 +44,7 @@ const DeveloperTabs: React.FC<Props> = ({ tabsData: { news, statistics, risks, a
     if (risks && risks.length) tab.push({ title: "Риски", Component: <DeveloperRisksTab items={risks} /> })
     return (
         <VerticalTabs
+            className={css.wrapper}
             link={false}
             tabs={tab}
         />

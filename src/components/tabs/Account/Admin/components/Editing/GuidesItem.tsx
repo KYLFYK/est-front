@@ -129,6 +129,12 @@ export const GuideItem: FC<GuideItemType> = observer(({guides, indexGuides}) => 
             subtitle_en: objectGuides.info[0].subtitle_en,
             isMulti: objectGuides.info[0].isMulti
         }
+        // if (newTypeGuide.subtitle_ru === null) {
+        //     // @ts-ignore
+        //     delete newTypeGuide.subtitle_ru
+        //     // @ts-ignore
+        //     delete newTypeGuide.subtitle_en
+        // }
         await addGuide(newTypeGuide)
         setTimeout(() => {
             fetch()
@@ -191,7 +197,7 @@ export const GuideItem: FC<GuideItemType> = observer(({guides, indexGuides}) => 
     }
 
     return (
-        <div>
+        <div >
             <div className={css.grid_3}>
                 <div className={css.df}>
                     <Typography>

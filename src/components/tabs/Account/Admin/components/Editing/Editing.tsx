@@ -32,7 +32,7 @@ const Editing = observer(() => {
     }, [])
 
     return (
-        <div style={{padding:"0 20px"}}>
+        <div style={{padding:"0 20px"}} className={css.list}>
             {
                 !loaded ? initialState?.map((t: any, index: number) => (
                     <GuidesHeader
@@ -60,7 +60,7 @@ const GuidesHeader: FC<GuidesHeaderType> = observer(({guidesHeader, indexGuides}
     const [menu, setMenu] = useState<boolean>(false)
 
     return (
-        <div>
+        <div >
             <div style={{display: 'flex'}}>
                 <div onClick={() => setMenu(!menu)}>
                     <Typography weight={"medium"} className={css.guideHearer}>

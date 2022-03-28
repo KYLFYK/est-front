@@ -46,7 +46,7 @@ const AgencyRoleTabs: React.FC<Props> = ({storybook }) => {
                 { title: "Заявки", Component: <ApplicationsViewTab /> },
                 { title: "Мои объявления", Component: <MyAds /> },
                 { title: "Тарифы размещения", Component: <PlacementRates /> },
-                { title: "Профпоиск", Component: <ProfSearch /> },
+                // { title: "Профпоиск", Component: <ProfSearch /> },
                 // { title: "Сообщения", Component: <Messages /> },
                 { title: "Уведомления", Component:  <AgentsNotifications
                 onRead={onRead}

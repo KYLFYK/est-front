@@ -33,7 +33,7 @@ const table = [
     {name: 'Июль 2021', price: '71000'},
 ]
 
-const numberApplications = [
+export const numberApplications = [
     {
         name: 'Крым',
         // "Срок окупаемости": 42,

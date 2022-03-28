@@ -16,6 +16,8 @@ export const AgencyTab: FC = observer(() => {
   const store = AllAdsStore;
   const [sort, setSort]=useState<string>('default')
 
+    console.log("store.statusLoader", store.statusLoader)
+
   return (
     <div className={styles.wrapper}>
       <PageFilter buttonText={"Добавить объект"} />
