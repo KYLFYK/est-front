@@ -86,7 +86,7 @@ export const BaseDropDown: React.FC<SelectPropsType> = ({
           }}
           className={classNames(
             css.dropdown_btn,
-            location === "bank" ? "" : css.border
+            (location === "bank" || location === "unionDropdown") ? "" : css.border
           )}
           onClick={() => {
             setOpen(!open);

@@ -4,6 +4,12 @@
     flex-wrap: wrap;
     align-items: flex-end;
 }
+.groupWithText {
+    display: flex;
+    gap: 10px 10px;
+    flex-wrap: wrap;
+    align-items: center;
+}
 
 .title {
     margin-bottom: 10px;

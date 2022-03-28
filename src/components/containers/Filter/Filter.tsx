@@ -193,6 +193,7 @@ export const Filter: React.FC<Props> = observer(({ location }) => {
           onChange={onChangeActionType}
           placeholder={FILTER_ACTIONS_OPTIONS[0].label}
           className={s.dropdownAction}
+          location={'unionDropdown'}
         />
         <BaseDropDown
           options={FILTER_HOUSE_TYPE_OPTIONS}
@@ -200,6 +201,7 @@ export const Filter: React.FC<Props> = observer(({ location }) => {
           onChange={onChangeHouseType}
           placeholder={FILTER_HOUSE_TYPE_OPTIONS[0].label}
           className={s.dropdownHouseType}
+          location={'unionDropdown'}
         />
       </InputsUnion>
 

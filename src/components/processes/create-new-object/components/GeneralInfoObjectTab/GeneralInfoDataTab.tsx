@@ -510,6 +510,7 @@ const GeneralInfoDataTab: React.FC<Props> = observer(
 
         {objectType !== ObjectTypes.LAND && (
           <InputsGroup
+            dropdownAndText={true}
             title={
               objectType === 4
                 ? "Размеры квартир"
@@ -711,7 +712,7 @@ const GeneralInfoDataTab: React.FC<Props> = observer(
             <div className={s.divider} />
             <InputsGroup title="Статус участка">
               <BaseDropDown
-              required={true}
+                required={true}
                 isError={!isValid && !isValidLandStatus}
                 value={values.landStatus}
                 options={GENERAL_INFO_TAB_STATUS_OPTIONS}

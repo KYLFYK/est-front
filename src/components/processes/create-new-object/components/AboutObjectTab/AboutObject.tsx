@@ -120,7 +120,7 @@ const AboutObjectTab: React.FC<Props> = observer(
         setIsValid(isValid);
       }
     };
-    
+
     useEffect(() => {
       if (createObjectStore.getObjType() !== actionToText(action)) {
         createObjectStore.setObjType(actionToText(action));
@@ -451,12 +451,13 @@ const AboutObjectTab: React.FC<Props> = observer(
                 className={s.inputXs}
                 type="number"
                 onChange={onChangeIndex}
+                required={true}
                 isError={!isValid && !isValidIndex}
                 name={"index"}
               />
             )}
             <BaseInput
-            required={true}
+              required={true}
               isError={!isValid && !isValidAddress}
               label="Адрес"
               className={s.inputX}
