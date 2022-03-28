@@ -137,7 +137,7 @@ const TownHouse: NextPage = observer((props: any) => {
 export default TownHouse
 
 export async function getServerSideProps({params}: any) {
-  const res  = await fetch(`https://estatum.f-case.ru/api/${UrlObj.townhouse}/${params.id}`)
+  const res  = await fetch(`${process.env.HOST}${UrlObj.townhouse}/${params.id}`)
   const object = await res.json()
   return {
       props: object,

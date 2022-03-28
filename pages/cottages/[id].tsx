@@ -1,4 +1,4 @@
-import React, {FC, useRef, useState} from 'react';
+import React, {FC, useEffect, useRef, useState} from 'react';
 import {MainContainer} from "../../src/components/containers/MainContainer/MainContainer";
 import {Breadcrumbs} from "../../src/components/shared/Breadcrumbs/Breadcrumbs";
 import {Views} from "../../src/components/shared/Views/Views";
@@ -21,6 +21,8 @@ import ConstructProgress from 'src/components/containers/ConstructProgress/Const
 import {OPTION_DATA} from 'src/pages/residential-complex/HousingComplex';
 import {Record} from "../../src/components/containers/Record/Record";
 import RecordAgent from "../../src/components/containers/Record/RecordAgent.json";
+import {useBreadcrumbsStore} from "../../src/mobx/stores/BreadcrumbsStore/BreadcrumbsStore";
+import {FILTER_ACTIONS_OPTIONS, FILTER_HOUSE_TYPE_OPTIONS} from "../../src/components/containers/Filter/config";
 
 const tabs = [
     {title: "Галерея"},
@@ -68,6 +70,8 @@ const infraD = 'Всего 14 км до Симферополя, столицы �
 
 const Cottages = () => {
 
+    const breadCrumbsStore = useBreadcrumbsStore();
+
     const general = useRef(null)
     const finishingOptions = useRef(null)
     const infra = useRef(null)
@@ -78,9 +82,37 @@ const Cottages = () => {
     const record = useRef(null)
     const [refs, setRefs] = useState<any>([]);
 
+    useEffect(()=>{
+        setRefs([
+            general.current,
+            finishingOptions.current,
+            infra.current,
+            generalInformation.current,
+            payback.current,
+            developer.current,
+            constructProgress.current,
+            record.current,
+        ])
+        breadCrumbsStore.addBreadCrumbs(`${
+                FILTER_ACTIONS_OPTIONS.filter((a: any) => 'buy' === a.value)
+                    ? FILTER_ACTIONS_OPTIONS.filter(
+                        (a: any) => 'buy' === a.value
+                    )[0].label
+                    : "нет сделки"
+            } ${
+                FILTER_HOUSE_TYPE_OPTIONS.filter((a: any) => 'cottages' === a.value)[0]
+                    ? FILTER_HOUSE_TYPE_OPTIONS.filter(
+                        (a: any) => 'cottages' === a.value
+                    )[0].label
+                    : "нет типа"
+            }`,
+            1)
+    },[])
+
+
     return (
         <MainContainer footerColor={"nude"} cabinetStyle={false}>
-            <Breadcrumbs location={"object"} items={['Крым', 'Купить участок', 'Участок в Троицком 30 соток']}/>
+            <Breadcrumbs location={"object"} />
             <Views items={['12.06.2021', '389']}/>
             <NameEstate item={'Дом в коттеджнном посёлоке Лесогор'}/>
             <AdressEstate item={'Крым респ., Ялта городской округ, Гурзуф пгт, ул. Ялтинская, 12К'}/>

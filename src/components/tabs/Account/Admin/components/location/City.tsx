@@ -15,14 +15,6 @@ const City = observer(() => {
 
     const {fetchCity, city, fetchRegion,region,addCity,editCity , loaded,statusLoaded} = AdminLocationStore
 
-    useEffect(() => {
-        fetchCity()
-        fetchRegion()
-    }, [])
-    useEffect(()=>{
-        setValueOptionDropDown ( region.map((r:any)=>({value:r.id,label:r.name})) )
-    },[region])
-
     const [editModalCity, setEditModalCity] = useState<boolean>(false)
     // const [removeModalCity, setRemoveModalCity] = useState<boolean>(false)
     const [addModalCity, setAddModalCity] = useState<boolean>(false)
@@ -32,6 +24,14 @@ const City = observer(() => {
 
     const [valueDropDown, setValueDropDown]=useState<string>("")
     const [valueOptionDropDown, setValueOptionDropDown]=useState<Array<{label:string,value:string}>>( [] )
+
+    useEffect(() => {
+        fetchCity()
+        fetchRegion()
+    }, [])
+    useEffect(()=>{
+        setValueOptionDropDown ( region.map((r:any)=>({value:r.id,label:r.name})) )
+    },[region])
 
     const onActiveEditCity = (index: number) => {
         setEditModalCity(true)
@@ -58,7 +58,7 @@ const City = observer(() => {
         setEditModalCity(!editModalCity)
     }
 
-    console.log(loaded)
+    console.log(JSON.parse(JSON.stringify(valueOptionDropDown)))
     return (
         <div className={css.df_jc}>
             <div>
@@ -109,7 +109,7 @@ const City = observer(() => {
                                 className={css.mT_5}
                                 options={valueOptionDropDown}
                                 onChange={(e)=>setValueDropDown(e)}
-                                placeholder={'Выбериге Регион'}
+                                placeholder={'Выбериге регион'}
                                 value={valueDropDown}
                             />
                         </div>
@@ -155,7 +155,7 @@ const City = observer(() => {
                         className={css.mT_10}
                         options={valueOptionDropDown}
                         onChange={(e)=>setValueDropDown(e)}
-                        placeholder={'Выберите Регион'}
+                        placeholder={'Выберите регион'}
                         value={valueDropDown}
                     />
                     <div className={css.df_mT_10} >
@@ -165,10 +165,10 @@ const City = observer(() => {
                             className={css.mR_10px}
                             onClick={onAddCity}
                         >
-                            создать
+                            Создать
                         </BaseButton>
                         <BaseButton onClick={cancelAddCity}>
-                            отмена
+                            Отмена
                         </BaseButton>
                     </div>
                 </Modal>

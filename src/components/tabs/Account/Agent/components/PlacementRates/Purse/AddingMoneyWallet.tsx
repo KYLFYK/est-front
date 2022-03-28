@@ -14,10 +14,10 @@ type AddingMoneyWalletType = {
 const arrMOc = [
     {title:'Банковская карта',info:'Без комиссии',type:'Bank'},
     {title:'Кошелек',info:'Без комиссии',type:'Wallet'},
-    {title:'Пополнить баланс ',info:'Без комиссии',type:'Сash'},
-    {title:'Сервис 1',info:'Без комиссии',type:''},
+    {title:'Сервис 1 ',info:'Без комиссии',type:'Сash'},
     {title:'Сервис 2',info:'Без комиссии',type:''},
     {title:'Сервис 3',info:'Без комиссии',type:''},
+    {title:'Сервис 4',info:'Без комиссии',type:''},
 ]
 
 const AddingMoneyWallet: FC<AddingMoneyWalletType> = ({onClick}) => {

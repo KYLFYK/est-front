@@ -195,7 +195,7 @@ export default ResidentialComplex;
 
 export async function getServerSideProps({ params }: any) {
   const res = await fetch(
-    `https://estatum.f-case.ru/api/${UrlObj.complex}/${params.id}`
+    `${process.env.HOST}${UrlObj.complex}/${params.id}`
   );
   const object = await res.json();
 

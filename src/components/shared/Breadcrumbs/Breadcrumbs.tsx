@@ -21,6 +21,7 @@ export const Breadcrumbs: React.FC<BreadcrumbsPropsType> = observer(({ className
     const breadCrumbsStore = useBreadcrumbsStore()
     const searchStore = useSearchStore()
     const router = useRouter()
+    // console.log("breadCrumbsStore",JSON.parse(JSON.stringify(breadCrumbsStore)))
     const onReturntoSearch = () => {
         FILTER_ACTIONS_OPTIONS.filter((a: any) => a.label === breadCrumbsStore.get()[1].split(' ')[0])[0] 
             && searchStore.setOrderType(FILTER_ACTIONS_OPTIONS.filter((a: any) => a.label === breadCrumbsStore.get()[1].split(' ')[0])[0].value)

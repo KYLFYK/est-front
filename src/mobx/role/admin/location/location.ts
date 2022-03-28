@@ -17,11 +17,11 @@ class AdminLocation {
 
     fetchCity: () => void = async () => {
         this.statusLoaded='loader'
-        this.loaded=true
+        this.loaded=false
         try {
             const res = await instance.get(`city`)
             this.city = res.data
-            this.loaded=false
+            this.loaded=true
         }catch (e){
             this.statusLoaded='error'
             this.loaded=false

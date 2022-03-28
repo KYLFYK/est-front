@@ -142,7 +142,7 @@ export default Land
 
 export async function getServerSideProps({params}: any) {
 
-    const res = await fetch(`https://estatum.f-case.ru/api/${UrlObj.land}/${params.id}`)
+    const res = await fetch(`${process.env.HOST}${UrlObj.land}/${params.id}`)
     // const objectPlatApi: IgetLandIdSSPType = await res.json()
     const objectPlatApi = await res.json()
 
