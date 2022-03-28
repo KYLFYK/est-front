@@ -51,4 +51,5 @@ const ObjectDeveloper: React.FC<any> = ({ developerData }) => {
     )
 }
 
+
 export default ObjectDeveloper
