@@ -1,0 +1,11 @@
+env
+dist
+node_modules
+docker-compose.yaml
+Dockerfile
+README.md
+.dockerignore
+.git
+.gitignore
+.gitlab-ci.yml
+.prod.env

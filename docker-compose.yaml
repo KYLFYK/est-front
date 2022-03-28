@@ -1,21 +1,25 @@
 version: '3.7'
 
 networks:
-  webnet:
+  marketplace:
+    name: marketplace
 services:
-  main:
-    container_name: estatum-front
-    build:
-      context: .
-      dockerfile: Dockerfile
+  market-front:
+    container_name: marketplace-front
+    image: market-front:latest
     networks:
-      - webnet
+      - marketplace
     restart: always
     volumes:
       - .keys:/app/keys
       - .env:/app/env
-    command: npm run start:prod
-    env_file:
-      - .env.production
+  market-proxy:
+    container_name: proxy
+    image: nginx:1.20.1
+    networks:
+      - marketplace
+    restart: always
     ports:
-      - 3002:3000
+      - 443:443
+    volumes:
+      - ./proxy.conf:/etc/nginx/conf.d/proxy.conf:ro
