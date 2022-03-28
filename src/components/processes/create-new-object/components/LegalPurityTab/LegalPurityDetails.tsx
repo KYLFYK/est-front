@@ -71,6 +71,7 @@ const LegalPurityDetails: React.FC<Props> = observer(
             label="Адрес"
             type="text"
             classNameWrapper={s.fullWidth}
+            required={true}
             isError={!isValid && !isValidAddress}
           />
           <BaseInput
@@ -79,6 +80,7 @@ const LegalPurityDetails: React.FC<Props> = observer(
             label="Кадастровый номер"
             type="text"
             classNameWrapper={s.inputMd}
+            required={true}
             isError={!isValid && !isValidCadastralNumber}
           />
           <BaseInput
@@ -87,6 +89,7 @@ const LegalPurityDetails: React.FC<Props> = observer(
             label="Кадастровая стоимость"
             type="number"
             classNameWrapper={s.inputMd}
+            required={true}
             isError={!isValid && !isValidCadastralCost}
           />
           <BaseInput
@@ -95,6 +98,7 @@ const LegalPurityDetails: React.FC<Props> = observer(
             label="Общая площадь"
             type="number"
             classNameWrapper={s.inputSm}
+            required={true}
             isError={!isValid && !isValidGeneralSquare}
           />
           {"floors" in realEstateRegister && (
@@ -109,6 +113,7 @@ const LegalPurityDetails: React.FC<Props> = observer(
               label="Этажность"
               type="number"
               classNameWrapper={s.inputSm}
+              required={true}
               isError={!isValid && !isValidFloors}
             />
           )}

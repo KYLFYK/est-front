@@ -129,6 +129,8 @@ const InfrastructureTab: React.FC<Props> = observer(
                       : "Выберите один или несколько"
                   }
                   multi={viewType.isMulti}
+                  required={true}
+                  isError={!isValid && !isValidView}
                 />
               </InputsGroup>
             )}

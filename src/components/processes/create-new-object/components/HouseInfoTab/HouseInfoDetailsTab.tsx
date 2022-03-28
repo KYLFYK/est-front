@@ -323,6 +323,7 @@ const HouseInfoDetailsTab: React.FC<Props> = observer(
             <InputsGroup title="Строительно-техническая экспертиза">
               {houseType && "houseType" in values && (
                 <NewDropDown
+                required={true}
                   isError={!isValid && !isValidHouseType}
                   value={values.houseType}
                   className={s.dropdownSm}
@@ -347,6 +348,7 @@ const HouseInfoDetailsTab: React.FC<Props> = observer(
                   }))}
                   placeholder="Фундамент"
                   onChange={(value) => onChangeDropDown(value, "fundament")}
+                  required={true}
                   isError={!isValid && !isValidFundament}
                   multi={groundType.isMulti}
                 />
@@ -362,6 +364,7 @@ const HouseInfoDetailsTab: React.FC<Props> = observer(
                   }))}
                   placeholder="Кровля"
                   onChange={(value) => onChangeDropDown(value, "roof")}
+                  required={true}
                   isError={!isValid && !isValidRoof}
                   multi={roofType.isMulti}
                 />
@@ -377,6 +380,7 @@ const HouseInfoDetailsTab: React.FC<Props> = observer(
                   }))}
                   placeholder="Стены"
                   onChange={(value) => onChangeDropDown(value, "walls")}
+                  required={true}
                   isError={!isValid && !isValidWalls}
                   multi={wallType.isMulti}
                 />
@@ -391,6 +395,7 @@ const HouseInfoDetailsTab: React.FC<Props> = observer(
                   classNameWrapper={classNames(s.fullWidth, s.commentInput)}
                   className={s.commentInputIconSpace}
                   label="Комментарий"
+                  required={true}
                   isError={!isValid && !isValidTechComment}
                   icon={
                     <Typography color="tertiary">
@@ -413,6 +418,7 @@ const HouseInfoDetailsTab: React.FC<Props> = observer(
                   }))}
                   placeholder="Водопровод"
                   onChange={(value) => onChangeDropDown(value, "waterPipe")}
+                  required={true}
                   isError={!isValid && !isValidWaterPipe}
                   multi={waterType.isMulti}
                 />
@@ -428,6 +434,7 @@ const HouseInfoDetailsTab: React.FC<Props> = observer(
                   }))}
                   placeholder="Отопление"
                   onChange={(value) => onChangeDropDown(value, "heating")}
+                  required={true}
                   isError={!isValid && !isValidHeating}
                   multi={heatingType.isMulti}
                 />
@@ -443,6 +450,7 @@ const HouseInfoDetailsTab: React.FC<Props> = observer(
                   }))}
                   placeholder="Канализация"
                   onChange={(value) => onChangeDropDown(value, "sewerage")}
+                  required={true}
                   isError={!isValid && !isValidSewerage}
                   multi={sewerageType.isMulti}
                 />
@@ -458,6 +466,7 @@ const HouseInfoDetailsTab: React.FC<Props> = observer(
                   }))}
                   placeholder="Электричество"
                   onChange={(value) => onChangeDropDown(value, "electricity")}
+                  required={true}
                   isError={!isValid && !isValidElectricity}
                   multi={electricityType.isMulti}
                 />
@@ -472,12 +481,14 @@ const HouseInfoDetailsTab: React.FC<Props> = observer(
                   onChange={(value) =>
                     onChangeDropDown(value, "vent" as keyof TInfoState)
                   }
+                  required={true}
                   isError={!isValid && !isValidVent}
                 />
               )}
               {internetType && "internet" in values && (
                 <NewDropDown
                   value={values.internet}
+                  required={true}
                   isError={!isValid && !isValidInternet}
                   className={s.dropdownSm}
                   label="Интернет"
@@ -503,6 +514,7 @@ const HouseInfoDetailsTab: React.FC<Props> = observer(
                   classNameWrapper={classNames(s.fullWidth, s.commentInput)}
                   label="Комментарий"
                   className={s.commentInputIconSpace}
+                  required={true}
                   isError={!isValid && !isValidEngineeringComment}
                   icon={
                     <Typography color="tertiary">
@@ -528,6 +540,7 @@ const HouseInfoDetailsTab: React.FC<Props> = observer(
                         onChange={(value) =>
                           onChangeDropDown(value, "parking" as keyof TInfoState)
                         }
+                        required={true}
                         isError={!isValid && !isValidParking}
                         multi={parkingType.isMulti}
                       />
@@ -542,6 +555,7 @@ const HouseInfoDetailsTab: React.FC<Props> = observer(
                         type="number"
                         classNameWrapper={s.dropdownSm}
                         label="Стоимость места за час"
+                        required={true}
                         isError={!isValid && !isValidParkingPrice}
                         icon={<Typography className={s.icon}>₽</Typography>}
                       />

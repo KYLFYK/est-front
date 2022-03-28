@@ -14,6 +14,7 @@ interface Props
   label?: string;
   classNameWrapper?: string;
   isError?: boolean;
+  required?: boolean;
   errorLabel?: string;
   iconPlacement?: "right" | "left";
   textArea?: boolean;
@@ -28,6 +29,7 @@ export const BaseInput: React.FC<Props> = ({
   label,
   classNameWrapper,
   isError,
+  required = false,
   errorLabel = "Поле должно быть заполнено",
   iconPlacement,
   textArea,
@@ -36,7 +38,6 @@ export const BaseInput: React.FC<Props> = ({
   ...props
 }) => {
   const refInput = useRef<any>(null);
-  const refText = useRef<any>(null);
   const [hover, setHover] = useState<boolean>(false);
 
   return (
@@ -91,20 +92,31 @@ export const BaseInput: React.FC<Props> = ({
             {icon}
           </span>
         )}
-        {isError && (
-          <div
-            onMouseEnter={() => setHover(true)}
-            onMouseLeave={() => setHover(false)}
-            style={{
-              cursor: "pointer",
-              position: "relative",
-              right: "-10px",
-              top: "10px",
-            }}
-          >
-            <IconExclamAlt />
-          </div>
-        )}
+        {required &&
+          (isError ? (
+            <div
+              onMouseEnter={() => setHover(true)}
+              onMouseLeave={() => setHover(false)}
+              style={{
+                margin: "0 10px 0 0",
+                cursor: "pointer",
+                position: "relative",
+                right: "-10px",
+                top: "10px",
+              }}
+            >
+              <IconExclamAlt />
+            </div>
+          ) : (
+            <div
+              style={{
+                margin: "0 30px 0 0",
+                position: "relative",
+                right: "-10px",
+                top: "10px",
+              }}
+            ></div>
+          ))}
         {hover && (
           <Card
             style={{
@@ -120,7 +132,7 @@ export const BaseInput: React.FC<Props> = ({
           >
             <Typography className={s.wrapWidth}>{errorLabel}</Typography>
           </Card>
-          )}
+        )}
       </div>
     </div>
   );

@@ -247,7 +247,7 @@ const HouseInfoInterierTab: React.FC<Props> = observer(
               {bathroomType && "plumbing" in values && (
                 <NewDropDown
                   value={values.plumbing}
-                  className={classNames(s.dropdownSm, s.extraSpace)}
+                  className={classNames(s.dropdownSm)}
                   options={bathroomType.values.map((el) => ({
                     label: el.value,
                     value: el.id.toString(),
@@ -255,6 +255,7 @@ const HouseInfoInterierTab: React.FC<Props> = observer(
                   onChange={(value) => onChangeDropDown(value, "plumbing")}
                   placeholder="Сан. узел"
                   label="Сан. узел"
+                  required={true}
                   isError={!isValid && !isValidPlumbing}
                   multi={bathroomType.isMulti}
                 />
@@ -267,6 +268,7 @@ const HouseInfoInterierTab: React.FC<Props> = observer(
                   onChange={(value) => onChangeDropDown(value, "renovation")}
                   placeholder="Ремонт"
                   label="Ремонт"
+                  required={true}
                   isError={!isValid && !isValidRenovation}
                 />
               )}

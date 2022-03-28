@@ -1,7 +1,8 @@
 .group {
     display: flex;
-    gap: 10px;
+    gap: 10px 10px;
     flex-wrap: wrap;
+    align-items: flex-end;
 }
 
 .title {
