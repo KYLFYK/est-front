@@ -77,7 +77,6 @@ export const Record: FC<AgentRecordType> = ({Record, title}) => {
     const [timeStart, setTimeStart] = useState('08:00')
     const [timeEnd, setTimeEnd] = useState('18:00')
 
-
     const [nameDirty, setNameDirty] = useState(false)
     const [mailDirty, setMailDirty] = useState(false)
     const [phoneDirty, setPhoneDirty] = useState(false)
@@ -105,10 +104,7 @@ export const Record: FC<AgentRecordType> = ({Record, title}) => {
     const [clicked, setClicked] = useState(false)
 
     const onClickHandler = async () => {
-
-        // dispatch(sendOrderTC(form));
         setClicked(true);
-
         const routerApi = router.asPath.split('/')
         await RecordApi.RecordPost(routerApi[1], routerApi[2],{
             name:name,
@@ -319,76 +315,6 @@ export const Record: FC<AgentRecordType> = ({Record, title}) => {
                     </div>
                 </div>
 
-                {/* Старая верстка +  фото */}
-                {/*<div className={s.margin_40_20}>*/}
-                {/*    <Typography color='secondary' weight={"bold"}>*/}
-                {/*        За домом закреплён агент*/}
-                {/*    </Typography>*/}
-                {/*</div>*/}
-                {/*<div className={s.card}>*/}
-                {/*    <div className={s.avatar}>*/}
-                {/*        <div className={s.divImage}>*/}
-                {/*            <Image unoptimized src={RomanSafonov} width={100} height={100} className={s.image}*/}
-                {/*                   alt={`property agent`}*/}
-                {/*                   loader={() => '../../../Pics/persons/РоманСафонов.png'}/>*/}
-                {/*        </div>*/}
-                {/*        <div className={s.fullName}>*/}
-                {/*            <div className={s.bold}>*/}
-                {/*                <Typography weight={'bold'}>*/}
-                {/*                    {Record.fullName}*/}
-                {/*                </Typography>*/}
-                {/*            </div>*/}
-                {/*            <div style={{marginLeft: '5px'}}>*/}
-                {/*                <Typography>*/}
-                {/*                    {Record.heldPost}*/}
-                {/*                </Typography>*/}
-                {/*            </div>*/}
-                {/*        </div>*/}
-                {/*    </div>*/}
-                {/*    <div className={s.portfolioContacts}>*/}
-                {/*        <div className={s.portfolio}>*/}
-                {/*            <div className={s.portfolioPosition}>*/}
-                {/*                <Typography> Работает: </Typography>*/}
-                {/*                <span className={s.bold}>*/}
-                {/*                    <Typography weight={'bold'}>*/}
-                {/*                        {Record.workExperience}*/}
-                {/*                    </Typography>*/}
-                {/*                </span>*/}
-                {/*            </div>*/}
-                {/*            <div className={s.portfolioPosition}>*/}
-                {/*                <Typography> Завершено: </Typography>*/}
-                {/*                <span className={s.bold}>*/}
-                {/*                    <Typography weight={'bold'}>*/}
-                {/*                        {Record.completed}*/}
-                {/*                    </Typography>*/}
-                {/*                </span>*/}
-                {/*            </div>*/}
-                {/*            <div className={s.portfolioPosition}>*/}
-                {/*                <Typography> В работе: </Typography>*/}
-                {/*                <span className={s.bold}>*/}
-                {/*                    <Typography weight={'bold'}>*/}
-                {/*                         {Record.inWork}*/}
-                {/*                    </Typography>*/}
-                {/*                </span>*/}
-                {/*            </div>*/}
-                {/*        </div>*/}
-                {/*        <div className={s.contacts}>*/}
-                {/*            {*/}
-                {/*                Record.connection.map((i, id) => (*/}
-                {/*                    <a key={id} style={{color: '#3d4550', textDecoration: 'none'}}*/}
-                {/*                       href={`${i.url}${i.value}`}>*/}
-                {/*                        <div key={id} className={s.contact}>*/}
-                {/*                            <div style={{marginRight: '8px'}}>{*/}
-                {/*                                searchIcon(i.title)*/}
-                {/*                            }</div>*/}
-                {/*                            <Typography> {i.value}</Typography>*/}
-                {/*                        </div>*/}
-                {/*                    </a>*/}
-                {/*                ))*/}
-                {/*            }*/}
-                {/*        </div>*/}
-                {/*    </div>*/}
-                {/*</div>*/}
             </ContentContainer>
         </div>
     )

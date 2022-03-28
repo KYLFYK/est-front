@@ -4,6 +4,7 @@ import {observer} from "mobx-react-lite";
 import Typography from "../../../../../shared/Typography/Typography";
 import css from './editing.module.scss'
 import {GuideItem} from "./GuidesItem";
+import {statusActiveApi} from "../../../../../shared/Loader/Loader";
 
 export const translate = (title: string) => {
     switch (title) {
@@ -24,16 +25,16 @@ export const translate = (title: string) => {
 
 const Editing = observer(() => {
 
-    const {fetch, initialState} = AdminEditingStore
+    const {fetch, initialState,loaded,statusLoader} = AdminEditingStore
 
     useEffect(() => {
         fetch()
     }, [])
 
     return (
-        <div style={{padding:"0 20px"}}>
+        <div style={{padding:"0 20px"}} className={css.list}>
             {
-                initialState?.map((t: any, index: number) => (
+                !loaded ? initialState?.map((t: any, index: number) => (
                     <GuidesHeader
                         key={index}
                         indexGuides={index}
@@ -41,6 +42,7 @@ const Editing = observer(() => {
                     />
 
                 ))
+                    : statusActiveApi(statusLoader)
             }
         </div>
     );
@@ -58,7 +60,7 @@ const GuidesHeader: FC<GuidesHeaderType> = observer(({guidesHeader, indexGuides}
     const [menu, setMenu] = useState<boolean>(false)
 
     return (
-        <div>
+        <div >
             <div style={{display: 'flex'}}>
                 <div onClick={() => setMenu(!menu)}>
                     <Typography weight={"medium"} className={css.guideHearer}>

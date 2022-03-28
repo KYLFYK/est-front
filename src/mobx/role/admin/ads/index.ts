@@ -60,17 +60,26 @@ class AllAdsStoreEx {
     }
 
     loaded: boolean = false;
+    statusLoader: string = "loader"
     errorOnLoad: boolean = false;
     adsList: IResponse[] | null = null;
 
     async uploadAllAds() {
+        this.statusLoader = "loader"
         try {
             this.adsList = await loadAllData();
             this.loaded = true;
             this.errorOnLoad = false;
+            this.statusLoader = ""
+            // console.log(JSON.parse(JSON.stringify(this.adsList)))
+            // debugger
+            if(this.adsList == null || this.adsList.length === 0 ){
+                this.statusLoader = "empty"
+            }
         } catch (e) {
             this.errorOnLoad = true;
-            this.loaded = false;
+            this.loaded = true;
+            this.statusLoader = "error"
         }
     }
 
@@ -91,7 +100,6 @@ class AllAdsStoreEx {
             if (sort === 'default') this.uploadAllAds()
         }
     }
-
 
     async setMarkAsDeleted(id: number, type: ObjectTypes, deleted: boolean) {
         if (this.adsList) {

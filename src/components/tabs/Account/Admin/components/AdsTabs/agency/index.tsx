@@ -9,13 +9,16 @@ import { ObjTypeToRu } from "../../../../Agent/components/Others/MyAdsContainer/
 import { typeToRuString } from "../../../../../../../utils/interfaces/objects";
 
 import styles from "./AgencyTab.module.scss";
+import Typography from "../../../../../../shared/Typography/Typography";
+import {statusActiveApi} from "../../../../../../shared/Loader/Loader";
 
 export const AgencyTab: FC = observer(() => {
   const store = AllAdsStore;
   const [sort, setSort]=useState<string>('default')
 
-  return store.adsList &&
-    store.adsList.filter((el) => el.owner.role === "agent").length > 0 ? (
+    console.log("store.statusLoader", store.statusLoader)
+
+  return (
     <div className={styles.wrapper}>
       <PageFilter buttonText={"Добавить объект"} />
       <FilterSearch
@@ -26,8 +29,8 @@ export const AgencyTab: FC = observer(() => {
             sort={sort}
       />
       <div className={styles.list}>
-        {store.adsList
-          .filter((el) => el.owner.role === "agent")
+        {store.adsList !== null && store.adsList.length > 0 ?
+        store.adsList.filter((el) => el.owner.role === "agent")
           .map((object) => {
             const textButton = object.markAsDelete ? "Восстановить" : undefined;
 
@@ -93,10 +96,9 @@ export const AgencyTab: FC = observer(() => {
                 markedAsDeleted={object.markAsDelete}
               />
             );
-          })}
+          }) :  statusActiveApi(store.statusLoader)
+        }
       </div>
     </div>
-  ) : (
-    <>Loading</>
-  );
+  )
 });

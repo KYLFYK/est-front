@@ -12,14 +12,15 @@ import {
 import { ObjTypeToRu } from "../../../Agent/components/Others/MyAdsContainer/MyAdsContainer";
 
 import styles from "./agency/AgencyTab.module.scss";
+import Typography from "../../../../../shared/Typography/Typography";
+import {statusActiveApi} from "../../../../../shared/Loader/Loader";
 
 export const DeveloperTab: FC = observer(() => {
   const store = AllAdsStore;
 
   const [sort,setSort]=useState<string>('default')
 
-  return store.adsList &&
-    store.adsList.filter((el) => el.owner.role === "developer").length > 0 ? (
+  return  (
     <div className={styles.wrapper}>
       <PageFilter buttonText={"Добавить объект"} />
       <FilterSearch
@@ -30,8 +31,8 @@ export const DeveloperTab: FC = observer(() => {
         }}
       />
       <div className={styles.list}>
-        {store.adsList
-          .filter((el) => el.owner.role === "developer")
+        {store.adsList !== null && store.adsList.length > 0 ?
+         store.adsList.filter((el) => el.owner.role === "developer")
           .map((object) => {
             const textButton = object.markAsDelete ? "Восстановить" : undefined;
 
@@ -116,11 +117,10 @@ export const DeveloperTab: FC = observer(() => {
                     : undefined
                 }
               />
-            );
-          })}
+            )
+          }): statusActiveApi(store.statusLoader)
+        }
       </div>
     </div>
-  ) : (
-    <>Loading</>
-  );
+  )
 });

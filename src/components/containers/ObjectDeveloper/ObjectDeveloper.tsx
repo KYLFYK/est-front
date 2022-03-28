@@ -33,7 +33,6 @@ const ObjectDeveloper: React.FC<any> = ({ developerData }) => {
                         {developerData.logo && <Image className={s.img} src={developerData.logo} unoptimized alt="logo" layout="fill" loader={() => developerData.logo} />}
                     </div>
                 </Advantage>
-
                 <Advantage title="Риски" text={developerData.risks ? "Да" : "Нет"} className={s.iconItem}>
                     <ExclamationMarkIcon />
                 </Advantage>
@@ -50,5 +49,6 @@ const ObjectDeveloper: React.FC<any> = ({ developerData }) => {
         </div>
     )
 }
+
 
 export default ObjectDeveloper

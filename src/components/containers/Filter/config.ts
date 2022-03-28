@@ -30,6 +30,7 @@ export const FILTER_HOUSE_TYPE_OPTIONS: IOption[] = [
     {value: "apartment", label: "Квартиру"},
     {value: "house", label: "Дом"},
     {value: "land", label: "Участок"},
+    {value: "cottages", label: "Коттеджный посёлок"},
 ]
 
 export const FILTER_PRIVATE_HOUSE_OPTIONS: IOption[] = [
@@ -65,6 +66,7 @@ export const FILTER_HOUSE_TYPES: IOption[] = [
     {value: "house", label: "Дом"},
     {value: "land", label: "Участок"},
     {value: "townhouse", label: "Таунхаус"},
-    {value: "complex", label: "Жилой комплекс"}
+    {value: "complex", label: "Жилой комплекс"},
+    {value:'cottages',label:'Коттеджный посёлок'}
 ]
 

@@ -10,20 +10,37 @@ class AdminLocation {
 
     loaded: boolean = false;
     errorOnLoad: boolean = false;
-
+    statusLoaded: string = ''
     city: any = []
     region: any = []
     country: any = []
 
     fetchCity: () => void = async () => {
-        const res = await instance.get(`city`)
-        this.city = res.data
+        this.statusLoaded='loader'
+        this.loaded=false
+        try {
+            const res = await instance.get(`city`)
+            this.city = res.data
+            this.loaded=true
+        }catch (e){
+            this.statusLoaded='error'
+            this.loaded=false
+        }
     }
+
     addCity: (nameCountry:{name:string,regionId:number}) => void = async (nameCountry:{name:string,regionId:number}) => {
-        await instance.post (`city`,nameCountry,{
-            headers: {authorization: `Bearer ${localStorage.getItem('accessEstatum')}`}
-        }) // + key
-        this.fetchCity()
+        this.statusLoaded='loader'
+        this.loaded=true
+        try {
+            await instance.post(`city`, nameCountry, {
+                headers: {authorization: `Bearer ${localStorage.getItem('accessEstatum')}`}
+            }) // + key
+            this.fetchCity()
+            this.loaded=false
+        }catch (e){
+            this.statusLoaded='error'
+            this.loaded=false
+        }
     }
     editCity: (id:number,city:{name:string,regionId:number}) => void = async (id:number,city:{name:string,regionId:number}) => {
        await instance.patch (`city/${id}`,city,{
@@ -36,8 +53,15 @@ class AdminLocation {
     //     instance.delete (`city/${id}`) // + key
     // }
     fetchRegion: () => void = async () => {
-        const res = await instance.get(`region`)
-        this.region = res.data
+        this.statusLoaded='loader'
+        this.loaded=false
+        try{
+            const res = await instance.get(`region`)
+            this.region = res.data
+            this.loaded=true
+        }catch (e) {
+            this.statusLoaded='error'
+        }
     }
     addRegion: (name:string) => void = async (name:string) => {
         await instance.post (`region`,{name:name},{
@@ -53,8 +77,16 @@ class AdminLocation {
     }
 
     fetchCountry: () => void = async () => {
-        const res = await instance.get(`country`)
-        this.country = res.data
+
+        try{
+            const res = await instance.get(`country`)
+            this.country = res.data
+            this.loaded=true
+        }catch (e){
+            this.statusLoaded='error'
+            this.loaded=true
+        }
+
     }
     addCountry: (nameCountry:string) => void = async (nameCountry:string) => {
         instance.put (`country`,nameCountry) // + key

@@ -32,13 +32,10 @@ export const Login: React.FC<LoginPropsType> = ({recoveryPass, registration, onE
                 alert('Ошибка ввода данных')
             }
         } catch (e) {
-
+            alert('ошибка сервера')
         }
-
-
         // await AuthApi.me()
     }
-
 
     return (
         <div className={css.loginContainer}>

@@ -17,6 +17,7 @@ export const useStyles = makeStyles(() => ({
             border: '0px solid #CAD1DA',
             color: '#C5A28E',
             fontFamily: "RobotoMedium",
+            marginLeft:"5px",
         }
     }
 ))

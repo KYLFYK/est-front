@@ -9,18 +9,11 @@ import BaseButton from "../../../../../shared/BaseButton/BaseButtons";
 import AddIcon from "@mui/icons-material/Add";
 import {BaseInput} from "../../../../../shared/BaseInput/Input";
 import {BaseDropDown} from "../../../../../shared/BaseDropDown/BaseDropDown";
+import {statusActiveApi} from "../../../../../shared/Loader/Loader";
 
 const City = observer(() => {
 
-    const {fetchCity, city, fetchRegion,region,addCity,editCity} = AdminLocationStore
-
-    useEffect(() => {
-        fetchCity()
-        fetchRegion()
-    }, [])
-    useEffect(()=>{
-        setValueOptionDropDown ( region.map((r:any)=>({value:r.id,label:r.name})) )
-    },[region])
+    const {fetchCity, city, fetchRegion,region,addCity,editCity , loaded,statusLoaded} = AdminLocationStore
 
     const [editModalCity, setEditModalCity] = useState<boolean>(false)
     // const [removeModalCity, setRemoveModalCity] = useState<boolean>(false)
@@ -31,6 +24,14 @@ const City = observer(() => {
 
     const [valueDropDown, setValueDropDown]=useState<string>("")
     const [valueOptionDropDown, setValueOptionDropDown]=useState<Array<{label:string,value:string}>>( [] )
+
+    useEffect(() => {
+        fetchCity()
+        fetchRegion()
+    }, [])
+    useEffect(()=>{
+        setValueOptionDropDown ( region.map((r:any)=>({value:r.id,label:r.name})) )
+    },[region])
 
     const onActiveEditCity = (index: number) => {
         setEditModalCity(true)
@@ -57,11 +58,12 @@ const City = observer(() => {
         setEditModalCity(!editModalCity)
     }
 
+    console.log(JSON.parse(JSON.stringify(valueOptionDropDown)))
     return (
         <div className={css.df_jc}>
             <div>
                 {
-                    city.map((reg: any, index: number) => (
+                    loaded ? city.map((reg: any, index: number) => (
                         <div key={reg.id} className={css.df}>
                             <Typography className={css.mR_5}>
                                 {`${reg.name} - (${reg.region.name})`}
@@ -70,8 +72,8 @@ const City = observer(() => {
                                 <ModeEditOutlineOutlinedIcon fontSize={'small'}/>
                             </div>
                         </div>
-
                     ))
+                        : statusActiveApi(statusLoaded)
                 }
             </div>
             <div onClick={() => setAddModalCity(true)}>
@@ -107,7 +109,7 @@ const City = observer(() => {
                                 className={css.mT_5}
                                 options={valueOptionDropDown}
                                 onChange={(e)=>setValueDropDown(e)}
-                                placeholder={'Выбериге Регион'}
+                                placeholder={'Выбериге регион'}
                                 value={valueDropDown}
                             />
                         </div>
@@ -153,7 +155,7 @@ const City = observer(() => {
                         className={css.mT_10}
                         options={valueOptionDropDown}
                         onChange={(e)=>setValueDropDown(e)}
-                        placeholder={'Выберите Регион'}
+                        placeholder={'Выберите регион'}
                         value={valueDropDown}
                     />
                     <div className={css.df_mT_10} >
@@ -163,10 +165,10 @@ const City = observer(() => {
                             className={css.mR_10px}
                             onClick={onAddCity}
                         >
-                            создать
+                            Создать
                         </BaseButton>
                         <BaseButton onClick={cancelAddCity}>
-                            отмена
+                            Отмена
                         </BaseButton>
                     </div>
                 </Modal>

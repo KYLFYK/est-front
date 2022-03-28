@@ -1,3 +1,4 @@
+@import "src/app/styles/scrollbars";
 .guideHearer{
   cursor: pointer;
   margin: 10px 0;
@@ -95,4 +96,12 @@
 }
 .df{
   display: flex;
+}
+.list{
+  overflow: auto;
+  scrollbar-width: 1px;
+  height: calc(100vh - 350px);
+  @include MapScrollbar;
+  padding-right: 10px;
+  margin-right: 5px;
 }

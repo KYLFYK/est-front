@@ -184,7 +184,7 @@ export default Apartment;
 
 export async function getServerSideProps({ params }: any) {
   const res = await fetch(
-    `https://estatum.f-case.ru/api/${UrlObj.apartment}/${params.id}`
+    `${process.env.HOST}${UrlObj.apartment}/${params.id}`
   );
   const object = await res.json();
   return {

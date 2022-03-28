@@ -52,7 +52,7 @@ const personalAcc = [
     { title: "Заявки", href: "/requests", message: 0 },
     { title: "Мои объявления", href: "/ads", message: 0 },
     { title: "Тарифы размещения", href: "/tariff", message: 12 },
-    { title: "Профпоиск", href: "/search", message: 3 },
+    // { title: "Профпоиск", href: "/search", message: 3 },
     // { title: "Сообщения", href: "/messages", message: 0 },
     { title: "Уведомления", href: "/notifications", message: 0 },
   ],

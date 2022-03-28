@@ -62,7 +62,7 @@ class MainPageStore {
         this.initialData.agents = res.data.map((agent: any) => (
             {
                 id: agent.id,
-                img: agent.agentProperty?.file[0]?.url 
+                img: agent.agentProperty?.file !== undefined && agent.agentProperty?.file[0]?.url
                     ? agent.agentProperty.file[0].url
                     : "https://images.unsplash.com/photo-1541963463532-d68292c34b19?ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8Ym9va3xlbnwwfHwwfHw%3D&ixlib=rb-1.2.1&w=1000&q=&q=",
                 connection: {
