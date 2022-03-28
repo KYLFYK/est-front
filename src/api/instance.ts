@@ -7,7 +7,7 @@ declare module "axios" {
 }
 
 export const instance = axios.create({
-  baseURL: process.env.HOST,
+  baseURL: 'http://185.98.83.46:443/api/',
   // baseURL: 'api/',
   headers: {
     authorization: `Bearer ''`,

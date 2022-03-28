@@ -250,6 +250,7 @@ const LegalPurityFounders: React.FC<Props> = observer(
                   label="Собственник 2"
                   type="text"
                   classNameWrapper={s.inputMd}
+                  required={true}
                   isError={!isValid && !isValidCurrentFounderNames}
                   errorLabel="Все поля должны быть заполнены"
                 />
@@ -261,6 +262,7 @@ const LegalPurityFounders: React.FC<Props> = observer(
                 label="Собственник"
                 type="text"
                 classNameWrapper={s.inputMd}
+                required={true}
                 isError={!isValid && !isValidCurrentFounderNames}
               />
             )}
@@ -271,6 +273,7 @@ const LegalPurityFounders: React.FC<Props> = observer(
             label="Кадастровый номер"
             type="text"
             classNameWrapper={s.inputMd}
+            required={true}
             isError={!isValid && !isValidCurrentCadastralNumber}
           />
 
@@ -308,6 +311,7 @@ const LegalPurityFounders: React.FC<Props> = observer(
                   label="Собственник 2"
                   type="text"
                   classNameWrapper={s.inputMd}
+                  required={true}
                   isError={!isValid && !isValidPrevFounderNames}
                   errorLabel="Все поля должны быть заполнены"
                 />
@@ -318,6 +322,7 @@ const LegalPurityFounders: React.FC<Props> = observer(
                 value={previousFounder.firstFounderName}
                 label="Собственник"
                 type="text"
+                required={true}
                 isError={!isValid && !isValidPrevFounderNames}
                 classNameWrapper={s.inputMd}
               />
@@ -329,6 +334,7 @@ const LegalPurityFounders: React.FC<Props> = observer(
             label="Кадастровый номер"
             type="text"
             classNameWrapper={s.inputMd}
+            required={true}
             isError={!isValid && !isValidPrevCadastralNumber}
           />
 

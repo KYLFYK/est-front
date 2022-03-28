@@ -120,7 +120,7 @@ const AboutObjectTab: React.FC<Props> = observer(
         setIsValid(isValid);
       }
     };
-
+    
     useEffect(() => {
       if (createObjectStore.getObjType() !== actionToText(action)) {
         createObjectStore.setObjType(actionToText(action));
@@ -296,6 +296,7 @@ const AboutObjectTab: React.FC<Props> = observer(
               type="text"
               value={values.name}
               onChange={onChangeName}
+              required={true}
               isError={!isValid && !isValidName}
               name={"objectName"}
             />
@@ -310,6 +311,7 @@ const AboutObjectTab: React.FC<Props> = observer(
                 value={values.type}
                 onChange={onChangeType}
                 label={objectType === 3 ? "Тип земли" : "Тип жилья"}
+                required={true}
                 isError={!isValid && !isValidType}
                 name={"type"}
                 multi={buildingType.isMulti}
@@ -341,6 +343,7 @@ const AboutObjectTab: React.FC<Props> = observer(
                     onChange={onChangeComplexName}
                     value={values.complexName}
                     label="ЖК"
+                    required={true}
                     isError={!isValid && !isValidComplexName}
                     name={"lcd"}
                   />
@@ -398,6 +401,7 @@ const AboutObjectTab: React.FC<Props> = observer(
                 placeholder={"Страна"}
                 onChange={onChangeCountry}
                 label="Страна"
+                required={true}
                 isError={!isValid && !isValidCountry}
                 name={"country"}
               />
@@ -413,6 +417,7 @@ const AboutObjectTab: React.FC<Props> = observer(
                 placeholder={"Регион"}
                 onChange={onChangeRegion}
                 label="Регион"
+                required={true}
                 isError={!isValid && !isValidRegion}
                 name={"region"}
               />
@@ -434,6 +439,7 @@ const AboutObjectTab: React.FC<Props> = observer(
                 placeholder={"Город"}
                 onChange={onChangeCity}
                 label="Город"
+                required={true}
                 isError={!isValid && !isValidCity}
                 name={"city"}
               />
@@ -450,6 +456,7 @@ const AboutObjectTab: React.FC<Props> = observer(
               />
             )}
             <BaseInput
+            required={true}
               isError={!isValid && !isValidAddress}
               label="Адрес"
               className={s.inputX}
@@ -469,6 +476,7 @@ const AboutObjectTab: React.FC<Props> = observer(
                   label="Укажите стоимость в рублях"
                   className={s.inputMd}
                   type="number"
+                  required={true}
                   isError={!isValid && !isValidCost}
                   icon={<Typography color="tertiary">₽</Typography>}
                   name={"cost"}

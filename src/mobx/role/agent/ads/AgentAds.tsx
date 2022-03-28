@@ -47,17 +47,17 @@ export const loadAllData: () => any = async () => {
     obj = obj
       ? [
           ...obj,
-          ...res?.data.map((el: any) => ({
+          ...res?.data?.map((el: any) => ({
             ...el,
             objType: ObjectTypes.HOUSE,
           })),
         ]
-      : res?.data.map((el: any) => ({
+      : res?.data?.map((el: any) => ({
           ...el,
           objType: ObjectTypes.HOUSE,
         }))
       ? [
-          ...res?.data.map((el: any) => ({
+          ...res?.data?.map((el: any) => ({
             ...el,
             objType: ObjectTypes.HOUSE,
           })),
@@ -71,17 +71,17 @@ export const loadAllData: () => any = async () => {
     obj = obj
       ? [
           ...obj,
-          ...res?.data.map((el: any) => ({
+          ...Array.from(res?.data)?.map((el: any) => ({
             ...el,
             objType: ObjectTypes.LAND,
           })),
         ]
-      : res?.data.map((el: any) => ({
+      : res?.data?.map((el: any) => ({
           ...el,
           objType: ObjectTypes.LAND,
         }))
       ? [
-          ...res?.data.map((el: any) => ({
+          ...res?.data?.map((el: any) => ({
             ...el,
             objType: ObjectTypes.LAND,
           })),
@@ -97,7 +97,7 @@ export const loadAllData: () => any = async () => {
       obj = obj
         ? [
             ...obj,
-            ...res?.data.map((el: any) => ({
+            ...res?.data?.map((el: any) => ({
               ...el,
               objType: ObjectTypes.RESCOMPLEX,
             })),
@@ -107,7 +107,7 @@ export const loadAllData: () => any = async () => {
             objType: ObjectTypes.RESCOMPLEX,
           }))
         ? [
-            ...res?.data.map((el: any) => ({
+            ...res?.data?.map((el: any) => ({
               ...el,
               objType: ObjectTypes.RESCOMPLEX,
             })),

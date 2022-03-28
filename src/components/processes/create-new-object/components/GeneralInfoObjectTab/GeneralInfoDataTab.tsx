@@ -384,6 +384,7 @@ const GeneralInfoDataTab: React.FC<Props> = observer(
                   label="Кол-во квартир"
                   className={s.inputSm}
                   value={values.amountObjects}
+                  required={true}
                   isError={!isValid && !isAmountObjects}
                 />
               )}
@@ -394,6 +395,7 @@ const GeneralInfoDataTab: React.FC<Props> = observer(
                   label="Кол-во корпусов"
                   className={s.inputSm}
                   value={values.amountBuildings}
+                  required={true}
                   isError={!isValid && !isAmountBuildings}
                 />
               )}
@@ -404,6 +406,7 @@ const GeneralInfoDataTab: React.FC<Props> = observer(
                   label="Кол-во этажей"
                   className={s.inputSm}
                   value={values.amountFloors}
+                  required={true}
                   isError={!isValid && !isAmountFloors}
                 />
               )}
@@ -416,6 +419,7 @@ const GeneralInfoDataTab: React.FC<Props> = observer(
               label="Общая площадь"
               className={s.inputSm}
               value={values.generalSquare}
+              required={true}
               isError={!isValid && !isValidGeneralSquare}
               icon={<Typography className={s.iconColor}>м²</Typography>}
             />
@@ -426,6 +430,7 @@ const GeneralInfoDataTab: React.FC<Props> = observer(
               onChange={onChangeHouseSquare}
               value={values.houseSquare}
               type="number"
+              required={true}
               isError={!isValid && !isValidHouseSquare}
               label="Площадь дома"
               className={s.inputSm}
@@ -439,6 +444,7 @@ const GeneralInfoDataTab: React.FC<Props> = observer(
               )}
               type="number"
               label="Жилая площадь"
+              required={true}
               isError={!isValid && !isValidLivingSquare}
               className={s.inputSm}
               onChange={onChangeLivingSquare}
@@ -451,6 +457,7 @@ const GeneralInfoDataTab: React.FC<Props> = observer(
               value={values.land}
               type="number"
               label="Участок"
+              required={true}
               isError={!isValid && !isValidLand}
               className={classNames(s.inputSm, s.largeIconSpace)}
               classNameWrapper={s.extraSpace}
@@ -463,6 +470,7 @@ const GeneralInfoDataTab: React.FC<Props> = observer(
               onChange={onChangeLandGeneralSquare}
               type="number"
               label="Общая площадь"
+              required={true}
               isError={!isValid && !isValidLandGeneralSquare}
               className={classNames(s.inputSm, s.largeIconSpace)}
               classNameWrapper={s.extraSpace}
@@ -474,6 +482,7 @@ const GeneralInfoDataTab: React.FC<Props> = observer(
               onChange={onChangeCeilingHeight}
               value={values.ceilingHeight}
               type="number"
+              required={true}
               isError={!isValid && !isValidCeilingHeight}
               label="Высота потолков"
               className={s.inputSm}
@@ -516,6 +525,7 @@ const GeneralInfoDataTab: React.FC<Props> = observer(
                     label="Площадь квартиры (Мин)"
                     className={s.inputSmP}
                     value={values.areaObjectMin}
+                    required={true}
                     isError={!isValid && !isAreaObjectMin}
                     icon={<Typography className={s.iconColor}>м²</Typography>}
                   />
@@ -527,6 +537,7 @@ const GeneralInfoDataTab: React.FC<Props> = observer(
                     label="Площадь квартиры (Макс)"
                     className={s.inputSmP}
                     value={values.areaObjectMax}
+                    required={true}
                     isError={!isValid && !isAreaObjectMax}
                     icon={<Typography className={s.iconColor}>м²</Typography>}
                   />
@@ -538,6 +549,7 @@ const GeneralInfoDataTab: React.FC<Props> = observer(
                     label="Высота потолков"
                     className={s.inputSm}
                     value={values.heightCeilings}
+                    required={true}
                     isError={!isValid && !isHeightCeilings}
                     icon={<Typography className={s.iconColor}>м</Typography>}
                   />
@@ -548,6 +560,7 @@ const GeneralInfoDataTab: React.FC<Props> = observer(
               <BaseInput
                 type="number"
                 value={values.bathroom}
+                required={true}
                 isError={!isValid && !isValidBathroom}
                 onChange={onChangeBathroom}
                 label="Ванная комната"
@@ -561,6 +574,7 @@ const GeneralInfoDataTab: React.FC<Props> = observer(
                 onChange={onChangeKitchen}
                 type="number"
                 label="Кухня"
+                required={true}
                 isError={!isValid && !isValidKitchen}
                 className={s.inputSm}
                 classNameWrapper={s.extraSpace}
@@ -592,6 +606,7 @@ const GeneralInfoDataTab: React.FC<Props> = observer(
               <>
                 <BaseDropDown
                   value={values.garage.has}
+                  required={true}
                   isError={!isValid && !isValidGarage}
                   options={GENERAL_INFO_TAB_TOGGLE_OPTIONS}
                   onChange={onChangeGarage}
@@ -602,6 +617,7 @@ const GeneralInfoDataTab: React.FC<Props> = observer(
 
                 <BaseInput
                   value={values.garage.capacity}
+                  required={true}
                   isError={!isValid && !isValidGarageCapacity}
                   onChange={onChangeGarageCapacity}
                   type="number"
@@ -615,6 +631,7 @@ const GeneralInfoDataTab: React.FC<Props> = observer(
                   onChange={onChangeGarageSquare}
                   type="number"
                   label="Площадь гаража"
+                  required={true}
                   isError={!isValid && !isValidGarageSquare}
                   className={s.inputSm}
                   classNameWrapper={s.extraSpace}
@@ -631,6 +648,7 @@ const GeneralInfoDataTab: React.FC<Props> = observer(
                   onChange={onChangePool}
                   placeholder="Бассейн"
                   label="Бассейн"
+                  required={true}
                   isError={!isValid && !isValidPool}
                   className={s.inputSm}
                 />
@@ -639,6 +657,7 @@ const GeneralInfoDataTab: React.FC<Props> = observer(
                   onChange={onChangePoolSquare}
                   type="number"
                   label="Площадь бассейна"
+                  required={true}
                   isError={!isValid && !isValidPoolSquare}
                   className={s.inputSm}
                   icon={<Typography className={s.iconColor}>м²</Typography>}
@@ -658,6 +677,7 @@ const GeneralInfoDataTab: React.FC<Props> = observer(
                   label="Минимальная"
                   className={s.inputSm}
                   value={values.priceObjectMin}
+                  required={true}
                   isError={!isValid && !isPriceObjectMin}
                 />
               )}
@@ -668,6 +688,7 @@ const GeneralInfoDataTab: React.FC<Props> = observer(
                   label="Максимальная"
                   className={s.inputSm}
                   value={values.priceObjectMax}
+                  required={true}
                   isError={!isValid && !isPriceObjectMax}
                 />
               )}
@@ -679,6 +700,7 @@ const GeneralInfoDataTab: React.FC<Props> = observer(
             <InputsGroup title="Коттеджный посёлок">
               <BaseInput
                 onChange={onChangeCottageVillage}
+                required={true}
                 isError={!isValid && !isValidCottageVillage}
                 value={values.cottageVillageName}
                 type="text"
@@ -689,6 +711,7 @@ const GeneralInfoDataTab: React.FC<Props> = observer(
             <div className={s.divider} />
             <InputsGroup title="Статус участка">
               <BaseDropDown
+              required={true}
                 isError={!isValid && !isValidLandStatus}
                 value={values.landStatus}
                 options={GENERAL_INFO_TAB_STATUS_OPTIONS}
@@ -709,6 +732,7 @@ const GeneralInfoDataTab: React.FC<Props> = observer(
               onChange={onChangeInteriorDescription}
               type="text"
               label="Описание комнат"
+              required={true}
               isError={!isValid && !isValidInteriorDescription}
               classNameWrapper={s.fullWidth}
             />

@@ -47,7 +47,7 @@ const PersonalCabinetAccountInfo: FC<PersonalCabinetAccountInfoType> = observer(
                 marginBottom: 30,
               }}
             >
-              {store.initialData.file.length > 0 ? (
+              {store.initialData.file?.length > 0 ? (
                 <AvatarSection src={store.initialData.file[0].url} />
               ) : (
                 <AvatarSection size={80} src={imgMoc} />
