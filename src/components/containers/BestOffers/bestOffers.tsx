@@ -68,7 +68,6 @@ const settings = {
             settings: {
                 slidesToShow: 3,
                 slidesToScroll: 3,
-                infinite: true,
                 dots: true
             }
         },
@@ -78,7 +77,6 @@ const settings = {
                 slidesToShow: 2,
                 slidesToScroll: 2,
                 initialSlide: 2,
-                infinite: true,
                 dots: true
             }
         },
@@ -88,7 +86,6 @@ const settings = {
                 slidesToShow: 1,
                 slidesToScroll: 1,
                 initialSlide: 1,
-                infinite: true,
                 dots: true
             }
         }
@@ -102,31 +99,35 @@ export const BestOffers: FC<BestOffersType> = observer(({tagsButton}) => {
     const store = useStoreMainPage()
     const customeSlider = useRef()
     useEffect(() => {
-        store.fetchBestOffers(10,false,false,false,false,false)
+        store.fetchBestOffers(10, false, false, false, false, false)
     }, [])
 
     const mapDat: any = mapData[0]
 
-    const [activeFilter, setActiveFilter] = useState<Array<boolean>>([false,false,false,false,false])
+    const [activeFilter, setActiveFilter] = useState<Array<boolean>>([false, false, false, false, false])
 
     const activeFilterActive = (tag: string) => {
-        if(tag==="apartment"){
-            activeFilter[4]=!activeFilter[4]
-            setActiveFilter(activeFilter)
-        } if(tag==="house"){
-            activeFilter[3]=!activeFilter[3]
-            setActiveFilter(activeFilter)
-        } if(tag==="isComplex"){
-            activeFilter[2]=!activeFilter[2]
-            setActiveFilter(activeFilter)
-        }if(tag==="isOld"){
-            activeFilter[1]=!activeFilter[1]
-            setActiveFilter(activeFilter)
-        }if(tag==="isNew"){
-            activeFilter[0]=!activeFilter[0]
+        if (tag === "apartment") {
+            activeFilter[4] = !activeFilter[4]
             setActiveFilter(activeFilter)
         }
-        store.fetchBestOffers(10,activeFilter[0],activeFilter[1],activeFilter[2],activeFilter[3],activeFilter[4])
+        if (tag === "house") {
+            activeFilter[3] = !activeFilter[3]
+            setActiveFilter(activeFilter)
+        }
+        if (tag === "isComplex") {
+            activeFilter[2] = !activeFilter[2]
+            setActiveFilter(activeFilter)
+        }
+        if (tag === "isOld") {
+            activeFilter[1] = !activeFilter[1]
+            setActiveFilter(activeFilter)
+        }
+        if (tag === "isNew") {
+            activeFilter[0] = !activeFilter[0]
+            setActiveFilter(activeFilter)
+        }
+        store.fetchBestOffers(10, activeFilter[0], activeFilter[1], activeFilter[2], activeFilter[3], activeFilter[4])
     }
 
     return (
@@ -135,7 +136,7 @@ export const BestOffers: FC<BestOffersType> = observer(({tagsButton}) => {
                 <div className={css.positionButton}>
                     <div className={css.buttonLine}>
                         {
-                            store.initialData.tagsButton.map((tags,index)=>(
+                            store.initialData.tagsButton.map((tags, index) => (
                                 <ArrayButton
                                     key={index}
                                     onActiveTags={activeFilterActive}
@@ -145,34 +146,24 @@ export const BestOffers: FC<BestOffersType> = observer(({tagsButton}) => {
                             ))
                         }
                     </div>
-                    {/*<BaseButton*/}
-                    {/*    type="secondary"*/}
-                    {/*    className={css.margin}*/}
-                    {/*>*/}
-                    {/*    <Typography color={"accent"}>*/}
-                    {/*        Показать еще*/}
-                    {/*    </Typography>*/}
-                    {/*</BaseButton>*/}
                 </div>
-
                 <div style={{padding: '5px', marginTop: '20px'}}>
-                    {/*<Slider {...settings} ref={customeSlider}  >*/}
                     <Slider {...settings} >
                         {
-                            store.initialData.bestOffers
-                                && store.initialData.bestOffers.map((t: any, index) => (
-                                    <div key={index} style={{padding: '5px', marginTop: index > 1 ? "24px" : '0px'}}>
-                                        <div>
-                                            <ObjectCard
-                                                route={t.type}
-                                                typeObject={"new"}
-                                                houseData={t}
-                                                data={t}
-                                            />
-                                        </div>
-
+                            store.initialData.bestOffers !== null && store.initialData.bestOffers.length > 0
+                            && store.initialData.bestOffers.map((t: any, index) => (
+                                <div key={index} style={{padding: '5px', marginTop: index > 1 ? "24px" : '0px'}}>
+                                    <div>
+                                        <ObjectCard
+                                            route={t.type}
+                                            typeObject={"new"}
+                                            houseData={t}
+                                            data={t}
+                                        />
                                     </div>
-                                ))
+
+                                </div>
+                            ))
                         }
                     </Slider>
                 </div>
