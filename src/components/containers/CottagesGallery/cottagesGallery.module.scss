@@ -1,0 +1,23 @@
+.buttonToggleCottages{
+  height: 40px;
+  padding: 7px 2px ;
+  width: auto;
+  color:#1A4862;
+  display: flex;
+  align-items: center;
+  &:active{
+    color:#1A4862 !important;
+  }
+}
+.buttonToggleCottagesColor{
+  padding: 0 10px;
+  background-color: #FFFFFF;
+  color:#96A2B5;
+}
+
+.positionButton{
+  position:relative;
+  bottom:100px;
+  left: calc(50% - 120px);
+
+}

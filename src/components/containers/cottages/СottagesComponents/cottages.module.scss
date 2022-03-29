@@ -49,6 +49,25 @@
     color:#1A4862 !important;
   }
 }
+.buttonToggleCottages{
+  height: 40px;
+  padding: 7px 2px ;
+  width: auto;
+  color:#96A2B5;
+  color:#1A4862;
+  display: flex;
+  align-items: center;
+  &:active{
+    color:#1A4862 !important;
+  }
+}
+.buttonToggleCottagesColor{
+  padding: 0 10px;
+  background-color: #FFFFFF;
+  color:#96A2B5;
+}
+
+
 .margin_4{
   margin: 4px;
 }

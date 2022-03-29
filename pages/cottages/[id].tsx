@@ -23,6 +23,7 @@ import {Record} from "../../src/components/containers/Record/Record";
 import RecordAgent from "../../src/components/containers/Record/RecordAgent.json";
 import {useBreadcrumbsStore} from "../../src/mobx/stores/BreadcrumbsStore/BreadcrumbsStore";
 import {FILTER_ACTIONS_OPTIONS, FILTER_HOUSE_TYPE_OPTIONS} from "../../src/components/containers/Filter/config";
+import {useRouter} from "next/router";
 
 const tabs = [
     {title: "Галерея"},
@@ -71,6 +72,7 @@ const infraD = 'Всего 14 км до Симферополя, столицы �
 const Cottages = () => {
 
     const breadCrumbsStore = useBreadcrumbsStore();
+    const router = useRouter()
 
     const general = useRef(null)
     const finishingOptions = useRef(null)
@@ -93,22 +95,9 @@ const Cottages = () => {
             constructProgress.current,
             record.current,
         ])
-        breadCrumbsStore.addBreadCrumbs(`${
-                FILTER_ACTIONS_OPTIONS.filter((a: any) => 'buy' === a.value)
-                    ? FILTER_ACTIONS_OPTIONS.filter(
-                        (a: any) => 'buy' === a.value
-                    )[0].label
-                    : "нет сделки"
-            } ${
-                FILTER_HOUSE_TYPE_OPTIONS.filter((a: any) => 'cottages' === a.value)[0]
-                    ? FILTER_HOUSE_TYPE_OPTIONS.filter(
-                        (a: any) => 'cottages' === a.value
-                    )[0].label
-                    : "нет типа"
-            }`,
-            1)
-    },[])
-
+        breadCrumbsStore.addBreadCrumbs(`${FILTER_ACTIONS_OPTIONS.filter((a: any) => 'buy' === a.value)[0].label}`,1);
+        breadCrumbsStore.addBreadCrumbs('Дом в коттеджнном посёлоке Лесогор', 2);
+    },[router.query.id, breadCrumbsStore])
 
     return (
         <MainContainer footerColor={"nude"} cabinetStyle={false}>
