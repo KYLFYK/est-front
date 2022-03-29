@@ -97,7 +97,7 @@ class ObjectInStore {
     }
 
     get() {
-        return JSON.parse(JSON.stringify([...this.initialData]))
+        return JSON.parse(JSON.stringify(this.initialData))
     }
 }
 

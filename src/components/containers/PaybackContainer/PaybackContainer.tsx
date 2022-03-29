@@ -77,7 +77,7 @@ const PaybackContainer :FC<PaybackContainerType> = ({averagePrice, currentHouse}
                         Похожие предложения в этом районе
                     </Typography>
                     <div style={{margin: '20px 0 0 0'}}>
-                        <Map currentHouse={currentHouse} objects={objects} location={'payback'} />
+                        {/*<Map currentHouse={currentHouse} objects={objects} location={'payback'} />*/}
                     </div>
                 </div>
             </HeadLine>

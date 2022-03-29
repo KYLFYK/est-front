@@ -306,7 +306,10 @@ const House = observer((props: any) => {
             <Views items={views}/>
             <NameEstate item={props.name}/>
             <AdressEstate item={props.address}/>
-            <HorizontalTabs tabs={tabs} refs={refs}/>
+            <div style={{margin:"0 60px"}}>
+              <HorizontalTabs tabs={tabs} refs={refs}/>
+            </div>
+
             <div ref={general}>
                 {
                     infoOptions &&
@@ -364,8 +367,8 @@ export async function getServerSideProps({ params }: any) {
 
   const res = await fetch(
     // `${process.env.HOST}${UrlObj.house}/${params.id}`
-    `https://estatum.f-case.ru/api/${UrlObj.house}/${params.id}`
-    // `http://marketplace-back:8008/api/${UrlObj.house}/${params.id}`
+    // `https://estatum.f-case.ru/api/${UrlObj.house}/${params.id}`
+    `https://marketplace-back:8008/api/${UrlObj.house}/${params.id}`
   );
 
   const house = await res.json();
