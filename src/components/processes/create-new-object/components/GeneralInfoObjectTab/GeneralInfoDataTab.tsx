@@ -281,8 +281,23 @@ const GeneralInfoDataTab: React.FC<Props> = observer(
     };
 
     const onChangeGarage = (value: string) => {
-      if ("garage" in values)
-        setValues({ ...values, garage: { ...values.garage, has: value } });
+      if ("garage" in values) {
+        value === "yes" &&
+          setValues({
+            ...values,
+            garage: { ...values.garage, has: value, capacity: "", square: "" },
+          });
+        value === "no" &&
+          setValues({
+            ...values,
+            garage: {
+              ...values.garage,
+              has: value,
+              capacity: value,
+              square: value,
+            },
+          });
+      }
     };
 
     const onChangeGarageCapacity = (
@@ -306,8 +321,15 @@ const GeneralInfoDataTab: React.FC<Props> = observer(
     };
 
     const onChangePool = (value: string) => {
-      if ("pool" in values)
-        setValues({ ...values, pool: { ...values.pool, has: value } });
+      if ("pool" in values) {
+        value === "yes" &&
+          setValues({ ...values, pool: { ...values.pool, has: value } });
+        value === "no" &&
+          setValues({
+            ...values,
+            pool: { ...values.pool, has: value, square: "" },
+          });
+      }
     };
 
     const onChangePoolSquare = (
@@ -491,6 +513,7 @@ const GeneralInfoDataTab: React.FC<Props> = observer(
           )}
           {"rooms" in values && (
             <CounterButtons
+              required={true}
               isError={!isValid && !isValidRooms}
               className={s.extraSpace}
               label="Кол-во комнат"
@@ -510,78 +533,83 @@ const GeneralInfoDataTab: React.FC<Props> = observer(
 
         {objectType !== ObjectTypes.LAND && (
           <InputsGroup
-            dropdownAndText={true}
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "flex-start",
+            }}
             title={
               objectType === 4
                 ? "Размеры квартир"
                 : "Внутренние размеры объекта"
             }
           >
-            {objectType === 4 && (
-              <>
-                {"areaObjectMin" in values && (
-                  <BaseInput
-                    type="number"
-                    onChange={onChangeAreaObjectMin}
-                    label="Площадь квартиры (Мин)"
-                    className={s.inputSmP}
-                    value={values.areaObjectMin}
-                    required={true}
-                    isError={!isValid && !isAreaObjectMin}
-                    icon={<Typography className={s.iconColor}>м²</Typography>}
-                  />
-                )}
-                {"areaObjectMax" in values && (
-                  <BaseInput
-                    type="number"
-                    onChange={onChangeAreaObjectMax}
-                    label="Площадь квартиры (Макс)"
-                    className={s.inputSmP}
-                    value={values.areaObjectMax}
-                    required={true}
-                    isError={!isValid && !isAreaObjectMax}
-                    icon={<Typography className={s.iconColor}>м²</Typography>}
-                  />
-                )}
-                {"heightCeilings" in values && (
-                  <BaseInput
-                    type="number"
-                    onChange={onChangeHeightCeilings}
-                    label="Высота потолков"
-                    className={s.inputSm}
-                    value={values.heightCeilings}
-                    required={true}
-                    isError={!isValid && !isHeightCeilings}
-                    icon={<Typography className={s.iconColor}>м</Typography>}
-                  />
-                )}
-              </>
-            )}
-            {"bathroom" in values && (
-              <BaseInput
-                type="number"
-                value={values.bathroom}
-                required={true}
-                isError={!isValid && !isValidBathroom}
-                onChange={onChangeBathroom}
-                label="Ванная комната"
-                className={s.inputSm}
-                icon={<Typography className={s.iconColor}>м²</Typography>}
-              />
-            )}
-            {"kitchen" in values && (
-              <BaseInput
-                value={values.kitchen}
-                onChange={onChangeKitchen}
-                type="number"
-                label="Кухня"
-                required={true}
-                isError={!isValid && !isValidKitchen}
-                className={s.inputSm}
-                classNameWrapper={s.extraSpace}
-                icon={<Typography className={s.iconColor}>м²</Typography>}
-              />
-            )}
+            <div style={{ display: "flex", gap: "10px" }}>
+              {objectType === 4 && (
+                <>
+                  {"areaObjectMin" in values && (
+                    <BaseInput
+                      type="number"
+                      onChange={onChangeAreaObjectMin}
+                      label="Площадь квартиры (Мин)"
+                      className={s.inputSmP}
+                      value={values.areaObjectMin}
+                      required={true}
+                      isError={!isValid && !isAreaObjectMin}
+                      icon={<Typography className={s.iconColor}>м²</Typography>}
+                    />
+                  )}
+                  {"areaObjectMax" in values && (
+                    <BaseInput
+                      type="number"
+                      onChange={onChangeAreaObjectMax}
+                      label="Площадь квартиры (Макс)"
+                      className={s.inputSmP}
+                      value={values.areaObjectMax}
+                      required={true}
+                      isError={!isValid && !isAreaObjectMax}
+                      icon={<Typography className={s.iconColor}>м²</Typography>}
+                    />
+                  )}
+                  {"heightCeilings" in values && (
+                    <BaseInput
+                      type="number"
+                      onChange={onChangeHeightCeilings}
+                      label="Высота потолков"
+                      className={s.inputSm}
+                      value={values.heightCeilings}
+                      required={true}
+                      isError={!isValid && !isHeightCeilings}
+                      icon={<Typography className={s.iconColor}>м</Typography>}
+                    />
+                  )}
+                </>
+              )}
+              {"bathroom" in values && (
+                <BaseInput
+                  type="number"
+                  value={values.bathroom}
+                  required={true}
+                  isError={!isValid && !isValidBathroom}
+                  onChange={onChangeBathroom}
+                  label="Ванная комната"
+                  className={s.inputSm}
+                  icon={<Typography className={s.iconColor}>м²</Typography>}
+                />
+              )}
+              {"kitchen" in values && (
+                <BaseInput
+                  value={values.kitchen}
+                  onChange={onChangeKitchen}
+                  type="number"
+                  label="Кухня"
+                  required={true}
+                  isError={!isValid && !isValidKitchen}
+                  className={s.inputSm}
+                  icon={<Typography className={s.iconColor}>м²</Typography>}
+                />
+              )}
+            </div>
 
             {"customRooms" in values && (
               <>
@@ -604,7 +632,7 @@ const GeneralInfoDataTab: React.FC<Props> = observer(
             )}
 
             {"garage" in values && (
-              <>
+              <div style={{ display: "flex", gap: "10px" }}>
                 <BaseDropDown
                   value={values.garage.has}
                   required={true}
@@ -616,33 +644,39 @@ const GeneralInfoDataTab: React.FC<Props> = observer(
                   className={s.inputSm}
                 />
 
-                <BaseInput
-                  value={values.garage.capacity}
-                  required={true}
-                  isError={!isValid && !isValidGarageCapacity}
-                  onChange={onChangeGarageCapacity}
-                  type="number"
-                  label="Вместимость"
-                  className={s.inputSm}
-                  icon={<Typography className={s.iconColor}>м/м</Typography>}
-                />
+                {values.garage.has === "yes" && (
+                  <>
+                    <BaseInput
+                      value={values.garage.capacity}
+                      required={true}
+                      isError={!isValid && !isValidGarageCapacity}
+                      onChange={onChangeGarageCapacity}
+                      type="number"
+                      label="Вместимость"
+                      className={s.inputSm}
+                      icon={
+                        <Typography className={s.iconColor}>м/м</Typography>
+                      }
+                    />
 
-                <BaseInput
-                  value={values.garage.square}
-                  onChange={onChangeGarageSquare}
-                  type="number"
-                  label="Площадь гаража"
-                  required={true}
-                  isError={!isValid && !isValidGarageSquare}
-                  className={s.inputSm}
-                  classNameWrapper={s.extraSpace}
-                  icon={<Typography className={s.iconColor}>м²</Typography>}
-                />
-              </>
+                    <BaseInput
+                      value={values.garage.square}
+                      onChange={onChangeGarageSquare}
+                      type="number"
+                      label="Площадь гаража"
+                      required={true}
+                      isError={!isValid && !isValidGarageSquare}
+                      className={s.inputSm}
+                      classNameWrapper={s.extraSpace}
+                      icon={<Typography className={s.iconColor}>м²</Typography>}
+                    />
+                  </>
+                )}
+              </div>
             )}
 
             {"pool" in values && (
-              <>
+              <div style={{ display: "flex" }}>
                 <BaseDropDown
                   value={values.pool.has}
                   options={GENERAL_INFO_TAB_TOGGLE_OPTIONS}
@@ -653,17 +687,19 @@ const GeneralInfoDataTab: React.FC<Props> = observer(
                   isError={!isValid && !isValidPool}
                   className={s.inputSm}
                 />
-                <BaseInput
-                  value={values.pool.square}
-                  onChange={onChangePoolSquare}
-                  type="number"
-                  label="Площадь бассейна"
-                  required={true}
-                  isError={!isValid && !isValidPoolSquare}
-                  className={s.inputSm}
-                  icon={<Typography className={s.iconColor}>м²</Typography>}
-                />
-              </>
+                {values.pool.has === "yes" && (
+                  <BaseInput
+                    value={values.pool.square}
+                    onChange={onChangePoolSquare}
+                    type="number"
+                    label="Площадь бассейна"
+                    required={true}
+                    isError={!isValid && !isValidPoolSquare}
+                    className={s.inputSm}
+                    icon={<Typography className={s.iconColor}>м²</Typography>}
+                  />
+                )}
+              </div>
             )}
           </InputsGroup>
         )}

@@ -11,6 +11,7 @@ import { observer } from "mobx-react-lite";
 import { useStoreAgentCabinet } from "../../../../../../../mobx/role/agent/cabinet/AgentCabinet";
 import { UpdateAgentCabinetType } from "../../../../../../../api/cabinet/cabinet";
 import { AvatarSection } from "../../../../../../shared/AvatarSection";
+import { Dashed } from "../../../../../../../icons/Dashed/dashed";
 
 export type infoAgentType = {
   name: string;
@@ -20,14 +21,9 @@ export type infoAgentType = {
 };
 
 type AccountEditType = {
-  onEdit:(tabId: number)=>void
+  onEdit: (tabId: number) => void;
   // infoAgency:infoAgentType
 };
-
-const image =
-  "data:image/svg+xml;utf8,<svg width='100%' height='100%' " +
-  "xmlns='http://www.w3.org/2000/svg'><rect width='240px' height='240px' rx='6px'" +
-  " style='fill: none; stroke: rgb(26, 72, 98); stroke-width: 1; stroke-dasharray: 9 9'/></svg>";
 
 const AccountEditAgent: FC<AccountEditType> = observer(({ onEdit }) => {
   const store = useStoreAgentCabinet();
@@ -38,17 +34,20 @@ const AccountEditAgent: FC<AccountEditType> = observer(({ onEdit }) => {
     phone: store.initialData.phone,
     email: store.initialData.email,
   };
-  
-  const [agentInfo, setAgentInfo] = useState<infoAgentType>(infoAgency);
+
+  const [agentInfo, setAgentInfo] = useState<infoAgentType>(infoAgency); // start years Experience
 
   // for input date user
   /*const date = new Date();
   const dateReal = date.toISOString().substr(0, 4); // year
   const mountAndDay = agentInfo.experience.substr(5, 5); // save for api ( mountAndDay )
-  const yearsExperience = agentInfo.experience.substr(0, 4);*/ // start years Experience
-
-  const [valueName, setValueName] = useState(store.get().name);
-  const [valueExperience, setValueExperience] = useState<string>(store.get().experience);
+  const yearsExperience = agentInfo.experience.substr(0, 4);*/ const [
+    valueName,
+    setValueName,
+  ] = useState(store.get().name);
+  const [valueExperience, setValueExperience] = useState<string>(
+    store.get().experience
+  );
   const [valuePhone, setValuePhone] = useState(agentInfo.phone);
   const [valueEmail, setValueEmail] = useState(agentInfo.email);
 
@@ -56,9 +55,9 @@ const AccountEditAgent: FC<AccountEditType> = observer(({ onEdit }) => {
   const backPage = () => {
     if (
       agentInfo.name === valueName &&
-     //+dateReal - +yearsExperience === +valueExperience &&
+      //+dateReal - +yearsExperience === +valueExperience &&
       agentInfo.phone === valuePhone &&
-      agentInfo.email === valueEmail 
+      agentInfo.email === valueEmail
     ) {
       onEdit(0);
     } else {
@@ -114,11 +113,11 @@ const AccountEditAgent: FC<AccountEditType> = observer(({ onEdit }) => {
   };
 
   const changeAvatar = (data: FormData) => {
-    store.updateAvatar(data,store.initialData.id).then();
+    store.updateAvatar(data, store.initialData.id).then();
   };
 
   return (
-    <div style={{marginTop:'10px'}}>
+    <div style={{ marginTop: "10px" }}>
       <BackPage onBackPage={backPage} title={"Редактирование аккаунта"} />
       <div className={css.df_jc}>
         <div>
@@ -142,9 +141,9 @@ const AccountEditAgent: FC<AccountEditType> = observer(({ onEdit }) => {
                   </Typography>
                   <BaseInput
                     value={valueExperience}
-                    type={'date'}
+                    type={"date"}
                     onChange={(e) => {
-                      setValueExperience(e.target.value)
+                      setValueExperience(e.target.value);
                     }}
                     className={css.styleButton}
                   />
@@ -174,17 +173,14 @@ const AccountEditAgent: FC<AccountEditType> = observer(({ onEdit }) => {
                   />
                 </div>
               </div>
-              <div className={css.df}>
-              </div>
+              <div className={css.df}></div>
             </div>
           </div>
         </div>
         <div>
-          <Typography weight={"bold"}>Логотип</Typography>
-          <div
-            style={{ backgroundImage: image, marginBottom: 80 }}
-            className={css.dashed}
-          >
+          <Typography weight={"bold"}>Фотография</Typography>
+          <div className={css.dashed}>
+            <Dashed />
             <div className={css.marginImage}>
               <AvatarSection
                 src={
@@ -215,7 +211,7 @@ const AccountEditAgent: FC<AccountEditType> = observer(({ onEdit }) => {
         {agentInfo.name !== valueName ||
           //+dateReal - +yearsExperience !== +valueExperience ||
           agentInfo.phone !== valuePhone ||
-          agentInfo.email !== valueEmail && (
+          (agentInfo.email !== valueEmail && (
             <div
               style={{
                 display: "flex",
@@ -227,7 +223,7 @@ const AccountEditAgent: FC<AccountEditType> = observer(({ onEdit }) => {
                 Есть несохраненные изменения
               </Typography>
             </div>
-          )}
+          ))}
       </div>
       {
         <Modal setActive={() => setComparison(!comparison)} active={comparison}>

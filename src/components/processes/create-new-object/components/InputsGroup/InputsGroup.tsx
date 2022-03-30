@@ -5,13 +5,14 @@ import s from './InputsGroup.module.scss'
 interface Props {
     title: string
     dropdownAndText?: boolean
+    style?: any
 }
 
-const InputsGroup: React.FC<Props> = ({ children, title, dropdownAndText=false }) => {
+const InputsGroup: React.FC<Props> = ({ children, title, dropdownAndText=false, style }) => {
     return (
         <div >
             <Typography weight="medium" className={s.title}> {title}</Typography>
-            <div className={dropdownAndText ? s.groupWithText : s.group}>
+            <div style={style ? style : {}} className={dropdownAndText ? s.groupWithText : s.group}>
                 {children}
             </div>
         </div>

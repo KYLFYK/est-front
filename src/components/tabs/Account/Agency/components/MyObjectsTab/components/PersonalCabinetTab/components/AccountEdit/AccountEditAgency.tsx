@@ -12,15 +12,11 @@ import { observer } from "mobx-react-lite";
 import { useStoreAgencyCabinet } from "../../../../../../../../../../mobx/role/agency/cabinet/AgencyCabinet";
 import { cabinetAPI } from "../../../../../../../../../../api/cabinet/cabinet";
 import { AvatarSection } from "../../../../../../../../../shared/AvatarSection";
+import { Dashed } from "../../../../../../../../../../icons/Dashed/dashed";
 
 type AccountEditType = {
   onEdit: () => void;
 };
-
-const image =
-  "data:image/svg+xml;utf8,<svg width='100%' height='100%' " +
-  "xmlns='http://www.w3.org/2000/svg'><rect width='240px' height='240px' rx='6px'" +
-  " style='fill: none; stroke: rgb(26, 72, 98); stroke-width: 1; stroke-dasharray: 9 9'/></svg>";
 
 const AccountEditAgency: FC<AccountEditType> = observer(({ onEdit }) => {
   const store = useStoreAgencyCabinet();
@@ -110,7 +106,7 @@ const AccountEditAgency: FC<AccountEditType> = observer(({ onEdit }) => {
   };
 
   return (
-    <div style={{marginTop:'10px'}}>
+    <div style={{ marginTop: "10px" }}>
       <BackPage
         onBackPage={backPage}
         title={"Редактирование аккаунта агентства"}
@@ -202,8 +198,9 @@ const AccountEditAgency: FC<AccountEditType> = observer(({ onEdit }) => {
           </div>
         </div>
         <div>
-          <Typography weight={"bold"}>Логотип</Typography>
-          <div style={{ backgroundImage: image }} className={css.dashed}>
+          <Typography weight={"bold"}>Фотография</Typography>
+          <div className={css.dashed}>
+            <Dashed />
             <div className={css.marginImage}>
               <AvatarSection
                 src={

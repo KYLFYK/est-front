@@ -205,7 +205,6 @@ export const Filter: React.FC<Props> = observer(({ location }) => {
         />
       </InputsUnion>
 
-
       {searchStore.getFilter()["object-type"] === "house" && (
         <BaseDropDown
           options={FILTER_PRIVATE_HOUSE_OPTIONS}
