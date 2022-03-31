@@ -1,0 +1,71 @@
+.card{
+  margin: 40px 60px;
+  height: calc(100vh - 320px);
+  background: #FFFFFF;
+}
+.mainContainer{
+  background:#FCFCFC ;
+}
+.df_jc_ai{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.mT_40{
+  margin-top: 40px;
+}
+.mT_20{
+  margin-top: 20px;
+}
+.mT_75{
+  margin-top: 80px;
+}
+.mL_5{
+  margin-left: 5px;
+}
+.mL_10{
+  margin-left: 10px;
+}
+
+
+.numberCardInput{
+  width: 240px;
+  position: relative;
+  bottom: 160px;
+  right: -31px;
+  border-radius: 6px !important;
+  text-indent: 8px !important;
+}
+
+.MM_Card{
+  width: 52px;
+  position: relative;
+  bottom: 100px;
+  right: 209px;
+  border-radius: 6px !important;
+  text-indent: 8px !important;
+}
+.GG_Card{
+  width: 60px;
+  position: relative;
+  bottom: 100px;
+  right: 182px;
+  border-radius: 6px !important;
+  text-indent: 8px !important;
+}
+.CVC_Card{
+  width: 60px;
+  position: relative;
+  bottom: 110px;
+  left: -41px;
+  border-radius: 6px !important;
+  text-indent: 8px !important;
+}
+.cardFree{
+  height: calc(100vh - 180px);
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+}

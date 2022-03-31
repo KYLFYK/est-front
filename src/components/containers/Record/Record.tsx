@@ -1,4 +1,4 @@
-import React, {useState, useEffect, FC, ChangeEvent,} from 'react';
+import React, {useState, useEffect, FC} from 'react';
 import {Button, TextField} from "@mui/material";
 import {IconWhatsapp} from "../../../icons/Agent/IconWhatsapp";
 import {IconTelegram} from "../../../icons/Agent/IconTelegram";
@@ -11,7 +11,10 @@ import {RecordApi} from "../../../api/record/record";
 import {useRouter} from "next/router";
 import {makeStyles} from "@material-ui/core";
 import classNames from "classnames";
-
+import {Modal} from "../../shared/Modal/Modal";
+import {RecordPriceLine} from "./RecordPriceLine";
+import css from './Record.module.scss'
+import {useRecordStore} from "../../../mobx/record/record";
 
 type AgentRecordType = {
     Record: {
@@ -65,14 +68,22 @@ export const useStyles = makeStyles({
         }
 })
 
+const condition = [
+    {  date:'3 дня', price:'Бесплатно'},
+    {  date:'14 дней', price:'150 000 ₽'},
+    {  date:'30 дней', price:'250 000 ₽'},
+]
+
 export const Record: FC<AgentRecordType> = ({Record, title}) => {
+
+    const store = useRecordStore
 
     const router = useRouter()
 
     const classes = useStyles()
 
     const [name, setName] = useState('')
-    const [mail, setMail] = useState('')
+    const [email, setEmail] = useState('')
     const [phone, setPhone] = useState('')
     const [timeStart, setTimeStart] = useState('08:00')
     const [timeEnd, setTimeEnd] = useState('18:00')
@@ -86,6 +97,32 @@ export const Record: FC<AgentRecordType> = ({Record, title}) => {
     const [phoneError, setPhoneError] = useState('не указан телефон')
 
     const [formValid, setFormValid] = useState(false)
+
+    const [recordActive, setRecordActive]=useState<boolean>(false)
+
+    const activeRegistration = () => {
+        store.updateRecordData({
+            name,
+            email,
+            phone,
+            status:'новая заявка',
+            comfortableTimeFrom:timeStart,
+            comfortableTimeTo:timeEnd,
+            orderType:'buy',
+            agentName:'string'
+        })
+        if(localStorage.getItem('roleEstatum')){
+            setRecordActive(!recordActive)
+        }else{
+            router.push(`/${router.asPath.split('/')[1]}/${router.query.id}?text=login`)
+        }
+    }
+
+    const redirectPay = async (date:string,price:string) => {
+        await store.updateRecordType(price === 'Бесплатно'? 'freePay': 'pay',price)
+        // mobx - pay + name + email + phone + time 1<2
+        router.push('/pay')
+    }
 
     useEffect(() => {
         if (nameError || mailError || phoneError) {
@@ -105,28 +142,29 @@ export const Record: FC<AgentRecordType> = ({Record, title}) => {
 
     const onClickHandler = async () => {
         setClicked(true);
-        const routerApi = router.asPath.split('/')
-        await RecordApi.RecordPost(routerApi[1], routerApi[2],{
-            name:name,
-            email:mail,
-            phone:phone,
-            status:'Новая заявка',
-            comfortableTimeFrom:timeStart,
-            comfortableTimeTo:timeEnd,
-            orderType: "buy",
-            agentName: "string", // ????
-        })
+        // const routerApi = router.asPath.split('/')
+        // await RecordApi.RecordPost(routerApi[1], routerApi[2],{
+        //     name:name,
+        //     email:email,
+        //     phone:phone,
+        //     status:'Новая заявка',
+        //     comfortableTimeFrom:timeStart,
+        //     comfortableTimeTo:timeEnd,
+        //     orderType: "buy",
+        //     agentName: "string", // ????
+        // })
         onBlurHandler('')
         setFormValid(false)
         setName('');
         setNameError('не указано имя');
         setNameDirty(false)
-        setMail('');
+        setEmail('');
         setMailError('не заполнен e-mail');
         setMailDirty(false)
         setPhone('');
         setPhoneError('не указан телефон');
         setPhoneDirty(false)
+        activeRegistration()
     }
 
     const onMouseHoverHandler = () => {
@@ -147,7 +185,7 @@ export const Record: FC<AgentRecordType> = ({Record, title}) => {
     }
 
     const onEmailHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setMail(e.target.value)
+        setEmail(e.target.value)
         const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
         if (!re.test(String(e.target.value).toLowerCase())) {
             setMailError('некорректный e-mail')
@@ -172,7 +210,7 @@ export const Record: FC<AgentRecordType> = ({Record, title}) => {
                 setNameDirty(true)
                 break
             case 'mail':
-                if (!setMail) setMailError('не заполнен e-mail')
+                if (!setEmail) setMailError('не заполнен e-mail')
                 setMailDirty(true)
                 break
             case 'phone':
@@ -239,7 +277,7 @@ export const Record: FC<AgentRecordType> = ({Record, title}) => {
                                 name='mail'
                                 placeholder={'ivan@mail.com'}
                                 onBlur={() => onBlurHandler('mail')}
-                                value={mail}
+                                value={email}
                                 onChange={(e) => onEmailHandler(e)}
                                 className={s.paddingInput}
                             />
@@ -299,7 +337,8 @@ export const Record: FC<AgentRecordType> = ({Record, title}) => {
                             </div>
                         </div>
                     </div>
-                    <div className={s.sendButton}>
+                    {/*<div className={s.sendButton} onClick={activeRegistration}>*/}
+                    <div className={s.sendButton} >
                         <Button
                             disabled={!formValid}
                             onMouseEnter={onMouseHoverHandler}
@@ -314,6 +353,30 @@ export const Record: FC<AgentRecordType> = ({Record, title}) => {
                         && <div className={s.unselectable}>не заполнена форма</div>}
                     </div>
                 </div>
+                {
+                    <Modal
+                        setActive={() => setRecordActive(!recordActive)}
+                        active={recordActive}
+                    >
+                        <div className={css.margin_B10} >
+                            <div className={css.df_jc}>
+                                <Typography weight={"medium"} className={css.margin_B10}>
+                                    Выберите длительность бронирования
+                                </Typography>
+                            </div>
+                            {
+                                condition.map((cond,index:number)=>(
+                                    <RecordPriceLine
+                                        onPay={(date,price)=>redirectPay(date,price)}
+                                        key={index}
+                                        date={cond.date}
+                                        price={cond.price}
+                                    />
+                                ))
+                            }
+                        </div>
+                    </Modal>
+                }
 
             </ContentContainer>
         </div>
@@ -327,3 +390,4 @@ export const ContentContainer: React.FC<{}> = ({children}) => {
         </div>
     )
 }
+
