@@ -12,8 +12,10 @@ type RecordPriceLineType = {
 
 export const RecordPriceLine: FC<RecordPriceLineType> = ({date, price,onPay}) => {
 
+    // for await API
     return (
         <Card className={price === 'Бесплатно' ? css.color_Card2 : css.color_Card1}>
+        {/*<Card className={price === 'Бесплатно' ? css.color_Card1 : css.color_Card2  }>*/}
             <div className={css.df_jc_ai}>
                 <div>
                     <div>
@@ -26,7 +28,8 @@ export const RecordPriceLine: FC<RecordPriceLineType> = ({date, price,onPay}) =>
                 <div>
                     <BaseButton
                         onClick={() => onPay(date,price)}
-                        className={css.bottomW}
+                        className={css.buttonW}
+                        // className={price === 'Бесплатно' ?css.buttonW : css.buttonDisable}
                     >
                         Выбрать
                     </BaseButton>

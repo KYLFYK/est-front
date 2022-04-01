@@ -96,7 +96,7 @@ const Plot: NextPage = () => {
         </div>
         <Mortgage/>
         <div ref={record}>
-          <Record Record={RecordAgent.Record}/>
+          <Record Record={RecordAgent.Record} nameObject={nameEstate}/>
         </div>
         <Footer color={'nude'}/>
         <ScrollUp/>

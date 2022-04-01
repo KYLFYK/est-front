@@ -355,7 +355,7 @@ const House = observer((props: any) => {
             </div>
             <Mortgage/>
             <div ref={record}>
-                <Record Record={RecordAgent.Record} title={'дом'}/>
+                <Record Record={RecordAgent.Record} title={'дом'} nameObject={props.name}/>
             </div>
         </MainContainer>
     )
@@ -366,8 +366,8 @@ export default House;
 export async function getServerSideProps({ params }: any) {
 
   const res = await fetch(
-    // `${process.env.HOST}${UrlObj.house}/${params.id}`
-    `https://estatum.f-case.ru/api/${UrlObj.house}/${params.id}`
+    `${process.env.HOST}${UrlObj.house}/${params.id}`
+    // `https://estatum.f-case.ru/api/${UrlObj.house}/${params.id}`
     // `http://marketplace-back:8008/api/${UrlObj.house}/${params.id}`
   );
 

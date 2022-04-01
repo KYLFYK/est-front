@@ -148,7 +148,7 @@ const Cottages = () => {
                 <ConstructProgress images={IMAGES_SET} info={OPTION_DATA}/>
             </div>
             <div ref={record}>
-                <Record Record={RecordAgent.Record} title={'дом'}/>
+                <Record Record={RecordAgent.Record} title={'дом'} nameObject={'Дом в коттеджнном посёлоке Лесогор'}/>
             </div>
         </MainContainer>
     );

@@ -27,6 +27,7 @@ type AgentRecordType = {
         connection: Array<{ title: string, value: string, url: string }>
     }
     title?: string
+    nameObject:string
 }
 
 export const useStyles = makeStyles({
@@ -74,7 +75,7 @@ const condition = [
     {  date:'30 дней', price:'250 000 ₽'},
 ]
 
-export const Record: FC<AgentRecordType> = ({Record, title}) => {
+export const Record: FC<AgentRecordType> = ({Record, title,nameObject}) => {
 
     const store = useRecordStore
 
@@ -109,7 +110,8 @@ export const Record: FC<AgentRecordType> = ({Record, title}) => {
             comfortableTimeFrom:timeStart,
             comfortableTimeTo:timeEnd,
             orderType:'buy',
-            agentName:'string'
+            agentName:'string',
+            nameObject
         })
         if(localStorage.getItem('roleEstatum')){
             setRecordActive(!recordActive)
@@ -118,8 +120,8 @@ export const Record: FC<AgentRecordType> = ({Record, title}) => {
         }
     }
 
-    const redirectPay = async (date:string,price:string) => {
-        await store.updateRecordType(price === 'Бесплатно'? 'freePay': 'pay',price)
+    const redirectPay = async (days:string,price:string) => {
+        await store.updateRecordType(days === '3 дня'? 'freePay': 'pay',price,days)
         // mobx - pay + name + email + phone + time 1<2
         router.push('/pay')
     }
@@ -131,6 +133,14 @@ export const Record: FC<AgentRecordType> = ({Record, title}) => {
             setFormValid(true)
         }
     }, [nameError, mailError, phoneError])
+    useEffect(()=>{
+        store.updateNameObject(
+            nameObject,
+            router.query.id !== undefined? router.query.id.toString() : '0',
+            router.asPath.split('/')[1]
+        )
+    },[])
+
     // useEffect(() => {
     //     if (nameDirty && nameError)setNameDirty(true)
     //     if (mailDirty && mailError)setMailDirty(true)
@@ -140,19 +150,19 @@ export const Record: FC<AgentRecordType> = ({Record, title}) => {
     const [hover, setHover] = useState(false)
     const [clicked, setClicked] = useState(false)
 
-    const onClickHandler = async () => {
+    const onClickHandler = () => {
         setClicked(true);
-        // const routerApi = router.asPath.split('/')
-        // await RecordApi.RecordPost(routerApi[1], routerApi[2],{
-        //     name:name,
-        //     email:email,
-        //     phone:phone,
-        //     status:'Новая заявка',
-        //     comfortableTimeFrom:timeStart,
-        //     comfortableTimeTo:timeEnd,
-        //     orderType: "buy",
-        //     agentName: "string", // ????
-        // })
+        const routerApi = router.asPath.split('/')
+        store.updateDataUser(
+            name,
+            email,
+            phone,
+            timeStart,
+            timeEnd,
+            'Новая заявка',
+            "buy",
+            "string"
+        )
         onBlurHandler('')
         setFormValid(false)
         setName('');

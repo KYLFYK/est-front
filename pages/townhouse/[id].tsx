@@ -128,7 +128,7 @@ const TownHouse: NextPage = observer((props: any) => {
         </div>
         <Mortgage/>
         <div ref={record}>
-          <Record Record={RecordAgent.Record} title={'дом'}/>
+          <Record Record={RecordAgent.Record} title={'дом'} nameObject={props.name}/>
         </div>
     </MainContainer>
   )

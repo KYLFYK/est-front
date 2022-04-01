@@ -25,5 +25,5 @@ type RecordPostType ={
     "comfortableTimeTo":string
     "status": string
     "orderType": string
-    "agentName": "string",
+    "agentName": string,
 }

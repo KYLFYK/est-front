@@ -325,6 +325,11 @@
 .margin_B10{
     margin-bottom: 10px;
 }
-.bottomW{
+.buttonW{
     width: 160px;
 }
+.buttonDisable{
+    width: 160px;
+    pointer-events:none;
+}
+
