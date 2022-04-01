@@ -7,34 +7,34 @@
 ## Запуск
 
 * скачать скрипт для установки nodejs 16 версии
----
+```
 curl -sL https://deb.nodesource.com/setup_16.x -o nodesource_setup.sh
---
+```
 
 * добавить репозиторий nodejs и установить nodejs с последними обновлениями
----
+```
 nodesource_setup.sh
----
+```
 
 * переключиться на ветку с разработкой
----
+```
 git checkout development
----
+```
 
 * установить зависимости
----
+```
 npm install --save-dev typescript
----
+```
 
 * собрать проект
----
+```
 npm run build
----
+```
 
 * запустить
----
+```
 npm start
----
+```
 
 ## CI/CD
 
