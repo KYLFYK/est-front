@@ -33,37 +33,39 @@ export const AvatarSection: FC<Props> = observer(
     };
 
     useEffect(() => {
-        setTimeout(()=>setFileSrc(src ? src : ""),100)
+      setTimeout(() => setFileSrc(src ? src : ""), 100);
       // setFileSrc(src ? src : "");
     }, [src]);
 
     return (
       <div className={styles.wrapper}>
-        <div className={styles.image}>
-          <Image
-            unoptimized
-            alt={"Аватар пользователя"}
-            src={fileSrc}
-            layout={size ? undefined : "fill"}
-            loader={(e) => myLoader(e.src, e.width, e.quality)}
-            width={size}
-            height={size}
-            objectFit={"cover"}
-          />
-        </div>
+        <label className={styles.label} htmlFor={labelId}>
+          <div className={styles.image}>
+            <Image
+              unoptimized
+              alt={"Аватар пользователя"}
+              src={fileSrc}
+              layout={size ? undefined : "fill"}
+              loader={(e) => myLoader(e.src, e.width, e.quality)}
+              width={size}
+              height={size}
+              objectFit={"cover"}
+            />
+          </div>
+        </label>
         {changeable && (
           <>
-            <label className={styles.label} htmlFor={labelId}>
+            {/*<label className={styles.label} htmlFor={labelId}>
               {activeUpload && (
                 <BaseButton
                   className={styles.button}
-                  onClick={() => {}}
+                  onClick={() => {console.log('ava')}}
                   type="secondary"
                 >
                   {buttonText ? buttonText : "Загрузить лого"}
                 </BaseButton>
               )}
-            </label>
+              </label>*/}
             <input
               type="file"
               id={labelId}

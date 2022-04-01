@@ -43,13 +43,13 @@
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-  width: 160px;
+  width: 97%;
 
   p {
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
-    width: 160px;
+    width: 100%;
   }
 }
 .dropdown .dropdown_content .dropdown_item:hover {
@@ -101,4 +101,13 @@
 
 .wrapWidth {
   width: 100% !important;
+}
+.label {
+  color: #CAD1DA;
+  margin-bottom: 5px;
+
+  &.textArea {
+      align-items: unset !important;
+      padding-top: 10px;
+  }
 }
