@@ -71,8 +71,7 @@ class AllAdsStoreEx {
             this.loaded = true;
             this.errorOnLoad = false;
             this.statusLoader = ""
-            // console.log(JSON.parse(JSON.stringify(this.adsList)))
-            // debugger
+
             if(this.adsList == null || this.adsList.length === 0 ){
                 this.statusLoader = "empty"
             }
@@ -89,8 +88,7 @@ class AllAdsStoreEx {
     }
 
     filter(sort: string, type: 'agent' | 'developer') {
-        console.log(JSON.parse(JSON.stringify(this.adsList)))
-        console.log('sort', sort)
+
         if (type === 'agent') {
             if (sort === 'default') this.uploadAllAds()
             if (sort === 'low' && this.adsList) this.adsList = this.adsList.sort((a, b) => a.price - b.price)

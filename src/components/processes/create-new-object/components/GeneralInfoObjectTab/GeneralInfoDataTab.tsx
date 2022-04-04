@@ -35,7 +35,7 @@ const GeneralInfoDataTab: React.FC<Props> = observer(
       getInitialStateGeneralInfoTab(objectType, createObjectStore)
     );
     const [isValid, setIsValid] = useState<boolean>(true);
-
+    
     const isValidGeneralSquare = !!(
       "generalSquare" in values && values.generalSquare.length
     );
@@ -101,6 +101,8 @@ const GeneralInfoDataTab: React.FC<Props> = observer(
       "areaObjectMax" in values && values.areaObjectMax
     );
 
+    const isFloors = !!("floors" in values && values.floors.count > 0);
+
     const onChangeAmountObjects = (
       event: React.ChangeEvent & { target: HTMLInputElement }
     ) => {
@@ -148,7 +150,7 @@ const GeneralInfoDataTab: React.FC<Props> = observer(
     ) => {
       setValues({ ...values, priceObjectMin: Number(event.target.value) });
     };
-
+    
     const onChangeFloors = (value: number) => {
       if ("floors" in values!) {
         let newFloorsList: IOption<{ description: string; height?: string }>[];
@@ -323,15 +325,15 @@ const GeneralInfoDataTab: React.FC<Props> = observer(
     const onChangePool = (value: string) => {
       if ("pool" in values) {
         value === "yes" &&
-          setValues({ ...values, pool: { ...values.pool, has: value } });
+          setValues({ ...values, pool: { ...values.pool, has: value, square: "" } });
         value === "no" &&
           setValues({
             ...values,
-            pool: { ...values.pool, has: value, square: "" },
+            pool: { ...values.pool, has: value, square: value },
           });
       }
     };
-
+    console.log(values)
     const onChangePoolSquare = (
       event: React.ChangeEvent & { target: HTMLInputElement }
     ) => {
@@ -356,7 +358,7 @@ const GeneralInfoDataTab: React.FC<Props> = observer(
     ) => {
       setValues({ ...values, interiorDescription: event.target.value });
     };
-
+    
     const handleNextTab = () => {
       const isValidInputs = isValidInputsGeneralTab(
         objectType,
@@ -384,8 +386,10 @@ const GeneralInfoDataTab: React.FC<Props> = observer(
         isPriceObjectMin,
         isPriceObjectMax,
         isAreaObjectMin,
-        isAreaObjectMax
+        isAreaObjectMax,
+        isFloors,
       );
+
       if (isValidInputs) {
         createObjectStore.saveGeneralTab(values, objectType);
         onNextTab && onNextTab();
@@ -676,7 +680,7 @@ const GeneralInfoDataTab: React.FC<Props> = observer(
             )}
 
             {"pool" in values && (
-              <div style={{ display: "flex" }}>
+              <div style={{ display: "flex", gap: "10px" }}>
                 <BaseDropDown
                   value={values.pool.has}
                   options={GENERAL_INFO_TAB_TOGGLE_OPTIONS}
@@ -779,6 +783,8 @@ const GeneralInfoDataTab: React.FC<Props> = observer(
           <InputsGroup title="Описание интерьера по этажам">
             <div className={s.extraSpace}>
               <CounterButtons
+              required={true}
+              isError={(!isValid && !isFloors) || (!isValid && values.floors.count === 0)}
                 initValue={values.floors.count}
                 onChange={onChangeFloors}
                 label="Этажей в доме"

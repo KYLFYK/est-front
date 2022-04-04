@@ -7,22 +7,28 @@ import { Card } from "../Mortgage/Card";
 
 interface Props {
   initValue: number;
+  amountValue?: number;
+  floorValue?: number;
   label?: string;
   className?: string;
   onChange: (value: number) => void;
   required?: boolean;
   isError?: boolean;
   errorLabel?: string;
+  location?: string;
 }
 
 const CounterButtons: React.FC<Props> = ({
   onChange,
   initValue,
+  amountValue,
+  floorValue,
   label,
   className,
   required = false,
   isError,
   errorLabel = "Значение должно быть выше 0",
+  location,
 }) => {
   const [value, setValue] = useState<number>(0);
   const [hover, setHover] = useState<boolean>(false);
@@ -32,13 +38,32 @@ const CounterButtons: React.FC<Props> = ({
   }, [initValue]);
 
   const increaseValue = () => {
-    setValue(value + 1);
-    onChange(value + 1);
+    if (location === "floorsAmmount") {
+      setValue(value + 1);
+      onChange(value + 1);
+    } else if (amountValue && amountValue > 0 && amountValue > value) {
+      setValue(value + 1);
+      onChange(value + 1);
+    } else if (!location) {
+      setValue(value + 1);
+      onChange(value + 1);
+    }
   };
   const decreaseValue = () => {
     const newValue = value === 0 ? 0 : value - 1;
-    setValue(newValue);
-    onChange(newValue);
+    if (location === "floor") {
+      setValue(newValue);
+      onChange(newValue);
+    } else if (
+      location === "floorsAmmount" &&
+      ((floorValue && floorValue < value) || !floorValue)
+    ) {
+      setValue(newValue);
+      onChange(newValue);
+    } else if (!location) {
+      setValue(newValue);
+      onChange(newValue);
+    }
   };
 
   return (

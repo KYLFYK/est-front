@@ -33,7 +33,7 @@ const MyAdsActive = observer(() => {
   ) : (
     <MyAdsContainer
       objects={adsStore.initialData.data.filter(
-        (el) => el.agent?.id === idOwner.id && !el.markAsDelete
+        (el) => el.agent?.id === idOwner?.id && !el.markAsDelete
       )}
       menu={"active"}
       deleteObject={handleDeleteObject}

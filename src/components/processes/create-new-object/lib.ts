@@ -176,7 +176,9 @@ export const isValidInputsAboutTab = (
   index: boolean,
   address: boolean,
   cost: boolean,
-  region: boolean
+  region: boolean,
+  isValidFloor: boolean,
+  isValidFloorsAmmount: boolean,
 ): boolean => {
   switch (objectType) {
     case ObjectTypes.APARTMENTS:
@@ -188,7 +190,9 @@ export const isValidInputsAboutTab = (
         city &&
         index &&
         address &&
-        cost
+        cost && 
+        isValidFloor && 
+        isValidFloorsAmmount
       );
     case ObjectTypes.HOUSE:
       return !!(name && country && city && index && address && cost);
@@ -229,7 +233,8 @@ export const isValidInputsGeneralTab = (
   isPriceObjectMin: boolean,
   isPriceObjectMax: boolean,
   isAreaObjectMin: boolean,
-  isAreaObjectMax: boolean
+  isAreaObjectMax: boolean,
+  isFloors: boolean,
 ): boolean => {
   switch (objectType) {
     case ObjectTypes.APARTMENTS:
@@ -255,7 +260,8 @@ export const isValidInputsGeneralTab = (
         garageCapacity &&
         garageSquare &&
         pool &&
-        poolSquare
+        poolSquare &&
+        isFloors
       );
     case ObjectTypes.TOWNHOUSE:
       return !!(

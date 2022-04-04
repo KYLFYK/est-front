@@ -52,7 +52,7 @@ export const NewDropDown: <T extends ValueVariants | Array<ValueVariants>>(
   );
   const refInput = useRef<any>(null);
   const [hover, setHover] = useState<boolean>(false);
-  console.log(placeholder, isError);
+
   const handleChange = (newValue: optionType) => {
     if (newValue !== value) {
       if (Array.isArray(value)) {

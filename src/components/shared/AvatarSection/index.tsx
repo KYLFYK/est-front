@@ -59,7 +59,7 @@ export const AvatarSection: FC<Props> = observer(
               {activeUpload && (
                 <BaseButton
                   className={styles.button}
-                  onClick={() => {console.log('ava')}}
+                  onClick={() => {}}
                   type="secondary"
                 >
                   {buttonText ? buttonText : "Загрузить лого"}

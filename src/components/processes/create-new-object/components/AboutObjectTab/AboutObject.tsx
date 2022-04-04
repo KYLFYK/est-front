@@ -99,6 +99,9 @@ const AboutObjectTab: React.FC<Props> = observer(
     const isValidAddress = "address" in values && !!values.address; // REPLACE BY VALIDATION SERVICE
     const isValidCost = "cost" in values && !!values.cost; // REPLACE BY VALIDATION SERVICE
     const isValidRegion = "region" in values && !!values.region; // REPLACE BY VALIDATION SERVICE
+    const isValidFloor = "floor" in values && !!values.floor;
+    const isValidFloorsAmmount =
+      "floorsAmmount" in values && !!values.floorsAmmount;
 
     const handleNext = () => {
       const isValid = isValidInputsAboutTab(
@@ -111,7 +114,9 @@ const AboutObjectTab: React.FC<Props> = observer(
         isValidIndex,
         isValidAddress,
         isValidCost,
-        isValidRegion
+        isValidRegion,
+        isValidFloor,
+        isValidFloorsAmmount
       );
       if (isValid) {
         saveAboutTab(values!, objectType);
@@ -154,6 +159,7 @@ const AboutObjectTab: React.FC<Props> = observer(
         setValues({ ...values, complexName: Number(value) });
       }
     };
+
     const onChangeFloor = (value: number) => {
       setValues({ ...values, floor: value });
     };
@@ -352,16 +358,24 @@ const AboutObjectTab: React.FC<Props> = observer(
             )}
             {"floor" in values && (
               <CounterButtons
+                required={true}
                 onChange={onChangeFloor}
                 initValue={values.floor}
+                amountValue={values.floorsAmmount}
+                location={'floor'}
                 label="Этаж"
+                isError={!isValid && !isValidFloor}
               />
             )}
             {"floorsAmmount" in values && (
               <CounterButtons
+                required={true}
                 onChange={onChangeFloorsAmmount}
                 initValue={values.floorsAmmount}
+                floorValue={values.floor}
+                location={'floorsAmmount'}
                 label="Этажей в доме"
+                isError={!isValid && !isValidFloorsAmmount}
               />
             )}
             {idOwner.role === "admin" && (

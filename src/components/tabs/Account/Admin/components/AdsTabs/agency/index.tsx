@@ -10,95 +10,96 @@ import { typeToRuString } from "../../../../../../../utils/interfaces/objects";
 
 import styles from "./AgencyTab.module.scss";
 import Typography from "../../../../../../shared/Typography/Typography";
-import {statusActiveApi} from "../../../../../../shared/Loader/Loader";
+import { statusActiveApi } from "../../../../../../shared/Loader/Loader";
 
 export const AgencyTab: FC = observer(() => {
   const store = AllAdsStore;
-  const [sort, setSort]=useState<string>('default')
-
-    console.log("store.statusLoader", store.statusLoader)
+  const [sort, setSort] = useState<string>("default");
 
   return (
     <div className={styles.wrapper}>
       <PageFilter buttonText={"Добавить объект"} />
       <FilterSearch
-          setSort={(e:any)=>{
-            setSort(e)
-            store.filter(e,"agent")
-            }}
-            sort={sort}
+        setSort={(e: any) => {
+          setSort(e);
+          store.filter(e, "agent");
+        }}
+        sort={sort}
       />
       <div className={styles.list}>
-        {store.adsList !== null && store.adsList.length > 0 ?
-        store.adsList.filter((el) => el.owner.role === "agent")
-          .map((object) => {
-            const textButton = object.markAsDelete ? "Восстановить" : undefined;
+        {store.adsList !== null && store.adsList.length > 0
+          ? store.adsList
+              .filter((el) => el.owner.role === "agent")
+              .map((object) => {
+                const textButton = object.markAsDelete
+                  ? "Восстановить"
+                  : undefined;
 
-            const headerElems = [
-              {
-                key: "Агент:",
-                value: object.owner.email,
-              },
-            ];
+                const headerElems = [
+                  {
+                    key: "Агент:",
+                    value: object.owner.email,
+                  },
+                ];
 
-            const footerMainElems: {
-              key: string;
-              value: string | number;
-            }[] = [
-              {
-                key: "Объект",
-                value: typeToRuString(object.objType),
-              },
-              {
-                key: "Цена",
-                value: object.price,
-              },
-              {
-                key: "Тип объекта",
-                value: ObjTypeToRu(object.objectType),
-              },
-              ...object.guides
-                .filter(
-                  (el) =>
-                    el.subtitle_ru !== null &&
-                    el.type_en !== "furniture" &&
-                    el.type_en !== "window"
-                )
-                .map((el) => ({
-                  key: el.type_ru,
-                  value: el.value,
-                })),
-            ];
+                const footerMainElems: {
+                  key: string;
+                  value: string | number;
+                }[] = [
+                  {
+                    key: "Объект",
+                    value: typeToRuString(object.objType),
+                  },
+                  {
+                    key: "Цена",
+                    value: object.price,
+                  },
+                  {
+                    key: "Тип объекта",
+                    value: ObjTypeToRu(object.objectType),
+                  },
+                  ...object.guides
+                    .filter(
+                      (el) =>
+                        el.subtitle_ru !== null &&
+                        el.type_en !== "furniture" &&
+                        el.type_en !== "window"
+                    )
+                    .map((el) => ({
+                      key: el.type_ru,
+                      value: el.value,
+                    })),
+                ];
 
-            if (object.markAsDelete) {
-              headerElems.push({
-                key: "В архиве с:",
-                value: moment(object.updateAt).format("DD.MM.YYYY"),
-              });
-            } else {
-              headerElems.push({
-                key: "Изменено:",
-                value: moment(object.updateAt).format("DD.MM.YYYY"),
-              });
-            }
+                if (object.markAsDelete) {
+                  headerElems.push({
+                    key: "В архиве с:",
+                    value: moment(object.updateAt).format("DD.MM.YYYY"),
+                  });
+                } else {
+                  headerElems.push({
+                    key: "Изменено:",
+                    value: moment(object.updateAt).format("DD.MM.YYYY"),
+                  });
+                }
 
-            return (
-              <AdItem
-                name={object.name}
-                address={object.address}
-                textButton={textButton}
-                headerElems={headerElems}
-                footerMainElems={footerMainElems}
-                key={object.id}
-                image={object.files[0] ? object.files[0].url : undefined}
-                objId={object.id}
-                objType={object.objType}
-                markedAsDeleted={object.markAsDelete}
-              />
-            );
-          }) :  statusActiveApi(store.statusLoader)
-        }
+                return (
+                  <AdItem
+                    name={object.name}
+                    address={object.address}
+                    textButton={textButton}
+                    headerElems={headerElems}
+                    footerMainElems={footerMainElems}
+                    key={object.id}
+                    image={object.files[0] ? object.files[0].url : undefined}
+                    objId={object.id}
+                    objType={object.objType}
+                    markedAsDeleted={object.markAsDelete}
+                  />
+                );
+              })
+          : statusActiveApi(store.statusLoader)}
       </div>
     </div>
-  )
+  );
 });
