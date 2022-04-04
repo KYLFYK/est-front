@@ -23,7 +23,6 @@ import {conversionDate} from "../../src/utils/conversionDate/conversionDate";
 import {sortObject_specsTypeGuide, sortGuide} from "../../src/utils/conversionIcons/conversionIcons";
 import {useBreadcrumbsStore} from '../../src/mobx/stores/BreadcrumbsStore/BreadcrumbsStore'
 import {FILTER_ACTIONS_OPTIONS, FILTER_HOUSE_TYPE_OPTIONS} from '../../src/components/containers/Filter/config'
-import ErrorPage from "../404";
 import css from "../../styles/slider.module.scss";
 
 const city = ['Москва', 'Крым', 'Сочи']
@@ -80,56 +79,50 @@ const Land = observer((props: ObjectLandType) => {
 
 
     return (
-        <>
-            {
-                !props.name === undefined &&
-                !props.address === undefined &&
-                !props.info_options === undefined
-                    ? <ErrorPage/>
-                    : <MainContainer
-                        keywords={props.name}
-                        title={props.name}
-                        city={city}
-                        personalAccount={personalAccount}
-                        footerColor={'nude'}
-                        refs={refs}
-                    >
-                        <Breadcrumbs location={'object'}/>
-                        <Views items={views}/>
-                        <NameEstate item={props.name}/>
-                        <AdressEstate item={props.address}/>
-                        <HorizontalTabs tabs={tabs} refs={refs}/>
-                        <div ref={general}>
-                            <GeneralInfo
-                                info={props.info_options}
-                                price={props.price}
-                                images={props.images}
-                                classSlider={css.image}
-                            />
-                        </div>
-                        <ObjectDescription items={props.description_items}/>
-                        <div ref={specs}>
-                            {
-                                props.object_specs && <ObjectSpecifications specificationsLists={props.object_specs} title={"Об участке"}/>
-                            }
-                        </div>
-                        <div ref={infra}>
-                            <Map currentHouse={props} infrastructura={infrastructura} location={'infrastructure'}
-                                 InfrastructureInfo={props.description_Info.toString()}/>
-                        </div>
-                        <div ref={legal}>
-                            {
-                                props.legalPurityData && <ObjectLegalPurity legalPurityData={props.legalPurityData}/>
-                            }
 
-                        </div>
-                        <Mortgage/>
-                        <div ref={record}>
-                            <Record Record={RecordAgent.Record} title={'участок'} nameObject={props.name}/>
-                        </div>
-                    </MainContainer>
-            }
-        </>
+        <MainContainer
+            keywords={props.name}
+            title={props.name}
+            city={city}
+            personalAccount={personalAccount}
+            footerColor={'nude'}
+            refs={refs}
+        >
+            <Breadcrumbs location={'object'}/>
+            <Views items={views}/>
+            <NameEstate item={props.name}/>
+            <AdressEstate item={props.address}/>
+            <HorizontalTabs tabs={tabs} refs={refs}/>
+            <div ref={general}>
+                <GeneralInfo
+                    info={props.info_options}
+                    price={props.price}
+                    images={props.images}
+                    classSlider={css.image}
+                />
+            </div>
+            <ObjectDescription items={props.description_items}/>
+            <div ref={specs}>
+                {
+                    props.object_specs &&
+                    <ObjectSpecifications specificationsLists={props.object_specs} title={"Об участке"}/>
+                }
+            </div>
+            <div ref={infra}>
+                <Map currentHouse={props} infrastructura={infrastructura} location={'infrastructure'}
+                     InfrastructureInfo={props.description_Info.toString()}/>
+            </div>
+            <div ref={legal}>
+                {
+                    props.legalPurityData && <ObjectLegalPurity legalPurityData={props.legalPurityData}/>
+                }
+
+            </div>
+            <Mortgage/>
+            <div ref={record}>
+                <Record Record={RecordAgent.Record} title={'участок'} nameObject={props.name}/>
+            </div>
+        </MainContainer>
     )
 })
 
