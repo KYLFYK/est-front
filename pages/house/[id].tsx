@@ -364,8 +364,8 @@ const House = observer((props: any) => {
 export default House;
 
 export async function getServerSideProps({ params }: any) {
-
   const res = await fetch(
+   
     `${process.env.HOST}${UrlObj.house}/${params.id}`
     // `https://estatum.f-case.ru/api/${UrlObj.house}/${params.id}`
     // `http://marketplace-back:8008/api/${UrlObj.house}/${params.id}`
