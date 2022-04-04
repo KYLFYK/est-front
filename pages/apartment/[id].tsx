@@ -173,7 +173,7 @@ const Apartment: NextPage = observer((props: any) => {
 
       <Mortgage />
       <div ref={record}>
-        <Record Record={RecordAgent.Record} title={"квартиру"} />
+        <Record Record={RecordAgent.Record} title={"квартиру"} nameObject={props.name} />
       </div>
       <Footer color={"nude"} />
     </MainContainer>

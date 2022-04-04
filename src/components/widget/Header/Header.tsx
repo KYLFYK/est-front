@@ -187,6 +187,11 @@ export const Header: FC<HeaderPropsType> = ({
       setEdit("reset-password");
       setActiveModal(true);
     }
+    if (router.query.text === "login") {
+      searchModal("login");
+      setEdit("login");
+      setActiveModal(true);
+    }
     if (router.query.text === "confirmationNewPassword") {
       searchModal("confirmationNewPassword");
       setEdit("confirmationNewPassword");

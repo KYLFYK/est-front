@@ -125,7 +125,7 @@ const Land = observer((props: ObjectLandType) => {
                         </div>
                         <Mortgage/>
                         <div ref={record}>
-                            <Record Record={RecordAgent.Record} title={'участок'}/>
+                            <Record Record={RecordAgent.Record} title={'участок'} nameObject={props.name}/>
                         </div>
                     </MainContainer>
             }

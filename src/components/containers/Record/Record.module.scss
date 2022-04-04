@@ -301,3 +301,35 @@
     user-select: none;          
     transition: all .5s;
 }
+.color_Card1{
+    background-color: #1A4862;
+    padding: 11px 20px 16px 20px  !important;
+    margin-top: 10px;
+    width: 430px;
+}
+.color_Card2{
+    padding: 11px 20px 16px 20px  !important;
+     margin-top: 10px;
+    width: 430px;
+}
+.df_jc{
+    display: flex;
+    justify-content: center;
+}
+
+.df_jc_ai{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.margin_B10{
+    margin-bottom: 10px;
+}
+.buttonW{
+    width: 160px;
+}
+.buttonDisable{
+    width: 160px;
+    pointer-events:none;
+}
+
