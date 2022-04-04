@@ -38,7 +38,7 @@ const ObjectCard: React.FC<Props> = observer(
     return (
       <div className={s.wrapper}>
         {/*<Link href={`${TEMP_LINK}${route}/${data.id}`} passHref>*/}
-        <Link href={`${TEMP_LINK}${route}/${encodeURIComponent(data.id)}`} passHref>
+        <Link href={`/${encodeURIComponent(route? route.toString():'house')}/${encodeURIComponent(data.id)}`} passHref>
         {/*<Link  href={{*/}
         {/*    pathname: `${route}`,*/}
         {/*    query: { id: `${data.id}` },*/}
