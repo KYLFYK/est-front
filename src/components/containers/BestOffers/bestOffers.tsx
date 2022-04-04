@@ -7,6 +7,7 @@ import {mapData} from '../Maps/MapFinder/config';
 import {useStoreMainPage} from "../../../mobx/mainPage/mainPage";
 import {observer} from "mobx-react-lite";
 import Slider from "react-slick";
+import {IMAGES_SET} from "../Card/config";
 
 type BestOffersType = {
     tagsButton: Array<string>
@@ -129,6 +130,9 @@ export const BestOffers: FC<BestOffersType> = observer(({tagsButton}) => {
         }
         store.fetchBestOffers(10, activeFilter[0], activeFilter[1], activeFilter[2], activeFilter[3], activeFilter[4])
     }
+    let data = ''
+    //@ts-ignore
+    if(store.initialData.bestOffers.length !== 0) data = JSON.parse(JSON.stringify(store.initialData.bestOffers[0]))
 
     return (
         <div className={css.offers}>
@@ -155,6 +159,7 @@ export const BestOffers: FC<BestOffersType> = observer(({tagsButton}) => {
                                 <div key={index} style={{padding: '5px', marginTop: index > 1 ? "24px" : '0px'}}>
                                     <div>
                                         <ObjectCard
+                                            key={index}
                                             route={t.type}
                                             typeObject={"new"}
                                             houseData={t}
@@ -166,6 +171,22 @@ export const BestOffers: FC<BestOffersType> = observer(({tagsButton}) => {
                             ))
                         }
                     </Slider>
+
+                    {
+                        store.initialData.bestOffers.length !== 0 && data.length !== 0 &&
+                        <div  style={{padding: '5px', marginTop: '0px'}}>
+                            <h1>Moc</h1>
+                            <div>
+                                <ObjectCard
+                                    route={'house'}
+                                    typeObject={"new"}
+                                    houseData={"Новостройка"}
+                                    data={data}
+                                />
+                            </div>
+
+                        </div>
+                    }
                 </div>
             </HeadLine>
         </div>
