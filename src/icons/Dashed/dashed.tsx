@@ -15,7 +15,7 @@ export const Dashed = () => {
           height="239"
           rx="5.5"
           stroke="#1A4862"
-          stroke-dasharray="8 8"
+          strokeDasharray="8 8"
         />
       </svg>
     </>

@@ -1,5 +1,5 @@
 import { makeAutoObservable } from "mobx";
-import moment from "moment";
+import { instance } from "../../../../api/instance";
 
 interface ISmiNews {
   title: string;
@@ -96,92 +96,81 @@ export interface IDeveloperProfile {
   identify: IIdentify;
 }
 
-const InitialData: null | IDeveloperProfile = {
-  id: "",
-  name: "",
-  type: "",
-  address: "",
-  phoneNumber: "",
-  email: "",
-  citeUrl: "",
-  description: "",
-  avatarUrl: "",
-  requisites: {
-    organizationName: "",
-    address: "",
-    authorizedCapital: "",
-    okfs: "",
-    okopf: "",
-    okogu: "",
-    inn: "",
-    ogrn: "",
-    kpp: "",
-    okato: "",
-    okpo: "",
-    oktmo: "",
-    companyStatus: "",
-    supervisor: "",
-    founders: "",
-    enterpriseSize: "",
-    personalCount: "",
-    filial: "",
-    revenue: "",
-    netProfit: "",
-    netAssets: "",
-    stateRegistrationDate: moment().toDate(),
-    registrationObject: "",
-    registrationObjectAddress: "",
-    registrationFileLocated: "",
-    okved: "",
-    additionalActivities: [""],
-  },
-  smiNews: [
-    {
-      title: "",
-      iconUrl: "",
-      description: "",
-      createdAt: moment().toDate(),
-      url: "",
-    },
-  ],
-  statistic: {
-    courtCases: 0,
-    asAPlaintiff: 0,
-    asADefendant: 0,
-    currentProductions: 0,
-    completedProductions: 0,
-    numberOfPurchases: 0,
-    allSignificantEvents: 0,
-    significantEventsOfYear: 0,
-    subsidiaries: 0,
-    coOwners: 0,
-    rentedHouses: 0,
-    rentedLS: 0,
-    underConstructionHouses: 0,
-    underConstructionLS: 0,
-  },
-  risk: {
-    dueDiligenceIndex: "",
-    financialRiskIndex: "",
-    paymentDisciplineIndex: "",
-  },
-  settings: {
-    login: "",
-    password: "",
-    email: "",
-    phoneNumbers: [""],
-  },
-  identify: {
-    status: "readyToTest",
-    documents: [
-      {
-        name: "",
-        format: "",
-        url: "",
-      },
-    ],
-  },
-};
+interface IDeveloper {
+  INN: string;
+  KPP: string;
+  OGRN: string;
+  OKATO: string;
+  OKFS: string;
+  OKOGU: string;
+  OKOPF: string;
+  OKPO: string;
+  OKTMO: string;
+  address: string;
+  authorizedCapital: number;
+  branch: number;
+  completedBuildingAmount: number;
+  completedComplexAmount: number;
+  description: string;
+  enterpriseSize: number;
+  founders: string;
+  id: number;
+  inProgressBuildingAmount: number;
+  inProgressComplexAmount: number;
+  leaderName: string;
+  legalAddress: string;
+  legalFullName: string;
+  logo: string;
+  mainOccupation: string | null;
+  name: string;
+  netAssets: number;
+  netProfit: number;
+  numberOfStaff: number;
+  registeringAuthorityLocated: string | null;
+  registrationAuthorityAddress: string | null;
+  registrationAuthorityName: string | null;
+  registrationDate: string | null;
+  revenue: number;
+  risks: null | string;
+  site: string | null;
+  status: null | string;
+  type: string;
+  extraOccupations: {
+    ord: number;
+    value: string;
+  }[];
+  phone: {
+    ord: number;
+    value: string;
+  }[];
+  press: {
+    date: string;
+    id: number;
+    link: string;
+    logo: string;
+    text: string;
+    title: string;
+  }[];
+  statistics: {
+    items: {
+      item: string;
+      value: number;
+    }[];
+    title: string;
+  }[];
+}
+
+interface IResponse {
+  createAt: string;
+  email: string;
+  id: number;
+  isConfirmed: boolean;
+  markAsDelete: boolean;
+  phone: string;
+  role: string;
+  updateAt: string;
+  developerProperty: IDeveloper;
+}
 
 class DeveloperProfile {
   constructor() {
@@ -190,12 +179,43 @@ class DeveloperProfile {
 
   loaded: boolean = false;
   errorOnLoad: boolean = false;
-  profileData: null | IDeveloperProfile = null;
+  profileData: null | IResponse = null;
+  developerId: string | null = null;
 
-  loadProfileInfo: () => void = async () => {
-    this.loaded = true;
-    this.errorOnLoad = false;
-    this.profileData = InitialData;
+  loadProfileInfo: (developerId: string) => void = async (developerId) => {
+    try {
+      const response = await instance.get<IResponse>(
+        `developer/${developerId}`
+      );
+      this.loaded = true;
+      this.errorOnLoad = false;
+      this.profileData = response.data;
+      this.developerId = developerId;
+    } catch (e) {
+      console.error("Developer loading error", e);
+      this.loaded = false;
+      this.errorOnLoad = true;
+    }
+  };
+
+  changeProfileInfo: (data: IDeveloper) => void = async (data) => {
+    try {
+      const response = await instance.patch(
+        `developer/${this.developerId}`,
+        data
+      );
+
+      console.log(response);
+
+      this.profileData = this.profileData
+        ? {
+            ...this.profileData,
+            developerProperty: data,
+          }
+        : null;
+    } catch (e) {
+      console.error("Profile update error", e);
+    }
   };
 }
 

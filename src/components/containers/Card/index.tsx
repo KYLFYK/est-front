@@ -37,7 +37,12 @@ const ObjectCard: React.FC<Props> = observer(
 
     return (
       <div className={s.wrapper}>
-        <Link href={`${TEMP_LINK}${route}/${data.id}`}>
+        {/*<Link href={`${TEMP_LINK}${route}/${data.id}`} passHref>*/}
+        <Link href={`/${route}/${encodeURIComponent(data.id)}`} >
+        {/*<Link  href={{*/}
+        {/*    pathname: `${route}`,*/}
+        {/*    query: { id: `${data.id}` },*/}
+        {/*}} passHref>*/}
           <a className={s.link}>
             <div className={s.slider}>
               <BaseSlider

@@ -367,8 +367,8 @@ export async function getServerSideProps({ params }: any) {
   console.log(`${process.env.HOST}${UrlObj.house}/${params.id}`)
   const res = await fetch(
    
-    `${process.env.HOST}${UrlObj.house}/${params.id}`
-    // `https://estatum.f-case.ru/api/${UrlObj.house}/${params.id}`
+    // `${process.env.HOST}${UrlObj.house}/${params.id}`
+    `https://estatum.f-case.ru/api/${UrlObj.house}/${params.id}`
     // `http://marketplace-back:8008/api/${UrlObj.house}/${params.id}`
   );
 

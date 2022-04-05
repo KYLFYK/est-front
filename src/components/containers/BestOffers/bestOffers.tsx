@@ -7,6 +7,7 @@ import {mapData} from '../Maps/MapFinder/config';
 import {useStoreMainPage} from "../../../mobx/mainPage/mainPage";
 import {observer} from "mobx-react-lite";
 import Slider from "react-slick";
+import {IMAGES_SET} from "../Card/config";
 
 type BestOffersType = {
     tagsButton: Array<string>
@@ -155,6 +156,7 @@ export const BestOffers: FC<BestOffersType> = observer(({tagsButton}) => {
                                 <div key={index} style={{padding: '5px', marginTop: index > 1 ? "24px" : '0px'}}>
                                     <div>
                                         <ObjectCard
+                                            key={index}
                                             route={t.type}
                                             typeObject={"new"}
                                             houseData={t}

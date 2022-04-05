@@ -47,6 +47,7 @@ export const AgentCard: FC<Props> = ({
             src={imgUrl ? imgUrl : cardImage}
             layout={"fill"}
             alt={"Логотип"}
+            unoptimized
           />
         </a>
       </Link>

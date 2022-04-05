@@ -17,8 +17,15 @@ RUN npm install --save-dev typescript
 # Copy project
 COPY ./ ./
 
+# Expose the listening port
+EXPOSE 3000
+
+ENV PORT 3000
+ENV ENV_STAGES=${ENV_STAGES}
+
 # Build app
 RUN npm run build:${ENV_STAGES}
+
 
 FROM node:16.13.2-alpine3.15
 

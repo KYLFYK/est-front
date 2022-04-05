@@ -1,29 +1,33 @@
 import { makeAutoObservable } from "mobx";
 import { instance } from "../../../../api/instance";
+import { IFile } from "../../agent/ads/AgentAds";
 
-interface IResponseProps {
-  address: string;
-  description: string;
-  id: string | number;
+interface IAgentProps {
+  agencyId: number;
+  experience: string;
+  id: number;
+  inviteLink: string;
   name: string;
+  position: string;
+  rating: number;
+  file: IFile[];
+  messengers: Record<string, string>;
   phone: {
-    ord: string;
+    ord: number;
     value: string;
   }[];
-  site: string;
-  status: string;
 }
 
 interface IResponse {
-  agencyProperty: IResponseProps;
-  createAt: Date;
+  createAt: string;
   email: string;
   id: number;
   isConfirmed: boolean;
   markAsDelete: boolean;
   phone: string;
   role: string;
-  updateAt: Date;
+  updateAt: string;
+  agentProperty: IAgentProps;
 }
 
 export interface IAdminAgent {
@@ -47,12 +51,18 @@ class AgenciesList {
 
   uploadList: () => void = async () => {
     try {
-      const res = await instance.get<IResponse[]>("agency");
+      const res = await instance.get<IResponse[]>("agent");
+
+      console.log(res.data);
+
       this.list = res.data.map((el) => ({
         id: el.id,
-        description: el.agencyProperty.description,
-        agencyName: el.agencyProperty.name,
+        description: el.agentProperty.position,
+        agencyName: el.agentProperty.name,
         markAsDelete: el.markAsDelete,
+        imgUrl: el.agentProperty.file[0]
+          ? el.agentProperty.file[0].url
+          : undefined,
       }));
       this.loaded = true;
       this.errorOnLoad = false;

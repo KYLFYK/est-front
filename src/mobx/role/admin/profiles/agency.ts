@@ -1,5 +1,6 @@
 import { makeAutoObservable } from "mobx";
 import moment from "moment";
+import { instance } from "../../../../api/instance";
 
 export type IPlan = "premium" | "standard" | "economy";
 export type IPayment = "card" | "cash";
@@ -120,10 +121,19 @@ class AgentProfile {
   profile: null | IAgentProfile = null;
 
   uploadProfile: (id: string) => void = async (id) => {
-    this.loaded = true;
-    this.errorOnLoad = false;
-    this.profile = InitialData;
-    this.profile.id = id;
+    try {
+      await instance.get(`account/${id}`);
+      this.loaded = true;
+      this.errorOnLoad = false;
+      this.profile = {
+        ...InitialData,
+      };
+      this.profile.id = id;
+    } catch (e) {
+      console.error("Error profile loading", e);
+      this.loaded = false;
+      this.errorOnLoad = true;
+    }
   };
 }
 
