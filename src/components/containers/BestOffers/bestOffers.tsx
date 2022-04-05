@@ -130,11 +130,7 @@ export const BestOffers: FC<BestOffersType> = observer(({tagsButton}) => {
         }
         store.fetchBestOffers(10, activeFilter[0], activeFilter[1], activeFilter[2], activeFilter[3], activeFilter[4])
     }
-    let data:any = ''
-    //@ts-ignore
-    if(store.initialData.bestOffers.length !== 0) data = JSON.parse(JSON.stringify(store.initialData.bestOffers[0]))
 
-    data  ={"id":1,"name":"2-этажный дом, 236 м² ","address":"Алушта городской округ, Малый Маяк село, ул. Морская","type":"house","price":30000000,"property":{"floor":3,"totalFloor":15,"images":[],"object_id":1,"name":"2-этажный дом, 236 м² ","description":""},"files":[{"id":1,"fileName":"3e62cdcb499f21ae9b37c2527264e734.jpg","url":"http://s3.dtln.ru:80/mp-data/3e62cdcb499f21ae9b37c2527264e734.jpg","mimeType":"image/jpeg","size":"388764","createAt":"2022-03-29T07:30:03.381Z","updateAt":"2022-03-29T07:30:03.414Z"},{"id":2,"fileName":"175089887a9bd4633a022236613cbc6d.jpg","url":"http://s3.dtln.ru:80/mp-data/175089887a9bd4633a022236613cbc6d.jpg","mimeType":"image/jpeg","size":"386803","createAt":"2022-03-29T07:30:03.392Z","updateAt":"2022-03-29T07:30:03.414Z"},{"id":3,"fileName":"f12ad9055be31d011a624ad865fee925.jpg","url":"http://s3.dtln.ru:80/mp-data/f12ad9055be31d011a624ad865fee925.jpg","mimeType":"image/jpeg","size":"406595","createAt":"2022-03-29T07:30:03.398Z","updateAt":"2022-03-29T07:30:03.414Z"}]}
     return (
         <div className={css.offers}>
             <HeadLine title={'Лучшие предложения'}>
@@ -172,22 +168,6 @@ export const BestOffers: FC<BestOffersType> = observer(({tagsButton}) => {
                             ))
                         }
                     </Slider>
-
-                    {
-                        store.initialData.bestOffers.length !== 0 && data.length !== 0 &&
-                        <div  style={{padding: '5px', marginTop: '0px'}}>
-                            <h1>Moc</h1>
-                            <div>
-                                <ObjectCard
-                                    route={'house'}
-                                    typeObject={"new"}
-                                    houseData={"Новостройка"}
-                                    data={data}
-                                />
-                            </div>
-
-                        </div>
-                    }
                 </div>
             </HeadLine>
         </div>
