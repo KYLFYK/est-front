@@ -1,10 +1,17 @@
 @import "src/app/styles/typography";
 @import "src/app/styles/colours";
+@import "src/app/styles/scrollbars";
 
 .wrapper {
   display: flex;
   flex-wrap: wrap;
   gap: 20px;
+  overflow: auto;
+  scrollbar-width: 1px;
+  height: calc(100vh - 430px);
+  @include MapScrollbar;
+  padding-right: 10px;
+  margin-right: 5px;
 }
 
 .card {

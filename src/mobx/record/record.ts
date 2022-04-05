@@ -53,7 +53,7 @@ class RecordStore {
         this.days = days
         this.price = price
         this.typeOrder = typeOrder
-        console.log(JSON.parse(JSON.stringify(this)))
+        // console.log(JSON.parse(JSON.stringify(this)))
     }
 
     updateDataUser(name: string,
@@ -73,7 +73,11 @@ class RecordStore {
         this.orderType = orderType
         this.agentName = agentName
     }
-
+    updateMeFromLogin(infoLogin:{email:string,phone:string,name:string}){
+        this.email = infoLogin.email
+        this.phone = infoLogin.phone // ?? infoLogin.customerProperty.phone
+        this.name = infoLogin.name
+    }
 }
 
 export const useRecordStore = new RecordStore();

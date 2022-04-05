@@ -10,12 +10,12 @@
   transition: 0.5s;
   opacity: 0;
   pointer-events: none;
-  z-index: 2;
+  z-index: 102;
 }
 
 .modal.active {
   pointer-events: all;
-  z-index: 2;
+  z-index: 102;
   background: rgba(61, 69, 80, 0.7);
   opacity: 1;
   border-radius: 8px;
@@ -32,7 +32,7 @@
 
 .modal_content.active {
   transform: scale(1);
-  z-index: 2;
+  z-index: 102;
   width: 578px;
   min-height: 300px;
   background: #FFFFFF;

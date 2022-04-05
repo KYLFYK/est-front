@@ -2,8 +2,15 @@ import css from "../../../../pages/pay/pay.module.scss";
 import Typography from "../../shared/Typography/Typography";
 import BaseButton from "../../shared/BaseButton/BaseButtons";
 import React from "react";
+import {useRouter} from "next/router";
+import {useRecordStore} from "../../../mobx/record/record";
 
 export const CardFree = () =>{
+
+    const store = useRecordStore
+
+    const router = useRouter()
+
     return(
         <div className={css.cardFree} >
             <svg width="403" height="189" viewBox="0 0 403 189" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -35,11 +42,25 @@ export const CardFree = () =>{
                 С Вами свяжутся в течение суток, чтобы уточнить статус бронирования
             </Typography>
             <div style={{display:'flex'}} className={css.mT_20}>
-                <BaseButton type={"secondary"} isActive>
+                <BaseButton
+                    type={"secondary"}
+                    isActive
+                    onClick={()=>router.push("/")}
+                >
                     На главную
                 </BaseButton>
-                <BaseButton className={css.mL_10}>
-                    В личный кабинет
+                <BaseButton
+                    className={css.mL_10}
+                    onClick={()=> store.email
+                        ? router.push('/cabinet')
+                        : router.push('/?text=login')
+                    }
+                >
+                    {
+                        store.email
+                            ? " В личный кабинет"
+                            : 'Войти'
+                    }
                 </BaseButton>
             </div>
             <div style={{display:"flex",flexDirection:"column" ,alignItems:"center",marginTop:'150px'}}>

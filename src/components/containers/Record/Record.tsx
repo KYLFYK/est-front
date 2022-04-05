@@ -15,6 +15,7 @@ import {Modal} from "../../shared/Modal/Modal";
 import {RecordPriceLine} from "./RecordPriceLine";
 import css from './Record.module.scss'
 import {useRecordStore} from "../../../mobx/record/record";
+import {observer} from "mobx-react-lite";
 
 type AgentRecordType = {
     Record: {
@@ -27,55 +28,55 @@ type AgentRecordType = {
         connection: Array<{ title: string, value: string, url: string }>
     }
     title?: string
-    nameObject:string
+    nameObject: string
 }
 
 export const useStyles = makeStyles({
-        root: {
-            height:'40px !important',
-            borderRadius:'6px',
-            width:'120px',
-            "& .MuiOutlinedInput-root .MuiOutlinedInput-notchedOutline": {
-                borderColor: "white",
-                borderRadius:'6px',
-            },
-            "&:hover .MuiOutlinedInput-root .MuiOutlinedInput-notchedOutline": {
-                borderColor: "white"
-            },
-            "& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline": {
-                borderColor: "white"
-            },
-            "& .MuiOutlinedInput-input": {
-                color: "black"
-            },
-            "&:hover .MuiOutlinedInput-input": {
-                color: "black"
-            },
-            "& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-input": {
-                color: "black"
-            },
-            "& .MuiInputLabel-outlined": {
-                color: "black"
-            },
-            "&:hover .MuiInputLabel-outlined": {
-                color: "black"
-            },
-            "& .MuiInputLabel-outlined.Mui-focused": {
-                color: "black"
-            },
-            "& > .MuiInputBase-root":{
-                height:'40px',
-            }
+    root: {
+        height: '40px !important',
+        borderRadius: '6px',
+        width: '120px',
+        "& .MuiOutlinedInput-root .MuiOutlinedInput-notchedOutline": {
+            borderColor: "white",
+            borderRadius: '6px',
+        },
+        "&:hover .MuiOutlinedInput-root .MuiOutlinedInput-notchedOutline": {
+            borderColor: "white"
+        },
+        "& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline": {
+            borderColor: "white"
+        },
+        "& .MuiOutlinedInput-input": {
+            color: "black"
+        },
+        "&:hover .MuiOutlinedInput-input": {
+            color: "black"
+        },
+        "& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-input": {
+            color: "black"
+        },
+        "& .MuiInputLabel-outlined": {
+            color: "black"
+        },
+        "&:hover .MuiInputLabel-outlined": {
+            color: "black"
+        },
+        "& .MuiInputLabel-outlined.Mui-focused": {
+            color: "black"
+        },
+        "& > .MuiInputBase-root": {
+            height: '40px',
         }
+    }
 })
 
 const condition = [
-    {  date:'3 дня', price:'Бесплатно'},
-    {  date:'14 дней', price:'150 000 ₽'},
-    {  date:'30 дней', price:'250 000 ₽'},
+    {date: '3 дня', price: 'Бесплатно'},
+    {date: '14 дней', price: '150 000 ₽'},
+    {date: '30 дней', price: '250 000 ₽'},
 ]
 
-export const Record: FC<AgentRecordType> = ({Record, title,nameObject}) => {
+export const Record: FC<AgentRecordType> = observer(({Record, title, nameObject}) => {
 
     const store = useRecordStore
 
@@ -83,11 +84,13 @@ export const Record: FC<AgentRecordType> = ({Record, title,nameObject}) => {
 
     const classes = useStyles()
 
-    const [name, setName] = useState('')
-    const [email, setEmail] = useState('')
-    const [phone, setPhone] = useState('')
+    const [name, setName] = useState<string>('')
+    const [email, setEmail] = useState<string>( '')
+    const [phone, setPhone] = useState<string>('')
     const [timeStart, setTimeStart] = useState('08:00')
     const [timeEnd, setTimeEnd] = useState('18:00')
+
+
 
     const [nameDirty, setNameDirty] = useState(false)
     const [mailDirty, setMailDirty] = useState(false)
@@ -99,47 +102,88 @@ export const Record: FC<AgentRecordType> = ({Record, title,nameObject}) => {
 
     const [formValid, setFormValid] = useState(false)
 
-    const [recordActive, setRecordActive]=useState<boolean>(false)
+    const [recordActive, setRecordActive] = useState<boolean>(false)
 
-    const activeRegistration = () => {
-        store.updateRecordData({
-            name,
-            email,
-            phone,
-            status:'новая заявка',
-            comfortableTimeFrom:timeStart,
-            comfortableTimeTo:timeEnd,
-            orderType:'buy',
-            agentName:'string',
-            nameObject
+    useEffect(()=>{
+        setName(localStorage.getItem('nameUserEstatum') !== null ? localStorage.getItem('nameUserEstatum')!.toString() : '')
+        setEmail(localStorage.getItem('emailEstatum') !== null ? localStorage.getItem('emailEstatum')!.toString() : '')
+        setPhone(localStorage.getItem('phoneEstatum') !== null ? localStorage.getItem('phoneEstatum')!.toString() : '')
+        store.updateMeFromLogin({
+            name:localStorage.getItem('nameUserEstatum') !== null ? localStorage.getItem('nameUserEstatum')!.toString() : '',
+            email:localStorage.getItem('emailEstatum') !== null ? localStorage.getItem('emailEstatum')!.toString() : '',
+            phone:localStorage.getItem('phoneEstatum') !== null ? localStorage.getItem('phoneEstatum')!.toString() : ''
         })
-        if(localStorage.getItem('roleEstatum')){
-            setRecordActive(!recordActive)
-        }else{
-            router.push(`/${router.asPath.split('/')[1]}/${router.query.id}?text=login`)
+    },[store.name])
+
+
+    const redirectPay = async (days: string, price: string) => {
+        await store.updateRecordType(days === '3 дня' ? 'freePay' : 'pay', price, days)
+
+        if(days ==='3 дня'){
+            const routerApi = router.asPath.split('/')
+            const res = await RecordApi.RecordPost(routerApi[1], routerApi[2],{
+                name:store.name,
+                email:store.email,
+                phone:store.phone,
+                status:'Новая заявка',
+                comfortableTimeFrom:timeStart,
+                comfortableTimeTo:timeEnd,
+                orderType: "buy",
+                agentName: "string", // ????
+            })
+            if(!res){
+                setRecordActive(false)
+                return
+            }
         }
+        setTimeout(()=>{
+            router.push('/pay')
+        },50)
     }
 
-    const redirectPay = async (days:string,price:string) => {
-        await store.updateRecordType(days === '3 дня'? 'freePay': 'pay',price,days)
-        // mobx - pay + name + email + phone + time 1<2
-        router.push('/pay')
+    const activeRegistration = () => {
+
+        // const infoLogin = {
+        //     name,
+        //     email,
+        //     phone,
+        //     status: 'новая заявка',
+        //     comfortableTimeFrom: timeStart,
+        //     comfortableTimeTo: timeEnd,
+        //     orderType: 'buy',
+        //     agentName: 'string',
+        //     nameObject
+        // }
+        //
+        // store.updateRecordData(infoLogin)
+        setRecordActive(!recordActive)
+        // if (localStorage.getItem('roleEstatum')) {
+        //     setRecordActive(!recordActive)
+        // } else {
+        //     router.push(`/${router.asPath.split('/')[1]}/${router.query.id}?text=login`)
+        // }
     }
 
     useEffect(() => {
-        if (nameError || mailError || phoneError) {
-            setFormValid(false)
-        } else {
+        if(name && email && phone){
+            setNameError('')
+            setPhoneError('')
+            setMailError('')
             setFormValid(true)
+        }else{
+            if (nameError || mailError || phoneError) {
+                setFormValid(false)
+            }
         }
-    }, [nameError, mailError, phoneError])
-    useEffect(()=>{
+    }, [nameError, mailError, phoneError,name,email,phone])
+
+    useEffect(() => {
         store.updateNameObject(
             nameObject,
-            router.query.id !== undefined? router.query.id.toString() : '0',
+            router.query.id !== undefined ? router.query.id.toString() : '0',
             router.asPath.split('/')[1]
         )
-    },[])
+    }, [])
 
     // useEffect(() => {
     //     if (nameDirty && nameError)setNameDirty(true)
@@ -151,7 +195,7 @@ export const Record: FC<AgentRecordType> = ({Record, title,nameObject}) => {
     const [clicked, setClicked] = useState(false)
 
     const onClickHandler = () => {
-        setClicked(true);
+        // setClicked(true);
         const routerApi = router.asPath.split('/')
         store.updateDataUser(
             name,
@@ -163,17 +207,6 @@ export const Record: FC<AgentRecordType> = ({Record, title,nameObject}) => {
             "buy",
             "string"
         )
-        onBlurHandler('')
-        setFormValid(false)
-        setName('');
-        setNameError('не указано имя');
-        setNameDirty(false)
-        setEmail('');
-        setMailError('не заполнен e-mail');
-        setMailDirty(false)
-        setPhone('');
-        setPhoneError('не указан телефон');
-        setPhoneDirty(false)
         activeRegistration()
     }
 
@@ -205,7 +238,7 @@ export const Record: FC<AgentRecordType> = ({Record, title,nameObject}) => {
     }
 
     const onPhoneHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setPhone(e.target.value)
+        setPhone(e.target.value.replace(/[^\d-]/g, ''))
         if (!e.target.value) {
             setPhoneError('не указан телефон')
         } else {
@@ -216,16 +249,25 @@ export const Record: FC<AgentRecordType> = ({Record, title,nameObject}) => {
     const onBlurHandler = (e: string) => {
         switch (e) {
             case 'name':
-                if (!setName) setNameError('не указано имя')
-                setNameDirty(true)
+                // if (!setName) setNameError('не указано имя')
+                if (!name) {
+                    setNameError('не указано имя')
+                    setNameDirty(true)
+                }
                 break
             case 'mail':
-                if (!setEmail) setMailError('не заполнен e-mail')
-                setMailDirty(true)
+                // if (!setEmail) setMailError('не заполнен e-mail')
+                if (!email) {
+                    setMailError('не заполнен e-mail')
+                    setMailDirty(true)
+                }
                 break
             case 'phone':
-                if (!setPhone) setPhoneError('не указан телефон')
-                setPhoneDirty(true)
+                // if (!setPhone) setPhoneError('не указан телефон')
+                if (!phone) {
+                    setPhoneError('не указан телефон')
+                    setPhoneDirty(true)
+                }
                 break
             default:
                 break
@@ -303,7 +345,7 @@ export const Record: FC<AgentRecordType> = ({Record, title,nameObject}) => {
                                 name='phone'
                                 placeholder={'Телефон'}
                                 onBlur={() => onBlurHandler('phone')}
-                                type={'number'}
+                                type={'string'}
                                 value={phone}
                                 onChange={(e) => onPhoneHandler(e)}
                                 className={s.paddingInput}
@@ -316,20 +358,25 @@ export const Record: FC<AgentRecordType> = ({Record, title,nameObject}) => {
                                     Удобное время
                                 </Typography>
                             </div>
-                            <div style={{backgroundColor:'white',borderRadius:'8px',display:'flex',justifyContent:'space-around'}}>
+                            <div style={{
+                                backgroundColor: 'white',
+                                borderRadius: '8px',
+                                display: 'flex',
+                                justifyContent: 'space-around'
+                            }}>
                                 <TextField
                                     id="time"
                                     type="time"
                                     variant="outlined"
                                     defaultValue="08:00"
                                     value={timeStart}
-                                    onChange={e=>setTimeStart(e.currentTarget.value)}
+                                    onChange={e => setTimeStart(e.currentTarget.value)}
                                     className={classes.root}
                                     inputProps={{
                                         step: 60, // 1 min
                                     }}
                                 />
-                                <span style={{color:'black',marginTop:'8px',display:'inline-block'}}>
+                                <span style={{color: 'black', marginTop: '8px', display: 'inline-block'}}>
                                     -
                                 </span>
                                 <TextField
@@ -338,7 +385,7 @@ export const Record: FC<AgentRecordType> = ({Record, title,nameObject}) => {
                                     variant="outlined"
                                     defaultValue="18:00"
                                     value={timeEnd}
-                                    onChange={e=>setTimeEnd(e.currentTarget.value)}
+                                    onChange={e => setTimeEnd(e.currentTarget.value)}
                                     className={classes.root}
                                     inputProps={{
                                         step: 60, // 1 min
@@ -348,13 +395,13 @@ export const Record: FC<AgentRecordType> = ({Record, title,nameObject}) => {
                         </div>
                     </div>
                     {/*<div className={s.sendButton} onClick={activeRegistration}>*/}
-                    <div className={s.sendButton} >
+                    <div className={s.sendButton}>
                         <Button
                             disabled={!formValid}
                             onMouseEnter={onMouseHoverHandler}
                             onMouseLeave={onMouseOutHandler}
                             onMouseDown={onClickHandler}
-                            className={classNames(s.buttonsColor,(clicked && s.buttonClicked) || (hover && s.buttonHovered) || s.buttons )}
+                            className={classNames(s.buttonsColor, (clicked && s.buttonClicked) || (hover && s.buttonHovered) || s.buttons)}
                             style={{width: '100%', cursor: !formValid ? 'not-allowed' : ''}}
                         >
                             <div><Typography color='secondary' className={s.buttonTitle}> Записаться</Typography></div>
@@ -368,17 +415,18 @@ export const Record: FC<AgentRecordType> = ({Record, title,nameObject}) => {
                         setActive={() => setRecordActive(!recordActive)}
                         active={recordActive}
                     >
-                        <div className={css.margin_B10} >
+                        <div className={css.margin_B10}>
                             <div className={css.df_jc}>
                                 <Typography weight={"medium"} className={css.margin_B10}>
                                     Выберите длительность бронирования
                                 </Typography>
                             </div>
                             {
-                                condition.map((cond,index:number)=>(
+                                condition.map((cond, index: number) => (
                                     <RecordPriceLine
-                                        onPay={(date,price)=>redirectPay(date,price)}
+                                        onPay={(date, price) => redirectPay(date, price)}
                                         key={index}
+                                        disable={index !==0}
                                         date={cond.date}
                                         price={cond.price}
                                     />
@@ -391,7 +439,7 @@ export const Record: FC<AgentRecordType> = ({Record, title,nameObject}) => {
             </ContentContainer>
         </div>
     )
-};
+})
 
 export const ContentContainer: React.FC<{}> = ({children}) => {
     return (

@@ -42,11 +42,31 @@ export const AuthApi = {
     },
     me: async () => {
         try {
-            await instance.get(`${UrlAuth.me}`, {
+            const res = await instance.get(`${UrlAuth.me}`, {
                 headers: {
                     authorization: `Bearer ${localStorage.getItem('accessEstatum')}`
                 }
-            })
+            }).then((res)=>res.data)
+            localStorage.setItem('emailEstatum', res.email)
+            localStorage.setItem('phoneEstatum', res.phone)
+            let nameUser
+            if(res.role === 'customer'){
+                nameUser = res.customerProperty.name
+            } if(res.role === 'agent'){
+                nameUser = res.agentProperty.name
+            } if(res.role === 'bank' || res.role === 'admin'){
+                nameUser = res.role
+            }if(res.role === 'developer' ){
+                nameUser = res.developerProperty.name
+            }if(res.role === 'agency' ) {
+                nameUser = res.agencyProperty.name
+            }
+            localStorage.setItem('nameUserEstatum',nameUser)
+            return {
+                name:nameUser,
+                email:res.email,
+                phone:res.phone
+            }
         } catch (e) {
             console.log('error', e)
         }

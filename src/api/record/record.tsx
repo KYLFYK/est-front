@@ -9,11 +9,13 @@ export const RecordApi  = {
     RecordPost: async (type:string,id:string,body:RecordPostType) =>{
         try{
             await instance.post(`${UrlRecord.registration}?objectId=${id}&objectType=${type}`,body )
-            alert('Заявка зарегистрирована. С вами свяжется наш менеджер.')
+            // alert('Заявка зарегистрирована. С вами свяжется наш менеджер.')
+            return true
         }
         catch (e){
             alert('Ошибка свяжитесь с администратором')
             console.log('error', e)
+            return false
         }
     },
 }

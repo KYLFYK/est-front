@@ -124,10 +124,10 @@ const House = observer((props: any) => {
     { title: "Записаться на просмотр" },
   ];
 
-  let floors = props.info_options.floors
+  let floors = props.info_options?.floors
     ? props.info_options.floors
     : [{ floor: "", value: "" }];
-  const construction_feat = props.info_options.construction_features
+  const construction_feat = props.info_options?.construction_features
     ? props.info_options.construction_features
     : [{ title: "", value: "" }];
   const construction_features = [...construction_feat];

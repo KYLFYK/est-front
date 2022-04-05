@@ -306,12 +306,19 @@
     padding: 11px 20px 16px 20px  !important;
     margin-top: 10px;
     width: 430px;
+    cursor: default !important;
 }
 .color_Card2{
     padding: 11px 20px 16px 20px  !important;
      margin-top: 10px;
     width: 430px;
+    cursor: default !important;
 }
+.color_Card_Disable{
+    background-color: gray;
+    cursor: default !important;
+}
+
 .df_jc{
     display: flex;
     justify-content: center;
@@ -328,8 +335,15 @@
 .buttonW{
     width: 160px;
 }
+.buttonW_Disable{
+    width: 160px;
+    cursor: default !important;
+}
 .buttonDisable{
     width: 160px;
     pointer-events:none;
+}
+.modalIndex{
+    z-index: 130;
 }
 

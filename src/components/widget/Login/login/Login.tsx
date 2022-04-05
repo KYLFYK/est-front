@@ -6,6 +6,7 @@ import {LogoIcon} from '../../../../icons/Header/LogoIcon';
 import Typography from '../../../shared/Typography/Typography';
 import BaseButton from '../../../shared/BaseButton/BaseButtons';
 import {AuthApi} from "../../../../api/auth/auth";
+import {useRecordStore} from "../../../../mobx/record/record";
 
 type LoginPropsType = {
     recoveryPass?: () => void
@@ -15,6 +16,8 @@ type LoginPropsType = {
 }
 
 export const Login: React.FC<LoginPropsType> = ({recoveryPass, registration, onEdit, setActive}) => {
+    const store = useRecordStore
+
     const recoveryPassword = () => {
         recoveryPass && recoveryPass()
     }
@@ -28,13 +31,14 @@ export const Login: React.FC<LoginPropsType> = ({recoveryPass, registration, onE
             const res = await AuthApi.login(valueAccount, valuePassword)
             if (res === 201){
                 setActive && setActive()
+                const infoLogin = await AuthApi.me()
+                store.updateMeFromLogin(infoLogin)
             }else{
                 alert('Ошибка ввода данных')
             }
         } catch (e) {
             alert('ошибка сервера')
         }
-        // await AuthApi.me()
     }
 
     return (

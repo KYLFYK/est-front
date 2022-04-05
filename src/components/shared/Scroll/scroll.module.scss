@@ -1,0 +1,14 @@
+@import "src/app/styles/scrollbars";
+
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  overflow: auto;
+  overflow-x: hidden;
+  scrollbar-width: 1px;
+  //height: calc(100vh - 490px);
+  @include MapScrollbar;
+  padding-right: 10px;
+  margin-right: -10px;
+}

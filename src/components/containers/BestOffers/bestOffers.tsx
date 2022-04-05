@@ -92,7 +92,6 @@ const settings = {
         }
     ],
     arrows: false,
-
 }
 
 export const BestOffers: FC<BestOffersType> = observer(({tagsButton}) => {

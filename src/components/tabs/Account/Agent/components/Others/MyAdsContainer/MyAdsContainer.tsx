@@ -5,9 +5,9 @@ import Typography from "../../../../../../shared/Typography/Typography";
 import { GlassIcon } from "../../../../../../../icons/InputIcon/GlassIcon";
 import { IObject } from "../../../../../../../mobx/role/agent/ads/AgentAds";
 import { MyAdsItem } from "./MyAdsItem";
-
 import css from "./Active.module.scss";
 import { ObjectTypes } from "../../../../../../../utils/interfaces/objects";
+import Scroll from "../../../../../../shared/Scroll/Scroll";
 
 export const searchColor = (status: string) => {
   switch (status) {
@@ -115,36 +115,38 @@ const MyAdsContainer: FC<ActiveType> = ({
         className={`${css.placeholder} ${css.altPadding}`}
       />
       <FilterSearch sort={sort} setSort={setSort} />
-      {sortedData?.length > 0 ? (
-        sortedData
-          ?.filter((d: any) =>
-            d.name.toLowerCase().includes(textFilter.toLowerCase())
-          )
-          .map((home: any, id: number) => (
-            <MyAdsItem
-              key={id}
-              home={home}
-              maxCardWidth={maxCardWidth}
-              menu={menu}
-              deleteObject={deleteObject}
-              restoreObject={restoreObject}
-            />
-          ))
-      ) : (
-        <div
-          style={{
-            marginTop: 40,
-          }}
-        >
-          <Typography
-            color={"default"}
-            weight={"bold"}
-            className={css.paddingRight_5}
+      <Scroll height={'440'}>
+        {sortedData?.length > 0 ? (
+          sortedData
+            ?.filter((d: any) =>
+              d.name.toLowerCase().includes(textFilter.toLowerCase())
+            )
+            .map((home: any, id: number) => (
+              <MyAdsItem
+                key={id}
+                home={home}
+                maxCardWidth={maxCardWidth}
+                menu={menu}
+                deleteObject={deleteObject}
+                restoreObject={restoreObject}
+              />
+            ))
+        ) : (
+          <div
+            style={{
+              marginTop: 40,
+            }}
           >
-            Нет объявлений
-          </Typography>
-        </div>
-      )}
+            <Typography
+              color={"default"}
+              weight={"bold"}
+              className={css.paddingRight_5}
+            >
+              Нет объявлений
+            </Typography>
+          </div>
+        )}
+        </Scroll>
     </div>
   );
 };
