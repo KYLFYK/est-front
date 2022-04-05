@@ -50,7 +50,7 @@ const GeneralInfoDataTab: React.FC<Props> = observer(
       "landGeneralSquare" in values && values.landGeneralSquare.length
     );
     const isValidCeilingHeight = !!(
-      "ceilingHeight" in values && values.ceilingHeight.length
+      "ceilingHeight" in values && values.ceilingHeight?.length
     );
     const isValidRooms = !!("rooms" in values && values.rooms);
     const isValidBathroom = !!("bathroom" in values && values.bathroom.length);

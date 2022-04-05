@@ -364,6 +364,7 @@ const House = observer((props: any) => {
 export default House;
 
 export async function getServerSideProps({ params }: any) {
+  console.log(`${process.env.HOST}${UrlObj.house}/${params.id}`)
   const res = await fetch(
    
     // `${process.env.HOST}${UrlObj.house}/${params.id}`

@@ -1,5 +1,5 @@
 import { observer } from "mobx-react-lite";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, ChangeEventHandler } from "react";
 import { useStores } from "../../../../../hooks/useStores";
 import { ICreateHouseAboutTab } from "../../../../../mobx/types/CreateObjectStoresTypes/CreateHouseStoreType";
 import {
@@ -99,7 +99,7 @@ const AboutObjectTab: React.FC<Props> = observer(
     const isValidAddress = "address" in values && !!values.address; // REPLACE BY VALIDATION SERVICE
     const isValidCost = "cost" in values && !!values.cost; // REPLACE BY VALIDATION SERVICE
     const isValidRegion = "region" in values && !!values.region; // REPLACE BY VALIDATION SERVICE
-    const isValidFloor = "floor" in values && !!values.floor;
+    const isValidFloor = ("floor" in values && !!values.floor) || ("floor" in values && values.floor < values.floorsAmmount);
     const isValidFloorsAmmount =
       "floorsAmmount" in values && !!values.floorsAmmount;
 
@@ -159,12 +159,11 @@ const AboutObjectTab: React.FC<Props> = observer(
         setValues({ ...values, complexName: Number(value) });
       }
     };
-
-    const onChangeFloor = (value: number) => {
-      setValues({ ...values, floor: value });
+    const onChangeFloor = (value: string) => {
+      setValues({ ...values, floor: +value > 75 ? 75 : +value > 0 && value.split('')[0] === '0' ? +value.substring(1) : +value });
     };
-    const onChangeFloorsAmmount = (value: number) => {
-      setValues({ ...values, floorsAmmount: value });
+    const onChangeFloorsAmmount = (value: string) => {
+      setValues({ ...values, floorsAmmount: +value > 75 ? 75 : +value > 0 && value.split('')[0] === '0' ? +value.substring(1) : +value });
     };
     const onChangeCountry = (value: number) => {
       setValues({ ...values, country: value });
@@ -357,24 +356,26 @@ const AboutObjectTab: React.FC<Props> = observer(
               </>
             )}
             {"floor" in values && (
-              <CounterButtons
-                required={true}
-                onChange={onChangeFloor}
-                initValue={values.floor}
-                amountValue={values.floorsAmmount}
-                location={'floor'}
+              <BaseInput
+                errorLabel={"Этаж не может быть нулевым"}
+                className={s.inputXs}
                 label="Этаж"
+                required={true}
+                type="number"
+                value={values.floor}
+                onChange={(e) => onChangeFloor(e.target.value)}
                 isError={!isValid && !isValidFloor}
               />
             )}
             {"floorsAmmount" in values && (
-              <CounterButtons
-                required={true}
-                onChange={onChangeFloorsAmmount}
-                initValue={values.floorsAmmount}
-                floorValue={values.floor}
-                location={'floorsAmmount'}
+              <BaseInput
+                errorLabel={"Этажей не может быть ноль"}
+                className={s.inputXs}
                 label="Этажей в доме"
+                required={true}
+                type="number"
+                value={values.floorsAmmount}
+                onChange={(e) => onChangeFloorsAmmount(e.target.value)}
                 isError={!isValid && !isValidFloorsAmmount}
               />
             )}
