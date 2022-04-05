@@ -6,6 +6,7 @@ import { ObjectTypes } from "../../../../../../../../utils/interfaces/objects";
 import { Loader } from "../../../../../../../shared/Loader/Loader";
 
 const Archive = () => {
+
   const adsStore = useAgentAdsStore();
 
   const [force, forceUpdate] = useState(false);
