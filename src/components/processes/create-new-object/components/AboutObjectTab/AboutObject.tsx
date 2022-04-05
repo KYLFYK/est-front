@@ -102,7 +102,7 @@ const AboutObjectTab: React.FC<Props> = observer(
     const isValidFloor = ("floor" in values && !!values.floor) || ("floor" in values && values.floor < values.floorsAmmount);
     const isValidFloorsAmmount =
       "floorsAmmount" in values && !!values.floorsAmmount;
-    console.log(isValidFloor)
+
     const handleNext = () => {
       const isValid = isValidInputsAboutTab(
         objectType,
