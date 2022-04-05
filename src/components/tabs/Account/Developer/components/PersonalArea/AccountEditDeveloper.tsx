@@ -139,7 +139,7 @@ const AccountEditDeveloper: FC<AccountEditType> = observer(({ onEdit }) => {
               <div className={css.df}>
                 <div className={css.marginColumn} style={{ width: "100%" }}>
                   <Typography color={"tertiary"} className={css.marginTypo}>
-                    Наименование
+                    Наименование кампании
                   </Typography>
                   <BaseInput
                     value={valueName}
