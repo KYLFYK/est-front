@@ -7,6 +7,7 @@ import { Loader } from "src/components/shared/Loader/Loader";
 import { ObjectTypes } from "../../../../../../../../utils/interfaces/objects";
 
 const MyAdsActive = observer(() => {
+
   const adsStore = useAgentAdsStore();
 
   const [force, forceUpdate] = useState(false);
