@@ -62,13 +62,20 @@ export const AuthApi = {
                 nameUser = res.agencyProperty.name
             }
             localStorage.setItem('nameUserEstatum',nameUser)
-            return {
+            const infoLogin :{name:string,email:string,phone:string} = {
                 name:nameUser,
                 email:res.email,
                 phone:res.phone
             }
+            return infoLogin
         } catch (e) {
             console.log('error', e)
+            const infoLogin :{name:string,email:string,phone:string} = {
+                name:'',
+                email:'',
+                phone:''
+            }
+            return infoLogin
         }
     },
     check: async () => { // error server need post  ( get - no body params)
