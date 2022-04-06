@@ -62,6 +62,7 @@ const addMessage = (e:{ message: string, date: string, time: string },index:numb
 }
 
 const ApplicationsViewTab: React.FC<Props> = observer(() => {
+
     const store = useAgentReqStore()
     const [edit, setEdit] = useState<any>({edit: false, id: ''})
     useEffect(() => {
