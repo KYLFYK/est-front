@@ -5,6 +5,7 @@ import FavoriteOffIcon from "../../../../../shared/FavoriteOffIcon/FavoriteOffIc
 import { BaseDropDown } from "../../../../../shared/BaseDropDown/BaseDropDown";
 import { makeStyles } from "@material-ui/core";
 import { useStoreOwnerSaveSearch } from "../../../../../../mobx/role/owner/saveSearch/saveSearch";
+import Scroll from "src/components/shared/Scroll/Scroll";
 
 type SavedSearchesType = {};
 
@@ -16,16 +17,18 @@ const SavedSearches: FC<SavedSearchesType> = ({}) => {
       <Typography weight={"bold"} className={css.title}>
         Мои поиски
       </Typography>
-      {store.initialData.search.map((search) => (
-        <CardObjectSaveSearch
-          nameObject={search.nameObject}
-          id={search.id}
-          newAds={search.ads}
-          locations={search.locations}
-          alertStatus={search.alertStatus}
-          key={search.id}
-        />
-      ))}
+      <Scroll height={'350'} >
+        {store.initialData.search.map((search) => (
+          <CardObjectSaveSearch
+            nameObject={search.nameObject}
+            id={search.id}
+            newAds={search.ads}
+            locations={search.locations}
+            alertStatus={search.alertStatus}
+            key={search.id}
+          />
+        ))}
+      </Scroll>
     </div>
   );
 };

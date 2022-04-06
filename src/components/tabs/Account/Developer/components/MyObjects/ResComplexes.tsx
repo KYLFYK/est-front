@@ -19,6 +19,7 @@ import css from "../../../Agent/components/Others/MyAdsContainer/Active.module.s
 import { useStoreDeveloperMyObjectStore } from "../../../../../../mobx/role/developer/myObject/DeveloperMyObject";
 import { accFromToken } from "../../../../../../lib/localStorage/localStorage";
 import { GlassIcon } from "../../../../../../icons/InputIcon/GlassIcon";
+import Scroll from "../../../../../shared/Scroll/Scroll";
 
 type ResComplexesType = {
   onComplex: Dispatch<SetStateAction<boolean>>;
@@ -87,70 +88,72 @@ export const ResComplexes: FC<ResComplexesType> = observer(
           sort={sort}
           setSort={setSort}
         />
-        <div className={styles.objectsList}>
-          {/*{Data.objects.map((home, index) => (*/}
-          {store.initialData.loading ? (
-            <Loader />
-          ) : (
-            sortedData
-              ?.filter((d: any) =>
-                d.name.toLowerCase().includes(textFilter.toLowerCase())
-              )
-              .map((home: any, index: number) => (
-                <div
-                  className={styles.object}
-                  key={index}
-                  onClick={() => onSetCompex(+home.id, home.name)}
-                >
-                  <CardObject
-                    img={home.files[0] ? home.files[0].url : home.img}
-                  >
-                    <div className={css.paddingCard}>
-                      <LineV1
-                        id={home.id}
-                        onPublish={publish}
-                        onRecover={recover}
-                        name={home.name}
-                        typeObject={home.type}
-                        onEdit={edit}
-                        onDelete={del}
-                      />
-                      <LineAddressV1 address={home.address} />
-                      <LineArray mainSpecifications={home.mainSpecifications} />
-                      <div style={{ display: "flex", paddingBottom: "10px" }}>
-                        <Typography
-                          weight={"light"}
-                          color={"tertiary"}
-                          className={css.paddingRight_5}
-                        >
-                          Застройщик:
-                        </Typography>
-                        <Typography
-                          color={"tertiary"}
-                          className={css.paddingRight_20}
-                        >
-                          {home.agent}
-                        </Typography>
-                        <Typography
-                          color={"tertiary"}
-                          weight={"light"}
-                          className={css.paddingRight_5}
-                        >
-                          От:
-                        </Typography>
-                        <Typography
-                          color={"tertiary"}
-                          className={css.paddingRight_20}
-                        >
-                          {home.dateStart}
-                        </Typography>
-                      </div>
+          <Scroll height={'500'}>
+            <div className={styles.objectsList}>
+              {/*{Data.objects.map((home, index) => (*/}
+              {store.initialData.loading ? (
+                <Loader />
+              ) : (
+                sortedData
+                  ?.filter((d: any) =>
+                    d.name.toLowerCase().includes(textFilter.toLowerCase())
+                  )
+                  .map((home: any, index: number) => (
+                    <div
+                      className={styles.object}
+                      key={index}
+                      onClick={() => onSetCompex(+home.id, home.name)}
+                    >
+                      <CardObject
+                        img={home.files[0] ? home.files[0].url : home.img}
+                      >
+                        <div className={css.paddingCard}>
+                          <LineV1
+                            id={home.id}
+                            onPublish={publish}
+                            onRecover={recover}
+                            name={home.name}
+                            typeObject={home.type}
+                            onEdit={edit}
+                            onDelete={del}
+                          />
+                          <LineAddressV1 address={home.address} />
+                          <LineArray mainSpecifications={home.mainSpecifications} />
+                          <div style={{ display: "flex", paddingBottom: "10px" }}>
+                            <Typography
+                              weight={"light"}
+                              color={"tertiary"}
+                              className={css.paddingRight_5}
+                            >
+                              Застройщик:
+                            </Typography>
+                            <Typography
+                              color={"tertiary"}
+                              className={css.paddingRight_20}
+                            >
+                              {home.agent}
+                            </Typography>
+                            <Typography
+                              color={"tertiary"}
+                              weight={"light"}
+                              className={css.paddingRight_5}
+                            >
+                              От:
+                            </Typography>
+                            <Typography
+                              color={"tertiary"}
+                              className={css.paddingRight_20}
+                            >
+                              {home.dateStart}
+                            </Typography>
+                          </div>
+                        </div>
+                      </CardObject>
                     </div>
-                  </CardObject>
-                </div>
-              ))
-          )}
-        </div>
+                  ))
+              )}
+            </div>
+          </Scroll>
       </div>
     );
   }

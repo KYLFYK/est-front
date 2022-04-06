@@ -7,7 +7,7 @@ import {useState, useEffect} from "react"
 import ViewingApplication from "./components/Catalog/ViewingApplication"
 import { observer } from "mobx-react-lite"
 import {useAgentReqStore} from '../../../../../../mobx/role/agent/request/AgentReq'
-import {Loader} from '../../../../../shared/Loader/Loader'
+import {Empty, Loader} from '../../../../../shared/Loader/Loader'
 
 interface Props {
 
@@ -71,7 +71,7 @@ const ApplicationsViewTab: React.FC<Props> = observer(() => {
     return (
         <>
             {store.initialData.loading && <Loader/>}
-            {store.initialData.error && <h1>Нет заявок</h1>}
+            {store.initialData.error && <Empty/>}
             {(!store.initialData.loading && !store.initialData.error) && !edit.edit &&
                 <HorizontalTabs tabs={[
                     {title: "Каталог заявок", Component: <ApplicationsViewCatalog agents={store.get().data} setEdit={setEdit} />},

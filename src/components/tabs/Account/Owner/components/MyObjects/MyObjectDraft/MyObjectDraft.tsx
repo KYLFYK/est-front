@@ -10,6 +10,7 @@ import ParamsColumn from "../../../../../../shared/ParamsColumn/ParamsColumn";
 import Typography from "../../../../../../shared/Typography/Typography";
 import { useStoreOwnerMyObjects } from "../../../../../../../mobx/role/owner/myObject/OwnerMyObject";
 import { GlassIcon } from "../../../../../../../icons/InputIcon/GlassIcon";
+import Scroll from "../../../../../../shared/Scroll/Scroll";
 
 const MyObjectDraft = () => {
   const store = useStoreOwnerMyObjects();
@@ -24,36 +25,38 @@ const MyObjectDraft = () => {
         placeholder={"Поиск..."}
       />
       <FilterSearch />
-      {store.initialData.objects_drafts.map((object) => (
-        <div key={object.id} className={css.borderCard}>
-          <CardObject img={object.img} className={css.padding}>
-            <LineV10
-              id={object.id}
-              onDelete={onDelete}
-              nameObject={object.nameObject}
-              totalArea={object.totalArea}
-              dateArchive={object.dateArchive}
-            />
-            <LineV9 address={object.address} />
-            <EnumerationColumn>
-              <div className={css.df_jc}>
-                <div style={{ display: "flex" }}>
-                  {object.rating.map((param, index) => (
-                    <ParamsColumn
-                      key={index}
-                      title={param.title}
-                      value={param.value}
-                    />
-                  ))}
-                </div>
-                <div className={css.cursor}>
-                  <Typography color={"nude"}>Восстановить</Typography>
-                </div>
-              </div>
-            </EnumerationColumn>
-          </CardObject>
-        </div>
-      ))}
+        <Scroll height={'450'}>
+          {store.initialData.objects_drafts.map((object) => (
+            <div key={object.id} className={css.borderCard}>
+              <CardObject img={object.img} className={css.padding}>
+                <LineV10
+                  id={object.id}
+                  onDelete={onDelete}
+                  nameObject={object.nameObject}
+                  totalArea={object.totalArea}
+                  dateArchive={object.dateArchive}
+                />
+                <LineV9 address={object.address} />
+                <EnumerationColumn>
+                  <div className={css.df_jc}>
+                    <div style={{ display: "flex" }}>
+                      {object.rating.map((param, index) => (
+                        <ParamsColumn
+                          key={index}
+                          title={param.title}
+                          value={param.value}
+                        />
+                      ))}
+                    </div>
+                    <div className={css.cursor}>
+                      <Typography color={"nude"}>Восстановить</Typography>
+                    </div>
+                  </div>
+                </EnumerationColumn>
+              </CardObject>
+            </div>
+          ))}
+        </Scroll>
     </div>
   );
 };

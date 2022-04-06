@@ -5,6 +5,7 @@ import FilterSearch from "../../../../../shared/FilterSearch/FilterSearch";
 import CardOwner, { ObjectInfoType } from "./CardOwner";
 import { useStoreOwnerFavorites } from "../../../../../../mobx/role/owner/favorites/OwnerFavorites";
 import { GlassIcon } from "../../../../../../icons/InputIcon/GlassIcon";
+import Scroll from "src/components/shared/Scroll/Scroll";
 
 type FavouritesType = {
   count?: number;
@@ -32,17 +33,19 @@ const Favourites: FC<FavouritesType> = ({ count = 0 }) => {
       <Typography color={"tertiary"}>
         {count > 0 && count + " объявления"}
       </Typography>
-      {store.initialData.favourites.map((object, index) => {
-        return (
-          <CardOwner
-            key={index}
-            id={object.id}
-            url={object.url}
-            objectInfo={object.objectInfo}
-            image={object.image}
-          />
-        );
-      })}
+        <Scroll height={'430'}>
+          {store.initialData.favourites.map((object, index) => {
+            return (
+              <CardOwner
+                key={index}
+                id={object.id}
+                url={object.url}
+                objectInfo={object.objectInfo}
+                image={object.image}
+              />
+            );
+          })}
+        </Scroll>
     </div>
   );
 };

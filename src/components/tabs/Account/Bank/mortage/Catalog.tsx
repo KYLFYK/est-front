@@ -5,6 +5,7 @@ import { IconDown } from "../../Developer/components/Notifications";
 import { CatalogItem } from "./CatalogItem";
 import { Loader } from "src/components/shared/Loader/Loader";
 import styles from "./Catalog.module.scss";
+import Scroll from "../../../../shared/Scroll/Scroll";
 
 export const Catalog: FC = observer(() => {
   const store = useMortGageStore()
@@ -35,6 +36,7 @@ export const Catalog: FC = observer(() => {
 
   return (
     <div className={styles.wrapper}>
+      <Scroll height={'350'}>
       <table>
         <tr>
           <th>
@@ -88,11 +90,12 @@ export const Catalog: FC = observer(() => {
             </div>
           </th>
         </tr>
-        {store.initialData.loading 
-          ? <Loader/>
-          : sortedData.map((d: any) => <CatalogItem data={d} id={d.id} key={d.id}/>)
-        }
+          {store.initialData.loading
+            ? <Loader/>
+            : sortedData.map((d: any) => <CatalogItem data={d} id={d.id} key={d.id}/>)
+          }
       </table>
+      </Scroll>
     </div>
   );
 });
