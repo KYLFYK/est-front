@@ -195,7 +195,7 @@ const StartScreen: React.FC<Props> = ({
                 </div>
               </>
             )}
-            {/*<div
+            <div
               className={cardClassName(ObjectTypes.LAND, choosedObjectType)}
               onClick={() => {
                 onChooseObjectType(ObjectTypes.LAND);
@@ -210,7 +210,7 @@ const StartScreen: React.FC<Props> = ({
               <Typography size="subheaderBig" weight="medium">
                 Участок
               </Typography>
-            </div>*/}
+            </div>
           </div>
         </div>
       </div>

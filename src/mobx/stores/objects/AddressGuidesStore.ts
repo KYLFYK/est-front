@@ -53,6 +53,16 @@ export class AddressGuidesStore {
       this.loaded = false;
     }
   }
+
+  getСities() {
+    return JSON.parse(JSON.stringify(this.cities))
+  }
+  getRegions() {
+    return JSON.parse(JSON.stringify(this.regions))
+  }
+  getCountries() {
+    return JSON.parse(JSON.stringify(this.countries))
+  }
 }
 
 export const AddressGuides = new AddressGuidesStore();

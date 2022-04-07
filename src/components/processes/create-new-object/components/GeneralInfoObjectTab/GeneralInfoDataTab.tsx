@@ -35,7 +35,7 @@ const GeneralInfoDataTab: React.FC<Props> = observer(
       getInitialStateGeneralInfoTab(objectType, createObjectStore)
     );
     const [isValid, setIsValid] = useState<boolean>(true);
-    
+
     const isValidGeneralSquare = !!(
       "generalSquare" in values && values.generalSquare.length
     );
@@ -333,7 +333,7 @@ const GeneralInfoDataTab: React.FC<Props> = observer(
           });
       }
     };
-    console.log(values)
+
     const onChangePoolSquare = (
       event: React.ChangeEvent & { target: HTMLInputElement }
     ) => {
