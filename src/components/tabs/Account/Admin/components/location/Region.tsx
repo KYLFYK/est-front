@@ -102,10 +102,10 @@ const Region = observer(() => {
                                 className={css.mR_10px}
                                 onClick={saveEditRegion}
                             >
-                                сохранить
+                                Сохранить
                             </BaseButton>
                             <BaseButton onClick={backEditRegion}>
-                                отмена
+                                Отмена
                             </BaseButton>
                         </div>
                     </div>
@@ -137,10 +137,10 @@ const Region = observer(() => {
                                 className={css.mR_10px}
                                 onClick={onAddRegion}
                             >
-                                создать
+                                Создать
                             </BaseButton>
                             <BaseButton onClick={cancelAddRegion}>
-                                отмена
+                                Отмена
                             </BaseButton>
                         </div>
                     </div>

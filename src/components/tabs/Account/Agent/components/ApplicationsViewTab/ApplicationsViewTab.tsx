@@ -8,6 +8,7 @@ import ViewingApplication from "./components/Catalog/ViewingApplication"
 import { observer } from "mobx-react-lite"
 import {useAgentReqStore} from '../../../../../../mobx/role/agent/request/AgentReq'
 import {Empty, Loader} from '../../../../../shared/Loader/Loader'
+import Typography from "../../../../../shared/Typography/Typography";
 
 interface Props {
 
@@ -66,13 +67,13 @@ const ApplicationsViewTab: React.FC<Props> = observer(() => {
     const store = useAgentReqStore()
     const [edit, setEdit] = useState<any>({edit: false, id: ''})
     useEffect(() => {
-        store.fetchReqs(28)
+        store.fetchReqs(+localStorage.getItem('idUserEstatum')! )
     },[])
 
     return (
         <>
             {store.initialData.loading && <Loader/>}
-            {store.initialData.error && <Empty/>}
+            {store.initialData.error && <Typography size={"big"}>Заявки отсутствуют</Typography>}
             {(!store.initialData.loading && !store.initialData.error) && !edit.edit &&
                 <HorizontalTabs tabs={[
                     {title: "Каталог заявок", Component: <ApplicationsViewCatalog agents={store.get().data} setEdit={setEdit} />},
