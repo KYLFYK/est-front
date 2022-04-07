@@ -89,7 +89,6 @@ const AboutObjectTab: React.FC<Props> = observer(
     ); // 1-type Object  2-
     const [isValid, setIsValid] = useState<boolean>(true);
     const saveAboutTab = createObjectStore.saveAboutTab.bind(createObjectStore);
-
     const isValidName = "name" in values && !!values.name.length; // REPLACE BY VALIDATION SERVICE
     const isValidType = "type" in values && !!values.type.length; // REPLACE BY VALIDATION SERVICE
     const isValidComplexName = "complexName" in values && !!values.complexName; // REPLACE BY VALIDATION SERVICE
@@ -102,7 +101,7 @@ const AboutObjectTab: React.FC<Props> = observer(
     const isValidFloor = ("floor" in values && !!values.floor) || ("floor" in values && values.floor < values.floorsAmmount);
     const isValidFloorsAmmount =
       "floorsAmmount" in values && !!values.floorsAmmount;
-
+      
     const handleNext = () => {
       const isValid = isValidInputsAboutTab(
         objectType,
@@ -169,8 +168,10 @@ const AboutObjectTab: React.FC<Props> = observer(
       setValues({ ...values, country: value });
     };
     const onChangeRegion = (value: number) => {
+      console.log(value)
       setValues({ ...values, region: value });
     };
+
     const onChangeCity = (value: number) => {
       setValues((prev) => ({ ...prev, city: value }));
 
