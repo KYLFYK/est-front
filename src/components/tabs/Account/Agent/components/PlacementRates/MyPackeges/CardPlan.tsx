@@ -12,6 +12,7 @@ type CardPlanType = {
 
 const typePlan = "Стандарт"
 const CardPlan: FC<CardPlanType> = ({title, suggestions, price}) => {
+
     const styleCard = title === 'Премиум'
         ? css.card_premium
         : title === 'Стандарт'
