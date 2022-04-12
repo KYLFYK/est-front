@@ -8,6 +8,8 @@ class CreateApartmentStore implements ICreateObjectAparts {
     country: 0,
     city: 0,
     address: "",
+    latitude: 0,
+    longitude: 0,
     region: 0,
     cost: 0,
     index: 0,

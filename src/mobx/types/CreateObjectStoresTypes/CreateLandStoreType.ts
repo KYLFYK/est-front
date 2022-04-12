@@ -20,6 +20,8 @@ export interface ICreateLandAboutTab {
   cost: number;
   region: number;
   type: string;
+  latitude: number;
+  longitude: number;
 }
 
 export interface ICreateLandGeneralInfo {

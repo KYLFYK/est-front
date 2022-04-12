@@ -10,7 +10,6 @@ export enum UrlCreateObject {
 
 export const createObjectAPI = {
   createObjectApartment: async (data: any) => {
-    console.log('data', data)
     try {
       return await instance.post(`${UrlCreateObject.apartment}`, data, {
         headers: {

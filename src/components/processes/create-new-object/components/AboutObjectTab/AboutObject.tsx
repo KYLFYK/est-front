@@ -96,12 +96,16 @@ const AboutObjectTab: React.FC<Props> = observer(
     const isValidCity = "city" in values && !!values.city; // REPLACE BY VALIDATION SERVICE
     const isValidIndex = "index" in values && !!values.index; // REPLACE BY VALIDATION SERVICE
     const isValidAddress = "address" in values && !!values.address; // REPLACE BY VALIDATION SERVICE
+    const isValidLat = "latitude" in values && !!values.latitude;
+    const isValidLng = "longitude" in values && !!values.longitude;
     const isValidCost = "cost" in values && !!values.cost; // REPLACE BY VALIDATION SERVICE
     const isValidRegion = "region" in values && !!values.region; // REPLACE BY VALIDATION SERVICE
-    const isValidFloor = ("floor" in values && !!values.floor) || ("floor" in values && values.floor < values.floorsAmmount);
+    const isValidFloor =
+      ("floor" in values && !!values.floor) ||
+      ("floor" in values && values.floor < values.floorsAmmount);
     const isValidFloorsAmmount =
       "floorsAmmount" in values && !!values.floorsAmmount;
-      
+
     const handleNext = () => {
       const isValid = isValidInputsAboutTab(
         objectType,
@@ -112,6 +116,8 @@ const AboutObjectTab: React.FC<Props> = observer(
         isValidCity,
         isValidIndex,
         isValidAddress,
+        isValidLat,
+        isValidLng,
         isValidCost,
         isValidRegion,
         isValidFloor,
@@ -159,17 +165,42 @@ const AboutObjectTab: React.FC<Props> = observer(
       }
     };
     const onChangeFloor = (value: string) => {
-      setValues({ ...values, floor: +value > 75 ? 75 : +value > 0 && value.split('')[0] === '0' ? +value.substring(1) : +value });
+      setValues({
+        ...values,
+        floor:
+          +value > 75
+            ? 75
+            : +value > 0 && value.split("")[0] === "0"
+            ? +value.substring(1)
+            : +value,
+      });
     };
     const onChangeFloorsAmmount = (value: string) => {
-      setValues({ ...values, floorsAmmount: +value > 75 ? 75 : +value > 0 && value.split('')[0] === '0' ? +value.substring(1) : +value });
+      setValues({
+        ...values,
+        floorsAmmount:
+          +value > 75
+            ? 75
+            : +value > 0 && value.split("")[0] === "0"
+            ? +value.substring(1)
+            : +value,
+      });
     };
     const onChangeCountry = (value: number) => {
       setValues({ ...values, country: value });
     };
     const onChangeRegion = (value: number) => {
-      console.log(value)
       setValues({ ...values, region: value });
+    };
+    const onChangeLatitude = (
+      event: React.ChangeEvent & { target: HTMLInputElement }
+    ) => {
+      setValues({ ...values, latitude: +event.target.value });
+    };
+    const onChangeLongitude = (
+      event: React.ChangeEvent & { target: HTMLInputElement }
+    ) => {
+      setValues({ ...values, longitude: +event.target.value });
     };
 
     const onChangeCity = (value: number) => {
@@ -480,6 +511,28 @@ const AboutObjectTab: React.FC<Props> = observer(
               type="text"
               value={values.address}
               onChange={onChangeAddress}
+              name={"address"}
+            />
+          </InputsGroup>
+          <InputsGroup title={"Координаты на карте"}>
+            <BaseInput
+              required={true}
+              isError={!isValid && !isValidLat}
+              label="Широта"
+              className={s.inputX}
+              type="number"
+              value={values.latitude}
+              onChange={onChangeLatitude}
+              name={"address"}
+            />
+            <BaseInput
+              required={true}
+              isError={!isValid && !isValidLng}
+              label="Долгота"
+              className={s.inputX}
+              type="number"
+              value={values.longitude}
+              onChange={onChangeLongitude}
               name={"address"}
             />
           </InputsGroup>

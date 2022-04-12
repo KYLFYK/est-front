@@ -175,6 +175,8 @@ export const isValidInputsAboutTab = (
   city: boolean,
   index: boolean,
   address: boolean,
+  isValidLat: boolean,
+  isValidLng: boolean,
   cost: boolean,
   region: boolean,
   isValidFloor: boolean,
@@ -187,21 +189,24 @@ export const isValidInputsAboutTab = (
         type &&
         complexName &&
         country &&
+        region &&
         city &&
         index &&
         address &&
+        isValidLat &&
+        isValidLng &&
         cost && 
         isValidFloor && 
         isValidFloorsAmmount
       );
     case ObjectTypes.HOUSE:
-      return !!(name && country && city && index && address && cost);
+      return !!(name && country && region && city && index && address && cost);
     case ObjectTypes.TOWNHOUSE:
-      return !!(name && country && city && index && address && cost);
+      return !!(name && country && region && city && index && address && cost);
     case ObjectTypes.LAND:
-      return !!(name && country && city && address && cost);
+      return !!(name && country && region && city && address && cost);
     case ObjectTypes.RESCOMPLEX:
-      return name && country && city && address && index && region;
+      return name && country && region && city && address && index && region;
     default:
       return false;
   }

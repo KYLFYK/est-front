@@ -756,6 +756,7 @@ class CreateObjectStore implements ICreateObject {
       }
 
       try {
+        console.log('apartmentData', apartmentData)
         if (isEdit) {
           if (idOwner.role === "admin" && this.newOwner !== null) {
             apartmentData.owner = this.newOwner;

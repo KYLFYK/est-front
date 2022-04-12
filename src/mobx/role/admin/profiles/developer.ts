@@ -205,8 +205,6 @@ class DeveloperProfile {
         data
       );
 
-      console.log(response);
-
       this.profileData = this.profileData
         ? {
             ...this.profileData,

@@ -53,7 +53,6 @@ class RecordStore {
         this.days = days
         this.price = price
         this.typeOrder = typeOrder
-        // console.log(JSON.parse(JSON.stringify(this)))
     }
 
     updateDataUser(name: string,

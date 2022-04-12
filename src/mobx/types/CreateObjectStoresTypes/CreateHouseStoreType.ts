@@ -22,6 +22,8 @@ export interface ICreateHouseAboutTab {
   cost: number;
   index: number;
   type: string;
+  latitude: number;
+  longitude: number;
 }
 
 export interface ICreateHouseGeneralInfo {

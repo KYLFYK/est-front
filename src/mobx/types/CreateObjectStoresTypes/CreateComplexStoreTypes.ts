@@ -19,6 +19,8 @@ export interface ICreateComplexAboutTab {
   address: string;
   index: number;
   type: string;
+  latitude: number;
+  longitude: number;
 }
 
 export interface ICreateComplexGeneralInfo {

@@ -25,6 +25,8 @@ export interface ICreateApartmentAboutTab {
   floor: number;
   floorsAmmount: number;
   type: string;
+  latitude: number;
+  longitude: number;
 }
 
 export interface ICreateApartsGeneralInfo {

@@ -29,6 +29,7 @@ type ResComplexesType = {
 export const ResComplexes: FC<ResComplexesType> = observer(
   ({ onComplex, setComplexId }) => {
     const store = useStoreDeveloperMyObjectStore();
+    const [maxCardWidth, setMaxCardWidth] = useState<number | "unset">("unset");
     const [textFilter, setTextFilter] = useState("");
     const [sort, setSort] = useState("default");
 
@@ -73,6 +74,25 @@ export const ResComplexes: FC<ResComplexesType> = observer(
       setTextFilter(e.target.value);
     };
 
+    useEffect(() => {
+      const listener = () => {
+        const wrapper = document.querySelector(".VerticalTabs_body__3JNyP");
+        const menu = document.querySelector(".VerticalTabs_menu__3NuQg");
+
+        if (wrapper && menu) {
+          setMaxCardWidth(wrapper.clientWidth - menu.clientWidth - 80);
+        }
+      };
+
+      listener();
+
+      window.addEventListener("resize", listener);
+
+      return () => {
+        window.removeEventListener("resize", listener);
+      };
+    }, []);
+
     return (
       <div className={styles.wrapper}>
         <SearchOffice
@@ -88,72 +108,79 @@ export const ResComplexes: FC<ResComplexesType> = observer(
           sort={sort}
           setSort={setSort}
         />
-          <Scroll height={'500'}>
-            <div className={styles.objectsList}>
-              {/*{Data.objects.map((home, index) => (*/}
-              {store.initialData.loading ? (
-                <Loader />
-              ) : (
-                sortedData
-                  ?.filter((d: any) =>
-                    d.name.toLowerCase().includes(textFilter.toLowerCase())
-                  )
-                  .map((home: any, index: number) => (
-                    <div
-                      className={styles.object}
-                      key={index}
-                      onClick={() => onSetCompex(+home.id, home.name)}
+        <Scroll height={"500"}>
+          <div className={styles.objectsList}>
+            {/*{Data.objects.map((home, index) => (*/}
+            {store.initialData.loading ? (
+              <Loader />
+            ) : (
+              sortedData
+                ?.filter((d: any) =>
+                  d.name.toLowerCase().includes(textFilter.toLowerCase())
+                )
+                .map((home: any, index: number) => (
+                  <div
+                    className={styles.object}
+                    style={{
+                      maxWidth: maxCardWidth,
+                      overflow: "hidden",
+                      textOverflow: "ellipsis",
+                    }}
+                    key={index}
+                    onClick={() => onSetCompex(+home.id, home.name)}
+                  >
+                    <CardObject
+                      img={home.files[0] ? home.files[0].url : home.img}
                     >
-                      <CardObject
-                        img={home.files[0] ? home.files[0].url : home.img}
-                      >
-                        <div className={css.paddingCard}>
-                          <LineV1
-                            id={home.id}
-                            onPublish={publish}
-                            onRecover={recover}
-                            name={home.name}
-                            typeObject={home.type}
-                            onEdit={edit}
-                            onDelete={del}
-                          />
-                          <LineAddressV1 address={home.address} />
-                          <LineArray mainSpecifications={home.mainSpecifications} />
-                          <div style={{ display: "flex", paddingBottom: "10px" }}>
-                            <Typography
-                              weight={"light"}
-                              color={"tertiary"}
-                              className={css.paddingRight_5}
-                            >
-                              Застройщик:
-                            </Typography>
-                            <Typography
-                              color={"tertiary"}
-                              className={css.paddingRight_20}
-                            >
-                              {home.agent}
-                            </Typography>
-                            <Typography
-                              color={"tertiary"}
-                              weight={"light"}
-                              className={css.paddingRight_5}
-                            >
-                              От:
-                            </Typography>
-                            <Typography
-                              color={"tertiary"}
-                              className={css.paddingRight_20}
-                            >
-                              {home.dateStart}
-                            </Typography>
-                          </div>
+                      <div className={css.paddingCard}>
+                        <LineV1
+                          id={home.id}
+                          onPublish={publish}
+                          onRecover={recover}
+                          name={home.name}
+                          typeObject={home.type}
+                          onEdit={edit}
+                          onDelete={del}
+                        />
+                        <LineAddressV1 address={home.address} />
+                        <LineArray
+                          mainSpecifications={home.mainSpecifications}
+                        />
+                        <div style={{ display: "flex", paddingBottom: "10px" }}>
+                          <Typography
+                            weight={"light"}
+                            color={"tertiary"}
+                            className={css.paddingRight_5}
+                          >
+                            Застройщик:
+                          </Typography>
+                          <Typography
+                            color={"tertiary"}
+                            className={css.paddingRight_20}
+                          >
+                            {home.agent}
+                          </Typography>
+                          <Typography
+                            color={"tertiary"}
+                            weight={"light"}
+                            className={css.paddingRight_5}
+                          >
+                            От:
+                          </Typography>
+                          <Typography
+                            color={"tertiary"}
+                            className={css.paddingRight_20}
+                          >
+                            {home.dateStart}
+                          </Typography>
                         </div>
-                      </CardObject>
-                    </div>
-                  ))
-              )}
-            </div>
-          </Scroll>
+                      </div>
+                    </CardObject>
+                  </div>
+                ))
+            )}
+          </div>
+        </Scroll>
       </div>
     );
   }

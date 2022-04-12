@@ -53,8 +53,6 @@ class AgenciesList {
     try {
       const res = await instance.get<IResponse[]>("agent");
 
-      console.log(res.data);
-
       this.list = res.data.map((el) => ({
         id: el.id,
         description: el.agentProperty.position,
