@@ -133,7 +133,7 @@ export const AdItem: FC<Props> = ({
         <div className={styles.footer}>
           <div className={styles.keys}>
             {footerMainElems?.map((el, index) => (
-              <div className={styles.elem} key={index}>
+              <div style={{display: index > 5 ?'none':""}} className={styles.elem} key={index}>
                 <span className={styles.key}>{el.key}</span>
                 <span className={styles.value}>{el.value}</span>
               </div>

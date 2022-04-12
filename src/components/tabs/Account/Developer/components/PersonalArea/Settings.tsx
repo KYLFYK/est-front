@@ -87,44 +87,50 @@ export const Settings: FC<SettingDeveloperType> = observer(({onEdit}) => {
   };
 
   return (
-    <form className={styles.settings}>
-      <div style={{height:'40px'}}>
-        <BaseButton onClick={onEdit} className={styles.buttonHeight} type={"secondary"}>
-          Редактировать настройки
-        </BaseButton>
+      <div className={styles.df_jc_Sb}>
+        <form className={styles.settings}>
+          <section className={styles.settingsSec}>
+            <span className={styles.title}>Данные регистрации</span>
+            <div className={styles.df_mT_20}>
+              <BaseInput
+                  classNameWrapper={styles.inputWrapper}
+                  className={styles.input}
+                  errorLabel=""
+                  label={"Телефон"}
+                  type="tel"
+                  name={"noticePhone"}
+                  value={store.get().setting.noticePhone}
+              />
+              <BaseInput
+                  classNameWrapper={styles.inputWrapper}
+                  className={styles.input}
+                  errorLabel=""
+                  label={"E-mail"}
+                  type="text"
+                  name={"login"}
+                  value={store.get().setting.noticeEmail}
+              />
+            </div>
+
+          </section>
+          <section className={styles.settingsSec}>
+            <BaseInput
+                classNameWrapper={styles.inputWrapper}
+                className={styles.input}
+                errorLabel=""
+                label={"Пароль"}
+                type="tel"
+                name={"noticeEmail"}
+                value={'***'}
+            />
+          </section>
+        </form>
+        <div className={styles.h40_mR30}>
+          <BaseButton onClick={onEdit} className={styles.buttonHeight} type={"secondary"}>
+            Редактировать настройки
+          </BaseButton>
+        </div>
       </div>
-      <section className={styles.settingsSec}>
-        <span className={styles.title}>Данные регистрации</span>
-        <BaseInput
-          classNameWrapper={styles.inputWrapper}
-          className={styles.input}
-          errorLabel=""
-          label={"Телефон"}
-          type="tel"
-          name={"noticePhone"}
-          value={store.get().setting.noticePhone}
-        />
-        <BaseInput
-          classNameWrapper={styles.inputWrapper}
-          className={styles.input}
-          errorLabel=""
-          label={"E-mail"}
-          type="text"
-          name={"login"}
-          value={store.get().setting.noticeEmail}
-        />
-      </section>
-      <section className={styles.settingsSec}>
-        <BaseInput
-          classNameWrapper={styles.inputWrapper}
-          className={styles.input}
-          errorLabel=""
-          label={"Пароль"}
-          type="tel"
-          name={"noticeEmail"}
-          value={'***'}
-        />
-      </section>
-    </form>
+
   );
 })

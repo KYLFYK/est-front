@@ -92,36 +92,43 @@ export const SettingsEditDeveloper: FC<SettingDeveloperType> = observer(({onEdit
     }
 
     return (
-        <div style={{margin:"20px"}}>
+        <div style={{margin:"15px 20px 20px 20px"}}>
             <BackPage onBackPage={backPage} title={'Редактирование настроек'}/>
             <div className={css.df_jc}>
                 <div>
                     <Typography weight={'bold'}>Данные регистрации</Typography>
-                    
-                    <BaseInput
-                        classNameWrapper={styles.largeWrapper}
-                        className={styles.large}
-                        errorLabel=""
-                        label="Телефон"
-                        type="text"
-                        name={"phoneNumber"}
-                        value={store.get().setting.noticePhone}
-                        onChange={(e) => {
-                            store.setsettingsPhone(e.target.value);
-                        }}
-                    />
-                    <BaseInput
-                        classNameWrapper={styles.largeWrapper}
-                        className={styles.large}
-                        errorLabel=""
-                        label="E-mail"
-                        type="text"
-                        name={"phoneNumber"}
-                        value={store.get().setting.noticeEmail}
-                        onChange={(e) => {
-                            store.setsettingsMail(e.target.value);
-                        }}
-                    />
+                    <div className={css.df} style={{width:'150%',marginTop:"20px"}}>
+                        <div style={{width:'50%'}} >
+                            <BaseInput
+                                classNameWrapper={styles.largeWrapper}
+                                className={styles.large}
+                                errorLabel=""
+                                label="Телефон"
+                                type="text"
+                                name={"phoneNumber"}
+                                value={store.get().setting.noticePhone}
+                                onChange={(e) => {
+                                    store.setsettingsPhone(e.target.value);
+                                }}
+                            />
+                        </div>
+                        <div style={{marginLeft:"10px",width:'50%'}}>
+                            <BaseInput
+                                classNameWrapper={styles.largeWrapper}
+                                className={styles.large}
+                                errorLabel=""
+                                label="E-mail"
+                                type="text"
+                                name={"phoneNumber"}
+                                value={store.get().setting.noticeEmail}
+                                onChange={(e) => {
+                                    store.setsettingsMail(e.target.value);
+                                }}
+                            />
+                        </div>
+
+                    </div>
+
                     {/*<BaseInput
                         classNameWrapper={styles.largeWrapper}
                         className={styles.large}
@@ -134,19 +141,20 @@ export const SettingsEditDeveloper: FC<SettingDeveloperType> = observer(({onEdit
                            
                         }}
                     />*/}
-                    <BaseInput
-                        classNameWrapper={styles.largeWrapper}
-                        className={styles.large}
-                        errorLabel=""
-                        label="Новый пароль"
-                        type="text"
-                        name={"phoneNumber"}
-                        value={store.get().setting.newPassword}
-                        onChange={(e) => {
-                            store.setsettingsPassword(e.target.value);
-                        }}
-                    />
-                    
+                    <div style={{marginTop:"20px"}}>
+                        <BaseInput
+                            classNameWrapper={styles.largeWrapper}
+                            className={styles.large}
+                            errorLabel=""
+                            label="Новый пароль"
+                            type="text"
+                            name={"phoneNumber"}
+                            value={store.get().setting.newPassword}
+                            onChange={(e) => {
+                                store.setsettingsPassword(e.target.value);
+                            }}
+                        />
+                    </div>
                 </div>
                 
             </div>

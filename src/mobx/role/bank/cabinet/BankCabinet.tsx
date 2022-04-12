@@ -28,9 +28,9 @@ class BankCabinetStore {
         experience: 'Смоленская обл. г.Смоленск',
         phone: '',
         email: 'estatum@mail.com',
-        telegram: 'estatum.com',
-        whatsApp: 'estatum.com',
-        viber: 'estatum.com',
+        // telegram: 'estatum.com',
+        // whatsApp: 'estatum.com',
+        // viber: 'estatum.com',
 
         phoneArray: [''],
 
@@ -39,13 +39,14 @@ class BankCabinetStore {
 
     async fetch() {
         const res  = await cabinetAPI.getAccountData()
-        const name = res.data.agentProperty.name ? res.data.agentProperty.name : 'name'
+        const name = res.data.agentProperty?.name ? res.data.agentProperty.name : 'name'
         const status = res.data.role
-        const experience = res.data.agentProperty.experience?res.data.agentProperty.experience :'0'
-        const phone = res.data.agentProperty.phone[0].value?res.data.agentProperty.phone[0].value:''
+        // const experience = res.data.agentProperty?.experience?res.data.agentProperty.experience :'0'
+        const experience = res.data.updateAt ?res.data.updateAt :'0'
+        const phone = res.data.agentProperty?.phone[0].value?res.data.agentProperty.phone[0].value:''
         const email = res.data.email
-        const telegram = res.data.agentProperty.messengers?.telegram ? res.data.agentProperty.messengers.telegram :''
-        const whatsApp = res.data.agentProperty.messengers?.whatsApp  ? res.data.agentProperty.messengers.whatsApp : ''
+        const telegram = res.data.agentProperty?.messengers?.telegram ? res.data.agentProperty.messengers.telegram :''
+        const whatsApp = res.data.agentProperty?.messengers?.whatsApp  ? res.data.agentProperty.messengers.whatsApp : ''
         const viber = 'viber'
 
         const info = [
@@ -65,12 +66,13 @@ class BankCabinetStore {
         this.initialData.name = name
         this.initialData.status = status
         this.initialData.experience = experience
-        this.initialData.phone = res.data.agentProperty.phone[0].value?res.data.agentProperty.phone[0].value:''
-        this.initialData.phoneArray = res.data.agentProperty.phone.length>0?res.data.agentProperty.phone.map((p:any)=>p.value):['']
+        this.initialData.phone = res.data.agentProperty?.phone[0].value?res.data.agentProperty.phone[0].value:''
+        this.initialData.phone = res.data.phone ? res.data.phone :''
+        this.initialData.phoneArray = res.data.agentProperty?.phone.length>0?res.data.agentProperty.phone.map((p:any)=>p.value):['']
         this.initialData.email = email
-        this.initialData.telegram = telegram
-        this.initialData.whatsApp = whatsApp
-        this.initialData.viber = viber
+        // this.initialData.telegram = telegram
+        // this.initialData.whatsApp = whatsApp
+        // this.initialData.viber = viber
 
         this.initialData.loading = false
 

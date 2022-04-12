@@ -31,6 +31,7 @@ import { useStore } from "../../src/mobx/stores/ComplexStore/ComplexStore";
 import { UrlObj } from "../../src/api/instance";
 import { FILTER_ACTIONS_OPTIONS } from "../../src/components/containers/Filter/config";
 import css from "../../styles/slider.module.scss";
+import {VRTour} from "../../src/components/containers/ToursContainer/Tours/VRTour/VRTour";
 
 const city = ["Москва", "Санкт-Петербург", "Крым", "Сочи", "Нижний Новгород"];
 const personalAccount = [

@@ -4,9 +4,12 @@ import { BankEditPage } from "../../../src/components/tabs/Account/Bank/cabinet/
 
 const EditPage: FC = () => {
   return (
-    <BankRoleTabs>
-      <BankEditPage />
-    </BankRoleTabs>
+      <div>
+
+      </div>
+    // <BankRoleTabs>
+    //   <BankEditPage />
+    // </BankRoleTabs>
   );
 };
 
