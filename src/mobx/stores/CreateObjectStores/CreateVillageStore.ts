@@ -14,6 +14,8 @@ export class CreateVillageStore implements ICreateObjectComplex {
     city: 0,
     region: 0,
     address: "",
+    latitude: 0,
+    longitude: 0,
     index: 0,
     type: "",
   };

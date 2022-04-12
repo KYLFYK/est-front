@@ -10,6 +10,8 @@ class CreateTownhouseStore implements ICreateObjectTownhouse {
     index: 0,
     region: 0,
     address: "",
+    latitude: 0,
+    longitude: 0,
     cost: 0,
     type: "",
   };

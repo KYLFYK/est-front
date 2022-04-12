@@ -9,6 +9,8 @@ class CreateHouseStore implements ICreateObjectHouse {
     city: 0,
     index: 0,
     address: "",
+    latitude: 0,
+    longitude: 0,
     region: 0,
     cost: 0,
     type: "",
