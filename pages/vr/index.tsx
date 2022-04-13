@@ -11,8 +11,12 @@ const Index = () => {
             title={"Главная"}
             city={city}
             footerColor="accent"
+
         >
-            <VRTour url={'https://3d-tur.ru/010/'} />
+            <div style={{height:"80vh",margin:"40px"}}>
+                <VRTour url={'https://3d-tur.ru/010/'} />
+            </div>
+
         </MainContainer>
     );
 };
