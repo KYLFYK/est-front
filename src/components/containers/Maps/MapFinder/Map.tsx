@@ -99,7 +99,7 @@ const Map: React.FC<Props> = observer(({mapData, location, viewport, setViewport
           onLoad={changeMapLanguage}
         >
           {clusters.map(cluster => {
-            const [longitude, latitude] = cluster.geometry.coordinates;
+            const [latitude, longitude] = cluster.geometry.coordinates;
             const {
               cluster: isCluster,
               point_count: pointCount

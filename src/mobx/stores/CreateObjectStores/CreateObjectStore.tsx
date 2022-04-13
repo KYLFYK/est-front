@@ -672,8 +672,8 @@ class CreateObjectStore implements ICreateObject {
         description: newData.generalInfo.description,
         address: newData.about.address,
         postcode: String(newData.about.index),
-        longitude: 31.45,
-        latitude: 31.45,
+        longitude: newData.about.longitude,
+        latitude: newData.about.latitude,
         region: data.about.region,
         country: data.about.country,
         city: data.about.city,
@@ -756,6 +756,7 @@ class CreateObjectStore implements ICreateObject {
       }
 
       try {
+        console.log('newData', newData)
         console.log('apartmentData', apartmentData)
         if (isEdit) {
           if (idOwner.role === "admin" && this.newOwner !== null) {
@@ -844,8 +845,8 @@ class CreateObjectStore implements ICreateObject {
         description: newHouse.generalInfo.description,
         address: newHouse.about.address,
         postcode: String(newHouse.about.index),
-        longitude: 31.45,
-        latitude: 31.45,
+        longitude: newHouse.about.longitude,
+        latitude: newHouse.about.latitude,
         region: data.about.region,
         country: data.about.country,
         city: data.about.city,
@@ -1019,8 +1020,8 @@ class CreateObjectStore implements ICreateObject {
         description: newLand.generalInfo.description,
         address: newLand.about.address,
         postcode: String(newLand.about.index),
-        longitude: 31.45,
-        latitude: 31.45,
+        longitude: newLand.about.longitude,
+        latitude: newLand.about.latitude,
         region: data.about.region,
         country: data.about.country,
         city: data.about.city,
@@ -1104,8 +1105,8 @@ class CreateObjectStore implements ICreateObject {
         description: complexDataS.generalInfo.description,
         address: complexDataS.about.address,
         postcode: complexDataS.about.index.toString(),
-        longitude: 44.948237,
-        latitude: 34.100318,
+        longitude: complexDataS.about.longitude,
+        latitude: complexDataS.about.latitude,
         region: complexDataS.about.region,
         country: complexDataS.about.country,
         city: complexDataS.about.city,
