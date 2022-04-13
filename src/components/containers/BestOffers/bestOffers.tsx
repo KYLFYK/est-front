@@ -56,51 +56,53 @@ const SamplePrevArrow: React.FC<ArrowType> = ({onClick}) => {
 // <SampleNextArrow  onClick={()=>gotoPrev()} />
 // <SamplePrevArrow onClick={()=>gotoNext()}/>
 
-const settings = {
-    dots: true,
-    infinite: false,
-    speed: 500,
-    slidesToShow: 4,
-    slidesToScroll: 2,
-    initialSlide: 0,
-    responsive: [
-        {
-            breakpoint: 1430,
-            settings: {
-                slidesToShow: 3,
-                slidesToScroll: 3,
-                dots: true
-            }
-        },
-        {
-            breakpoint: 1125,
-            settings: {
-                slidesToShow: 2,
-                slidesToScroll: 2,
-                initialSlide: 2,
-                dots: true
-            }
-        },
-        {
-            breakpoint: 790,
-            settings: {
-                slidesToShow: 1,
-                slidesToScroll: 1,
-                initialSlide: 1,
-                dots: true
-            }
-        }
-    ],
-    arrows: false,
-}
+
 
 export const BestOffers: FC<BestOffersType> = observer(({tagsButton}) => {
 
     const store = useStoreMainPage()
+    const settings = {
+        dots: true,
+        infinite: store.initialData.bestOffers.length>2, // true || false, чтобы корректно отображалось
+        speed: 500,
+        slidesToShow: 4,
+        slidesToScroll: 2,
+        initialSlide: 0,
+        responsive: [
+            {
+                breakpoint: 1430,
+                settings: {
+                    slidesToShow: 3,
+                    slidesToScroll: 2,
+                    dots: true
+                }
+            },
+            {
+                breakpoint: 1125,
+                settings: {
+                    slidesToShow: 2,
+                    slidesToScroll: 2,
+                    initialSlide: 2,
+                    dots: true
+                }
+            },
+            {
+                breakpoint: 790,
+                settings: {
+                    slidesToShow: 1,
+                    slidesToScroll: 1,
+                    initialSlide: 1,
+                    dots: true
+                }
+            }
+        ],
+        arrows: false,
+    }
+
     const customeSlider = useRef()
     useEffect(() => {
         store.fetchBestOffers(10, false, false, false, false, false)
-    }, [])
+    }, [store.fetchBestOffers])
 
     const mapDat: any = mapData[0]
 
