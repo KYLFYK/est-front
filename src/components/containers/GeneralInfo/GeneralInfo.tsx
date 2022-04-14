@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import s from './GeneralInfo.module.scss';
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -19,13 +19,20 @@ interface Props {
 const GeneralInfo: React.FC<Props> = observer(({ images, price, info,classSlider }) => {
 
     const imagesUrl = images.length === 0 ? IMAGES_SET : images.map((i: any) => i.url && i.url.includes('public') ? IMAGES_SET[0] : i.url || i)
+    const [width,setWidth]=useState<number>(600)
+
+    useEffect(()=>{
+        if(window?.innerWidth < 1300){
+            setWidth(450)
+        }
+    },[])
 
     return (
         <div className={s.container}>
             <div className={s.sliderContainer}>
                 <BaseSlider
                     images={imagesUrl}
-                    height={600}
+                    height={width}
                     withArrows
                     withFavorite={typeof window !== "undefined" && localStorage.getItem("roleEstatum") ? true : false}
                     onClickFavorite={() => {}}

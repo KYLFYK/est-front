@@ -1,6 +1,9 @@
 .blockAdvantage{
     display: flex;
     margin: 20px 0 10px 60px;
+    @media screen and (max-width: 1300px){
+        margin: 5px 0 0 60px;
+    }
 }
 .item{
     color: #9495A7;

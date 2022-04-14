@@ -5,7 +5,7 @@ import LegalPurityEncumbrancesTab from "./components/Encumbrances/LegalPurityEnc
 import LegalPurityFoundersTab from "./components/Founders/LegalPurityFoundersTab"
 import LegalPurityGeneralTab from "./components/General/LegalPurityGeneralTab"
 import LegalPurityRecomendationsTab from "./components/Recomendations/LegalPurityRecomendationsTab"
-
+import css from './legalPurity.module.scss'
 
 interface Props {
     tabsData?: IObjectLegalPurityTabs
@@ -32,6 +32,7 @@ const LegalPurityTabs: React.FC<Props> = ({tabsData}) => {
     return (
         <div>
             <VerticalTabs
+                className={css.wrapper}
                 link={false}
                 tabs={tabsFilter.length > 0
                     ? tabsFilter

@@ -1,6 +1,9 @@
 .blockAdvantage{
     display: flex;
     margin: 40px 0 0 60px;
+    @media screen and (max-width: 1300px){
+        margin: 20px 0 0 60px;
+    }
 }
 .img{
     display: inline-block;

@@ -306,7 +306,7 @@ const House = observer((props: any) => {
             <Views items={views}/>
             <NameEstate item={props.name}/>
             <AdressEstate item={props.address}/>
-            <div style={{margin:"0 60px"}}>
+            <div >
               <HorizontalTabs tabs={tabs} refs={refs}/>
             </div>
 

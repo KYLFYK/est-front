@@ -20,6 +20,10 @@
 .menu {
   //margin: 0 0 10px 60px;
   margin: 0 0 5px 0;
+  @media screen and (max-width: 1300px){
+    margin: 10px 60px 5px 60px;
+}
+
 }
 .hr{
   position: relative;

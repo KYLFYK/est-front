@@ -72,14 +72,14 @@ const PaybackContainer :FC<PaybackContainerType> = ({averagePrice, currentHouse}
                 {/*    <DynamicsPriceTable table={table} />*/}
                 {/*    <AverageMarketPrice averagePrice={averagePrice} />*/}
                 {/*</div>*/}
-                <div style={{margin: '30px 0 0 0'}}>
-                    <Typography weight={'medium'}>
-                        Похожие предложения в этом районе
-                    </Typography>
-                    <div style={{margin: '20px 0 0 0'}}>
-                        {/*<Map currentHouse={currentHouse} objects={objects} location={'payback'} />*/}
-                    </div>
-                </div>
+                {/*<div style={{margin: '30px 0 0 0'}}>*/}
+                {/*    <Typography weight={'medium'}>*/}
+                {/*        Похожие предложения в этом районе*/}
+                {/*    </Typography>*/}
+                {/*    <div style={{margin: '20px 0 0 0'}}>*/}
+                {/*        <Map currentHouse={currentHouse} objects={objects} location={'payback'} />*/}
+                {/*    </div>*/}
+                {/*</div>*/}
             </HeadLine>
         </div>
     );

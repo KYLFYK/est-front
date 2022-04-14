@@ -5,12 +5,19 @@
 .sliderContainer {
     max-width: 890px;
     width: 70%;
+    @media screen and (max-width: 1300px){
+        max-width: 750px;
+        width: 70%;
+    }
 }
 
 .container {
     margin: 40px 0 0 60px;
     display: flex;
     width: 90%;
+    @media screen and (max-width: 1300px){
+        margin: 20px 0 0 60px;
+    }
 }
 .infoContainer {
     margin-left: 20px;
@@ -19,6 +26,9 @@
     gap: 20px;
     max-width: 600px;
     width: 29%;
+    @media screen and (max-width: 1300px){
+        gap: 15px;
+    }
 }
 .infoItem {
     display: flex;

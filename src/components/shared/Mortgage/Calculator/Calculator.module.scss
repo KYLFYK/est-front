@@ -55,20 +55,20 @@
 .container {
   color: #3D4550;
   @include for-size(KT1) {
-    padding: 20px 10px 20px 10px;
+    padding: 20px 10px 0 10px;
   }
   @include for-size(KT2) {
-    padding: 20px 20px 20px 60px;
+    padding: 20px 20px 0 60px;
   }
   @include for-size(KT3) {
-    padding: 20px 24px 20px 24px;
+    padding: 20px 24px 0 24px;
   }
   @include for-size(KT4) {
-    padding: 20px 20px 20px 60px;
+    padding: 20px 20px 0 60px;
     width: 800px;
   }
   @include for-size(KT5) {
-    padding: 20px 20px 20px 60px;
+    padding: 20px 20px 0 60px;
     width: 1000px;
   }
   @include for-size(KT6) {
@@ -207,11 +207,13 @@
     display: flex;
     width: 100% ;
   }
+
   @include for-size(KT6) {
     width: 256px ;
     margin: 10px 0;
     padding: 0 20px 20px 60px !important;
   }
+
 
 }
 
