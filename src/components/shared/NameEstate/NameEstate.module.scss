@@ -1,7 +1,12 @@
 .blockAdvantage{
     display: flex;
     margin: 10px 0 10px 60px;
-    @media screen and (max-width: 1300px){
+    @media screen and (max-width: 1400px){
         margin: 0 0 0 60px;
+    }
+}
+.height{
+    @media screen and (max-width: 1400px){
+        font-size: 25px !important;
     }
 }

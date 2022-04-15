@@ -12,9 +12,11 @@ type NameEstatePropsType = {
 
 export const NameEstate: React.FC<NameEstatePropsType> = ({ className, item, text, children, variant = "primary" }) => {
 
+
+
     return (
         <div className={s.blockAdvantage}>
-            <Typography size={'header'} >
+            <Typography size={'header'} className={s.height} >
                 {item}
             </Typography>
         </div>
