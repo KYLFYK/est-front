@@ -6,6 +6,7 @@ import {ObjectTypes} from "../../../../utils/interfaces/objects";
 import {markAsDeleted} from "../../../../api/obj/markAsDeleted";
 import {reestablishObject} from "../../../../api/obj/reestablishObject";
 import moment from "moment";
+import { json } from "stream/consumers";
 
 interface ILocation {
     id: number;
@@ -121,6 +122,10 @@ class AllAdsStoreEx {
                 console.log("Error deleting", e);
             }
         }
+    }
+
+    get() {
+        return JSON.parse(JSON.stringify(this.adsList))
     }
 }
 

@@ -53,7 +53,6 @@ export const BankEditPage: FC = observer(() => {
   const [valuePhone , setValuePhone]=useState<string>(store.initialData.phone)
   const [valueLogin , setValueLogin]=useState<string>(store.initialData.email)
 
-  console.log(store.initialData.phone)
   return (
     <div className={commonStyles.pageWrapper}>
       <div className={commonStyles.header}>

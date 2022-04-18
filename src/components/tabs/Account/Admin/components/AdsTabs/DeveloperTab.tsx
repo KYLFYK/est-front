@@ -19,10 +19,30 @@ export const DeveloperTab: FC = observer(() => {
   const store = AllAdsStore;
 
   const [sort,setSort]=useState<string>('default')
+  const [filterValue,setFilterValue]=useState<string>('')
+
+  /*let sortedData: any = [];
+  if (sort === "high") {
+    sortedData = [
+      ...objects.sort((a: any, b: any) => (a.price > b.price ? 1 : -1)),
+    ];
+  }
+  if (sort === "low") {
+    sortedData = [
+      ...objects.sort((a: any, b: any) => (a.price < b.price ? 1 : -1)),
+    ];
+  }
+  if (sort === "default") {
+    sortedData = [...objects];
+  }*/
+
+  const onChangeFilter = (e: any) => {
+    setFilterValue(e.target.value)
+  }
 
   return  (
     <div className={styles.wrapper}>
-      <PageFilter buttonText={"Добавить объект"} />
+      <PageFilter buttonText={"Добавить объект"} value={filterValue} onChange={onChangeFilter}/>
       <FilterSearch
         sort={sort}
         setSort={(e:any)=>{

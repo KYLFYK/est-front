@@ -213,12 +213,16 @@ class CreateObjectStore implements ICreateObject {
   setExistObject(objectType: ObjectTypes, data: any) {
     switch (objectType) {
       case ObjectTypes.APARTMENTS:
+        console.log('setExistObjectdata', data)
+        console.log('setExistObjectthis.apartment', this.apartment)
         this.apartment.about.name = data.name;
         this.apartment.about.address = data.address;
         this.apartment.about.complexName = data.complex;
         this.apartment.about.cost = data.price;
         this.apartment.about.city = data.cityId;
         this.apartment.about.country = data.countryId;
+        this.apartment.about.latitude = data.lat;
+        this.apartment.about.longitude = data.lng;
         if (data.secondary_type) {
           this.apartment.about.type = data.secondary_type;
         }
@@ -227,6 +231,7 @@ class CreateObjectStore implements ICreateObject {
         if (data.postcode) {
           this.apartment.about.index = Number(data.postcode);
         }
+        this.apartment.generalInfo.ceilingHeight = data.info_options.height_сeilings
         this.apartment.generalInfo.description = data.description;
         this.apartment.generalInfo.generalSquare = data.info_options.total_area
           ? data.info_options.total_area.toString()
@@ -333,6 +338,8 @@ class CreateObjectStore implements ICreateObject {
         }
         this.house.about.city = data.cityId;
         this.house.about.country = data.countryId;
+        this.apartment.about.latitude = data.lat;
+        this.apartment.about.longitude = data.lng;
         if (data.secondary_type) {
           this.house.about.type = data.secondary_type;
         }
@@ -445,6 +452,8 @@ class CreateObjectStore implements ICreateObject {
         this.land.about.cost = data.price;
         this.land.about.city = data.cityId;
         this.land.about.country = data.countryId;
+        this.apartment.about.latitude = data.lat;
+        this.apartment.about.longitude = data.lng;
         this.land.about.type = "Вторичка";
         this.land.generalInfo.description = data.description;
         this.uploadedFiles = data.images;
@@ -506,6 +515,8 @@ class CreateObjectStore implements ICreateObject {
         this.complex.about.address = data.address;
         this.complex.about.city = data.cityId;
         this.complex.about.country = data.countryId;
+        this.apartment.about.latitude = data.lat;
+        this.apartment.about.longitude = data.lng;
         this.complex.generalInfo.description = data.description;
         this.uploadedFiles = data.images;
         this.complex.generalInfo.photos = data.images;
@@ -756,8 +767,7 @@ class CreateObjectStore implements ICreateObject {
       }
 
       try {
-        console.log('newData', newData)
-        console.log('apartmentData', apartmentData)
+        
         if (isEdit) {
           if (idOwner.role === "admin" && this.newOwner !== null) {
             apartmentData.owner = this.newOwner;

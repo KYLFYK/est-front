@@ -19,7 +19,7 @@ export const loadAllData: () => any = async () => {
   let res;
 
   do {
-    res = await ApartmentApi.getAllApartment(i * 10, 10)
+    res = await ApartmentApi.getAllApartment(i * 100, 100)
     res = res ? res : {data: []}
     obj = obj
       ? [
@@ -41,10 +41,10 @@ export const loadAllData: () => any = async () => {
         ]
       : [];
     i++;
-  } while (res?.data?.length >= 10);
+  } while (res?.data?.length >= 100);
   i = 0;
   do {
-    res = await HouseApi.getAllHouse(i * 10, 10);
+    res = await HouseApi.getAllHouse(i * 100, 100);
     res = res ? res : {data: []}
     obj = obj
       ? [
@@ -66,10 +66,10 @@ export const loadAllData: () => any = async () => {
         ]
       : [];
     i++;
-  } while (res?.data?.length >= 10);
+  } while (res?.data?.length >= 100);
   i = 0;
   do {
-    res = await LandApi.getAllLand(i * 10, 10);
+    res = await LandApi.getAllLand(i * 100, 100);
     res = res ? res : {data: []}
     obj = obj
       ? [
@@ -91,10 +91,10 @@ export const loadAllData: () => any = async () => {
         ]
       : [];
     i++;
-  } while (res?.data?.length >= 10);
+  } while (res?.data?.length >= 100);
   i = 0;
   do {
-    res = await ComplexApi.getAllComplex(i * 10, 10);
+    res = await ComplexApi.getAllComplex(i * 100, 100);
     res = res ? res : {data: []}
     if (res?.data && Array.isArray(res.data)) {
       obj = obj
@@ -120,7 +120,7 @@ export const loadAllData: () => any = async () => {
     } else {
       break;
     }
-  } while (res?.data?.length >= 10);
+  } while (res?.data?.length >= 100);
 
   return obj;
 };

@@ -15,10 +15,32 @@ import { statusActiveApi } from "../../../../../../shared/Loader/Loader";
 export const AgencyTab: FC = observer(() => {
   const store = AllAdsStore;
   const [sort, setSort] = useState<string>("default");
+  const [filterValue,setFilterValue]=useState<string>('')
 
+  let sortedData: any = [];
+  if (store.get()) {
+    if (sort === "high") {
+      sortedData = [
+        ...store.get().sort((a: any, b: any) => (a.price > b.price ? 1 : -1)),
+      ];
+    }
+    if (sort === "low") {
+      sortedData = [
+        ...store.get().sort((a: any, b: any) => (a.price < b.price ? 1 : -1)),
+      ];
+    }
+    if (sort === "default") {
+      sortedData = [...store.get()];
+    }
+  }
+  console.log(sortedData)
+
+  const onChangeFilter = (e: any) => {
+    setFilterValue(e.target.value)
+  }
   return (
     <div className={styles.wrapper}>
-      <PageFilter buttonText={"Добавить объект"} />
+      <PageFilter buttonText={"Добавить объект"} value={filterValue} onChange={onChangeFilter}/>
       <FilterSearch
         setSort={(e: any) => {
           setSort(e);
