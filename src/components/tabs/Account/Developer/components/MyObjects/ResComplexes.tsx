@@ -35,7 +35,6 @@ const dropDownOption =[
     {label:'Дома',value:'house'},
 ]
 
-
 export const ResComplexes: FC<ResComplexesType> = observer(
   ({ onComplex, setComplexId }) => {
     const store = useStoreDeveloperMyObjectStore();
