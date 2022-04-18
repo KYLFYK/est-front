@@ -113,7 +113,7 @@ export const BaseDropDown: React.FC<SelectPropsType> = ({
                 let result = array.some((ar) => ar === index);
                 return (
                   <div
-                    style={{ color: result ? "#C5A28E" : "" }}
+                    style={{ color: result ? "#C5A28E" : "",minHeight:'25px' }}
                     ref={innerBorderRef}
                     key={index}
                     onClick={() => {

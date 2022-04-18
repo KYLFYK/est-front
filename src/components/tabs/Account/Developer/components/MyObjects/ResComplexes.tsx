@@ -20,11 +20,21 @@ import { useStoreDeveloperMyObjectStore } from "../../../../../../mobx/role/deve
 import { accFromToken } from "../../../../../../lib/localStorage/localStorage";
 import { GlassIcon } from "../../../../../../icons/InputIcon/GlassIcon";
 import Scroll from "../../../../../shared/Scroll/Scroll";
+import {BaseDropDown} from "../../../../../shared/BaseDropDown/BaseDropDown";
 
 type ResComplexesType = {
   onComplex: Dispatch<SetStateAction<boolean>>;
   setComplexId: Dispatch<SetStateAction<{ id: number; name: string }>>;
 };
+
+
+const dropDownOption =[
+    {label:'ЖК',value:'complex'},
+    {label:'Квартиры',value:'apartment'},
+    {label:'Участки',value:'land'},
+    {label:'Дома',value:'house'},
+]
+
 
 export const ResComplexes: FC<ResComplexesType> = observer(
   ({ onComplex, setComplexId }) => {
@@ -32,6 +42,7 @@ export const ResComplexes: FC<ResComplexesType> = observer(
     const [maxCardWidth, setMaxCardWidth] = useState<number | "unset">("unset");
     const [textFilter, setTextFilter] = useState("");
     const [sort, setSort] = useState("default");
+    const [typeFilter,setTypeFilter]=useState<string>('')
 
     useEffect(() => {
       store.fetchAllComplexByOwnerId(accFromToken().id);
@@ -95,13 +106,27 @@ export const ResComplexes: FC<ResComplexesType> = observer(
 
     return (
       <div className={styles.wrapper}>
-        <SearchOffice
-          inputIcon={<GlassIcon />}
-          inputIconPlacement={"right"}
-          placeholder={"Поиск..."}
-          value={textFilter}
-          onChange={onChange}
-        />
+          <div className={styles.filterContainer}>
+              {/*<BaseDropDown*/}
+              {/*    options={dropDownOption}*/}
+              {/*    placeholder={'Дома,Квартиры,Участки,ЖК'}*/}
+              {/*    onChange={e=>setTypeFilter(e)}*/}
+              {/*    value={typeFilter}*/}
+              {/*    className={styles.widthDD}*/}
+              {/*/>*/}
+              <div style={{width:"100%"}}>
+                  <div className={styles.filterBox} >
+                      <SearchOffice
+                          inputIcon={<GlassIcon />}
+                          inputIconPlacement={"right"}
+                          placeholder={"Поиск..."}
+                          value={textFilter}
+                          onChange={onChange}
+                          wrapperClassName={styles.marginSearch}
+                      />
+                  </div>
+              </div>
+          </div>
         <FilterSearch
           className={styles.filter}
           type="agent"

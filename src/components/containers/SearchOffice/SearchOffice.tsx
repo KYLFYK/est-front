@@ -5,6 +5,7 @@ import Typography from "src/components/shared/Typography/Typography";
 import BaseButton from "../../shared/BaseButton/BaseButtons";
 
 import css from "./SearchOffice.module.scss";
+import classNames from "classnames";
 
 interface Props {
   type?: "active" | "archive" | "draft" | "owner";
@@ -17,6 +18,7 @@ interface Props {
   altPadding?: boolean;
   value?: string;
   onChange?: any;
+  wrapperClassName?:string
 }
 
 export const SearchOffice: FC<Props> = ({
@@ -29,6 +31,7 @@ export const SearchOffice: FC<Props> = ({
   className,
   value,
   onChange,
+  wrapperClassName
 }) => {
   
   const searchTitle = (type: string) => {
@@ -63,7 +66,7 @@ export const SearchOffice: FC<Props> = ({
   };
 
   return (
-    <div className={css.search}>
+    <div className={classNames(css.search,wrapperClassName)}>
       <div className={css.position}>
         <div className={css.inputMargin}>
           <BaseInput
