@@ -22,7 +22,7 @@ const GeneralInfo: React.FC<Props> = observer(({ images, price, info,classSlider
     const [width,setWidth]=useState<number>(600)
 
     useEffect(()=>{
-        if(window?.innerWidth < 1300){
+        if(window?.innerWidth < 1400){
             setWidth(450)
         }
     },[])
