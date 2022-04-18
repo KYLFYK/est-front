@@ -1,5 +1,5 @@
 @import '../../../app/styles/colours.scss';
-
+@import "src/app/styles/scrollbars";
 .dropdown {
   width: 200px;
   user-select: none;
@@ -35,6 +35,17 @@
   width: 94%;
   border-radius: 8px;
   z-index: 11;
+ // for scroll Base DropDown ( on active )
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  overflow: auto;
+  overflow-x: hidden;
+  max-height: 500px;
+  scrollbar-width: 1px;
+  @include MapScrollbar;
+  padding-right: 10px;
+  margin-right: -10px;
 }
 .dropdown .dropdown_content .dropdown_item {
   display: flex;

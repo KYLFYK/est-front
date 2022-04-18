@@ -61,3 +61,20 @@
     box-shadow: 15px 15px 40px -40px black;
   }
 }
+.filterContainer{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.filterBox{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  //margin-left: 20px;
+}
+.widthDD{
+  min-width: 300px;
+}
+.marginSearch{
+  margin: 0;
+}

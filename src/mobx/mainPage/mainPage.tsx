@@ -112,6 +112,19 @@ class MainPageStore {
 
         const bestOfferNew = await mailPage.bestObjects1(count,isOld,isNew,isComplex,isHouse,isApartment)
 
+        // const searchAllFloor = (type:string,object:any) =>{
+        //     if(type==="apartment"){
+        //         return object.property.floor
+        //         return object.property.totalFloor
+        //     }if(type==="apartment"){
+        //         return object.property.floor
+        //         return object.property.totalFloor
+        //     }if(type==="apartment"){
+        //         return object.property.floor
+        //         return object.property.totalFloor
+        //     }
+        // }
+
         this.initialData.bestOffers = bestOfferNew.map((object: any) => (
             {
                 id: object.id,
@@ -120,8 +133,8 @@ class MainPageStore {
                 type: object.objectName ==='complex' ? "residential-complex" :object.objectName,
                 price:object.objectName !=='complex'? object.price: object.property.priceObjectMin !== null ? object.property.priceObjectMin : '10000000',
                 property: {
-                    floor: 3, // moc
-                    totalFloor: 15, // moc
+                    floor: object.property.floor?object.property.floor:'-', // moc
+                    totalFloor:object.objectName ==='complex'? object.property.amountFloors : object.property.totalFloor, // moc
                     images: [],
                     object_id: object.id,
                     name: object.name,
@@ -130,6 +143,8 @@ class MainPageStore {
                 files: object.files ? object.files.sort((a: any, b: any) => a.id > b.id ? 1 : -1) : [],
             }
         ))
+
+
 
     }
     async fetchComplexDeveloper(id: number) {
