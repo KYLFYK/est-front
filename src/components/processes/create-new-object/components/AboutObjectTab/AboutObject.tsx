@@ -92,7 +92,10 @@ const AboutObjectTab: React.FC<Props> = observer(
     const isValidName = "name" in values && !!values.name.length; // REPLACE BY VALIDATION SERVICE
     const isValidType =
       "type" in values && (values.type === "5" || values.type === "11"); // REPLACE BY VALIDATION SERVICE
-    const isValidComplexName = "complexName" in values && !!values.complexName; // REPLACE BY VALIDATION SERVICE
+    const isValidComplexName =
+      "complexName" in values &&
+      !!values.complexName &&
+      typeof values.complexName === "number"; // REPLACE BY VALIDATION SERVICE
     const isValidCountry = "country" in values && !!values.country; // REPLACE BY VALIDATION SERVICE
     const isValidCity = "city" in values && !!values.city; // REPLACE BY VALIDATION SERVICE
     const isValidIndex = "index" in values && !!values.index; // REPLACE BY VALIDATION SERVICE
@@ -106,7 +109,7 @@ const AboutObjectTab: React.FC<Props> = observer(
       ("floor" in values && values.floor < values.floorsAmmount);
     const isValidFloorsAmmount =
       "floorsAmmount" in values && !!values.floorsAmmount;
-    console.log(values);
+
     const handleNext = () => {
       const isValid = isValidInputsAboutTab(
         objectType,

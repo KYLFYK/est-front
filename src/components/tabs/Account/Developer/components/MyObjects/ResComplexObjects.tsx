@@ -58,7 +58,7 @@ const ResComplexObjects: FC<ResComplexObjectsType> = observer(
     }
 
     return (
-      <div style={{padding:"20px"}}>
+      <div style={{ padding: "20px" }}>
         <BackPage onBackPage={() => onComplex(false)} title={complexId.name} />
         <Typography weight={"bold"} className={css.marginB_20}>
           Квартиры и апартаменты
@@ -111,50 +111,57 @@ const ResComplexObjects: FC<ResComplexObjectsType> = observer(
             </BaseLink>
           </div>
         </div>
-          <div style={{marginTop:'20px'}}>
-              <Scroll height={'470'} >
-                  <div className={css.grid4}>
-                      {store.get().loading ? (
-                          <Loader />
-                      ) : filteredData ? (
-                          filteredData.map((object: any, index:number) => (
-                              <div key={index} style={{ position: "relative" }}>
-                                  <ObjectCard
-                                      key={object.id}
-                                      route={"apartment"}
-                                      typeObject={"new"}
-                                      houseData={object}
-                                      data={object}
-                                      hideLike
-                                  />
+        <div style={{ marginTop: "20px" }}>
+          <Scroll height={"470"}>
+            <div className={css.grid4}>
+              {store.get().loading ? (
+                <Loader />
+              ) : filteredData ? (
+                filteredData.map((object: any, index: number) => (
+                  <div key={index} style={{ position: "relative" }}>
+                    <ObjectCard
+                      key={object.id}
+                      route={"apartment"}
+                      typeObject={"new"}
+                      houseData={object}
+                      data={object}
+                      hideLike
+                    />
 
-                                  <div className={css.link}>
-                                      <Link href={createEditLink("edit", object.id, 0)}>
-                                          <a>
-                                              <svg
-                                                  className={css.svg}
-                                                  width="24"
-                                                  height="24"
-                                                  viewBox="0 0 24 24"
-                                                  fill="none"
-                                                  xmlns="http://www.w3.org/2000/svg"
-                                              >
-                                                  <path
-                                                      d="M14.06 9.02L14.98 9.94L5.92 19H5V18.08L14.06 9.02ZM17.66 3C17.41 3 17.15 3.1 16.96 3.29L15.13 5.12L18.88 8.87L20.71 7.04C21.1 6.65 21.1 6.02 20.71 5.63L18.37 3.29C18.17 3.09 17.92 3 17.66 3ZM14.06 6.19L3 17.25V21H6.75L17.81 9.94L14.06 6.19Z"
-                                                      fill="#3D4550"
-                                                  />
-                                              </svg>
-                                          </a>
-                                      </Link>
-                                  </div>
-                              </div>
-                          ))
-                      ) : (
-                          <Empty />
-                      )}
+                    <div className={css.link}>
+                      <Link
+                        href={createEditLink(
+                          "edit",
+                          object.id,
+                          0,
+                          complexId.id
+                        )}
+                      >
+                        <a>
+                          <svg
+                            className={css.svg}
+                            width="24"
+                            height="24"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            xmlns="http://www.w3.org/2000/svg"
+                          >
+                            <path
+                              d="M14.06 9.02L14.98 9.94L5.92 19H5V18.08L14.06 9.02ZM17.66 3C17.41 3 17.15 3.1 16.96 3.29L15.13 5.12L18.88 8.87L20.71 7.04C21.1 6.65 21.1 6.02 20.71 5.63L18.37 3.29C18.17 3.09 17.92 3 17.66 3ZM14.06 6.19L3 17.25V21H6.75L17.81 9.94L14.06 6.19Z"
+                              fill="#3D4550"
+                            />
+                          </svg>
+                        </a>
+                      </Link>
+                    </div>
                   </div>
-              </Scroll>
-          </div>
+                ))
+              ) : (
+                <Empty />
+              )}
+            </div>
+          </Scroll>
+        </div>
       </div>
     );
   }

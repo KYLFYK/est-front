@@ -396,7 +396,7 @@ const GeneralInfoDataTab: React.FC<Props> = observer(
         setIsValid(isValidInputs);
       }
     };
-
+    
     return (
       <ButtonPanel onNextTab={handleNextTab} onPrevTab={onPrevTab}>
         <InputsGroup title="Размеры объекта">
