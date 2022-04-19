@@ -34,7 +34,6 @@ export const searchCabinet = (type: string | null) => {
 };
 
 const Cabinet = () => {
-
   return getLocalStorage() === "admin" ? (
     <AdminCabinetWrapper>
       <UsersTab />

@@ -18,7 +18,7 @@ interface Props {
   altPadding?: boolean;
   value?: string;
   onChange?: any;
-  wrapperClassName?:string
+  wrapperClassName?: string;
 }
 
 export const SearchOffice: FC<Props> = ({
@@ -31,9 +31,8 @@ export const SearchOffice: FC<Props> = ({
   className,
   value,
   onChange,
-  wrapperClassName
+  wrapperClassName,
 }) => {
-  
   const searchTitle = (type: string) => {
     switch (type) {
       case "archive":
@@ -66,7 +65,7 @@ export const SearchOffice: FC<Props> = ({
   };
 
   return (
-    <div className={classNames(css.search,wrapperClassName)}>
+    <div className={classNames(css.search, wrapperClassName)}>
       <div className={css.position}>
         <div className={css.inputMargin}>
           <BaseInput
@@ -81,9 +80,10 @@ export const SearchOffice: FC<Props> = ({
         {/*<IconOption />*/}
       </div>
       {type === "archive" ? (
-        <BaseButton type={searchLinkColor(type)} isActive>
-          {buttonText ? buttonText : searchTitle(type)}
-        </BaseButton>
+        // <BaseButton type={searchLinkColor(type)} isActive>
+        //   {buttonText ? buttonText : searchTitle(type)}
+        // </BaseButton>
+        <></>
       ) : (
         type !== "owner" &&
         !hideButton && (
