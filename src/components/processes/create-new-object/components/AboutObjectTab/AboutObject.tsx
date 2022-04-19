@@ -90,7 +90,8 @@ const AboutObjectTab: React.FC<Props> = observer(
     const [isValid, setIsValid] = useState<boolean>(true);
     const saveAboutTab = createObjectStore.saveAboutTab.bind(createObjectStore);
     const isValidName = "name" in values && !!values.name.length; // REPLACE BY VALIDATION SERVICE
-    const isValidType = "type" in values && !!values.type.length; // REPLACE BY VALIDATION SERVICE
+    const isValidType =
+      "type" in values && (values.type === "5" || values.type === "11"); // REPLACE BY VALIDATION SERVICE
     const isValidComplexName = "complexName" in values && !!values.complexName; // REPLACE BY VALIDATION SERVICE
     const isValidCountry = "country" in values && !!values.country; // REPLACE BY VALIDATION SERVICE
     const isValidCity = "city" in values && !!values.city; // REPLACE BY VALIDATION SERVICE
@@ -105,7 +106,7 @@ const AboutObjectTab: React.FC<Props> = observer(
       ("floor" in values && values.floor < values.floorsAmmount);
     const isValidFloorsAmmount =
       "floorsAmmount" in values && !!values.floorsAmmount;
-
+    console.log(values);
     const handleNext = () => {
       const isValid = isValidInputsAboutTab(
         objectType,
@@ -195,12 +196,18 @@ const AboutObjectTab: React.FC<Props> = observer(
     const onChangeLatitude = (
       event: React.ChangeEvent & { target: HTMLInputElement }
     ) => {
-      setValues({ ...values, latitude: +event.target.value });
+      setValues({
+        ...values,
+        latitude: +event.target.value > 90 ? 90 : +event.target.value,
+      });
     };
     const onChangeLongitude = (
       event: React.ChangeEvent & { target: HTMLInputElement }
     ) => {
-      setValues({ ...values, longitude: +event.target.value });
+      setValues({
+        ...values,
+        longitude: +event.target.value > 180 ? 180 : +event.target.value,
+      });
     };
 
     const onChangeCity = (value: number) => {

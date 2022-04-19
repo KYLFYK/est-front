@@ -15,13 +15,15 @@ import { statusActiveApi } from "../../../../../../shared/Loader/Loader";
 export const AgencyTab: FC = observer(() => {
   const store = AllAdsStore;
   const [sort, setSort] = useState<string>("default");
-  const [filterValue,setFilterValue]=useState<string>('')
+  const [filterValue, setFilterValue] = useState<string>("");
 
   let sortedData: any = [];
   if (store.get()) {
     if (sort === "high") {
       sortedData = [
-        ...store.get().sort((a: any, b: any) => (a.price > b.price ? 1 : -1)),
+        ...store.get().sort((a: any, b: any) => {
+          a.price > b.price ? 1 : -1;
+        }),
       ];
     }
     if (sort === "low") {
@@ -33,14 +35,17 @@ export const AgencyTab: FC = observer(() => {
       sortedData = [...store.get()];
     }
   }
-  console.log(sortedData)
 
   const onChangeFilter = (e: any) => {
-    setFilterValue(e.target.value)
-  }
+    setFilterValue(e.target.value);
+  };
   return (
     <div className={styles.wrapper}>
-      <PageFilter buttonText={"Добавить объект"} value={filterValue} onChange={onChangeFilter}/>
+      <PageFilter
+        buttonText={"Добавить объект"}
+        value={filterValue}
+        onChange={onChangeFilter}
+      />
       <FilterSearch
         setSort={(e: any) => {
           setSort(e);
@@ -51,8 +56,8 @@ export const AgencyTab: FC = observer(() => {
       <div className={styles.list}>
         {store.adsList !== null && store.adsList.length > 0
           ? store.adsList
-              .filter((el) => el.owner.role === "agent")
-              .map((object) => {
+              .filter((el: any) => el.owner.role === "agent")
+              .map((object: any) => {
                 const textButton = object.markAsDelete
                   ? "Восстановить"
                   : undefined;
@@ -82,12 +87,12 @@ export const AgencyTab: FC = observer(() => {
                   },
                   ...object.guides
                     .filter(
-                      (el) =>
+                      (el: any) =>
                         el.subtitle_ru !== null &&
                         el.type_en !== "furniture" &&
                         el.type_en !== "window"
                     )
-                    .map((el) => ({
+                    .map((el: any) => ({
                       key: el.type_ru,
                       value: el.value,
                     })),
