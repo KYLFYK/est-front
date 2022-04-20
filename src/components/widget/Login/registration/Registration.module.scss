@@ -1,5 +1,5 @@
 @import '../../../../app/styles/colours.scss';
-
+@import '/src/components/containers/Record/all.scss';
 .selectStyle{
   height: 42px !important;
   min-width: 374px;
@@ -83,6 +83,7 @@
   padding-left: 24px;
 }
 
+
 // inputContainerRegistration
 /*===== FORM =====*/
 .lForm{
@@ -108,6 +109,12 @@
   height: 40px;
   margin: 10px 0;
   min-width: 340px;
+  @include for-size(KT1) {
+    min-width: 220px;
+  }
+  @include for-size(KT2) {
+    min-width: 360px;
+  }
 }
 .form__input{
   position: absolute;

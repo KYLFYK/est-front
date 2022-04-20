@@ -11,7 +11,7 @@ const HeadLine :FC<HeadLineType> = ({children,title}) => {
     return (
         <>
             <div className={css.margin}>
-                <Typography size={'subheader'} weight="bold">
+                <Typography size={'subheader'} weight="bold" >
                     {title}
                 </Typography>
             </div>

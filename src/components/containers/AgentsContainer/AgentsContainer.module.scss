@@ -1,13 +1,18 @@
+@import '/src/components/containers/Record/all.scss';
 .containerAgentsBlock {
-    margin: 40px 60px 0 60px;
+    @include for-size(KT1) {
+        margin: 0 30px 0 10px;
+    }@include for-size(KT2) {
+        margin: 40px 60px 0 60px;
+    }
 }
 .block{
     display: flex;
     justify-content: space-between;
     @media  (max-width: 1300px) {
-        //display: grid;
-        //grid-template-columns: 1fr 1fr ;
-        //gap: 20px;
+        display: grid;
+        grid-template-columns: 1fr 1fr ;
+        gap: 20px;
     }
     @media  (max-width: 1020px) {
         display: grid;
@@ -17,6 +22,19 @@
         display: grid;
         grid-template-columns: 1fr ;
         gap: 20px;
+    }
+    @include for-size(KT1) {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr ;
+        width: 300px;
+        height:216px;
+        //overflow: hidden;
+        overflow-x: scroll;
+        white-space:nowrap;
+        gap: 0;
+        scrollbar-arrow-color: #FFFFFF;
+        margin-bottom: -20px;
+        padding-bottom: -20px;
     }
 }
 .margin{

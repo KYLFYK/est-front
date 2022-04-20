@@ -1,0 +1,38 @@
+@import '/src/components/containers/Record/all.scss';
+.logoMain{
+  height: 19px;
+  width: 151px;
+  @include for-size(KT1) {
+    margin-left: 10px;
+    height: 12px;
+    width: 97px;
+  }
+}
+.burger{
+  //padding: ;
+
+  @include for-size(KT1) {
+    display: block;
+    cursor: pointer;
+  } @include for-size(KT2) {
+    display: none;
+  } @include for-size(KT3) {
+     display: none;
+  } @include for-size(KT4) {
+     display: none;
+  }
+
+}
+.style{
+  display: flex;
+  align-items: center;
+}
+.iconLocation{
+  margin-right: 5px;
+  @include for-size(KT1) {
+    display: none;
+  }
+  @include for-size(KT2) {
+    display: inline;
+  }
+}

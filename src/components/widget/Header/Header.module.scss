@@ -1,3 +1,4 @@
+@import '/src/components/containers/Record/all.scss';
 .header {
   display: flex;
   justify-content: space-between;
@@ -6,6 +7,13 @@
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
   @media  (max-width: 930px) {
     flex-wrap: wrap;
+  }
+  @include for-size(KT1) {
+    flex-wrap: nowrap;
+    display: flex;
+    align-items: center;
+    padding: 0 10px;
+    justify-content: space-between;
   }
 }
 .headerLogo{
@@ -20,18 +28,86 @@
     margin-top: 10px;
   }
   @media  (max-width: 750px) {
-    flex-wrap: wrap;
+    //flex-wrap: wrap;
     min-width: 466px;
   }
+  @include for-size(KT1) {
+    min-width: 50px;
+    margin-top: 0;
+  }
 }
-
+.select {
+  margin: 0 15px;
+  cursor: pointer;
+  display: flex;
+  align-content: center;
+  @include for-size(KT1) {
+    position: relative;
+    margin-top: 100px;
+    //right: 100px;
+    right: 145px;
+    min-width: 200px
+  }
+  @include for-size(KT2) {
+    display: flex;
+    margin-top: 0;
+    right: 0;
+    min-width: 10px
+  }
+}
+.T_Position{
+  @include for-size(KT1) {
+    display: flex;
+  }
+  @include for-size(KT2) {
+    display: none;
+  }
+}
+.positionSelect{
+  display: block;
+  @include for-size(KT1) {
+    position: relative;
+    display: flex;
+  }
+  @include for-size(KT2) {
+    position: center;
+  }
+  color:#C5A28E;
+  font-family: Roboto;
+}
 .menuName {
   margin: 0 15px;
   cursor: pointer;
   display: flex;
   align-content: center;
+  @include for-size(KT1) {
+    display:none;
+  }
+  @include for-size(KT2) {
+        display: flex;
+  }
 }
 
+.menuNameAuthorization {
+  margin: 0 15px;
+  cursor: pointer;
+  display: flex;
+  align-content: center;
+  @include for-size(KT1) {
+    padding-right: 20px ;
+  }@include for-size(KT2) {
+    display:flex;
+       padding-right: 0;
+  }
+}
+.t_Info{
+  @include for-size(KT1) {
+    display: flex;
+    margin-right: 5px;
+  } @include for-size(KT2) {
+        display: none;
+  }
+}
 .menuCity {
   width: 200px;
   margin: 0 15px;
@@ -39,7 +115,7 @@
   display: flex;
   align-content: center;
 }
-.textTypography{
-  color:#C5A28E;
-  font-family: Roboto;
-}
+//.textTypography{
+//  color:#C5A28E;
+//  font-family: Roboto;
+//}

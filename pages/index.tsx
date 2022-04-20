@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, {useEffect, useState} from "react";
 import { MainContainer } from "src/components/containers/MainContainer/MainContainer";
 import { HeadFilter } from "../src/components/containers/HeadFilter/Finder";
 import { BestOffers } from "../src/components/containers/BestOffers/bestOffers";
@@ -11,6 +11,8 @@ import OurOffice from "../src/components/containers/OurOffice/OurOffice";
 import { OurOfficeType } from "../src/components/containers/OurOffice/OurOffice";
 import { observer } from "mobx-react-lite";
 import { useRouter } from "next/router";
+import Typography from "src/components/shared/Typography/Typography";
+import {BaseDropDown} from "../src/components/shared/BaseDropDown/BaseDropDown";
 
 const city = ["Москва", "Крым", "Сочи"];
 
@@ -69,7 +71,6 @@ const Start = observer(({}) => {
       personalAccount={personalAccount}
       footerColor="accent"
     >
-      <HeadFilter />
       <BestOffers tagsButton={tagsButton} />
       <DevelopersContainer
         title={"Застройщики и агентства, которые нам доверяют"}
@@ -77,9 +78,9 @@ const Start = observer(({}) => {
       <AgentsContainer title={"Наши агенты к вашим услугам"} />
       <Advantages advantages={mocAdvantages} />
       <OfferNews />
-      <div id={"contact"}>
-        <OurOffice ourOffice={ourOffice.ourOffice} />
-      </div>
+      {/*<div id={"contact"}>*/}
+      {/*  <OurOffice ourOffice={ourOffice.ourOffice} />*/}
+      {/*</div>*/}
     </MainContainer>
   );
 });

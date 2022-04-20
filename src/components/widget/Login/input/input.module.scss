@@ -1,3 +1,4 @@
+@import '/src/components/containers/Record/all.scss';
 /*===== FORM =====*/
 .lForm{
   display: flex;
@@ -20,6 +21,12 @@
   height: 40px;
   margin: 10px 0;
   min-width: 340px;
+  @include for-size(KT1) {
+    min-width: 220px;
+  }
+  @include for-size(KT2) {
+    min-width: 360px;
+  }
 }
 .form__input{
   position: absolute;

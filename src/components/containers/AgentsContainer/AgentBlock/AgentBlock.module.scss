@@ -1,9 +1,20 @@
+@import '/src/components/containers/Record/all.scss';
 .agentBlock{
     display: flex;
     min-width: 400px;
     @media  (max-width: 1320px) {
         min-width: 100px;
         min-height: 100px;
+    }
+    @include for-size(KT1) {
+        margin-left: 10px;
+        width: 196px !important;
+        height: 196px;
+        display: inline-block;
+        vertical-align: top;
+        border: 1px solid #F2F2F2;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px 0 rgba(26, 72, 98, 0.15);
     }
 }
 .photoAgent{
@@ -17,6 +28,12 @@
         width: 100px;
         height: 100px;
     }
+    @include for-size(KT1) {
+        border-radius: 8px 8px 0 0;
+    }
+    @include for-size(KT2) {
+        border-radius: 8px;
+    }
 }
 .dataAgent{
     display: flex;
@@ -28,10 +45,30 @@
     display: flex;
     margin: 4px 0 0;
 }
-.cursor{
+.info{
+    display: block;
+    @include for-size(KT1) {
+       display: none;
+    }
+    @include for-size(KT2) {
+       display: block;
+    }
+}
+.cursorName{
     cursor: pointer;
     color:#1A4862;
+    @include for-size(KT1) {
+        margin-top: 10px;
+    }
     &:hover{
         color:#146695;
+    }
+}
+.m_5px{
+    @include for-size(KT1) {
+        margin-top: 5px;
+    }
+    @include for-size(KT2) {
+        margin-top: 0;
     }
 }

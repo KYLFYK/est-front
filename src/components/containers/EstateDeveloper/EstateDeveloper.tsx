@@ -1,4 +1,4 @@
-import React, { FC, useState } from "react";
+import React, {FC, useEffect, useState} from "react";
 import css from "./EstateDevelopers.module.scss";
 import Typography from "../../shared/Typography/Typography";
 import { DeveloperDataModal } from "../DeveloperDataModal/DeveloperDataModal";
@@ -30,6 +30,20 @@ export const EstateDeveloper: FC<EstateDevelopersPropsType> = ({
 
   const [edit, setEdit] = useState<boolean>(false);
 
+  const [width,setWidth]=useState<number>(200)
+  const [height,setHeight]=useState<number>(80)
+
+  useEffect(()=>{
+    if (window.innerWidth >319 && window.innerWidth <= 576){
+      setWidth(65)
+      setHeight(65)
+    }
+    if(window.innerWidth >576){
+      setWidth(200)
+      setHeight(80)
+    }
+  },[])
+
   return (
     <div className={css.containerEstate}>
       {!hideModal && developerInfo && (
@@ -44,8 +58,8 @@ export const EstateDeveloper: FC<EstateDevelopersPropsType> = ({
       <div onClick={() => !hideModal && setEdit(true)} className={css.hover}>
         <Image
           unoptimized
-          width={200}
-          height={80}
+          width={width}
+          height={height}
           className={css.img}
           src={img}
           alt="emmar"
@@ -57,7 +71,9 @@ export const EstateDeveloper: FC<EstateDevelopersPropsType> = ({
           <Typography size={"default"} color="accent">
             {title}{" "}
           </Typography>
-          <Typography size={"small"}>{description} </Typography>
+          <Typography size={"small"} className={css.marginT}>
+            {description}
+          </Typography>
         </div>
       </div>
     </div>

@@ -21,6 +21,7 @@ import { useRouter } from "next/router";
 import { ThankRegistering } from "../Login/ThankRegistering/ThankRegistering";
 
 import css from "./Header.module.scss";
+import Burger from "src/icons/Header/Burger";
 
 type HeaderPropsType = {
   className?: string;
@@ -280,14 +281,19 @@ export const Header: FC<HeaderPropsType> = ({
       </div>
       <div className={css.menu}>
         <div
-          className={css.menuName}
+          className={css.select}
           onClick={() => setActive(0)}
           style={{ color: "#C5A28E" }}
         >
           <IconLocation />
-          <div className={css.textTypography}>
+          <div className={css.positionSelect}>
+            <div className={css.t_Info}>
+              <Typography >
+                Регион поиска:
+              </Typography>
+            </div>
             <SelectEstate options={city} selectLeft={false} />
-          </div>
+            </div>
         </div>
         {moc.map(({ href, title }, index) => (
           <Link href={href} key={index} passHref>
@@ -302,7 +308,7 @@ export const Header: FC<HeaderPropsType> = ({
         ))}
         {!authorization ? (
           <div
-            className={css.menuName}
+            className={css.menuNameAuthorization}
             onClick={() => {
               setActiveModal(true);
               setEdit("login");
@@ -311,7 +317,7 @@ export const Header: FC<HeaderPropsType> = ({
             <LoginIcon />
           </div>
         ) : (
-          <div className={css.menuName}>
+          <div className={css.menuNameAuthorization}>
             <Typography size={"default"} color="nude">
               <SelectUser
                 params={"housingCondition"}

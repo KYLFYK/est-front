@@ -1,3 +1,10 @@
+@import '/src/components/containers/Record/all.scss';
 .margin{
   margin: 30px 0;
+  @include for-size(KT1) {
+    font-size: 24px;
+  }
+  @include for-size(KT2) {
+    font-size: 20px;
+  }
 }

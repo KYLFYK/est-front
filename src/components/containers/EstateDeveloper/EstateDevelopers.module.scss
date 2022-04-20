@@ -1,9 +1,16 @@
+@import '/src/components/containers/Record/all.scss';
 .containerEstate{
   display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  width: 200px;
-  margin-right: 30px ;
+
+  @include for-size(KT1) {
+    width: 295px;
+  }
+  @include for-size(KT2) {
+    flex-direction: column;
+    width: 200px;
+    margin-right: 30px ;
+    justify-content: space-between;
+  }
 }
 
 .img {
@@ -15,10 +22,29 @@
   object-fit: contain;
   cursor: pointer;
   background-size: cover;
+  @include for-size(KT1) {
+    width: 65px;
+    height: 65px;
+  }
+  @include for-size(KT2) {
+    width: 200px;
+    height: 80px;
+  }
 }
 
 .infoCompany{
-  margin: 20px 0;
+  @include for-size(KT1) {
+    margin: 0 0 0 10px;
+  }
+  @include for-size(KT2) {
+    margin: 20px 0;
+  }
+}
+.marginT{
+  @include for-size(KT1) {
+    margin-top: 5px;
+  }
+  margin: 0;
 }
 .hover{
   :hover{

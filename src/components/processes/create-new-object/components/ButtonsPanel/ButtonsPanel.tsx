@@ -5,6 +5,7 @@ import Typography from "../../../../shared/Typography/Typography";
 
 import s from "./ButtonsPanel.module.scss";
 import { IEditInfo, IInfoLoaded } from "../../../../../hooks/useEditObject";
+import {useRouter} from "next/router";
 
 export interface ICreateObjectControls {
   onPrevTab: () => void;
@@ -35,6 +36,8 @@ const ButtonPanel: React.FC<Props> = ({
     onNextTab && onNextTab();
   };
 
+  const router = useRouter()
+
   return (
     <div className={s.wrapper}>
       <div>{children}</div>
@@ -50,9 +53,11 @@ const ButtonPanel: React.FC<Props> = ({
         </BaseButton>
         <div className={s.buttonsGroup}>
           {onPreview && (!presets || !presets.editMode) && (
-            <Typography color="accent" size="small">
-              Предпросмотр перед публикацией
-            </Typography>
+              <div style={{cursor:'pointer',display:'flex'}} onClick={()=>router.push('/viewing ')}>
+                <Typography color="accent" size="small">
+                  Предпросмотр перед публикацией
+                </Typography>
+              </div>
           )}
           {/*<BaseButton buttonHTMLType={"button"} type="secondary">
             <Typography size="small"> В черновик </Typography>

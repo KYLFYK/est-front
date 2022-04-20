@@ -1,9 +1,16 @@
+@import '/src/components/containers/Record/all.scss';
 .loginContainer{
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   width: 440px;
+  @include for-size(KT1) {
+    width: 320px;
+  }
+  @include for-size(KT2) {
+    width: 440px;
+  }
 }
 .recovery{
   width: 100%;
@@ -11,7 +18,12 @@
   justify-content: flex-end;
 }
 .width{
-  width: 380px;
+  @include for-size(KT1) {
+    width: 260px;
+  }
+  @include for-size(KT2) {
+    width: 380px;
+  }
 }
 .margin{
   margin:20px 0 0 0;

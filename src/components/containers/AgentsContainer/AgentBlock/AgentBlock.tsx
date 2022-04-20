@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {Modal} from "../../../shared/Modal/Modal";
 import {AgentInfo} from '../AgentInfo/AgentInfo';
 import Typography from "../../../shared/Typography/Typography";
@@ -41,7 +41,18 @@ type infoAgent = {
 export const AgentBlock: React.FC<AgentBlockPropsType> = ({img, connection, infoAgent}) => {
 
     const [edit, setEdit] = useState<boolean>(false)
-
+    const [width,setWidth]=useState<number>(200)
+    const [height,setHeight]=useState<number>(200)
+    useEffect(()=>{
+        if (window.innerWidth >319 && window.innerWidth <= 576){
+            setWidth(195)
+            setHeight(130)
+        }
+        if(window.innerWidth >576){
+            setWidth(200)
+            setHeight(200)
+        }
+    },[])
     return (
         <div className={css.agentBlock}>
             <Image
@@ -49,8 +60,8 @@ export const AgentBlock: React.FC<AgentBlockPropsType> = ({img, connection, info
                 className={css.photoAgent}
                 src={img}
                 alt="agent"
-                height={200}
-                width={200}
+                height={height}
+                width={width}
                 loader={e => myLoader(e.src, e.width, e.quality)}
             />
             <div className={css.dataAgent}>
@@ -59,17 +70,17 @@ export const AgentBlock: React.FC<AgentBlockPropsType> = ({img, connection, info
                         <AgentInfo infoAgent={infoAgent} connection={connection} img={img}/>
                     </Modal>
                     <div onClick={() => setEdit(true)}>
-                        <Typography size={'default'} color="accent" weight={'medium'} className={css.cursor}>
+                        <Typography size={'default'} color="accent" weight={'medium'} className={css.cursorName}>
                             {infoAgent.fullName}
                         </Typography>
                     </div>
                     <div>
-                        <Typography size={'default'}>
+                        <Typography size={'default'} className={css.cursor}>
                             {infoAgent.heldPost}
                         </Typography>
                     </div>
                 </div>
-                <div>
+                <div className={css.info} >
                     <div>
                         <Typography size={'default'}>
                             Связаться

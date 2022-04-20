@@ -1,6 +1,13 @@
+@import '../../../components/containers/Record/all.scss';
 .offers{
     margin: 40px 60px 0 60px;
     overflow: visible;
+    @include for-size(KT1) {
+        margin: 20px 10px 0 10px;
+    }
+    @include for-size(KT2) {
+        margin: 40px 60px 0 60px;
+    }
 }
 .positionButton{
     display: flex;
