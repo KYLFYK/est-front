@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC, useEffect, useState } from 'react';
 import css from './AdvantageList.module.scss'
 import HeadLine from '../../shared/HeadLine/HeadLine';
 import { Advantage } from '../../shared/Advantage/Advantage';
@@ -13,16 +13,36 @@ export interface IAdvantage {
 
 type AdvantagesType = {
     advantages: IAdvantage[],
+    advantagesMobile: IAdvantage[],
 }
 
-export const Advantages: FC<AdvantagesType> = ({ advantages }) => {
+export const Advantages: FC<AdvantagesType> = ({ advantages, advantagesMobile }) => {
+    const [adv, setAdvantages] = useState(advantages)
+
+    const HandleResize = () => {
+        if (window.innerWidth < 576) {
+            setAdvantages(advantagesMobile)
+        } else {
+            setAdvantages(advantages)
+        }
+    }
+
+    useEffect(() => {
+        if (window.innerWidth < 576) {
+            setAdvantages(advantagesMobile)
+        }
+        window.addEventListener("resize", HandleResize);
+        return () => {
+            window.removeEventListener("resize", HandleResize);
+        }
+    }, [adv])
 
     return (
         <div className={css.allAdvantages}>
             <HeadLine title={'Наши преимущества'}>
                 <div className={css.advantages}>
                     {
-                        advantages.map(({ title, text }, index) => (
+                        adv.map(({ title, text }, index) => (
                             <Advantage
                                 key={index}
                                 title={title.label}

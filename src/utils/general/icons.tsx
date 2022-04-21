@@ -3,6 +3,10 @@ import InfrastructureAnalysis from "../../icons/Advantages/InfrastructureAnalysi
 import Mortgage from "../../icons/Advantages/Mortage";
 import Tours from "../../icons/Advantages/Tours";
 import AnalysisLegalPurity from "../../icons/Advantages/AnalysisLegalPurity";
+import {InfrastructureAnalysisMobile} from "../../icons/Advantages/InfrastructureAnalysisMobile";
+import {MortgageMobile} from "../../icons/Advantages/MortageMobile";
+import {ToursMobile} from "../../icons/Advantages/ToursMobile";
+import {AnalysisLegalPurityMobile} from "../../icons/Advantages/AnalysisLegalPurityMobile";
 import {IconTypes} from "../interfaces/icons";
 import {HouseIcon} from "../../icons/Specifications/House";
 import {RestIcon} from "../../icons/Specifications/Rest";
@@ -44,6 +48,14 @@ export const searchIconByValue = (value: IconTypes | string): JSX.Element => {
       return <Tours />;
     case IconTypes.PURITY_ANALYSIS:
       return <AnalysisLegalPurity />;
+    case IconTypes.MORTGAGE_MOBILE:
+      return <MortgageMobile />;
+    case IconTypes.INFRASTRUCTURE_ANALYSIS_MOBILE:
+      return <InfrastructureAnalysisMobile />;
+    case IconTypes.TOURS_MOBILE:
+      return <ToursMobile />;
+    case IconTypes.PURITY_ANALYSIS_MOBILE:
+      return <AnalysisLegalPurityMobile />;
     case IconTypes.HOUSE_TYPE:
       return <HouseIcon />
     case IconTypes.REST:

@@ -56,6 +56,19 @@ export const HeadFilter = () => {
                         </Button>*/}
 
           </div>
+          <div className={s.containerTitleMobile}>
+            <Typography size={"subheaderBig"} color={"altWhite"}>
+              Найдите дом мечты
+            </Typography>
+            <Typography
+              weight={"regular"}
+              size={'default'}
+              color={"altWhite"}
+              className={s.subTitle}
+            >
+              Выгодные предложения домов и квартир в Крыму
+            </Typography>
+          </div>
         </div>
         <div className={s.filterWrapper}>
           <Filter location={'start'}/>

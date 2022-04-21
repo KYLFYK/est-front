@@ -19,6 +19,15 @@
     }
 }
 
+.mobileMargin {
+    display: block;
+    margin: 0 0 10px 0;
+    @include for-size(KT2) {
+        margin: 0;
+        display: none;
+    }
+}
+
 .grid{
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr;
