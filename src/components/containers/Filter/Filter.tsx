@@ -55,6 +55,7 @@ export const useStyles = makeStyles(() => ({
 }));
 
 export const Filter: React.FC<Props> = observer(({ location,onFilter,activeFilter }) => {
+
   const router = useRouter();
   const searchStore = useSearchStore();
   const breadcrumbs = useBreadcrumbsStore();
@@ -115,7 +116,6 @@ export const Filter: React.FC<Props> = observer(({ location,onFilter,activeFilte
       searchStore.setParams(paramsForGet(searchStore.getFilter()));
       searchStore.fetch();
     }
-    debugger
     if(width<578){
       onFilter && onFilter()
     }

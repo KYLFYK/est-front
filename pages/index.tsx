@@ -71,16 +71,17 @@ const Start = observer(({}) => {
       personalAccount={personalAccount}
       footerColor="accent"
     >
+      <HeadFilter />
       <BestOffers tagsButton={tagsButton} />
       <DevelopersContainer
         title={"Застройщики и агентства, которые нам доверяют"}
       />
       <AgentsContainer title={"Наши агенты к вашим услугам"} />
-      {/*<Advantages advantages={mocAdvantages} />*/}
-      {/*<OfferNews />*/}
-      {/*<div id={"contact"}>*/}
-      {/*  <OurOffice ourOffice={ourOffice.ourOffice} />*/}
-      {/*</div>*/}
+      <Advantages advantages={mocAdvantages} />
+      <OfferNews />
+      <div id={"contact"}>
+        <OurOffice ourOffice={ourOffice.ourOffice} />
+      </div>
     </MainContainer>
   );
 });
