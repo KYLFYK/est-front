@@ -25,7 +25,6 @@ const personalAccount = [{title: 'Личный кабинет', href: '/User', m
 const center = {lat: 45.16, lng: 36.90}
 
 const Finder: NextPage = observer(() => {
-
   const searchStore = useSearchStore();
   const [view, setView] = useState('mapView')
 
