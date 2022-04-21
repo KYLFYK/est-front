@@ -15,6 +15,7 @@ import {
   FILTER_FLOORS_OPTIONS,
   FILTER_HOUSE_TYPE_OPTIONS,
   TOGGLE_BUTTONS_OPTIONS_APART,
+  TOGGLE_BUTTONS_OPTIONS_APART_MOBILE,
   TOGGLE_BUTTONS_OPTIONS_HOUSE,
   FILTER_IRB_OPTIONS,
   FILTER_LAND_SPECS_OPTIONS,
@@ -193,7 +194,7 @@ export const Filter: React.FC<Props> = observer(({ location }) => {
           onChange={onChangeActionType}
           placeholder={FILTER_ACTIONS_OPTIONS[0].label}
           className={s.dropdownAction}
-          location={'unionDropdown'}
+          location={"unionDropdown"}
         />
         <BaseDropDown
           options={FILTER_HOUSE_TYPE_OPTIONS}
@@ -201,7 +202,7 @@ export const Filter: React.FC<Props> = observer(({ location }) => {
           onChange={onChangeHouseType}
           placeholder={FILTER_HOUSE_TYPE_OPTIONS[0].label}
           className={s.dropdownHouseType}
-          location={'unionDropdown'}
+          location={"unionDropdown"}
         />
       </InputsUnion>
 
@@ -230,19 +231,33 @@ export const Filter: React.FC<Props> = observer(({ location }) => {
       )}
 
       {searchStore.getFilter()["object-type"] === "apartment" && (
-        <ToggleButtons
-          classNameButton={s.toggleButton}
-          items={TOGGLE_BUTTONS_OPTIONS_APART}
-          activeValue={searchStore.getFilter()["rooms-in-apartment"]}
-          onChange={onChangePlanningApart}
-          multiple
-        />
+        <div className={s.mainToggleButtonWrap}>
+          <ToggleButtons
+            classNameButton={s.toggleButton}
+            items={TOGGLE_BUTTONS_OPTIONS_APART}
+            activeValue={searchStore.getFilter()["rooms-in-apartment"]}
+            onChange={onChangePlanningApart}
+            multiple
+          />
+        </div>
+      )}
+
+      {searchStore.getFilter()["object-type"] === "apartment" && (
+        <div className={s.lowResToggleButtonWrap}>
+          <ToggleButtons
+            classNameButton={s.toggleButton}
+            items={TOGGLE_BUTTONS_OPTIONS_APART_MOBILE}
+            activeValue={searchStore.getFilter()["rooms-in-apartment"]}
+            onChange={onChangePlanningApart}
+            multiple
+          />
+        </div>
       )}
 
       {(searchStore.getFilter()["object-type"] === "house" ||
         searchStore.getFilter()["object-type"] === "townhouse") && (
         <ToggleButtons
-          title={'комнат'}
+          title={"комнат"}
           classNameButton={s.toggleButton}
           items={TOGGLE_BUTTONS_OPTIONS_HOUSE}
           activeValue={searchStore.getFilter()["rooms-in-house"]}
@@ -283,6 +298,37 @@ export const Filter: React.FC<Props> = observer(({ location }) => {
           }
         />
       </InputsUnion>
+
+      <div className={s.lowResContainer}>
+        <CompareInput
+          location="search"
+          classNameInputFrom={s.priceInputFrom}
+          classNameInputTo={s.priceInputTo}
+          placeholderFrom="Цена от"
+          placeholderTo="до"
+          valueFrom={searchStore.getFilter()["price-from"]}
+          valueTo={searchStore.getFilter()["price-to"]}
+          onChangeFrom={onChangePriceFrom}
+          onChangeTo={onChangePriceTo}
+          Icon={<span>₽</span>}
+        />
+        <CompareInput
+          location="search"
+          classNameInputFrom={s.squareInputFrom}
+          classNameInputTo={s.squareInputTo}
+          placeholderFrom="Площадь от"
+          placeholderTo="до"
+          valueFrom={searchStore.getFilter()["square-from"]}
+          valueTo={searchStore.getFilter()["square-to"]}
+          onChangeFrom={onChangeSquareFrom}
+          onChangeTo={onChangeSquareTo}
+          Icon={
+            <span>
+              м<sup>2</sup>
+            </span>
+          }
+        />
+      </div>
 
       {/*searchStore.getFilter()['object-type'] !== 'land' && <BaseDropDown
                 options={FILTER_BUILDING_TYPE_OPTIONS}

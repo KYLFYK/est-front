@@ -41,7 +41,7 @@ const ourOffice: OurOfficeType = {
     },
     location: "start",
     contactsOffice: [
-      { title: "metro", value: "Проспект Победы" },
+      // { title: "metro", value: "Проспект Победы" },
       { title: "dot", value: "Крым, Ленина, 23 корпус 1" },
       { title: "time", value: "Ежедневно с 10:00 до 20:00" },
       { title: "phone", value: "+7 913 453 22 34", href: "tel:" },

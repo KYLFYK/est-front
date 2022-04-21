@@ -1,6 +1,24 @@
+@import '../../../app/styles/resolutions.scss';
+
 .offerNews{
-    margin: 50px 60px 0 60px;
+    margin: 30px 10px 20px 10px;
+    @include for-size(KT2) {
+        margin: 50px 60px 0 60px;
+    }
 }
+.container{
+    display: none;
+    @include for-size(KT2) {
+      display: block;
+    }
+}
+.minResContainer {
+    display: block;
+    @include for-size(KT2) {
+        display: none;
+    }
+}
+
 .grid{
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr;

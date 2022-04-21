@@ -1,8 +1,12 @@
+@import '../../../app/styles/resolutions.scss';
+
 .contactOfficeBlock{
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  height: 380px;
+  @include for-size(KT2) {
+    height: 380px;
+  }
 }
 .position{
   display: flex;
@@ -12,4 +16,10 @@
   margin:0 8px;
   font-family: RobotoRegular;
   color: #3D4550;
+}
+.link {
+  display: none;
+  @include for-size(KT2) {
+      display: block;
+  }
 }

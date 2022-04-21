@@ -1,3 +1,5 @@
+@import '../../../../app/styles/resolutions.scss';
+
 .footer {
     background: #1A4862;
     height: 120px;
@@ -7,3 +9,9 @@
     align-items: center;
 }
 
+.elements {
+    display: none;
+    @include for-size(KT2) {
+        display: block;
+    }
+}

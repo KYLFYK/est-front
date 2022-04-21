@@ -11,6 +11,14 @@ export const TOGGLE_BUTTONS_OPTIONS_APART: IOption[] = [
     {label: "Свободная планировка", value: "free_plan"},
 ]
 
+export const TOGGLE_BUTTONS_OPTIONS_APART_MOBILE: IOption[] = [
+    {label: "Студия", value: "studio"},
+    {label: "1", value: "one"},
+    {label: "2", value: "two"},
+    {label: "3+", value: "three"},
+    {label: "Своб. план.", value: "free_plan"},
+]
+
 export const TOGGLE_BUTTONS_OPTIONS_HOUSE: IOption[] = [
     {label: "1", value: "one"},
     {label: "2", value: "two"},

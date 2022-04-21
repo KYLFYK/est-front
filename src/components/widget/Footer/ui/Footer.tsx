@@ -16,8 +16,10 @@ export const Footer :FC<FooterPropsType>= ({color, className}) => {
 
     return (
         <div style={{backgroundColor: `${color==='nude' ? '#C5A28E' : '#1A4862'}`}} className={classNames(css.footer,className)}>
-            <FooterCopyRight/>
-            <div>
+            <div className={css.elements}>
+                <FooterCopyRight/>
+            </div>
+            <div className={css.elements}>
                 <FaceBook/>
                 <Vk/>
                 <Twitter/>

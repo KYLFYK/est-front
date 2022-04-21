@@ -76,7 +76,7 @@ export const BaseDropDown: React.FC<SelectPropsType> = ({
 
   return (
     <div
-      style={{ display: "flex", flexDirection: "column", position: "relative" }}
+      className={location === 'unionDropdown' ? css.wrapUnion : css.wrap}
     >
       {label && <Typography className={css.label}>{label}</Typography>}
       <div style={{ display: "flex", position: "relative" }}>

@@ -1,5 +1,10 @@
+@import '../../../app/styles/resolutions.scss';
+
 .allAdvantages{
-    margin: 60px 60px 0 60px;
+    margin: 30px 10px 20px 10px;
+    @include for-size(KT2) {
+        margin: 60px 60px 0 60px;;
+    }
 }
 .advantages{
     display: grid;
