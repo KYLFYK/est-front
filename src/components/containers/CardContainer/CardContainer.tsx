@@ -31,7 +31,7 @@ interface Props {
     mapData: any
     view: string
     setView: any
-    onActiveFilter:()=>void
+    onActiveFilter?:()=>void
 }
 
 const useStyles = makeStyles(() => ({
