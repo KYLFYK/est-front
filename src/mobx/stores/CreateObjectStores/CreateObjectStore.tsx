@@ -65,6 +65,7 @@ import { IGuide } from "../objects/GuidesStore";
 import { ICustomFile } from "../../../components/processes/create-new-object/components/GeneralInfoObjectTab/GeneralInfoPhotosTab";
 import moment from "moment";
 import { editObjectApi } from "../../../api/editObjects/editObjects";
+import { IComplex } from "../../residentialСomplex/flatSourceComplex";
 
 export interface IUploadedFile {
   size: number;
@@ -210,11 +211,73 @@ class CreateObjectStore implements ICreateObject {
     }
   }
 
+  setDeveloperApartData(complex: IComplex) {
+    this.apartment.about.address = complex.address;
+    this.apartment.about.city = complex.cityId;
+    this.apartment.about.country = complex.countryId;
+    this.apartment.about.latitude = complex.lat;
+    this.apartment.about.longitude = complex.lng;
+    this.apartment.about.complexName = complex.object_id
+      ? complex.object_id
+      : "";
+    this.apartment.about.floorsAmmount =
+      complex.info_options && complex.info_options[0]
+        ? complex.info_options[0].amountFloors
+        : 0;
+    if (complex.postcode) {
+      this.apartment.about.index = Number(complex.postcode);
+    }
+    this.apartment.generalInfo.ceilingHeight =
+      complex.info_options && complex.info_options[0]
+        ? complex.info_options[0].heightCeilings.toString()
+        : "0";
+    this.apartment.infrastructure.description = complex.description;
+
+    if (complex.object_specs) {
+      complex.object_specs.forEach((item: IGuide) => {
+        switch (item.type_en) {
+          case "buildingType":
+            this.apartment.about.type = item.id.toString();
+            break;
+          case "heating":
+            this.apartment.info.heating = item.id.toString();
+            break;
+          case "electricity":
+            this.apartment.info.electricity = item.id.toString();
+            break;
+          case "window":
+            this.apartment.infrastructure.view = this.apartment.infrastructure
+              .view
+              ? [...this.apartment.infrastructure.view, item.id.toString()]
+              : [item.id.toString()];
+            break;
+          case "sewerage":
+            this.apartment.info.sewerage = item.id.toString();
+            break;
+          case "roof":
+            this.apartment.info.roof = item.id.toString();
+            break;
+          case "parking":
+            this.apartment.info.parking = item.id.toString();
+            break;
+          case "furniture":
+            this.apartment.info.furnitureList = this.apartment.info
+              .furnitureList
+              ? [...this.apartment.info.furnitureList, item.id.toString()]
+              : [item.id.toString()];
+            break;
+        }
+      });
+    }
+
+    console.log(this.apartment);
+  }
+
   setExistObject(objectType: ObjectTypes, data: any) {
     switch (objectType) {
       case ObjectTypes.APARTMENTS:
-        console.log('setExistObjectdata', data)
-        console.log('setExistObjectthis.apartment', this.apartment)
+        console.log("setExistObjectdata", data);
+        console.log("setExistObjectthis.apartment", this.apartment);
         this.apartment.about.name = data.name;
         this.apartment.about.address = data.address;
         this.apartment.about.complexName = data.complex;
@@ -231,7 +294,8 @@ class CreateObjectStore implements ICreateObject {
         if (data.postcode) {
           this.apartment.about.index = Number(data.postcode);
         }
-        this.apartment.generalInfo.ceilingHeight = data.info_options.height_сeilings
+        this.apartment.generalInfo.ceilingHeight =
+          data.info_options.height_сeilings;
         this.apartment.generalInfo.description = data.description;
         this.apartment.generalInfo.generalSquare = data.info_options.total_area
           ? data.info_options.total_area.toString()
@@ -767,7 +831,6 @@ class CreateObjectStore implements ICreateObject {
       }
 
       try {
-        
         if (isEdit) {
           if (idOwner.role === "admin" && this.newOwner !== null) {
             apartmentData.owner = this.newOwner;
