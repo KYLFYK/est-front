@@ -28,7 +28,8 @@ export const OfferNews = () => {
 
     return (
         <div className={css.offerNews}>
-            <HeadLine title={'Хотите получать новости о новых предложения и избранных домах?'}>
+            <div className={css.container}>
+            <HeadLine title={'Хотите получать новости о новых предложениях и избранных домах?'}>
                 <div className={css.grid}>
                     <BaseInput placeholder="Имя" value={name} onChange={e=>setName(e.currentTarget.value)}/>
                     <BaseInput placeholder="Email" value={email} onChange={e=>setEmail(e.currentTarget.value)}/>
@@ -36,6 +37,17 @@ export const OfferNews = () => {
                     <BaseButton onClick={newsSubscription} type="primary">Подписаться на новости</BaseButton>
                 </div>
             </HeadLine>
+            </div>
+            <div className={css.minResContainer}>
+            <HeadLine title={'Хотите получать новости о новых предложениях?'}>
+                <div className={css.grid}>
+                    <BaseInput label="Имя" placeholder="Имя" value={name} onChange={e=>setName(e.currentTarget.value)}/>
+                    <BaseInput label="Email" placeholder="Email" value={email} onChange={e=>setEmail(e.currentTarget.value)}/>
+                    <BaseInput label="Телефон" placeholder="Телефон" type={"number"} value={phone} onChange={e=>setPhone(e.currentTarget.value)}/>
+                    <BaseButton onClick={newsSubscription} type="primary">Подписаться на новости</BaseButton>
+                </div>
+            </HeadLine>
+            </div>
             {
                 <Modal
                     className={css.modalIndex}

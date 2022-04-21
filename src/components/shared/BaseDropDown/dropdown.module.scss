@@ -1,7 +1,11 @@
 @import '../../../app/styles/colours.scss';
+@import '../../../app/styles/resolutions.scss';
 @import "src/app/styles/scrollbars";
 .dropdown {
-  width: 200px;
+  width: 100%;
+  @include for-size(KT2) {
+    width: 200px;
+  }
   user-select: none;
   position: relative;
   height: 40px;
@@ -121,4 +125,21 @@
       align-items: unset !important;
       padding-top: 10px;
   }
+}
+
+.wrap {
+  display: "flex";
+  flex-direction: "column";
+  position: "relative";
+  width: 100%;
+  @include for-size(KT2) {
+    width: auto;
+  }
+}
+
+.wrapUnion {
+  display: "flex";
+  flex-direction: "column";
+  position: "relative";
+  width: 50%;
 }

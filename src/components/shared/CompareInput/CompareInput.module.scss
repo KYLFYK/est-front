@@ -1,6 +1,6 @@
 @import '../../../app/styles/colours.scss';
 @import '../../../app/styles/typography.scss';
-
+@import '../../../app/styles/resolutions.scss';
 
 .input {
     @include ROBOTOREGULAR16;
@@ -27,7 +27,9 @@
     padding: 10px 10px 8px 10px;
     border: 1px solid $ACCENTBUTTONDISABLED;
     border-radius: 8px;
-    max-width: fit-content;
+    @include for-size(KT2) {
+        max-width: fit-content;
+    }
 }
 
 .divider {

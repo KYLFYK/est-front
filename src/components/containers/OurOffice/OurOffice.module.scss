@@ -1,9 +1,23 @@
+@import '../../../app/styles/resolutions.scss';
+
 .marginContainer{
   margin: 60px 60px 100px 60px;
+  display: none;
+  @include for-size(KT2) {
+    display: block;
+  }
 }
+
+.minResContainer {
+  margin: 30px 10px 30px 10px;
+  display: block;
+  @include for-size(KT2) {
+    display: none;
+  }
+}
+
 .position{
   display: flex;
-
   @media  (max-width: 1300px) {
     display: grid;
     grid-template-columns: 1fr 1fr ;

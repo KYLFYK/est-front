@@ -3,15 +3,16 @@
 @import '../../../app/styles/typography.scss';
 @import '../../../app/styles/resolutions.scss';
 
-
 .wrapper {
     display: flex;
+    flex-direction: column;
     padding: 0px;
     flex-wrap: wrap;
     gap: 10px;
     justify-content: center;
     @include for-size(KT2) {
         padding: 0 60px;
+        flex-direction: row;
     }
 }
 
@@ -35,16 +36,24 @@
 }
 
 .dropdownAction {
-    width: 200px;
+
+    @include for-size(KT2) {
+        width: 200px;
+    }
 }
 .dropdownHouseType {
-    width: 200px;
+
+    @include for-size(KT2) {
+        width: 200px;
+    }
 }
 .dropdownPrivateType {
     width: 200px;
 }
-.dropdownBuildingType {
-    width: 200px;
+.dropdownBuildingType { 
+    @include for-size(KT2) {
+        width: 200px;
+    }
 }
 .dropdownFloor {
     width: 360px !important
@@ -74,19 +83,39 @@
 }
 
 .actionDropdownUnion {
-    max-width: fit-content;
     height: 40px;
+    @include for-size(KT2) {
+        max-width: fit-content;
+    }
 }
 
 .toggleButton {
     height: 40px;
-    padding: 7px 4px ;
+    padding: 0;
     width: auto;
+    @include for-size(KT2) {
+        padding: 7px 4px;
+    }
+}
+.mainToggleButtonWrap {
+    display: none;
+    @include for-size(KT2) {
+        display: block;
+    }
+}
+.lowResToggleButtonWrap {
+    @include for-size(KT2) {
+        display: none;
+    }
 }
 
 .inputsUnion {
-    max-width: 478px;
-    height: 40px;
+    display: none;
+    @include for-size(KT2) {
+        display: flex;
+        max-width: 478px;
+        height: 40px;
+    }
 }
 
 .searchInput {
@@ -104,4 +133,12 @@
 
 .linkTitle{
     margin: 10px;
+}
+
+.lowResContainer{
+    display: flex;
+    flex-direction: column;
+    @include for-size(KT2) {
+        display: none;
+    }
 }

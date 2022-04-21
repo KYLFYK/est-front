@@ -5,7 +5,6 @@
 
 .wrapper {
     background-color: #fff;
-    max-width: fit-content;
     height: 40px;
     @include for-size(KT1) {
         border: 1px solid $ACCENTBUTTONDISABLED;
@@ -14,14 +13,14 @@
         border-radius: 8px;
         justify-content: center;
         gap: 5px;
-        padding: 5px;
     }
-   @include for-size(KT3) {
-       flex-wrap: nowrap;
-       justify-content: flex-start;
-       gap: 0px;
-       padding: 0px;
-   }
+
+    @include for-size(KT3) {
+        flex-wrap: nowrap;
+        justify-content: flex-start;
+        gap: 0px;
+        padding: 0px;
+    }
 }
 
 .elemWrap {
@@ -31,15 +30,11 @@
 
 .divider {
     @include for-size(KT1) {
-        width: 0px;
+        width: 1px;
+        height: 20px;
         background-color: #BDBDBD;
         margin: 12px 0;
     }
-    @include for-size(KT3) {
-        width: 1px;
-        height: 20px;
-    }
-
 }
 
 .button {
