@@ -9,13 +9,14 @@
     width: 75px;
     height: 40px;
     @include for-size(KT1) {
-        border: 1px solid $ACCENTBUTTONDISABLED;
+        border: 1px solid #F2F2F2;
         display: flex;
-        flex-wrap: wrap;
+        //flex-wrap: wrap;
         border-radius: 8px;
         justify-content: center;
         gap: 5px;
         padding: 5px;
+        box-sizing: border-box;
     }
    @include for-size(KT3) {
        flex-wrap: nowrap;

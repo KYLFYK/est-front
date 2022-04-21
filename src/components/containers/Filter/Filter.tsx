@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { observer } from "mobx-react-lite";
 import { useRouter } from "next/router";
 import { ISearchParamsModel } from "../../../utils/interfaces/search";
@@ -28,6 +28,8 @@ import { makeStyles } from "@material-ui/core";
 
 interface Props {
   location?: "start" | "search";
+  onFilter?:()=>void
+  activeFilter?:()=>void
 }
 
 export const useStyles = makeStyles(() => ({
@@ -51,11 +53,16 @@ export const useStyles = makeStyles(() => ({
   },
 }));
 
-export const Filter: React.FC<Props> = observer(({ location }) => {
+export const Filter: React.FC<Props> = observer(({ location,onFilter,activeFilter }) => {
   const router = useRouter();
   const searchStore = useSearchStore();
   const breadcrumbs = useBreadcrumbsStore();
+  const [width, setWidth]=useState<number>(1280)
   const classes = useStyles();
+
+  React.useEffect(() => {
+    setWidth(window.innerWidth)
+  },[])
 
   React.useEffect(() => {
     if (
@@ -106,6 +113,10 @@ export const Filter: React.FC<Props> = observer(({ location }) => {
       );
       searchStore.setParams(paramsForGet(searchStore.getFilter()));
       searchStore.fetch();
+    }
+    debugger
+    if(width<578){
+      onFilter && onFilter()
     }
   };
   const onChangeActionType = (value: string) => {

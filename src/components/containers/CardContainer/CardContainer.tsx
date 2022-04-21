@@ -13,6 +13,8 @@ import s from './styles.module.scss'
 import { DROPDOWN_PLACEHOLDER, SORT_FILTER_OPTIONS } from "../PlanningFilter/config"
 import { ToggleButtonsWithIcons } from '../../shared/ToggleButtonsWithIcons/ToggleButtonsWithIcons'
 import {Loader, Empty} from '../../shared/Loader/Loader'
+import Typography from "../../shared/Typography/Typography";
+import FilterIcon from "../../../icons/FilterIcon/FilterIcon";
 
 // TODO: Take types from 'model' folder, when global state gets its types
 
@@ -29,6 +31,7 @@ interface Props {
     mapData: any
     view: string
     setView: any
+    onActiveFilter:()=>void
 }
 
 const useStyles = makeStyles(() => ({
@@ -37,7 +40,7 @@ const useStyles = makeStyles(() => ({
     }
 }))
 
-const CardContainer: React.FC<Props> = observer(({ mapData, view, setView }) => {
+const CardContainer: React.FC<Props> = observer(({ mapData, view, setView,onActiveFilter }) => {
     const searchStore = useSearchStore()
     const classes = useStyles()
 
@@ -70,14 +73,28 @@ const CardContainer: React.FC<Props> = observer(({ mapData, view, setView }) => 
                     />
                 </div>
                 <div className={s.finderButtons}>
-                    {/*<BaseButton
-                        type={'secondary'}
-                        isActive={false}
-                        icon={<FavoriteIcon />}
-                        iconActive={''}
+                    {/*<div style={{width:'114px',border:'1px solid #f2f2f'}}>*/}
+                    {/*    <Typography>*/}
+                    {/*        Фильтры*/}
+                    {/*    </Typography>*/}
+                    {/*</div>*/}
+                    <BaseButton
+                        icon={<FilterIcon />}
+                        iconPosition={"start"}
+                        type={"secondary"}
+                        className={s.paddingButton}
+                        onClick={onActiveFilter}
                     >
-                        Сохранить поиск
-                    </BaseButton>*/}
+                        Фильтры
+                    </BaseButton>
+                    {/*<BaseButton*/}
+                    {/*    type={'secondary'}*/}
+                    {/*    isActive={false}*/}
+                    {/*    icon={<FavoriteIcon />}*/}
+                    {/*    iconActive={''}*/}
+                    {/*>*/}
+                    {/*    Сохранить поиск*/}
+                    {/*</BaseButton>*/}
                     <div className={s.toggleButtonsWrap}>
                         <ToggleButtonsWithIcons
                             items={toggleButtonOptions}

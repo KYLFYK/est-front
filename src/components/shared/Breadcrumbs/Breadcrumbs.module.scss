@@ -1,9 +1,15 @@
+@import '/src/components/containers/Record/all.scss';
 .blockAdvantage{
     display: flex;
     margin: 40px 0 0 60px;
     @media screen and (max-width: 1400px){
         margin: 20px 0 0 60px;
     }
+    @include for-size(KT1) {
+        margin: 35px 0 0 10px;
+    }@include for-size(KT2) {
+        margin: 20px 0 0 10px;
+     }
 }
 .img{
     display: inline-block;

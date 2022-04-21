@@ -34,6 +34,7 @@
   @include for-size(KT1) {
     min-width: 50px;
     margin-top: 0;
+    //display: block;
   }
 }
 .select {
@@ -94,10 +95,21 @@
   display: flex;
   align-content: center;
   @include for-size(KT1) {
-    padding-right: 20px ;
-  }@include for-size(KT2) {
+    padding-right: 0;
+    margin: 0;
+    position: relative;
+    left: calc(70vw - 320px) ;
+  }
+  @media screen and (min-width:440px) {
+    left: calc(60vw - 300px)
+  }@media screen and (min-width:500px) {
+    left: calc(60vw - 340px)
+  }
+  @include for-size(KT2) {
     display:flex;
-       padding-right: 0;
+    padding-right: 0;
+    position: center;
+    left: 0;
   }
 }
 .t_Info{

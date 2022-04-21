@@ -9,6 +9,7 @@ class SearchStore {
   constructor() {
     makeAutoObservable(this);
   }
+  activeFilter=false
   fetching = true
   sort = 'default'
   setSort(sort: string) {
@@ -55,7 +56,9 @@ class SearchStore {
     'benefit': values['benefit'],
     }
   }
-
+  onActiveFilter(){
+    this.activeFilter = !this.activeFilter
+  }
   setOrderType(value: string | number) {
     this.filter = {...this.filter, 'order-type': value}
   }

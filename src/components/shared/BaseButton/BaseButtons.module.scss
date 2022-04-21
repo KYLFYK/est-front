@@ -1,5 +1,5 @@
 @import '../../../app/styles/colours.scss';
-
+@import '/src/components/containers/Record/all.scss';
 .basebutton {
     cursor: pointer;
     color: $WHITE;
@@ -108,6 +108,11 @@
     background-color: $WHITE;
     border: none;
     outline: none;
+    @include for-size(KT1) {
+       width: 30px;
+    }@include for-size(KT2) {
+       width: 30px;
+     }
 }
 .startIcon {
     margin-right: 8px;

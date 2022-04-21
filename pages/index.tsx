@@ -76,8 +76,8 @@ const Start = observer(({}) => {
         title={"Застройщики и агентства, которые нам доверяют"}
       />
       <AgentsContainer title={"Наши агенты к вашим услугам"} />
-      <Advantages advantages={mocAdvantages} />
-      <OfferNews />
+      {/*<Advantages advantages={mocAdvantages} />*/}
+      {/*<OfferNews />*/}
       {/*<div id={"contact"}>*/}
       {/*  <OurOffice ourOffice={ourOffice.ourOffice} />*/}
       {/*</div>*/}

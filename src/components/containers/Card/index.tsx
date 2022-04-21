@@ -67,22 +67,24 @@ const ObjectCard: React.FC<Props> = observer(
                 </Typography>
                 <div className={s.ellipsisText}> {data.address} </div>
               </p>
-              <p className={s.subtitle}>
-                <Typography inline weight="light" color="tertiary">
-                  Этаж:
-                </Typography>
-                <Typography inline className={s.margin}>
-                  {data.property?.floor} / {data.property?.totalFloor}
-                </Typography>
-              </p>
-              <p className={s.subtitle}>
-                <Typography inline weight="light" color="tertiary">
-                  Тип жилья:
-                </Typography>
-                <Typography inline className={s.margin}>
-                  {typeObject === "new" ? "Новостройка" : "Вторичное"}
-                </Typography>
-              </p>
+                <div className={s.subtitleFloor_Type}>
+                    <p className={s.subtitle}>
+                        <Typography inline weight="light" color="tertiary">
+                            Этаж:
+                        </Typography>
+                        <Typography inline className={s.margin}>
+                            {data.property?.floor} / {data.property?.totalFloor}
+                        </Typography>
+                    </p>
+                    <p className={s.subtitle} style={{marginLeft:'10px'}}>
+                        <Typography inline weight="light" color="tertiary">
+                            Тип жилья:
+                        </Typography>
+                        <Typography inline className={s.margin}>
+                            {typeObject === "new" ? "Новостройка" : "Вторичное"}
+                        </Typography>
+                    </p>
+                </div>
               <p className={s.price}>{numberWithSpaces(data.price)} ₽</p>
             </div>
           </a>
