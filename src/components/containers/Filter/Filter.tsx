@@ -323,6 +323,7 @@ export const Filter: React.FC<Props> = observer(({ location,onFilter,activeFilte
           onChangeTo={onChangePriceTo}
           Icon={<span>₽</span>}
         />
+        <div style={{height: '10px'}}></div>
         <CompareInput
           location="search"
           classNameInputFrom={s.squareInputFrom}

@@ -75,11 +75,22 @@
 .title {
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
+    align-items: stretch;
 }
 
 .containerTitle {
-    margin: 0 10px 0 10px;
+    display: none;
+    @include for-size(KT2) {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        background: none;
+        margin: 0 0 0 60px;
+    }
+}
+
+.containerTitleMobile{
+    margin: 40px 10px 0 10px;
     padding: 10px 10px 10px 10px;
     display: flex;
     flex-direction: column;
@@ -87,21 +98,9 @@
     background: linear-gradient(90deg, #1488CC 0%, #1A4862 100%);
     box-shadow: 0px 4px 8px rgba(26, 72, 98, 0.15);
     border-radius: 6px;
-    //@include for-size(KT1) {
-    //}
     @include for-size(KT2) {
-        background: none;
-        margin: 0 0 0 60px;
+        display: none;
     }
-    //@include for-size(KT3) {
-    //
-    //}
-    //@include for-size(KT4) {
-    //}
-    //@include for-size(KT5) {
-    //}
-    //@include for-size(KT6) {
-    //}
 }
 
 .titleText {
@@ -134,7 +133,10 @@
 
 .subTitle{
     margin: 12px 0 0 0;
-    font-size: 24px;
+    font-size: 16px;
+    @include for-size(KT2) {
+        font-size: 24px;
+    }
 }
 
 .subtitleText {

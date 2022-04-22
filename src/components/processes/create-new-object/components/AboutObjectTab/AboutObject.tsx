@@ -32,6 +32,7 @@ import { NewDropDown } from "../../../../shared/BaseDropDown/NewDropDown";
 import { AllAdsStore } from "../../../../../mobx/role/admin/ads";
 import { OwnersSelectStore } from "../../../../../mobx/object/ownersSelect";
 import { SearchDropDown } from "../../../../shared/SearchDropDown";
+import { FlatSourceComplexStore } from "../../../../../mobx/residentialСomplex/flatSourceComplex";
 
 interface Props extends ICreateObjectControls {
   objectType: ObjectTypes;
@@ -65,6 +66,8 @@ const AboutObjectTab: React.FC<Props> = observer(
     const adminAdsStore = AllAdsStore;
     const ownersList = OwnersSelectStore;
     const developerStore = useStoreDeveloperMyObjectStore();
+
+    const developerFlatSource = FlatSourceComplexStore;
 
     const idOwner: any = jwt_decode(
       localStorage.getItem("accessEstatum")
@@ -134,6 +137,7 @@ const AboutObjectTab: React.FC<Props> = observer(
         setIsValid(isValid);
       }
     };
+    const [readyToLoadApart, setReadyToLoadApart] = useState(false);
 
     useEffect(() => {
       if (createObjectStore.getObjType() !== actionToText(action)) {
@@ -152,6 +156,38 @@ const AboutObjectTab: React.FC<Props> = observer(
         onPrevTab();
       }
     };
+
+    useEffect(() => {
+      if (idOwner.role === "developer") {
+        if (
+          "complexName" in values &&
+          ((developerFlatSource.complexId !== values.complexName.toString() &&
+            values.complexName) ||
+            !developerFlatSource.loaded)
+        ) {
+          setReadyToLoadApart(false);
+          developerFlatSource
+            .fetchComplex(values.complexName.toString())
+            .then(() => {
+              setReadyToLoadApart(true);
+            });
+        }
+      }
+    }, [values, developerFlatSource]);
+
+    useEffect(() => {
+      if (
+        idOwner.role === "developer" &&
+        developerFlatSource.complexData &&
+        readyToLoadApart &&
+        developerFlatSource.complexId
+      ) {
+        createObjectStore.setDeveloperApartData(
+          developerFlatSource.complexData
+        );
+        setValues(getInitStateAboutTab(objectType, createObjectStore));
+      }
+    }, [readyToLoadApart]);
 
     const onChangeName = (
       event: React.ChangeEvent & { target: HTMLInputElement }

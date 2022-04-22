@@ -23,3 +23,10 @@
       display: block;
   }
 }
+.mobileLink{
+  margin: 0 0 0 28px;
+  text-decoration: none;
+  @include for-size(KT2) {
+    display: none;
+  }
+}

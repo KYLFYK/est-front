@@ -8,7 +8,7 @@ import DevelopersContainer, {mockDevelopers} from '../../components/containers/D
 import { AgentsContainer } from '../../components/containers/AgentsContainer/AgentsContainer'
 import mocAgent from '../../components/containers/AgentsContainer/Agents.json'
 import { Advantages } from '../../components/containers/AdvantageList/AdvantageList'
-import { mocAdvantages } from '../../components/containers/AdvantageList/config'
+import { mocAdvantages, mocAdvantagesMobile } from '../../components/containers/AdvantageList/config'
 import { OfferNews } from '../../components/containers/OfferNews/offerNews'
 import OurOffice from '../../components/containers/OurOffice/OurOffice'
 import { OurOfficeType } from '../../components/containers/OurOffice/OurOffice'
@@ -55,7 +55,7 @@ const Start: NextPage = () => {
         <BestOffers tagsButton={tagsButton} />
         <DevelopersContainer title={'Застройщики и агества, которые нам доверяют'} />
         <AgentsContainer title={'Наши агенты к вашим услугам'}/>
-        <Advantages advantages={mocAdvantages}/>
+        <Advantages advantages={mocAdvantages} advantagesMobile={mocAdvantagesMobile}/>
         <OfferNews/>
         <OurOffice ourOffice={ourOffice.ourOffice}/>
         <Footer color={'accent'}/>

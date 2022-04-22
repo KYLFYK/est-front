@@ -3,6 +3,11 @@ export const enum IconTypes {
     INFRASTRUCTURE_ANALYSIS = 'infrastructure_analysis',
     PURITY_ANALYSIS = 'purity_analysis',
     TOURS = 'tours',
+    MORTGAGE_MOBILE = 'mortgage_mobile',
+    INFRASTRUCTURE_ANALYSIS_MOBILE = 'infrastructure_analysis_mobile',
+    PURITY_ANALYSIS_MOBILE = 'purity_analysis_mobile',
+    TOURS_MOBILE = 'tours_mobile',
+
     HOUSE_TYPE = 'house_type',
     REST = 'rest',
 

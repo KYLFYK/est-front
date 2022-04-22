@@ -5,7 +5,7 @@ import { BestOffers } from "../src/components/containers/BestOffers/bestOffers";
 import DevelopersContainer from "../src/components/containers/DevelopersContainer/DevelopersContainer";
 import { AgentsContainer } from "../src/components/containers/AgentsContainer/AgentsContainer";
 import { Advantages } from "../src/components/containers/AdvantageList/AdvantageList";
-import { mocAdvantages } from "../src/components/containers/AdvantageList/config";
+import { mocAdvantages, mocAdvantagesMobile } from "../src/components/containers/AdvantageList/config";
 import { OfferNews } from "../src/components/containers/OfferNews/offerNews";
 import OurOffice from "../src/components/containers/OurOffice/OurOffice";
 import { OurOfficeType } from "../src/components/containers/OurOffice/OurOffice";
@@ -77,7 +77,7 @@ const Start = observer(({}) => {
         title={"Застройщики и агентства, которые нам доверяют"}
       />
       <AgentsContainer title={"Наши агенты к вашим услугам"} />
-      <Advantages advantages={mocAdvantages} />
+      <Advantages advantages={mocAdvantages} advantagesMobile={mocAdvantagesMobile}/>
       <OfferNews />
       <div id={"contact"}>
         <OurOffice ourOffice={ourOffice.ourOffice} />
