@@ -1,7 +1,13 @@
 @import '../../../app/styles/colours.scss';
-
+@import '/src/components/containers/Record/all.scss';
 .content {
-    position: absolute;              
-    top: 50%;
-    left: 50%;
+    @include for-size(KT1) {
+        position: relative;
+    }
+    @include for-size(KT2) {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+    }
+
 }

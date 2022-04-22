@@ -7,12 +7,13 @@ import {ArrowIconLeft} from '../../../../icons/Search&Crumbs/ArrowIconLeft';
 interface Props {
     view: string
     setView: any
+    forViewObject?:string //none
 }
 
-export const OpenCloseMapButton: React.FC<Props> = ({view, setView}) => {
+export const OpenCloseMapButton: React.FC<Props> = ({view, setView,forViewObject}) => {
 
     return (
-        <div className={view==='mapView' ? s.openWrapper : s.closeWrapper}>
+        <div className={view==='mapView' ? s.openWrapper : s.closeWrapper } style={{display:forViewObject}}>
             <BaseButton 
                 onClick={() => view==='mapView' ? setView('gridView') : setView('mapView')} 
                 className={view==='mapView' ? s.openButton : s.closeButton} type="secondary"

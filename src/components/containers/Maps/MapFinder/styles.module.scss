@@ -1,12 +1,17 @@
 @import '../../../../app/styles/colours.scss';
 @import '../../../../app/styles/resolutions.scss';
 @import '../../../../app/styles/scrollbars.scss';
-
+@import '/src/components/containers/Record/all.scss';
 .openMapWrapper {
     position: relative;
     width: 100%; 
     height: 655px;
     transition: all .5s;
+    @include for-size(KT1) {
+    }
+    @include for-size(KT2) {
+
+    }
 }
 
 .closeMapWrapper {
@@ -14,7 +19,35 @@
     width: 0%; 
     height: 655px;
     transition: all .5s;
+    @include for-size(KT1) {
+        //margin-right: 40px;
+    }
+    @include for-size(KT2) {
+
+    }
 }
+.positionAdaptive{
+    @include for-size(KT1) {
+        margin-top: 10px;
+        display: flex;
+        flex-direction: column-reverse;
+    }
+    @include for-size(KT2) {
+        display: grid;
+        width: 100%;
+        margin: 20px 0 0 0;
+    }
+}
+.cardAdaptive{
+    @include for-size(KT1) {
+      display: none !important;
+    }
+    @include for-size(KT2) {
+        display: block !important;
+    }
+}
+
+
 
 .button {
     padding: 0;

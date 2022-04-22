@@ -10,6 +10,7 @@ class SearchStore {
     makeAutoObservable(this);
   }
   activeFilter=false
+  widthBrowser=1280
   fetching = true
   sort = 'default'
   setSort(sort: string) {
@@ -58,6 +59,9 @@ class SearchStore {
   }
   onActiveFilter(){
     this.activeFilter = !this.activeFilter
+  }
+  onWidthBrowser(width:number){
+    this.widthBrowser = width
   }
   setOrderType(value: string | number) {
     this.filter = {...this.filter, 'order-type': value}

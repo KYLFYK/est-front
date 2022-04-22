@@ -32,6 +32,7 @@ interface Props {
     view: string
     setView: any
     onActiveFilter?:()=>void
+    forViewObject?:string // none
 }
 
 const useStyles = makeStyles(() => ({
@@ -40,7 +41,7 @@ const useStyles = makeStyles(() => ({
     }
 }))
 
-const CardContainer: React.FC<Props> = observer(({ mapData, view, setView,onActiveFilter }) => {
+const CardContainer: React.FC<Props> = observer(({ mapData, view, setView,onActiveFilter,forViewObject }) => {
     const searchStore = useSearchStore()
     const classes = useStyles()
 
@@ -56,14 +57,14 @@ const CardContainer: React.FC<Props> = observer(({ mapData, view, setView,onActi
     }
 
     const toggleButtonOptions = [
-        { icon: <GridView fill={view === 'gridView' ? '#96A2B5' : '#CAD1DA'}/>, onclick: () => setView('gridView') }, 
+        { icon: <GridView fill={view === 'gridView' ? '#96A2B5' : '#CAD1DA'}/>, onclick: () => setView('gridView') },
         { icon: <MapView fill={view === 'mapView' ? '#96A2B5' : '#CAD1DA'}/>, onclick: () => setView('mapView') },
     ]
 
     return (
         <div className={view === 'mapView' ? s.openContainer : s.closeContainer}>
             <div className={s.finderControls}>
-                <div className={s.finderDropdown}>
+                <div className={s.finderDropdown} style={{display:view === 'mapView'?'none':""}}>
                     <BaseDropDown 
                         className={classes.sortDropdown}
                         onChange={(e) => {setSort(e)}}
@@ -102,18 +103,18 @@ const CardContainer: React.FC<Props> = observer(({ mapData, view, setView,onActi
                     </div>
                 </div>
             </div>
-            <div className={(searchStore.fetching || !sortedData.length) ? s.contentText : s.content}>
-                {searchStore.fetching 
+            <div className={(searchStore.fetching || !sortedData.length) ? s.contentText : s.content} style={{display:forViewObject}} >
+                {searchStore.fetching
                     ? <Loader/>
-                    : sortedData.length 
+                    : sortedData.length
                         ? sortedData && sortedData.map((i: any, id: number) => {
                             return(
                                 <div key={id} style={{padding:'5px'}}>
-                                    <ObjectCard 
-                                        route={searchStore.getParams()['object-type']} 
-                                        typeObject={searchStore.getParams()['building-type']} 
-                                        houseData={mapData[0]} 
-                                        data={i} 
+                                    <ObjectCard
+                                        route={searchStore.getParams()['object-type']}
+                                        typeObject={searchStore.getParams()['building-type']}
+                                        houseData={mapData[0]}
+                                        data={i}
                                     />
                                 </div>
                             )
@@ -121,7 +122,7 @@ const CardContainer: React.FC<Props> = observer(({ mapData, view, setView,onActi
                         : <Empty/>
                 }
             </div>
-            <OpenCloseMapButton view={view} setView={setView}/>
+            <OpenCloseMapButton view={view} forViewObject={forViewObject} setView={setView}/>
         </div>
     )
 })
