@@ -64,7 +64,7 @@ const CardContainer: React.FC<Props> = observer(({ mapData, view, setView,onActi
     return (
         <div className={view === 'mapView' ? s.openContainer : s.closeContainer}>
             <div className={s.finderControls}>
-                <div className={s.finderDropdown} style={{display:view === 'mapView'?'none':""}}>
+                <div className={s.finderDropdown} style={{display: view === 'mapView'?'none':""}}>
                     <BaseDropDown 
                         className={classes.sortDropdown}
                         onChange={(e) => {setSort(e)}}

@@ -64,6 +64,7 @@ const Finder: NextPage = observer(() => {
                     }
                 </div>
             </div>
+
             {/*for 576px+ */}
             <div style={{display:searchStore.widthBrowser < 576 ? 'none': ''}}>
                 <div style={{margin: '20px 0 0 0'}}>
