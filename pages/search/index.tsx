@@ -36,7 +36,7 @@ const Finder: NextPage = observer(() => {
             searchStore.onWidthBrowser(window.innerWidth)
         }
     }, [])
-    console.log(searchStore.activeFilter)
+
     return (
         <MainContainer keywords={"Поиск"} title={"Поиск"} city={city} personalAccount={personalAccount}>
             <Breadcrumbs/>
