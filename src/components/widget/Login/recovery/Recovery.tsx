@@ -31,7 +31,7 @@ export const Recovery :React.FC<RecoveryPropsType> = ({onEdit,email,onValueEmail
                 Чтобы восстановить пароль, напишите email, с которым вы регистрировались
             </Typography>
             <div className={css.margin}>
-                <InputAlways value={email}  onChange={onValueEmail} title={'Email*'} className={css.widthInput}/>
+                <InputAlways value={email}  onChange={onValueEmail} title={'Email*'} />
             </div>
             <BaseButton
                 onClick={backRecovery}

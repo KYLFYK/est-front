@@ -21,8 +21,8 @@ export const Registration: React.FC<RegistrationPropsType> = ({enterLogin, onEdi
         {value: 'agent', label: 'Агент'},
         {value: 'customer', label: 'Собственник'},
         {value: 'developer', label: 'Застройщик'},
-        {value: 'bank', label: 'Банк'},
-        {value: 'admin', label: 'Администратор'},
+        // {value: 'bank', label: 'Банк'},
+        // {value: 'admin', label: 'Администратор'},
     ]
 
     // agency - агентства
@@ -90,7 +90,7 @@ export const Registration: React.FC<RegistrationPropsType> = ({enterLogin, onEdi
                 </div>
             </Checkbox>
 
-                <div style={{width:'100%',display:"flex",justifyContent:'center',margin:'30px 0 20px 0'}}>
+                <div className={css.buttonRegistration} >
                     <BaseButton
                         onClick={infoRegistration}
                         className={css.marginButton}

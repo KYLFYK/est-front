@@ -16,13 +16,12 @@
 }
 
 .form__div{
-  left:-20px;
+  left:-16px;
   position: relative;
   height: 40px;
   margin: 10px 0;
-  min-width: 340px;
   @include for-size(KT1) {
-    min-width: 220px;
+    min-width: calc( 70vw );
   }
   @include for-size(KT2) {
     min-width: 360px;

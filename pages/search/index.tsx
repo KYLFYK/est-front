@@ -79,7 +79,7 @@ const Finder: NextPage = observer(() => {
                     <div style={{display: view === 'mapView' ? 'flex' : 'none'}}>
                         <Map mapData={mapData} location={'finder'} center={center} view={view} setView={setView}/>
                     </div>
-                    <CardContainer mapData={mapData} view={view} setView={setView} forViewObject={''}/>
+                    <CardContainer mapData={mapData} view={'view'} setView={setView} forViewObject={''}/>
                 </div>
             </div>
 
