@@ -4,7 +4,7 @@
     display: grid;
     @include for-size(KT1) {
         grid-template-columns: 1fr ;
-    }@include for-size(KT2) {
+    }@include for-size(KT3) {
         grid-template-columns: 1fr 2fr;
         grid-column-gap: 30px;
     }

@@ -1,4 +1,4 @@
-import React, {FC} from 'react';
+import React, {FC, useEffect, useState} from 'react';
 import HeadLine from "../../shared/HeadLine/HeadLine";
 import DynamicsPrice from "../../shared/DynamicsPrice/DynamicsPrice";
 import PaybackPeriod from "../../shared/PaybackPeriod/PaybackPeriod";
@@ -33,32 +33,41 @@ const table = [
     {name: 'Июль 2021', price: '71000'},
 ]
 
-export const numberApplications = [
-    {
-        name: 'Крым',
-        // "Срок окупаемости": 42,
-        "Срок окупаемости, лет": 4,
-        'Чистый доход млн. ₽': 150,
-        amt: 2400,
-    },
-    {
-        name: 'Москва',
-        // "Срок окупаемости": 70,
-        "Срок окупаемости, лет": 7,
-        'Чистый доход млн. ₽': 90,
-        amt: 2210,
-    },
-    {
-        name: 'Санкт-Петербург',
-        // "Срок окупаемости": 120,
-        "Срок окупаемости, лет": 12,
-        'Чистый доход млн. ₽': 44,
-        amt: 2290,
-    },
-];
+
 
 const PaybackContainer :FC<PaybackContainerType> = ({averagePrice, currentHouse}) => {
 
+    const [margin, setMargin]=useState<string>('Санкт-Петербург')
+
+    const numberApplications = [
+        {
+            name: 'Крым',
+            // "Срок окупаемости": 42,
+            "Срок окупаемости, лет": 4,
+            'Чистый доход млн. ₽': 150,
+            amt: 2400,
+        },
+        {
+            name: 'Москва',
+            // "Срок окупаемости": 70,
+            "Срок окупаемости, лет": 7,
+            'Чистый доход млн. ₽': 90,
+            amt: 2210,
+        },
+        {
+            name:   margin,
+            // "Срок окупаемости": 120,
+            "Срок окупаемости, лет": 12,
+            'Чистый доход млн. ₽': 44,
+            amt: 2290,
+        },
+    ];
+
+    useEffect(()=>{
+        if(window.innerWidth < 576){
+            setMargin('С-Петербург')
+        }
+    },[])
     return (
         <div className={css.marginContainer}>
             <HeadLine title={'Окупаемость'}>
