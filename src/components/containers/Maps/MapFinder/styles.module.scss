@@ -115,12 +115,10 @@
     top: 720px; 
     transition: all .5s;
     display: flex;
-    border-radius: 10px;
     overflow-y: scroll;
     scrollbar-width: 1px;
     @include MapScrollbar;
     @include for-size(KT1) {
-        width: 95%;
         flex-direction: column;
     }
     @include for-size(KT2) {
@@ -128,6 +126,7 @@
         left: -500px;
         width: 323px;
         height: 605px;
+        border-radius: 10px;
     }
     @include for-size(KT5) {
         width: 343px;
@@ -136,18 +135,14 @@
 
 .localbarActive {
     background-color: #ffffff;
-    height: 360px;
     position: absolute;
     z-index: 10;
     transition: all .5s;
     display: flex;
-    padding: 5px;
     @include for-size(KT1) {
-        border-radius: 10px;
         flex-direction: column;
-        width: 95%;
-        left: 10px;
-        top: 320px; 
+        width: 100%;
+        top: 0px; 
     }
     @include for-size(KT2) {
         border-radius: 10px 0 10px 10px;
@@ -155,6 +150,7 @@
         width: 323px;
         left: 20px;
         top: 20px; 
+        padding: 5px;
     }
     @include for-size(KT5) {
         width: 343px;

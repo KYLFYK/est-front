@@ -35,7 +35,7 @@ const Finder: NextPage = observer(() => {
             searchStore.onWidthBrowser(window.innerWidth)
         }
     }, [])
-    console.log(searchStore)
+
     return (
         <MainContainer keywords={"Поиск"} title={"Поиск"} city={city} personalAccount={personalAccount}>
             <div style={{display:searchStore.widthBrowser < 576 && searchStore.activeFilter === true ? 'none' : 'flex'}}><Breadcrumbs/></div>
