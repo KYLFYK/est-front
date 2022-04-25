@@ -16,6 +16,10 @@
         border-radius: 8px;
         box-shadow: 0 4px 8px 0 rgba(26, 72, 98, 0.15);
     }
+    @media  (min-width: 1320px) {
+    display: flex;
+    min-width: 400px;
+    }
 }
 .photoAgent{
     width: 200px;
@@ -50,9 +54,12 @@
     @include for-size(KT1) {
        display: none;
     }
-    @include for-size(KT2) {
-       display: block;
+    @media  (min-width: 950px) {
+        display: block;
     }
+    //@include for-size(KT3) {
+    //   display: block;
+    //}
 }
 .cursorName{
     cursor: pointer;
