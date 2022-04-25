@@ -39,24 +39,24 @@ const ResComplexObjects: FC<ResComplexObjectsType> = observer(
     if (corpus === 0 && floor === 0) {
       filteredData = store
         .get()
-        .complexObjects.filter((d: any) => d.markAsDelete === false);
+        .complexObjects?.filter((d: any) => d.markAsDelete === false);
     } else if (corpus === 0 && floor !== 0) {
       filteredData = store
         .get()
-        .complexObjects.filter(
+        .complexObjects?.filter(
           (d: any) => d.property.floor === floor && d.markAsDelete === false
         );
     } else if (corpus !== 0 && floor === 0) {
       filteredData = store
         .get()
-        .complexObjects.filter(
+        .complexObjects?.filter(
           (d: any) =>
             d.property.buildingNumber === corpus && d.markAsDelete === false
         );
     } else if (corpus !== 0 && floor !== 0) {
       filteredData = store
         .get()
-        .complexObjects.filter(
+        .complexObjects?.filter(
           (d: any) =>
             d.property.floor === floor &&
             d.property.buildingNumber === corpus &&
