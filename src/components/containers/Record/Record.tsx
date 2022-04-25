@@ -293,7 +293,7 @@ export const Record: FC<AgentRecordType> = observer(({Record, title, nameObject}
         <div className={s.container}>
             <ContentContainer>
                 <div className={s.title}>
-                    <Typography size={'headerLow'} color='secondary'> Хотите
+                    <Typography className={s.title} size={'headerLow'} color='secondary'> Хотите
                         посмотреть {title ? title : "Объект"}?</Typography>
                 </div>
                 <div className={s.subTitle}>

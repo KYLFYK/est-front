@@ -1,0 +1,25 @@
+/*@import '/src/components/containers/Record/all.scss';*/
+@import './src/components/containers/Record/all.scss';
+.columnGrid_top{
+    display: grid;
+    @include for-size(KT1) {
+        grid-template-columns: 1fr ;
+    }@include for-size(KT3) {
+        grid-template-columns: 1fr 2fr;
+        grid-column-gap: 30px;
+    }
+}
+.columnGrid_Bottom{
+    display: grid;
+    grid-template-columns: 19fr 7fr;
+    grid-column-gap: 30px;
+    margin-top: 30px ;
+}
+.marginContainer{
+    @include for-size(KT1) {
+        margin: 20px 10px;
+    }
+    @include for-size(KT2) {
+        margin: 60px 60px 30px 60px;
+    }
+}

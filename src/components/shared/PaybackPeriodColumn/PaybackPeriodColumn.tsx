@@ -1,4 +1,4 @@
-import React, {FC} from 'react';
+import React, {FC, useEffect, useState} from 'react';
 import Typography from "../Typography/Typography";
 import css from "../../tabs/Account/Agent/components/Others/Tables/TableColumn/TableColumn.module.scss";
 import {Card} from "../Mortgage/Card";
@@ -15,6 +15,13 @@ type PaybackPeriodColumnType={
 
 const PaybackPeriodColumn :FC<PaybackPeriodColumnType> = ({title,tableColumn}) => {
 
+    const [margin, setMargin]=useState<number>(20)
+
+    useEffect(()=>{
+        if(window.innerWidth < 576){
+            setMargin(-30)
+        }
+    },[])
 
     const minY = 0 % 20 < 20 ? 0 - (0 % 20) : 0;
     const maxY = 170 % 20 < 20 ? 170 + 20 - (170 % 20) : 170;
@@ -52,8 +59,8 @@ const PaybackPeriodColumn :FC<PaybackPeriodColumnType> = ({title,tableColumn}) =
                         data={tableColumn}
                         margin={{
                             top: 15,
-                            right: 20,
-                            left: 20,
+                            right: margin,
+                            left: margin,
                             bottom: 5,
                         }}
                         barGap={0}
