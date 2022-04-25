@@ -1,3 +1,4 @@
+@import '/src/components/containers/Record/all.scss';
 .photoAgent{
     width: 150px;
     height: 150px;
@@ -10,6 +11,11 @@
 .gridConnection{
     display: grid;
     grid-template-columns: 1fr 1fr;
+    @include for-size(KT1) {
+        grid-template-columns: 1fr
+    }@include for-size(KT2) {
+        grid-template-columns: 1fr 1fr;
+    }
 }
 .marginWork{
     margin: 20px;

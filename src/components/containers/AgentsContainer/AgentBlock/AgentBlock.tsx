@@ -66,7 +66,7 @@ export const AgentBlock: React.FC<AgentBlockPropsType> = ({img, connection, info
             />
             <div className={css.dataAgent}>
                 <div>
-                    <Modal setActive={() => setEdit(false)} active={edit}>
+                    <Modal setActive={() => setEdit(false)} active={edit} >
                         <AgentInfo infoAgent={infoAgent} connection={connection} img={img}/>
                     </Modal>
                     <div onClick={() => setEdit(true)}>

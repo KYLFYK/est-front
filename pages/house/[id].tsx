@@ -347,15 +347,15 @@ const House = observer((props: any) => {
                     <ObjectLegalPurity legalPurityData={legalPurityData}/>
                 }
             </div>
+            <Mortgage/>
             <div ref={payback}>
                 <PaybackContainer currentHouse={JSON.parse(JSON.stringify(props))} averagePrice={averagePrice}/>
             </div>
-            <div ref={developer}>
-                {/*<ObjectDeveloper developerData={store.initialData.object_developer_info}/>*/}
-            </div>
-            <Mortgage/>
             <div ref={record}>
                 <Record Record={RecordAgent.Record} title={'дом'} nameObject={props.name}/>
+            </div>
+            <div ref={developer}>
+              {/*<ObjectDeveloper developerData={store.initialData.object_developer_info}/>*/}
             </div>
         </MainContainer>
     )

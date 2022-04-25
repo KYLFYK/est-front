@@ -11,6 +11,7 @@ import {observer} from "mobx-react-lite";
 import {useStoreMainPage} from "../../../mobx/mainPage/mainPage";
 import Link from 'next/link'
 import { imageConfigDefault } from 'next/dist/server/image-config';
+import Scroll from 'src/components/shared/Scroll/Scroll';
 
 type DeveloperDataPropsType = {
     img: string
@@ -73,27 +74,21 @@ export const DeveloperDataModal: FC<DeveloperDataPropsType> = observer(({ img, d
                     <Typography size={'default'} color="accent">
                         Объекты застройщика
                     </Typography>
-                    {/*{*/}
-                    {/*    developer.objectsDeveloper.map(({ nameObject,id}, index) => (*/}
-                    {/*        <div key={index} className={css.colorText}>*/}
-                    {/*            <Typography size={'default'} color="nude">*/}
-                    {/*                {nameObject}*/}
-                    {/*            </Typography>*/}
-                    {/*        </div>*/}
-                    {/*    ))*/}
-                    {/*}*/}
-                    {
-                        store.initialData.complexDeveloper.map(({ name,id}, index) => (
-                            <div key={index} className={css.colorText}>
-                                <Link href={`residential-complex/${id}`}>
-                                    <Typography size={'default'} color="nude">
-                                        {name}
-                                    </Typography>
-                                </Link>
+                    <Scroll height={'650'}>
+                        {
+                            store.initialData.complexDeveloper.map(({ name,id}, index) => (
+                                <div key={index} className={css.colorText}>
+                                    <Link href={`residential-complex/${id}`}>
+                                        <Typography size={'default'} color="nude">
+                                            {name}
+                                        </Typography>
+                                    </Link>
 
-                            </div>
-                        ))
-                    }
+                                </div>
+                            ))
+                        }
+                    </Scroll>
+
                 </div>
             </div>
         </Modal>

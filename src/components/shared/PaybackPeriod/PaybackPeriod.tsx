@@ -149,7 +149,9 @@ const PaybackPeriod = () => {
                         {/*</div>*/}
                         <div className={s.calculations}>
                             <div className={s.position}>
-                                <Typography weight={"medium"} >Срок окупаемости дома при заданных параметрах</Typography>
+                                <Typography weight={"medium"} >
+                                    Срок окупаемости дома при заданных параметрах
+                                </Typography>
                                 <Typography color={'nude'} weight={'bold'} size={'subheaderBig'} className={s.resultterm}>
                                     {/*<div  style={{ fontSize: yearPayback >= 100 ? '22px' : (months === 0 || expenses >= rent * months) ? '16px' : '' }}>*/}
                                     <div  style={{ fontSize: yearPayback >= 100 ? '22px' : ( expenses >= rent * months) ? '16px' : '' }}>
@@ -161,7 +163,7 @@ const PaybackPeriod = () => {
                                 </Typography>
                             </div>
                             <div className={s.position} style={{ marginTop: '26px' }}>
-                                <Typography weight={'light'} className={s.titlerent}>
+                                <Typography weight={'light'} className={s.titleRent}>
                                     Арендные платежи
                                     <Image
                                         id={"0"}
@@ -184,7 +186,7 @@ const PaybackPeriod = () => {
                                 </Typography>
                             </div>
                             <div className={s.position} style={{ marginTop: '12px' }}>
-                                <Typography weight={'light'} className={s.titlerent}>
+                                <Typography weight={'light'} className={s.titleRent}>
                                     Чистый доход
                                     <Image
                                         id={"1"}

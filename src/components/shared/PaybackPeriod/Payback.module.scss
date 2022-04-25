@@ -36,6 +36,9 @@ $KT6: 1440px;
   border-radius: 6px;
   background: #FFFFFF;
   margin-top: 20px;
+  @include for-size(KT1) {
+    padding: 10px 10px 10px 20px;
+  }
 }
 .container {
   display: grid;
@@ -129,7 +132,7 @@ $KT6: 1440px;
   white-space: nowrap;
 }
 
-.titlerent {
+.titleRent {
   //@include ROBOTOREGULAR16;
   font-weight: 300;
   display: flex;
@@ -148,8 +151,14 @@ $KT6: 1440px;
 
 .position {
   display: grid;
-  grid-template-columns: 2.2fr 1fr;
-  grid-gap: 20px;
+  @include for-size(KT1) {
+    grid-template-columns:1fr;
+    gap:10px;
+  }
+  @include for-size(KT2) {
+    grid-template-columns: 2.2fr 1fr;
+    grid-gap: 20px;
+  }
 }
 
 .popupText {
