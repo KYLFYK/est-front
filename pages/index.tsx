@@ -58,6 +58,7 @@ const ourOffice: OurOfficeType = {
 const Start = observer(({}) => {
 
   const router = useRouter();
+
   useEffect(() => {
     if (router.asPath === "/#contact") {
       router.push("/#contact");
