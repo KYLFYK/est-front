@@ -2,7 +2,7 @@ import React, {FC} from 'react';
 import HeadLine from "../../shared/HeadLine/HeadLine";
 import DynamicsPrice from "../../shared/DynamicsPrice/DynamicsPrice";
 import PaybackPeriod from "../../shared/PaybackPeriod/PaybackPeriod";
-import css from './PaybackContainer.module.css'
+import css from './PaybackContainer.module.scss'
 import DynamicsPriceTable from "../../shared/DynamicsPrice/DynamicsPriceTable";
 import AverageMarketPrice from "../../shared/AverageMarketPrice/AverageMarketPrice";
 import Map from "../../containers/Maps/MapPayback/index";

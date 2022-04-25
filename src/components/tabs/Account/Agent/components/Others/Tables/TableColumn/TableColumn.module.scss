@@ -1,5 +1,11 @@
+@import './src/components/containers/Record/all.scss';
 .title{
-  padding-right: 5px;
+  @include for-size(KT1) {
+    margin: 20px 5px 0 5px;
+  }
+  @include for-size(KT2) {
+      margin: 0;
+   }
 }
 .card{
   margin-top: 20px;
