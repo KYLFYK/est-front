@@ -28,20 +28,19 @@ const Finder: NextPage = observer(() => {
     const searchStore = useSearchStore();
     const [view, setView] = useState('mapView')
 
-
     useEffect(() => {
-        if (window.innerWidth > 576) {
+        if (window.innerWidth >= 576) {
             searchStore.activeFilter = true
         } else {
             searchStore.onWidthBrowser(window.innerWidth)
         }
     }, [])
-
+    console.log(searchStore)
     return (
         <MainContainer keywords={"Поиск"} title={"Поиск"} city={city} personalAccount={personalAccount}>
-            <Breadcrumbs/>
+            <div style={{display:searchStore.widthBrowser < 576 && searchStore.activeFilter === true ? 'none' : 'flex'}}><Breadcrumbs/></div>
             {/*for 320px*/}
-            <div style={{display:searchStore.widthBrowser > 576 ? 'none': ''}}>
+            <div style={{display:searchStore.widthBrowser < 576 ? '': 'none'}}>
                 {
                     searchStore.activeFilter && <div style={{margin: '20px 10px 0 10px'}}>
                         <Filter location={'search'} onFilter={() => searchStore.onActiveFilter()}/>
@@ -49,7 +48,7 @@ const Finder: NextPage = observer(() => {
                 }
                 <div className={s.positionAdaptive} style={{gridTemplateColumns: view === 'mapView' ? '1fr 1fr' : '1fr'}}>
                     {
-                        searchStore.activeFilter || searchStore.widthBrowser < 577 &&
+                        searchStore.activeFilter || searchStore.widthBrowser < 576 &&
                         <div className={view !== 'mapView' ? s.cardAdaptive : ''} style={{
                             display: view === 'mapView' ? 'flex' : 'none',
                             marginTop: view === 'mapView' ? "10px" : '',

@@ -37,23 +37,30 @@ const ResComplexObjects: FC<ResComplexObjectsType> = observer(
 
     let filteredData: any = [];
     if (corpus === 0 && floor === 0) {
-      filteredData = store.get().complexObjects;
+      filteredData = store
+        .get()
+        .complexObjects.filter((d: any) => d.markAsDelete === false);
     } else if (corpus === 0 && floor !== 0) {
       filteredData = store
         .get()
-        .complexObjects.filter((d: any) => d.property.floor === floor);
+        .complexObjects.filter(
+          (d: any) => d.property.floor === floor && d.markAsDelete === false
+        );
     } else if (corpus !== 0 && floor === 0) {
       filteredData = store
         .get()
         .complexObjects.filter(
-          (d: any) => d.property.buildingNumber === corpus
+          (d: any) =>
+            d.property.buildingNumber === corpus && d.markAsDelete === false
         );
     } else if (corpus !== 0 && floor !== 0) {
       filteredData = store
         .get()
         .complexObjects.filter(
           (d: any) =>
-            d.property.floor === floor && d.property.buildingNumber === corpus
+            d.property.floor === floor &&
+            d.property.buildingNumber === corpus &&
+            d.markAsDelete === false
         );
     }
 
@@ -71,7 +78,10 @@ const ResComplexObjects: FC<ResComplexObjectsType> = observer(
                 new Set(
                   store
                     .get()
-                    ?.complexObjects?.map((d: any) => d.property.buildingNumber)
+                    ?.complexObjects?.filter(
+                      (d: any) => d.markAsDelete === false
+                    )
+                    .map((d: any) => d.property.buildingNumber)
                 )
               )
                 .map((el: any) => {
@@ -87,7 +97,12 @@ const ResComplexObjects: FC<ResComplexObjectsType> = observer(
             options={defaultOptionFloor.concat(
               Array.from(
                 new Set(
-                  store.get()?.complexObjects?.map((d: any) => d.property.floor)
+                  store
+                    .get()
+                    ?.complexObjects?.filter(
+                      (d: any) => d.markAsDelete === false
+                    )
+                    .map((d: any) => d.property.floor)
                 )
               )
                 .map((el: any) => {

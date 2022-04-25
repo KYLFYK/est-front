@@ -9,8 +9,8 @@ class SearchStore {
   constructor() {
     makeAutoObservable(this);
   }
-  activeFilter=false
-  widthBrowser=1280
+  activeFilter = true
+  widthBrowser = 1280
   fetching = true
   sort = 'default'
   setSort(sort: string) {
