@@ -50,7 +50,10 @@
     @include for-size(KT1) {
        display: none;
     }
-    @include for-size(KT2) {
+    @media  (min-width: 680px) {
+        display: block;
+    }
+    @include for-size(KT3) {
        display: block;
     }
 }
