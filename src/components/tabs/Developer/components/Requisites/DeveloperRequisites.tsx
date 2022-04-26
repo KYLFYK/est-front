@@ -53,9 +53,11 @@ const DeveloperRequisites: React.FC<Props> = ({ items }) => {
 
             <div className={s.restList}>
                 {articles.rest.map((item) => (
-                    <div className={s.article} key={item.value}>
-
-                        <Typography weight="light">{item.label.title}</Typography>
+                    <div className={item.label.text ?s.articleMap : ''} key={item.value}>
+                        {
+                            item.label.text &&
+                            <Typography weight="light">{item.label.title}</Typography>
+                        }
                         <Typography weight="medium">{item.label.text}</Typography>
                     </div>
                 ))}
@@ -64,11 +66,17 @@ const DeveloperRequisites: React.FC<Props> = ({ items }) => {
 
             <div className={s.pairArticle}>
                 <div className={s.article}>
-                    <Typography weight="light">{articles.inn?.label.title}</Typography>
+                    {
+                        articles.inn?.label.text &&
+                        <Typography weight="light">{articles.inn?.label.title}</Typography>
+                    }
                     <Typography weight="medium" color="nude">{articles.inn?.label.text}</Typography>
                 </div>
                 <div className={s.article}>
-                    <Typography weight="light">{articles.okato?.label.title}</Typography>
+                    {
+                        articles.okato?.label.text &&
+                        <Typography weight="medium">{articles.okato?.label.text}</Typography>
+                    }
                     <Typography weight="medium">{articles.okato?.label.text}</Typography>
                 </div>
             </div>

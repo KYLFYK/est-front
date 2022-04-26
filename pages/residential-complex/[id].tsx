@@ -32,6 +32,8 @@ import { UrlObj } from "../../src/api/instance";
 import { FILTER_ACTIONS_OPTIONS } from "../../src/components/containers/Filter/config";
 import css from "../../styles/slider.module.scss";
 import {VRTour} from "../../src/components/containers/ToursContainer/Tours/VRTour/VRTour";
+import AccordionMobile from "../../src/components/containers/AccordionMobile/AccordionMobile";
+import AccordionContainerMobile from "../../src/components/containers/AccordionMobile/AccordionContainerModile";
 
 const city = ["Москва", "Санкт-Петербург", "Крым", "Сочи", "Нижний Новгород"];
 const personalAccount = [
@@ -175,6 +177,7 @@ const ResidentialComplex: NextPage = observer((props: any) => {
         <ObjectDeveloper
           developerData={MappingDeveloperInfo(props.object_developer_info)}
         />
+        <AccordionContainerMobile developerData={MappingDeveloperInfo(props.object_developer_info)}/>
       </div>
       {props.schedule.length > 0 ? (
         <ConstructProgress

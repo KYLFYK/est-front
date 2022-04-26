@@ -36,8 +36,8 @@ const DeveloperContacts: React.FC<Props> = ({ items }) => {
 
     return (
         <div className={s.wrapper}>
-            {items.map((item) => (
-                <div key={item.value} className={s.item}>
+            {items.map((item,index) => (
+                <div key={item.value} className={s.item} style={{marginTop:index===0? '-10px':'' }}>
                     <Typography weight="light">
                         {item.label.title}
                     </Typography>

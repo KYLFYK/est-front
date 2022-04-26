@@ -1,9 +1,21 @@
+@import '/src/components/containers/Record/all.scss';
 .item {
     margin-right: 60px;
+    @include for-size(KT1) {
+        margin-top:20px;
+    }@include for-size(KT2) {
+        margin-top:0;
+    }
 }
 
 .wrapper {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 16px;
+    @include for-size(KT1) {
+        flex-direction: column;
+    }
+    @include for-size(KT2) {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 16px;
+        flex-direction: row;
+    }
 }
