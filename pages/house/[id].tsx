@@ -302,52 +302,52 @@ const House = observer((props: any) => {
             footerColor={'nude'}
             refs={refs}
         >
-            {/*<Breadcrumbs location={'object'}/>*/}
-            {/*<Views items={views}/>*/}
-            {/*<NameEstate item={props.name}/>*/}
-            {/*<AdressEstate item={props.address}/>*/}
-            {/*<div >*/}
-            {/*  <HorizontalTabs tabs={tabs} refs={refs}/>*/}
-            {/*</div>*/}
+            <Breadcrumbs location={'object'}/>
+            <Views items={views}/>
+            <NameEstate item={props.name}/>
+            <AdressEstate item={props.address}/>
+            <div >
+              <HorizontalTabs tabs={tabs} refs={refs}/>
+            </div>
 
-            {/*<div ref={general}>*/}
-            {/*    {*/}
-            {/*        infoOptions &&*/}
-            {/*        <GeneralInfo*/}
-            {/*            info={plusUnitMeasurement(infoOptions)}*/}
-            {/*            price={props.price}*/}
-            {/*            images={props.images}*/}
-            {/*            // classSlider={css.image}*/}
-            {/*        />*/}
-            {/*    }*/}
-            {/*</div>*/}
-            {/*    {*/}
-            {/*        props.description && <ObjectDescription items={[props.description]}/>*/}
-            {/*    }*/}
-            {/*<div ref={tours}>*/}
-            {/*    {*/}
-            {/*        (props?.online_tour?.threeD_tour?.url || props?.online_tour?.vr_tour?.url) && <ToursContainer Online_tour={props.online_tour}/>*/}
-            {/*    }*/}
-            {/*</div>*/}
-            {/*<div ref={architec}>*/}
-            {/*    {*/}
-            {/*        object_specs &&*/}
-            {/*        <ObjectSpecifications*/}
-            {/*            specificationsLists={object_specs}*/}
-            {/*            title={"Архитектурно-планировочные решения"}/>*/}
-            {/*    }*/}
-            {/*</div>*/}
-            {/*<div ref={infra}>*/}
-            {/*    <Map currentHouse={JSON.parse(JSON.stringify(props))} infrastructura={infrastructura}*/}
-            {/*         location={'infrastructure'} InfrastructureInfo={props.description_items ? props.description_items : ''}/>*/}
-            {/*</div>*/}
-            {/*<div ref={legal}>*/}
-            {/*    {*/}
-            {/*        legalPurityData &&*/}
-            {/*        <ObjectLegalPurity legalPurityData={legalPurityData}/>*/}
-            {/*    }*/}
-            {/*</div>*/}
-            {/*<Mortgage/>*/}
+            <div ref={general}>
+                {
+                    infoOptions &&
+                    <GeneralInfo
+                        info={plusUnitMeasurement(infoOptions)}
+                        price={props.price}
+                        images={props.images}
+                        // classSlider={css.image}
+                    />
+                }
+            </div>
+                {
+                    props.description && <ObjectDescription items={[props.description]}/>
+                }
+            <div ref={tours}>
+                {
+                    (props?.online_tour?.threeD_tour?.url || props?.online_tour?.vr_tour?.url) && <ToursContainer Online_tour={props.online_tour}/>
+                }
+            </div>
+            <div ref={architec}>
+                {
+                    object_specs &&
+                    <ObjectSpecifications
+                        specificationsLists={object_specs}
+                        title={"Архитектурно-планировочные решения"}/>
+                }
+            </div>
+            <div ref={infra}>
+                <Map currentHouse={JSON.parse(JSON.stringify(props))} infrastructura={infrastructura}
+                     location={'infrastructure'} InfrastructureInfo={props.description_items ? props.description_items : ''}/>
+            </div>
+            <div ref={legal}>
+                {
+                    legalPurityData &&
+                    <ObjectLegalPurity legalPurityData={legalPurityData}/>
+                }
+            </div>
+            <Mortgage/>
             <div ref={payback}>
                 <PaybackContainer currentHouse={JSON.parse(JSON.stringify(props))} averagePrice={averagePrice}/>
             </div>
