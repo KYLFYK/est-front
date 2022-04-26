@@ -1,21 +1,23 @@
-import { createContext, FC, useContext, useEffect } from "react";
+import { createContext, FC, useContext, useLayoutEffect } from "react";
 import { AdaptiveParams, AdaptiveStoreData } from "./store";
 import { observer } from "mobx-react-lite";
 
-export const AdaptiveProvider = createContext(AdaptiveParams.KT6);
+export const AdaptiveProvider = createContext({
+  resolution: AdaptiveParams.KT6,
+});
 
 export const AdaptiveWrapper: FC = observer(({ children }) => {
-  const { currentAdaptive, calculateAdaptive } = AdaptiveStoreData;
+  const AdaptiveStore = AdaptiveStoreData;
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     if (typeof window !== "undefined") {
-      calculateAdaptive(window.outerWidth);
+      AdaptiveStore.calculateAdaptive(window.outerWidth);
     }
 
     const handler = () => {
       setTimeout(() => {
         if (typeof window !== "undefined") {
-          calculateAdaptive(window.outerWidth);
+          AdaptiveStore.calculateAdaptive(window.outerWidth);
         }
       }, 100);
     };
@@ -28,7 +30,11 @@ export const AdaptiveWrapper: FC = observer(({ children }) => {
   }, []);
 
   return (
-    <AdaptiveProvider.Provider value={currentAdaptive}>
+    <AdaptiveProvider.Provider
+      value={{
+        resolution: AdaptiveStore.currentAdaptive,
+      }}
+    >
       {children}
     </AdaptiveProvider.Provider>
   );
