@@ -4,6 +4,7 @@ import { ScrollUp } from "../../shared/ScrollUp/ScrollUp";
 import { Footer } from "../../widget/Footer/ui/Footer";
 import classNames from "classnames";
 import css from "./MainContainer.module.scss";
+import { AdaptiveWrapper } from "../../../mobx/adaptive/AdaptiveProvider";
 type MainContainerType = {
   children?: any;
   keywords?: any;
@@ -15,7 +16,7 @@ type MainContainerType = {
   cabinetStyle?: boolean;
   className?: string;
 };
-const cityMoc = ['Москва', 'Крым', 'Сочи']
+const cityMoc = ["Москва", "Крым", "Сочи"];
 
 export const MainContainer = ({
   children,
@@ -39,12 +40,17 @@ export const MainContainer = ({
           href="%PUBLIC_URL%/LogoIcon.svg"
         />
       </Head>
-      <Header city={city ? city : cityMoc} personalAccount={personalAccount} />
-      <div className={classNames(cabinetStyle ? css.cabinet : "", className)}>
-        {children}
-      </div>
-      {footerColor && <Footer color={footerColor} />}
-      <ScrollUp refs={refs}/>
+      <AdaptiveWrapper>
+        <Header
+          city={city ? city : cityMoc}
+          personalAccount={personalAccount}
+        />
+        <div className={classNames(cabinetStyle ? css.cabinet : "", className)}>
+          {children}
+        </div>
+        {footerColor && <Footer color={footerColor} />}
+        <ScrollUp refs={refs} />
+      </AdaptiveWrapper>
     </>
   );
 };
