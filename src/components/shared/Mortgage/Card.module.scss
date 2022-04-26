@@ -1,6 +1,11 @@
+@import '../../../app/styles/resolutions.scss';
+
 .card {
   background-color: #F2F2F2;
-  border-radius: 10px;
-  padding: 20px 20px 40px 30px;
+  border-radius: 6px;
+  padding: 20px 10px 20px 10px;
   z-index: 100;
+  @include for-size(KT2) {
+    padding: 20px 20px 40px 30px;
+  }
 }

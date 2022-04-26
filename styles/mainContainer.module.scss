@@ -1,5 +1,9 @@
+@import '../src/app/styles/resolutions.scss';
+
 .js{
-  height: calc(100vh - 180px);
+  @include for-size(KT2) {
+    height: calc(100vh - 180px);
+  }
   //height: `${100vh}-${38px}`;
 }
 

@@ -31,7 +31,7 @@
 .block_container{
   width: 1500px;
   @include for-size(KT1) {
-    width: 400px;
+    width: calc(100vw - 20px);
     display: block;
   }
   @include for-size(KT2) {
@@ -181,18 +181,15 @@
   color: #C5A28E;
   margin: 10px 0 15px 0;
   cursor: pointer;
-  padding:30px 20px 0 60px;
+  width: calc(100vw - 20px);
+  display: flex;
+  padding: 20px 30px 30px 30px;
   min-width: 265px ;
-  @include for-size(KT1) {
-    width: 400px;
-    flex-direction: column-reverse;
-    display: flex;
-    align-items: center;
+  @include for-size(KT2) {
+    padding: 30px 20px 0 60px;
   }
   @include for-size(KT5) {
-    flex-direction: column-reverse;
     justify-content: center;
-    align-items: center;
     display: flex;
     width: 265px ;
   }
@@ -232,8 +229,11 @@
 }
 
 .subresult {
-
   width: 50%;
+  justify-content: flex-end;
+  @include for-size(KT2) {
+    justify-content: flex-start;
+  }
 }
 
 .popupText {
@@ -246,7 +246,6 @@
   display: none;
   @include for-size(KT4) {
     display: flex;
-
     margin: 0 0 20px 0;
   }
 }
@@ -258,31 +257,30 @@
   position: relative;
   background: #F2F2F2;
 }
-.earlyPaymentTitle{
-  padding: 20px 40px;
-}
 .titleEarlyRepayment {
   width: 100%;
   display: flex;
-  flex-direction: row;
   justify-content: space-between;
   align-items: center;
   text-align: center;
-  color: #1A4862;
-  padding: 0 40px 0 80px;
-  //margin-bottom: 30px;
+  color: #1A4862; 
+  padding: 0px 20px 0px 20px;
+  @include for-size(KT2) {
+    padding: auto;
+  }
 }
 
 .cardContainer {
   //width: 100%;
-  //@include for-size(KT2) {
-  //  width: 400px;
-  //}
-  display: grid;
-  grid-template-columns: 3fr 5fr 4fr 4fr 30px;
+  display: flex;
+  flex-direction: column;
   grid-column-gap: 10px;
   margin-bottom: 30px;
   padding: 0 40px;
+  @include for-size(KT2) {
+    display: grid;
+    grid-template-columns: 3fr 5fr 4fr 4fr;
+  }
 }
 .DeleteIconPosition{
   display: flex;
@@ -373,3 +371,17 @@
   border: 0;
 }
 
+.addEarlyPayment {
+  display: none;
+  @include for-size(KT2) {
+    display: block;
+    cursor: pointer; 
+  }
+}
+
+.addEarlyPaymentMobile {
+  display: block;
+  @include for-size(KT2) {
+    display: none;
+  }
+}

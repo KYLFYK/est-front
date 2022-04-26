@@ -1,4 +1,5 @@
 @import '../../../../app/styles/colours.scss';
+@import '../../../../app/styles/resolutions.scss';
 
 .wrapper{
   display: flex;
@@ -10,7 +11,10 @@
   align-items: center;
   justify-content: center;
   width: 335px;
-  margin: 200px 0 80px 0;
+  margin: 36px 0 20px 0;
+  @include for-size(KT2) {
+    margin: 200px 0 80px 0;
+  }
 }
 .textFooter{
   text-align: center;
@@ -42,5 +46,8 @@
   margin: 20px 0 0 0;
 }
 .marginTop116px{
-  margin: 116px 0 0 0;
+  margin: 50px 0 0 0;
+  @include for-size(KT2) {
+    margin: 116px 0 0 0;
+  }
 }

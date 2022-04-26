@@ -464,13 +464,20 @@ export const Calculator: React.FC<Props> = observer(({setModal}) => {
                                         <hr color={'#CAD1DA'} style={{width:'93%',}}/>
                                     </div>
                                     <div className={s.titleEarlyRepayment}>
-                                        <Typography weight={"medium"} className={s.earlyPaymentTitle}>
+                                        <Typography weight={"medium"}>
                                             {`Досрочный платёж ${i + 1}`}
                                         </Typography>
+                                        <div
+                                            className={s.DeleteIconPosition}
+                                            onClick={() => {
+                                                store.setEarlyPayment(store.getEarlyPayments().filter((ef: any) => ef.id !== r.id))}}
+                                        >
+                                            X Удалить
+                                        </div>
                                         {
                                             store.getEarlyPayments().length-1 === i
                                                 && <div
-                                                    style={{cursor:'pointer', paddingRight:'60px'}}
+                                                    className={s.addEarlyPayment}
                                                     onClick={OnAddEarlyPayment}
                                                     >
                                                         <Typography color={'nude'}>
@@ -598,13 +605,6 @@ export const Calculator: React.FC<Props> = observer(({setModal}) => {
                                                 value={store.getEarlyPayments().filter((ef: any) => ef.id === r.id)[0] && formatNumbersToCurrency(store.getEarlyPayments().filter((ef: any) => ef.id === r.id)[0].summ, "RUB")}
                                             />
                                         </Card>
-                                        <div
-                                            className={s.DeleteIconPosition}
-                                            onClick={() => {
-                                                store.setEarlyPayment(store.getEarlyPayments().filter((ef: any) => ef.id !== r.id))}}
-                                        >
-                                            <DeleteOutlineIcon color={'error'}  />
-                                        </div>
                                     </div>
                                 </div>
                             )
@@ -616,8 +616,11 @@ export const Calculator: React.FC<Props> = observer(({setModal}) => {
                         <BaseButton onClick={() => setModal(true)}  type={'primary'} className={s.buttonWidth}>
                             <Typography color={'secondary'}>Подать заявку </Typography>
                         </BaseButton>
-                        <div onClick={OnAddEarlyPayment}>
-                            <Typography color={'nude'} >Рассчитать досрочное погашение </Typography>
+                        <div onClick={OnAddEarlyPayment} className={s.addEarlyPayment}>
+                            <Typography color={'nude'} >{'Рассчитать досрочное погашение'}</Typography>
+                        </div>
+                        <div onClick={OnAddEarlyPayment} className={s.addEarlyPaymentMobile}>
+                            <Typography color={'nude'} >{store.get().createPayload.earlyPayment.length ? '+ Добавить досрочное погашение' : 'Рассчитать досрочное погашение'} </Typography>
                         </div>
                     </div>
                 </div>
