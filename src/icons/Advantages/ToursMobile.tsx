@@ -38,8 +38,8 @@ export const ToursMobile = () => {
           y2="9.4797"
           gradientUnits="userSpaceOnUse"
         >
-          <stop stop-color="#1488CC" />
-          <stop offset="1" stop-color="#1A4862" />
+          <stop stopColor="#1488CC" />
+          <stop offset="1" stopColor="#1A4862" />
         </linearGradient>
         <linearGradient
           id="paint1_linear_7418_26243"
@@ -49,8 +49,8 @@ export const ToursMobile = () => {
           y2="55.5208"
           gradientUnits="userSpaceOnUse"
         >
-          <stop stop-color="#1488CC" />
-          <stop offset="1" stop-color="#1A4862" />
+          <stop stopColor="#1488CC" />
+          <stop offset="1" stopColor="#1A4862" />
         </linearGradient>
         <linearGradient
           id="paint2_linear_7418_26243"
@@ -60,8 +60,8 @@ export const ToursMobile = () => {
           y2="9.4797"
           gradientUnits="userSpaceOnUse"
         >
-          <stop stop-color="#1488CC" />
-          <stop offset="1" stop-color="#1A4862" />
+          <stop stopColor="#1488CC" />
+          <stop offset="1" stopColor="#1A4862" />
         </linearGradient>
         <linearGradient
           id="paint3_linear_7418_26243"
@@ -71,8 +71,8 @@ export const ToursMobile = () => {
           y2="55.5208"
           gradientUnits="userSpaceOnUse"
         >
-          <stop stop-color="#1488CC" />
-          <stop offset="1" stop-color="#1A4862" />
+          <stop stopColor="#1488CC" />
+          <stop offset="1" stopColor="#1A4862" />
         </linearGradient>
         <linearGradient
           id="paint4_linear_7418_26243"
@@ -82,8 +82,8 @@ export const ToursMobile = () => {
           y2="32.5011"
           gradientUnits="userSpaceOnUse"
         >
-          <stop stop-color="#1488CC" />
-          <stop offset="1" stop-color="#1A4862" />
+          <stop stopColor="#1488CC" />
+          <stop offset="1" stopColor="#1A4862" />
         </linearGradient>
       </defs>
     </svg>

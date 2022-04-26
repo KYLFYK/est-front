@@ -22,8 +22,8 @@ export const InfrastructureAnalysisMobile = () => {
           y2="27.4995"
           gradientUnits="userSpaceOnUse"
         >
-          <stop stop-color="#1488CC" />
-          <stop offset="1" stop-color="#1A4862" />
+          <stop stopColor="#1488CC" />
+          <stop offset="1" stopColor="#1A4862" />
         </linearGradient>
       </defs>
     </svg>

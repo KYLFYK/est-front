@@ -128,24 +128,21 @@
 }
 
 .wrap {
-  display: "flex";
-  flex-direction: "column";
-  position: "relative";
+  //display: "flex";
+  //flex-direction: "column";
+  //position: "relative";
   //width: 100%;
-  @include for-size(KT2) {
-    width: auto;
-  }
   @include for-size(KT1) {
     min-width: calc( 40px + 6.8*10vw );
   }
   @include for-size(KT2) {
-    min-width: 380px;
+    min-width: 180px;
   }
 }
 
 .wrapUnion {
-  display: "flex";
-  flex-direction: "column";
-  position: "relative";
+  //display: "flex";
+  //flex-direction: "column";
+  //position: "relative";
   width: 50%;
 }
