@@ -108,89 +108,90 @@ const ResidentialComplex: NextPage = observer((props: any) => {
       footerColor={"accent"}
       refs={refs}
     >
-      <Breadcrumbs location={"object"} />
-      <Views items={views} />
-      <NameEstate item={props.name} />
-      <AdressEstate item={props.address} />
-      <HorizontalTabs tabs={tabs} refs={refs} />
-      <div ref={general}>
-        <GeneralInfo
-          info={MappingGeneralInfo(
-            props.name,
-            props.address,
-            props.category,
-            props.info_options[0],
-            props.object_specs
-          )}
-          images={
-            props.images
-              ? props.images.map((el: { id: number; url: string }) => el.url)
-              : IMAGES_SET
-          }
-          // classSlider={css.image}
-        />
+      {/*<Breadcrumbs location={"object"} />*/}
+      {/*<Views items={views} />*/}
+      {/*<NameEstate item={props.name} />*/}
+      {/*<AdressEstate item={props.address} />*/}
+      {/*<HorizontalTabs tabs={tabs} refs={refs} />*/}
+      {/*<div ref={general}>*/}
+      {/*  <GeneralInfo*/}
+      {/*    info={MappingGeneralInfo(*/}
+      {/*      props.name,*/}
+      {/*      props.address,*/}
+      {/*      props.category,*/}
+      {/*      props.info_options[0],*/}
+      {/*      props.object_specs*/}
+      {/*    )}*/}
+      {/*    images={*/}
+      {/*      props.images*/}
+      {/*        ? props.images.map((el: { id: number; url: string }) => el.url)*/}
+      {/*        : IMAGES_SET*/}
+      {/*    }*/}
+      {/*    // classSlider={css.image}*/}
+      {/*  />*/}
+      {/*</div>*/}
+      {/*<div ref={specs}>*/}
+      {/*  <ObjectSpecifications*/}
+      {/*    specificationsLists={sortObject_specsTypeGuide(*/}
+      {/*      props.object_specs*/}
+      {/*        .map((guid: any) => sortGuide(guid, guid.subtitle_ru))*/}
+      {/*        .filter((f: any) => f !== undefined)*/}
+      {/*    ).filter(*/}
+      {/*      (s: any) =>*/}
+      {/*        s.subtitle === "Объекты на территории" ||*/}
+      {/*        s.subtitle === "Безопасность"*/}
+      {/*    )}*/}
+      {/*    title={"Особенности"}*/}
+      {/*  />*/}
+      {/*</div>*/}
+      {/*<div ref={architec}>*/}
+      {/*  <ObjectSpecifications*/}
+      {/*    specificationsLists={sortObject_specsTypeGuide(*/}
+      {/*      props.object_specs*/}
+      {/*        .map((guid: any) => sortGuide(guid, guid.subtitle_ru))*/}
+      {/*        .filter((f: any) => f !== undefined)*/}
+      {/*    ).filter(*/}
+      {/*      (s: any) =>*/}
+      {/*        s.subtitle === "Строительно-техническая экспертиза" ||*/}
+      {/*        s.subtitle === "Инженерные коммуникации"*/}
+      {/*    )}*/}
+      {/*    title={"Архитектурно-планировочные решения"}*/}
+      {/*  />*/}
+      {/*</div>*/}
+      {/*<div ref={plansec}>*/}
+      {/*  {props.planningList.length > 0 && (*/}
+      {/*    <Planning*/}
+      {/*      FilterComponent={<PlanningFilter />}*/}
+      {/*      planningList={props.planningList}*/}
+      {/*    />*/}
+      {/*  )}*/}
+      {/*</div>*/}
+      {/*<div ref={infra}>*/}
+      {/*  <Map*/}
+      {/*    currentHouse={props}*/}
+      {/*    location={"infrastructure"}*/}
+      {/*    InfrastructureInfo={props.info_options[0].infrastructure}*/}
+      {/*  />*/}
+      {/*</div>*/}
+      <div ref={developer} >
+                {/*for kt1(max-width 576px) / kt2*/}
+               <AccordionContainerMobile developerData={MappingDeveloperInfo(props.object_developer_info)}/>
+               <ObjectDeveloper
+                  developerData={MappingDeveloperInfo(props.object_developer_info)}
+              />
       </div>
-      <div ref={specs}>
-        <ObjectSpecifications
-          specificationsLists={sortObject_specsTypeGuide(
-            props.object_specs
-              .map((guid: any) => sortGuide(guid, guid.subtitle_ru))
-              .filter((f: any) => f !== undefined)
-          ).filter(
-            (s: any) =>
-              s.subtitle === "Объекты на территории" ||
-              s.subtitle === "Безопасность"
-          )}
-          title={"Особенности"}
-        />
-      </div>
-      <div ref={architec}>
-        <ObjectSpecifications
-          specificationsLists={sortObject_specsTypeGuide(
-            props.object_specs
-              .map((guid: any) => sortGuide(guid, guid.subtitle_ru))
-              .filter((f: any) => f !== undefined)
-          ).filter(
-            (s: any) =>
-              s.subtitle === "Строительно-техническая экспертиза" ||
-              s.subtitle === "Инженерные коммуникации"
-          )}
-          title={"Архитектурно-планировочные решения"}
-        />
-      </div>
-      <div ref={plansec}>
-        {props.planningList.length > 0 && (
-          <Planning
-            FilterComponent={<PlanningFilter />}
-            planningList={props.planningList}
-          />
-        )}
-      </div>
-      <div ref={infra}>
-        <Map
-          currentHouse={props}
-          location={"infrastructure"}
-          InfrastructureInfo={props.info_options[0].infrastructure}
-        />
-      </div>
-      <div ref={developer}>
-        <ObjectDeveloper
-          developerData={MappingDeveloperInfo(props.object_developer_info)}
-        />
-        <AccordionContainerMobile developerData={MappingDeveloperInfo(props.object_developer_info)}/>
-      </div>
-      {props.schedule.length > 0 ? (
-        <ConstructProgress
-          info={MappingShedule(props.schedule)}
-          images={
-            props.images
-              ? props.images.map((el: { id: number; url: string }) => el.url)
-              : IMAGES_SET
-          }
-        />
-      ) : (
-        <div style={{ height: "40px" }}> </div>
-      )}
+      {/*{props.schedule.length > 0 ? (*/}
+      {/*  <ConstructProgress*/}
+      {/*    info={MappingShedule(props.schedule)}*/}
+      {/*    images={*/}
+      {/*      props.images*/}
+      {/*        ? props.images.map((el: { id: number; url: string }) => el.url)*/}
+      {/*        : IMAGES_SET*/}
+      {/*    }*/}
+      {/*  />*/}
+      {/*) : (*/}
+      {/*  <div style={{ height: "40px" }}> </div>*/}
+      {/*)}*/}
     </MainContainer>
   );
 });

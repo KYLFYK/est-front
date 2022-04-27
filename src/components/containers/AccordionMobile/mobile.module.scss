@@ -1,0 +1,45 @@
+@import '/src/components/containers/Record/all.scss';
+.content{
+  @include for-size(KT1) {
+    display:flex;
+    flex-direction:column;
+    gap:10px;
+    margin:0 10px;
+  }
+  @include for-size(KT2) {
+    display: none;
+   }
+}
+.infoBlock {
+  display: grid;
+  margin-bottom: 30px;
+  grid-template-columns: 1fr 1fr;
+}
+.iconItem {
+  @include for-size(KT1) {
+    min-width: calc(50vw - 40px);
+    margin-right: 0;
+    align-items: center;
+    margin-top: 20px;
+  }
+  @include for-size(KT2) {
+    margin-right: 80px;
+    margin-top: 0;
+  }
+
+
+}
+.imgContainer {
+  position: relative;
+  width: 60px;
+  height: 60px;
+}
+.img {
+  object-fit: contain;
+  @include for-size(KT1) {
+    width: 60px;
+  }
+  @include for-size(KT2) {
+    width: auto;
+  }
+}

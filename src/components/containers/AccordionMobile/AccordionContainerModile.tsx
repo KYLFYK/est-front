@@ -9,30 +9,71 @@ import DeveloperActivity from "../../tabs/Developer/components/Activity/Develope
 import DeveloperMassMedia from "../../tabs/Developer/components/MassMedia/DeveloperMassMedia";
 import DeveloperStatisticTab from "../../tabs/Developer/components/Statistic/DeveloperStatisticTab";
 import DeveloperRisksTab from "../../tabs/Developer/components/Risks/DeveloperRisksTab";
+import css from './mobile.module.scss'
+import {Advantage} from "../../shared/Advantage/Advantage";
+import Image from "next/image";
+import ExclamationMarkMobile from "../../../icons/Development/ExclamationMarkMobile";
+import CircledKeyMobile from "../../../icons/Development/CircledKeyMobile";
+import CircledSawMobile from "../../../icons/Development/CircledSawMobile";
+import Typography from "../../shared/Typography/Typography";
 
 interface Props {
     developerData: IObjectDeveloperInfo
 }
 
-const AccordionContainerMobile :FC<Props> = ({developerData}) => {
+const AccordionContainerMobile: FC<Props> = ({developerData}) => {
+
     return (
-        <div style={{display:'flex',flexDirection:'column',gap:'10px',margin:"0 10px"}}>
+        <div className={css.content}>
+            <Typography size={'subheader'} className={css.size} weight="bold">
+                Застройщик
+            </Typography>
+            <div className={css.infoBlock}>
+                <Advantage
+                    title={developerData.name}
+                    text={developerData.developerType}
+                    className={css.iconItem}
+                >
+                    <div className={css.imgContainer}>
+                        {
+                            developerData.logo &&
+                            <Image
+                                className={css.img}
+                                src={developerData.logo}
+                                unoptimized alt="logo"
+                                layout="fill"
+                                loader={() => developerData.logo}
+                            />
+                        }
+                    </div>
+                </Advantage>
+                <Advantage title="Риски" text={developerData.risks ? "Да" : "Нет"} className={css.iconItem}>
+                    <ExclamationMarkMobile/>
+                </Advantage>
+                <Advantage title="Сдано" text={developerData.leasedAmmount} className={css.iconItem}>
+                    <CircledKeyMobile/>
+                </Advantage>
+                <Advantage title="Строится" text={developerData.inProgressAmmount} className={css.iconItem}>
+                    <CircledSawMobile/>
+                </Advantage>
+            </div>
             {
                 developerData.tabsData.about &&
-                <InfoDeveloperMobile title={'О застройщике'} >
-                    <DeveloperAbout paragraphs={developerData.tabsData.about} />
+                developerData.tabsData.about?.length > 0 &&
+                <InfoDeveloperMobile title={'О застройщике'}>
+                    <DeveloperAbout paragraphs={developerData.tabsData.about}/>
                 </InfoDeveloperMobile>
             }
             {
                 developerData.tabsData.contacts &&
-                <InfoDeveloperMobile title={'Контакты'} >
-                    <DeveloperContacts items={developerData.tabsData.contacts} />
+                <InfoDeveloperMobile title={'Контакты'}>
+                    <DeveloperContacts items={developerData.tabsData.contacts}/>
                 </InfoDeveloperMobile>
             }
             {
                 developerData.tabsData.requisits &&
-                <InfoDeveloperMobile title={'Реквизиты'} >
-                    <DeveloperRequisites items={developerData.tabsData.requisits} />
+                <InfoDeveloperMobile title={'Реквизиты'}>
+                    <DeveloperRequisites items={developerData.tabsData.requisits}/>
                 </InfoDeveloperMobile>
             }
             {
@@ -40,10 +81,10 @@ const AccordionContainerMobile :FC<Props> = ({developerData}) => {
                 && developerData.tabsData.owners.goverment
                 && developerData.tabsData.owners.company
                 &&
-                <InfoDeveloperMobile title={'Учредители'} >
+                <InfoDeveloperMobile title={'Учредители'}>
                     <DeveloperOwners
                         companyData={developerData.tabsData.owners.company}
-                        govermentData={developerData.tabsData.owners.goverment} />
+                        govermentData={developerData.tabsData.owners.goverment}/>
                 </InfoDeveloperMobile>
             }
             {
@@ -51,28 +92,31 @@ const AccordionContainerMobile :FC<Props> = ({developerData}) => {
                 && developerData.tabsData.activities.primary
                 && developerData.tabsData.activities.secondary
                 &&
-                <InfoDeveloperMobile title={'Виды деятельности'} >
+                <InfoDeveloperMobile title={'Виды деятельности'}>
                     <DeveloperActivity
                         primaryActivities={developerData.tabsData.activities.primary}
-                        secondaryActivities={developerData.tabsData.activities.secondary} />
+                        secondaryActivities={developerData.tabsData.activities.secondary}/>
                 </InfoDeveloperMobile>
             }
             {
                 developerData.tabsData.news &&
-                <InfoDeveloperMobile title={'СМИ о застройщике'} >
-                    <DeveloperMassMedia articlesItems={ developerData.tabsData.news} />
+                developerData.tabsData.news?.length > 0 &&
+                <InfoDeveloperMobile title={'СМИ о застройщике'}>
+                    <DeveloperMassMedia articlesItems={developerData.tabsData.news}/>
                 </InfoDeveloperMobile>
             }
             {
                 developerData.tabsData.statistics &&
-                <InfoDeveloperMobile title={'Статистика'} >
-                    <DeveloperStatisticTab items={developerData.tabsData.statistics} />
+                developerData.tabsData.statistics?.length > 0 &&
+                <InfoDeveloperMobile title={'Статистика'}>
+                    <DeveloperStatisticTab items={developerData.tabsData.statistics}/>
                 </InfoDeveloperMobile>
             }
             {
                 developerData.tabsData.risks &&
-                <InfoDeveloperMobile title={'Риски'} >
-                    <DeveloperRisksTab items={developerData.tabsData.risks} />
+                developerData.tabsData.risks?.length > 0 &&
+                <InfoDeveloperMobile title={'Риски'}>
+                    <DeveloperRisksTab items={developerData.tabsData.risks}/>
                 </InfoDeveloperMobile>
             }
         </div>

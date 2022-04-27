@@ -61,9 +61,10 @@ const SamplePrevArrow: React.FC<ArrowType> = ({onClick}) => {
 export const BestOffers: FC<BestOffersType> = observer(({tagsButton}) => {
 
     const store = useStoreMainPage()
+    const [infinite,setInfinite]=useState<boolean>(false)
     const settings = {
         dots: true,
-        infinite: store.initialData.bestOffers.length>2, // true || false, чтобы корректно отображалось
+        infinite: infinite, // true || false, чтобы корректно отображалось
         speed: 500,
         slidesToShow: 4,
         slidesToScroll: 2,
@@ -75,7 +76,7 @@ export const BestOffers: FC<BestOffersType> = observer(({tagsButton}) => {
                     slidesToShow: 3,
                     slidesToScroll: 2,
                     dots: true
-                }
+                },
             },
             {
                 breakpoint: 1125,
@@ -102,7 +103,14 @@ export const BestOffers: FC<BestOffersType> = observer(({tagsButton}) => {
     const customeSlider = useRef()
     useEffect(() => {
         store.fetchBestOffers(10, false, false, false, false, false)
+        setInfinite(true)
     }, [store.fetchBestOffers])
+    useEffect(()=>{
+        setInfinite(true)
+        if(window.innerWidth > 1430 && store.initialData.bestOffers.length < 4){
+            setInfinite(false)
+        }
+    },[])
 
     const mapDat: any = mapData[0]
 
