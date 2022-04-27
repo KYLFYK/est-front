@@ -20,7 +20,7 @@ import Typography from "../../Typography/Typography";
 import Image from 'next/image'
 import {RadioIconChecked, RadioIconUnChecked} from "../icons/RadioIcon";
 import {makeStyles} from "@material-ui/core";
-import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
+import { CrossIcon } from '../../../../icons/CrossIcon/CrossIcon'
 import { dateToDigit, digitToDate, currentDate } from '../../../../lib/mortgage/date';
 import {paymentSchedule} from './helpers';
 import {formatNumbersToCurrency} from '../../../../lib/syntax/syntax';
@@ -41,9 +41,9 @@ interface Props {
 export const useStyles = makeStyles(() => ({
     root: {
         backgroundColor: "#fff",
-        width: 200,
+        width: '100%',
         borderRadius: 8,
-        border: '0px solid #CAD1DA',
+        border: '0px solid #FFFFFF !important',
         "&::before": {
             display: 'none'
         },
@@ -460,31 +460,33 @@ export const Calculator: React.FC<Props> = observer(({setModal}) => {
                         {store.getEarlyPayments().map((r: any, i: number) => {
                             return (
                                 <div key={i} className={s.cardEarlyRepayment}>
-                                    <div style={{width:'100%',margin:'0px 40px'}}>
-                                        <hr color={'#CAD1DA'} style={{width:'93%',}}/>
+                                    <div style={{width:'100%'}}>
+                                        <hr color={'#CAD1DA'} />
                                     </div>
                                     <div className={s.titleEarlyRepayment}>
                                         <Typography weight={"medium"}>
                                             {`Досрочный платёж ${i + 1}`}
                                         </Typography>
-                                        <div
-                                            className={s.DeleteIconPosition}
-                                            onClick={() => {
-                                                store.setEarlyPayment(store.getEarlyPayments().filter((ef: any) => ef.id !== r.id))}}
-                                        >
-                                            X Удалить
+                                        <div className={s.subTitleEarlyRepayment}>
+                                            <div
+                                                className={s.DeleteIconPosition}
+                                                onClick={() => {
+                                                    store.setEarlyPayment(store.getEarlyPayments().filter((ef: any) => ef.id !== r.id))}}
+                                            >
+                                                <CrossIcon/> <Typography color={'altGray'}>Удалить</Typography>
+                                            </div>
+                                            {
+                                                store.getEarlyPayments().length-1 === i
+                                                    && <div
+                                                        className={s.addEarlyPayment}
+                                                        onClick={OnAddEarlyPayment}
+                                                        >
+                                                            <Typography color={'nude'}>
+                                                                + Добавить досрочное погашение
+                                                            </Typography>
+                                                        </div>
+                                            }
                                         </div>
-                                        {
-                                            store.getEarlyPayments().length-1 === i
-                                                && <div
-                                                    className={s.addEarlyPayment}
-                                                    onClick={OnAddEarlyPayment}
-                                                    >
-                                                        <Typography color={'nude'}>
-                                                            + Добавить досрочное погашение
-                                                        </Typography>
-                                                    </div>
-                                        }
                                     </div>
 
                                     <div key={r.id} id={r.id} className={s.cardContainer}>
@@ -494,7 +496,7 @@ export const Calculator: React.FC<Props> = observer(({setModal}) => {
                                             </Typography>
                                             <div className={s.earlyPaymentChooseBlock}>
                                                 <BaseInput
-                                                    className={s.baseInputStyle}
+                                                    className={`${s.baseInputStyle} ${s.textIndent}`}
                                                     id={r.id}
                                                     type='date'
                                                     value={store.getEarlyPayments().filter((ef: any) => ef.id === r.id)[0] && store.getEarlyPayments().filter((ef: any) => ef.id === r.id)[0].date}
@@ -527,6 +529,7 @@ export const Calculator: React.FC<Props> = observer(({setModal}) => {
                                                           onChange={(value: any) => onChangePaymentPeriod(value, r.id)}
                                                           placeholder="Выберите периодичность платежа"
                                                           className={classes.root}
+                                                          location={'bank'}
                                             />
                                         </Card>
 
@@ -534,7 +537,7 @@ export const Calculator: React.FC<Props> = observer(({setModal}) => {
                                             <Typography className={s.paddingTypo} color={'tertiary'} weight={'light'} >
                                                 Что уменьшить ?
                                             </Typography>
-                                            <div className={s.earlyPaymentChooseBlock}>
+                                            <div className={s.earlyPaymentChooseBlock} style={{padding: '10px 0px 10px 0'}}>
 
                                                 <BaseButton
                                                     className={classNames(s.earlyPaymentChooseButton, r.buttons === EarlyPaymentButtonsTypes.PAYMENT && s.earlyPaymentButtonActive)}
@@ -602,7 +605,8 @@ export const Calculator: React.FC<Props> = observer(({setModal}) => {
                                                 type="text"
                                                 onChange={onChangePaymentSumm}
                                                 icon={"₽"}
-                                                value={store.getEarlyPayments().filter((ef: any) => ef.id === r.id)[0] && formatNumbersToCurrency(store.getEarlyPayments().filter((ef: any) => ef.id === r.id)[0].summ, "RUB")}
+                                                iconClassName={s.icon}
+                                                value={store.getEarlyPayments().filter((ef: any) => ef.id === r.id)[0] && formatNumbersToCurrency(store.getEarlyPayments().filter((ef: any) => ef.id === r.id)[0].summ)}
                                             />
                                         </Card>
                                     </div>
