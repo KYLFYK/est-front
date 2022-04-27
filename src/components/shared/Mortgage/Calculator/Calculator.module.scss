@@ -256,6 +256,10 @@
   align-items: center;
   position: relative;
   background: #F2F2F2;
+  padding: 0px 10px 0px 10px;
+  @include for-size(KT2) {
+    padding: 0px 40px 0px 40px;
+  }
 }
 .titleEarlyRepayment {
   width: 100%;
@@ -264,22 +268,22 @@
   align-items: center;
   text-align: center;
   color: #1A4862; 
-  padding: 0px 20px 0px 20px;
-  @include for-size(KT2) {
-    padding: auto;
-  }
+}
+.subTitleEarlyRepayment{
+  display: flex;
+  align-items: center;
 }
 
 .cardContainer {
   //width: 100%;
-  display: flex;
-  flex-direction: column;
-  grid-column-gap: 10px;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-row-gap: 20px;
+  width: 100%;
   margin-bottom: 30px;
-  padding: 0 40px;
   @include for-size(KT2) {
-    display: grid;
     grid-template-columns: 3fr 5fr 4fr 4fr;
+    grid-column-gap: 10px;
   }
 }
 .DeleteIconPosition{
@@ -288,6 +292,10 @@
   align-items: center;
   height: 54px;
   cursor: pointer;
+  margin: 0;
+  @include for-size(KT2) {
+    margin: 0px 20px 0px 0px;
+  }
 }
 
 .dropdown {
@@ -317,22 +325,30 @@
   margin-top: 3px;
 }
 
+.textIndent {
+  text-indent: 0px !important;
+}
+
 .baseInputStyle {
-  border: 0 solid #CAD1DA;
+  border: 0 solid #CAD1DA !important;
   height: 24px;
   font-family: "RobotoRegular";
+  width: 100% !important;
+  position: relative;
   //&::-webkit-datetime-edit-fields-wrapper {
   //  margin-left: -20px;
   //}
   &::-webkit-calendar-picker-indicator {
+    margin: 0 0 0 10px;
     color: transparent;
     opacity: 1;
     background: url(../icons/calendar.svg) no-repeat center;
     background-size: contain;
+    cursor: pointer;
   }
 }
 .baseInput{
-  border: 0 solid #CAD1DA;
+  border: 0 solid #CAD1DA !important;
   height: 24px;
   position: relative;
   right: 15px;
@@ -350,8 +366,7 @@
 
 .earlyPaymentChooseBlock {
   display: flex;
-  justify-content: center;
-  height: 24px;
+  justify-content: flex-start;
 }
 
 .earlyPaymentChooseButton {
@@ -384,4 +399,8 @@
   @include for-size(KT2) {
     display: none;
   }
+}
+
+.icon{
+  right: -18px !important;
 }
