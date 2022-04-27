@@ -12,11 +12,13 @@
     color: #FFF;
 
     @include for-size(KT1) {
-        min-height: 503px;
+        //min-height: 503px;
         background-position-x: 90%;
         background-position-y: 43%;
+        margin-top: 30px;
     }
     @include for-size(KT2) {
+        margin-top: 0;
         min-height: 305px;
         background-position-x: 0%;
         background-image:url("./../../../Pics/mainPhoto.jpg");

@@ -13,6 +13,9 @@ import { observer } from "mobx-react-lite";
 import { useRouter } from "next/router";
 import Typography from "src/components/shared/Typography/Typography";
 import {BaseDropDown} from "../src/components/shared/BaseDropDown/BaseDropDown";
+import { MobileOnly } from "src/components/containers/Adaptive/MobileOnly";
+import { DesktopOnly } from "src/components/containers/Adaptive/DesktopOnly";
+import { BestOffersMobile } from "src/components/containers/BestOffers/BestOffersMobile";
 
 const city = ["Москва", "Крым", "Сочи"];
 
@@ -74,7 +77,12 @@ const Start = observer(({}) => {
       footerColor="accent"
     >
       <HeadFilter />
-      <BestOffers tagsButton={tagsButton} />
+      <MobileOnly>
+        <BestOffersMobile tagsButton={tagsButton} />
+      </MobileOnly>
+      <DesktopOnly>
+        <BestOffers tagsButton={tagsButton} />
+      </DesktopOnly>
       <DevelopersContainer
         title={"Застройщики и агентства, которые нам доверяют"}
       />

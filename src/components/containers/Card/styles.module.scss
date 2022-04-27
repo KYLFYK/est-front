@@ -45,8 +45,17 @@ $borderRadius: 6px;
 
 .price {
     @include ROBOTOBOLD16;
-    margin: 0 0 8px 0;
     color: $BLACK;
+    margin: 5px 0 0 0 ;
+}
+.cursorName{
+    margin: 5px 0 0 0 ;
+    display: block;
+    width: 170px;
+    white-space: nowrap; /* Отменяем перенос текста */
+    overflow: hidden; /* Обрезаем содержимое */
+    //padding-right:0px; /* Поля */
+    text-overflow: ellipsis;
 }
 
 .subtitle {
@@ -80,6 +89,50 @@ $borderRadius: 6px;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+}
+.dataAgent{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    margin: 0 10px;
+}
+.photoAgent{
+    border-radius: 8px 8px 0 0;
+}
+.link {
+    color: black;
+    &:visited{
+        color: black
+    }
+    &:focus {
+        color: black
+    }
+    &:link {
+        text-decoration: none
+    }
+}
+.agentBlock{
+    display: flex;
+    min-width: 400px;
+    @media  (max-width: 1320px) {
+        min-width: 100px;
+        min-height: 100px;
+    }
+    @include for-size(KT1) {
+        box-sizing: border-box;
+        margin-left: 10px;
+        width: 196px !important;
+        height: 220px;
+        display: inline-block;
+        vertical-align: top;
+        border: 1px solid #F2F2F2;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px 0 rgba(26, 72, 98, 0.15);
+    }
+    @media  (min-width: 1320px) {
+        display: flex;
+        min-width: 400px;
+    }
 }
 
 .margin {

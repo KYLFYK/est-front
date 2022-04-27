@@ -8,6 +8,8 @@ import {useStoreMainPage} from "../../../mobx/mainPage/mainPage";
 import {observer} from "mobx-react-lite";
 import Slider from "react-slick";
 import {IMAGES_SET} from "../Card/config";
+import {AgentBlock} from "../AgentsContainer/AgentBlock/AgentBlock";
+import CardBestOfferMobile from "../Card/CardBestOfferMobile";
 
 type BestOffersType = {
     tagsButton: Array<string>
@@ -139,6 +141,8 @@ export const BestOffers: FC<BestOffersType> = observer(({tagsButton}) => {
         }
         store.fetchBestOffers(10, activeFilter[0], activeFilter[1], activeFilter[2], activeFilter[3], activeFilter[4])
     }
+
+    console.log('bestOffers',JSON.parse(JSON.stringify(store.initialData.bestOffers)))
 
     return (
         <div className={css.offers}>

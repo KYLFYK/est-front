@@ -3,9 +3,9 @@
     margin: 40px 60px 0 60px;
     overflow: visible;
     @include for-size(KT1) {
-        margin: 20px 10px 0 10px;
+        margin: 0 10px 0 10px;
     }
-    @include for-size(KT2) {
+    @include for-size(KT3) {
         margin: 40px 60px 0 60px;
     }
 }
@@ -13,7 +13,47 @@
     display: flex;
     justify-content: space-between;
 }
-
+.block{
+    display: flex;
+    justify-content: space-between;
+    @media  (max-width: 1300px) {
+        display: grid;
+        grid-template-columns: 1fr 1fr ;
+        gap: 20px;
+    }
+    @media  (max-width: 1020px) {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 20px;
+    }
+    @media  (max-width: 650px) {
+        display: grid;
+        grid-template-columns: 1fr ;
+        gap: 20px;
+    }
+    @include for-size(KT1) {
+        display: flex;
+        width: calc( 100vw - 20px );
+        height: 240px;
+        overflow-x: scroll;
+        white-space:nowrap;
+        gap: 0;
+        scrollbar-arrow-color: #FFFFFF;
+        margin-bottom: -20px;
+        padding-bottom: -20px;
+        margin-top: 20px;
+    }
+    @include for-size(KT2) {
+        height:266px;
+    }@media  (min-width: 750px) {
+    overflow-x: hidden
+    }@media  (min-width: 950px) {
+        height:316px;
+    }
+    @media  (min-width: 1320px) {
+        height:210px;
+    }
+}
 .buttonLine{
     min-width:1060px ;
     display: flex;
