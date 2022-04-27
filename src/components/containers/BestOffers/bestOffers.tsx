@@ -142,8 +142,6 @@ export const BestOffers: FC<BestOffersType> = observer(({tagsButton}) => {
         store.fetchBestOffers(10, activeFilter[0], activeFilter[1], activeFilter[2], activeFilter[3], activeFilter[4])
     }
 
-    console.log('bestOffers',JSON.parse(JSON.stringify(store.initialData.bestOffers)))
-
     return (
         <div className={css.offers}>
             <HeadLine title={'Лучшие предложения'}>
