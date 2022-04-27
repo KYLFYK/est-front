@@ -5,6 +5,9 @@ import { Advantage } from '../../shared/Advantage/Advantage';
 import { IOption } from '../../../utils/interfaces/general';
 import { searchIconByValue } from '../../../utils/general/icons';
 import { IconTypes } from '../../../utils/interfaces/icons';
+import { DesktopOnly } from '../Adaptive/DesktopOnly';
+import { MobileOnly } from '../Adaptive/MobileOnly';
+
 
 export interface IAdvantage {
     title: IOption<IconTypes | string>,

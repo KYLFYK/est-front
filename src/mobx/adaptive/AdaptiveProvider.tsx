@@ -11,13 +11,13 @@ export const AdaptiveWrapper: FC = observer(({ children }) => {
 
   useLayoutEffect(() => {
     if (typeof window !== "undefined") {
-      AdaptiveStore.calculateAdaptive(window.outerWidth);
+      AdaptiveStore.calculateAdaptive(window.innerWidth);
     }
 
     const handler = () => {
       setTimeout(() => {
         if (typeof window !== "undefined") {
-          AdaptiveStore.calculateAdaptive(window.outerWidth);
+          AdaptiveStore.calculateAdaptive(window.innerWidth);
         }
       }, 100);
     };
