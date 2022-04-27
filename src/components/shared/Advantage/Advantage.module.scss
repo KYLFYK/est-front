@@ -2,13 +2,6 @@
 .blockAdvantage{
     display: flex;
     margin: 10px 0;
-    @include for-size(KT1) {
-        display:flex;
-        flex-direction: column;
-    }
-    @include for-size(KT2) {
-
-    }
 }
 .img{
     display: inline-block;
@@ -22,14 +15,6 @@
     justify-content: center;
     //min-width: 430px;
     max-width: 500px;
-    @include for-size(KT1) {
-        margin: 10px 0 0 0 ;
-        text-align: center;
-    }
-    @include for-size(KT2) {
-        margin: 0 20px;
-        text-align: start ;
-    }
 }
 .autoWidth {
     min-width: auto;
@@ -38,10 +23,4 @@
 .icon {
     display: flex;
     align-items: center;
-    @include for-size(KT1) {
-        justify-content: center;
-    }
-    @include for-size(KT2) {
-        justify-content: normal;
-    }
 }
