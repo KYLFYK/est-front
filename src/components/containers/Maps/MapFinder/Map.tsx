@@ -21,11 +21,14 @@ interface Props {
   location: 'finder' | 'start' | 'infrastructure' | 'payback'
   viewport: any
   setViewport?: any
-  view?: string
-  setView?: any
+  view?: {
+    filter: boolean,
+    map: boolean,
+    grid: boolean,
+  }
 }
 
-const Map: React.FC<Props> = observer(({mapData, location, viewport, setViewport, view, setView}) => {
+const Map: React.FC<Props> = observer(({mapData, location, viewport, setViewport, view}) => {
 
   const router = useRouter()
   const searchStore = useSearchStore()
@@ -84,7 +87,7 @@ const Map: React.FC<Props> = observer(({mapData, location, viewport, setViewport
   )}, [setViewport, viewport])
 
   return (
-    <div className={view==='mapView' ? s.openMapWrapper : s.closeMapWrapper} ref={mapWrap}>
+    <div className={view?.map ? s.openMapWrapper : s.closeMapWrapper} ref={mapWrap}>
         <MapGL
           {...viewport}
           mapboxApiAccessToken={'pk.eyJ1Ijoibmlja29sYXlhcmJ1em92IiwiYSI6ImNrdmdtYWQxYjd0enQybnM3bGR5b2Fnd2YifQ.IEtk0ClJ58f6dgZYa8hKpA'}

@@ -23,7 +23,7 @@ const center = {lat: 45.16, lng: 36.90}
 
 const Finder: NextPage = () => {
 
-  const [view, setView] = useState('mapView')
+  const [view, setView] = useState({filter: false, map: true, grid: false})
 
   return (
     <div>
@@ -33,8 +33,8 @@ const Finder: NextPage = () => {
           <Filter/>
         </div>
         <div style={{display: 'flex', width: '100%', margin: '20px 0 0 0'}}>
-          <Map mapData={mapData} location={'finder'} center={center} view={view} setView={setView}/>
-          <CardContainer mapData={mapData} view={view} setView={setView}/>
+          <Map mapData={mapData} location={'finder'} center={center} view={view} />
+          <CardContainer mapData={mapData} />
         </div>
     </div>
   )

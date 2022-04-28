@@ -22,16 +22,17 @@
 
 .content {
     display: flex;
-    justify-content: flex-start;
     flex-wrap: wrap;
     @include MapScrollbar;
     @include for-size(KT1) {
         margin: 10px 15px 0 15px;
+        justify-content: center;
     }@include for-size(KT2) {
         margin: 0 15px 0 15px;
         height: 575px;
         overflow-y: scroll;
         scrollbar-width: 1px;
+        justify-content: flex-start;
      }
 }
 .contentText {
@@ -45,14 +46,13 @@
 .finderControls {
     display: flex;
     justify-content: space-between;
-    @include for-size(KT1) {
-        flex-direction: column-reverse;
-        flex-wrap: wrap;
-        margin: 0;
-    }@include for-size(KT2) {
+    flex-direction: column-reverse;
+    flex-wrap: wrap;
+    margin: 0;
+    @include for-size(KT2) {
         flex-direction: row;
         margin: 20px;
-     }
+    }
 }
 
 .finderButtons{

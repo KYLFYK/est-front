@@ -6,10 +6,13 @@ import {MainContainer} from 'src/components/containers/MainContainer/MainContain
 import {Breadcrumbs} from '../../src/components/shared/Breadcrumbs/Breadcrumbs'
 import {Filter} from '../../src/components/containers/Filter/Filter'
 import CardContainer from '../../src/components/containers/CardContainer/CardContainer'
+import {ToggleButtons} from '../../src/components/containers/CardContainer/ToggleButtons/index'
 import Map from '../../src/components/containers/Maps/MapFinder/index'
 import {mapData} from '../../src/components/containers/Maps/MapFinder/config'
-import {useSearchStore} from "../../src/mobx/stores/SearchStore/SearchStore";
+import {useSearchStore} from "../../src/mobx/stores/SearchStore/SearchStore"
 import s from 'src/components/containers/Maps/MapFinder/styles.module.scss'
+import { MobileOnly } from 'src/components/containers/Adaptive/MobileOnly'
+import { DesktopOnly } from 'src/components/containers/Adaptive/DesktopOnly'
 
 const city = ['Москва', 'Крым', 'Сочи']
 
@@ -26,61 +29,59 @@ const center = {lat: 45.16, lng: 36.90}
 
 const Finder: NextPage = observer(() => {
     const searchStore = useSearchStore();
-    const [view, setView] = useState('mapView')
 
     useEffect(() => {
         if (window.innerWidth >= 576) {
-            searchStore.activeFilter = true
+            //searchStore.activeFilter = true
         } else {
             searchStore.onWidthBrowser(window.innerWidth)
         }
     }, [])
-
+    console.log(searchStore.getView())
     return (
         <MainContainer keywords={"Поиск"} title={"Поиск"} city={city} personalAccount={personalAccount}>
-            <div style={{display:searchStore.widthBrowser < 576 && searchStore.activeFilter === true ? 'none' : 'flex'}}><Breadcrumbs/></div>
-            {/*for 320px*/}
-            <div style={{display:searchStore.widthBrowser < 576 ? '': 'none'}}>
+            <div style={{display:searchStore.widthBrowser < 576 && searchStore.views.filter ? 'none' : 'flex'}}><Breadcrumbs/></div>
+
+            <MobileOnly>
                 {
-                    searchStore.activeFilter && <div style={{margin: '20px 10px 0 10px'}}>
-                        <Filter location={'search'} onFilter={() => searchStore.onActiveFilter()}/>
+                    searchStore.views.filter && <div style={{margin: '20px 10px 0 10px'}}>
+                        <Filter location={'search'} onFilter={() => searchStore.setView('grid')}/>
                     </div>
                 }
-                <div className={s.positionAdaptive} style={{gridTemplateColumns: view === 'mapView' ? '1fr 1fr' : '1fr'}}>
+                <div className={s.positionAdaptive} style={{gridTemplateColumns: searchStore.views.map ? '1fr 1fr' : '1fr'}}>
+                    {!searchStore.views.filter &&<ToggleButtons onActiveFilter={() => searchStore.setView('filter')}/>}
                     {
-                        searchStore.activeFilter || searchStore.widthBrowser < 576 &&
-                        <div className={view !== 'mapView' ? s.cardAdaptive : ''} style={{
-                            display: view === 'mapView' ? 'flex' : 'none',
-                            marginTop: view === 'mapView' ? "10px" : '',
+                        searchStore.views.map &&
+                        (<div className={!searchStore.views.map ? s.cardAdaptive : ''} style={{
+                            display: searchStore.views.map ? 'flex' : 'none',
+                            marginTop: searchStore.views.map ? "10px" : '',
                         }}>
-                            <Map mapData={mapData} location={'finder'} center={center} view={view} setView={setView}/>
-                        </div>
+                            <Map mapData={mapData} location={'finder'} center={center} view={searchStore.views}/>
+                        </div>)
                     }
                     {
-                        !searchStore.activeFilter &&
-                        <CardContainer mapData={mapData} onActiveFilter={() => searchStore.onActiveFilter()} view={view}
-                                       setView={setView} forViewObject={view==='mapView'?'none':''}/>
+                        searchStore.views.grid &&
+                        <CardContainer mapData={mapData} onActiveFilter={() => searchStore.setView('filter')} forViewObject={searchStore.views.map?'none':''}/>
                     }
                 </div>
-            </div>
+            </MobileOnly>
 
-            {/*for 576px+ */}
-            <div style={{display:searchStore.widthBrowser < 576 ? 'none': ''}}>
+            <DesktopOnly>
                 <div style={{margin: '20px 0 0 0'}}>
                     <Filter location={'search'}/>
                 </div>
                 <div style={{
                     display: 'grid',
-                    gridTemplateColumns: view === 'mapView' ? '1fr 1fr' : '1fr',
+                    gridTemplateColumns: searchStore.views.map ? '1fr 1fr' : '1fr',
                     width: '100%',
                     margin: '20px 0 0 0'
                 }}>
-                    <div style={{display: view === 'mapView' ? 'flex' : 'none'}}>
-                        <Map mapData={mapData} location={'finder'} center={center} view={view} setView={setView}/>
+                    <div style={{display: searchStore.views.map ? 'flex' : 'none'}}>
+                        <Map mapData={mapData} location={'finder'} center={center} />
                     </div>
-                    <CardContainer mapData={mapData} view={'view'} setView={setView} forViewObject={''}/>
+                    <CardContainer mapData={mapData} forViewObject={''}/>
                 </div>
-            </div>
+            </DesktopOnly>
 
         </MainContainer>
     )

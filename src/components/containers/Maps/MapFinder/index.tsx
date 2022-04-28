@@ -6,11 +6,14 @@ interface Props {
   mapData: any
   location: 'finder' | 'start' | 'infrastructure' | 'payback'
   center: any
-  view?: string
-  setView?: any
+  view?: {
+    filter: boolean,
+    map: boolean,
+    grid: boolean,
+  }
 }
 
-const MapModal: React.FC<Props> = ({mapData, location, center, view, setView}) => {
+const MapModal: React.FC<Props> = ({mapData, location, center, view}) => {
 
   const [viewport, setViewport] = useState({
     width: "100%",
@@ -21,8 +24,8 @@ const MapModal: React.FC<Props> = ({mapData, location, center, view, setView}) =
   });
 
   return (
-    <div style={{width: view==='mapView' ? '100%' : '0%', transition: 'all .5s'}}>
-      <Map mapData={mapData} location={location} viewport={viewport} setViewport={setViewport} view={view} setView={setView}/>
+    <div style={{width: view?.map ? '100%' : '0%', transition: 'all .5s'}}>
+      <Map mapData={mapData} location={location} viewport={viewport} setViewport={setViewport} view={view} />
       {/*<Modal active={modal} setActive={setModal} >
         <Map mapData={mapData} location={location} modal={modal} setModal={setModal} viewport={viewport} setViewport={setViewport} main={false}/>
       </Modal>*/}
