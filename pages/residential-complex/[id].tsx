@@ -182,7 +182,6 @@ const ResidentialComplex: NextPage = observer((props: any) => {
             </MobileOnly>
             <DesktopOnly>
                 <div ref={developer}>
-                    {/*for kt1(max-width 576px) / kt2*/}
                     <ObjectDeveloper developerData={MappingDeveloperInfo(props.object_developer_info)}/>
                 </div>
             </DesktopOnly>

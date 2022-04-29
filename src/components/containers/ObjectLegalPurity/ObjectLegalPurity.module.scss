@@ -1,13 +1,44 @@
+@import '/src/components/containers/Record/all.scss';
 .infoBlock {
     display: flex;
     margin-bottom: 30px;
+}
+.infoBlockMobile {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
 }
 
 .iconItem {
     min-width: auto;
     margin-right: 80px;
 }
-
+.containerMobile{
+    display: flex;
+    flex-direction: column;
+    gap:10px;
+    margin: 0 10px;
+    &div{
+        flex-direction:row;
+    }
+}
+.paddingIconMobile{
+    display: flex;
+    flex-direction: column;
+    margin: 0 10px;
+    &div{
+        flex-direction:row;
+    }
+}
+.wrapperStyle{
+    flex-direction:row;
+}
 .container {
-    margin: 60px 0 0 60px;
+    @include for-size(KT1) {
+
+        margin: 20px 10px 0 10px;
+    }
+    @include for-size(KT2) {
+        margin: 60px 0 0 60px;
+    }
 }

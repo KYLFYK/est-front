@@ -31,6 +31,9 @@ import { conversionDate } from "../../src/utils/conversionDate/conversionDate";
 import PaybackContainer from "../../src/components/containers/PaybackContainer/PaybackContainer";
 import {plusUnitMeasurement} from "../../src/utils/plusUnitMeasurement/plusUnitMeasurement";
 import css from "../../styles/slider.module.scss";
+import {MobileOnly} from "../../src/components/containers/Adaptive/MobileOnly";
+import {DesktopOnly} from "../../src/components/containers/Adaptive/DesktopOnly";
+import ObjectLegalPurityMobile from "../../src/components/containers/ObjectLegalPurity/ObjectLegalPurityMobile";
 
 const city = ["Москва", "Крым", "Сочи"];
 
@@ -341,12 +344,23 @@ const House = observer((props: any) => {
                 <Map currentHouse={JSON.parse(JSON.stringify(props))} infrastructura={infrastructura}
                      location={'infrastructure'} InfrastructureInfo={props.description_items ? props.description_items : ''}/>
             </div>
+
+          <MobileOnly>
             <div ref={legal}>
-                {
-                    legalPurityData &&
-                    <ObjectLegalPurity legalPurityData={legalPurityData}/>
-                }
+              {
+                legalPurityData &&
+                <ObjectLegalPurityMobile legalPurityData={legalPurityData}/>
+              }
             </div>
+          </MobileOnly>
+          <DesktopOnly>
+            <div ref={legal}>
+              {
+                legalPurityData &&
+                <ObjectLegalPurity legalPurityData={legalPurityData}/>
+              }
+            </div>
+          </DesktopOnly>
             <Mortgage/>
             <div ref={payback}>
                 <PaybackContainer currentHouse={JSON.parse(JSON.stringify(props))} averagePrice={averagePrice}/>

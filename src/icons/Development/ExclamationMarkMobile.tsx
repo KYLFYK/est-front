@@ -1,6 +1,6 @@
 import React from 'react';
 
-const ExclamationMarkMobile = () => {
+export const ExclamationMarkMobile = () => {
     return (
         <svg width="60" height="60" viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
             <circle cx="30" cy="30" r="30" fill="#F2F2F2"/>
@@ -9,5 +9,12 @@ const ExclamationMarkMobile = () => {
         </svg>
     );
 };
-
-export default ExclamationMarkMobile;
+export const ExclamationMarkMobileV2 = () => {
+    return (
+        <svg width="50" height="50" viewBox="0 0 50 50" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="25" cy="25" r="24.5" fill="white" stroke="#F2F2F2"/>
+            <path d="M25.0039 34C26.1085 34 27.0039 33.1046 27.0039 32C27.0039 30.8954 26.1085 30 25.0039 30C23.8993 30 23.0039 30.8954 23.0039 32C23.0039 33.1046 23.8993 34 25.0039 34Z" fill="#27AE60"/>
+            <path d="M23.0039 16H27.0039V28H23.0039V16Z" fill="#27AE60"/>
+        </svg>
+    );
+};

@@ -9,13 +9,13 @@ import DeveloperActivity from "../../tabs/Developer/components/Activity/Develope
 import DeveloperMassMedia from "../../tabs/Developer/components/MassMedia/DeveloperMassMedia";
 import DeveloperStatisticTab from "../../tabs/Developer/components/Statistic/DeveloperStatisticTab";
 import DeveloperRisksTab from "../../tabs/Developer/components/Risks/DeveloperRisksTab";
-import css from './mobile.module.scss'
-import {Advantage} from "../../shared/Advantage/Advantage";
 import Image from "next/image";
-import ExclamationMarkMobile from "../../../icons/Development/ExclamationMarkMobile";
+import {ExclamationMarkMobile} from "../../../icons/Development/ExclamationMarkMobile";
 import CircledKeyMobile from "../../../icons/Development/CircledKeyMobile";
 import CircledSawMobile from "../../../icons/Development/CircledSawMobile";
 import Typography from "../../shared/Typography/Typography";
+import { AdvantageMobile } from 'src/components/shared/Advantage/AdvantageMobile';
+import css from './mobile.module.scss'
 
 interface Props {
     developerData: IObjectDeveloperInfo
@@ -29,7 +29,7 @@ const AccordionContainerMobile: FC<Props> = ({developerData}) => {
                 Застройщик
             </Typography>
             <div className={css.infoBlock}>
-                <Advantage
+                <AdvantageMobile
                     title={developerData.name}
                     text={developerData.developerType}
                     className={css.iconItem}
@@ -46,16 +46,16 @@ const AccordionContainerMobile: FC<Props> = ({developerData}) => {
                             />
                         }
                     </div>
-                </Advantage>
-                <Advantage title="Риски" text={developerData.risks ? "Да" : "Нет"} className={css.iconItem}>
+                </AdvantageMobile>
+                <AdvantageMobile title="Риски" text={developerData.risks ? "Да" : "Нет"} className={css.iconItem}>
                     <ExclamationMarkMobile/>
-                </Advantage>
-                <Advantage title="Сдано" text={developerData.leasedAmmount} className={css.iconItem}>
+                </AdvantageMobile>
+                <AdvantageMobile title="Сдано" text={developerData.leasedAmmount} className={css.iconItem}>
                     <CircledKeyMobile/>
-                </Advantage>
-                <Advantage title="Строится" text={developerData.inProgressAmmount} className={css.iconItem}>
+                </AdvantageMobile>
+                <AdvantageMobile title="Строится" text={developerData.inProgressAmmount} className={css.iconItem}>
                     <CircledSawMobile/>
-                </Advantage>
+                </AdvantageMobile>
             </div>
             {
                 developerData.tabsData.about &&
