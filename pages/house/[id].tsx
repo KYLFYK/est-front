@@ -30,10 +30,10 @@ import {
 import { conversionDate } from "../../src/utils/conversionDate/conversionDate";
 import PaybackContainer from "../../src/components/containers/PaybackContainer/PaybackContainer";
 import {plusUnitMeasurement} from "../../src/utils/plusUnitMeasurement/plusUnitMeasurement";
-import css from "../../styles/slider.module.scss";
 import {MobileOnly} from "../../src/components/containers/Adaptive/MobileOnly";
 import {DesktopOnly} from "../../src/components/containers/Adaptive/DesktopOnly";
 import ObjectLegalPurityMobile from "../../src/components/containers/ObjectLegalPurity/ObjectLegalPurityMobile";
+import css from "../../styles/slider.module.scss";
 
 const city = ["Москва", "Крым", "Сочи"];
 
@@ -329,7 +329,8 @@ const House = observer((props: any) => {
                 }
             <div ref={tours}>
                 {
-                    (props?.online_tour?.threeD_tour?.url || props?.online_tour?.vr_tour?.url) && <ToursContainer Online_tour={props.online_tour}/>
+                    (props?.online_tour?.threeD_tour?.url || props?.online_tour?.vr_tour?.url)
+                    && <ToursContainer Online_tour={props.online_tour}/>
                 }
             </div>
             <div ref={architec}>

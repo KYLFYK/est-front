@@ -1,5 +1,5 @@
 import {observer} from "mobx-react-lite"
-import React, {useRef, useEffect, useState} from 'react'
+import React, {useEffect, useRef, useState} from 'react'
 import {useRouter} from 'next/router'
 import {MainContainer} from '../../src/components/containers/MainContainer/MainContainer'
 import {Breadcrumbs} from '../../src/components/shared/Breadcrumbs/Breadcrumbs'
@@ -7,7 +7,6 @@ import {Views} from '../../src/components/shared/Views/Views'
 import {NameEstate} from '../../src/components/shared/NameEstate/NameEstate'
 import {AdressEstate} from '../../src/components/shared/AdressEstate/AdressEstate'
 import {HorizontalTabs} from '../../src/components/shared/HorizontalTabs/HorizontalTabs'
-import {IMAGES_SET} from '../../src/components/containers/GeneralInfo/config'
 import GeneralInfo from '../../src/components/containers/GeneralInfo/GeneralInfo'
 import ObjectDescription from '../../src/components/containers/ObjectDescription/ObjectDescription'
 import ObjectSpecifications from '../../src/components/containers/ObjectSpecifications/ObjectSpecifications'
@@ -18,12 +17,15 @@ import {Mortgage} from '../../src/components/shared/Mortgage/Mortgage'
 import {Record} from '../../src/components/containers/Record/Record'
 import RecordAgent from '../../src/components/containers/Record/RecordAgent.json'
 import {UrlObj} from '../../src/api/instance'
-import {IgetLandIdSSPType, ObjectLandType} from "../../src/api/obj/land";
+import {ObjectLandType} from "../../src/api/obj/land";
 import {conversionDate} from "../../src/utils/conversionDate/conversionDate";
-import {sortObject_specsTypeGuide, sortGuide} from "../../src/utils/conversionIcons/conversionIcons";
+import {sortGuide, sortObject_specsTypeGuide} from "../../src/utils/conversionIcons/conversionIcons";
 import {useBreadcrumbsStore} from '../../src/mobx/stores/BreadcrumbsStore/BreadcrumbsStore'
 import {FILTER_ACTIONS_OPTIONS, FILTER_HOUSE_TYPE_OPTIONS} from '../../src/components/containers/Filter/config'
+import {MobileOnly} from "../../src/components/containers/Adaptive/MobileOnly";
+import {DesktopOnly} from "../../src/components/containers/Adaptive/DesktopOnly";
 import css from "../../styles/slider.module.scss";
+import ObjectLegalPurityMobile from "../../src/components/containers/ObjectLegalPurity/ObjectLegalPurityMobile";
 
 const city = ['Москва', 'Крым', 'Сочи']
 const personalAccount = [{title: 'Личный кабинет', href: '/User', message: 0},
@@ -112,12 +114,22 @@ const Land = observer((props: ObjectLandType) => {
                 <Map currentHouse={props} infrastructura={infrastructura} location={'infrastructure'}
                      InfrastructureInfo={props.description_Info.toString()}/>
             </div>
-            <div ref={legal}>
-                {
-                    props.legalPurityData && <ObjectLegalPurity legalPurityData={props.legalPurityData}/>
-                }
+            <MobileOnly>
+                <div ref={legal}>
+                    {
+                        props.legalPurityData &&
+                        <ObjectLegalPurityMobile legalPurityData={props.legalPurityData}/>
+                    }
+                </div>
+            </MobileOnly>
+            <DesktopOnly>
+                <div ref={legal}>
+                    {
+                        props.legalPurityData && <ObjectLegalPurity legalPurityData={props.legalPurityData}/>
+                    }
 
-            </div>
+                </div>
+            </DesktopOnly>
             <Mortgage/>
             <div ref={record}>
                 <Record Record={RecordAgent.Record} title={'участок'} nameObject={props.name}/>
@@ -127,11 +139,6 @@ const Land = observer((props: ObjectLandType) => {
 })
 
 export default Land
-
-// need fix
-// 1 images
-// 2 map infrastructura
-// 3 legalPurityData
 
 export async function getServerSideProps({params}: any) {
 
