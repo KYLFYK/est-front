@@ -116,7 +116,7 @@ export const Filter: React.FC<Props> = observer(({ location,onFilter,activeFilte
       searchStore.setParams(paramsForGet(searchStore.getFilter()));
       searchStore.fetch();
     }
-    if(width<578){
+    if(width<576){
       onFilter && onFilter()
     }
   };

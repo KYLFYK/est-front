@@ -9,7 +9,11 @@ class SearchStore {
   constructor() {
     makeAutoObservable(this);
   }
-  activeFilter = true
+  views = {
+    filter: false,
+    map: false,
+    grid: true,
+  }
   widthBrowser = 1280
   fetching = true
   sort = 'default'
@@ -57,12 +61,38 @@ class SearchStore {
     'benefit': values['benefit'],
     }
   }
-  onActiveFilter(){
-    this.activeFilter = !this.activeFilter
+  setView(value: 'map' | 'grid' | 'filter'){
+    if(value === 'map'){
+      this.views = {
+        filter: false,
+        map: true,
+        grid: false,
+      }
+    }
+    if(value === 'grid'){
+      this.views = {
+        filter: false,
+        map: false,
+        grid: true,
+      }
+    }
+    if(value === 'filter'){
+      this.views = {
+        filter: true,
+        map: false,
+        grid: false,
+      }
+    }
   }
-  onWidthBrowser(width:number){
+
+  getView() {
+    return JSON.parse(JSON.stringify({ ...this.views}))
+  }
+
+  onWidthBrowser(width: number){
     this.widthBrowser = width
   }
+
   setOrderType(value: string | number) {
     this.filter = {...this.filter, 'order-type': value}
   }

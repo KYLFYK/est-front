@@ -1,0 +1,25 @@
+@import '../../../../app/styles/resolutions.scss';
+
+.finderButtons{
+    display: flex;
+    @include for-size(KT1) {
+        flex-direction: row-reverse;
+        gap: 10px;
+        justify-content: flex-end;
+    }@include for-size(KT2) {
+             flex-direction: row;
+     }
+}
+
+.paddingButton{
+    padding: 0 10px 0 0;
+    @include for-size(KT1) {
+        display: flex;
+    }
+    @include for-size(KT2) {
+        display: none;
+    }
+}
+.toggleButtonsWrap {
+    margin: 0 0 0 8px;
+}

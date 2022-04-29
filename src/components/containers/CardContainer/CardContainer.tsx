@@ -15,6 +15,8 @@ import { ToggleButtonsWithIcons } from '../../shared/ToggleButtonsWithIcons/Togg
 import {Loader, Empty} from '../../shared/Loader/Loader'
 import Typography from "../../shared/Typography/Typography";
 import FilterIcon from "../../../icons/FilterIcon/FilterIcon";
+import { DesktopOnly } from 'src/components/containers/Adaptive/DesktopOnly'
+import { ToggleButtons } from './ToggleButtons'
 
 // TODO: Take types from 'model' folder, when global state gets its types
 
@@ -29,8 +31,6 @@ interface IObjectPlanningItem {
 
 interface Props {
     mapData: any
-    view: string
-    setView: any
     onActiveFilter?:()=>void
     forViewObject?:string // none
 }
@@ -41,7 +41,7 @@ const useStyles = makeStyles(() => ({
     }
 }))
 
-const CardContainer: React.FC<Props> = observer(({ mapData, view, setView,onActiveFilter,forViewObject }) => {
+const CardContainer: React.FC<Props> = observer(({ mapData,onActiveFilter,forViewObject }) => {
     const searchStore = useSearchStore()
     const classes = useStyles()
 
@@ -56,15 +56,10 @@ const CardContainer: React.FC<Props> = observer(({ mapData, view, setView,onActi
         sortedData = [...searchStore.getInitialData()?.sort((a: any, b: any) => a.price < b.price ? 1 : -1)]
     }
 
-    const toggleButtonOptions = [
-        { icon: <GridView fill={view === 'gridView' ? '#96A2B5' : '#CAD1DA'}/>, onclick: () => setView('gridView') },
-        { icon: <MapView fill={view === 'mapView' ? '#96A2B5' : '#CAD1DA'}/>, onclick: () => setView('mapView') },
-    ]
-
     return (
-        <div className={view === 'mapView' ? s.openContainer : s.closeContainer}>
+        <div className={searchStore.views.map ? s.openContainer : s.closeContainer}>
             <div className={s.finderControls}>
-                <div className={s.finderDropdown} style={{display: view === 'mapView'?'none':""}}>
+                <div className={s.finderDropdown} style={{display: searchStore.views.map?'none':""}}>
                     <BaseDropDown 
                         className={classes.sortDropdown}
                         onChange={(e) => {setSort(e)}}
@@ -72,35 +67,6 @@ const CardContainer: React.FC<Props> = observer(({ mapData, view, setView,onActi
                         options={SORT_FILTER_OPTIONS}
                         value={sort} 
                     />
-                </div>
-                <div className={s.finderButtons}>
-                    {/*<div style={{width:'114px',border:'1px solid #f2f2f'}}>*/}
-                    {/*    <Typography>*/}
-                    {/*        Фильтры*/}
-                    {/*    </Typography>*/}
-                    {/*</div>*/}
-                    <BaseButton
-                        icon={<FilterIcon />}
-                        iconPosition={"start"}
-                        type={"secondary"}
-                        className={s.paddingButton}
-                        onClick={onActiveFilter}
-                    >
-                        Фильтры
-                    </BaseButton>
-                    {/*<BaseButton*/}
-                    {/*    type={'secondary'}*/}
-                    {/*    isActive={false}*/}
-                    {/*    icon={<FavoriteIcon />}*/}
-                    {/*    iconActive={''}*/}
-                    {/*>*/}
-                    {/*    Сохранить поиск*/}
-                    {/*</BaseButton>*/}
-                    <div className={s.toggleButtonsWrap}>
-                        <ToggleButtonsWithIcons
-                            items={toggleButtonOptions}
-                        />
-                    </div>
                 </div>
             </div>
             <div className={(searchStore.fetching || !sortedData.length) ? s.contentText : s.content} style={{display:forViewObject}} >
@@ -122,7 +88,9 @@ const CardContainer: React.FC<Props> = observer(({ mapData, view, setView,onActi
                         : <Empty/>
                 }
             </div>
-            <OpenCloseMapButton view={view} forViewObject={forViewObject} setView={setView}/>
+            <DesktopOnly>
+                <OpenCloseMapButton view={searchStore.views} setView={searchStore.setView}/>
+            </DesktopOnly>
         </div>
     )
 })
