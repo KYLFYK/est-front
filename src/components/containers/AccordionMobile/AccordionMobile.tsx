@@ -15,7 +15,7 @@ interface Props {
 }
 
 const AccordionMobile :FC<Props> = ({developerData}) => {
-    console.log(123,developerData.tabsData.about)
+
     return (
         <div>
             {

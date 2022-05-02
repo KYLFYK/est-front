@@ -10,7 +10,7 @@ interface Props {
         map: boolean,
         grid: boolean,
     }
-    setView: (value: 'map' | 'grid' | 'filter') => void
+    setView: any
 }
 
 export const OpenCloseMapButton: React.FC<Props> = ({view, setView}) => {
@@ -18,7 +18,7 @@ export const OpenCloseMapButton: React.FC<Props> = ({view, setView}) => {
     return (
         <div className={view.map ? s.openWrapper : s.closeWrapper }>
             <BaseButton 
-                onClick={() => view.map ? setView('grid') : setView('map')} 
+                onClick={setView} 
                 className={view.map ? s.openButton : s.closeButton} type="secondary"
             > 
                 {view.map ? <ArrowIconLeft/> : <ArrowIconRight/>} 

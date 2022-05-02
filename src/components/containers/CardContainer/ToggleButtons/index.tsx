@@ -10,7 +10,7 @@ import FilterIcon from "../../../../icons/FilterIcon/FilterIcon";
 import { DesktopOnly } from 'src/components/containers/Adaptive/DesktopOnly'
 
 interface Props {
-    onActiveFilter: any
+    onActiveFilter?: any
 }
 
 export const ToggleButtons: React.FC<Props> = observer(({onActiveFilter}) => {

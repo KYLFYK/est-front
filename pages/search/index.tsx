@@ -37,12 +37,12 @@ const Finder: NextPage = observer(() => {
             searchStore.onWidthBrowser(window.innerWidth)
         }
     }, [])
-    console.log(searchStore.getView())
+
     return (
         <MainContainer keywords={"Поиск"} title={"Поиск"} city={city} personalAccount={personalAccount}>
-            <div style={{display:searchStore.widthBrowser < 576 && searchStore.views.filter ? 'none' : 'flex'}}><Breadcrumbs/></div>
 
             <MobileOnly>
+                
                 {
                     searchStore.views.filter && <div style={{margin: '20px 10px 0 10px'}}>
                         <Filter location={'search'} onFilter={() => searchStore.setView('grid')}/>
@@ -67,6 +67,7 @@ const Finder: NextPage = observer(() => {
             </MobileOnly>
 
             <DesktopOnly>
+                <Breadcrumbs/>
                 <div style={{margin: '20px 0 0 0'}}>
                     <Filter location={'search'}/>
                 </div>
@@ -76,8 +77,8 @@ const Finder: NextPage = observer(() => {
                     width: '100%',
                     margin: '20px 0 0 0'
                 }}>
-                    <div style={{display: searchStore.views.map ? 'flex' : 'none'}}>
-                        <Map mapData={mapData} location={'finder'} center={center} />
+                    <div style={{display: searchStore.views.map  ? 'flex' : 'none'}}>
+                        <Map mapData={mapData} location={'finder'} center={center} view={searchStore.views}/>
                     </div>
                     <CardContainer mapData={mapData} forViewObject={''}/>
                 </div>

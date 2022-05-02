@@ -21,7 +21,7 @@ interface Props {
   location: 'finder' | 'start' | 'infrastructure' | 'payback'
   viewport: any
   setViewport?: any
-  view?: {
+  view: {
     filter: boolean,
     map: boolean,
     grid: boolean,
@@ -75,6 +75,12 @@ const Map: React.FC<Props> = observer(({mapData, location, viewport, setViewport
     }
   }
 
+  // разовый useEffect, на приведение в соответствие размера карты (является "костылем")
+  useEffect(() => {
+    setViewport({ ...viewport, width: "100%", height: "100%", transitionDuration: 100 });
+  }, [])
+
+  // useEffect с зависимостями, на изменение fullscreen
   useEffect(() => { 
     document.addEventListener('fullscreenchange', () => {
       if (document.fullscreenElement) {
@@ -87,7 +93,7 @@ const Map: React.FC<Props> = observer(({mapData, location, viewport, setViewport
   )}, [setViewport, viewport])
 
   return (
-    <div className={view?.map ? s.openMapWrapper : s.closeMapWrapper} ref={mapWrap}>
+    <div className={view.map ? s.openMapWrapper : s.closeMapWrapper} ref={mapWrap}>
         <MapGL
           {...viewport}
           mapboxApiAccessToken={'pk.eyJ1Ijoibmlja29sYXlhcmJ1em92IiwiYSI6ImNrdmdtYWQxYjd0enQybnM3bGR5b2Fnd2YifQ.IEtk0ClJ58f6dgZYa8hKpA'}

@@ -85,8 +85,8 @@ class SearchStore {
     }
   }
 
-  getView() {
-    return JSON.parse(JSON.stringify({ ...this.views}))
+  get() {
+    return JSON.parse(JSON.stringify({ ...this}))
   }
 
   onWidthBrowser(width: number){

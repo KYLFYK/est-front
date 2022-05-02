@@ -1,6 +1,8 @@
 import React, {useState} from 'react'
 import { observer } from "mobx-react-lite"
 import { useSearchStore } from "../../../mobx/stores/SearchStore/SearchStore"
+import { useAdaptiveContext } from "../../../mobx/adaptive/AdaptiveProvider";
+import { AdaptiveParams } from "../../../mobx/adaptive/store";
 import { makeStyles } from "@material-ui/core"
 import ObjectCard from '../Card/index'
 import {BaseDropDown} from '../../shared/BaseDropDown/BaseDropDown'
@@ -43,6 +45,7 @@ const useStyles = makeStyles(() => ({
 
 const CardContainer: React.FC<Props> = observer(({ mapData,onActiveFilter,forViewObject }) => {
     const searchStore = useSearchStore()
+    const { resolution } = useAdaptiveContext()
     const classes = useStyles()
 
     const [sort, setSort] = useState(SORT_FILTER_OPTIONS[0].value)
@@ -59,7 +62,7 @@ const CardContainer: React.FC<Props> = observer(({ mapData,onActiveFilter,forVie
     return (
         <div className={searchStore.views.map ? s.openContainer : s.closeContainer}>
             <div className={s.finderControls}>
-                <div className={s.finderDropdown} style={{display: searchStore.views.map?'none':""}}>
+                <div className={s.finderDropdown} style={{display: (searchStore.views.map && resolution < AdaptiveParams.KT3) ?'none':""}}>
                     <BaseDropDown 
                         className={classes.sortDropdown}
                         onChange={(e) => {setSort(e)}}
@@ -68,6 +71,7 @@ const CardContainer: React.FC<Props> = observer(({ mapData,onActiveFilter,forVie
                         value={sort} 
                     />
                 </div>
+                <DesktopOnly><ToggleButtons/></DesktopOnly>
             </div>
             <div className={(searchStore.fetching || !sortedData.length) ? s.contentText : s.content} style={{display:forViewObject}} >
                 {searchStore.fetching
@@ -89,7 +93,7 @@ const CardContainer: React.FC<Props> = observer(({ mapData,onActiveFilter,forVie
                 }
             </div>
             <DesktopOnly>
-                <OpenCloseMapButton view={searchStore.views} setView={searchStore.setView}/>
+                <OpenCloseMapButton view={searchStore.views} setView={() => searchStore.views.map ? searchStore.setView('grid') : searchStore.setView('map')}/>
             </DesktopOnly>
         </div>
     )
