@@ -58,6 +58,13 @@
   padding: 10px 10px 0 0;
   position:relative;
   left: 50px;
+  @include for-size(KT1) {
+    height: 20px;
+  }
+  @include for-size(KT2) {
+        height: 40px;
+  }
+
 }
 .positionContent{
   display: flex;

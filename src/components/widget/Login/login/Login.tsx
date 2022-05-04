@@ -44,7 +44,9 @@ export const Login: React.FC<LoginPropsType> = ({recoveryPass, registration, onE
     return (
         <div className={css.loginContainer}>
             <LogoIcon/>
-            <InputAlways value={valueAccount} onChange={setValueAccount} title={'Логин*'}/>
+            <div style={{marginTop:'20px'}}>
+                <InputAlways value={valueAccount} onChange={setValueAccount} title={'Логин*'}/>
+            </div>
             <InputPassword value={valuePassword} onChange={setValuePassword}/>
             <div className={css.recovery}>
                 {/*<div style={{marginRight: '35px'}} onClick={() => recoveryPassword()}>*/}

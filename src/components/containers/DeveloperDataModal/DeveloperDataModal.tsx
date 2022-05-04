@@ -35,8 +35,9 @@ export const DeveloperDataModal: FC<DeveloperDataPropsType> = observer(({ img, d
     },[isActive, store, id])
 
     return (
-
-        <Modal setActive={() => setActive(false)} active={isActive} >
+        // test for mobile update ( modal 0.2c vision)
+        <Modal setActive={() => setActive(false)} active={developer.title?isActive:false} >
+        {/*<Modal setActive={() => setActive(false)} active={isActive} >*/}
             <Image
                 unoptimized
                 src={img}
@@ -74,7 +75,7 @@ export const DeveloperDataModal: FC<DeveloperDataPropsType> = observer(({ img, d
                     <Typography size={'default'} color="accent">
                         Объекты застройщика
                     </Typography>
-                    <Scroll height={'650'}>
+                    <Scroll height={store.initialData.complexDeveloper.length> 7 ?'500': "600"}>
                         {
                             store.initialData.complexDeveloper.map(({ name,id}, index) => (
                                 <div key={index} className={css.colorText}>

@@ -2,15 +2,16 @@
 @import '/src/components/containers/Record/all.scss';
 .selectStyle{
   height: 42px !important;
-  margin:30px 0 5px;
   text-align: center;
   border-radius: 6px !important;
   right: 3px;
   @include for-size(KT1) {
     min-width: calc( 70vw );
+    margin:20px 0 5px;
   }
   @include for-size(KT2) {
     min-width: 374px;
+    margin:30px 0 5px;
   }
 }
 .registrationContainer{
@@ -64,6 +65,7 @@
   cursor: pointer;
   @include for-size(KT1) {
     width: calc(  40px + 70vw );
+    line-height: 15.4px;
   }
   @include for-size(KT2) {
     width: 400px;
@@ -73,12 +75,13 @@
   width: 100%;
   display: flex;
   justify-content: center;
-  margin: 30px 0 20px 0;
   @include for-size(KT1) {
     width: calc(  40px + 70vw );
+    margin: 15px 0;
   }
   @include for-size(KT2) {
     min-width: 380px;
+    margin: 30px 0 20px 0;
   }
 }
 .check{
