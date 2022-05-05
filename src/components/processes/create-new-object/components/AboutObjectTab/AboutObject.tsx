@@ -237,7 +237,7 @@ const AboutObjectTab: React.FC<Props> = observer(
     ) => {
       setValues({
         ...values,
-        latitude: +event.target.value > 90 ? 90 : +event.target.value,
+        latitude: +event.target.value > 89 ? 89 : +event.target.value,
       });
     };
     const onChangeLongitude = (
@@ -245,7 +245,7 @@ const AboutObjectTab: React.FC<Props> = observer(
     ) => {
       setValues({
         ...values,
-        longitude: +event.target.value > 180 ? 180 : +event.target.value,
+        longitude: +event.target.value > 89 ? 89 : +event.target.value,
       });
     };
 

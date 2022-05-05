@@ -49,7 +49,7 @@ const Planning: React.FC<Props> = ({ FilterComponent, planningList }) => {
                             <a className={s.link}>
                                 <Card 
                                     key={idx} 
-                                    image={file ? file[0].url : ''} 
+                                    image={file[0]?.url} 
                                     price={price} 
                                     title={name} 
                                     housing={buildingNumber} 
