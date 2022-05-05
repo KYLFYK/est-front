@@ -36,9 +36,9 @@
   background: #FFFFFF;
   box-shadow: 3px 3px 10px 6px rgba(0, 0, 0, 0.06);
   color: #333;
-  width: 94%;
+  width: calc(100% - 16px);
   border-radius: 8px;
-  z-index: 110;
+  z-index: 100;
  // for scroll Base DropDown ( on active )
   display: flex;
   flex-direction: column;

@@ -48,7 +48,9 @@
     }
 }
 .dropdownPrivateType {
-    width: 200px;
+    @include for-size(KT2) {
+        width: 200px;
+    }
 }
 .dropdownBuildingType { 
     @include for-size(KT2) {
@@ -56,13 +58,19 @@
     }
 }
 .dropdownFloor {
-    width: 360px !important
+    @include for-size(KT2) {
+        width: 360px !important;
+    }
 }
 .dropdownIRB {
-    width: 200px;
+    @include for-size(KT2) {
+        width: 200px;
+    }
 }
 .dropdownImprovement {
-    width: 200px;
+    @include for-size(KT2) {
+        width: 200px;
+    }
 }
 
 .submit {

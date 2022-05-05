@@ -21,46 +21,23 @@ import {
   FILTER_LAND_SPECS_OPTIONS,
   FILTER_HOUSE_TYPES,
 } from "./config";
+import {REG_EXP_CONFIG} from '../../../lib/regexp/regexp';
 import { useSearchStore } from "src/mobx/stores/SearchStore/SearchStore";
 import { useBreadcrumbsStore } from "src/mobx/stores/BreadcrumbsStore/BreadcrumbsStore";
 import s from "./Filter.module.scss";
 import { paramsForGet } from "../../../lib/params/params";
-import { makeStyles } from "@material-ui/core";
 
 interface Props {
   location?: "start" | "search";
-  onFilter?:()=>void
-  activeFilter?:()=>void
+  onFilter?: ()=>void
 }
 
-export const useStyles = makeStyles(() => ({
-  root: {
-    backgroundColor: "#fff",
-    width: 200,
-    borderRadius: 8,
-    border: "0px solid #CAD1DA",
-    "&::before": {
-      display: "none",
-    },
-    "&.MuiInput-underline::after": {
-      display: "none",
-    },
-    "& > .MuiSelect-root": {
-      padding: "10px 15px 11px 12px !important",
-      "&:focus": {
-        backgroundColor: "inherit",
-      },
-    },
-  },
-}));
-
-export const Filter: React.FC<Props> = observer(({ location,onFilter,activeFilter }) => {
+export const Filter: React.FC<Props> = observer(({ location, onFilter }) => {
 
   const router = useRouter();
   const searchStore = useSearchStore();
   const breadcrumbs = useBreadcrumbsStore();
   const [width, setWidth]=useState<number>(1280)
-  const classes = useStyles();
 
   React.useEffect(() => {
     setWidth(window.innerWidth)
@@ -94,7 +71,7 @@ export const Filter: React.FC<Props> = observer(({ location,onFilter,activeFilte
       searchStore.fetch();
     }
   }, []);
-
+  
   const onSubmit = () => {
     if (location === "start") {
       router.push({
@@ -147,16 +124,16 @@ export const Filter: React.FC<Props> = observer(({ location,onFilter,activeFilte
     searchStore.setBuildingType(value);
   };
   const onChangePriceFrom = (value: string) => {
-    searchStore.setPriceFrom(value);
+    (value.match(REG_EXP_CONFIG.integer) || value === '') && searchStore.setPriceFrom(value);
   };
   const onChangePriceTo = (value: string) => {
-    searchStore.setPriceTo(value);
+    (value.match(REG_EXP_CONFIG.integer) || value === '') && searchStore.setPriceTo(value);
   };
   const onChangeSquareFrom = (value: string) => {
-    searchStore.setSquareFrom(value);
+    (value.match(REG_EXP_CONFIG.integer) || value === '') && searchStore.setSquareFrom(value);
   };
   const onChangeSquareTo = (value: string) => {
-    searchStore.setSquareTo(value);
+    (value.match(REG_EXP_CONFIG.integer) || value === '') && searchStore.setSquareTo(value);
   };
   /*const onChangeSearchValue = (e: ChangeEvent<HTMLInputElement>) => {
         setValues({...values, searchValue: e.target.value})
@@ -169,10 +146,10 @@ export const Filter: React.FC<Props> = observer(({ location,onFilter,activeFilte
     );
   };
   const onChangePrivateFloorFrom = (value: string) => {
-    searchStore.setPrivateFloorFrom(value);
+    (value.match(REG_EXP_CONFIG.integer) || value === '') && searchStore.setPrivateFloorFrom(value);
   };
   const onChangePrivateFloorTo = (value: string) => {
-    searchStore.setPrivateFloorTo(value);
+    (value.match(REG_EXP_CONFIG.integer) || value === '') && searchStore.setPrivateFloorTo(value);
   };
   const onChangeIrb = (value: string) => {
     searchStore.setIRB(value);
