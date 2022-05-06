@@ -9,6 +9,7 @@ class SearchStore {
   constructor() {
     makeAutoObservable(this);
   }
+
   views = {
     filter: false,
     map: false,

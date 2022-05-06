@@ -22,6 +22,8 @@ import { ThankRegistering } from "../Login/ThankRegistering/ThankRegistering";
 
 import css from "./Header.module.scss";
 import Burger from "src/icons/Header/Burger";
+import { useSearchStore } from "src/mobx/stores/SearchStore/SearchStore";
+import { observer } from "mobx-react-lite";
 
 type HeaderPropsType = {
   className?: string;
@@ -30,20 +32,6 @@ type HeaderPropsType = {
   auth?: boolean;
   modalActive?: string;
 };
-
-const moc = [
-  {
-    href: "/search?object-type=apartment&order-type=buy&privateType=house",
-    title: "Купить",
-  },
-  /*{
-    href: "/search?object-type=apartment&order-type=rent&privateType=house",
-    title: "Снять",
-  },*/
-  { href: "/calculator", title: "Ипотека" },
-  // { href: "/construction", title: "Строящиеся дома" },
-  { href: "/#contact", title: "Контакты" },
-];
 
 const personalAcc = [
   [
@@ -103,7 +91,7 @@ const personalAcc = [
   ],
 ];
 
-export const Header: FC<HeaderPropsType> = ({
+export const Header: FC<HeaderPropsType> = observer(({
   className,
   city,
   personalAccount,
@@ -128,6 +116,21 @@ export const Header: FC<HeaderPropsType> = ({
   const [edit, setEdit] = useState<string>(modalActive ? modalActive : "");
 
   const tokenConformation = router.query.token && router.query.token;
+  const searchStore = useSearchStore();
+
+  const moc = [
+    {
+      href: `/search?object-type=${searchStore.getFilter()['object-type']}&building-type=${searchStore.getFilter()['building-type']}&order-type=buy`,
+      title: "Купить",
+    },
+    /*{
+      href: "/search?object-type=apartment&order-type=rent&privateType=house",
+      title: "Снять",
+    },*/
+    { href: "/calculator", title: "Ипотека" },
+    // { href: "/construction", title: "Строящиеся дома" },
+    { href: "/#contact", title: "Контакты" },
+  ];
 
   const searchModal = (menu: string) => {
     switch (menu) {
@@ -338,6 +341,6 @@ export const Header: FC<HeaderPropsType> = ({
       </div>
     </div>
   );
-};
+});
 
 export default Header;

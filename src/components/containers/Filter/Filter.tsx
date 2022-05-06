@@ -68,7 +68,6 @@ export const Filter: React.FC<Props> = observer(({ location, onFilter }) => {
           )[0].label,
           2
         );
-      searchStore.fetch();
     }
   }, []);
   
