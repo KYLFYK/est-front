@@ -37,7 +37,9 @@ const Card: React.FC<Props> = ({
       </div>
       <div className={s.content}>
         <div className={s.contentRow}>
-          <Typography weight="bold">{title}</Typography>
+          <Typography weight="bold" className={s.nameWidth} title={title.toString()} >
+            {title}
+          </Typography>
           <Typography weight="bold" color="nude" className={s.price}>
             {formatNumbersToCurrency(price)} ₽
           </Typography>

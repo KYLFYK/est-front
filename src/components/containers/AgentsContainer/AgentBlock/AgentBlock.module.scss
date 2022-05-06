@@ -16,6 +16,11 @@
         border-radius: 8px;
         box-shadow: 0 4px 8px 0 rgba(26, 72, 98, 0.15);
     }
+    @include for-size(KT3) {
+        border: 0 solid #F2F2F2;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px 0 rgba(26, 72, 98, 0);
+    }
     @media  (min-width: 1320px) {
     display: flex;
     min-width: 400px;

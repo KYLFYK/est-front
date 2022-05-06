@@ -27,6 +27,7 @@ interface Props extends IPropsGeneral {
   icon?: JSX.Element | string | boolean;
   iconPosition?: "start" | "end";
   inline?: boolean;
+  title?:string
 }
 
 const Typography: React.FC<Props> = ({
@@ -39,6 +40,7 @@ const Typography: React.FC<Props> = ({
   icon,
   inline,
   children,
+  title,
 }) => {
   return (
     <p
@@ -51,6 +53,7 @@ const Typography: React.FC<Props> = ({
         className
       )}
       style={{ display: inline ? "inline-flex" : "flex" }}
+      title={title}
     >
       {icon && iconPosition === "start" && (
         <span className={s.icon}>{icon}</span>

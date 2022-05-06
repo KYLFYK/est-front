@@ -43,8 +43,16 @@
     display: flex;
     margin-bottom: 15px;
     gap: 17px;
-}
 
+}
+.nameWidth{
+    display: block;
+    width: 155px;
+    white-space: nowrap;
+    overflow: hidden;
+    padding-right: 5px;
+    text-overflow: ellipsis;
+}
 .price {
     margin-left: auto;
     white-space: nowrap;
