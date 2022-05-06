@@ -5,9 +5,12 @@
     flex-direction:column;
     gap:10px;
     margin:0 10px;
+    border-bottom: 1px solid #F2F2F2;
+    padding-bottom: 20px;
   }
   @include for-size(KT3) {
     display: none;
+    padding-bottom: 0;
    }
 }
 .infoBlock {

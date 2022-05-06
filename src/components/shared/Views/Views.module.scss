@@ -2,13 +2,14 @@
 
 .blockAdvantage{
     display: flex;
-    margin: 20px 0 10px 60px;
-
     @include for-size(KT1) {
         margin: 10px 10px 0 10px;
     }
     @include for-size(KT2) {
         margin: 20px 20px 0 20px;
+    }
+    @include for-size(KT3) {
+        margin: 20px 0 0 60px;
     }
 }
 .item{

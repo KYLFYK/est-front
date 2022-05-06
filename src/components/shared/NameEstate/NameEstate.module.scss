@@ -2,7 +2,6 @@
 
 .blockAdvantage{
     display: flex;
-    margin: 10px 0 10px 60px;
     @media screen and (max-width: 1400px){
         margin: 0 0 0 60px;
     }
@@ -12,6 +11,9 @@
     }
     @include for-size(KT2) {
         margin: 20px 0 20px 20px;
+    }
+    @include for-size(KT3) {
+        margin: 10px 0 10px 60px;
     }
 }
 .height{
