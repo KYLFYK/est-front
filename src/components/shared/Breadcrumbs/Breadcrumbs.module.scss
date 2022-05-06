@@ -1,15 +1,20 @@
 @import '/src/components/containers/Record/all.scss';
+
 .blockAdvantage{
     display: flex;
     margin: 40px 0 0 60px;
     @media screen and (max-width: 1400px){
         margin: 20px 0 0 60px;
     }
+    @media (max-width: 786px) {
+        margin: 20px 0;
+    }
     @include for-size(KT1) {
         margin: 35px 0 0 10px;
-    }@include for-size(KT2) {
+    }
+    @include for-size(KT2) {
         margin: 20px 0 0 10px;
-     }
+    }
 }
 .img{
     display: inline-block;
@@ -32,7 +37,7 @@
     align-items: center;
 }
 .item {
-    display: flex; 
+    display: flex;
     align-items: center;
     cursor: pointer;
     margin: 0 4px 0 0;

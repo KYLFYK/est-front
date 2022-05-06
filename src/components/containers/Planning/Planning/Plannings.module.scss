@@ -1,3 +1,9 @@
+@import '/src/components/containers/Record/all.scss';
+@import '/src/app/styles/colours.scss';
+@import '/src/app/styles/typography.scss';
+@import '/src/app/styles/buttons.scss';
+@import '/src/app/styles/resolutions.scss';
+
 .content {
     display: flex;
     gap: 20px;
@@ -8,11 +14,50 @@
 }
 .container{
     margin: 60px 0 0 60px;
+
+    @include for-size(KT1) {
+        margin: 10px 10px 0 10px;
+        padding-bottom: 15px;
+        border-bottom: 1px solid #F2F2F2;
+    }
+    @include for-size(KT2) {
+        margin: 20px 20px 0 20px;
+        padding-bottom: 15px;
+        border-bottom: 1px solid #F2F2F2;
+    }
+
+    @include for-size(KT3) {
+        margin: 60px 0 0 60px;
+        padding-bottom: 0;
+        border-bottom: none;
+    }
 }
+
+.mobileButtonWrapper {
+    margin-top: 20px;
+
+    .button {
+        @include button;
+        @include ROBOTOREGULAR16;
+        width: 100%;
+        background-color: $NUDE;
+        border-radius: 6px;
+        @include for-size(KT3) {
+            width: auto;
+        }
+        &:hover{
+            background-color: $SECONDARYBUTTONHOVER
+        }
+        &:active{
+            background-color: $PRESSED
+        }
+    }
+}
+
 .link {
     color: black;
     &:visited{
-       color: black 
+       color: black
     }
     &:focus {
         color: black

@@ -1,7 +1,28 @@
+@import '/src/components/containers/Record/all.scss';
+
 .body{
   //height: 500px;
   display: grid;
   grid-template-columns: 233px 1fr;
+
+  @include for-size(KT1) {
+    grid-auto-rows: auto auto;
+    grid-template-columns: 1fr;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #F2F2F2;
+  }
+  @include for-size(KT2) {
+    grid-auto-rows: auto auto;
+    grid-template-columns: 1fr;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #F2F2F2;
+  }
+  @include for-size(KT3) {
+    grid-template-rows: unset;
+    grid-template-columns: 233px 1fr;
+    padding-bottom: 0;
+    border-bottom: none;
+  }
 }
 .menu{
   display: flex;
@@ -13,11 +34,52 @@
   border-radius: 6px;
   padding: 8px 0;
   height: fit-content;
+
+  @include for-size(KT1) {
+    flex-direction: row;
+    margin-bottom: 10px;
+    width: fit-content;
+  }
+  @include for-size(KT2) {
+    flex-direction: row;
+    margin-bottom: 10px;
+    width: fit-content;
+  }
+  @include for-size(KT3) {
+    margin-bottom: 0;
+    flex-direction: column;
+    width: 100%;
+  }
 }
 .menuItem{
   padding: 8px 10px;
   cursor: pointer;
   text-decoration: none;
+
+  @include for-size(KT1) {
+    position: relative;
+
+    &:not(:last-of-type)::after {
+      content: '';
+      position: absolute;
+      display: block;
+      width: 1px;
+      height: 20px;
+      background-color: #F2F2F2;
+      top: 50%;
+      right: 0;
+      transform: translateY(-50%);
+    }
+  }
+  @include for-size(KT3) {
+    flex-direction: row;
+    margin-bottom: 10px;
+    width: fit-content;
+
+    &:not(:last-of-type)::after {
+      content: none;
+    }
+  }
 }
 .information{
   margin: 0 0 0 20px ;
@@ -29,4 +91,14 @@
   padding: 5px 0;
   //width: calc(100vw - 283px);
   height: calc(100vh - 260px) !important;
+
+  @include for-size(KT1) {
+    margin: 0;
+  }
+  @include for-size(KT2) {
+    margin: 0;
+  }
+  @include for-size(KT3) {
+    margin: 0 0 0 20px;
+  }
 }

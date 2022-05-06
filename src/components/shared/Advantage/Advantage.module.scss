@@ -1,7 +1,16 @@
 @import '/src/components/containers/Record/all.scss';
+
 .blockAdvantage{
     display: flex;
     margin: 10px 0;
+
+    @include for-size(KT1) {
+        margin: 0;
+    }
+
+    @include for-size(KT3) {
+        margin: 10px 0;
+    }
 }
 .img{
     display: inline-block;

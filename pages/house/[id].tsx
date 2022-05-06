@@ -29,11 +29,12 @@ import {
 } from "../../src/utils/conversionIcons/conversionIcons";
 import { conversionDate } from "../../src/utils/conversionDate/conversionDate";
 import PaybackContainer from "../../src/components/containers/PaybackContainer/PaybackContainer";
-import {plusUnitMeasurement} from "../../src/utils/plusUnitMeasurement/plusUnitMeasurement";
-import {MobileOnly} from "../../src/components/containers/Adaptive/MobileOnly";
-import {DesktopOnly} from "../../src/components/containers/Adaptive/DesktopOnly";
+import { plusUnitMeasurement } from "../../src/utils/plusUnitMeasurement/plusUnitMeasurement";
+import { MobileOnly } from "../../src/components/containers/Adaptive/MobileOnly";
+import { DesktopOnly } from "../../src/components/containers/Adaptive/DesktopOnly";
 import ObjectLegalPurityMobile from "../../src/components/containers/ObjectLegalPurity/ObjectLegalPurityMobile";
 import css from "../../styles/slider.module.scss";
+import { GeneralInfoMobile } from "../../src/components/containers/GeneralInfo/GeneralInfoMobile";
 
 const city = ["Москва", "Крым", "Сочи"];
 
@@ -62,7 +63,6 @@ const sortInfoOptions = (option: {}) => {
   const keysOption = Object.keys(option);
 
   for (let n = 0; n < keysOption.length; n++) {
-    
     if (keysOption[n] === "total_floor")
       infoOptions.push({
         label: "Этажи",
@@ -296,85 +296,101 @@ const House = observer((props: any) => {
     breadCrumbsStore.addBreadCrumbs(props.name, 2);
   }, [router.query.id]);
 
-    return (
-        <MainContainer
-            keywords={props.name}
-            title={props.name}
-            city={city}
-            personalAccount={personalAccount}
-            footerColor={'nude'}
-            refs={refs}
-        >
-            <Breadcrumbs location={'object'}/>
-            <Views items={views}/>
-            <NameEstate item={props.name}/>
-            <AdressEstate item={props.address}/>
-            <div >
-              <HorizontalTabs tabs={tabs} refs={refs}/>
-            </div>
+  return (
+    <MainContainer
+      keywords={props.name}
+      title={props.name}
+      city={city}
+      personalAccount={personalAccount}
+      footerColor={"nude"}
+      refs={refs}
+    >
+      <Breadcrumbs location={"object"} />
+      <Views items={views} />
+      <NameEstate item={props.name} />
+      <DesktopOnly>
+        <AdressEstate item={props.address} />
+        <div>
+          <HorizontalTabs tabs={tabs} refs={refs} />
+        </div>
+        <div ref={general}>
+          {infoOptions && (
+            <GeneralInfo
+              info={plusUnitMeasurement(infoOptions)}
+              price={props.price}
+              images={props.images}
+              // classSlider={css.image}
+            />
+          )}
+        </div>
+      </DesktopOnly>
+      <MobileOnly>
+        <GeneralInfoMobile
+          info={plusUnitMeasurement(infoOptions)}
+          price={props.price}
+          images={props.images}
+        />
+      </MobileOnly>
+      {props.description && <ObjectDescription items={[props.description]} />}
+      <div ref={tours}>
+        {(props?.online_tour?.threeD_tour?.url ||
+          props?.online_tour?.vr_tour?.url) && (
+          <ToursContainer Online_tour={props.online_tour} />
+        )}
+      </div>
+      <div ref={architec}>
+        {object_specs && (
+          <ObjectSpecifications
+            specificationsLists={object_specs}
+            title={"Архитектурно-планировочные решения"}
+          />
+        )}
+      </div>
+      <div ref={infra}>
+        <Map
+          currentHouse={JSON.parse(JSON.stringify(props))}
+          infrastructura={infrastructura}
+          location={"infrastructure"}
+          InfrastructureInfo={
+            props.description_items ? props.description_items : ""
+          }
+        />
+      </div>
 
-            <div ref={general}>
-                {
-                    infoOptions &&
-                    <GeneralInfo
-                        info={plusUnitMeasurement(infoOptions)}
-                        price={props.price}
-                        images={props.images}
-                        // classSlider={css.image}
-                    />
-                }
-            </div>
-                {
-                    props.description && <ObjectDescription items={[props.description]}/>
-                }
-            <div ref={tours}>
-                {
-                    (props?.online_tour?.threeD_tour?.url || props?.online_tour?.vr_tour?.url)
-                    && <ToursContainer Online_tour={props.online_tour}/>
-                }
-            </div>
-            <div ref={architec}>
-                {
-                    object_specs &&
-                    <ObjectSpecifications
-                        specificationsLists={object_specs}
-                        title={"Архитектурно-планировочные решения"}/>
-                }
-            </div>
-            <div ref={infra}>
-                <Map currentHouse={JSON.parse(JSON.stringify(props))} infrastructura={infrastructura}
-                     location={'infrastructure'} InfrastructureInfo={props.description_items ? props.description_items : ''}/>
-            </div>
-
-          <MobileOnly>
-            <div ref={legal}>
-              {
-                legalPurityData &&
-                <ObjectLegalPurityMobile legalPurityData={legalPurityData}/>
-              }
-            </div>
-          </MobileOnly>
-          <DesktopOnly>
-            <div ref={legal}>
-              {
-                legalPurityData &&
-                <ObjectLegalPurity legalPurityData={legalPurityData}/>
-              }
-            </div>
-          </DesktopOnly>
-            <Mortgage/>
-            <div ref={payback}>
-                <PaybackContainer currentHouse={JSON.parse(JSON.stringify(props))} averagePrice={averagePrice}/>
-            </div>
-            <div ref={record}>
-                <Record Record={RecordAgent.Record} title={'дом'} nameObject={props.name}/>
-            </div>
-            <div ref={developer}>
-              {/*<ObjectDeveloper developerData={store.initialData.object_developer_info}/>*/}
-            </div>
-        </MainContainer>
-    )
-})
+      <MobileOnly>
+        <div ref={legal}>
+          {legalPurityData && (
+            <ObjectLegalPurityMobile legalPurityData={legalPurityData} />
+          )}
+        </div>
+      </MobileOnly>
+      <DesktopOnly>
+        <div ref={legal}>
+          {legalPurityData && (
+            <ObjectLegalPurity legalPurityData={legalPurityData} />
+          )}
+        </div>
+      </DesktopOnly>
+      <Mortgage />
+      <div ref={payback}>
+        <PaybackContainer
+          currentHouse={JSON.parse(JSON.stringify(props))}
+          averagePrice={averagePrice}
+        />
+      </div>
+      <div ref={record}>
+        <Record
+          Record={RecordAgent.Record}
+          title={"дом"}
+          nameObject={props.name}
+        />
+      </div>
+      <div ref={developer}>
+        {/*<ObjectDeveloper developerData={store.initialData.object_developer_info}/>*/}
+      </div>
+    </MainContainer>
+  );
+});
 
 export default House;
 
