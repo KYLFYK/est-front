@@ -1,13 +1,16 @@
 import React from "react";
 import css from "./LogoMain.module.scss";
-type logoMainProp = {
+
+type PropsType = {
   color?: string;
   margin?: boolean;
+  burger?: boolean;
 };
-const LogoMain: React.FC<logoMainProp> = ({ color, margin = false }) => {
+
+const LogoMain: React.FC<PropsType> = ({ color, margin = false, burger = false }) => {
   return (
     <div className={css.style}>
-      <svg
+      {burger && <svg
         className={css.burger}
         width="24"
         height="24"
@@ -21,7 +24,7 @@ const LogoMain: React.FC<logoMainProp> = ({ color, margin = false }) => {
           d="M3 8V6H21V8H3ZM3 13H21V11H3V13ZM3 18H21V16H3V18Z"
           fill="#3D4550"
         />
-      </svg>
+      </svg>}
       <svg
         className={`${css.logoMain} ${margin ? css.margin : ""}`}
         viewBox="0 0 151 19"

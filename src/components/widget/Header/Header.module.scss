@@ -1,4 +1,6 @@
 @import '/src/components/containers/Record/all.scss';
+@import '/src/app/styles/colours.scss';
+
 .header {
   display: flex;
   justify-content: space-between;
@@ -76,7 +78,7 @@
   @include for-size(KT2) {
     position: center;
   }
-  color:#C5A28E;
+  color: $NUDE;
   font-family: Roboto;
 }
 .menuName {

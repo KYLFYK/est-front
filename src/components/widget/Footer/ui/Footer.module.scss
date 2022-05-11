@@ -5,9 +5,11 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    padding: 0 50px;
     align-items: flex-start;
+    width: calc(100vw - 20px);
+    padding: 0 10px 0 10px;
     @include for-size(KT3) {
+        width: calc(100vw - 120px);
         flex-direction: row;
         height: 100px;
         padding: 40px 60px 24px 60px;
@@ -20,6 +22,10 @@
 
 .underline {
     width: fit-content;
-    border-bottom: .5px solid #C5A28E;
+    border-bottom: .5px solid #64B5F6;
     cursor: pointer;
+}
+
+.icons {
+    display: flex;
 }

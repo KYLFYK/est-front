@@ -9,6 +9,8 @@ import Vk from "../../../../icons/Footer/Vk";
 import Twitter from "../../../../icons/Footer/Twitter";
 import Youtube from "../../../../icons/Footer/Youtube";
 import Typography from "src/components/shared/Typography/Typography";
+import { MobileOnly } from "src/components/containers/Adaptive/MobileOnly";
+import { DesktopOnly } from "src/components/containers/Adaptive/DesktopOnly";
 
 type FooterPropsType = {
   color: "nude" | "accent";
@@ -18,7 +20,7 @@ type FooterPropsType = {
 export const Footer: FC<FooterPropsType> = ({ color, className }) => {
   return (
     <div
-      style={{ backgroundColor: `${color === "nude" ? "#C5A28E" : "#1A4862"}` }}
+      style={{ backgroundColor: `${color === "nude" ? "#C5A28E" : "#1B3243"}` }}
       className={classNames(css.footer, className)}
     >
       <div>
@@ -56,6 +58,8 @@ export const Footer: FC<FooterPropsType> = ({ color, className }) => {
           </Typography>
         </Link>
       </div>
+      <MobileOnly></MobileOnly>
+      <DesktopOnly></DesktopOnly>
       <div>
         <Typography color={"nude"} weight={"medium"}>
           8 (800) 600-20-94
@@ -71,7 +75,7 @@ export const Footer: FC<FooterPropsType> = ({ color, className }) => {
           </Typography>
         </Link>
       </div>
-      <div>
+      <div className={css.icons}>
         {/*<FaceBook/>*/}
         <Vk />
         {/*<Twitter/>*/}

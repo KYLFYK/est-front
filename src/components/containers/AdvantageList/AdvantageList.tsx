@@ -20,7 +20,7 @@ export const Advantages: FC<AdvantagesType> = ({ advantages, advantagesMobile })
     const [adv, setAdvantages] = useState(advantages)
 
     const HandleResize = () => {
-        if (window.innerWidth < 576) {
+        if (window.innerWidth < 768) {
             setAdvantages(advantagesMobile)
         } else {
             setAdvantages(advantages)
@@ -28,7 +28,7 @@ export const Advantages: FC<AdvantagesType> = ({ advantages, advantagesMobile })
     }
 
     useEffect(() => {
-        if (window.innerWidth < 576) {
+        if (window.innerWidth < 768) {
             setAdvantages(advantagesMobile)
         }
         window.addEventListener("resize", HandleResize);

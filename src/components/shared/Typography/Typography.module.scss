@@ -38,11 +38,14 @@
 .color_altAccent{
     color: $ALTACCENT;
 }
-.disabled{
-    color: $ACCENTBUTTONDISABLED;
+.color_disabled{
+    color: $ICONGRAY;
 }
-.altGray{
+.color_altGray{
     color: $ALTGREY;
+}
+.color_lightBlue{
+    color: $LIGHTBLUE;
 }
 
 // sizes ---------------
