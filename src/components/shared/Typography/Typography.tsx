@@ -13,7 +13,8 @@ interface Props extends IPropsGeneral {
     | "green"
     | "disabled"
     | "altWhite"
-    | "altGray";
+    | "altGray"
+    | "altAccent"
   size?:
     | "default"
     | "subheader"

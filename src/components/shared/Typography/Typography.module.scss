@@ -15,31 +15,34 @@
 }
 
 .color_accent {
-    color: $ACCENT
+    color: $ACCENT;
 }
 
 .color_secondary {
-    color: $WHITE
+    color: $WHITE;
 }
 .color_altWhite {
-    color: $BACKGROUND
+    color: $BACKGROUND;
 }
 
 .color_tertiary {
-    color: $GREY
+    color: $GREY;
 }
 
 .color_red{
-    color: $RED
+    color: $RED;
 }
 .color_green{
-    color: $GREEN
+    color: $GREEN;
+}
+.color_altAccent{
+    color: $ALTACCENT;
 }
 .disabled{
-    color: $ACCENTBUTTONDISABLED
+    color: $ACCENTBUTTONDISABLED;
 }
 .altGray{
-    color: $ALTGREY
+    color: $ALTGREY;
 }
 
 // sizes ---------------

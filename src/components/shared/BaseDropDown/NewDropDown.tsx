@@ -83,7 +83,7 @@ export const NewDropDown: <T extends ValueVariants | Array<ValueVariants>>(
           return placeholder;
         }
       } else {
-        return options.filter((el) => el.value === value)[0].label;
+        return options.filter((el) => el.value === value)[0]?.label;
       }
     } else {
       return placeholder;

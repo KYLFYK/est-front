@@ -128,7 +128,7 @@ export const Header: FC<HeaderPropsType> = observer(({
       title: "Снять",
     },*/
     { href: "/calculator", title: "Ипотека" },
-    // { href: "/construction", title: "Строящиеся дома" },
+    { href: "/", title: "ЖК" },
     { href: "/#contact", title: "Контакты" },
   ];
 
@@ -278,7 +278,7 @@ export const Header: FC<HeaderPropsType> = observer(({
       <div className={css.headerLogo}>
         <Link href={"/"} passHref>
           <div style={{ cursor: "pointer" }}>
-            <LogoMain />
+            <LogoMain margin/>
           </div>
         </Link>
       </div>
