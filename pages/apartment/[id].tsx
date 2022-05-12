@@ -43,6 +43,7 @@ import css from "../../styles/slider.module.scss";
 import ObjectLegalPurityMobile from "../../src/components/containers/ObjectLegalPurity/ObjectLegalPurityMobile";
 import { GeneralInfoMobile } from "../../src/components/containers/GeneralInfo/GeneralInfoMobile";
 import { IMAGES_SET } from "../../src/components/containers/GeneralInfo/config";
+import IndexVision from "../test";
 
 const city = ["Москва", "Санкт-Петербург", "Крым", "Сочи", "Нижний Новгород"];
 const personalAccount = [
@@ -203,6 +204,7 @@ const Apartment: NextPage = observer((props: any) => {
         />
       </div>
       <Footer color={"nude"} />
+      <IndexVision />
     </MainContainer>
   );
 });
