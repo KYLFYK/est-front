@@ -7,18 +7,18 @@
         min-height: 100px;
     }
     @include for-size(KT1) {
-        margin-left: 10px;
-        width: 196px !important;
-        height: 196px;
+        margin: 0 0 0 10px;
+        width: 200px !important;
+        height: 200px;
         display: inline-block;
         vertical-align: top;
         border: 1px solid #F2F2F2;
-        border-radius: 8px;
+        border-radius: 6px;
         box-shadow: 0 4px 8px 0 rgba(26, 72, 98, 0.15);
     }
     @include for-size(KT3) {
+        margin: 0 0 0 0;
         border: 0 solid #F2F2F2;
-        border-radius: 8px;
         box-shadow: 0 4px 8px 0 rgba(26, 72, 98, 0);
     }
     @media  (min-width: 1320px) {
@@ -71,12 +71,13 @@
 .cursorName{
     cursor: pointer;
     color:#1A4862;
-    @include for-size(KT1) {
-        margin-top: 10px;
-    }
+    margin: 5px 0 0 0;
     &:hover{
         color:#146695;
     }
+}
+.cursor{
+    margin: 8px 0 0 0;
 }
 .m_5px{
     @include for-size(KT1) {

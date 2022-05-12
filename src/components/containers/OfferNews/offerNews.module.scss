@@ -4,8 +4,11 @@
 .offerNews{
     margin: 30px 10px 45px 10px;
     @include for-size(KT3) {
-        margin: 50px 60px 100px 60px;
+        margin: 50px auto 100px auto;
+        padding: 0 60px;
+        box-sizing: border-box;
     }
+    max-width: $KT6;
 }
 
 .mobileMargin {
@@ -20,8 +23,7 @@
 .grid{
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr;
-    margin:15px 0;
-    grid-column-gap: 16px;
+    grid-column-gap: 8px;
     @media  (max-width: 1080px) {
         grid-template-columns: 1fr 1fr ;
         gap : 4px;
@@ -45,9 +47,12 @@
 }
 .signature{
     display: flex;
+    margin: 10px 0 0 0;
 }
 .link{
     cursor: pointer;
-    border-bottom: 1px solid $ICONGRAY;
     margin: 0 0 0 5px;
+}
+.width{
+    width: 328px !important;
 }

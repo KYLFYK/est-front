@@ -45,6 +45,7 @@ export const useStyles = makeStyles(() => ({
   root: {
     fontSize: "14px",
     backgroundColor: "#fff",
+    minWidth:'230px',
     borderRadius: 8,
     fontFamily: "RobotoRegular",
     border: "0px solid #CAD1DA",

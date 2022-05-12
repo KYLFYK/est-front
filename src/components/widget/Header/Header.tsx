@@ -91,256 +91,256 @@ const personalAcc = [
   ],
 ];
 
-export const Header: FC<HeaderPropsType> = observer(({
-  className,
-  city,
-  personalAccount,
-  modalActive,
-  auth = false,
-}) => {
-  const router = useRouter();
+export const Header: FC<HeaderPropsType> = observer(
+  ({ className, city, personalAccount, modalActive, auth = false }) => {
+    const router = useRouter();
 
-  const [email, setEmail] = useState<string>("");
+    const [email, setEmail] = useState<string>("");
 
-  // for test modal
-  // http://localhost:3000/?text=confirmationNewPassword
-  // http://localhost:3000/?text=login
+    // for test modal
+    // http://localhost:3000/?text=confirmationNewPassword
+    // http://localhost:3000/?text=login
 
-  // http://localhost:3000/?text=email-conformation
-  // http://localhost:3000/?text=reset-password
+    // http://localhost:3000/?text=email-conformation
+    // http://localhost:3000/?text=reset-password
 
-  // const [modalSearch, setModalSearch]=useState(modalActive)
-  const [authorization, setAuthorization] = useState<boolean>(auth);
-  const [activeModal, setActiveModal] = useState<boolean>(false);
-  const [newPassword, setNewPassword] = useState<string>("");
-  const [edit, setEdit] = useState<string>(modalActive ? modalActive : "");
+    // const [modalSearch, setModalSearch]=useState(modalActive)
+    const [authorization, setAuthorization] = useState<boolean>(auth);
+    const [activeModal, setActiveModal] = useState<boolean>(false);
+    const [newPassword, setNewPassword] = useState<string>("");
+    const [edit, setEdit] = useState<string>(modalActive ? modalActive : "");
 
-  const tokenConformation = router.query.token && router.query.token;
-  const searchStore = useSearchStore();
+    const tokenConformation = router.query.token && router.query.token;
+    const searchStore = useSearchStore();
 
-  const moc = [
-    {
-      href: `/search?object-type=${searchStore.getFilter()['object-type']}&building-type=${searchStore.getFilter()['building-type']}&order-type=buy`,
-      title: "Купить",
-    },
-    /*{
+    const moc = [
+      {
+        href: `/search?object-type=${
+          searchStore.getFilter()["object-type"]
+        }&building-type=${
+          searchStore.getFilter()["building-type"]
+        }&order-type=buy`,
+        title: "Купить",
+      },
+      /*{
       href: "/search?object-type=apartment&order-type=rent&privateType=house",
       title: "Снять",
     },*/
-    { href: "/calculator", title: "Ипотека" },
-    { href: "/", title: "ЖК" },
-    { href: "/#contact", title: "Контакты" },
-  ];
+      { href: "/calculator", title: "Ипотека" },
+      { href: "/", title: "ЖК" },
+      { href: "/#contact", title: "Контакты" },
+    ];
 
-  const searchModal = (menu: string) => {
-    switch (menu) {
-      case "login":
-        return <Login onEdit={(e) => setEdit(e)} setActive={loginActive} />;
-      case "recovery": // password
-        return (
-          <Recovery
-            email={email}
-            onValueEmail={setEmail}
-            onEdit={(e) => setEdit(e)}
-          />
-        );
-      case "recoveryMail":
-        return <RecoveryMail onEdit={activeEdit} email={email} />;
-      case "thankRegistering":
-        return <ThankRegistering onEdit={activeEdit} email={email} />;
-      case "registration":
-        return <Registration onEdit={(e) => setEdit(e)} onEmail={setEmail} />;
-      case "addressConfirmation":
-        return <AddressConfirmation onEdit={(e) => setEdit(e)} />;
-      case "reset-password":
-        return (
-          <NewPassword
-            onBack={() => setEdit("login")}
-            onPassword={setNewPassword}
-            password={newPassword}
-            onEdit={() => setEdit("confirmationNewPassword")}
-          />
-        );
-      case "confirmationNewPassword":
-        return <ConfirmationNewPassword onEdit={() => setEdit("login")} />;
-      case "email-conformation":
-        return (
-          <EmailConformation
-            onEdit={(e) => setEdit(e)}
-            tokenConformationEmail={tokenConformation}
-          />
-        );
-      default:
-        return <div> </div>;
-    }
-  };
+    const searchModal = (menu: string) => {
+      switch (menu) {
+        case "login":
+          return <Login onEdit={(e) => setEdit(e)} setActive={loginActive} />;
+        case "recovery": // password
+          return (
+            <Recovery
+              email={email}
+              onValueEmail={setEmail}
+              onEdit={(e) => setEdit(e)}
+            />
+          );
+        case "recoveryMail":
+          return <RecoveryMail onEdit={activeEdit} email={email} />;
+        case "thankRegistering":
+          return <ThankRegistering onEdit={activeEdit} email={email} />;
+        case "registration":
+          return <Registration onEdit={(e) => setEdit(e)} onEmail={setEmail} />;
+        case "addressConfirmation":
+          return <AddressConfirmation onEdit={(e) => setEdit(e)} />;
+        case "reset-password":
+          return (
+            <NewPassword
+              onBack={() => setEdit("login")}
+              onPassword={setNewPassword}
+              password={newPassword}
+              onEdit={() => setEdit("confirmationNewPassword")}
+            />
+          );
+        case "confirmationNewPassword":
+          return <ConfirmationNewPassword onEdit={() => setEdit("login")} />;
+        case "email-conformation":
+          return (
+            <EmailConformation
+              onEdit={(e) => setEdit(e)}
+              tokenConformationEmail={tokenConformation}
+            />
+          );
+        default:
+          return <div> </div>;
+      }
+    };
 
-  const activeEdit = (e: string) => {
-    setEdit(e);
-    setActiveModal(false);
-  };
+    const activeEdit = (e: string) => {
+      setEdit(e);
+      setActiveModal(false);
+    };
 
-  useEffect(() => {
-    if (router.query.text === "email-conformation") {
-      searchModal("email-conformation");
-      setEdit("email-conformation");
-      setActiveModal(true);
-    }
-    if (router.query.text === "reset-password") {
-      searchModal("reset-password");
-      setEdit("reset-password");
-      setActiveModal(true);
-    }
-    if (router.query.text === "login") {
-      searchModal("login");
-      setEdit("login");
-      setActiveModal(true);
-    }
-    if (router.query.text === "confirmationNewPassword") {
-      searchModal("confirmationNewPassword");
-      setEdit("confirmationNewPassword");
-      setActiveModal(true);
-    } // eslint-disable-next-line
-  }, [router]); // if dependency searchModal - no update Modal active (date)
+    useEffect(() => {
+      if (router.query.text === "email-conformation") {
+        searchModal("email-conformation");
+        setEdit("email-conformation");
+        setActiveModal(true);
+      }
+      if (router.query.text === "reset-password") {
+        searchModal("reset-password");
+        setEdit("reset-password");
+        setActiveModal(true);
+      }
+      if (router.query.text === "login") {
+        searchModal("login");
+        setEdit("login");
+        setActiveModal(true);
+      }
+      if (router.query.text === "confirmationNewPassword") {
+        searchModal("confirmationNewPassword");
+        setEdit("confirmationNewPassword");
+        setActiveModal(true);
+      } // eslint-disable-next-line
+    }, [router]); // if dependency searchModal - no update Modal active (date)
 
-  useEffect(() => {
-    // overflow - scroll vertical (off / on) for modal
-    if (activeModal && document.body.style.overflow !== "hidden") {
-      document.body.style.overflow = "hidden";
-    }
-    if (!activeModal && document.body.style.overflow === "hidden") {
-      document.body.style.overflow = "auto";
-    }
-  }, [activeModal]);
+    useEffect(() => {
+      // overflow - scroll vertical (off / on) for modal
+      if (activeModal && document.body.style.overflow !== "hidden") {
+        document.body.style.overflow = "hidden";
+      }
+      if (!activeModal && document.body.style.overflow === "hidden") {
+        document.body.style.overflow = "auto";
+      }
+    }, [activeModal]);
 
-  const [active, setActive] = useState<number>(0);
+    const [active, setActive] = useState<number>(0);
 
-  const [mocAccountMenu, setMocAccountMenu] = useState<
-    Array<{ title: string; href: string; message: number }>
-  >(personalAcc[0]);
-  const searchLoginMoc = (role: string | null) => {
-    if (role === "agency") {
-      setAuthorization(true);
-      setMocAccountMenu(personalAcc[0]);
-    }
-    if (role === "agent") {
-      setAuthorization(true);
-      setMocAccountMenu(personalAcc[1]);
-    }
-    if (role === "customer") {
-      setAuthorization(true);
-      setMocAccountMenu(personalAcc[2]);
-    }
-    if (role === "developer") {
-      setAuthorization(true);
-      setMocAccountMenu(personalAcc[3]);
-    }
-    if (role === "admin") {
-      setAuthorization(true);
-      setMocAccountMenu(personalAcc[4]);
-    }
-    if (role === "bank") {
-      setAuthorization(true);
-      setMocAccountMenu(personalAcc[5]);
-    }
-  };
-  const logout = () => {
-    localStorage.clear();
-    setAuthorization(false);
-    if (router.asPath === "/search") return 1;
-    router.push("/");
-  };
+    const [mocAccountMenu, setMocAccountMenu] = useState<
+      Array<{ title: string; href: string; message: number }>
+    >(personalAcc[0]);
+    const searchLoginMoc = (role: string | null) => {
+      if (role === "agency") {
+        setAuthorization(true);
+        setMocAccountMenu(personalAcc[0]);
+      }
+      if (role === "agent") {
+        setAuthorization(true);
+        setMocAccountMenu(personalAcc[1]);
+      }
+      if (role === "customer") {
+        setAuthorization(true);
+        setMocAccountMenu(personalAcc[2]);
+      }
+      if (role === "developer") {
+        setAuthorization(true);
+        setMocAccountMenu(personalAcc[3]);
+      }
+      if (role === "admin") {
+        setAuthorization(true);
+        setMocAccountMenu(personalAcc[4]);
+      }
+      if (role === "bank") {
+        setAuthorization(true);
+        setMocAccountMenu(personalAcc[5]);
+      }
+    };
+    const logout = () => {
+      localStorage.clear();
+      setAuthorization(false);
+      if (router.asPath === "/search") return 1;
+      router.push("/");
+    };
 
-  const loginActive = () => {
-    setActiveModal(!activeModal);
-    searchLoginMoc(localStorage.getItem("roleEstatum"));
-  };
+    const loginActive = () => {
+      setActiveModal(!activeModal);
+      searchLoginMoc(localStorage.getItem("roleEstatum"));
+    };
 
-  useEffect(() => {
-    try {
-      const res = async () => {
-        await AuthApi.check();
-        searchLoginMoc(localStorage.getItem("roleEstatum"));
-      };
-      res();
-    } catch (e) {
-      console.log("error - throw", e);
-    }
-  }, []);
+    useEffect(() => {
+      try {
+        const res = async () => {
+          await AuthApi.check();
+          searchLoginMoc(localStorage.getItem("roleEstatum"));
+        };
+        res();
+      } catch (e) {
+        console.log("error - throw", e);
+      }
+    }, []);
 
-  const mocRole = (role: string) => {
-    searchLoginMoc(role);
-    localStorage.setItem("roleEstatum", role);
-  };
+    const mocRole = (role: string) => {
+      searchLoginMoc(role);
+      localStorage.setItem("roleEstatum", role);
+    };
 
-  return (
-    <div className={classNames(css.header, className)}>
-      <div className={css.headerLogo}>
-        <Link href={"/"} passHref>
-          <div style={{ cursor: "pointer" }}>
-            <LogoMain margin burger/>
+    return (
+      <div className={classNames(css.header, className)}>
+        <div className={css.container}>
+          <div className={css.headerLogo}>
+            <Link href={"/"} passHref>
+              <div style={{ cursor: "pointer" }}>
+                <LogoMain margin burger />
+              </div>
+            </Link>
           </div>
-        </Link>
-      </div>
-      <div className={css.menu}>
-        <div
-          className={css.select}
-          onClick={() => setActive(0)}
-          style={{ color: "#C5A28E" }}
-        >
-          <IconLocation color={'#64B5F6'}/>
-          <div className={css.positionSelect}>
-            <div className={css.t_Info}>
-              <Typography >
-                Регион поиска:
-              </Typography>
-            </div>
-            <SelectEstate options={city} selectLeft={false} />
-            </div>
-        </div>
-        {moc.map(({ href, title }, index) => (
-          <Link href={href} key={index} passHref>
+          <div className={css.menu}>
             <div
-              className={css.menuName}
+              className={css.select}
               onClick={() => setActive(0)}
-              style={{ color: active === 0 ? "#C5A28E" : "#3D4550" }}
+              style={{ color: "#C5A28E" }}
             >
-              <Typography size={"default"}>{title}</Typography>
+              <IconLocation color={"#64B5F6"} />
+              <div className={css.positionSelect}>
+                <div className={css.t_Info}>
+                  <Typography>Регион поиска:</Typography>
+                </div>
+                <SelectEstate options={city} selectLeft={false} />
+              </div>
             </div>
-          </Link>
-        ))}
-        {!authorization ? (
-          <div
-            className={css.menuNameAuthorization}
-            onClick={() => {
-              setActiveModal(true);
-              setEdit("login");
-            }}
-          >
-            <Typography color={'nude'}>Войти</Typography>
+            {moc.map(({ href, title }, index) => (
+              <Link href={href} key={index} passHref>
+                <div
+                  className={css.menuName}
+                  onClick={() => setActive(0)}
+                  style={{ color: active === 0 ? "#C5A28E" : "#3D4550" }}
+                >
+                  <Typography size={"default"}>{title}</Typography>
+                </div>
+              </Link>
+            ))}
+            {!authorization ? (
+              <div
+                className={css.menuNameAuthorization}
+                onClick={() => {
+                  setActiveModal(true);
+                  setEdit("login");
+                }}
+              >
+                <Typography color={"nude"}>Войти</Typography>
+              </div>
+            ) : (
+              <div className={css.menuNameAuthorization}>
+                <Typography size={"default"} color="nude">
+                  <SelectUser
+                    params={"housingCondition"}
+                    options={mocAccountMenu}
+                    onChangeOption={logout}
+                  />
+                </Typography>
+              </div>
+            )}
+            {
+              <Modal
+                setActive={() => setActiveModal(!activeModal)}
+                active={activeModal}
+              >
+                {searchModal(modalActive ? modalActive : edit)}
+              </Modal>
+            }
           </div>
-        ) : (
-          <div className={css.menuNameAuthorization}>
-            <Typography size={"default"} color="nude">
-              <SelectUser
-                params={"housingCondition"}
-                options={mocAccountMenu}
-                onChangeOption={logout}
-              />
-            </Typography>
-          </div>
-        )}
-        {
-          <Modal
-            setActive={() => setActiveModal(!activeModal)}
-            active={activeModal}
-          >
-            {searchModal(modalActive ? modalActive : edit)}
-          </Modal>
-        }
+        </div>
       </div>
-    </div>
-  );
-});
+    );
+  }
+);
 
 export default Header;

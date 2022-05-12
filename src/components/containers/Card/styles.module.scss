@@ -37,8 +37,7 @@ $borderRadius: 6px;
 .content {
     display: block;
     cursor: pointer;
-    margin-right: 2px;
-    padding: 10px 15px 0 15px;
+    padding: 10px 15px 10px 15px;
     box-sizing: border-box;
     @include MapScrollbar;
 }

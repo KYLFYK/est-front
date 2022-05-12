@@ -25,7 +25,7 @@ const PersonalAccountOwner: FC<PersonalAccountType> = observer(({onEdit}) => {
     return (
         <div className={css.padding}>
             <div className={css.headerTitle}>
-                <Typography weight={"bold"}>
+                <Typography weight={"bold"} className={css.typography}>
                     {store.initialData.name}
                 </Typography>
                 <div className={css.buttonColumn}>
@@ -34,7 +34,7 @@ const PersonalAccountOwner: FC<PersonalAccountType> = observer(({onEdit}) => {
                         className={css.mR_15}
                         onClick={onEdit}
                     >
-                        <Typography size={"small"}>
+                        <Typography size={"small"} className={css.plusPadding}>
                             Редактировать аккаунт
                         </Typography>
                     </BaseButton>
@@ -43,7 +43,9 @@ const PersonalAccountOwner: FC<PersonalAccountType> = observer(({onEdit}) => {
                         isActive
                         className={css.styleButtonAgent}
                     >
-                        Стать агентом
+                        <Typography size={"small"} color={"secondary"} className={css.plusPadding}>
+                            Стать агентом
+                        </Typography>
                     </BaseButton>
                 </div>
             </div>
@@ -69,6 +71,7 @@ const PersonalAccountOwner: FC<PersonalAccountType> = observer(({onEdit}) => {
                             value={store.initialData.name}
                             className={css.inputStyle}
                             disabled
+                            classNameWrapper={css.wrapper}
                         />
                     </div>
                     <div>
@@ -79,6 +82,7 @@ const PersonalAccountOwner: FC<PersonalAccountType> = observer(({onEdit}) => {
                             value={store.initialData.dateBirth}
                             className={css.inputStyle}
                             disabled
+                            classNameWrapper={css.wrapper}
                         />
                     </div>
                     <div className={css.df}>
@@ -88,7 +92,7 @@ const PersonalAccountOwner: FC<PersonalAccountType> = observer(({onEdit}) => {
                             </Typography>
                             <BaseInput
                                 value={store.initialData.phone}
-                                className={css.inputStyle}
+                                className={css.inputStyleVertical}
                                 disabled
                             />
                         </div>

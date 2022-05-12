@@ -253,7 +253,7 @@ export const Filter: React.FC<Props> = observer(({ location, onFilter }) => {
         />
       )}
 
-      {<BaseInput type="text" placeholder="Поиск" className={s.searchInput} onChange={() => {} /*onChangeSearchValue*/}/>}
+      {<BaseInput type="text" placeholder="Поиск..." className={s.searchInput} onChange={() => {} /*onChangeSearchValue*/}/>}
 
       <InputsUnion className={s.inputsUnion}>
         <CompareInput

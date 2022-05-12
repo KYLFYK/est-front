@@ -63,21 +63,31 @@ const PersonalAccountEdit: FC<PersonalAccountEditType> = observer(
     };
 
     return (
-      <div style={{ margin: "20px" }}>
+      <div style={{ margin: "12px 30px 20px 30px" }}>
         <BackPage onBackPage={backPage} title={"Редактирование аккаунта"} />
         <div className={css.column}>
           <div style={{ width: "100%", height: "400px" }}>
             <Typography weight={"bold"}>Аккаунт</Typography>
             <div className={css.df} style={{ width: "90%" }}>
-              <div className={css.mR_10} style={{ width: "60%" }}>
-                <Typography className={css.mB_10}>Имя</Typography>
+              <div className={css.mR_10} style={{ width: "367px" }}>
+                <Typography
+                    color={"tertiary"}
+                    className={css.mB_10}
+                >
+                    Имя
+                </Typography>
                 <BaseInput
                   value={name}
                   onChange={(e) => setName(e.currentTarget.value)}
                 />
               </div>
-              <div className={css.mR_10} style={{ width: "40%" }}>
-                <Typography className={css.mB_10}>Дата рождения</Typography>
+              <div className={css.mR_10} style={{ width: "190px" }}>
+                <Typography
+                    className={css.mB_10}
+                    color={"tertiary"}
+                >
+                    Дата рождения
+                </Typography>
                 <BaseInput
                   value={birthday}
                   onChange={(e) => setBirthday(e.currentTarget.value)}
@@ -85,15 +95,25 @@ const PersonalAccountEdit: FC<PersonalAccountEditType> = observer(
               </div>
             </div>
             <div className={css.df} style={{ width: "90%" }}>
-              <div className={css.mR_10} style={{ width: "40%" }}>
-                <Typography className={css.mB_10}>Телефон</Typography>
+              <div className={css.mR_10} style={{ width: "200px" }}>
+                <Typography
+                    className={css.mB_10}
+                    color={"tertiary"}
+                >
+                    Телефон
+                </Typography>
                 <BaseInput
                   value={phone}
                   onChange={(e) => setPhone(e.currentTarget.value)}
                 />
               </div>
-              <div className={css.mR_10} style={{ width: "40%" }}>
-                <Typography className={css.mB_10}>E-mail</Typography>
+              <div className={css.mR_10} style={{ width: "262px" }}>
+                <Typography
+                    className={css.mB_10}
+                    color={"tertiary"}
+                >
+                    E-mail
+                </Typography>
                 <BaseInput
                   value={email}
                   onChange={(e) => setEmail(e.currentTarget.value)}

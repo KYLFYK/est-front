@@ -1,12 +1,12 @@
 @import '../../../components/containers/Record/all.scss';
 .offers{
-    margin: 40px 60px 0 60px;
+    margin: 0 10px 0 10px;
     overflow: visible;
-    @include for-size(KT1) {
-        margin: 0 10px 0 10px;
-    }
+    max-width: $KT6;
     @include for-size(KT3) {
-        margin: 40px 60px 0 60px;
+        margin: 40px auto 0 auto;
+        padding: 0 60px;
+        box-sizing: border-box;
     }
 }
 .positionButton{
@@ -79,8 +79,7 @@
     }
 }
 .margin{
-    margin: 0 4px;
-    border: 0 ;
+    margin: 40px 0 20px 0 !important;
 }
 
 .offersPhoto{
@@ -103,9 +102,9 @@
     //}
 }
 .button{
-    margin-top: 5px;
-    @media  (max-width: 950px) {
-       margin-top: 5px;
+    margin: 5px 0 0 0;
+    @include for-size(KT3) {
+        margin: 0 0 0 0;
     }
     //@media  (max-width: 1020px) {
     //    grid-template-columns: 1fr;
@@ -113,5 +112,6 @@
     //}
 }
 .sortDropdown {
-    min-width: 260;
+    width: 260 !important;
+    margin: 20px 0 0 0;
 }

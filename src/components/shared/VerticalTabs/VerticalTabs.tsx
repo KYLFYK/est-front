@@ -88,6 +88,7 @@ export const MenuUser: React.FC<MenuUserType> = ({
                 (router ? router.asPath : "/") === searchNamePage(name)
                   ? "#C5A28E"
                   : "",
+
             }}
             onClick={() => onActive(index)}
           >
@@ -97,10 +98,10 @@ export const MenuUser: React.FC<MenuUserType> = ({
                 link !== undefined
                   ? router.pathname.substr(1, 15) === searchNamePage(name)
                     ? "nude"
-                    : "tertiary"
+                    : "default"
                   : name === menu[active]
                   ? "nude"
-                  : "tertiary"
+                  : "default"
               }
               weight="bold"
             >

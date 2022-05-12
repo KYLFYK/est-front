@@ -5,6 +5,8 @@ import Box from "@mui/material/Box";
 import Typography from "../Typography/Typography";
 
 import css from "./HorizontalTabs.module.scss";
+import {makeStyles} from "@material-ui/core";
+
 
 export interface ITabItem {
   title: string;
@@ -20,6 +22,19 @@ interface Props {
   style?: CSSProperties;
 }
 
+export const useStyles = makeStyles(() => ({
+  // MuiTabs-indicator css-1aquho2-MuiTabs-indicator
+  iconSpan:{
+    ">.MuiTabs-indicator":{
+      width:"20px !important",
+    },
+    ">.css-1aquho2-MuiTabs-indicator":{
+      width:"20px !important",
+    }
+  }
+}))
+
+
 export const HorizontalTabs: FC<Props> = ({
   current,
   setCurrent,
@@ -28,12 +43,13 @@ export const HorizontalTabs: FC<Props> = ({
   wrapperClassName,
   style,
 }) => {
+  const classes = useStyles()
   const [selectedTabIdx, setSelectedTabIdx] = useState(current ? current : 0);
   const activeTabRef = useRef<HTMLDivElement | null>(null);
   const [activeTabMargin, setActiveTabMargin] = useState(30);
   useEffect(() => {
     if (activeTabRef && activeTabRef.current) {
-      setActiveTabMargin((activeTabRef.current.clientWidth - 50) / 2);
+      setActiveTabMargin((activeTabRef.current.clientWidth - 25) / 2);
     }
   }, [activeTabRef, selectedTabIdx]);
 
@@ -65,8 +81,10 @@ export const HorizontalTabs: FC<Props> = ({
             TabIndicatorProps={{
               style: {
                 backgroundColor: "#C5A28E",
-                width: "50px",
+                width: "20px",
                 marginLeft: activeTabMargin,
+                marginBottom:'4px',
+                zIndex:'2',
               },
             }}
           >
@@ -74,7 +92,7 @@ export const HorizontalTabs: FC<Props> = ({
               <Tab
                 key={index}
                 value={index}
-                style={{ textTransform: "none", padding: "12px 16px" }}
+                style={{ textTransform: "none", padding: "12px 12px" }}
                 onClick={tab.onClick}
                 ref={index === selectedTabIdx ? activeTabRef : null}
                 label={

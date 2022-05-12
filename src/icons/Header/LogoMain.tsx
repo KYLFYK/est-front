@@ -10,8 +10,8 @@ type PropsType = {
 const LogoMain: React.FC<PropsType> = ({ color, margin = false, burger = false }) => {
   return (
     <div className={css.style}>
-      {burger && <svg
-        className={css.burger}
+      {burger && margin && <svg
+        className={`${css.burger} ${css.margin}`}
         width="24"
         height="24"
         viewBox="0 0 24 24"
@@ -26,7 +26,7 @@ const LogoMain: React.FC<PropsType> = ({ color, margin = false, burger = false }
         />
       </svg>}
       <svg
-        className={`${css.logoMain} ${margin ? css.margin : ""}`}
+        className={css.logoMain}
         viewBox="0 0 151 19"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"

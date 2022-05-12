@@ -2,21 +2,31 @@
 @import '/src/app/styles/colours.scss';
 
 .header {
-  display: flex;
-  justify-content: space-between;
-  flex-wrap: nowrap;
-  display: flex;
-  align-items: center;
-  height: 60px;
-  padding: 0 10px;
-  margin-bottom: 20px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+
+  @include for-size(KT1) {
+    margin-bottom: 20px;
+  }
+
   @include for-size(KT3) {
-    padding: 0 50px;
     margin-bottom: 0;
   }
-  @media  (max-width: 930px) {
-    flex-wrap: wrap;
+
+  .container {
+    @include base-container;
+    height: 60px;
+    padding: 0 10px;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: nowrap;
+    align-items: center;
+    box-sizing: border-box;
+    @include for-size(KT3) {
+      padding: 0 60px;
+    }
+    @media  (max-width: 930px) {
+      flex-wrap: wrap;
+    }
   }
 }
 .headerLogo{
@@ -41,22 +51,17 @@
   }
 }
 .select {
-  margin: 0 15px;
-  cursor: pointer;
-  display: flex;
-  align-content: center;
-  @include for-size(KT1) {
-    position: relative;
-    margin-top: 100px;
-    //right: 100px;
-    right: 145px;
-    min-width: 200px
-  }
-  @include for-size(KT2) {
+  position: relative;
+  margin: 100px 0 0 0;
+  right: 145px;
+  min-width: 200px;
+  @include for-size(KT3) {
     display: flex;
-    margin-top: 0;
+    align-content: center;
+    margin: 0 0 0 0;
     right: 0;
-    min-width: 10px
+    min-width: 10px;
+    cursor: pointer;
   }
 }
 .T_Position{
@@ -80,36 +85,31 @@
   font-family: Roboto;
 }
 .menuName {
-  margin: 0 15px;
-  cursor: pointer;
-  display: flex;
-  align-content: center;
-  @include for-size(KT1) {
-    display:none;
-  }
-  @include for-size(KT2) {
-        display: flex;
+  display:none;
+  @include for-size(KT3) {
+      display: flex;
+      align-content: center;
+      margin: 0 0 0 30px;
+    cursor: pointer;
   }
 }
 
 .menuNameAuthorization {
-  margin: 0 15px;
+  padding-right: 0;
+  margin: 0;
+  position: relative;
+  left: calc(70vw - 320px) ;
   cursor: pointer;
   display: flex;
   align-content: center;
-  @include for-size(KT1) {
-    padding-right: 0;
-    margin: 0;
-    position: relative;
-    left: calc(70vw - 320px) ;
-  }
   @media screen and (min-width:440px) {
     left: calc(60vw - 300px)
   }@media screen and (min-width:500px) {
     left: calc(60vw - 340px)
   }
-  @include for-size(KT2) {
-    display:flex;
+  @include for-size(KT3) {
+    margin: 0 0 0 30px;
+    display: flex;
     padding-right: 0;
     position: center;
     left: 0;

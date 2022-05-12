@@ -49,3 +49,8 @@ $KT6: 1440px;
   transition: all .5s;
   padding: 10px;
 }
+
+@mixin base-container {
+  max-width: $KT6;
+  margin: 0 auto;
+}

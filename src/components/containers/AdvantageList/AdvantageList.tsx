@@ -39,7 +39,7 @@ export const Advantages: FC<AdvantagesType> = ({ advantages, advantagesMobile })
 
     return (
         <div className={css.allAdvantages}>
-            <HeadLine title={'Наши преимущества'}>
+            <HeadLine title={'Наши преимущества'} className={css.margin}>
                 <div className={css.advantages}>
                     {
                         adv.map(({ title, text }, index) => (
