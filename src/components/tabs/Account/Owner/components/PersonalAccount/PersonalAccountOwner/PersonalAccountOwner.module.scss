@@ -1,9 +1,9 @@
 .column{
-  padding-top: 20px;
+  padding-top: 5px;
 }
 .df{
   display: flex;
-  margin: 10px 0;
+  //margin: 10px 0;
 }
 .typographyWidth{
   width: 140px;
@@ -16,9 +16,23 @@
   border: none;
   position: relative;
   right: 20px;
+  margin-top: 4px;
   &:disabled{
     background-color: #fff;
   }
+}
+.inputStyleVertical{
+  width: 190px;
+  border: none;
+  position: relative;
+  right: 20px;
+  margin-top: 4px;
+  &:disabled{
+    background-color: #fff;
+  }
+}
+.wrapper{
+  height: 34px;
 }
 .image{
   border: 1px solid #CAD1DA;
@@ -34,24 +48,36 @@
 .buttonColumn{
   display: flex;
   height: 40px;
+  margin-top: 8px;
+  margin-right: 7px
+}
+.plusPadding{
+  padding: 0 5px;
 }
 .mR_15{
   margin-right: 15px;
+  padding: 11px 15px;
 }
 .headerTitle{
   display: flex;
   justify-content: space-between;
+  margin-top: 8px;
+}
+.typography{
+  align-items: flex-start;
+  margin-top: 12px;
 }
 .headerAccount{
-  margin: 20px 0;
+  margin: 30px 0 0 0;
 }
 .typographyMargin{
-  margin: 10px 0 0 0;
+  margin: 20px 0 0 0;
   color:#CAD1DA
 }
 .styleButtonAgent{
   font-size: 14px;
 }
 .padding{
-  padding: 0 20px;
+  //padding: 0 20px;
+  padding: 0 22px;
 }
