@@ -7,7 +7,7 @@
     background-color: #fff;
     height: 40px;
     @include for-size(KT1) {
-        border: 1px solid $ACCENTBUTTONDISABLED;
+        border: 1px solid $ICONGRAY;
         display: flex;
         flex-wrap: wrap;
         border-radius: 8px;

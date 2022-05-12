@@ -36,7 +36,7 @@
   background: #FFFFFF;
   box-shadow: 3px 3px 10px 6px rgba(0, 0, 0, 0.06);
   color: #333;
-  width: calc(100% - 16px);
+  min-width: calc(100% - 12px);
   border-radius: 8px;
   z-index: 100;
  // for scroll Base DropDown ( on active )
@@ -48,17 +48,15 @@
   max-height: 500px;
   scrollbar-width: 1px;
   @include MapScrollbar;
-  padding-right: 10px;
   margin-right: -10px;
 }
 .dropdown .dropdown_content .dropdown_item {
   display: flex;
-  padding: 4px;
+  padding: 4px 6px 4px 6px;
   transition: all 0.3s;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-  width: 97%;
 
   p {
     overflow: hidden;

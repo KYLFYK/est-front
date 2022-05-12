@@ -3,10 +3,12 @@
   height: 19px;
   width: 151px;
   @include for-size(KT1) {
-    margin-left: 10px;
     height: 12px;
     width: 97px;
   }
+}
+.margin {
+  margin-left: 10px;
 }
 .burger{
   //padding: ;

@@ -8,6 +8,9 @@ import { Modal } from "../../shared/Modal/Modal";
 import Typography from "../../shared/Typography/Typography";
 import IconOfferThanks from "./IconOfferThanks";
 import IconOfferError from "./IconOfferError";
+import { DesktopOnly } from "../Adaptive/DesktopOnly";
+import { MobileOnly } from "../Adaptive/MobileOnly";
+import Link from "next/link";
 
 export const OfferNews = () => {
   const [name, setName] = useState<string>("");
@@ -29,7 +32,7 @@ export const OfferNews = () => {
 
   return (
     <div className={css.offerNews}>
-      <div className={css.container}>
+      <DesktopOnly>
         <HeadLine
           title={
             "Хотите получать новости о новых предложениях и избранных домах?"
@@ -57,8 +60,8 @@ export const OfferNews = () => {
             </BaseButton>
           </div>
         </HeadLine>
-      </div>
-      <div className={css.minResContainer}>
+      </DesktopOnly>
+      <MobileOnly>
         <HeadLine title={"Хотите получать новости о новых предложениях?"}>
           <div className={css.grid}>
             <div className={css.mobileMargin}>
@@ -91,6 +94,9 @@ export const OfferNews = () => {
             </BaseButton>
           </div>
         </HeadLine>
+      </MobileOnly>
+      <div className={css.signature}>
+      <Typography color={'disabled'}>Подписываясь на новости от Estatum, вы принимаете</Typography> <Link href={'/'}><Typography color={'disabled'} className={css.link}>Пользовательское соглашение</Typography></Link>
       </div>
       {
         <Modal

@@ -89,9 +89,9 @@ const Start = observer(({}) => {
       <AgentsContainer title={"Наши агенты к вашим услугам"} />
       <Advantages advantages={mocAdvantages} advantagesMobile={mocAdvantagesMobile}/>
       <OfferNews />
-      <div id={"contact"}>
+      {/*<div id={"contact"}>
         <OurOffice ourOffice={ourOffice.ourOffice} />
-      </div>
+      </div>*/}
     </MainContainer>
   );
 });

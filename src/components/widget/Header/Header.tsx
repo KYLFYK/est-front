@@ -128,7 +128,7 @@ export const Header: FC<HeaderPropsType> = observer(({
       title: "Снять",
     },*/
     { href: "/calculator", title: "Ипотека" },
-    // { href: "/construction", title: "Строящиеся дома" },
+    { href: "/", title: "ЖК" },
     { href: "/#contact", title: "Контакты" },
   ];
 
@@ -278,7 +278,7 @@ export const Header: FC<HeaderPropsType> = observer(({
       <div className={css.headerLogo}>
         <Link href={"/"} passHref>
           <div style={{ cursor: "pointer" }}>
-            <LogoMain />
+            <LogoMain margin burger/>
           </div>
         </Link>
       </div>
@@ -288,7 +288,7 @@ export const Header: FC<HeaderPropsType> = observer(({
           onClick={() => setActive(0)}
           style={{ color: "#C5A28E" }}
         >
-          <IconLocation />
+          <IconLocation color={'#64B5F6'}/>
           <div className={css.positionSelect}>
             <div className={css.t_Info}>
               <Typography >
@@ -317,7 +317,7 @@ export const Header: FC<HeaderPropsType> = observer(({
               setEdit("login");
             }}
           >
-            <LoginIcon />
+            <Typography color={'nude'}>Войти</Typography>
           </div>
         ) : (
           <div className={css.menuNameAuthorization}>

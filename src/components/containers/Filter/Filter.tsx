@@ -42,7 +42,7 @@ export const Filter: React.FC<Props> = observer(({ location, onFilter }) => {
   React.useEffect(() => {
     setWidth(window.innerWidth)
   },[])
-
+  console.log(searchStore.getFilter())
   React.useEffect(() => {
     if (
       searchStore.getFilter() &&
@@ -253,7 +253,7 @@ export const Filter: React.FC<Props> = observer(({ location, onFilter }) => {
         />
       )}
 
-      {/*<BaseInput type="text" placeholder="Поиск" className={s.searchInput} onChange={onChangeSearchValue}/>*/}
+      {<BaseInput type="text" placeholder="Поиск" className={s.searchInput} onChange={() => {} /*onChangeSearchValue*/}/>}
 
       <InputsUnion className={s.inputsUnion}>
         <CompareInput
@@ -318,14 +318,6 @@ export const Filter: React.FC<Props> = observer(({ location, onFilter }) => {
         />
       </div>
 
-      {/*searchStore.getFilter()['object-type'] !== 'land' && <BaseDropDown
-                options={FILTER_BUILDING_TYPE_OPTIONS}
-                value={searchStore.getFilter()['building-type']}
-                onChange={onChangeBuildingType}
-                placeholder={searchStore.getFilter()['building-type']}
-                className={s.dropdown}
-            />*/}
-
       {searchStore.getFilter()["object-type"] !== "land" && (
         <BaseDropDown
           options={FILTER_BUILDING_TYPE_OPTIONS}
@@ -336,7 +328,7 @@ export const Filter: React.FC<Props> = observer(({ location, onFilter }) => {
         />
       )}
 
-      {/*searchStore.getFilter()["object-type"] === "apartment" && (
+      {searchStore.getFilter()["object-type"] === "apartment" && (
         <BaseDropDown
           options={FILTER_FLOORS_OPTIONS}
           value={searchStore.getFilter().floor}
@@ -344,7 +336,7 @@ export const Filter: React.FC<Props> = observer(({ location, onFilter }) => {
           placeholder="Выбрать этаж"
           className={s.dropdownFloor}
         />
-      )*/}
+      )}
 
       {searchStore.getFilter()["object-type"] === "land" && (
         <BaseDropDown
@@ -356,14 +348,7 @@ export const Filter: React.FC<Props> = observer(({ location, onFilter }) => {
         />
       )}
 
-      {/*searchStore.getFilter()['object-type'] !== 'apartment' && <BaseDropDown
-                options={FILTER_LAND_SPECS_OPTIONS}
-                value={searchStore.getFilter()['benefit']}
-                onChange={onChooseImprovment}
-                placeholder={searchStore.getFilter()['benefit'] ? MultiChoiceBenefits() : "Выбрать благоустроенность"}
-                className={s.dropdown}
-            />*/}
-      {/*searchStore.getFilter()["object-type"] !== "apartment" && (
+      {searchStore.getFilter()["object-type"] !== "apartment" && (
         <BaseDropDown
           options={FILTER_LAND_SPECS_OPTIONS}
           value={searchStore.getFilter()["benefit"]}
@@ -376,7 +361,7 @@ export const Filter: React.FC<Props> = observer(({ location, onFilter }) => {
           multi
           className={s.dropdownImprovement}
         />
-      )*/}
+      )}
 
       {location === "start" || location === "search" ? (
         <BaseButton className={s.submit} type="primary" onClick={onSubmit}>

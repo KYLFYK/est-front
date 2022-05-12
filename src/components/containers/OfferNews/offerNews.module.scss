@@ -1,28 +1,17 @@
 @import '../../../app/styles/resolutions.scss';
+@import '../../../app/styles/colours.scss';
 
 .offerNews{
-    margin: 30px 10px 20px 10px;
-    @include for-size(KT2) {
-        margin: 50px 60px 0 60px;
-    }
-}
-.container{
-    display: none;
-    @include for-size(KT2) {
-      display: block;
-    }
-}
-.minResContainer {
-    display: block;
-    @include for-size(KT2) {
-        display: none;
+    margin: 30px 10px 45px 10px;
+    @include for-size(KT3) {
+        margin: 50px 60px 100px 60px;
     }
 }
 
 .mobileMargin {
     display: block;
     margin: 0 0 10px 0;
-    @include for-size(KT2) {
+    @include for-size(KT3) {
         margin: 0;
         display: none;
     }
@@ -53,4 +42,12 @@
 }
 .modalIndex{
     z-index: 10 !important;
+}
+.signature{
+    display: flex;
+}
+.link{
+    cursor: pointer;
+    border-bottom: 1px solid $ICONGRAY;
+    margin: 0 0 0 5px;
 }
