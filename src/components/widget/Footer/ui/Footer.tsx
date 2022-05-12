@@ -20,6 +20,7 @@ type FooterPropsType = {
 export const Footer: FC<FooterPropsType> = ({ color, className }) => {
   return (
     <div
+      id={"contact"}
       style={{ backgroundColor: `${color === "nude" ? "#C5A28E" : "#1B3243"}` }}
       className={classNames(css.footer, className)}
     >
@@ -65,7 +66,7 @@ export const Footer: FC<FooterPropsType> = ({ color, className }) => {
           8 (800) 600-20-94
         </Typography>
         <div className={css.margin}></div>
-        <Link href="/">
+        <Link href="mailto:estatum@f-case.ru">
           <Typography
             className={css.underline}
             color={"nude"}
