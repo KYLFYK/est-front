@@ -169,7 +169,6 @@ const Apartment: NextPage = observer((props: any) => {
           InfrastructureInfo={infrastructureInfo}
         />
       </div>
-
       {props.object_developer_info && (
         <div ref={develop}>
           <ObjectDeveloper
