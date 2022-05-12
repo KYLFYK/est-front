@@ -4,8 +4,15 @@
     margin: 40px 10px 0 10px;
   }
   @include for-size(KT2) {
-    margin: 60px 60px 0 60px;
+    margin: 60px auto 0 auto;
   }
+
+  @include for-size(KT3) {
+    padding: 0 60px;
+  }
+
+  max-width: $KT6;
+  box-sizing: border-box;
 }
 
 .containerDevelopers{

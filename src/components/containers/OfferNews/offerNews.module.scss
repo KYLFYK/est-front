@@ -4,8 +4,11 @@
 .offerNews{
     margin: 30px 10px 45px 10px;
     @include for-size(KT3) {
-        margin: 50px 60px 100px 60px;
+        margin: 50px auto 100px auto;
+        padding: 0 60px;
+        box-sizing: border-box;
     }
+    max-width: $KT6;
 }
 
 .mobileMargin {

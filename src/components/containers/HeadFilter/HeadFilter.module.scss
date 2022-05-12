@@ -2,6 +2,7 @@
 @import '../../../app/styles/typography.scss';
 @import '../../../app/styles/buttons.scss';
 @import '../../../app/styles/resolutions.scss';
+@import '/src/components/containers/Record/all.scss';
 
 .container {
     width: 100%;
@@ -182,4 +183,5 @@
     width: 100%;
     box-sizing: border-box;
     position: relative;
+    max-width: $KT6;
 }
