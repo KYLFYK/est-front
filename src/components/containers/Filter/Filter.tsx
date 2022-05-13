@@ -174,6 +174,7 @@ export const Filter: React.FC<Props> = observer(({ location, onFilter }) => {
 
   return (
     <div className={s.wrapper}>
+      <div className={s.firstLine}>
       <InputsUnion className={s.actionDropdownUnion}>
         <BaseDropDown
           options={FILTER_ACTIONS_OPTIONS}
@@ -204,6 +205,7 @@ export const Filter: React.FC<Props> = observer(({ location, onFilter }) => {
       )}
 
       {searchStore.getFilter()["object-type"] === "house" && (
+        <div style={{marginRight: '8px', width: '200px'}}>
         <CompareInput
           location="search"
           classNameInputFrom={s.floorInputFrom}
@@ -215,6 +217,7 @@ export const Filter: React.FC<Props> = observer(({ location, onFilter }) => {
           onChangeFrom={onChangePrivateFloorFrom}
           onChangeTo={onChangePrivateFloorTo}
         />
+        </div>
       )}
 
       {searchStore.getFilter()["object-type"] === "apartment" && (
@@ -254,7 +257,8 @@ export const Filter: React.FC<Props> = observer(({ location, onFilter }) => {
         )*/}
 
       {<BaseInput type="text" placeholder="Поиск..." className={searchStore.getFilter()["object-type"] === "land" ? s.searchInputLand : s.searchInput} onChange={() => {} /*onChangeSearchValue*/}/>}
-
+      </div>
+      <div className={s.secondLine}>
       <InputsUnion className={s.inputsUnion}>
         <CompareInput
           location="search"
@@ -372,6 +376,7 @@ export const Filter: React.FC<Props> = observer(({ location, onFilter }) => {
           Искать
         </BaseButton>
       )}
+      </div>
     </div>
   );
 });

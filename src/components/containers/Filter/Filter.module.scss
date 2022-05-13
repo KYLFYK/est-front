@@ -8,7 +8,6 @@
     flex-direction: column;
     padding: 0px;
     flex-wrap: wrap;
-    gap: 8px;
     justify-content: center;
     @include for-size(KT3) {
         padding-left: 60px;
@@ -19,9 +18,11 @@
 
 .floorInputFrom {
     width: 78px;
+    height: 18px;
 }
 .floorInputTo {
     width: 60px;
+    height: 18px;
 }
 .priceInputFrom {
     width: 73px;
@@ -37,39 +38,43 @@
 }
 
 .dropdownAction {
-
     @include for-size(KT3) {
         width: 200px;
     }
 }
 .dropdownHouseType {
-
     @include for-size(KT3) {
         width: 200px;
     }
 }
 .dropdownPrivateType {
+    height: 38px !important;
     @include for-size(KT3) {
+        margin-right: 8px;
         width: 218px !important;
     }
 }
 .dropdownBuildingType { 
     @include for-size(KT3) {
+        margin-right: 8px;
         width: 237px;
     }
 }
 .dropdownFloor {
     @include for-size(KT3) {
+        margin-right: 8px;
         width: 372px !important;
     }
 }
 .dropdownIRB {
     @include for-size(KT3) {
+        margin-right: 8px;
         width: 237px;
     }
 }
 .dropdownImprovement {
     @include for-size(KT3) {
+        margin-right: 8px;
         width: 372px;
     }
 }
@@ -93,14 +98,15 @@
 
 .actionDropdownUnion {
     width: 398px;
-    height: 40px;
+    height: 38px;
     @include for-size(KT3) {
+        margin-right: 8px;
         max-width: fit-content;
     }
 }
 
 .toggleButton {
-    height: 40px;
+    height: 38px;
     padding: 0;
     width: auto;
     @include for-size(KT3) {
@@ -113,6 +119,7 @@
 .mainToggleButtonWrap {
     display: none;
     @include for-size(KT3) {
+        margin-right: 8px;
         display: block;
     }
 }
@@ -125,22 +132,24 @@
 .inputsUnion {
     display: none;
     @include for-size(KT3) {
+        margin-right: 8px;
         display: flex;
         width: 478px;
-        height: 40px;
+        height: 38px;
     }
 }
 
 .searchInput {
     width: 478px;
 }
+  
 .searchInputLand {
     width: 912px;
 }
 
 .link {
     background-color: $NUDE;
-    height: 40px;
+    height: 38px;
     border-radius: 6px;
     outline: none;
     text-decoration: none;
@@ -160,4 +169,13 @@
     @include for-size(KT3) {
         display: none;
     }
+}
+
+.firstLine{
+    display: flex;
+}
+
+.secondLine{
+    display: flex;
+    margin-top: 8px;
 }

@@ -102,10 +102,15 @@ export const OfferNews = () => {
         <Typography color={"disabled"}>
           Подписываясь на новости от Estatum, вы принимаете
         </Typography>{" "}
-        <Link href={"/"}>
-          <Typography color={"disabled"} className={css.link}>
-            Пользовательское соглашение
-          </Typography>
+        <Link href="https://estatum.f-case.ru/models/UserAgreement.pdf">
+          <a
+            href="https://estatum.f-case.ru/models/UserAgreement.pdf"
+            target={"_blank"}
+          >
+            <Typography color={"disabled"} className={css.link}>
+              Пользовательское соглашение
+            </Typography>
+          </a>
         </Link>
       </div>
       {

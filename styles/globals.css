@@ -58,6 +58,9 @@ body{
   margin: 0;
   background-color: rgba(252, 252, 252, 1);
 }
+a{
+  text-decoration: none;
+}
 #__next {
   min-height: 100vh;
   display: flex;
