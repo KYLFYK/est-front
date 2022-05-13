@@ -86,7 +86,7 @@ export const Footer: FC<FooterPropsType> = ({ color, className }) => {
           </Link>
           {/*<Twitter/>*/}
           <Link href="https://www.youtube.com/channel/UC5Xs06qv6uI3ty2dvaAhSPA/featured">
-            <a href="https://vk.com/estatum_re" target={'_blank'}  rel="noreferrer">
+            <a href="https://www.youtube.com/channel/UC5Xs06qv6uI3ty2dvaAhSPA/featured" target={'_blank'}  rel="noreferrer">
               <Youtube />
             </a>
           </Link>

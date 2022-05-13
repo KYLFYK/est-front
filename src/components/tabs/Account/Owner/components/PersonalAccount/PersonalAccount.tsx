@@ -5,19 +5,29 @@ import PersonalAccountOwner from "./PersonalAccountOwner/PersonalAccountOwner";
 import PersonalAccountEdit from "./PersonalAccountEdit/PersonalAccountEdit";
 import AccountEditAgent from "../../../Agent/components/PersonalCabinetTab/AccountEditAgent/AccountEditAgent";
 import {SettingsEditAgent} from "../../../Agent/components/PersonalCabinetTab/Settings/SettingsEditAgent";
+import AccountOwnerEdit from "./AccountOwnerOptions/AccountOwnerEdit";
+import {observer} from "mobx-react-lite";
 
 const style={
     margin:'0 18px'
 }
 
 
-const PersonalAccount = () => {
+const PersonalAccount = observer(() => {
     const [edit, setEdit] = useState<boolean>(false)
-    const [current, setCurrent] = useState<number>(1)
+    const [current, setCurrent] = useState<number>(0)
 
-    const changeCurrent = (id:number) => {
-        setCurrent(id)
+    const changeCurrentBack = (id:number) => {
         setEdit(false)
+        setCurrent(id)
+    }
+    const changeCurrent1 = () => {
+        setEdit(true)
+        setCurrent(0)
+    }
+    const changeCurrent2 = () => {
+        setEdit(true)
+        setCurrent(1)
     }
 
     return (
@@ -26,17 +36,17 @@ const PersonalAccount = () => {
                 !edit?<HorizontalTabs
                         style={style}
                         tabs={[
-                        {title: "Аккаунт", Component: <PersonalAccountOwner onEdit={()=>setEdit(!edit)}/>},
-                        {title: "Настройки", Component: <AccountOwnerOptions onEdit={()=>setEdit(!edit)} />},
+                        {title: "Аккаунт", Component: <PersonalAccountOwner onEdit={changeCurrent1}/>},
+                        {title: "Настройки", Component: <AccountOwnerOptions onEdit={changeCurrent2} />},
                     ]}/>
                     :
                     (
-                        (current === 0 && <PersonalAccountEdit current={0} onCurrent={changeCurrent}/>) ||
-                        (current === 1 && <PersonalAccountEdit current={1} onCurrent={changeCurrent}/>)
+                        current === 0 && <PersonalAccountEdit onCurrent={changeCurrentBack}/> ||
+                        current === 1 && <AccountOwnerEdit onCurrent={changeCurrentBack}/>
                     )
             }
         </>
     );
-};
+})
 
 export default PersonalAccount;

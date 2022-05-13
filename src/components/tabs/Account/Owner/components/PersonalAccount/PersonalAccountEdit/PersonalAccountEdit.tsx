@@ -14,13 +14,11 @@ import { Dashed } from "../../../../../../../icons/Dashed/dashed";
 
 type PersonalAccountEditType = {
     onCurrent: (id:number) => void;
-    current:number
 };
 
 const PersonalAccountEdit: FC<PersonalAccountEditType> = observer(
-  ({ onCurrent ,current}) => {
+  ({ onCurrent }) => {
     const store = useStoreOwnerCabinet();
-      console.log(current)
     const [comparison, setComparison] = useState<boolean>(false);
 
     const [name, setName] = useState<string>(store.initialData.name);
@@ -39,7 +37,7 @@ const PersonalAccountEdit: FC<PersonalAccountEditType> = observer(
       )
         setComparison(true);
       else {
-        onCurrent(current);
+        onCurrent(0);
       }
     };
 
@@ -56,11 +54,11 @@ const PersonalAccountEdit: FC<PersonalAccountEditType> = observer(
         store.fetch();
       }, 100);
       setComparison(false);
-      onCurrent(current);
+      onCurrent(0);
     };
     const backPageNoSave = () => {
       setComparison(false);
-      onCurrent(current);
+      onCurrent(0);
     };
 
     return (
