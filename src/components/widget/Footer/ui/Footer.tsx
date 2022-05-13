@@ -78,13 +78,15 @@ export const Footer: FC<FooterPropsType> = ({ color, className }) => {
           </Typography>
           <div className={css.margin}></div>
           <Link href="mailto:estatum@f-case.ru">
-            <Typography
-              className={css.underline}
-              color={"nude"}
-              weight={"medium"}
-            >
-              estatum@f-case.ru
-            </Typography>
+            <a href="mailto:estatum@f-case.ru">
+              <Typography
+                className={css.underline}
+                color={"nude"}
+                weight={"medium"}
+              >
+                estatum@f-case.ru
+              </Typography>
+            </a>
           </Link>
         </div>
         <div className={css.icons}>

@@ -5,16 +5,13 @@
 
 .wrapper {
     background-color: #fff;
-    height: 40px;
-    @include for-size(KT1) {
-        border: 1px solid $ICONGRAY;
-        display: flex;
-        flex-wrap: wrap;
-        border-radius: 8px;
-        justify-content: center;
-        gap: 5px;
-    }
-
+    height: 38px;
+    border: 1px solid $ICONGRAY;
+    display: flex;
+    flex-wrap: wrap;
+    border-radius: 8px;
+    justify-content: center;
+    gap: 5px;
     @include for-size(KT3) {
         flex-wrap: nowrap;
         justify-content: flex-start;
@@ -29,12 +26,10 @@
 }
 
 .divider {
-    @include for-size(KT1) {
-        width: 1px;
-        height: 20px;
-        background-color: #BDBDBD;
-        margin: 12px 0;
-    }
+    width: 1px;
+    height: 20px;
+    background-color: #BDBDBD;
+    margin: 10px 0;
 }
 
 .button {
@@ -86,7 +81,7 @@
     position: relative;
     border-radius: 4px;
     text-align: center;
-    padding: 2px 8px 2px 8px;
+    padding: 0 8px 2px 8px;
 }
 
 .title{
