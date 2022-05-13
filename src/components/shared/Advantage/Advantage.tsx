@@ -33,7 +33,7 @@ export const Advantage: React.FC<AdvantagePropsType> = ({
         <Typography weight={titleWeight} size={titleSize}>
           {title}
         </Typography>
-        {text && <Typography weight={textWeight}>{text}</Typography>}
+        {text && <div style={{margin: '8px 0 0 0'}}><Typography weight={textWeight}>{text}</Typography></div>}
       </div>
     </div>
   );

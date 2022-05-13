@@ -40,16 +40,19 @@ export const OfferNews = () => {
         >
           <div className={css.grid}>
             <BaseInput
+              className={css.width}
               placeholder="Имя"
               value={name}
               onChange={(e) => setName(e.currentTarget.value)}
             />
             <BaseInput
+              className={css.width}
               placeholder="Email"
               value={email}
               onChange={(e) => setEmail(e.currentTarget.value)}
             />
             <BaseInput
+              className={css.width}
               placeholder="Телефон"
               type={"number"}
               value={phone}
@@ -96,7 +99,14 @@ export const OfferNews = () => {
         </HeadLine>
       </MobileOnly>
       <div className={css.signature}>
-      <Typography color={'disabled'}>Подписываясь на новости от Estatum, вы принимаете</Typography> <Link href={'/'}><Typography color={'disabled'} className={css.link}>Пользовательское соглашение</Typography></Link>
+        <Typography color={"disabled"}>
+          Подписываясь на новости от Estatum, вы принимаете
+        </Typography>{" "}
+        <Link href={"/"}>
+          <Typography color={"disabled"} className={css.link}>
+            Пользовательское соглашение
+          </Typography>
+        </Link>
       </div>
       {
         <Modal
@@ -104,10 +114,11 @@ export const OfferNews = () => {
           setActive={() => setActiveModal(!activeModal)}
           active={activeModal}
         >
-          {messageNews === "Спасибо что подписались на новости"
-              ? <IconOfferThanks />
-              : <IconOfferError />
-          }
+          {messageNews === "Спасибо что подписались на новости" ? (
+            <IconOfferThanks />
+          ) : (
+            <IconOfferError />
+          )}
 
           <Typography className={css.textMessage}>{messageNews}</Typography>
         </Modal>

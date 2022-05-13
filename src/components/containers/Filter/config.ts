@@ -5,9 +5,9 @@ export const TOGGLE_BUTTONS_OPTIONS_APART: IOption[] = [
   { label: "1", value: "one" },
   { label: "2", value: "two" },
   { label: "3", value: "three" },
-  { label: "4", value: "four" },
-  { label: "5", value: "five" },
-  { label: "6", value: "six" },
+  { label: "4+", value: "four" },
+  //{ label: "5", value: "five" },
+  //{ label: "6", value: "six" },
   { label: "Свободная планировка", value: "free_plan" },
 ];
 

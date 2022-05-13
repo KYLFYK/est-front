@@ -5,12 +5,13 @@ import css from "./HeadLine.module.scss";
 type HeadLineType = {
   children: ReactNode;
   title: string;
+  className?: any;
 };
 
-const HeadLine: FC<HeadLineType> = ({ children, title }) => {
+const HeadLine: FC<HeadLineType> = ({ children, title, className }) => {
   return (
     <>
-      <div className={css.margin}>
+      <div className={`${css.margin} ${className ? className : ''}`}>
         <Typography size={"subheader"} className={css.size} weight="bold">
           {title}
         </Typography>

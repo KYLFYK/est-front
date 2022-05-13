@@ -20,66 +20,73 @@ type FooterPropsType = {
 export const Footer: FC<FooterPropsType> = ({ color, className }) => {
   return (
     <div
+      id={"contact"}
       style={{ backgroundColor: `${color === "nude" ? "#C5A28E" : "#1B3243"}` }}
       className={classNames(css.footer, className)}
     >
-      <div>
-        <LogoMain color={"#FCFCFC"} />
-        <div className={css.margin}></div>
-        <FooterCopyRight />
-      </div>
-      <div>
-        <Typography color={"altWhite"} weight={"medium"}>
-          ИНН 7707832969
-        </Typography>
-        <div className={css.margin}></div>
-        <Typography color={"altWhite"} weight={"medium"}>
-          ОГРН 1147746472180
-        </Typography>
-      </div>
-      <div>
-        <Link href="/">
-          <Typography
-            className={css.underline}
-            color={"nude"}
-            weight={"medium"}
-          >
-            Политика конфиденциальности
+      <div className={css.container}>
+        <div>
+          <LogoMain color={"#FCFCFC"} />
+          <div className={css.margin}></div>
+          <FooterCopyRight />
+        </div>
+        <div>
+          <Typography color={"altWhite"} weight={"medium"}>
+            ИНН 7707832969
           </Typography>
-        </Link>
-        <div className={css.margin}></div>
-        <Link href="/">
-          <Typography
-            className={css.underline}
-            color={"nude"}
-            weight={"medium"}
-          >
-            Пользовательское соглашение
+          <div className={css.margin}></div>
+          <Typography color={"altWhite"} weight={"medium"}>
+            ОГРН 1147746472180
           </Typography>
-        </Link>
-      </div>
-      <MobileOnly></MobileOnly>
-      <DesktopOnly></DesktopOnly>
-      <div>
-        <Typography color={"nude"} weight={"medium"}>
-          8 (800) 600-20-94
-        </Typography>
-        <div className={css.margin}></div>
-        <Link href="/">
-          <Typography
-            className={css.underline}
-            color={"nude"}
-            weight={"medium"}
-          >
-            estatum@f-case.ru
+        </div>
+        <div>
+          <Link href="/">
+            <Typography
+              className={css.underline}
+              color={"nude"}
+              weight={"medium"}
+            >
+              Политика конфиденциальности
+            </Typography>
+          </Link>
+          <div className={css.margin}></div>
+          <Link href="/">
+            <Typography
+              className={css.underline}
+              color={"nude"}
+              weight={"medium"}
+            >
+              Пользовательское соглашение
+            </Typography>
+          </Link>
+        </div>
+        <MobileOnly></MobileOnly>
+        <DesktopOnly></DesktopOnly>
+        <div>
+          <Typography color={"nude"} weight={"medium"}>
+            8 (800) 600-20-94
           </Typography>
-        </Link>
-      </div>
-      <div className={css.icons}>
-        {/*<FaceBook/>*/}
-        <Vk />
-        {/*<Twitter/>*/}
-        <Youtube />
+          <div className={css.margin}></div>
+          <Link href="/">
+            <Typography
+              className={css.underline}
+              color={"nude"}
+              weight={"medium"}
+            >
+              estatum@f-case.ru
+            </Typography>
+          </Link>
+        </div>
+        <div className={css.icons}>
+          {/*<FaceBook/>*/}
+          <Link href="https://vk.com/estatum_re">
+            <Vk />
+          </Link>
+          {/*<Twitter/>*/}
+          <Link href="https://www.youtube.com/channel/UC5Xs06qv6uI3ty2dvaAhSPA/featured">
+            <Youtube />
+          </Link>
+        </div>
       </div>
     </div>
   );

@@ -1,10 +1,10 @@
 @import '/src/components/containers/Record/all.scss';
 .logoMain{
-  height: 19px;
-  width: 151px;
-  @include for-size(KT1) {
     height: 12px;
     width: 97px;
+  @include for-size(KT3) {
+    height: 19px;
+    width: 151px;
   }
 }
 .margin {
@@ -12,18 +12,11 @@
 }
 .burger{
   //padding: ;
-
-  @include for-size(KT1) {
-    display: block;
-    cursor: pointer;
-  } @include for-size(KT2) {
+  display: block;
+  cursor: pointer;
+  @include for-size(KT3) {
     display: none;
-  } @include for-size(KT3) {
-     display: none;
-  } @include for-size(KT4) {
-     display: none;
-  }
-
+  } 
 }
 .style{
   display: flex;

@@ -10,6 +10,8 @@ import Slider from "react-slick";
 import {IMAGES_SET} from "../Card/config";
 import {AgentBlock} from "../AgentsContainer/AgentBlock/AgentBlock";
 import CardBestOfferMobile from "../Card/CardBestOfferMobile";
+import { BaseDropDown } from 'src/components/shared/BaseDropDown/BaseDropDown';
+import { DROPDOWN_PLACEHOLDER, SORT_FILTER_OPTIONS } from '../PlanningFilter/config';
 
 type BestOffersType = {
     tagsButton: Array<string>
@@ -141,10 +143,12 @@ export const BestOffers: FC<BestOffersType> = observer(({tagsButton}) => {
         }
         store.fetchBestOffers(10, activeFilter[0], activeFilter[1], activeFilter[2], activeFilter[3], activeFilter[4])
     }
-
+    const [sort, setSort] = useState(SORT_FILTER_OPTIONS[0].value)
     return (
         <div className={css.offers}>
-            <HeadLine title={'Лучшие предложения'}>
+
+                <HeadLine title={'Лучшие предложения'} className={css.margin}>
+            
                 <div className={css.positionButton}>
                     <div className={css.buttonLine}>
                         {
@@ -159,7 +163,14 @@ export const BestOffers: FC<BestOffersType> = observer(({tagsButton}) => {
                         }
                     </div>
                 </div>
-                <div style={{padding: '5px', marginTop: '20px'}}>
+                    <BaseDropDown 
+                        className={css.sortDropdown}
+                        onChange={(e) => {setSort(e)}}
+                        placeholder={DROPDOWN_PLACEHOLDER}
+                        options={SORT_FILTER_OPTIONS}
+                        value={sort} 
+                    />
+                <div style={{marginTop: '20px'}}>
                     <Slider {...settings} >
                         {
                             store.initialData.bestOffers !== null && store.initialData.bestOffers.length > 0

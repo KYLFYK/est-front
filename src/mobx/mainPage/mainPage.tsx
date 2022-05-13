@@ -59,7 +59,7 @@ class MainPageStore {
         const res = await mailPage.getAgentOur(3)
         const date = new Date()
         const years = date.getFullYear()
-        this.initialData.agents = res.data.map((agent: any) => (
+        this.initialData.agents = res.data?.map((agent: any) => (
             {
                 id: agent.id,
                 img: agent.agentProperty?.file !== undefined && agent.agentProperty?.file[0]?.url
@@ -89,7 +89,7 @@ class MainPageStore {
 
     async fetchDevelopers() {
         const developers = await mailPage.getDeveloperOur(10)
-        this.initialData.developers = developers.data.map((developer: any) => (
+        this.initialData.developers = developers.data?.map((developer: any) => (
             {
                 id: developer.id,
                 img: developer.developerProperty?.logo 

@@ -1,18 +1,29 @@
 @import '../../../../app/styles/resolutions.scss';
+@import '/src/components/containers/Record/all.scss';
 
 .footer {
     background: #1A4862;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    align-items: flex-start;
-    width: calc(100vw - 20px);
-    padding: 0 10px 0 10px;
-    @include for-size(KT3) {
-        width: calc(100vw - 120px);
-        flex-direction: row;
-        height: 100px;
-        padding: 40px 60px 24px 60px;
+    box-sizing: border-box;
+
+    .container {
+        @include base-container;
+
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: flex-start;
+        padding: 0 10px 0 10px;
+
+        @include for-size(KT3) {
+            flex-direction: row;
+            padding: 40px 60px 65px 60px;
+            box-sizing: border-box;
+            height: auto;
+        }
+
+        & + div {
+            box-sizing: unset;
+        }
     }
 }
 
@@ -22,7 +33,7 @@
 
 .underline {
     width: fit-content;
-    border-bottom: .5px solid #64B5F6;
+    border-bottom: .5px solid RGBA(100, 181, 246, .5);
     cursor: pointer;
 }
 

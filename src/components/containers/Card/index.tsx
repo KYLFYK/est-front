@@ -73,7 +73,7 @@ const ObjectCard: React.FC<Props> = observer(
                             Этаж:
                         </Typography>
                         <Typography inline className={s.margin}>
-                            {data.property?.floor} / {data.property?.totalFloor}
+                            {data.property?.floor}/{data.property?.totalFloor}
                         </Typography>
                     </p>
                     <p className={s.subtitle} style={{marginLeft:'10px'}}>

@@ -8,10 +8,11 @@
     flex-direction: column;
     padding: 0px;
     flex-wrap: wrap;
-    gap: 10px;
+    gap: 8px;
     justify-content: center;
-    @include for-size(KT2) {
-        padding: 0 60px;
+    @include for-size(KT3) {
+        padding-left: 60px;
+        padding-right: 60px;
         flex-direction: row;
     }
 }
@@ -37,38 +38,38 @@
 
 .dropdownAction {
 
-    @include for-size(KT2) {
+    @include for-size(KT3) {
         width: 200px;
     }
 }
 .dropdownHouseType {
 
-    @include for-size(KT2) {
+    @include for-size(KT3) {
         width: 200px;
     }
 }
 .dropdownPrivateType {
-    @include for-size(KT2) {
+    @include for-size(KT3) {
         width: 200px;
     }
 }
 .dropdownBuildingType { 
-    @include for-size(KT2) {
-        width: 200px;
+    @include for-size(KT3) {
+        width: 237px;
     }
 }
 .dropdownFloor {
-    @include for-size(KT2) {
-        width: 360px !important;
+    @include for-size(KT3) {
+        width: 372px !important;
     }
 }
 .dropdownIRB {
-    @include for-size(KT2) {
+    @include for-size(KT3) {
         width: 200px;
     }
 }
 .dropdownImprovement {
-    @include for-size(KT2) {
+    @include for-size(KT3) {
         width: 200px;
     }
 }
@@ -76,7 +77,7 @@
 .submit {
     @include button;
     @include ROBOTOREGULAR16;
-    width: 100%;
+    width: 207px !important;
     background-color: $NUDE;
     border-radius: 6px;
     @include for-size(KT3) {
@@ -91,8 +92,9 @@
 }
 
 .actionDropdownUnion {
+    width: 398px;
     height: 40px;
-    @include for-size(KT2) {
+    @include for-size(KT3) {
         max-width: fit-content;
     }
 }
@@ -101,33 +103,36 @@
     height: 40px;
     padding: 0;
     width: auto;
-    @include for-size(KT2) {
-        padding: 7px 4px;
+    @include for-size(KT3) {
+        padding-top: 7px;
+        padding-right: 4px;
+        padding-bottom: 7px;
+        padding-left: 4px;
     }
 }
 .mainToggleButtonWrap {
     display: none;
-    @include for-size(KT2) {
+    @include for-size(KT3) {
         display: block;
     }
 }
 .lowResToggleButtonWrap {
-    @include for-size(KT2) {
+    @include for-size(KT3) {
         display: none;
     }
 }
 
 .inputsUnion {
     display: none;
-    @include for-size(KT2) {
+    @include for-size(KT3) {
         display: flex;
-        max-width: 478px;
+        width: 478px;
         height: 40px;
     }
 }
 
 .searchInput {
-    width: 400px;
+    width: 478px;
 }
 
 .link {
@@ -140,13 +145,16 @@
 }
 
 .linkTitle{
-    margin: 10px;
+    margin-top: 10px;
+    margin-right: 10px;
+    margin-bottom: 10px;
+    margin-left: 10px;
 }
 
 .lowResContainer{
     display: flex;
     flex-direction: column;
-    @include for-size(KT2) {
+    @include for-size(KT3) {
         display: none;
     }
 }
