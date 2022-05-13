@@ -52,13 +52,14 @@
     padding: 0px;
     text-overflow: ellipsis;
     //border:1px solid #000;
-    margin: 18px 0 22px 0;
+    margin: 18px 0 0 0;
   }
 }
 .marginT{
   margin-top: 5px;
   @include for-size(KT3) {
-    margin: 0;
+    margin: 10px 0;
+    white-space:normal;
   }
 }
 .hover{
