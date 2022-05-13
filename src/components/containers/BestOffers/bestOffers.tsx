@@ -163,13 +163,6 @@ export const BestOffers: FC<BestOffersType> = observer(({tagsButton}) => {
                         }
                     </div>
                 </div>
-                    <BaseDropDown 
-                        className={css.sortDropdown}
-                        onChange={(e) => {setSort(e)}}
-                        placeholder={DROPDOWN_PLACEHOLDER}
-                        options={SORT_FILTER_OPTIONS}
-                        value={sort} 
-                    />
                 <div style={{marginTop: '20px'}}>
                     <Slider {...settings} >
                         {

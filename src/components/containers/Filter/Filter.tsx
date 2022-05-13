@@ -241,7 +241,7 @@ export const Filter: React.FC<Props> = observer(({ location, onFilter }) => {
         </div>
       )}
 
-      {(searchStore.getFilter()["object-type"] === "house" ||
+      {/*(searchStore.getFilter()["object-type"] === "house" ||
         searchStore.getFilter()["object-type"] === "townhouse") && (
         <ToggleButtons
           title={"комнат"}
@@ -251,9 +251,9 @@ export const Filter: React.FC<Props> = observer(({ location, onFilter }) => {
           onChange={onChangePlanningHouse}
           multiple
         />
-      )}
+        )*/}
 
-      {<BaseInput type="text" placeholder="Поиск..." className={s.searchInput} onChange={() => {} /*onChangeSearchValue*/}/>}
+      {<BaseInput type="text" placeholder="Поиск..." className={searchStore.getFilter()["object-type"] === "land" ? s.searchInputLand : s.searchInput} onChange={() => {} /*onChangeSearchValue*/}/>}
 
       <InputsUnion className={s.inputsUnion}>
         <CompareInput
