@@ -38,7 +38,7 @@ export const FILTER_HOUSE_TYPE_OPTIONS: IOption[] = [
   { value: "apartment", label: "Квартиру" },
   { value: "house", label: "Дом" },
   { value: "land", label: "Участок" },
-  { value: "cottages", label: "Коттеджный посёлок" },
+  //{ value: "cottages", label: "Коттеджный посёлок" },
 ];
 
 export const FILTER_PRIVATE_HOUSE_OPTIONS: IOption[] = [
