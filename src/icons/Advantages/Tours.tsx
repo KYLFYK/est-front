@@ -19,8 +19,8 @@ const Tours = () => {
           y2="50"
           gradientUnits="userSpaceOnUse"
         >
-          <stop stop-color="#7474BF" />
-          <stop offset="1" stop-color="#64B5F6" />
+          <stop stopColor="#7474BF" />
+          <stop offset="1" stopColor="#64B5F6" />
         </linearGradient>
       </defs>
       <svg
