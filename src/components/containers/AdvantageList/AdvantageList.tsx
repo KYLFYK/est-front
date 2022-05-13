@@ -47,6 +47,7 @@ export const Advantages: FC<AdvantagesType> = ({ advantages, advantagesMobile })
                                 key={index}
                                 title={title.label}
                                 text={text}
+                                classWrapper={index %2==1 ? css.mL_5 : ''}
                             >
                                 {
                                     searchIconByValue(title.value as string)

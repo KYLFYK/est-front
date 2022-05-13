@@ -36,7 +36,7 @@ export const AgentsContainer: FC<AgentsContainerType> = observer(({  title }) =>
 
     return (
         <div className={css.containerAgentsBlock}>
-            <HeadLine title={title}>
+            <HeadLine title={title} >
                 <div className={css.block}>
                     {
                         store.initialData.agents && store.initialData.agents.map(({ infoAgent, connection, img }, index) => (

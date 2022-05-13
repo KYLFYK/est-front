@@ -7,7 +7,7 @@ const year = date.getFullYear()
 
 const FooterCopyRight = () => {
     return (
-        <div style={{display:'flex',alignItems:"center"}}>
+        <div style={{display:'flex',alignItems:"center"}} className={css.mT_5px}>
             <svg width="13" height="13" xmlns="http://www.w3.org/2000/svg">
 
                 <g>
@@ -20,7 +20,7 @@ const FooterCopyRight = () => {
                 </g>
             </svg>
             <Typography weight={'medium'} color={"altAccent"} className={css.marginL_5}>
-                {year} ООО «Estatum»
+                 ООО «Estatum», {year}
             </Typography>
         </div>
 

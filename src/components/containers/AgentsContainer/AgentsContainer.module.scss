@@ -9,6 +9,7 @@
 
     @include for-size(KT3) {
         padding: 0 60px;
+        margin: 61px auto 0 auto;
     }
 
     max-width: $KT6;
@@ -50,6 +51,7 @@
     @include for-size(KT3) {
         width: auto;
         height:266px;
+        gap:45px;
     }@media  (min-width: 750px) {
         overflow-x: hidden
     }@media  (min-width: 950px) {

@@ -68,7 +68,7 @@ export const EstateDeveloper: FC<EstateDevelopersPropsType> = ({
       </div>
       <div>
         <div className={css.infoCompany}>
-          <Typography size={"default"} color="accent">
+          <Typography size={"default"} weight={"medium"} color="accent" title={title}>
             {title}{" "}
           </Typography>
           <Typography size={"small"} className={css.marginT}>

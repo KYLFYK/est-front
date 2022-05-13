@@ -9,9 +9,11 @@ type AdvantagePropsType = {
   children: ReactNode;
   variant?: "primary" | "secondary";
   className?: string;
+  classWrapper?: string;
 };
 
 export const Advantage: React.FC<AdvantagePropsType> = ({
+  classWrapper,
   className,
   title,
   text,
@@ -23,7 +25,7 @@ export const Advantage: React.FC<AdvantagePropsType> = ({
   const textWeight = variant === "primary" ? "regular" : "light";
 
   return (
-    <div className={css.blockAdvantage}>
+    <div className={classNames(css.blockAdvantage,classWrapper)}>
       <div className={css.icon}>{children}</div>
       <div
         className={classNames(css.text, className, {

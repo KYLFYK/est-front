@@ -4,7 +4,7 @@ import { IAdvantage } from "./AdvantageList";
 export const mocAdvantages: IAdvantage[] = [
     {
         title: {
-            label: 'Ипотека от РНКБ',
+            label: 'Ипотека от РКНБ',
             value: IconTypes.MORTGAGE,
         },
         text: 'Используйте ипотечный калькулятор  для расчета своей ставки'

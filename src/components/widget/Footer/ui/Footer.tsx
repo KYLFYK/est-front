@@ -25,13 +25,13 @@ export const Footer: FC<FooterPropsType> = ({ color, className }) => {
       className={classNames(css.footer, className)}
     >
       <div className={css.container}>
-        <div>
+        <div style={{width:"176px"}} >
           <LogoMain color={"#FCFCFC"} />
           <div className={css.margin}></div>
           <FooterCopyRight />
         </div>
-        <div>
-          <Typography color={"altWhite"} weight={"medium"}>
+        <div className={css.padding_5}>
+          <Typography color={"altWhite"} weight={"medium"} >
             ИНН 7707832969
           </Typography>
           <div className={css.margin}></div>
@@ -39,7 +39,7 @@ export const Footer: FC<FooterPropsType> = ({ color, className }) => {
             ОГРН 1147746472180
           </Typography>
         </div>
-        <div>
+        <div >
           <Link href="/">
             <Typography
               className={css.underline}
@@ -79,12 +79,16 @@ export const Footer: FC<FooterPropsType> = ({ color, className }) => {
         </div>
         <div className={css.icons}>
           {/*<FaceBook/>*/}
-          <Link href="https://vk.com/estatum_re">
-            <Vk />
+          <Link href="https://vk.com/estatum_re" >
+            <a href="https://vk.com/estatum_re" target={'_blank'} rel="noreferrer">
+              <Vk />
+            </a>
           </Link>
           {/*<Twitter/>*/}
           <Link href="https://www.youtube.com/channel/UC5Xs06qv6uI3ty2dvaAhSPA/featured">
-            <Youtube />
+            <a href="https://vk.com/estatum_re" target={'_blank'}  rel="noreferrer">
+              <Youtube />
+            </a>
           </Link>
         </div>
       </div>

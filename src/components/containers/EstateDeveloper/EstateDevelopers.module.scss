@@ -11,6 +11,9 @@
     margin-right: 30px ;
     justify-content: space-between;
   }
+  @include for-size(KT3) {
+    justify-content: flex-start;
+  }
 }
 
 .img {
@@ -30,6 +33,9 @@
     width: 200px;
     height: 80px;
   }
+  @include for-size(KT3) {
+
+  }
 }
 
 .infoCompany{
@@ -38,6 +44,15 @@
   }
   @include for-size(KT2) {
     margin: 20px 0;
+  }
+  @include for-size(KT3) {
+    width: 185px;
+    white-space: nowrap;
+    overflow: hidden;
+    padding: 0px;
+    text-overflow: ellipsis;
+    //border:1px solid #000;
+    margin: 18px 0 22px 0;
   }
 }
 .marginT{
@@ -50,4 +65,8 @@
   :hover{
     box-shadow: 0  4px 8px 0 rgba(26, 72, 98, 0.2);
   }
+  border: 1px solid rgba(242, 242, 242, 1);
+  border-radius: 6px;
+  box-sizing: border-box;
+  height: 81px;
 }
