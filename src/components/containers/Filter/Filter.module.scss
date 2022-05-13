@@ -11,7 +11,8 @@
     gap: 8px;
     justify-content: center;
     @include for-size(KT3) {
-        padding: 0 60px;
+        padding-left: 60px;
+        padding-right: 60px;
         flex-direction: row;
     }
 }
@@ -103,7 +104,10 @@
     padding: 0;
     width: auto;
     @include for-size(KT3) {
-        padding: 7px 4px;
+        padding-top: 7px;
+        padding-right: 4px;
+        padding-bottom: 7px;
+        padding-left: 4px;
     }
 }
 .mainToggleButtonWrap {
@@ -122,13 +126,13 @@
     display: none;
     @include for-size(KT3) {
         display: flex;
-        max-width: 478px;
+        width: 478px;
         height: 40px;
     }
 }
 
 .searchInput {
-    width: 419px;
+    width: 478px;
 }
 
 .link {
@@ -141,7 +145,10 @@
 }
 
 .linkTitle{
-    margin: 10px;
+    margin-top: 10px;
+    margin-right: 10px;
+    margin-bottom: 10px;
+    margin-left: 10px;
 }
 
 .lowResContainer{
