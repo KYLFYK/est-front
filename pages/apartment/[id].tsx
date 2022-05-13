@@ -203,7 +203,6 @@ const Apartment: NextPage = observer((props: any) => {
         />
       </div>
       <Footer color={"nude"} />
-      <IndexVision />
     </MainContainer>
   );
 });

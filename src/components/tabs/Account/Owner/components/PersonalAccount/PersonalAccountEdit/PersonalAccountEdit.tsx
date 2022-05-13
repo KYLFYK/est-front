@@ -13,13 +13,14 @@ import BaseButton from "../../../../../../shared/BaseButton/BaseButtons";
 import { Dashed } from "../../../../../../../icons/Dashed/dashed";
 
 type PersonalAccountEditType = {
-  onEdit: () => void;
+    onCurrent: (id:number) => void;
+    current:number
 };
 
 const PersonalAccountEdit: FC<PersonalAccountEditType> = observer(
-  ({ onEdit }) => {
+  ({ onCurrent ,current}) => {
     const store = useStoreOwnerCabinet();
-
+      console.log(current)
     const [comparison, setComparison] = useState<boolean>(false);
 
     const [name, setName] = useState<string>(store.initialData.name);
@@ -38,7 +39,7 @@ const PersonalAccountEdit: FC<PersonalAccountEditType> = observer(
       )
         setComparison(true);
       else {
-        onEdit();
+        onCurrent(current);
       }
     };
 
@@ -55,19 +56,19 @@ const PersonalAccountEdit: FC<PersonalAccountEditType> = observer(
         store.fetch();
       }, 100);
       setComparison(false);
-      onEdit();
+      onCurrent(current);
     };
     const backPageNoSave = () => {
       setComparison(false);
-      onEdit();
+      onCurrent(current);
     };
 
     return (
-      <div style={{ margin: "12px 30px 20px 30px" }}>
+      <div style={{ margin: "12px 28px 20px 30px" }}>
         <BackPage onBackPage={backPage} title={"Редактирование аккаунта"} />
         <div className={css.column}>
           <div style={{ width: "100%", height: "400px" }}>
-            <Typography weight={"bold"}>Аккаунт</Typography>
+            <Typography weight={"bold"} className={css.mL_2}>Аккаунт</Typography>
             <div className={css.df} style={{ width: "90%" }}>
               <div className={css.mR_10} style={{ width: "367px" }}>
                 <Typography
@@ -121,8 +122,8 @@ const PersonalAccountEdit: FC<PersonalAccountEditType> = observer(
               </div>
             </div>
           </div>
-          <div>
-            <Typography weight={"bold"}>Фотография профиля</Typography>
+          <div >
+            <Typography weight={"bold"} className={css.pL_2}>Фотография профиля</Typography>
             <div className={css.dashed}>
               <Dashed />
               <div className={css.marginImage}>
