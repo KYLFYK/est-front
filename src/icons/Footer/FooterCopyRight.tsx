@@ -20,11 +20,9 @@ const FooterCopyRight = () => {
                 </g>
             </svg>
             <Typography weight={'medium'} color={"altAccent"} className={css.marginL_5}>
-                 {/*ООО «Estatum», {year}*/}
                     ООО «Финкейс»  {year}
             </Typography>
         </div>
-
     );
 };
 
