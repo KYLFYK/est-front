@@ -24,11 +24,11 @@ export const Views: React.FC<ViewsPropsType> = ({
         return (
           <div key={id} style={{ display: "flex" }}>
             <Typography
-              icon={id === 1 && <ViewIcon />}
+              icon={id === 1 && <ViewIcon className={s.icon} />}
               iconPosition={"start"}
               className={s.item}
-              size={"small"}
-              weight={"light"}
+              // size={"small"}
+              // weight={"light"}
             >
               {i}
             </Typography>
