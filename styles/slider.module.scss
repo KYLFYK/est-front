@@ -1,3 +1,19 @@
+@import '/src/components/containers/Record/all.scss';
 .image{
   object-fit: contain;
+}
+.vh_wh{
+  @include base-container;
+
+  //padding: 0 10px;
+  justify-content: space-between;
+  flex-wrap: nowrap;
+  align-items: center;
+  box-sizing: border-box;
+  //@include for-size(KT3) {
+  //  padding: 0 60px;
+  //}
+  @media  (max-width: 930px) {
+    flex-wrap: wrap;
+  }
 }

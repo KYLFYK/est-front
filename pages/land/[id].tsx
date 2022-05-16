@@ -113,9 +113,10 @@ const Land = observer((props: ObjectLandType) => {
       title={props.name}
       city={city}
       personalAccount={personalAccount}
-      footerColor={"nude"}
+      footerColor={"accent"}
       refs={refs}
     >
+      <div className={css.vh_wh}>
       <Breadcrumbs location={"object"} />
       <Views items={views} />
       <NameEstate item={props.name} />
@@ -170,13 +171,14 @@ const Land = observer((props: ObjectLandType) => {
         </div>
       </DesktopOnly>
       <Mortgage />
-      <div ref={record}>
-        <Record
-          Record={RecordAgent.Record}
-          title={"участок"}
-          nameObject={props.name}
-        />
       </div>
+        <div ref={record} style={{backgroundColor:'#1A4862'}}>
+          <Record
+            Record={RecordAgent.Record}
+            title={"участок"}
+            nameObject={props.name}
+          />
+        </div>
     </MainContainer>
   );
 });

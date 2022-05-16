@@ -302,9 +302,10 @@ const House = observer((props: any) => {
       title={props.name}
       city={city}
       personalAccount={personalAccount}
-      footerColor={"nude"}
+      footerColor={"accent"}
       refs={refs}
     >
+      <div className={css.vh_wh}>
       <Breadcrumbs location={"object"} />
       <Views items={views} />
       <NameEstate item={props.name} />
@@ -378,13 +379,14 @@ const House = observer((props: any) => {
           averagePrice={averagePrice}
         />
       </div>
-      <div ref={record}>
-        <Record
-          Record={RecordAgent.Record}
-          title={"дом"}
-          nameObject={props.name}
-        />
       </div>
+        <div ref={record} style={{backgroundColor:'#1A4862'}}>
+          <Record
+            Record={RecordAgent.Record}
+            title={"дом"}
+            nameObject={props.name}
+          />
+        </div>
       <div ref={developer}>
         {/*<ObjectDeveloper developerData={store.initialData.object_developer_info}/>*/}
       </div>

@@ -1,13 +1,13 @@
-import type { NextPage } from "next";
-import { observer } from "mobx-react-lite";
-import React, { useEffect, useRef, useState } from "react";
-import { useRouter } from "next/router";
-import { MainContainer } from "../../src/components/containers/MainContainer/MainContainer";
-import { Breadcrumbs } from "../../src/components/shared/Breadcrumbs/Breadcrumbs";
-import { Views } from "../../src/components/shared/Views/Views";
-import { NameEstate } from "../../src/components/shared/NameEstate/NameEstate";
-import { AdressEstate } from "../../src/components/shared/AdressEstate/AdressEstate";
-import { HorizontalTabs } from "../../src/components/shared/HorizontalTabs/HorizontalTabs";
+import type {NextPage} from "next";
+import {observer} from "mobx-react-lite";
+import React, {useEffect, useRef, useState} from "react";
+import {useRouter} from "next/router";
+import {MainContainer} from "../../src/components/containers/MainContainer/MainContainer";
+import {Breadcrumbs} from "../../src/components/shared/Breadcrumbs/Breadcrumbs";
+import {Views} from "../../src/components/shared/Views/Views";
+import {NameEstate} from "../../src/components/shared/NameEstate/NameEstate";
+import {AdressEstate} from "../../src/components/shared/AdressEstate/AdressEstate";
+import {HorizontalTabs} from "../../src/components/shared/HorizontalTabs/HorizontalTabs";
 import GeneralInfo from "../../src/components/containers/GeneralInfo/GeneralInfo";
 import ObjectDescription from "../../src/components/containers/ObjectDescription/ObjectDescription";
 import ToursContainer from "../../src/components/containers/ToursContainer/ToursContainer";
@@ -15,35 +15,22 @@ import ObjectSpecifications from "../../src/components/containers/ObjectSpecific
 import Map from "../../src/components/containers/Maps/MapInfrastructure/index";
 import ObjectLegalPurity from "../../src/components/containers/ObjectLegalPurity/ObjectLegalPurity";
 import ObjectDeveloper from "../../src/components/containers/ObjectDeveloper/ObjectDeveloper";
-import { Mortgage } from "../../src/components/shared/Mortgage/Mortgage";
-import { Record } from "../../src/components/containers/Record/Record";
+import {Mortgage} from "../../src/components/shared/Mortgage/Mortgage";
+import {Record} from "../../src/components/containers/Record/Record";
 import RecordAgent from "../../src/components/containers/Record/RecordAgent.json";
-import { Footer } from "../../src/components/widget/Footer/ui/Footer";
-import {
-  MappingDescription,
-  MappingGeneralInfo,
-  MappingLegalPurity,
-} from "src/lib/mapping/Apartment/apartmentMapping";
-import { MappingDeveloperInfo } from "src/lib/mapping/ResidentComplex/residentComplexMapping";
-import { datetoDayFormat } from "src/lib/mapping/objectDates";
-import {
-  sortGuide,
-  sortObject_specsTypeGuide,
-} from "../../src/utils/conversionIcons/conversionIcons";
-import { useStore } from "../../src/mobx/stores/ApartamentStore/ApartmentStore";
-import { useBreadcrumbsStore } from "../../src/mobx/stores/BreadcrumbsStore/BreadcrumbsStore";
-import { UrlObj } from "../../src/api/instance";
-import {
-  FILTER_ACTIONS_OPTIONS,
-  FILTER_HOUSE_TYPE_OPTIONS,
-} from "../../src/components/containers/Filter/config";
-import { MobileOnly } from "../../src/components/containers/Adaptive/MobileOnly";
-import { DesktopOnly } from "../../src/components/containers/Adaptive/DesktopOnly";
+import {MappingDescription, MappingGeneralInfo, MappingLegalPurity,} from "src/lib/mapping/Apartment/apartmentMapping";
+import {MappingDeveloperInfo} from "src/lib/mapping/ResidentComplex/residentComplexMapping";
+import {datetoDayFormat} from "src/lib/mapping/objectDates";
+import {sortGuide, sortObject_specsTypeGuide,} from "../../src/utils/conversionIcons/conversionIcons";
+import {useStore} from "../../src/mobx/stores/ApartamentStore/ApartmentStore";
+import {useBreadcrumbsStore} from "../../src/mobx/stores/BreadcrumbsStore/BreadcrumbsStore";
+import {UrlObj} from "../../src/api/instance";
+import {FILTER_ACTIONS_OPTIONS, FILTER_HOUSE_TYPE_OPTIONS,} from "../../src/components/containers/Filter/config";
+import {MobileOnly} from "../../src/components/containers/Adaptive/MobileOnly";
+import {DesktopOnly} from "../../src/components/containers/Adaptive/DesktopOnly";
 import css from "../../styles/slider.module.scss";
 import ObjectLegalPurityMobile from "../../src/components/containers/ObjectLegalPurity/ObjectLegalPurityMobile";
-import { GeneralInfoMobile } from "../../src/components/containers/GeneralInfo/GeneralInfoMobile";
-import { IMAGES_SET } from "../../src/components/containers/GeneralInfo/config";
-import IndexVision from "../test";
+import {GeneralInfoMobile} from "../../src/components/containers/GeneralInfo/GeneralInfoMobile";
 
 const city = ["Москва", "Санкт-Петербург", "Крым", "Сочи", "Нижний Новгород"];
 const personalAccount = [
@@ -122,87 +109,89 @@ const Apartment: NextPage = observer((props: any) => {
       city={city}
       personalAccount={personalAccount}
       refs={refs}
+      footerColor={"accent"}
     >
-      <Breadcrumbs location={"object"} />
-      <Views items={views} />
-      <NameEstate item={props.name} />
-      <DesktopOnly>
-        <AdressEstate item={props.address} />
-        <HorizontalTabs refs={refs} tabs={tabs} />
-        <div ref={general}>
-          <GeneralInfo
+      <div className={css.vh_wh}>
+        <Breadcrumbs location={"object"} />
+        <Views items={views} />
+        <NameEstate item={props.name} />
+        <DesktopOnly>
+          <AdressEstate item={props.address} />
+          <HorizontalTabs refs={refs} tabs={tabs} />
+          <div ref={general}>
+            <GeneralInfo
+              info={MappingGeneralInfo(props.info_options, props.object_specs)}
+              price={props.price}
+              images={props.images}
+              classSlider={css.image}
+            />
+          </div>
+        </DesktopOnly>
+        <MobileOnly>
+          <GeneralInfoMobile
             info={MappingGeneralInfo(props.info_options, props.object_specs)}
-            price={props.price}
             images={props.images}
-            classSlider={css.image}
+            price={props.price}
           />
-        </div>
-      </DesktopOnly>
-      <MobileOnly>
-        <GeneralInfoMobile
-          info={MappingGeneralInfo(props.info_options, props.object_specs)}
-          images={props.images}
-          price={props.price}
-        />
-      </MobileOnly>
-      <ObjectDescription items={MappingDescription(props.description_items)} />
-      {(props?.online_tour?.threeD_tour?.url ||
-        props?.online_tour?.vr_tour?.url) && (
-        <div ref={tours}>
-          <ToursContainer Online_tour={props.online_tour} />
-        </div>
-      )}
-      <div ref={architec}>
-        <ObjectSpecifications
-          specificationsLists={sortObject_specsTypeGuide(
-            props.object_specs
-              .map((guid: any) => sortGuide(guid, guid.subtitle_ru))
-              .filter((f: any) => f !== undefined)
-          )}
-          title={"Архитектурно-планировочные решения"}
-        />
-      </div>
-      <div ref={infra}>
-        <Map
-          currentHouse={props}
-          location={"infrastructure"}
-          InfrastructureInfo={infrastructureInfo}
-        />
-      </div>
-      {props.object_developer_info && (
-        <div ref={develop}>
-          <ObjectDeveloper
-            developerData={MappingDeveloperInfo(props.object_developer_info)}
-          />
-        </div>
-      )}
-      <MobileOnly>
-        <div ref={legal}>
-          {props.legalPurityData && (
-            <ObjectLegalPurityMobile legalPurityData={props.legalPurityData} />
-          )}
-        </div>
-      </MobileOnly>
-      <DesktopOnly>
-        {props.legalPurityData && (
-          <div ref={legal}>
-            {props.legalPurityData && (
-              <ObjectLegalPurity
-                legalPurityData={MappingLegalPurity(props.legalPurityData)}
-              />
-            )}
+        </MobileOnly>
+        <ObjectDescription items={MappingDescription(props.description_items)} />
+        {(props?.online_tour?.threeD_tour?.url ||
+          props?.online_tour?.vr_tour?.url) && (
+          <div ref={tours}>
+            <ToursContainer Online_tour={props.online_tour} />
           </div>
         )}
-      </DesktopOnly>
-      <Mortgage />
-      <div ref={record}>
-        <Record
-          Record={RecordAgent.Record}
-          title={"квартиру"}
-          nameObject={props.name}
-        />
+        <div ref={architec}>
+          <ObjectSpecifications
+            specificationsLists={sortObject_specsTypeGuide(
+              props.object_specs
+                .map((guid: any) => sortGuide(guid, guid.subtitle_ru))
+                .filter((f: any) => f !== undefined)
+            )}
+            title={"Архитектурно-планировочные решения"}
+          />
+        </div>
+        <div ref={infra}>
+          <Map
+            currentHouse={props}
+            location={"infrastructure"}
+            InfrastructureInfo={infrastructureInfo}
+          />
+        </div>
+        {props.object_developer_info && (
+          <div ref={develop}>
+            <ObjectDeveloper
+              developerData={MappingDeveloperInfo(props.object_developer_info)}
+            />
+          </div>
+        )}
+        <MobileOnly>
+          <div ref={legal}>
+            {props.legalPurityData && (
+              <ObjectLegalPurityMobile legalPurityData={props.legalPurityData} />
+            )}
+          </div>
+        </MobileOnly>
+        <DesktopOnly>
+          {props.legalPurityData && (
+            <div ref={legal}>
+              {props.legalPurityData && (
+                <ObjectLegalPurity
+                  legalPurityData={MappingLegalPurity(props.legalPurityData)}
+                />
+              )}
+            </div>
+          )}
+        </DesktopOnly>
+        <Mortgage />
       </div>
-      <Footer color={"nude"} />
+      <div ref={record} style={{backgroundColor:'#1A4862'}} >
+        <Record
+            Record={RecordAgent.Record}
+                title={"квартиру"}
+            nameObject={props.name}
+          />
+        </div>
     </MainContainer>
   );
 });
