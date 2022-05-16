@@ -1,3 +1,5 @@
+@use "sass:math";
+
 $KT1: 320px;
 $KT2: 576px;
 $KT3: 768px;
@@ -32,7 +34,15 @@ $KT6: 1440px;
   }
 }
 
+@function mobile-size($size) {
+  $vw-context-mobile: 320 * 0.01 * 1px;
+  @return math.div($size, $vw-context-mobile) * 1vw;
+}
 
+@function desktop-size($size) {
+  $vw-context-desktop: 1440 * 0.01 * 1px;
+  @return math.div($size, $vw-context-desktop) * 1vw;
+}
 
 @mixin button {
   display: flex;
