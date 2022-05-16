@@ -33,6 +33,7 @@ import {MobileOnly} from "../../src/components/containers/Adaptive/MobileOnly";
 import {GeneralInfoMobile} from "../../src/components/containers/GeneralInfo/GeneralInfoMobile";
 
 const city = ["Москва", "Санкт-Петербург", "Крым", "Сочи", "Нижний Новгород"];
+
 const personalAccount = [
   { title: "Личный кабинет", href: "/User", message: 0 },
   { title: "Избранное", href: "/User", message: 0 },
