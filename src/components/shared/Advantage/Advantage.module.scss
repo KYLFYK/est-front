@@ -3,16 +3,24 @@
 .blockAdvantage{
     display: flex;
     margin: 10px 0;
-
     @include for-size(KT1) {
         margin: 0;
     }
-
     @include for-size(KT3) {
         margin: 10px 0;
     }
     @include for-size(KT4) {
         margin: 0;
+    }
+}
+.blockAdvantageMain{
+    display: flex;
+    margin: 10px 0;
+    @include for-size(KT1) {
+        margin: 0;
+    }
+    @include for-size(KT3) {
+        margin: 10px 0;
     }
 }
 .img{
@@ -30,6 +38,18 @@
     @include for-size(KT4) {
         margin: 0 12px;
         margin-bottom: 5px;
+    }
+}
+.textMain{
+    margin: 0 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    //min-width: 430px;
+    max-width: 500px;
+    @include for-size(KT4) {
+        margin: 0 20px;
+        margin-bottom: 3px;
     }
 }
 .autoWidth {
