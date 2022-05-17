@@ -39,6 +39,11 @@
         padding: 60px 30px 60px 30px;
     }
     @include for-size(KT6) {
+        @include base-container;
+        justify-content: space-between;
+        flex-wrap: nowrap;
+        align-items: center;
+        box-sizing: border-box;
         padding: 60px 60px 110px 60px;
     }
 }
