@@ -38,7 +38,7 @@ const Planning: React.FC<Props> = ({ planningList }) => {
       <HeadLine title="Квартиры и аппартаменты">
         <DesktopOnly>
           <div className={s.filterWrapper}>
-            <PlanningFilter sort={sort} setSort={setSort} />
+            <PlanningFilter sort={sort} setSort={setSort} className={s.mB_20} />
           </div>
         </DesktopOnly>
         <div className={s.content}>

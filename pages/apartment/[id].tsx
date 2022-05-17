@@ -7,7 +7,6 @@ import {Breadcrumbs} from "../../src/components/shared/Breadcrumbs/Breadcrumbs";
 import {Views} from "../../src/components/shared/Views/Views";
 import {NameEstate} from "../../src/components/shared/NameEstate/NameEstate";
 import {AdressEstate} from "../../src/components/shared/AdressEstate/AdressEstate";
-import {HorizontalTabs} from "../../src/components/shared/HorizontalTabs/HorizontalTabs";
 import GeneralInfo from "../../src/components/containers/GeneralInfo/GeneralInfo";
 import ObjectDescription from "../../src/components/containers/ObjectDescription/ObjectDescription";
 import ToursContainer from "../../src/components/containers/ToursContainer/ToursContainer";
@@ -31,6 +30,7 @@ import {DesktopOnly} from "../../src/components/containers/Adaptive/DesktopOnly"
 import css from "../../styles/slider.module.scss";
 import ObjectLegalPurityMobile from "../../src/components/containers/ObjectLegalPurity/ObjectLegalPurityMobile";
 import {GeneralInfoMobile} from "../../src/components/containers/GeneralInfo/GeneralInfoMobile";
+import {HorizontalTabsObjects} from "../../src/components/shared/HorizontalTabs/HorizontalTabsObjects";
 
 const city = ["Москва", "Санкт-Петербург", "Крым", "Сочи", "Нижний Новгород"];
 const personalAccount = [
@@ -117,7 +117,7 @@ const Apartment: NextPage = observer((props: any) => {
         <NameEstate item={props.name} />
         <DesktopOnly>
           <AdressEstate item={props.address} />
-          <HorizontalTabs refs={refs} tabs={tabs} />
+          <HorizontalTabsObjects refs={refs} tabs={tabs} />
           <div ref={general}>
             <GeneralInfo
               info={MappingGeneralInfo(props.info_options, props.object_specs)}

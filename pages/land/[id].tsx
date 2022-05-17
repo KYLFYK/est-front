@@ -1,38 +1,32 @@
-import { observer } from "mobx-react-lite";
-import React, { useEffect, useRef, useState } from "react";
-import { useRouter } from "next/router";
-import { MainContainer } from "../../src/components/containers/MainContainer/MainContainer";
-import { Breadcrumbs } from "../../src/components/shared/Breadcrumbs/Breadcrumbs";
-import { Views } from "../../src/components/shared/Views/Views";
-import { NameEstate } from "../../src/components/shared/NameEstate/NameEstate";
-import { AdressEstate } from "../../src/components/shared/AdressEstate/AdressEstate";
-import { HorizontalTabs } from "../../src/components/shared/HorizontalTabs/HorizontalTabs";
+import {observer} from "mobx-react-lite";
+import React, {useEffect, useRef, useState} from "react";
+import {useRouter} from "next/router";
+import {MainContainer} from "../../src/components/containers/MainContainer/MainContainer";
+import {Breadcrumbs} from "../../src/components/shared/Breadcrumbs/Breadcrumbs";
+import {Views} from "../../src/components/shared/Views/Views";
+import {NameEstate} from "../../src/components/shared/NameEstate/NameEstate";
+import {AdressEstate} from "../../src/components/shared/AdressEstate/AdressEstate";
 import GeneralInfo from "../../src/components/containers/GeneralInfo/GeneralInfo";
 import ObjectDescription from "../../src/components/containers/ObjectDescription/ObjectDescription";
 import ObjectSpecifications from "../../src/components/containers/ObjectSpecifications/ObjectSpecifications";
 import Map from "../../src/components/containers/Maps/MapInfrastructure/index";
-import { infrastructura } from "../../src/components/containers/Maps/MapInfrastructure/config";
+import {infrastructura} from "../../src/components/containers/Maps/MapInfrastructure/config";
 import ObjectLegalPurity from "../../src/components/containers/ObjectLegalPurity/ObjectLegalPurity";
-import { Mortgage } from "../../src/components/shared/Mortgage/Mortgage";
-import { Record } from "../../src/components/containers/Record/Record";
+import {Mortgage} from "../../src/components/shared/Mortgage/Mortgage";
+import {Record} from "../../src/components/containers/Record/Record";
 import RecordAgent from "../../src/components/containers/Record/RecordAgent.json";
-import { UrlObj } from "../../src/api/instance";
-import { ObjectLandType } from "../../src/api/obj/land";
-import { conversionDate } from "../../src/utils/conversionDate/conversionDate";
-import {
-  sortGuide,
-  sortObject_specsTypeGuide,
-} from "../../src/utils/conversionIcons/conversionIcons";
-import { useBreadcrumbsStore } from "../../src/mobx/stores/BreadcrumbsStore/BreadcrumbsStore";
-import {
-  FILTER_ACTIONS_OPTIONS,
-  FILTER_HOUSE_TYPE_OPTIONS,
-} from "../../src/components/containers/Filter/config";
-import { MobileOnly } from "../../src/components/containers/Adaptive/MobileOnly";
-import { DesktopOnly } from "../../src/components/containers/Adaptive/DesktopOnly";
+import {UrlObj} from "../../src/api/instance";
+import {ObjectLandType} from "../../src/api/obj/land";
+import {conversionDate} from "../../src/utils/conversionDate/conversionDate";
+import {sortGuide, sortObject_specsTypeGuide,} from "../../src/utils/conversionIcons/conversionIcons";
+import {useBreadcrumbsStore} from "../../src/mobx/stores/BreadcrumbsStore/BreadcrumbsStore";
+import {FILTER_ACTIONS_OPTIONS, FILTER_HOUSE_TYPE_OPTIONS,} from "../../src/components/containers/Filter/config";
+import {MobileOnly} from "../../src/components/containers/Adaptive/MobileOnly";
+import {DesktopOnly} from "../../src/components/containers/Adaptive/DesktopOnly";
 import css from "../../styles/slider.module.scss";
 import ObjectLegalPurityMobile from "../../src/components/containers/ObjectLegalPurity/ObjectLegalPurityMobile";
-import { GeneralInfoMobile } from "../../src/components/containers/GeneralInfo/GeneralInfoMobile";
+import {GeneralInfoMobile} from "../../src/components/containers/GeneralInfo/GeneralInfoMobile";
+import {HorizontalTabsObjects} from "../../src/components/shared/HorizontalTabs/HorizontalTabsObjects";
 
 const city = ["Москва", "Крым", "Сочи"];
 const personalAccount = [
@@ -122,7 +116,7 @@ const Land = observer((props: ObjectLandType) => {
       <NameEstate item={props.name} />
       <DesktopOnly>
         <AdressEstate item={props.address} />
-        <HorizontalTabs tabs={tabs} refs={refs} />
+        <HorizontalTabsObjects tabs={tabs} refs={refs} />
         <div ref={general}>
           <GeneralInfo
             info={props.info_options}

@@ -28,7 +28,7 @@ const ObjectDeveloper: React.FC<any> = ({ developerData }) => {
         <div className={s.container}>
         <HeadLine title="Застройщик">
             <div className={s.infoBlock}>
-                <Advantage title={developerData.name} text={developerData.developerType} className={s.iconItem}>
+                <Advantage title={developerData.name} text={developerData.developerType} className={s.iconItem_name}>
                     <div className={s.imgContainer}>
                         {developerData.logo && <Image className={s.img} src={developerData.logo} unoptimized alt="logo" layout="fill" loader={() => developerData.logo} />}
                     </div>
@@ -40,7 +40,7 @@ const ObjectDeveloper: React.FC<any> = ({ developerData }) => {
                     <CircledKeyIcon />
                 </Advantage>
 
-                <Advantage title="Строится" text={developerData.inProgressAmmount} className={s.iconItem}>
+                <Advantage title="Строится" text={developerData.inProgressAmmount} className={s.iconItemMr_0}>
                     <CircledSawIcon />
                 </Advantage>
             </div>

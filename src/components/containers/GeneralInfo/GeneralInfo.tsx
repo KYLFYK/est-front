@@ -8,6 +8,7 @@ import Typography from '../../shared/Typography/Typography';
 import { formatNumbersToCurrency } from '../../../utils/general';
 import {observer} from "mobx-react-lite";
 import {IMAGES_SET} from './config';
+import classNames from "classnames";
 
 interface Props {
     images: string[] | { url: string; id: number; }[],
@@ -19,12 +20,15 @@ interface Props {
 const GeneralInfo: React.FC<Props> = observer(({ images, price, info,classSlider }) => {
 
     const imagesUrl = images.length === 0 ? IMAGES_SET : images.map((i: any) => i.url && i.url.includes('public') ? IMAGES_SET[0] : i.url || i)
-    const [width,setWidth]=useState<number>(600)
+    const [height,setHeight]=useState<number>(595)
 
     useEffect(()=>{
         if(window?.innerWidth < 1400){
-            setWidth(450)
+            setHeight(450)
+        }else{
+            setHeight(595)
         }
+
     },[])
 
     return (
@@ -32,7 +36,7 @@ const GeneralInfo: React.FC<Props> = observer(({ images, price, info,classSlider
             <div className={s.sliderContainer}>
                 <BaseSlider
                     images={imagesUrl}
-                    height={width}
+                    height={height}
                     withArrows
                     withFavorite={typeof window !== "undefined" && localStorage.getItem("roleEstatum") ? true : false}
                     onClickFavorite={() => {}}
@@ -44,11 +48,12 @@ const GeneralInfo: React.FC<Props> = observer(({ images, price, info,classSlider
                 {info.map((item, idx) => (
                     <div className={s.infoItem} key={idx}>
                         {
-                            item.value !== '' && item.value !== null &&
+                           item.value !== null &&
                                 <>
                                     <Typography
                                         color={item.value === '' ? 'tertiary' : 'default'}
-                                        weight="medium" className={idx > 0 && item.value === '' ? s.infoTitle : s.infoLabel}
+                                        weight={item.value === '' ? 'regular':'bold' }
+                                        className={classNames(idx > 0 && item.value === '' ? s.infoTitle : s.infoLabel)}
                                     >
                                         {item.label}
                                     </Typography>

@@ -1,5 +1,5 @@
 @import '../../../../../app/styles/colours.scss';
-
+@import '/src/components/containers/Record/all.scss';
 @import '../../../../../app/styles/scrollbars.scss';
 
 .list {
@@ -23,6 +23,10 @@
     outline: none;
     margin: 20px 0 0 20px;
     background-color: transparent;
+    @include for-size(KT3) {
+        margin: 20px 0 0 ;
+        padding: 0 1px;
+    }
 }
 
 .buttonContent {

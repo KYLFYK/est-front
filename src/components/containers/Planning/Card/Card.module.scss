@@ -10,20 +10,24 @@
 .imgContainer {
     height: 290px;
     position: relative;
-    margin: 5px;
+    margin: 8px;
+    max-width: 299px;
+    max-height: 272px;
 }
 
 .img {
     object-fit: contain;
-    max-width: 100%;
-    max-height: 100%;
+    //max-width: 100%;
+    max-width: 299px;
+    //max-height: 100%;
+    max-height: 272px;
 }
 
 .content {
     margin-right: 2px;
     overflow: auto;
-    height: 100px;
-    padding: 10px 15px 0px 15px;
+    height: 96px;
+    padding: 9px 15px 0 15px;
     box-sizing: border-box;
     @include MapScrollbar;
     color: black;
@@ -35,13 +39,14 @@
         height: 120px;
     }
     @include for-size(KT3) {
-        height: 100px;
+        height: 96px;
     }
 }
 
+
 .contentRow {
     display: flex;
-    margin-bottom: 15px;
+    margin-bottom: 11px;
     gap: 17px;
 
 }
@@ -56,4 +61,7 @@
 .price {
     margin-left: auto;
     white-space: nowrap;
+}
+.mT_3{
+    margin-top: 3px;
 }
