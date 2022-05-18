@@ -41,7 +41,7 @@ const Planning: React.FC<Props> = ({ planningList }) => {
             <PlanningFilter sort={sort} setSort={setSort} className={s.mB_20} />
           </div>
         </DesktopOnly>
-        <div className={s.content}>
+        <div className={ planningList !== undefined && planningList.length > 8 ? s.scroll : s.content}>
           {planningList &&
             planningList.map(
               (
