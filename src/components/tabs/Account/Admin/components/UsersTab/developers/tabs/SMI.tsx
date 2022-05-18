@@ -16,7 +16,7 @@ export const SMI: FC = observer(() => {
   const { profileData } = DeveloperProfileStore;
 
   return (
-    <Scroll height={'470'} >
+    <Scroll height={'530'} >
       <div
         style={{
           paddingTop: 20,

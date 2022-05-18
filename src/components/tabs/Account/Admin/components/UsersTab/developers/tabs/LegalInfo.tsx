@@ -99,7 +99,7 @@ export const LegalInfo: FC = observer(() => {
   });
 
   return (
-    <Scroll height={'470'} >
+    <Scroll height={'530'} >
       <div
         className={styles.formWrapper}
         style={{

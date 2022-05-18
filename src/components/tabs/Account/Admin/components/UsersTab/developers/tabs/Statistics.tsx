@@ -6,7 +6,7 @@ import Scroll from "../../../../../../../shared/Scroll/Scroll";
 
 export const Statistics: FC = () => {
   return (
-    <Scroll height={'470'} >
+    <Scroll height={'530'} >
       <div
         style={{
           paddingTop: 20,

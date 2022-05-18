@@ -68,7 +68,7 @@ export const Account: FC<Props> = observer(({ form }) => {
   }, []);
 
   return (
-      <Scroll height={'470'} >
+      <Scroll height={'530'} >
         <div
             className={styles.formWrapper}
             style={{padding:"20px 0"}}
