@@ -87,6 +87,7 @@
   }
 }
 .information{
+  width: 1074px;
   margin: 0 0 0 20px ;
   background: #FFFFFF;
   border: 1px solid #F2F2F2;
@@ -95,7 +96,7 @@
   //padding: 23px 30px;
   padding: 5px 0;
   //width: calc(100vw - 283px);
-  height: calc(100vh - 260px) ;
+  height: calc(100vh - 303px) ;
 
   @include for-size(KT1) {
     margin: 0;

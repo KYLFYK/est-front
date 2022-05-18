@@ -17,6 +17,12 @@ module.exports = {
     HOST: process.env.HOST,
   },
 
+  build: {
+    extend(config, { loaders }) {
+      loaders.scss.additionalData = '@use "sass:math";';
+    },
+  },
+
   eslint: {
     // Warning: This allows production builds to successfully complete even if
     // your project has ESLint errors.
