@@ -1,14 +1,29 @@
 @import '/src/components/containers/Record/all.scss';
 .logoMain{
-    height: 12px;
-    width: 97px;
+    height: mobile-size(12px);
+    width: mobile-size(97px);
+    font-size: mobile-size(5px);
+
   @include for-size(KT3) {
+    height: desktop-size(19px);
+    width: desktop-size(151px);
+    font-size: desktop-size(5px);
+  }
+  @include for-size(KT6) {
     height: 19px;
     width: 151px;
+    font-size: 5px;
   }
 }
+
 .margin {
-  margin-left: 10px;
+  margin-left: mobile-size(10px);
+  @include for-size(KT3) {
+    margin-left: desktop-size(10px);
+  }
+  @include for-size(KT6) {
+    margin-left: 10px;
+  }
 }
 .burger{
   //padding: ;
@@ -16,18 +31,31 @@
   cursor: pointer;
   @include for-size(KT3) {
     display: none;
-  } 
+  }
 }
 .style{
   display: flex;
   align-items: center;
 }
 .iconLocation{
-  margin-right: 5px;
+  margin-right: mobile-size(5px);
+  width: mobile-size(14px);
+  height: mobile-size(20px);
+
   @include for-size(KT1) {
     display: none;
   }
   @include for-size(KT2) {
     display: inline;
+  }
+  @include for-size(KT3) {
+    margin-right: desktop-size(5px);
+    width: desktop-size(14px);
+    height: desktop-size(20px);
+  }
+  @include for-size(KT6) {
+    margin-right: 5px;
+    width: 14px;
+    height: 20px;
   }
 }

@@ -4,7 +4,7 @@
 
 .input {
     @include ROBOTOREGULAR16;
-    width: 90px;
+    width: mobile-size(90px);
     border: 0;
     overflow: hidden;
     &::-webkit-outer-spin-button,
@@ -17,33 +17,83 @@
         outline: none;
     }
     &::placeholder{
-        font-size: 16px;
+        font-size: mobile-size(16px);
+
+        @include for-size(KT3) {
+            font-size: desktop-size(16px);
+        }
+        @include for-size(KT6) {
+            font-size: 16px;
+        }
+    }
+
+    @include for-size(KT3) {
+        width: desktop-size(90px);
+    }
+
+    @include for-size(KT6) {
+        width: 90px;
+    }
+
+    &.addMr {
+        margin-right: mobile-size(30px);
+
+        @include for-size(KT3) {
+            margin-right: desktop-size(30px);
+        }
+
+        @include for-size(KT6) {
+            margin-right: 30px;
+        }
     }
 }
 .wrapper {
     background-color: #fff;
     position: relative;
     @include ROBOTOREGULAR16;
-    padding: 10px 10px 8px 10px;
+    padding: mobile-size(10px) mobile-size(10px) mobile-size(8px) mobile-size(10px);
     border: 1px solid $ICONGRAY;
     border-radius: 8px;
-    @include for-size(KT2) {
-        max-width: fit-content;
+    @include for-size(KT3) {
+        min-width: fit-content;
+        padding: desktop-size(10px) desktop-size(10px) desktop-size(8px) desktop-size(10px);
+    }
+
+    @include for-size(KT6) {
+        padding: 10px 10px 8px 10px;
     }
 }
 
 .divider {
     display: inline-block;
     height: 2px;
-    width: 10px;
+    width: mobile-size(10px);
     background-color: #BDBDBD;
-    margin: 0 10px 5px 12px;
+    margin: 0 mobile-size(10px) mobile-size(5px) mobile-size(12px);
+
+    @include for-size(KT3) {
+        width: desktop-size(10px);
+        margin: 0 desktop-size(10px) desktop-size(5px) desktop-size(12px);
+    }
+
+    @include for-size(KT6) {
+        width: 10px;
+        margin: 0 10px 5px 12px;
+    }
 }
 
 .icon {
     color: #000;
     position: absolute;
-    right: 12px;
+    right: mobile-size(12px);
     top: 50%;
     transform: translateY(-50%);
+
+    @include for-size(KT3) {
+        right: desktop-size(12px);
+    }
+
+    @include for-size(KT6) {
+        right: 12px;
+    }
 }

@@ -1,7 +1,16 @@
+@import '/src/components/containers/Record/all.scss';
+
 .margin{
-  margin: 0 6px 0 0;
-  padding-top: 10px !important;
-  padding-right: 12px !important;
-  padding-bottom: 10px !important;
-  padding-left: 12px !important;
+  margin: 0 mobile-size(6px) 0 0;
+  padding: mobile-size(10px) mobile-size(12px) !important;
+
+  @include for-size(KT3) {
+    margin: 0 desktop-size(6px) 0 0;
+    padding: desktop-size(10px) desktop-size(12px) !important;
+  }
+
+  @include for-size(KT6) {
+    margin: 0 6px 0 0;
+    padding: 10px 12px !important;
+  }
 }

@@ -1,9 +1,20 @@
+@import '/src/components/containers/Record/all.scss';
+
 @mixin MONTSERRATBOLD {
     font-family: 'Montserrat', sans-serif;
     font-style: normal;
     font-weight: bold;
-    font-size: 40px;
-    line-height: 60px;
+    font-size: mobile-size(40px);
+    line-height: mobile-size(60px);
+    @include for-size(KT3) {
+        font-size: desktop-size(40px);
+        line-height: desktop-size(60px);
+    }
+
+    @include for-size(KT6) {
+        font-size: 40px;
+        line-height: 60px;
+    }
     letter-spacing: 0.01em;
 }
 
@@ -11,8 +22,17 @@
     font-family: 'Montserrat', sans-serif;
     font-style: normal;
     font-weight: bold;
-    font-size: 24px;
-    line-height: 29px;
+    font-size: mobile-size(24px);
+    line-height: mobile-size(29px);
+    @include for-size(KT3) {
+        font-size: desktop-size(24px);
+        line-height: desktop-size(29px);
+    }
+
+    @include for-size(KT6) {
+        font-size: 24px;
+        line-height: 29px;
+    }
     letter-spacing: 0.03em;
 }
 
@@ -20,8 +40,17 @@
     font-family: 'Montserrat', sans-serif;
     font-style: normal;
     font-weight: bold;
-    font-size: 20px;
-    line-height: 24px;
+    font-size: mobile-size(20px);
+    line-height: mobile-size(24px);
+    @include for-size(KT3) {
+        font-size: desktop-size(20px);
+        line-height: desktop-size(24px);
+    }
+
+    @include for-size(KT6) {
+        font-size: 20px;
+        line-height: 24px;
+    }
     letter-spacing: 0.03em;
 }
 
@@ -29,8 +58,17 @@
     font-family: 'Montserrat', sans-serif;
     font-style: normal;
     font-weight: bold;
-    font-size: 16px;
-    line-height: 20px;
+    font-size: mobile-size(16px);
+    line-height: mobile-size(20px);
+    @include for-size(KT3) {
+        font-size: desktop-size(16px);
+        line-height: desktop-size(20px);
+    }
+
+    @include for-size(KT6) {
+        font-size: 16px;
+        line-height: 20px;
+    }
     letter-spacing: 0.03em;
 }
 
@@ -38,32 +76,68 @@
     font-family: 'RobotoBold', sans-serif;
     font-style: normal;
     font-weight: bold;
-    font-size: 24px;
-    line-height: 29px;
+    font-size: mobile-size(24px);
+    line-height: mobile-size(29px);
+    @include for-size(KT3) {
+        font-size: desktop-size(24px);
+        line-height: desktop-size(29px);
+    }
+
+    @include for-size(KT6) {
+        font-size: 24px;
+        line-height: 29px;
+    }
 }
 
 @mixin ROBOTOBOLD18 {
     font-family: 'RobotoBold', sans-serif;
     font-style: normal;
     font-weight: bold;
-    font-size: 18px;
-    line-height: 21px;
+    font-size: mobile-size(18px);
+    line-height: mobile-size(21px);
+    @include for-size(KT3) {
+        font-size: desktop-size(18px);
+        line-height: desktop-size(21px);
+    }
+
+    @include for-size(KT6) {
+        font-size: 18px;
+        line-height: 21px;
+    }
 }
 
 @mixin ROBOTOBOLD16 {
     font-family: 'RobotoBold', sans-serif;
     font-style: normal;
     font-weight: bold;
-    font-size: 16px;
-    line-height: 19px;
+    font-size: mobile-size(16px);
+    line-height: mobile-size(19px);
+    @include for-size(KT3) {
+        font-size: desktop-size(16px);
+        line-height: desktop-size(19px);
+    }
+
+    @include for-size(KT6) {
+        font-size: 16px;
+        line-height: 19px;
+    }
 }
 
 @mixin ROBOTOREGULAR {
     font-family: 'RobotoRegular', sans-serif;
     font-style: normal;
     font-weight: normal;
-    font-size: 40px;
-    line-height: 60px;
+    font-size: mobile-size(40px);
+    line-height: mobile-size(60px);
+    @include for-size(KT3) {
+        font-size: desktop-size(40px);
+        line-height: desktop-size(60px);
+    }
+
+    @include for-size(KT6) {
+        font-size: 40px;
+        line-height: 60px;
+    }
     letter-spacing: 0.01em;
 }
 
@@ -71,32 +145,68 @@
     font-family: 'RobotoRegular', sans-serif;
     font-style: normal;
     font-weight: normal;
-    font-size: 18px;
-    line-height: 21px;
+    font-size: mobile-size(18px);
+    line-height: mobile-size(21px);
+    @include for-size(KT3) {
+        font-size: desktop-size(18px);
+        line-height: desktop-size(21px);
+    }
+
+    @include for-size(KT6) {
+        font-size: 18px;
+        line-height: 21px;
+    }
 }
 
 @mixin ROBOTOREGULAR16 {
     font-family: 'RobotoRegular', sans-serif;
     font-style: normal;
     font-weight: normal;
-    font-size: 16px;
-    line-height: 19px;
+    font-size: mobile-size(16px);
+    line-height: mobile-size(19px);
+    @include for-size(KT3) {
+        font-size: desktop-size(16px);
+        line-height: desktop-size(19px);
+    }
+
+    @include for-size(KT6) {
+        font-size: 16px;
+        line-height: 19px;
+    }
 }
 
 @mixin ROBOTOREGULAR14 {
     font-family: 'RobotoRegular', sans-serif;
     font-style: normal;
     font-weight: normal;
-    font-size: 14px;
-    line-height: 16px;
+    font-size: mobile-size(14px);
+    line-height: mobile-size(16px);
+    @include for-size(KT3) {
+        font-size: desktop-size(14px);
+        line-height: desktop-size(16px);
+    }
+
+    @include for-size(KT6) {
+        font-size: 14px;
+        line-height: 16px;
+    }
 }
 
 @mixin ROBOTOMEDIUM {
     font-family: 'RobotoMedium', sans-serif;
     font-style: normal;
     font-weight: 500;
-    font-size: 40px;
-    line-height: 60px;
+    font-size: mobile-size(40px);
+    line-height: mobile-size(60px);
+    @include for-size(KT3) {
+        font-size: desktop-size(40px);
+        line-height: desktop-size(60px);
+    }
+
+    @include for-size(KT6) {
+        font-size: 40px;
+        line-height: 60px;
+    }
     letter-spacing: 0.01em;
 }
 
@@ -104,37 +214,81 @@
     font-family: 'RobotoMedium', sans-serif;
     font-style: normal;
     font-weight: 500;
-    font-size: 24px;
-    line-height: 28px;
+    font-size: mobile-size(24px);
+    line-height: mobile-size(28px);
+    @include for-size(KT3) {
+        font-size: desktop-size(24px);
+        line-height: desktop-size(28px);
+    }
+
+    @include for-size(KT6) {
+        font-size: 24px;
+        line-height: 28px;
+    }
 }
 
 @mixin ROBOTOMEDIUM16 {
     font-family: 'RobotoMedium', sans-serif;
     font-style: normal;
     font-weight: 500;
-    font-size: 16px;
-    line-height: 19px;
+    font-size: mobile-size(16px);
+    line-height: mobile-size(19px);
+    @include for-size(KT3) {
+        font-size: desktop-size(16px);
+        line-height: desktop-size(19px);
+    }
+
+    @include for-size(KT6) {
+        font-size: 16px;
+        line-height: 19px;
+    }
 }
 
 @mixin ROBOTOMEDIUM16L {
     @include ROBOTOMEDIUM16;
-    line-height: 24px;
+    line-height: mobile-size(24px);
+
+    @include for-size(KT3) {
+        line-height: desktop-size(24px);
+    }
+
+    @include for-size(KT6) {
+        line-height: 24px;
+    }
 }
 
 @mixin ROBOTOMEDIUM14 {
     font-family: 'RobotoRegular', sans-serif;
     font-style: normal;
     font-weight: normal;
-    font-size: 14px;
-    line-height: 16px;
+    font-size: mobile-size(14px);
+    line-height: mobile-size(16px);
+    @include for-size(KT3) {
+        font-size: desktop-size(14px);
+        line-height: desktop-size(16px);
+    }
+
+    @include for-size(KT6) {
+        font-size: 14px;
+        line-height: 16px;
+    }
 }
 
 @mixin NunitoSans {
     font-family: "Nunito Sans", sans-serif;
     font-style: normal;
     font-weight: 300;
-    font-size: 10px;
-    line-height: 11px;
+    font-size: mobile-size(10px);
+    line-height: mobile-size(11px);
+    @include for-size(KT3) {
+        font-size: desktop-size(10px);
+        line-height: desktop-size(11px);
+    }
+
+    @include for-size(KT6) {
+        font-size: 10px;
+        line-height: 11px;
+    }
     display: flex;
     align-items: center;
 }

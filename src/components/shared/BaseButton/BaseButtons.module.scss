@@ -3,27 +3,30 @@
 .basebutton {
     cursor: pointer;
     color: $WHITE;
-    padding: 10px 10px;
+    padding: mobile-size(10px) mobile-size(10px);
     border-radius: 6px;
     border: 0;
     font-weight: 400;
-    font-size: 16px;
+    font-size: mobile-size(16px);
     display: flex;
     align-items: center;
     justify-content: center;
     text-align: center;
-    font-family: RobotoRegular;
-    //&:hover{
-    //    border: 1px solid  $GREY;
-    //}
-    //&:active{
-    //    color: $WHITE !important;
-    //    background-color: $ACCENT
-    //}
+    font-family: RobotoRegular, sans-serif;
+
+    @include for-size(KT3) {
+        padding: desktop-size(10px) desktop-size(10px);
+        font-size: desktop-size(16px);
+    }
+
+    @include for-size(KT6) {
+        padding: 10px 10px;
+        font-size: 16px;
+    }
 }
 
 .primary {
-    padding: 10px 20px;
+    padding: mobile-size(10px) mobile-size(20px);
     background-color: $NUDE;
     font-weight: 500;
     border: 1px solid rgba(0,0,0,0);
@@ -33,13 +36,29 @@
     &:active{
         background-color: $PRESSED
     }
+
+    @include for-size(KT3) {
+        padding: desktop-size(10px) desktop-size(20px);
+    }
+
+    @include for-size(KT6) {
+        padding: 10px 20px;
+    }
 }
 .primary_light{
-    padding: 10px 20px;
+    padding: mobile-size(10px) mobile-size(20px);
     color:$NUDE;
     background-color: $WHITE;
     font-weight: 500;
     border: 1px solid $NUDE;
+
+    @include for-size(KT3) {
+        padding: desktop-size(10px) desktop-size(20px);
+    }
+
+    @include for-size(KT6) {
+        padding: 10px 20px;
+    }
 }
 .tags{
     background-color: $WHITE;
@@ -88,7 +107,15 @@
     background-color: $WHITE;
     color: $ACCENT;
     border: 1px solid $ACCENT;
-    font-size: 14px;
+    font-size: mobile-size(14px);
+
+    @include for-size(KT3) {
+        font-size: desktop-size(14px);
+    }
+
+    @include for-size(KT6) {
+        font-size: 14px;
+    }
 }
 
 .iconWrapper {
@@ -98,7 +125,15 @@
     margin-left: auto;
 }
 .iconSpace {
-    padding-left: 8px;
+    padding-left: mobile-size(8px);
+
+    @include for-size(KT3) {
+        padding-left: desktop-size(8px);
+    }
+
+    @include for-size(KT6) {
+        padding-left: 8px;
+    }
 }
 .toggleButtonWithIcons {
     display: flex;
@@ -108,12 +143,26 @@
     background-color: $WHITE;
     border: none;
     outline: none;
+
     @include for-size(KT1) {
-       width: 30px;
-    }@include for-size(KT2) {
-       width: 30px;
+       width: mobile-size(30px);
+    }
+    @include for-size(KT3) {
+       width: desktop-size(30px);
      }
+
+    @include for-size(KT6) {
+        width: 30px;
+    }
 }
 .startIcon {
-    margin-right: 8px;
+    margin-right: mobile-size(8px);
+
+    @include for-size(KT3) {
+        margin-right: desktop-size(8px);
+    }
+
+    @include for-size(KT6) {
+        margin-right: 8px;
+    }
 }

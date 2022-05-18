@@ -1,12 +1,17 @@
 @import '../../../components/containers/Record/all.scss';
 .offers{
-    margin: 0 10px 0 10px;
+    margin: 0 mobile-size(10px) 0 mobile-size(10px);
     overflow: visible;
     max-width: $KT6;
     @include for-size(KT3) {
+        margin: desktop-size(40px) auto 0 auto;
+        padding: 0 desktop-size(60px);
+        box-sizing: border-box;
+    }
+
+    @include for-size(KT6) {
         margin: 40px auto 0 auto;
         padding: 0 60px;
-        box-sizing: border-box;
     }
 }
 .positionButton{
@@ -14,27 +19,14 @@
     justify-content: space-between;
 }
 .block{
-    display: flex;
-    justify-content: space-between;
-    @media  (max-width: 1300px) {
-        display: grid;
-        grid-template-columns: 1fr 1fr ;
-        gap: 20px;
-    }
-    @media  (max-width: 1020px) {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 20px;
-    }
-    @media  (max-width: 650px) {
-        display: grid;
-        grid-template-columns: 1fr ;
-        gap: 20px;
-    }
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: mobile-size(20px);
+
     @include for-size(KT1) {
         display: flex;
         width: calc( 100vw - 20px );
-        height: 240px;
+        height: mobile-size(240px);
         overflow-x: scroll;
         white-space:nowrap;
         gap: 0;
@@ -43,71 +35,73 @@
         padding-bottom: -20px;
         margin-top: 20px;
     }
-    @include for-size(KT2) {
-        height:266px;
-    }@media  (min-width: 750px) {
-    overflow-x: hidden
-    }@media  (min-width: 950px) {
-        height:316px;
+    @include for-size(KT3) {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: desktop-size(20px);
+        height: desktop-size(210px);
+        overflow-x: hidden
     }
-    @media  (min-width: 1320px) {
-        height:210px;
+    @include for-size(KT6) {
+        gap: 20px;
+        height: 210px;
     }
 }
 .buttonLine{
-    min-width:1060px ;
+    min-width: 1060px;
     display: flex;
 
-    @media  (max-width: 1360px) {
+    @include for-size(KT1) {
         flex-wrap: wrap;
-        min-width:750px ;
+        min-width: mobile-size(250px);
     }
-    @media  (max-width: 950px) {
-        flex-wrap: wrap;
-        min-width:600px ;
+
+    @include for-size(KT2) {
+        min-width: mobile-size(250px);
     }
-    @media  (max-width:800px) {
-        flex-wrap: wrap;
-        min-width:400px ;
+
+    @include for-size(KT3) {
+        min-width: desktop-size(750px);
     }
-    @media  (max-width:600px) {
-        flex-wrap: wrap;
-        min-width:300px ;
-    }@media  (max-width:550px) {
-        flex-wrap: wrap;
-        min-width:250px ;
+
+    @include for-size(KT6) {
+        min-width: 750px;
     }
 }
 .margin{
-    margin: 40px 0 20px 0 !important;
+    margin: mobile-size(40px) 0 mobile-size(20px) 0 !important;
+
+    @include for-size(KT3) {
+        margin: desktop-size(40px) 0 desktop-size(20px) 0 !important;
+    }
+
+    @include for-size(KT6) {
+        margin: 40px 0 20px 0 !important;
+    }
 }
 
 .offersPhoto{
-    margin: 30px 0;
+    margin: mobile-size(30px) 0;
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr;
-    @media  (max-width: 1420px) {
+    gap: mobile-size(20px);
+
+    @include for-size(KT3) {
+        margin: desktop-size(30px) 0;
+        gap: unset;
         display: flex;
         flex-basis: 50%;
         flex-wrap: wrap;
-        //grid-template-columns: 1fr 1fr;
-        //gap: 20px;
-    }@media  (max-width: 580px) {
-        grid-template-columns: 1fr ;
-        gap: 20px;
     }
-    //@media  (max-width: 1020px) {
-    //    grid-template-columns: 1fr;
-    //    gap: 20px;
-    //}
+
+    @include for-size(KT6) {
+        margin: 30px 0;
+    }
 }
 .button{
-    margin: 5px 0 0 0;
+    margin: mobile-size(5px) 0 0 0;
+
     @include for-size(KT3) {
         margin: 0 0 0 0;
     }
-    //@media  (max-width: 1020px) {
-    //    grid-template-columns: 1fr;
-    //    gap: 20px;
-    //}
 }

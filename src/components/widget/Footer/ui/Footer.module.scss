@@ -12,13 +12,17 @@
         flex-direction: column;
         justify-content: space-between;
         align-items: flex-start;
-        padding: 0 10px 0 10px;
+        padding: 0 mobile-size(10px) 0 mobile-size(10px);
 
         @include for-size(KT3) {
             flex-direction: row;
-            padding: 40px 60px 65px 60px;
+            padding: desktop-size(40px) desktop-size(60px) desktop-size(65px) desktop-size(60px);
             box-sizing: border-box;
             height: auto;
+        }
+
+        @include for-size(KT6) {
+            padding: 40px 60px 65px 60px;
         }
 
         & + div {
@@ -28,7 +32,15 @@
 }
 
 .margin {
-    height: 16px;
+    height: mobile-size(16px);
+
+    @include for-size(KT3) {
+        height: desktop-size(16px);
+    }
+
+    @include for-size(KT6) {
+        height: 16px;
+    }
 }
 
 .underline {
@@ -39,9 +51,13 @@
 
 .icons {
     display: flex;
-    margin-right: 60px;
-}
-.padding_5{
-    //width: 177px;
-    //padding-right: 45px;
+    margin-right: mobile-size(60px);
+
+    @include for-size(KT3) {
+        margin-right: desktop-size(60px);
+    }
+
+    @include for-size(KT6) {
+        margin-right: 60px;
+    }
 }

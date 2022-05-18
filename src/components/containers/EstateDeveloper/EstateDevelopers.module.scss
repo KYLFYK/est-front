@@ -1,18 +1,20 @@
 @import '/src/components/containers/Record/all.scss';
+
 .containerEstate{
   display: flex;
 
   @include for-size(KT1) {
-    width: 295px;
+    width: mobile-size(295px);
   }
-  @include for-size(KT2) {
-    flex-direction: column;
-    width: 200px;
-    margin-right: 30px ;
-    justify-content: space-between;
-  }
+
   @include for-size(KT3) {
     justify-content: flex-start;
+    width: desktop-size(295px);
+    flex-direction: column;
+  }
+
+  @include for-size(KT6) {
+    width: 295px;
   }
 }
 
@@ -26,42 +28,49 @@
   cursor: pointer;
   background-size: cover;
   @include for-size(KT1) {
-    width: 65px;
-    height: 65px;
+    width: mobile-size(65px);
+    height: mobile-size(65px);
   }
   @include for-size(KT3) {
+    width: desktop-size(200px);
+    height: desktop-size(80px);
+  }
+  @include for-size(KT6) {
     width: 200px;
     height: 80px;
-  }
-  @include for-size(KT3) {
-
   }
 }
 
 .infoCompany{
   @include for-size(KT1) {
-    margin: 0 0 0 10px;
+    margin: 0 0 0 mobile-size(10px);
   }
   @include for-size(KT3) {
-    margin: 20px 0;
-  }
-  @include for-size(KT3) {
-    width: 185px;
+    width: desktop-size(185px);
     white-space: nowrap;
     overflow: hidden;
-    padding: 0px;
+    padding: 0;
     text-overflow: ellipsis;
-    //border:1px solid #000;
+    margin: desktop-size(18px) 0 0 0;
+  }
+  @include for-size(KT6) {
+    width: 185px;
     margin: 18px 0 0 0;
   }
 }
 .marginT{
   margin-top: 5px;
+
   @include for-size(KT3) {
-    margin: 10px 0;
+    margin: desktop-size(10px) 0;
     white-space:normal;
   }
+
+  @include for-size(KT6) {
+    margin: 10px 0;
+  }
 }
+
 .hover{
   :hover{
     box-shadow: 0  4px 8px 0 rgba(26, 72, 98, 0.2);
@@ -69,5 +78,5 @@
   border: 1px solid rgba(242, 242, 242, 1);
   border-radius: 6px;
   box-sizing: border-box;
-  height: 81px;
+  width: fit-content;
 }

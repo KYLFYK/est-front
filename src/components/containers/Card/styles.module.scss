@@ -15,10 +15,16 @@ $borderRadius: 6px;
         box-shadow: 15px 15px 40px -40px black;
     }
     @include for-size(KT1) {
-        width: 300px;
-    }@include for-size(KT2) {
+        width: mobile-size(300px);
+    }
+
+    @include for-size(KT3) {
+        width: desktop-size(315px);
+    }
+
+    @include for-size(KT6) {
         width: 315px;
-     }
+    }
 }
 
 .link {
@@ -37,34 +43,73 @@ $borderRadius: 6px;
 .content {
     display: block;
     cursor: pointer;
-    padding: 10px 15px 10px 15px;
+    padding: mobile-size(10px) mobile-size(15px) mobile-size(10px) mobile-size(15px);
     box-sizing: border-box;
     @include MapScrollbar;
+
+    @include for-size(KT3) {
+        padding: desktop-size(10px) desktop-size(15px) desktop-size(10px) desktop-size(15px);
+    }
+
+    @include for-size(KT6) {
+        padding: 10px 15px 10px 15px;
+    }
 }
 
 .price {
     @include ROBOTOBOLD16;
     color: $BLACK;
-    margin: 5px 0 0 0 ;
+    margin: mobile-size(5px) 0 0 0;
+
+    @include for-size(KT3) {
+        margin: desktop-size(5px) 0 0 0;
+    }
+
+    @include for-size(KT6) {
+        margin: 5px 0 0 0;
+    }
 }
 .cursorName{
     margin: 5px 0 0 0 ;
     display: block;
-    width: 170px;
-    white-space: nowrap; /* Отменяем перенос текста */
-    overflow: hidden; /* Обрезаем содержимое */
-    //padding-right:0px; /* Поля */
+    width: mobile-size(170px);
+    white-space: nowrap;
+    overflow: hidden;
     text-overflow: ellipsis;
+
+    @include for-size(KT3) {
+        width: desktop-size(170px);
+    }
+
+    @include for-size(KT6) {
+        width: 170px;
+    }
 }
 
 .subtitle {
     @include ROBOTOREGULAR16;
-    margin: 0 0 4px 0;
+    margin: 0 0 mobile-size(4px) 0;
     display: flex;
+
+    @include for-size(KT3) {
+        margin: 0 0 desktop-size(4px) 0;
+    }
+
+    @include for-size(KT6) {
+        margin: 0 0 4px 0;
+    }
 }
 .subtitleFloor_Type {
     display: flex;
-    margin: 0 0 4px 0;
+    margin: 0 0 mobile-size(4px) 0;
+
+    @include for-size(KT3) {
+        margin: 0 0 desktop-size(4px) 0;
+    }
+
+    @include for-size(KT6) {
+        margin: 0 0 4px 0;
+    }
 }
 .typeLabel {
     color: $GREY;
@@ -75,25 +120,49 @@ $borderRadius: 6px;
 .ellipsisTextBold {
     font-family: "RobotoBold";
     color: $ACCENT;
-    margin: -4px 0 4px 0;
+    margin: mobile-size(-4px) 0 mobile-size(4px) 0;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+
+    @include for-size(KT3) {
+        margin: desktop-size(-4px) 0 desktop-size(4px) 0;
+    }
+
+    @include for-size(KT6) {
+        margin: -4px 0 4px 0;
+    }
 }
 
 .ellipsisText {
     font-family: "RobotoRegular";
     color: $BLACK;
-    margin: 0 0 0 4px;
+    margin: 0 0 0 mobile-size(4px);
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+
+    @include for-size(KT3) {
+        margin: 0 0 0 desktop-size(4px);
+    }
+
+    @include for-size(KT6) {
+        margin: 0 0 0 4px;
+    }
 }
 .dataAgent{
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    margin: 0 10px;
+    margin: 0 mobile-size(10px);
+
+    @include for-size(KT3) {
+        margin: 0 desktop-size(10px);
+    }
+
+    @include for-size(KT6) {
+        margin: 0 10px;
+    }
 }
 .photoAgent{
     border-radius: 8px 8px 0 0;
@@ -112,28 +181,47 @@ $borderRadius: 6px;
 }
 .agentBlock{
     display: flex;
-    min-width: 400px;
-    @media  (max-width: 1320px) {
+    min-width: mobile-size(100px);
+    min-height: mobile-size(100px);
+
+    @media (max-width: 1320px) {
         min-width: 100px;
         min-height: 100px;
     }
+
     @include for-size(KT1) {
         box-sizing: border-box;
         margin-left: 10px;
-        width: 196px !important;
-        height: 220px;
+        width: mobile-size(196px) !important;
+        height: mobile-size(220px);
         display: inline-block;
         vertical-align: top;
         border: 1px solid #F2F2F2;
         border-radius: 8px;
         box-shadow: 0 4px 8px 0 rgba(26, 72, 98, 0.15);
     }
-    @media  (min-width: 1320px) {
+
+    @include for-size(KT3) {
+        min-width: desktop-size(400px);
+        height: desktop-size(220px);
+        min-height: desktop-size(100px);
         display: flex;
+    }
+
+    @include for-size(KT6) {
         min-width: 400px;
+        height: 220px;
     }
 }
 
 .margin {
-    margin: 0 0 0 4px;
+    margin: 0 0 0 mobile-size(4px);
+
+    @include for-size(KT3) {
+        margin: 0 0 0 desktop-size(4px);
+    }
+
+    @include for-size(KT6) {
+        margin: 0 0 0 4px;
+    }
 }

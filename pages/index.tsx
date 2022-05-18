@@ -1,18 +1,18 @@
-import React, {useEffect, useState} from "react";
+import React, { useEffect, useState } from "react";
 import { MainContainer } from "src/components/containers/MainContainer/MainContainer";
 import { HeadFilter } from "../src/components/containers/HeadFilter/Finder";
 import { BestOffers } from "../src/components/containers/BestOffers/bestOffers";
 import DevelopersContainer from "../src/components/containers/DevelopersContainer/DevelopersContainer";
 import { AgentsContainer } from "../src/components/containers/AgentsContainer/AgentsContainer";
 import { Advantages } from "../src/components/containers/AdvantageList/AdvantageList";
-import { mocAdvantages, mocAdvantagesMobile } from "../src/components/containers/AdvantageList/config";
+import {
+  mocAdvantages,
+  mocAdvantagesMobile,
+} from "../src/components/containers/AdvantageList/config";
 import { OfferNews } from "../src/components/containers/OfferNews/offerNews";
-import OurOffice from "../src/components/containers/OurOffice/OurOffice";
 import { OurOfficeType } from "../src/components/containers/OurOffice/OurOffice";
 import { observer } from "mobx-react-lite";
 import { useRouter } from "next/router";
-import Typography from "src/components/shared/Typography/Typography";
-import {BaseDropDown} from "../src/components/shared/BaseDropDown/BaseDropDown";
 import { MobileOnly } from "src/components/containers/Adaptive/MobileOnly";
 import { DesktopOnly } from "src/components/containers/Adaptive/DesktopOnly";
 import { BestOffersMobile } from "src/components/containers/BestOffers/BestOffersMobile";
@@ -29,14 +29,7 @@ const personalAccount = [
   { title: "Проверка объекта", href: "/User", message: 0 },
 ];
 
-const tagsButton = [
-  "Квартира",
-  "Дом",
-  "ЖК",
-  "Новостройка",
-  "Вторичное жилье",
-  // "Участок",
-];
+const tagsButton = ["Квартира", "Дом", "ЖК", "Новостройка", "Вторичное жилье"];
 
 const ourOffice: OurOfficeType = {
   ourOffice: {
@@ -59,7 +52,6 @@ const ourOffice: OurOfficeType = {
 };
 
 const Start = observer(({}) => {
-
   const router = useRouter();
 
   useEffect(() => {
@@ -87,7 +79,10 @@ const Start = observer(({}) => {
         title={"Застройщики и агентства, которые нам доверяют"}
       />
       <AgentsContainer title={"Наши агенты к вашим услугам"} />
-      <Advantages advantages={mocAdvantages} advantagesMobile={mocAdvantagesMobile}/>
+      <Advantages
+        advantages={mocAdvantages}
+        advantagesMobile={mocAdvantagesMobile}
+      />
       <OfferNews />
       {/*<div id={"contact"}>
         <OurOffice ourOffice={ourOffice.ourOffice} />

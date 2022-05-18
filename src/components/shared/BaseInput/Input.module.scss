@@ -1,3 +1,5 @@
+@import '/src/components/containers/Record/all.scss';
+
 .input {
     box-sizing: border-box;
     display: flex;
@@ -5,12 +7,12 @@
     align-items: center;
     outline: none;
     width: 100%;
-    min-height: 40px;
+    min-height: mobile-size(40px);
     border-radius: 8px;
-    text-indent: 16px;
+    text-indent: mobile-size(16px);
     border: 1px #CAD1DA solid;
     font-family: "RobotoRegular", sans-serif;
-    font-size: 16px;
+    font-size: mobile-size(16px);
     &::-webkit-outer-spin-button,
     &::-webkit-inner-spin-button {
       -webkit-appearance: none;
@@ -21,11 +23,33 @@
         outline: none;
     }
 
+    @include for-size(KT3) {
+        min-height: desktop-size(40px);
+        text-indent: desktop-size(16px);
+        font-size: desktop-size(16px);
+    }
+
+    @include for-size(KT6) {
+        min-height: 40px;
+        text-indent: 16px;
+        font-size: 16px;
+    }
+
     &.textArea {
         width: 100%;
-        padding-top: 12px;
+        padding-top: mobile-size(12px);
         box-sizing: border-box;
-        height: 200px;
+        height: mobile-size(200px);
+
+        @include for-size(KT3) {
+            padding-top: desktop-size(12px);
+            height: desktop-size(200px);
+        }
+
+        @include for-size(KT6) {
+            padding-top: 12px;
+            height: 200px;
+        }
     }
 }
 
@@ -39,10 +63,20 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    right: 12px;
+    right: mobile-size(12px);
     top: 50%;
     transform: translateY(-50%);
-    margin: 0px 30px 0px 0px;
+    margin: 0px mobile-size(30px) 0px 0px;
+
+    @include for-size(KT3) {
+        right: desktop-size(12px);
+        margin: 0px desktop-size(30px) 0px 0px;
+    }
+
+    @include for-size(KT6) {
+        right: 12px;
+        margin: 0px 30px 0px 0px;
+    }
 }
 
 .wrapper {
@@ -53,14 +87,38 @@
     &.altIcon {
         .icon {
             right: unset;
-            left: 12px;
+            left: mobile-size(12px);
+
+            @include for-size(KT3) {
+                left: desktop-size(12px);
+            }
+
+            @include for-size(KT6) {
+                left: 12px;
+            }
         }
 
         .input {
-            padding-left: 30px;
+            padding-left: mobile-size(30px);
+
+            @include for-size(KT3) {
+                padding-left: desktop-size(30px);
+            }
+
+            @include for-size(KT6) {
+                padding-left: 30px;
+            }
         }
         .altInput {
-            padding-left: 20px;
+            padding-left: mobile-size(20px);
+
+            @include for-size(KT3) {
+                padding-left: desktop-size(20px);
+            }
+
+            @include for-size(KT6) {
+                padding-left: 20px;
+            }
         }
 
         .iconPadding {
@@ -71,16 +129,40 @@
 
 .label {
     color: #CAD1DA;
-    margin-bottom: 5px;
+    margin-bottom: mobile-size(5px);
+
+    @include for-size(KT3) {
+        margin-bottom: desktop-size(5px);
+    }
+
+    @include for-size(KT6) {
+        margin-bottom: 5px;
+    }
 
     &.textArea {
         align-items: unset !important;
-        padding-top: 10px;
+        padding-top: mobile-size(10px);
+
+        @include for-size(KT3) {
+            padding-top: desktop-size(10px);
+        }
+
+        @include for-size(KT6) {
+            padding-top: 10px;
+        }
     }
 }
 
 .iconPadding {
-    padding-right: 30px;
+    padding-right: mobile-size(30px);
+
+    @include for-size(KT3) {
+        padding-right: desktop-size(30px);
+    }
+
+    @include for-size(KT6) {
+        padding-right: 30px;
+    }
 }
 
 .error {
