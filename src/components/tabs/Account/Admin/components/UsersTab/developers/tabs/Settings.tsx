@@ -18,6 +18,7 @@ const Options = {
 };
 
 export const Settings: FC = () => {
+
   const [phoneNumbers, setPhoneNumbers] = useState<string[]>([]);
   const [selectedStatus, setSelectedStatus] = useState("Готово к проверке");
 
