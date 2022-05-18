@@ -94,7 +94,6 @@ const personalAcc = [
 export const Header: FC<HeaderPropsType> = observer(
   ({ className, city, personalAccount, modalActive, auth = false }) => {
     const router = useRouter();
-    console.log('className', className)
     const [email, setEmail] = useState<string>("");
 
     // for test modal
