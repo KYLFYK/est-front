@@ -37,6 +37,31 @@ export const useForm: <T>(
     IInitialValues[keyof IInitialValues] | undefined
   > = useMemo(() => ({ ...initValues }), [initValues]);
 
+  function isEqual(
+    object1: IInitialValues,
+    object2: Record<
+      keyof IInitialValues,
+      IInitialValues[keyof IInitialValues] | undefined
+    >
+  ) {
+    const props1 = Object.getOwnPropertyNames(object1);
+    const props2 = Object.getOwnPropertyNames(object2);
+
+    if (props1.length !== props2.length) {
+      return false;
+    }
+
+    for (let i = 0; i < props1.length; i += 1) {
+      const prop: keyof IInitialValues = props1[i] as keyof IInitialValues;
+
+      if (object1[prop] !== object2[prop]) {
+        return false;
+      }
+    }
+
+    return true;
+  }
+
   const Form = useMemo<FormInstance<IInitialValues>>(
     () => ({
       ref: formRef,
@@ -117,10 +142,7 @@ export const useForm: <T>(
           formRef.current?.[index].addEventListener("input", (e: any) => {
             if (initialValues) {
               initialValues[obj] = e.target.value ? e.target.value : undefined;
-              if (
-                JSON.stringify(initialValues) !== JSON.stringify(initValues) &&
-                onFormChange
-              ) {
+              if (isEqual(initValues, initialValues) && onFormChange) {
                 onFormChange();
               }
             }
