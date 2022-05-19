@@ -57,7 +57,7 @@
 .secondary {
     background-color: $WHITE;
     color: $BLACK;
-    border: 1px solid #F2F2F2;
+    border: 1px solid $ICONGRAY;
     &.active {
         background-color: $ACCENT;
         color: $WHITE;

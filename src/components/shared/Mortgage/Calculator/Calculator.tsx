@@ -269,7 +269,7 @@ export const Calculator: React.FC<Props> = observer(({setModal}) => {
 
     return (
         <div className={s.wrap}>
-            <Typography weight={"bold"} className={s.typoHeader}>
+            <Typography weight={"bold"}>
                 Ипотечный калькулятор
             </Typography>
             <div className={s.block_container}>

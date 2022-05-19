@@ -25,9 +25,6 @@
   font-size: 12px;
   padding:8px 4px 0 4px;
 }
-.typoHeader{
-  margin: 0 0 0 60px;
-}
 .block_container{
   width: 1500px;
   @include for-size(KT1) {
@@ -47,33 +44,32 @@
     width: 1100px;
   }
   @include for-size(KT6) {
-    width: 1400px;
+    width: 100%;
     display: flex;
   }
 }
 
 .container {
   color: #3D4550;
-  @include for-size(KT1) {
-    padding: 20px 10px 0 10px;
-  }
+  padding: 20px 0 0 0px;
+
   @include for-size(KT2) {
-    padding: 20px 20px 0 60px;
+    padding: 20px 0 0 0;
   }
   @include for-size(KT3) {
-    padding: 20px 24px 0 24px;
+    padding: 20px 0 0 0;
   }
   @include for-size(KT4) {
-    padding: 20px 20px 0 60px;
+    padding: 20px 0 0 0;
     width: 800px;
   }
   @include for-size(KT5) {
-    padding: 20px 20px 0 60px;
+    padding: 20px 0 0 0;
     width: 1000px;
   }
   @include for-size(KT6) {
-    padding: 30px 20px 20px 60px;
-    width: 1100px;
+    padding: 30px 0 20px 0;
+    width: 907px;
   }
 }
 
@@ -109,8 +105,8 @@
   background-color: #C5A28E;
 }
 .buttonWidth{
-  width: 100%;
-  margin:10px 0;
+  width: 260px;
+  margin: 10px 0;
 }
 .buttonHovered {
   display: flex;
@@ -183,19 +179,19 @@
   cursor: pointer;
   width: calc(100vw - 20px);
   display: flex;
-  padding: 20px 30px 30px 30px;
-  min-width: 265px ;
+  padding: 20px 0 30px 0px;
+  min-width: 260px ;
   @include for-size(KT2) {
-    padding: 30px 20px 0 60px;
+    padding: 30px 0 0 0px;
   }
   @include for-size(KT5) {
     justify-content: center;
     display: flex;
-    width: 265px ;
+    width: 260px ;
   }
   @include for-size(KT6) {
     display: block;
-    padding: 0 20px 0 60px !important;
+    padding: 0 0 0 0 !important;
   }
 }
 .buttonContainer{
@@ -206,11 +202,9 @@
   }
 
   @include for-size(KT6) {
-    width: 256px ;
-    margin: 10px 0;
-    padding: 0 20px 20px 60px !important;
+    width: 260px ;
+    margin: 10px 0 0 20px;
   }
-
 
 }
 

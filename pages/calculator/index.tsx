@@ -23,6 +23,7 @@ const Calculator: NextPage = observer(() => {
       personalAccount={personalAccount} 
       footerColor={'accent'} 
       className={store.getEarlyPayments().length ? css.altjs : css.js}
+      cabinetStyle={true}
     >
         <Mortgage/>
     </MainContainer>

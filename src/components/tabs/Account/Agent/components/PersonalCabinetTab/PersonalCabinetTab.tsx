@@ -51,7 +51,8 @@ const PersonalCabinetTab = observer(() => {
           ]}
           style={{
             margin: 0,
-            marginBottom: 20,
+            marginBottom: 24,
+            marginLeft: -10,
           }}
         />
       ) : (

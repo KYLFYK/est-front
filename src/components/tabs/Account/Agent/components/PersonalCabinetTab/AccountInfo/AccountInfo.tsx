@@ -40,11 +40,11 @@ const PersonalCabinetAccountInfo: FC<PersonalCabinetAccountInfoType> = observer(
       <div>
         <div className={css.column}>
           <div>
-            <Typography weight={"bold"}>Фотография</Typography>
+            <Typography weight={"bold"} className={css.negativeMargin}>Фотография</Typography>
             <div
               style={{
-                marginTop: 20,
-                marginBottom: 30,
+                marginTop: 21,
+                marginBottom: 20,
               }}
             >
               {store.initialData.file?.length > 0 ? (
@@ -62,7 +62,7 @@ const PersonalCabinetAccountInfo: FC<PersonalCabinetAccountInfoType> = observer(
             >
               <Typography size={"small"}>Редактировать аккаунт</Typography>
             </BaseButton>
-            <BaseButton
+            {/*<BaseButton
               type={"secondary"}
               isActive
               className={css.margin}
@@ -71,7 +71,7 @@ const PersonalCabinetAccountInfo: FC<PersonalCabinetAccountInfoType> = observer(
               <Typography size={"small"} color={"secondary"}>
                 {statusVerificationTitle(store.get().statusVerification)}
               </Typography>
-            </BaseButton>
+              </BaseButton>*/}
           </div>
         </div>
         <Typography weight={"bold"} className={css.marginText}>

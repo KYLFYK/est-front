@@ -1,4 +1,4 @@
-@import "src/app/styles/colours";
+@import "src/app/styles/colours.scss";
 
 .wrapper {
   display: flex;
@@ -14,7 +14,7 @@
   align-items: center;
   justify-content: center;
   position: relative;
-  border: 1px solid $ICONGRAY;
+  border: 1px solid $GREY_6;
   box-sizing: border-box;
   border-radius: 6px;
   overflow: hidden;

@@ -47,6 +47,7 @@ export const HorizontalTabs: FC<Props> = ({
   const [selectedTabIdx, setSelectedTabIdx] = useState(current ? current : 0);
   const activeTabRef = useRef<HTMLDivElement | null>(null);
   const [activeTabMargin, setActiveTabMargin] = useState(30);
+
   useEffect(() => {
     if (activeTabRef && activeTabRef.current) {
       setActiveTabMargin((activeTabRef.current.clientWidth - 25) / 2);
@@ -92,7 +93,7 @@ export const HorizontalTabs: FC<Props> = ({
               <Tab
                 key={index}
                 value={index}
-                style={{ textTransform: "none", padding: "12px 12px" }}
+                style={{ textTransform: "none", padding: "0px 0px" }}
                 onClick={tab.onClick}
                 ref={index === selectedTabIdx ? activeTabRef : null}
                 label={
@@ -121,7 +122,7 @@ export const HorizontalTabs: FC<Props> = ({
             ))}
           </Tabs>
         </Box>
-        <hr color={"#F2F2F2"} className={css.hr} />
+        <div className={css.hr}></div>
       </div>
       {tabs[selectedTabIdx].Component && (
         <div>{tabs[selectedTabIdx].Component}</div>
