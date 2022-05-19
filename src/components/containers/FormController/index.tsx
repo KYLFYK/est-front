@@ -37,44 +37,49 @@ export const useForm: <T>(initValues: T) => [Form: FormInstance<T>] = (
     IInitialValues[keyof IInitialValues] | undefined
   > = useMemo(() => ({ ...initValues }), [initValues]);
 
-  const [Form] = useState<FormInstance<IInitialValues>>({
-    ref: formRef,
-    getValues: () => {
-      return initialValues as IInitialValues;
-    },
-    setValues: (data) => {
-      data.forEach((element) => {
-        if (initialValues.hasOwnProperty(element.name)) {
-          initialValues[element.name] = element.value;
+  const Form = useMemo<FormInstance<IInitialValues>>(
+    () => ({
+      ref: formRef,
+      getValues: () => {
+        return initialValues as IInitialValues;
+      },
+      setValues: (data) => {
+        data.forEach((element) => {
+          if (initialValues.hasOwnProperty(element.name)) {
+            initialValues[element.name] = element.value;
 
-          Object.keys(initialValues).forEach((obj, index) => {
-            if (formRef.current?.[index] && obj === element.name) {
-              formRef.current[index].value = element.value as any;
-            }
-          });
-        }
-      });
-    },
-    resetValues: () => {
-      const objKeys = Object.keys(initialValues) as Array<keyof IInitialValues>;
-
-      objKeys.forEach((obj, index) => {
-        if (initValues && initValues[obj]) {
-          initialValues[obj] = initValues[obj];
-        } else {
-          initialValues[obj] = undefined;
-        }
-
-        if (formRef.current?.[index]) {
-          if (initValues && initValues[obj]) {
-            formRef.current[index].value = initValues[obj] as any;
-          } else {
-            formRef.current[index].value = "";
+            Object.keys(initialValues).forEach((obj, index) => {
+              if (formRef.current?.[index] && obj === element.name) {
+                formRef.current[index].value = element.value as any;
+              }
+            });
           }
-        }
-      });
-    },
-  });
+        });
+      },
+      resetValues: () => {
+        const objKeys = Object.keys(initialValues) as Array<
+          keyof IInitialValues
+        >;
+
+        objKeys.forEach((obj, index) => {
+          if (initValues && initValues[obj]) {
+            initialValues[obj] = initValues[obj];
+          } else {
+            initialValues[obj] = undefined;
+          }
+
+          if (formRef.current?.[index]) {
+            if (initValues && initValues[obj]) {
+              formRef.current[index].value = initValues[obj] as any;
+            } else {
+              formRef.current[index].value = "";
+            }
+          }
+        });
+      },
+    }),
+    [initialValues, formRef]
+  );
 
   useEffect(() => {
     let index = 0;
