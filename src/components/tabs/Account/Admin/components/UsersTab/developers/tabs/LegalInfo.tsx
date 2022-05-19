@@ -8,6 +8,7 @@ import {
 
 import styles from "../../agency/agency.module.scss";
 import { observer } from "mobx-react";
+import Scroll from "../../../../../../../shared/Scroll/Scroll";
 
 export interface ILegalForm {
   fullCompanyName?: string;
@@ -98,335 +99,337 @@ export const LegalInfo: FC = observer(() => {
   });
 
   return (
-    <div
-      className={styles.formWrapper}
-      style={{
-        paddingTop: 20,
-      }}
-    >
-      {profileData !== null && (
-        <FormController form={form} className={styles.form}>
-          <section>
-            <span className={styles.formSubTitle}>Реквизиты</span>
-            <BaseInput
-              classNameWrapper={styles.largeWrapper}
-              className={styles.large}
-              errorLabel=""
-              label="Полное название организации"
-              type="text"
-              name={"fullCompanyName"}
-              defaultValue={" "}
-              onChange={() => {}}
-            />
-            <BaseInput
-              classNameWrapper={styles.largeWrapper}
-              className={styles.large}
-              errorLabel=""
-              label="Адрес"
-              type="text"
-              name={"address"}
-              defaultValue={" "}
-              onChange={() => {}}
-            />
-            <BaseInput
-              classNameWrapper={styles.largeWrapper}
-              className={styles.large}
-              errorLabel=""
-              label="Уставный капитал"
-              type="text"
-              name={"capital"}
-              defaultValue={" "}
-              onChange={() => {}}
-            />
-            <BaseInput
-              classNameWrapper={styles.largeWrapper}
-              className={styles.large}
-              errorLabel=""
-              label="ОКФС"
-              type="text"
-              name={"okfs"}
-              defaultValue={" "}
-              onChange={() => {}}
-            />
-            <BaseInput
-              classNameWrapper={styles.largeWrapper}
-              className={styles.large}
-              errorLabel=""
-              label="ОКОПФ"
-              type="text"
-              name={"okopf"}
-              defaultValue={" "}
-              onChange={() => {}}
-            />
-            <BaseInput
-              classNameWrapper={styles.largeWrapper}
-              className={styles.large}
-              errorLabel=""
-              label="ОКОГУ"
-              type="text"
-              name={"okogu"}
-              defaultValue={" "}
-              onChange={() => {}}
-            />
-            <div className={styles.subSection}>
+    <Scroll height={'530'} >
+      <div
+        className={styles.formWrapper}
+        style={{
+          paddingTop: 20,
+        }}
+      >
+        {profileData !== null && (
+          <FormController form={form} className={styles.form}>
+            <section>
+              <span className={styles.formSubTitle}>Реквизиты</span>
               <BaseInput
-                classNameWrapper={styles.smallWrapper}
-                className={styles.small}
-                errorLabel=""
-                label="ИНН"
-                type="text"
-                name={"inn"}
-                defaultValue={" "}
-                onChange={() => {}}
-              />
-              <BaseInput
-                classNameWrapper={styles.smallWrapper}
-                className={styles.small}
-                errorLabel=""
-                label="ОГРН"
-                type="text"
-                name={"ogrn"}
-                defaultValue={" "}
-                onChange={() => {}}
-              />
-              <BaseInput
-                classNameWrapper={styles.smallWrapper}
-                className={styles.small}
-                errorLabel=""
-                label="КПП"
-                type="text"
-                name={"kpp"}
-                defaultValue={" "}
-                onChange={() => {}}
-              />
-              <BaseInput
-                classNameWrapper={styles.smallWrapper}
-                className={styles.small}
-                errorLabel=""
-                label="ОКАТО"
-                type="text"
-                name={"okato"}
-                defaultValue={" "}
-                onChange={() => {}}
-              />
-              <BaseInput
-                classNameWrapper={styles.smallWrapper}
-                className={styles.small}
-                errorLabel=""
-                label="ОКПО"
-                type="text"
-                name={"okpo"}
-                defaultValue={" "}
-                onChange={() => {}}
-              />
-              <BaseInput
-                classNameWrapper={styles.smallWrapper}
-                className={styles.small}
-                errorLabel=""
-                label="ОКТМО"
-                type="text"
-                name={"oktmo"}
-                defaultValue={" "}
-                onChange={() => {}}
-              />
-            </div>
-          </section>
-          <section>
-            <span className={styles.formSubTitle}>Информация о компании</span>
-            <BaseInput
-              classNameWrapper={styles.largeWrapper}
-              className={styles.large}
-              errorLabel=""
-              label="Статус компании"
-              type="text"
-              name={"companyStatus"}
-              defaultValue={" "}
-              onChange={() => {}}
-            />
-            <BaseInput
-              classNameWrapper={styles.largeWrapper}
-              className={styles.large}
-              errorLabel=""
-              label="Руководитель"
-              type="text"
-              name={"director"}
-              defaultValue={" "}
-              onChange={() => {}}
-            />
-            <BaseInput
-              classNameWrapper={styles.largeWrapper}
-              className={styles.large}
-              errorLabel=""
-              label="Учредители"
-              type="text"
-              name={"founder"}
-              defaultValue={" "}
-              onChange={() => {}}
-            />
-            <div className={styles.subSection}>
-              <BaseInput
-                classNameWrapper={styles.mediumWrapper}
-                className={styles.medium}
-                errorLabel=""
-                label="Размер предприятия"
-                type="text"
-                name={"size"}
-                defaultValue={" "}
-                onChange={() => {}}
-              />
-              <BaseInput
-                classNameWrapper={styles.mediumWrapper}
-                className={styles.medium}
-                errorLabel=""
-                label="Численность персонала"
-                type="text"
-                name={"personal"}
-                defaultValue={" "}
-                onChange={() => {}}
-              />
-              <BaseInput
-                classNameWrapper={styles.mediumWrapper}
-                className={styles.medium}
-                errorLabel=""
-                label="Филиалы"
-                type="text"
-                name={"filial"}
-                defaultValue={" "}
-                onChange={() => {}}
-              />
-              <BaseInput
-                classNameWrapper={styles.mediumWrapper}
-                className={styles.medium}
-                errorLabel=""
-                label="Выручка"
-                type="text"
-                name={"revenue"}
-                defaultValue={" "}
-                onChange={() => {}}
-              />
-              <BaseInput
-                classNameWrapper={styles.mediumWrapper}
-                className={styles.medium}
-                errorLabel=""
-                label="Чистая прибыль"
-                type="text"
-                name={"net"}
-                defaultValue={" "}
-                onChange={() => {}}
-              />
-              <BaseInput
-                classNameWrapper={styles.mediumWrapper}
-                className={styles.medium}
-                errorLabel=""
-                label="Чистые активы"
-                type="text"
-                name={"netActive"}
-                defaultValue={" "}
-                onChange={() => {}}
-              />
-            </div>
-          </section>
-          <section className={styles.vertical}>
-            <span className={styles.formSubTitle}>
-              Сведения о государственной регистрации
-            </span>
-            <BaseInput
-              classNameWrapper={styles.mediumWrapper}
-              className={styles.medium}
-              errorLabel=""
-              label="Дата регистрации"
-              type="text"
-              name={"companyRegistered"}
-              defaultValue={" "}
-              onChange={() => {}}
-            />
-            <BaseInput
-              classNameWrapper={styles.largeWrapper}
-              className={styles.large}
-              errorLabel=""
-              label="Регистрирующий орган"
-              type="text"
-              name={"registeredFrom"}
-              defaultValue={" "}
-              onChange={() => {}}
-            />
-            <BaseInput
-              classNameWrapper={styles.largeWrapper}
-              className={styles.large}
-              errorLabel=""
-              label="Адрес регистрирующего органа"
-              type="text"
-              name={"registeredAdress"}
-              defaultValue={" "}
-              onChange={() => {}}
-            />
-            <BaseInput
-              classNameWrapper={styles.largeWrapper}
-              className={styles.large}
-              errorLabel=""
-              label="Регистрирующий орган, в котором находится регистрационное дело"
-              type="text"
-              name={"registeredMember"}
-              defaultValue={" "}
-              onChange={() => {}}
-            />
-          </section>
-          <section className={styles.vertical}>
-            <span className={styles.formSubTitle}>Виды деятельности</span>
-            <BaseInput
-              classNameWrapper={styles.largeWrapper}
-              className={styles.large}
-              errorLabel=""
-              label="Основной вид деятельности по ОКВЭД"
-              type="text"
-              name={"okved"}
-              defaultValue={" "}
-              onChange={() => {}}
-            />
-            <BaseInput
-              classNameWrapper={styles.largeWrapper}
-              className={styles.large}
-              errorLabel=""
-              label="Дополнительные виды деятельности"
-              type="text"
-              name={"okvedAdditional"}
-              defaultValue={" "}
-              onChange={() => {}}
-            />
-            {activityKinds.map((active, index) => (
-              <BaseInput
-                key={index}
                 classNameWrapper={styles.largeWrapper}
                 className={styles.large}
                 errorLabel=""
+                label="Полное название организации"
                 type="text"
-                name={"phoneNumber"}
-                defaultValue={active}
-                icon={index === activityKinds.length - 1 ? <>-</> : undefined}
-                iconClassName={styles.iconDelete}
-                iconOnClick={() => {
-                  if (index === activityKinds.length - 1) {
-                    setActivityKinds([
-                      ...activityKinds.filter(
-                        (v, i) => i !== activityKinds.length - 1
-                      ),
-                    ]);
-                  }
-                }}
+                name={"fullCompanyName"}
+                defaultValue={" "}
                 onChange={() => {}}
               />
-            ))}
-            <span
-              className={styles.addNumber}
-              onClick={() => {
-                setActivityKinds([...activityKinds, ""]);
-              }}
-            >
-              + Добавить вид деятельности
-            </span>
-          </section>
-        </FormController>
-      )}
-    </div>
+              <BaseInput
+                classNameWrapper={styles.largeWrapper}
+                className={styles.large}
+                errorLabel=""
+                label="Адрес"
+                type="text"
+                name={"address"}
+                defaultValue={" "}
+                onChange={() => {}}
+              />
+              <BaseInput
+                classNameWrapper={styles.largeWrapper}
+                className={styles.large}
+                errorLabel=""
+                label="Уставный капитал"
+                type="text"
+                name={"capital"}
+                defaultValue={" "}
+                onChange={() => {}}
+              />
+              <BaseInput
+                classNameWrapper={styles.largeWrapper}
+                className={styles.large}
+                errorLabel=""
+                label="ОКФС"
+                type="text"
+                name={"okfs"}
+                defaultValue={" "}
+                onChange={() => {}}
+              />
+              <BaseInput
+                classNameWrapper={styles.largeWrapper}
+                className={styles.large}
+                errorLabel=""
+                label="ОКОПФ"
+                type="text"
+                name={"okopf"}
+                defaultValue={" "}
+                onChange={() => {}}
+              />
+              <BaseInput
+                classNameWrapper={styles.largeWrapper}
+                className={styles.large}
+                errorLabel=""
+                label="ОКОГУ"
+                type="text"
+                name={"okogu"}
+                defaultValue={" "}
+                onChange={() => {}}
+              />
+              <div className={styles.subSection}>
+                <BaseInput
+                  classNameWrapper={styles.smallWrapper}
+                  className={styles.small}
+                  errorLabel=""
+                  label="ИНН"
+                  type="text"
+                  name={"inn"}
+                  defaultValue={" "}
+                  onChange={() => {}}
+                />
+                <BaseInput
+                  classNameWrapper={styles.smallWrapper}
+                  className={styles.small}
+                  errorLabel=""
+                  label="ОГРН"
+                  type="text"
+                  name={"ogrn"}
+                  defaultValue={" "}
+                  onChange={() => {}}
+                />
+                <BaseInput
+                  classNameWrapper={styles.smallWrapper}
+                  className={styles.small}
+                  errorLabel=""
+                  label="КПП"
+                  type="text"
+                  name={"kpp"}
+                  defaultValue={" "}
+                  onChange={() => {}}
+                />
+                <BaseInput
+                  classNameWrapper={styles.smallWrapper}
+                  className={styles.small}
+                  errorLabel=""
+                  label="ОКАТО"
+                  type="text"
+                  name={"okato"}
+                  defaultValue={" "}
+                  onChange={() => {}}
+                />
+                <BaseInput
+                  classNameWrapper={styles.smallWrapper}
+                  className={styles.small}
+                  errorLabel=""
+                  label="ОКПО"
+                  type="text"
+                  name={"okpo"}
+                  defaultValue={" "}
+                  onChange={() => {}}
+                />
+                <BaseInput
+                  classNameWrapper={styles.smallWrapper}
+                  className={styles.small}
+                  errorLabel=""
+                  label="ОКТМО"
+                  type="text"
+                  name={"oktmo"}
+                  defaultValue={" "}
+                  onChange={() => {}}
+                />
+              </div>
+            </section>
+            <section>
+              <span className={styles.formSubTitle}>Информация о компании</span>
+              <BaseInput
+                classNameWrapper={styles.largeWrapper}
+                className={styles.large}
+                errorLabel=""
+                label="Статус компании"
+                type="text"
+                name={"companyStatus"}
+                defaultValue={" "}
+                onChange={() => {}}
+              />
+              <BaseInput
+                classNameWrapper={styles.largeWrapper}
+                className={styles.large}
+                errorLabel=""
+                label="Руководитель"
+                type="text"
+                name={"director"}
+                defaultValue={" "}
+                onChange={() => {}}
+              />
+              <BaseInput
+                classNameWrapper={styles.largeWrapper}
+                className={styles.large}
+                errorLabel=""
+                label="Учредители"
+                type="text"
+                name={"founder"}
+                defaultValue={" "}
+                onChange={() => {}}
+              />
+              <div className={styles.subSection}>
+                <BaseInput
+                  classNameWrapper={styles.mediumWrapper}
+                  className={styles.medium}
+                  errorLabel=""
+                  label="Размер предприятия"
+                  type="text"
+                  name={"size"}
+                  defaultValue={" "}
+                  onChange={() => {}}
+                />
+                <BaseInput
+                  classNameWrapper={styles.mediumWrapper}
+                  className={styles.medium}
+                  errorLabel=""
+                  label="Численность персонала"
+                  type="text"
+                  name={"personal"}
+                  defaultValue={" "}
+                  onChange={() => {}}
+                />
+                <BaseInput
+                  classNameWrapper={styles.mediumWrapper}
+                  className={styles.medium}
+                  errorLabel=""
+                  label="Филиалы"
+                  type="text"
+                  name={"filial"}
+                  defaultValue={" "}
+                  onChange={() => {}}
+                />
+                <BaseInput
+                  classNameWrapper={styles.mediumWrapper}
+                  className={styles.medium}
+                  errorLabel=""
+                  label="Выручка"
+                  type="text"
+                  name={"revenue"}
+                  defaultValue={" "}
+                  onChange={() => {}}
+                />
+                <BaseInput
+                  classNameWrapper={styles.mediumWrapper}
+                  className={styles.medium}
+                  errorLabel=""
+                  label="Чистая прибыль"
+                  type="text"
+                  name={"net"}
+                  defaultValue={" "}
+                  onChange={() => {}}
+                />
+                <BaseInput
+                  classNameWrapper={styles.mediumWrapper}
+                  className={styles.medium}
+                  errorLabel=""
+                  label="Чистые активы"
+                  type="text"
+                  name={"netActive"}
+                  defaultValue={" "}
+                  onChange={() => {}}
+                />
+              </div>
+            </section>
+            <section className={styles.vertical}>
+              <span className={styles.formSubTitle}>
+                Сведения о государственной регистрации
+              </span>
+              <BaseInput
+                classNameWrapper={styles.mediumWrapper}
+                className={styles.medium}
+                errorLabel=""
+                label="Дата регистрации"
+                type="text"
+                name={"companyRegistered"}
+                defaultValue={" "}
+                onChange={() => {}}
+              />
+              <BaseInput
+                classNameWrapper={styles.largeWrapper}
+                className={styles.large}
+                errorLabel=""
+                label="Регистрирующий орган"
+                type="text"
+                name={"registeredFrom"}
+                defaultValue={" "}
+                onChange={() => {}}
+              />
+              <BaseInput
+                classNameWrapper={styles.largeWrapper}
+                className={styles.large}
+                errorLabel=""
+                label="Адрес регистрирующего органа"
+                type="text"
+                name={"registeredAdress"}
+                defaultValue={" "}
+                onChange={() => {}}
+              />
+              <BaseInput
+                classNameWrapper={styles.largeWrapper}
+                className={styles.large}
+                errorLabel=""
+                label="Регистрирующий орган, в котором находится регистрационное дело"
+                type="text"
+                name={"registeredMember"}
+                defaultValue={" "}
+                onChange={() => {}}
+              />
+            </section>
+            <section className={styles.vertical}>
+              <span className={styles.formSubTitle}>Виды деятельности</span>
+              <BaseInput
+                classNameWrapper={styles.largeWrapper}
+                className={styles.large}
+                errorLabel=""
+                label="Основной вид деятельности по ОКВЭД"
+                type="text"
+                name={"okved"}
+                defaultValue={" "}
+                onChange={() => {}}
+              />
+              <BaseInput
+                classNameWrapper={styles.largeWrapper}
+                className={styles.large}
+                errorLabel=""
+                label="Дополнительные виды деятельности"
+                type="text"
+                name={"okvedAdditional"}
+                defaultValue={" "}
+                onChange={() => {}}
+              />
+              {activityKinds.map((active, index) => (
+                <BaseInput
+                  key={index}
+                  classNameWrapper={styles.largeWrapper}
+                  className={styles.large}
+                  errorLabel=""
+                  type="text"
+                  name={"phoneNumber"}
+                  defaultValue={active}
+                  icon={index === activityKinds.length - 1 ? <>-</> : undefined}
+                  iconClassName={styles.iconDelete}
+                  iconOnClick={() => {
+                    if (index === activityKinds.length - 1) {
+                      setActivityKinds([
+                        ...activityKinds.filter(
+                          (v, i) => i !== activityKinds.length - 1
+                        ),
+                      ]);
+                    }
+                  }}
+                  onChange={() => {}}
+                />
+              ))}
+              <span
+                className={styles.addNumber}
+                onClick={() => {
+                  setActivityKinds([...activityKinds, ""]);
+                }}
+              >
+                + Добавить вид деятельности
+              </span>
+            </section>
+          </FormController>
+        )}
+      </div>
+    </Scroll>
   );
 });

@@ -67,7 +67,7 @@ export const SearchOffice: FC<Props> = ({
   return (
     <div className={classNames(css.search, wrapperClassName)}>
       <div className={css.position}>
-        <div className={css.inputMargin}>
+        <div className={classNames(css.inputMargin , className)}>
           <BaseInput
             icon={inputIcon}
             iconPlacement={inputIconPlacement}

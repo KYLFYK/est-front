@@ -12,11 +12,22 @@
 .infoBlock {
     display: flex;
     margin-bottom: 30px;
+    @include for-size(KT4) {
+       padding-top: 1px;
+    }
 }
 
 .iconItem {
+    max-width: 200px;
+    margin-right: 125px;
+}
+.iconItem_name {
+    width: 202px;
+    margin-right: 115px;
+}
+.iconItemMr_0 {
     min-width: auto;
-    margin-right: 80px;
+    margin-right: 0;
 }
 
 .imgContainer {

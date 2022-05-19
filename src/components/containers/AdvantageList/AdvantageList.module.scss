@@ -1,25 +1,51 @@
 @import '../../../app/styles/resolutions.scss';
+@import '/src/components/containers/Record/all.scss';
 
 .allAdvantages{
-    margin: 30px 10px 20px 10px;
-    @include for-size(KT2) {
+    margin: mobile-size(30px) mobile-size(10px) mobile-size(20px) mobile-size(10px);
+
+    @include for-size(KT3) {
+        margin: desktop-size(60px) auto 0 auto;
+        padding: 0 0 0 desktop-size(60px);
+        box-sizing: border-box;
+    }
+
+    @include for-size(KT6) {
         margin: 60px auto 0 auto;
         padding: 0 0 0 60px;
-        box-sizing: border-box;
     }
 
     max-width: $KT6;
 }
 .advantages{
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    @media  (max-width: 1000px) {
+
+    @include for-size(KT1) {
         grid-template-columns: 1fr;
+    }
+    @include for-size(KT3) {
+        grid-template-columns: 1fr 1fr;
     }
 }
 .mL_5{
-    margin-left: 5px !important;
+    margin: 10px 0 !important;
+}
+.mTB_10{
+    margin: 10px 0 !important;
+    margin-left: mobile-size(5px) !important;
+
+    @include for-size(KT3) {
+        margin-left: desktop-size(5px) !important;
+    }
+
+    @include for-size(KT6) {
+        margin-left: 5px !important;
+    }
 }
 .margin{
-    margin: 70px 0 20px 0 !important;
+    margin: desktop-size(70px) 0 desktop-size(20px) 0 !important;
+
+    @include for-size(KT6) {
+        margin: 70px 0 20px 0 !important;
+    }
 }

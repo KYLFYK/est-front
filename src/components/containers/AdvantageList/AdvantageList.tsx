@@ -1,10 +1,10 @@
 import React, { FC, useEffect, useState } from 'react';
 import css from './AdvantageList.module.scss'
 import HeadLine from '../../shared/HeadLine/HeadLine';
-import { Advantage } from '../../shared/Advantage/Advantage';
 import { IOption } from '../../../utils/interfaces/general';
 import { searchIconByValue } from '../../../utils/general/icons';
 import { IconTypes } from '../../../utils/interfaces/icons';
+import {AdvantageMain} from "../../shared/Advantage/AdvantageMain";
 
 export interface IAdvantage {
     title: IOption<IconTypes | string>,
@@ -43,16 +43,16 @@ export const Advantages: FC<AdvantagesType> = ({ advantages, advantagesMobile })
                 <div className={css.advantages}>
                     {
                         adv.map(({ title, text }, index) => (
-                            <Advantage
+                            <AdvantageMain
                                 key={index}
                                 title={title.label}
                                 text={text}
-                                classWrapper={index %2==1 ? css.mL_5 : ''}
+                                classWrapper={index %2==1 ? css.mTB_10 : ""}
                             >
                                 {
                                     searchIconByValue(title.value as string)
                                 }
-                            </Advantage>
+                            </AdvantageMain>
                         ))
                     }
                 </div>

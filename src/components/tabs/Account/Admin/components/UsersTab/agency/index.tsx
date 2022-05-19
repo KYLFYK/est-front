@@ -12,6 +12,7 @@ import { sortNameOptions } from "../../../../../../../lib/configs/dropdownOption
 
 import commonStyles from "../../../AdminRoleStyles.module.scss";
 import styles from "./agency.module.scss";
+import Scroll from "../../../../../../shared/Scroll/Scroll";
 
 export const listSortFunction: (
   a: IAdminAgent,
@@ -64,7 +65,7 @@ export const AgencyTab: FC = observer(() => {
   };
 
   return sortedData.length > 0 ? (
-    <div className={commonStyles.wrapper}>
+    <div className={commonStyles.wrapperAgency}>
       <div className={styles.filtersortWrapper}>
         <BaseDropDown
           options={sortNameOptions}
@@ -76,27 +77,39 @@ export const AgencyTab: FC = observer(() => {
                 }`
               : "Сортировать: по умолчанию"
           }
+          className={styles.baseDropDown}
         />
-        <PageFilter hideButton value={textFilter} onChange={onChange} />
+        <PageFilter
+            hideButton
+            value={textFilter}
+            onChange={onChange}
+            wrapperClassName={styles.searchFilter}
+        />
       </div>
-      <div className={styles.wrapper}>
-        {sortedData
-          .filter((d) =>
-            d.agencyName.toLowerCase().includes(textFilter.toLowerCase())
-          )
-          .map((agent, index) => (
-            <AgentCard
-              key={index}
-              hrefPrefix={hrefPrefix}
-              description={agent.description}
-              title={agent.agencyName}
-              imgUrl={agent.imgUrl}
-              markAsDeleted={agent.markAsDelete}
-              id={agent.id}
-              handleDelete={handleDelete}
-              handleRestore={handleRestore}
-            />
-          ))}
+      <hr color={'#F2F2F2'} style={{height:'1px',margin:'12px 0 0 0',borderBottom:'none'}}/>
+      <div style={{marginTop:"19px"}}>
+        {/*<div className={styles.wrapper}>*/}
+        <Scroll height={'480'}>
+          <div className={styles.wrapperAgencyTab}>
+            {sortedData
+                .filter((d) =>
+                    d.agencyName.toLowerCase().includes(textFilter.toLowerCase())
+                )
+                .map((agent, index) => (
+                    <AgentCard
+                        key={index}
+                        hrefPrefix={hrefPrefix}
+                        description={agent.description}
+                        title={agent.agencyName}
+                        imgUrl={agent.imgUrl}
+                        markAsDeleted={agent.markAsDelete}
+                        id={agent.id}
+                        handleDelete={handleDelete}
+                        handleRestore={handleRestore}
+                    />
+                ))}
+          </div>
+        </Scroll>
       </div>
     </div>
   ) : (

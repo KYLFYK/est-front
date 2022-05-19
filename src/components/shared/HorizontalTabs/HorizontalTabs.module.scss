@@ -21,9 +21,16 @@
   margin: 10px 60px 5px 60px;
   @media screen and (max-width: 1400px){
     margin: 10px 60px 5px 60px;
+  }
+}
+.menuObjects {
+  margin: 0 60px 5px 50px;
+  @media screen and (max-width: 1400px){
+    margin: 10px 60px 5px 50px;
+  }
 }
 
-}
+
 .hr{
   background-color:#F2F2F2;
   height: 1px;

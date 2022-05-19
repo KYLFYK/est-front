@@ -1,4 +1,5 @@
 @import '../../../app/styles/colours.scss';
+@import '/src/components/containers/Record/all.scss';
 
 .unionInput {
     background-color: #fff;
@@ -17,5 +18,12 @@
 .divider {
     width: 1px;
     background-color: #BDBDBD;
-    margin: 8px 0;
+    margin: mobile-size(8px) 0;
+
+    @include for-size(KT3) {
+        margin: desktop-size(8px) 0;
+    }
+    @include for-size(KT6) {
+        margin: 8px 0;
+    }
 }

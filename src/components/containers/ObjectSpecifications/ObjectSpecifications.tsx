@@ -45,6 +45,7 @@ const ObjectSpecifications: React.FC<Props> = ({
                           text={spec.label.text}
                           title={spec.label.title}
                           key={index}
+                          classWrapper={s.margin}
                         >
                           {searchIconByValue(spec.value as string)}
                         </Advantage>

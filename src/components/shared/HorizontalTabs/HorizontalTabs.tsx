@@ -84,7 +84,7 @@ export const HorizontalTabs: FC<Props> = ({
                 backgroundColor: "#C5A28E",
                 width: "20px",
                 marginLeft: activeTabMargin,
-                marginBottom:'4px',
+                marginBottom:'0px',
                 zIndex:'2',
               },
             }}

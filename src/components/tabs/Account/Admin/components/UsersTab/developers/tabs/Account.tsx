@@ -10,6 +10,8 @@ import { observer } from "mobx-react";
 
 import styles from "../../agency/agency.module.scss";
 import dealImg from "../../../../../../../../Pics/card-images/dealCard.jpg";
+import {ScrollUp} from "../../../../../../../shared/ScrollUp/ScrollUp";
+import Scroll from "../../../../../../../shared/Scroll/Scroll";
 
 export interface IAccountForm {
   companyName?: string;
@@ -66,102 +68,102 @@ export const Account: FC<Props> = observer(({ form }) => {
   }, []);
 
   return (
-    <div
-      className={styles.formWrapper}
-      style={{
-        paddingTop: 20,
-      }}
-    >
-      {profileData !== null && (
-        <div className={styles.form}>
-          <FormController<IAccountForm> form={form}>
-            <section>
-              <span className={styles.formSubTitle}>Аккаунт</span>
-              <BaseInput
-                classNameWrapper={styles.inputWrapper}
-                className={styles.input}
-                errorLabel=""
-                label="Название компании"
-                type="text"
-                name={"companyName"}
-                defaultValue={" "}
-                onChange={() => {}}
-              />
-              <BaseInput
-                classNameWrapper={styles.inputWrapper}
-                className={styles.input}
-                errorLabel=""
-                label="Тип застройщика"
-                type="text"
-                name={"developerType"}
-                defaultValue={" "}
-                onChange={() => {}}
-              />
-              <BaseInput
-                classNameWrapper={styles.inputWrapper}
-                className={styles.input}
-                errorLabel=""
-                label="Адрес"
-                type="text"
-                name={"address"}
-                defaultValue={" "}
-                onChange={() => {}}
-              />
-              <BaseInput
-                classNameWrapper={styles.inputWrapper}
-                className={styles.input}
-                errorLabel=""
-                label="Телефон"
-                type="tel"
-                name={"phoneNumber"}
-                defaultValue={" "}
-                onChange={() => {}}
-              />
-              <BaseInput
-                classNameWrapper={styles.inputWrapper}
-                className={styles.input}
-                errorLabel=""
-                label="Email"
-                type="email"
-                name={"email"}
-                defaultValue={" "}
-                onChange={() => {}}
-              />
-              <BaseInput
-                classNameWrapper={styles.inputWrapper}
-                className={styles.input}
-                errorLabel=""
-                label="Сайт"
-                type="text"
-                name={"cite"}
-                defaultValue={" "}
-                onChange={() => {}}
-              />
-              <BaseInput
-                classNameWrapper={styles.inputWrapper}
-                className={styles.input}
-                errorLabel=""
-                label="Описание"
-                type="text"
-                name={"description"}
-                defaultValue={" "}
-                textArea
-                onChange={() => {}}
-              />
-            </section>
-          </FormController>
+      <Scroll height={'530'} >
+        <div
+            className={styles.formWrapper}
+            style={{padding:"20px 0"}}
+        >
+          {profileData !== null && (
+            <div className={styles.form}>
+              <FormController<IAccountForm> form={form}>
+                <section>
+                  <span className={styles.formSubTitle}>Аккаунт</span>
+                  <BaseInput
+                    classNameWrapper={styles.inputWrapper}
+                    className={styles.input}
+                    errorLabel=""
+                    label="Название компании"
+                    type="text"
+                    name={"companyName"}
+                    defaultValue={" "}
+                    onChange={() => {}}
+                  />
+                  <BaseInput
+                    classNameWrapper={styles.inputWrapper}
+                    className={styles.input}
+                    errorLabel=""
+                    label="Тип застройщика"
+                    type="text"
+                    name={"developerType"}
+                    defaultValue={" "}
+                    onChange={() => {}}
+                  />
+                  <BaseInput
+                    classNameWrapper={styles.inputWrapper}
+                    className={styles.input}
+                    errorLabel=""
+                    label="Адрес"
+                    type="text"
+                    name={"address"}
+                    defaultValue={" "}
+                    onChange={() => {}}
+                  />
+                  <BaseInput
+                    classNameWrapper={styles.inputWrapper}
+                    className={styles.input}
+                    errorLabel=""
+                    label="Телефон"
+                    type="tel"
+                    name={"phoneNumber"}
+                    defaultValue={" "}
+                    onChange={() => {}}
+                  />
+                  <BaseInput
+                    classNameWrapper={styles.inputWrapper}
+                    className={styles.input}
+                    errorLabel=""
+                    label="Email"
+                    type="email"
+                    name={"email"}
+                    defaultValue={" "}
+                    onChange={() => {}}
+                  />
+                  <BaseInput
+                    classNameWrapper={styles.inputWrapper}
+                    className={styles.input}
+                    errorLabel=""
+                    label="Сайт"
+                    type="text"
+                    name={"cite"}
+                    defaultValue={" "}
+                    onChange={() => {}}
+                  />
+                  <BaseInput
+                    classNameWrapper={styles.inputWrapper}
+                    className={styles.input}
+                    errorLabel=""
+                    label="Описание"
+                    type="text"
+                    name={"description"}
+                    defaultValue={" "}
+                    textArea
+                    onChange={() => {}}
+                  />
+                </section>
+              </FormController>
+            </div>
+          )}
+          {profileData !== null && (
+            <AvatarSection
+              src={
+                profileData.developerProperty.logo
+                  ? profileData.developerProperty.logo
+                  : dealImg
+              }
+              changeable
+            />
+          )}
         </div>
-      )}
-      {profileData !== null && (
-        <AvatarSection
-          src={
-            profileData.developerProperty.logo
-              ? profileData.developerProperty.logo
-              : dealImg
-          }
-          changeable
-        />
-      )}
-    </div>
+      </Scroll>
   );
 });

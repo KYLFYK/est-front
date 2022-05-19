@@ -1,43 +1,69 @@
 @import '../../../app/styles/colours.scss';
 @import '../../../app/styles/typography.scss';
 @import '../../../app/styles/resolutions.scss';
-
+@import '/src/components/containers/Record/all.scss';
 
 .wrapper {
     background-color: #fff;
-    height: 38px;
+    height: mobile-size(38px);
     border: 1px solid $ICONGRAY;
     display: flex;
     flex-wrap: wrap;
-    border-radius: 8px;
+    border-radius: mobile-size(8px);
     justify-content: center;
     gap: 5px;
+
     @include for-size(KT3) {
         flex-wrap: nowrap;
         justify-content: flex-start;
-        gap: 0px;
-        padding: 0px;
+        gap: 0;
+        padding: 0;
+        height: desktop-size(38px);
+        border-radius: desktop-size(8px);
+    }
+
+    @include for-size(KT6) {
+        height: 38px;
+        border-radius: 8px;
     }
 }
 
 .elemWrap {
     display: flex;
-    height: 40px;
+    height: mobile-size(40px);
+
+    @include for-size(KT3) {
+        height: desktop-size(40px);
+    }
+
+    @include for-size(KT6) {
+        height: 40px;
+    }
 }
 
 .divider {
     width: 1px;
-    height: 20px;
+    height: mobile-size(20px);
     background-color: #BDBDBD;
-    margin: 10px 0;
+    margin: mobile-size(10px) 0;
+
+    @include for-size(KT3) {
+        height: desktop-size(20px);
+        margin: desktop-size(10px) 0;
+    }
+
+    @include for-size(KT6) {
+        height: 20px;
+        margin: 10px 0;
+    }
 }
 
 .button {
-    max-width: 205px;
+    max-width: mobile-size(205px);
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    padding: 12px;
+    padding: mobile-size(12px);
     background-color: transparent;
     border: 0;
     @include ROBOTOREGULAR16;
@@ -45,15 +71,25 @@
     &:hover{
         color:$NUDE;
     }
+
+    @include for-size(KT3) {
+        max-width: desktop-size(205px);
+        padding: desktop-size(12px);
+    }
+
+    @include for-size(KT6) {
+        max-width: 205px;
+        padding: 12px;
+    }
 }
 
 .firstButton {
-    border-radius: 8px 0px 0px 8px;
+    border-radius: 8px 0 0 8px;
     //padding: 7px 4px;
 }
 
 .lastButton {
-    border-radius: 0px 8px 8px 0px;
+    border-radius: 0 8px 8px 0;
     //padding: 7px 4px;
 }
 .roundedButton {
@@ -71,9 +107,17 @@
     border-radius: 4px;
     background-color: #F2F2F2;
     text-align: center;
-    padding: 0 8px 2px 8px;
+    padding: 0 mobile-size(8px) mobile-size(2px) mobile-size(8px);
     height: 100%;
     color:#1A4862 !important;
+
+    @include for-size(KT3) {
+        padding: 0 desktop-size(8px) desktop-size(2px) desktop-size(8px);
+    }
+
+    @include for-size(KT6) {
+        padding: 0 8px 2px 8px;
+    }
 }
 .colorPlus{
     display: flex;
@@ -82,8 +126,24 @@
     border-radius: 4px;
     text-align: center;
     padding: 0 8px 2px 8px;
+
+    @include for-size(KT3) {
+        padding: 0 desktop-size(8px) desktop-size(2px) desktop-size(8px);
+    }
+
+    @include for-size(KT6) {
+        padding: 0 8px 2px 8px;
+    }
 }
 
 .title{
-    padding: 0 0 0 10px;
+    padding: 0 0 0 mobile-size(10px);
+
+    @include for-size(KT3) {
+        padding: 0 0 0 desktop-size(10px);
+    }
+
+    @include for-size(KT6) {
+        padding: 0 0 0 10px;
+    }
 }

@@ -1,18 +1,26 @@
 @import '../../../app/styles/colours.scss';
 @import '../../../app/styles/resolutions.scss';
 @import "src/app/styles/scrollbars";
+@import '/src/components/containers/Record/all.scss';
+
 .dropdown {
   width: 100%;
-  @include for-size(KT2) {
-    width: 200px;
-  }
   user-select: none;
   position: relative;
-  height: 38px;
+  height: mobile-size(38px);
   cursor: pointer;
+
+  @include for-size(KT3) {
+    width: desktop-size(200px);
+    height: desktop-size(38px);
+  }
+  @include for-size(KT6) {
+    width: 200px;
+    height: 38px;
+  }
 }
 .dropdown .dropdown_btn {
-  padding: 10px 16px 10px 10px;
+  padding: mobile-size(10px) mobile-size(16px) mobile-size(10px) mobile-size(10px);
   background: #FFFFFF;
   color: #333;
   display: flex;
@@ -20,6 +28,13 @@
   cursor: pointer;
   justify-content: space-between;
   border-radius: 8px;
+
+  @include for-size(KT3) {
+    padding: desktop-size(10px) desktop-size(16px) desktop-size(10px) desktop-size(10px);
+  }
+  @include for-size(KT6) {
+    padding: 10px 16px 10px 10px;
+  }
 }
 .border {
   border: 1px double #C5A28E;
@@ -32,31 +47,49 @@
   position: absolute;
   top: 110%;
   left: 0;
-  padding: 6px;
+  padding: mobile-size(6px);
   background: #FFFFFF;
   box-shadow: 3px 3px 10px 6px rgba(0, 0, 0, 0.06);
   color: #333;
   min-width: calc(100% - 12px);
   border-radius: 8px;
   z-index: 100;
- // for scroll Base DropDown ( on active )
   display: flex;
   flex-direction: column;
   gap: 0;
   overflow: auto;
   overflow-x: hidden;
-  max-height: 500px;
+  max-height: mobile-size(500px);
   scrollbar-width: 1px;
   @include MapScrollbar;
-  margin-right: -10px;
+  margin-right: mobile-size(-10px);
+
+  @include for-size(KT3) {
+    padding: desktop-size(6px);
+    max-height: desktop-size(500px);
+    margin-right: desktop-size(-10px);
+  }
+  @include for-size(KT6) {
+    padding: 6px;
+    max-height: 500px;
+    margin-right: -10px;
+  }
 }
 .dropdown .dropdown_content .dropdown_item {
   display: flex;
-  padding: 4px 6px 4px 6px;
+  padding: mobile-size(4px) mobile-size(6px) mobile-size(4px) mobile-size(6px);
   transition: all 0.3s;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+
+  @include for-size(KT3) {
+    padding: desktop-size(4px) desktop-size(6px) desktop-size(4px) desktop-size(6px);
+  }
+
+  @include for-size(KT6) {
+    padding: 4px 6px 4px 6px;
+  }
 
   p {
     overflow: hidden;
@@ -71,23 +104,47 @@
 }
 
 .title {
-  max-width: 190px !important;
+  max-width: mobile-size(190px) !important;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+
+  @include for-size(KT3) {
+    max-width: desktop-size(190px) !important;
+  }
+  @include for-size(KT6) {
+    max-width: 190px !important;
+  }
 }
 
 .checkIcon {
-  width: 26px;
+  width: mobile-size(26px);
   position: relative;
-  top: 2px;
+  top: mobile-size(2px);
+
+  @include for-size(KT3) {
+    width: desktop-size(26px);
+    top: desktop-size(2px);
+  }
+
+  @include for-size(KT6) {
+    width: 26px;
+    top: 2px;
+  }
 }
 
 .icon {
   position: absolute;
   top: 31% !important;
-  right: 10px !important;
+  right: mobile-size(10px) !important;
   width: 12px;
+
+  @include for-size(KT3) {
+    right: desktop-size(10px) !important;
+  }
+  @include for-size(KT6) {
+    right: 10px !important;
+  }
 }
 
 .ellipsisText {
@@ -96,7 +153,18 @@
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  height: 18px;
+  height: mobile-size(18px);
+  font-size: mobile-size(16px);
+
+  @include for-size(KT3) {
+    height: desktop-size(18px);
+    font-size: desktop-size(16px);
+  }
+
+  @include for-size(KT6) {
+    height: 18px;
+    font-size: 16px;
+  }
 }
 
 .searchInput {
@@ -105,8 +173,17 @@
   color: $BLACK;
   outline: none;
   width: 100%;
-  height: 38px;
-  padding-right: 10px;
+  height: mobile-size(38px);
+  padding-right: mobile-size(10px);
+
+  @include for-size(KT3) {
+    height: desktop-size(38px);
+    padding-right: desktop-size(10px);
+  }
+  @include for-size(KT6) {
+    height: 38px;
+    padding-right: 10px;
+  }
 }
 
 .green {
@@ -118,11 +195,27 @@
 }
 .label {
   color: #CAD1DA;
-  margin-bottom: 5px;
+  margin-bottom: mobile-size(5px);
+
+  @include for-size(KT3) {
+    margin-bottom: desktop-size(5px);
+  }
+
+  @include for-size(KT6) {
+    margin-bottom: 5px;
+  }
 
   &.textArea {
       align-items: unset !important;
-      padding-top: 10px;
+      padding-top: mobile-size(10px);
+
+      @include for-size(KT3) {
+        padding-top: desktop-size(10px);
+      }
+
+      @include for-size(KT6) {
+        padding-top: 10px;
+      }
   }
 }
 
@@ -134,7 +227,12 @@
   @include for-size(KT1) {
     min-width: calc( 40px + 6.8*10vw );
   }
-  @include for-size(KT2) {
+
+  @include for-size(KT3) {
+    min-width: desktop-size(180px);
+  }
+
+  @include for-size(KT6) {
     min-width: 180px;
   }
 }

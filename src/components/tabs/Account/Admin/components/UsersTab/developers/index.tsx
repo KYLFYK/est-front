@@ -70,29 +70,38 @@ export const DevelopersTab: FC = observer(() => {
                 }`
               : "Сортировать: по умолчанию"
           }
+          className={styles.baseDropDown}
         />
-        <PageFilter hideButton value={textFilter} onChange={onChange} />
+        <PageFilter
+            hideButton
+            value={textFilter}
+            onChange={onChange}
+            wrapperClassName={styles.searchFilter}
+        />
       </div>
-      <div className={styles.wrapper}>
-        {sortedData
-          .filter((d: any) =>
-            d.developerName.toLowerCase().includes(textFilter.toLowerCase())
-          )
-          .map((developer, index: number) => (
-            <AgentCard
-              key={index}
-              hrefPrefix={hrefPrefix}
-              description={
-                developer.description ? developer.description : "Не указано"
-              }
-              title={developer.developerName}
-              imgUrl={developer.imgUrl}
-              id={developer.id}
-              markAsDeleted={developer.markAsDelete}
-              handleDelete={handleDelete}
-              handleRestore={handleRestore}
-            />
-          ))}
+      <hr color={'#F2F2F2'} style={{height:'1px',margin:'12px 0 0 0',borderBottom:'none'}}/>
+      <div style={{marginTop:"19px"}}>
+        <div className={styles.wrapper}>
+          {sortedData
+            .filter((d: any) =>
+              d.developerName.toLowerCase().includes(textFilter.toLowerCase())
+            )
+            .map((developer, index: number) => (
+              <AgentCard
+                key={index}
+                hrefPrefix={hrefPrefix}
+                description={
+                  developer.description ? developer.description : "Не указано"
+                }
+                title={developer.developerName}
+                imgUrl={developer.imgUrl}
+                id={developer.id}
+                markAsDeleted={developer.markAsDelete}
+                handleDelete={handleDelete}
+                handleRestore={handleRestore}
+              />
+            ))}
+        </div>
       </div>
     </div>
   ) : (

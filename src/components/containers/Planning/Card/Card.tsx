@@ -46,22 +46,28 @@ const Card: React.FC<Props> = ({
         </div>
         <div className={s.contentRow}>
           <div>
-            <Typography weight="light" color="tertiary">
+            <Typography weight="light" color="tertiary" size={"small"}>
               Корпус
             </Typography>
-            <Typography>{housing}</Typography>
-          </div>
-          <div>
-            <Typography weight="light" color="tertiary">
-              Этаж
+            <Typography size={"small"} className={s.mT_3}>
+              {housing}
             </Typography>
-            <Typography>{floor}</Typography>
           </div>
           <div>
-            <Typography weight="light" color="tertiary">
+            <Typography weight="light" color="tertiary" size={"small"}>
+              Этаж
+            </Typography >
+            <Typography size={"small"} className={s.mT_3}>
+              {floor}
+            </Typography>
+          </div>
+          <div>
+            <Typography weight="light" color="tertiary" size={"small"}>
               Срок сдачи
             </Typography>
-            <Typography>{deadline}</Typography>
+            <Typography size={"small"} className={s.mT_3}>
+              {deadline}
+            </Typography>
           </div>
         </div>
       </div>

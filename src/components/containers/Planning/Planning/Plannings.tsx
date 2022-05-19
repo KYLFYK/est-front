@@ -38,10 +38,10 @@ const Planning: React.FC<Props> = ({ planningList }) => {
       <HeadLine title="Квартиры и аппартаменты">
         <DesktopOnly>
           <div className={s.filterWrapper}>
-            <PlanningFilter sort={sort} setSort={setSort} />
+            <PlanningFilter sort={sort} setSort={setSort} className={s.mB_20} />
           </div>
         </DesktopOnly>
-        <div className={s.content}>
+        <div className={ planningList !== undefined && planningList.length > 8 ? s.scroll : s.content}>
           {planningList &&
             planningList.map(
               (

@@ -2,14 +2,20 @@
 
 .containerDevelopersBlock {
   @include for-size(KT1) {
-    margin: 40px 10px 0 10px;
+    margin: mobile-size(40px) mobile-size(10px) 0 mobile-size(10px);
   }
   @include for-size(KT2) {
-    margin: 60px auto 0 auto;
+    margin: mobile-size(40px) auto 0 auto;
   }
 
   @include for-size(KT3) {
+    padding: 0 desktop-size(60px);
+    margin: desktop-size(40px) auto 0 auto;
+  }
+
+  @include for-size(KT6) {
     padding: 0 60px;
+    margin: 40px auto 0 auto;
   }
 
   max-width: $KT6;
@@ -20,19 +26,19 @@
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
   gap: 25px;
-  @media  (max-width: 1300px) {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr ;
-    gap: 20px;
+
+  @include for-size(KT1) {
+    grid-template-columns: 1fr;
+    gap: mobile-size(20px);
   }
-  @media  (max-width: 1020px) {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 20px;
-  }@media  (max-width: 550px) {
-    display: grid;
-    grid-template-columns: 1fr ;
-    gap: 20px;
+
+  @include for-size(KT3) {
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    gap: desktop-size(25px);
+  }
+
+  @include for-size(KT6) {
+    gap: 25px;
   }
 }
 

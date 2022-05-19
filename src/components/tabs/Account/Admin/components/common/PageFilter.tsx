@@ -8,6 +8,7 @@ interface Props {
   value?: string;
   onChange?: (e: any) => void;
   hideButton?: boolean;
+  wrapperClassName?:string
 }
 
 export const PageFilter: FC<Props> = ({
@@ -16,6 +17,7 @@ export const PageFilter: FC<Props> = ({
   value,
   onChange,
   hideButton,
+  wrapperClassName
 }) => {
   return (
     <SearchOffice
@@ -27,6 +29,7 @@ export const PageFilter: FC<Props> = ({
       value={value}
       onChange={onChange}
       hideButton={hideButton}
+      className={wrapperClassName}
     />
   );
 };

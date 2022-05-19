@@ -1,7 +1,7 @@
 @import "src/app/styles/typography";
 @import "src/app/styles/colours";
 @import "src/app/styles/scrollbars";
-
+@import 'src/app/styles/resolutions.scss';
 .wrapper {
   display: flex;
   flex-wrap: wrap;
@@ -13,6 +13,13 @@
   padding-right: 10px;
   margin-right: 5px;
 }
+.wrapperAgencyTab {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  overflow: auto;
+  //padding-right: 10px;
+}
 
 .card {
   flex-basis: calc(25% - 20px);
@@ -23,7 +30,7 @@
   border-radius: 8px;
   border: 1px solid #F2F2F2;
   transition: box-shadow .3s ease-out, border-color .3s ease-out;
-
+  height: 190px;
   &:hover {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
     border-color: transparent;
@@ -49,7 +56,7 @@
   }
 
   &Content {
-    padding: 10px 10px 20px 20px;
+    padding: 5px 10px 20px 20px;
 
     .head {
       display: flex;
@@ -63,7 +70,12 @@
 
     .title {
       @include ROBOTOMEDIUM16;
-
+      display: inline-block;
+      width: 175px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      border:0px solid #000;
       color: $ACCENT;
       text-transform: uppercase;
     }
@@ -149,7 +161,7 @@
   flex-direction: column;
   gap: 30px;
   height: calc(100vh - 370px);
-  overflow-x: auto;
+  //overflow-x: auto;
   section {
     .inputWrapper, .largeWrapper, .smallWrapper, .mediumWrapper, .mediumHWrapper {
       &:not(:last-of-type) {
@@ -439,6 +451,23 @@
 
 .filtersortWrapper {
   display: grid;
-  grid-template-columns: 1fr 2fr;
+  grid-template-columns: 310px 2fr;
   align-items: center;
 }
+.searchFilter{
+  width: 300px;
+}
+.baseDropDown{
+  width: 100%;
+  @include for-size(KT2) {
+    width: 200px;
+  }
+  @include for-size(KT4) {
+    width: 300px;
+  }
+  user-select: none;
+  position: relative;
+  height: 38px;
+  cursor: pointer;
+}
+

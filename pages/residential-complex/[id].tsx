@@ -6,7 +6,6 @@ import {MainContainer} from "../../src/components/containers/MainContainer/MainC
 import {Breadcrumbs} from "../../src/components/shared/Breadcrumbs/Breadcrumbs";
 import {Views} from "../../src/components/shared/Views/Views";
 import {NameEstate} from "../../src/components/shared/NameEstate/NameEstate";
-import {HorizontalTabs} from "../../src/components/shared/HorizontalTabs/HorizontalTabs";
 import {IMAGES_SET} from "../../src/components/containers/GeneralInfo/config";
 import GeneralInfo from "../../src/components/containers/GeneralInfo/GeneralInfo";
 import ObjectSpecifications from "../../src/components/containers/ObjectSpecifications/ObjectSpecifications";
@@ -31,6 +30,7 @@ import AccordionContainerMobile from "../../src/components/containers/AccordionM
 import {DesktopOnly} from "src/components/containers/Adaptive/DesktopOnly";
 import {MobileOnly} from "../../src/components/containers/Adaptive/MobileOnly";
 import {GeneralInfoMobile} from "../../src/components/containers/GeneralInfo/GeneralInfoMobile";
+import {HorizontalTabsObjects} from "../../src/components/shared/HorizontalTabs/HorizontalTabsObjects";
 
 const city = ["Москва", "Санкт-Петербург", "Крым", "Сочи", "Нижний Новгород"];
 
@@ -118,7 +118,7 @@ const ResidentialComplex: NextPage = observer((props: any) => {
         <NameEstate item={props.name} />
         <DesktopOnly>
           {/*<AdressEstate item={props.address} />*/}
-          <HorizontalTabs tabs={tabs} refs={refs} />
+          <HorizontalTabsObjects tabs={tabs} refs={refs} />
           <div ref={general}>
             <GeneralInfo
                 info={MappingGeneralInfo(

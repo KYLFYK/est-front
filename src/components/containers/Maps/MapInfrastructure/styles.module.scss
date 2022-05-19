@@ -25,11 +25,15 @@
 .container {
     @include for-size(KT1) {
         margin: 10px 10px 20px 10px;
-        border-bottom: 1px solid #F2F2F2;
+        //border-bottom: 1px solid #F2F2F2;
         padding-bottom: 20px;
     }
     @include for-size(KT2) {
         margin: 60px 0 0 60px;
+        padding-bottom: 0;
+    }
+    @include for-size(KT3) {
+        margin: 60px 60px 0 60px;
         padding-bottom: 0;
     }
 }
@@ -86,7 +90,7 @@
 
 .localbarActive {
     background-color: #ffffff;
-    padding: 20px 0 20px 20px;
+    padding: 23px 0 20px 20px;
     max-height: 360px;
     position: absolute;
     z-index: 10;
@@ -107,9 +111,12 @@
         left: 20px;
         top: 20px; 
     }
-    @include for-size(KT5) {
-        width: 343px;
+    @include for-size(KT3) {
+        width: 323px;
     }
+    //@include for-size(KT5) {
+    //    width: 343px;
+    //}
 }
 
 .dynamicBar{
@@ -135,8 +142,11 @@
         display: flex;
     }
     @include for-size(KT5) {
-        left: 384px;
+        left: 364px;
     }
+    //@include for-size(KT5) {
+    //    left: 384px;
+    //}
 }
 .backButton {
     position: absolute;

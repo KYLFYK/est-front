@@ -58,9 +58,15 @@ export const OfferNews = () => {
               value={phone}
               onChange={(e) => setPhone(e.currentTarget.value)}
             />
-            <BaseButton onClick={newsSubscription} type="primary">
-              Подписаться на новости
-            </BaseButton>
+            <div>
+              <BaseButton
+                className={css.width}
+                onClick={newsSubscription}
+                type="primary"
+              >
+                Подписаться на новости
+              </BaseButton>
+            </div>
           </div>
         </HeadLine>
       </DesktopOnly>
@@ -106,6 +112,7 @@ export const OfferNews = () => {
           <a
             href="https://estatum.f-case.ru/models/UserAgreement.pdf"
             target={"_blank"}
+            rel="noreferrer"
           >
             <Typography color={"disabled"} className={css.link}>
               Пользовательское соглашение

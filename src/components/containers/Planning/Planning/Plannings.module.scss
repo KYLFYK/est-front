@@ -8,6 +8,17 @@
     display: flex;
     gap: 20px;
     flex-wrap: wrap;
+
+}
+.scroll{
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    margin: 0 15px 0 0;
+    height: 778px;
+    overflow-y: scroll;
+    scrollbar-width: 1px;
+    justify-content: flex-start;
 }
 .filterWrapper {
     margin-bottom: 20px;
@@ -65,4 +76,7 @@
     &:link {
         text-decoration: none
     }
+}
+.mB_20{
+    margin-bottom: 22px !important;
 }

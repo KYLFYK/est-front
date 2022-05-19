@@ -54,43 +54,109 @@
     font-family: "MontserratBold" !important;
 
     @include for-size(KT1) {
-        font-size: 24px;
+        font-size: mobile-size(24px);
     }
-    @include for-size(KT2) {
-        font-size: 20px;
+    @include for-size(KT3) {
+        font-size: desktop-size(20px);
         letter-spacing: 0.6px;
+    }
+    @include for-size(KT6) {
+        font-size: 20px;
     }
 }
 .size_subheaderBig {
     font-family: "MontserratBold" !important;
     font-size: 24px;
+    @include for-size(KT1) {
+        font-size: mobile-size(24px);
+    }
+    @include for-size(KT3) {
+        font-size: desktop-size(24px);
+    }
+    @include for-size(KT6) {
+        font-size: 24px;
+    }
 }
 
 .size_small {
     font-size: 14px;
+    @include for-size(KT1) {
+        font-size: mobile-size(14px);
+    }
+    @include for-size(KT3) {
+        font-size: desktop-size(14px);
+    }
+    @include for-size(KT6) {
+        font-size: 14px;
+    }
 }
 
 .size_default {
     font-size: 16px;
+    @include for-size(KT1) {
+        font-size: mobile-size(16px);
+    }
+    @include for-size(KT3) {
+        font-size: desktop-size(16px);
+    }
+    @include for-size(KT6) {
+        font-size: 16px;
+    }
 }
 
 .size_medium {
     font-size: 18px;
+    @include for-size(KT1) {
+        font-size: mobile-size(18px);
+    }
+    @include for-size(KT3) {
+        font-size: desktop-size(18px);
+    }
+    @include for-size(KT6) {
+        font-size: 18px;
+    }
 }
 
 .size_header {
     font-family: "MontserratBold" !important;
     font-size: 48px;
+    @include for-size(KT1) {
+        font-size: mobile-size(48px);
+    }
+    @include for-size(KT3) {
+        font-size: desktop-size(48px);
+    }
+    @include for-size(KT6) {
+        font-size: 48px;
+    }
 }
 
 .size_headerLow {
     font-family: "MontserratBold" !important;
     font-size: 40px;
+    @include for-size(KT1) {
+        font-size: mobile-size(40px);
+    }
+    @include for-size(KT3) {
+        font-size: desktop-size(40px);
+    }
+    @include for-size(KT6) {
+        font-size: 40px;
+    }
 }
 
 .size_big {
     font-family: "MontserratBold" !important;
     font-size: 30px;
+    @include for-size(KT1) {
+        font-size: mobile-size(30px);
+    }
+    @include for-size(KT3) {
+        font-size: desktop-size(30px);
+    }
+    @include for-size(KT6) {
+        font-size: 30px;
+    }
 }
 
 // weight -----
@@ -117,4 +183,17 @@
     display: inline-flex;
     padding-left: 5px;
     padding-right: 5px;
+
+    @include for-size(KT1) {
+        padding-left: mobile-size(5px);
+        padding-right: mobile-size(5px);
+    }
+    @include for-size(KT3) {
+        padding-left: desktop-size(5px);
+        padding-right: desktop-size(5px);
+    }
+    @include for-size(KT6) {
+        padding-left: 5px;
+        padding-right: 5px;
+    }
 }

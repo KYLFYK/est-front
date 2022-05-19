@@ -3,7 +3,7 @@ import Image from "next/image";
 import { Trash } from "../../../../../../../icons/Trash";
 import Link from "next/link";
 import { myLoader } from "../../../../../../../utils/image/image";
-
+import RestoreSharpIcon from '@mui/icons-material/RestoreSharp';
 import cardImage from "../../../../../../../Pics/card-images/dealCard.jpg";
 import styles from "./agency.module.scss";
 
@@ -53,7 +53,9 @@ export const AgentCard: FC<Props> = ({
       </Link>
       <div className={styles.cardContent}>
         <div className={styles.head}>
-          <span className={styles.title}>{title}</span>
+          <span className={styles.title} title={title}>
+              {title}
+          </span>
           {markAsDeleted ? (
             <div
               style={{
@@ -69,7 +71,7 @@ export const AgentCard: FC<Props> = ({
                 }}
                 className={styles.restore}
               >
-                Восстановить
+                <RestoreSharpIcon/>
               </span>
             </div>
           ) : (

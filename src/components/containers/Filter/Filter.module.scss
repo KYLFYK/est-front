@@ -2,78 +2,165 @@
 @import '../../../app/styles/buttons.scss';
 @import '../../../app/styles/typography.scss';
 @import '../../../app/styles/resolutions.scss';
+@import '/src/components/containers/Record/all.scss';
 
 .wrapper {
     display: flex;
     flex-direction: column;
-    padding: 0px;
+    padding: 0;
     flex-wrap: wrap;
     justify-content: center;
+
     @include for-size(KT3) {
+        padding-left: 0;
+        padding-right: 0;
+        flex-direction: row;
+    }
+    @include for-size(KT6) {
         padding-left: 60px;
         padding-right: 60px;
-        flex-direction: row;
     }
 }
 
 .floorInputFrom {
-    width: 78px;
-    height: 18px;
+    width: mobile-size(78px);
+    height: mobile-size(18px);
+
+    @include for-size(KT3) {
+        width: desktop-size(78px);
+        height: desktop-size(18px);
+    }
+    @include for-size(KT6) {
+        width: 78px;
+        height: 18px;
+    }
 }
 .floorInputTo {
-    width: 60px;
-    height: 18px;
+    width: mobile-size(60px);
+    height: mobile-size(18px);
+
+    @include for-size(KT3) {
+        width: desktop-size(60px);
+        height: desktop-size(18px);
+    }
+    @include for-size(KT6) {
+        width: 60px;
+        height: 18px;
+    }
 }
 .priceInputFrom {
-    width: 73px;
+    width: mobile-size(73px);
+
+    @include for-size(KT3) {
+        width: desktop-size(73px);
+    }
+    @include for-size(KT6) {
+        width: 73px;
+    }
 }
 .priceInputTo {
-    width: 50px;
+    width: mobile-size(50px);
+
+    @include for-size(KT3) {
+        width: desktop-size(50px);
+    }
+    @include for-size(KT6) {
+        width: 50px;
+    }
 }
 .squareInputFrom {
-    width: 91px;
+    width: mobile-size(91px);
+    font-size: mobile-size(16px);
+
+    @include for-size(KT3) {
+        width: desktop-size(91px);
+        font-size: desktop-size(16px);
+    }
+    @include for-size(KT6) {
+        width: 91px;
+        font-size: 16px;
+    }
 }
 .squareInputTo {
-    width: 83px;
+    width: mobile-size(83px);
+
+    @include for-size(KT3) {
+        width: desktop-size(83px);
+    }
+    @include for-size(KT6) {
+        width: 83px;
+    }
 }
 
 .dropdownAction {
     @include for-size(KT3) {
+        width: desktop-size(200px);
+    }
+
+    @include for-size(KT6) {
         width: 200px;
     }
 }
 .dropdownHouseType {
     @include for-size(KT3) {
+        width: desktop-size(200px);
+    }
+
+    @include for-size(KT6) {
         width: 200px;
     }
 }
 .dropdownPrivateType {
-    height: 38px !important;
+    height: mobile-size(38px) !important;
     @include for-size(KT3) {
+        height: desktop-size(38px) !important;
+        margin-right: desktop-size(8px);
+        width: desktop-size(218px) !important;
+    }
+    @include for-size(KT6) {
+        height: 38px !important;
         margin-right: 8px;
         width: 218px !important;
     }
 }
-.dropdownBuildingType { 
+.dropdownBuildingType {
     @include for-size(KT3) {
+        margin-right: desktop-size(8px);
+        width: desktop-size(237px);
+    }
+    @include for-size(KT6) {
         margin-right: 8px;
         width: 237px;
     }
 }
 .dropdownFloor {
     @include for-size(KT3) {
+        margin-right: desktop-size(8px);
+        width: desktop-size(372px) !important;
+    }
+    @include for-size(KT6) {
         margin-right: 8px;
         width: 372px !important;
     }
 }
 .dropdownIRB {
     @include for-size(KT3) {
+        margin-right: desktop-size(8px);
+        width: desktop-size(237px);
+    }
+
+    @include for-size(KT6) {
         margin-right: 8px;
         width: 237px;
     }
 }
 .dropdownImprovement {
     @include for-size(KT3) {
+        margin-right: desktop-size(8px);
+        width: desktop-size(372px);
+    }
+
+    @include for-size(KT6) {
         margin-right: 8px;
         width: 372px;
     }
@@ -82,11 +169,11 @@
 .submit {
     @include button;
     @include ROBOTOREGULAR16;
-    width: 207px !important;
+    width: mobile-size(207px) !important;
     background-color: $NUDE;
     border-radius: 6px;
     @include for-size(KT3) {
-        width: auto;
+        width: auto !important;
     }
     &:hover{
         background-color: $SECONDARYBUTTONHOVER
@@ -97,30 +184,44 @@
 }
 
 .actionDropdownUnion {
-    width: 398px;
-    height: 38px;
+    width: mobile-size(398px);
+    height: mobile-size(38px);
+
     @include for-size(KT3) {
-        margin-right: 8px;
+        margin-right: desktop-size(8px);
         max-width: fit-content;
+        width: desktop-size(398px);
+        height: desktop-size(38px);
+    }
+
+    @include for-size(KT6) {
+        margin-right: 8px;
+        width: 398px;
+        height: 38px;
     }
 }
 
 .toggleButton {
-    height: 38px;
+    height: mobile-size(38px);
     padding: 0;
     width: auto;
     @include for-size(KT3) {
-        padding-top: 7px;
-        padding-right: 4px;
-        padding-bottom: 7px;
-        padding-left: 4px;
+        height: desktop-size(38px);
+        padding: desktop-size(7px) desktop-size(4px);
+    }
+    @include for-size(KT6) {
+        height: 38px;
+        padding: 7px 4px;
     }
 }
 .mainToggleButtonWrap {
     display: none;
     @include for-size(KT3) {
-        margin-right: 8px;
+        margin-right: desktop-size(8px);
         display: block;
+    }
+    @include for-size(KT6) {
+        margin-right: 8px;
     }
 }
 .lowResToggleButtonWrap {
@@ -132,35 +233,59 @@
 .inputsUnion {
     display: none;
     @include for-size(KT3) {
-        margin-right: 8px;
+        margin-right: desktop-size(8px);
         display: flex;
+        width: desktop-size(478px);
+        height: desktop-size(38px);
+    }
+    @include for-size(KT6) {
+        margin-right: 8px;
         width: 478px;
         height: 38px;
     }
 }
 
 .searchInput {
-    width: 478px;
+    @include for-size(KT3) {
+        width: desktop-size(478px);
+    }
+    @include for-size(KT6) {
+        width: 478px;
+    }
 }
-  
+
 .searchInputLand {
-    width: 912px;
+    @include for-size(KT3) {
+        width: desktop-size(912px);
+    }
+    @include for-size(KT6) {
+        width: 912px;
+    }
 }
 
 .link {
     background-color: $NUDE;
-    height: 38px;
+    height: mobile-size(38px);
     border-radius: 6px;
     outline: none;
     text-decoration: none;
     cursor: pointer;
+    @include for-size(KT3) {
+        height: desktop-size(38px);
+    }
+    @include for-size(KT6) {
+        height: 38px;
+    }
 }
 
 .linkTitle{
-    margin-top: 10px;
-    margin-right: 10px;
-    margin-bottom: 10px;
-    margin-left: 10px;
+    margin: mobile-size(10px);
+    @include for-size(KT3) {
+        margin: desktop-size(10px);
+    }
+    @include for-size(KT6) {
+        margin: 10px;
+    }
 }
 
 .lowResContainer{
@@ -177,5 +302,12 @@
 
 .secondLine{
     display: flex;
-    margin-top: 8px;
+    margin-top: mobile-size(8px);
+
+    @include for-size(KT3) {
+        margin-top: 8px;
+    }
+    @include for-size(KT6) {
+        margin-top: 8px;
+    }
 }

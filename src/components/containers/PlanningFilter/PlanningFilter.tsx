@@ -13,10 +13,12 @@ import {
   TOGGLE_BUTTONS_OPTIONS,
 } from "./config";
 import css from "./PlanningFilter.module.css";
+import classNames from "classnames";
 
 interface Props {
   sort?: string;
   setSort?: React.Dispatch<React.SetStateAction<string>>;
+  className?:string
 }
 
 const useStyles = makeStyles(() => ({
@@ -57,7 +59,7 @@ const useStyles = makeStyles(() => ({
 // onSubmit and Filter Values will come from global state and observers
 // MyAdsContainer values should store in local state
 
-const PlanningFilter: React.FC<Props> = ({ sort, setSort }) => {
+const PlanningFilter: React.FC<Props> = ({ sort, setSort,className }) => {
   const classes = useStyles();
   useEffect(() => {
     // here's action for load some filter values from backend and hold it in global store
@@ -84,7 +86,7 @@ const PlanningFilter: React.FC<Props> = ({ sort, setSort }) => {
                     <BaseButton type="primary"> <Typography color="secondary" size="small">Применить</Typography> </BaseButton>
                 </div>
             </div>*/}
-      <div className={classes.contentRow}>
+      <div className={classNames(classes.contentRow,className)}>
         <BaseDropDown
           className={classes.sortDropdown}
           onChange={tempFunc}
