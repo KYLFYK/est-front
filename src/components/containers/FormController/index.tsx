@@ -22,7 +22,6 @@ export interface FormInstance<T> {
   getValues: () => T;
   setValues: (data: FieldType<T>[]) => void;
   resetValues: () => void;
-  checkChanges: () => boolean;
 }
 
 export const useForm: <T>(
@@ -78,9 +77,6 @@ export const useForm: <T>(
           }
         });
       },
-      checkChanges: () => {
-        return JSON.stringify(initialValues) !== JSON.stringify(initValues);
-      },
     }),
     [initialValues, formRef]
   );
@@ -121,18 +117,18 @@ export const useForm: <T>(
           formRef.current?.[index].addEventListener("input", (e: any) => {
             if (initialValues) {
               initialValues[obj] = e.target.value ? e.target.value : undefined;
+              if (
+                JSON.stringify(initialValues) !== JSON.stringify(initValues) &&
+                onFormChange
+              ) {
+                onFormChange();
+              }
             }
           });
         }
       });
     }
   }, [formRef, initialValues]);
-
-  useEffect(() => {
-    if (Form.checkChanges() && onFormChange) {
-      onFormChange();
-    }
-  }, [initialValues]);
 
   return [Form];
 };
