@@ -22,11 +22,13 @@ export interface FormInstance<T> {
   getValues: () => T;
   setValues: (data: FieldType<T>[]) => void;
   resetValues: () => void;
+  checkChanges: () => boolean;
 }
 
-export const useForm: <T>(initValues: T) => [Form: FormInstance<T>] = (
-  initValues
-) => {
+export const useForm: <T>(
+  initValues: T,
+  onFormChange?: () => void
+) => [Form: FormInstance<T>] = (initValues, onFormChange) => {
   type IInitialValues = typeof initValues;
 
   const formRef = createRef<IFormRef>();
@@ -76,6 +78,9 @@ export const useForm: <T>(initValues: T) => [Form: FormInstance<T>] = (
           }
         });
       },
+      checkChanges: () => {
+        return JSON.stringify(initialValues) !== JSON.stringify(initValues);
+      },
     }),
     [initialValues, formRef]
   );
@@ -122,6 +127,12 @@ export const useForm: <T>(initValues: T) => [Form: FormInstance<T>] = (
       });
     }
   }, [formRef, initialValues]);
+
+  useEffect(() => {
+    if (Form.checkChanges() && onFormChange) {
+      onFormChange();
+    }
+  }, [initialValues]);
 
   return [Form];
 };
