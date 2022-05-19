@@ -17,7 +17,7 @@ import { useForm } from "../../../../../../containers/FormController";
 import styles from "../agency/agency.module.scss";
 
 export const DeveloperPage: FC = observer(() => {
-  const [haveUnsaved, setUnsaved] = useState<boolean>(true);
+  const [haveUnsaved, setUnsaved] = useState<boolean>(false);
 
   const pathDeveloperId = useRouter().query.id as string;
 
@@ -30,19 +30,28 @@ export const DeveloperPage: FC = observer(() => {
     changeProfileInfo,
   } = DeveloperProfileStore;
 
-  const [accountForm] = useForm<IAccountForm>({
-    companyName: profileData?.developerProperty.name,
-    developerType: profileData?.developerProperty.type,
-    address: profileData?.developerProperty.address,
-    phoneNumber: profileData?.developerProperty.phone[0]
-      ? profileData?.developerProperty.phone[0].value
-      : undefined,
-    email: profileData?.email,
-    cite: profileData?.developerProperty.site
-      ? profileData?.developerProperty.site
-      : undefined,
-    description: profileData?.developerProperty.description,
-  });
+  const onFormChange = (changed: boolean) => {
+    if (changed !== haveUnsaved) {
+      setUnsaved(changed);
+    }
+  };
+
+  const [accountForm] = useForm<IAccountForm>(
+    {
+      companyName: profileData?.developerProperty.name,
+      developerType: profileData?.developerProperty.type,
+      address: profileData?.developerProperty.address,
+      phoneNumber: profileData?.developerProperty.phone[0]
+        ? profileData?.developerProperty.phone[0].value
+        : undefined,
+      email: profileData?.email,
+      cite: profileData?.developerProperty.site
+        ? profileData?.developerProperty.site
+        : undefined,
+      description: profileData?.developerProperty.description,
+    },
+    onFormChange
+  );
 
   useEffect(() => {
     if ((!loaded && !errorOnLoad) || developerId !== pathDeveloperId) {
