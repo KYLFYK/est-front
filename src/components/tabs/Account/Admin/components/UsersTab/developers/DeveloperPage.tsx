@@ -17,7 +17,7 @@ import { useForm } from "../../../../../../containers/FormController";
 import styles from "../agency/agency.module.scss";
 
 export const DeveloperPage: FC = observer(() => {
-  const [haveUnsaved, setUnsaved] = useState<boolean>(true);
+  const [haveUnsaved, setUnsaved] = useState<boolean>(false);
 
   const pathDeveloperId = useRouter().query.id as string;
 
@@ -30,19 +30,28 @@ export const DeveloperPage: FC = observer(() => {
     changeProfileInfo,
   } = DeveloperProfileStore;
 
-  const [accountForm] = useForm<IAccountForm>({
-    companyName: profileData?.developerProperty.name,
-    developerType: profileData?.developerProperty.type,
-    address: profileData?.developerProperty.address,
-    phoneNumber: profileData?.developerProperty.phone[0]
-      ? profileData?.developerProperty.phone[0].value
-      : undefined,
-    email: profileData?.email,
-    cite: profileData?.developerProperty.site
-      ? profileData?.developerProperty.site
-      : undefined,
-    description: profileData?.developerProperty.description,
-  });
+  const onFormChange = (changed: boolean) => {
+    if (changed !== haveUnsaved) {
+      setUnsaved(changed);
+    }
+  };
+
+  const [accountForm] = useForm<IAccountForm>(
+      {
+        companyName: profileData?.developerProperty.name,
+        developerType: profileData?.developerProperty.type,
+        address: profileData?.developerProperty.address,
+        phoneNumber: profileData?.developerProperty.phone[0]
+            ? profileData?.developerProperty.phone[0].value
+            : undefined,
+        email: profileData?.email,
+        cite: profileData?.developerProperty.site
+            ? profileData?.developerProperty.site
+            : undefined,
+        description: profileData?.developerProperty.description,
+      },
+      onFormChange
+  );
 
   useEffect(() => {
     if ((!loaded && !errorOnLoad) || developerId !== pathDeveloperId) {
@@ -68,8 +77,8 @@ export const DeveloperPage: FC = observer(() => {
         {
           name: "phoneNumber",
           value: profileData?.developerProperty.phone[0]
-            ? profileData?.developerProperty.phone[0].value
-            : undefined,
+              ? profileData?.developerProperty.phone[0].value
+              : undefined,
         },
         {
           name: "email",
@@ -78,8 +87,8 @@ export const DeveloperPage: FC = observer(() => {
         {
           name: "cite",
           value: profileData?.developerProperty.site
-            ? profileData?.developerProperty.site
-            : undefined,
+              ? profileData?.developerProperty.site
+              : undefined,
         },
         {
           name: "description",
@@ -113,67 +122,67 @@ export const DeveloperPage: FC = observer(() => {
   }, [accountForm, profileData]);
 
   return profileData !== null ? (
-    <div className={styles.pageWrapper}>
-      <div className={styles.header}>
-        <Link href={"/cabinet"}>
-          <a className={styles.link}>
-            <BackIcon width={24} height={24} color={"#3D4550"} />
-            <span>Редактирование профиля застройщика</span>
-          </a>
-        </Link>
-      </div>
-      <div className={`${styles.contentHeader} ${styles.littleMargin}`}>
+      <div className={styles.pageWrapper}>
+        <div className={styles.header}>
+          <Link href={"/cabinet"}>
+            <a className={styles.link}>
+              <BackIcon width={24} height={24} color={"#3D4550"} />
+              <span>Редактирование профиля застройщика</span>
+            </a>
+          </Link>
+        </div>
+        <div className={`${styles.contentHeader} ${styles.littleMargin}`}>
         <span className={styles.title}>
           {profileData.developerProperty.name}
         </span>
-        {haveUnsaved && (
-          <div className={styles.rightSide}>
-            <span className={styles.unsaved}>Есть несохранённые изменения</span>
-            <BaseButton
-              onClick={() => {
-                handleChangeData();
-              }}
-              type={"secondary"}
-              isActive
-            >
-              Сохранить
-            </BaseButton>
-          </div>
-        )}
+          {haveUnsaved && (
+              <div className={styles.rightSide}>
+                <span className={styles.unsaved}>Есть несохранённые изменения</span>
+                <BaseButton
+                    onClick={() => {
+                      handleChangeData();
+                    }}
+                    type={"secondary"}
+                    isActive
+                >
+                  Сохранить
+                </BaseButton>
+              </div>
+          )}
+        </div>
+        <div className={styles.tabsWrapper}>
+          <HorizontalTabs
+              wrapperClassName={styles.tabs}
+              tabs={[
+                {
+                  title: "Аккаунт",
+                  Component: <Account form={accountForm} />,
+                },
+                {
+                  title: "Юридические сведения",
+                  Component: <LegalInfo />,
+                },
+                {
+                  title: "СМИ о застройщике",
+                  Component: <SMI />,
+                },
+                {
+                  title: "Статистика",
+                  Component: <Statistics />,
+                },
+                {
+                  title: "Риски",
+                  Component: <Risk />,
+                },
+                {
+                  title: "Настройки",
+                  Component: <Settings />,
+                },
+              ]}
+          />
+        </div>
       </div>
-      <div className={styles.tabsWrapper}>
-        <HorizontalTabs
-          wrapperClassName={styles.tabs}
-          tabs={[
-            {
-              title: "Аккаунт",
-              Component: <Account form={accountForm} />,
-            },
-            {
-              title: "Юридические сведения",
-              Component: <LegalInfo />,
-            },
-            {
-              title: "СМИ о застройщике",
-              Component: <SMI />,
-            },
-            {
-              title: "Статистика",
-              Component: <Statistics />,
-            },
-            {
-              title: "Риски",
-              Component: <Risk />,
-            },
-            {
-              title: "Настройки",
-              Component: <Settings />,
-            },
-          ]}
-        />
-      </div>
-    </div>
   ) : (
-    <></>
+      <></>
   );
 });

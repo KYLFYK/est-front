@@ -65,13 +65,15 @@ export const Account: FC<Props> = observer(({ form }) => {
         value: profileData?.developerProperty.description,
       },
     ]);
-  }, []);
+  }, [profileData]);
+
+  console.log(JSON.parse(JSON.stringify(profileData)))
 
   return (
-      <Scroll height={'530'} >
+      <Scroll height={'510'} >
         <div
             className={styles.formWrapper}
-            style={{padding:"20px 0"}}
+            style={{padding:"12px 0"}}
         >
           {profileData !== null && (
             <div className={styles.form}>

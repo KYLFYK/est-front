@@ -23,7 +23,7 @@ export const Settings: FC = () => {
   const [selectedStatus, setSelectedStatus] = useState("Готово к проверке");
 
   return (
-    <Scroll height={'530'} >
+    <Scroll height={'510'} >
       <div
         style={{
           paddingTop: 20,

@@ -202,8 +202,13 @@ class DeveloperProfile {
     try {
       const response = await instance.patch(
         `developer/${this.developerId}`,
-        data
-      );
+        data,
+          {
+            headers: {
+              authorization: `Bearer ${localStorage.getItem('accessEstatum')}`
+            }
+          }
+      )
 
       this.profileData = this.profileData
         ? {
