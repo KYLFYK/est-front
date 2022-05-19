@@ -1,5 +1,4 @@
 import axios from "axios";
-import {defaultProps} from "downshift/dist/src/hooks/utils";
 
 declare module "axios" {
   export interface AxiosRequestConfig {
