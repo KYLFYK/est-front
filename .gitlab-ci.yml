@@ -14,8 +14,7 @@ before_script:
 build_dev:
   stage: build_dev
   script:
-    - docker pull $CI_REGISTRY_IMAGE:latest
-    - docker build --build-arg ENV_STAGES=development --cache-from $CI_REGISTRY_IMAGE:latest
+    - docker build --build-arg ENV_STAGES=development
       --tag $CI_REGISTRY_IMAGE:$CI_COMMIT_SHA
       --tag $CI_REGISTRY_IMAGE:latest
       .
@@ -31,13 +30,12 @@ deploy_dev:
     - 'echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config' 
        
   script:
-    - ssh -p 22 deployer@$SERVER_DEV_IP "/app/$CI_PROJECT_NAME/deploy.sh --projectName $CI_PROJECT_NAME --user $DOCKER_REPO_LOGIN --token $DOCKER_REPO_TOKEN --tag $CI_COMMIT_SHA" || exit 1
+    - ssh -p 31022 deployer@$SERVER_DEV_IP "/app/$CI_PROJECT_NAME/deploy.sh --projectName $CI_PROJECT_NAME --user $DOCKER_REPO_LOGIN --token $DOCKER_REPO_TOKEN --tag $CI_COMMIT_SHA" || exit 1
 
 build_prod:
   stage: build_prod
   script:
-    - docker pull $CI_REGISTRY_IMAGE:latest
-    - docker build --build-arg ENV_STAGES=production --cache-from $CI_REGISTRY_IMAGE:latest
+    - docker build --build-arg ENV_STAGES=production
       --tag $CI_REGISTRY_IMAGE:$CI_COMMIT_SHA
       --tag $CI_REGISTRY_IMAGE:latest
       .
