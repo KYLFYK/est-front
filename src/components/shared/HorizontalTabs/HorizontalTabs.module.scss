@@ -1,3 +1,5 @@
+@import '../../../app/styles/colours.scss';
+
 .LineContainer {
   display: flex;
   margin: 0 60px;
@@ -30,14 +32,11 @@
   }
 }
 
-
 .hr{
-  background-color:#F2F2F2;
+  background-color: $ICONGRAY;
   height: 1px;
   position: relative;
-  margin-right: 12px;
   margin-left: 12px;
-  bottom: 5px;
 }
 
 .label{

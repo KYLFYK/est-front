@@ -19,8 +19,8 @@ interface Props {
 export const MapControls: React.FC<Props> = ({location, viewport, setViewport, center, onsetFullscreen}) => {
 
     const toggleButtonOptions = [
-        { icon: <ZoomIn />, onclick: () => setViewport({ ...viewport, zoom: viewport.zoom + 1 }) }, 
         { icon: <ZoomOut />, onclick: () => setViewport({ ...viewport, zoom: viewport.zoom - 1 }) },
+        { icon: <ZoomIn />, onclick: () => setViewport({ ...viewport, zoom: viewport.zoom + 1 }) }, 
     ]
     return (
         <div className={s.wrapper}>

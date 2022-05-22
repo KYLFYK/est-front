@@ -19,7 +19,7 @@ export const AdressEstate: React.FC<AdressEstatePropsType> = ({
 }) => {
   return (
     <div className={s.blockAdvantage}>
-      <Typography className={s.item} size={"small"} weight={"light"}>
+      <Typography className={s.item} weight={"light"}>
         {item}
       </Typography>
     </div>

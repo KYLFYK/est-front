@@ -122,7 +122,7 @@ export const HorizontalTabsObjects: FC<Props> = ({
                         ))}
                     </Tabs>
                 </Box>
-                <hr color={"#CAD1DA"} className={css.hr} />
+                <div className={css.hr} ></div>
             </div>
             {tabs[selectedTabIdx].Component && (
                 <div>{tabs[selectedTabIdx].Component}</div>

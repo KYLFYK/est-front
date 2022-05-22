@@ -7,9 +7,12 @@ type AdvantagePropsType = {
   title: string;
   text?: string;
   children: ReactNode;
-  variant?: "primary" | "secondary";
+  titleWeight: "bold" | "light" | "regular" | "medium" | undefined;
+  titleSize: "medium" | "big" | "small" | "header" | "default" | "subheader" | "headerLow" | "subheaderBig" | undefined;
+  textWeight: "bold" | "light" | "regular" | "medium" | undefined;
   className?: string;
   classWrapper?: string;
+  classNameMargin?: string;
 };
 
 export const Advantage: React.FC<AdvantagePropsType> = ({
@@ -18,30 +21,34 @@ export const Advantage: React.FC<AdvantagePropsType> = ({
   title,
   text,
   children,
-  variant = "primary",
+  titleWeight,
+  titleSize, 
+  textWeight,
+  classNameMargin,
 }) => {
-  const titleWeight = variant === "primary" ? "bold" : "regular";
-  const titleSize = variant === "primary" ? "medium" : "default";
-  const textWeight = variant === "primary" ? "regular" : "light";
-
+  //const titleWeight = variant === "primary" ? "bold" : "regular";
+  //const titleSize = variant === "primary" ? "medium" : "default";
+  //const textWeight = variant === "primary" ? "regular" : "light";
+  console.log(classNameMargin, text)
   return (
-    <div className={classNames(css.blockAdvantage,classWrapper)}>
+    <div className={classNames(css.blockAdvantage, classWrapper)}>
       <div className={css.icon}>{children}</div>
       <div
         className={classNames(css.text, className, {
-          [css.autoWidth]: variant === "secondary",
+          [css.autoWidth]: titleWeight === "regular" && titleSize === "default",
         })}
       >
-        <Typography weight={titleWeight} size={titleSize}>
+        <Typography weight={titleWeight} color={"accent"} size={titleSize}>
           {title}
         </Typography>
-          {
-            text && <div >
-            <Typography weight={textWeight}>
-              {text}
-            </Typography>
+        {text && (
+          <div>
+            <div className={classNameMargin ? classNameMargin : ''}></div>
+            <div>
+              <Typography weight={textWeight}>{text}</Typography>
+            </div>
           </div>
-          }
+        )}
       </div>
     </div>
   );

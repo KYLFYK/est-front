@@ -12,13 +12,16 @@ export interface ITabItem {
 }
 
 interface Props {
-  tabs: any;
-  className?: string;
-  link?: boolean;
-  storybook?: boolean;
+  tabs: any
+  className?: string
+  link?: boolean
+  storybook?: boolean
+  classNameBody?: any
+  classNameMenu?: any
+  classNameInfo?: any
 }
 
-const VerticalTabs: React.FC<Props> = ({ tabs, className, link }) => {
+const VerticalTabs: React.FC<Props> = ({ tabs, className, link, classNameBody, classNameMenu, classNameInfo }) => {
   const router = useRouter();
   // search index ( tabs - title - color ) : number
   const searchColor = tabs
@@ -46,13 +49,14 @@ const VerticalTabs: React.FC<Props> = ({ tabs, className, link }) => {
   };
 
   return (
-    <div className={css.body}>
+    <div className={`${css.body} ${classNameBody ? classNameBody : ''}`}>
       <MenuUser
         active={active}
         onActive={movePage}
+        classNameMenu={classNameMenu}
         menu={tabs.map((tab: any) => tab.title)}
       />
-      <div className={`${css.information}${className ? ` ${className}` : ""}`}>
+      <div className={`${css.information} ${classNameInfo ? classNameInfo : ''}`}>
         {link === undefined
           ? tabsVision.length > 0 && tabsVision[0].Component
           : tabs[active].Component}
@@ -62,10 +66,11 @@ const VerticalTabs: React.FC<Props> = ({ tabs, className, link }) => {
 };
 
 type MenuUserType = {
-  onActive: (num: number) => void;
-  menu: Array<string>;
-  active?: number;
-  link?: boolean;
+  onActive: (num: number) => void
+  menu: Array<string>
+  active?: number
+  link?: boolean
+  classNameMenu?: any
 };
 
 export const MenuUser: React.FC<MenuUserType> = ({
@@ -73,11 +78,12 @@ export const MenuUser: React.FC<MenuUserType> = ({
   onActive,
   menu,
   link,
+  classNameMenu,
 }) => {
   const router = useRouter();
 
   return (
-    <div className={css.menu}>
+    <div className={`${css.menu} ${classNameMenu ? classNameMenu : ''}`}>
       {menu.map((name, index) => {
         return (
           <div

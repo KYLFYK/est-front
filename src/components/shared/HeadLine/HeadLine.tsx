@@ -3,9 +3,9 @@ import Typography from "../Typography/Typography";
 import css from "./HeadLine.module.scss";
 
 type HeadLineType = {
-  children: ReactNode;
-  title: string;
-  className?: any;
+  children?: ReactNode
+  title: string
+  className?: any
 };
 
 const HeadLine: FC<HeadLineType> = ({ children, title, className }) => {

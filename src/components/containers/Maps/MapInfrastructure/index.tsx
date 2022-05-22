@@ -80,7 +80,7 @@ const Map: React.FC<Props> = ({currentHouse, location, InfrastructureInfo}) => {
 
   return (
     <div className={s.container}>
-      <HeadLine title={'Инфраструктура'}>
+      <HeadLine title={'Инфраструктура'} className={s.headLine}>
         <Typography >
             {InfrastructureInfo}
         </Typography>

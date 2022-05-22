@@ -47,6 +47,8 @@ const DeveloperTabs: React.FC<Props> = ({ tabsData: { news, statistics, risks, a
             className={css.wrapper}
             link={false}
             tabs={tab}
+            classNameMenu={css.classNameMenu}
+            classNameInfo={css.classNameInfo}
         />
     )
 }

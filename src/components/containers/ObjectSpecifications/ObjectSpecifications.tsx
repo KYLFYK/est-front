@@ -27,7 +27,7 @@ const ObjectSpecifications: React.FC<Props> = ({
 }) => {
   return (
     <div className={s.container}>
-      <HeadLine title={title}>
+      <HeadLine title={title} className={s.headLine}>
         {specificationsLists &&
           specificationsLists.map((specList, idx) => {
             // для исключения пустого поля заголовка
@@ -41,11 +41,14 @@ const ObjectSpecifications: React.FC<Props> = ({
                     {specList.specificationsItems &&
                       specList.specificationsItems.map((spec, index) => (
                         <Advantage
-                          variant="secondary"
+                          titleWeight={'regular'}
+                          titleSize={'default'}
+                          textWeight={'light'}
                           text={spec.label.text}
                           title={spec.label.title}
                           key={index}
                           classWrapper={s.margin}
+                          classNameMargin={s.classNameMargin}
                         >
                           {searchIconByValue(spec.value as string)}
                         </Advantage>

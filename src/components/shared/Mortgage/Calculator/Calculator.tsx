@@ -24,6 +24,7 @@ import { CrossIcon } from '../../../../icons/CrossIcon/CrossIcon'
 import { dateToDigit, digitToDate, currentDate } from '../../../../lib/mortgage/date';
 import {paymentSchedule} from './helpers';
 import {formatNumbersToCurrency} from '../../../../lib/syntax/syntax';
+import HeadLine from '../../HeadLine/HeadLine';
 
 export const removeStringSpaces = (string: string) => {
     return string.replace(/\s+/g, "")
@@ -269,9 +270,7 @@ export const Calculator: React.FC<Props> = observer(({setModal}) => {
 
     return (
         <div className={s.wrap}>
-            <Typography weight={"bold"}>
-                Ипотечный калькулятор
-            </Typography>
+            <HeadLine title="Ипотечный калькулятор"/>
             <div className={s.block_container}>
                 <div className={s.container}>
                     {cardhover.map((c, index) => {
