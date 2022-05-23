@@ -1,12 +1,11 @@
 import type { NextPage } from "next";
 import { observer } from "mobx-react-lite";
-import { useBreadcrumbsStore } from "../../src/mobx/stores/BreadcrumbsStore/BreadcrumbsStore";
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { MainContainer } from "src/components/containers/MainContainer/MainContainer";
 import { Breadcrumbs } from "../../src/components/shared/Breadcrumbs/Breadcrumbs";
 import { Filter } from "../../src/components/containers/Filter/Filter";
 import CardContainer from "../../src/components/containers/CardContainer/CardContainer";
-import { ToggleButtons } from "../../src/components/containers/CardContainer/ToggleButtons/index";
+import { ToggleButtons } from "../../src/components/containers/CardContainer/ToggleButtons";
 import Map from "../../src/components/containers/Maps/MapFinder/index";
 import { mapData } from "../../src/components/containers/Maps/MapFinder/config";
 import { useSearchStore } from "../../src/mobx/stores/SearchStore/SearchStore";
@@ -102,7 +101,8 @@ const Finder: NextPage = observer(() => {
             display: "grid",
             gridTemplateColumns: searchStore.views.map ? "1fr 1fr" : "1fr",
             width: "100%",
-            margin: "20px 0 0 0",
+            margin: "20px auto 0 auto",
+            maxWidth: "1440px",
           }}
         >
           <div style={{ display: searchStore.views.map ? "flex" : "none" }}>

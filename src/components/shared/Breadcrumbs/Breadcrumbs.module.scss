@@ -2,6 +2,14 @@
 
 .blockAdvantage{
     display: flex;
+    max-width: $KT6;
+
+    @media (min-width: 1440px) {
+        margin: 40px auto 0 auto !important;
+        padding-left: 60px;
+        padding-right: 60px;
+        box-sizing: border-box;
+    }
 
     @media screen and (max-width: 1400px){
         margin: 20px 0 0 60px;

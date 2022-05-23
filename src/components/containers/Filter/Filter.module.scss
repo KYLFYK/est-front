@@ -10,6 +10,9 @@
     padding: 0;
     flex-wrap: wrap;
     justify-content: center;
+    max-width: $KT6;
+    margin: 0 auto;
+    box-sizing: border-box;
 
     @include for-size(KT3) {
         padding-left: 0;
