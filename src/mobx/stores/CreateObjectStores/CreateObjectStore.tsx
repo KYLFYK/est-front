@@ -269,15 +269,11 @@ class CreateObjectStore implements ICreateObject {
         }
       });
     }
-
-    console.log(this.apartment);
   }
 
   setExistObject(objectType: ObjectTypes, data: any) {
     switch (objectType) {
       case ObjectTypes.APARTMENTS:
-        console.log("setExistObjectdata", data);
-        console.log("setExistObjectthis.apartment", this.apartment);
         this.apartment.about.name = data.name;
         this.apartment.about.address = data.address;
         this.apartment.about.complexName = data.complex;

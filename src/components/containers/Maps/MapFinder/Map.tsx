@@ -32,12 +32,11 @@ const Map: React.FC<Props> = observer(({mapData, location, viewport, setViewport
 
   const router = useRouter()
   const searchStore = useSearchStore()
-  const data = searchStore.getInitialData()
+  const data = searchStore.getInitialData().results
   const center = {
     lat: 45.16,
     lng: 36.90
   }
-
   const [activeMarker, setActivemarker] = useState(0)
   const [choosedPlaces, setChoosedplaces] = useState<any>([])
   const [open, setOpen] = useState(false)

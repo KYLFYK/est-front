@@ -1,16 +1,11 @@
-import {instance, UrlSearch} from "../instance";
+import {instance, altInstance, UrlSearch} from "../instance";
 import { transformRequestOptions } from "src/lib/mapping/urlPathCollect";
 
 export const SearchApi = {
     getFilteredObj: async (params: any) =>{
         try{
-            const res = await instance.get(`${UrlSearch.search}`, 
-                { params: { ...params, 
-                    'order-type': (params['order-type'] === 'buy' && 'sale') || (params['order-type'] === 'sale' && 'buy') || 'rent',
-                    'rooms-in-apartment': params['rooms-in-apartment']?.split(','), 
-                    'rooms-in-house': params['rooms-in-house']?.split(','), 
-                    benefit: params.benefit?.split(',') 
-                }, paramsSerializer: params => transformRequestOptions(params)}
+            const res = await altInstance.get(`${UrlSearch.altSearch}?filters=[{"type__slug": "land"}]`/*, 
+                { params: { ...params}, paramsSerializer: params => transformRequestOptions(params)}*/
             )
             return res.data
         }

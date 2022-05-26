@@ -16,6 +16,10 @@ export const instance = axios.create({
   },
 });
 
+export const altInstance = axios.create({
+  baseURL: 'https://estat.101bot.ru/api/v1',
+});
+
 export enum UrlObj {
   complex = "complex",
   townhouse = "townhouse",
@@ -27,4 +31,5 @@ export enum UrlObj {
 
 export enum UrlSearch {
   search = "search",
+  altSearch = "reality-objects"
 }

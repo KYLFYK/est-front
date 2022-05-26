@@ -6,7 +6,7 @@ import Typography from '../Typography/Typography'
 interface Props {
     title?: string,
     items: IOption[],
-    activeValue?: string,
+    activeValue?: Array<string>,
     onChange: (value: string) => void,
     classNameButton?: string,
     /**
@@ -18,8 +18,15 @@ interface Props {
 
 export const ToggleButtons: React.FC<Props> = ({title, items, activeValue, classNameButton, multiple,className, onChange }) => {
 
+    let convertingActiveValue = [] as Array<string>
+    if (activeValue && Array.isArray(activeValue)) {
+        convertingActiveValue = activeValue
+    } else if (activeValue) {
+        convertingActiveValue[0] = activeValue
+    }
+
     const checkIsActive = (value: string | number) => {
-        return multiple ? activeValue?.split(',').includes(String(value)) : activeValue === value
+        return multiple ? !!convertingActiveValue?.filter((v) => v === value)[0] : value
     }
 
     return (

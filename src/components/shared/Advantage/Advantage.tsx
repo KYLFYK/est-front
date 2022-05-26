@@ -29,7 +29,6 @@ export const Advantage: React.FC<AdvantagePropsType> = ({
   //const titleWeight = variant === "primary" ? "bold" : "regular";
   //const titleSize = variant === "primary" ? "medium" : "default";
   //const textWeight = variant === "primary" ? "regular" : "light";
-  console.log(classNameMargin, text)
   return (
     <div className={classNames(css.blockAdvantage, classWrapper)}>
       <div className={css.icon}>{children}</div>

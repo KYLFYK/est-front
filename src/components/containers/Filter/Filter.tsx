@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { ChangeEvent, useState } from "react";
 import { observer } from "mobx-react-lite";
 import { useRouter } from "next/router";
 import { ISearchParamsModel } from "../../../utils/interfaces/search";
@@ -10,7 +10,7 @@ import InputsUnion from "../../shared/InputsUnion/InputsUnion";
 import { ToggleButtons } from "../../shared/ToggleButtons/ToggleButtons";
 import {
   FILTER_ACTIONS_OPTIONS,
-  FILTER_BUILDING_TYPE_OPTIONS,
+  FILTER_APARTMENT_TYPE_OPTIONS,
   FILTER_PRIVATE_HOUSE_OPTIONS,
   FILTER_FLOORS_OPTIONS,
   FILTER_HOUSE_TYPE_OPTIONS,
@@ -20,9 +20,11 @@ import {
   FILTER_IRB_OPTIONS,
   FILTER_LAND_SPECS_OPTIONS,
   FILTER_HOUSE_TYPES,
+  FILTER_FORHOUSE_TYPE_OPTIONS,
 } from "./config";
+import { IOption } from "../../../utils/interfaces/general";
 import {REG_EXP_CONFIG} from '../../../lib/regexp/regexp';
-import { useSearchStore } from "src/mobx/stores/SearchStore/SearchStore";
+import { SearchStore, useSearchStore } from "src/mobx/stores/SearchStore/SearchStore";
 import { useBreadcrumbsStore } from "src/mobx/stores/BreadcrumbsStore/BreadcrumbsStore";
 import s from "./Filter.module.scss";
 import { paramsForGet } from "../../../lib/params/params";
@@ -38,15 +40,14 @@ export const Filter: React.FC<Props> = observer(({ location, onFilter }) => {
   const searchStore = useSearchStore();
   const breadcrumbs = useBreadcrumbsStore();
   const [width, setWidth]=useState<number>(1280)
-
+  
   React.useEffect(() => {
     setWidth(window.innerWidth)
   },[])
-  console.log(searchStore.getFilter())
   React.useEffect(() => {
     if (
       searchStore.getFilter() &&
-      searchStore.getFilter()["object-type"] === "townhouse"
+      searchStore.getFilter()["type__slug"] === "townhouse"
     ) {
       searchStore.setPrivateType("house");
       searchStore.setPrivateType(FILTER_PRIVATE_HOUSE_OPTIONS[1].value);
@@ -54,23 +55,23 @@ export const Filter: React.FC<Props> = observer(({ location, onFilter }) => {
     searchStore.setParams(paramsForGet(router.query));
     if (location === "search") {
       searchStore.setFilter(router.query);
-      searchStore.getFilter()["order-type"] &&
+      searchStore.getFilter()["advert_type"] &&
         breadcrumbs.addBreadCrumbs(
           FILTER_ACTIONS_OPTIONS.filter(
-            (s: any) => searchStore.getFilter()["order-type"] === s.value
+            (s: any) => searchStore.getFilter()["advert_type"] === s.value
           )[0].label,
           1
         );
-      searchStore.getFilter()["object-type"] &&
+      searchStore.getFilter()["type__slug"] &&
         breadcrumbs.addBreadCrumbs(
           FILTER_HOUSE_TYPES.filter(
-            (s: any) => searchStore.getFilter()["object-type"] === s.value
+            (s: any) => searchStore.getFilter()["type__slug"] === s.value
           )[0].label,
           2
         );
     }
   }, []);
-  
+
   const onSubmit = () => {
     if (location === "start") {
       router.push({
@@ -116,9 +117,6 @@ export const Filter: React.FC<Props> = observer(({ location, onFilter }) => {
   const onChangePlanningApart = (value: string) => {
     searchStore.setRoomsApart(value);
   };
-  const onChangePlanningHouse = (value: string) => {
-    searchStore.setRoomsHouse(value);
-  };
   const onChangeBuildingType = (value: string) => {
     searchStore.setBuildingType(value);
   };
@@ -134,9 +132,9 @@ export const Filter: React.FC<Props> = observer(({ location, onFilter }) => {
   const onChangeSquareTo = (value: string) => {
     (value.match(REG_EXP_CONFIG.integer) || value === '') && searchStore.setSquareTo(value);
   };
-  /*const onChangeSearchValue = (e: ChangeEvent<HTMLInputElement>) => {
-        setValues({...values, searchValue: e.target.value})
-    }*/
+  const onChangeSearchValue = (e: ChangeEvent<HTMLInputElement>) => {
+    searchStore.setSearchField(e.target.value)
+  }
   const onChangePrivateType = (value: string) => {
     searchStore.setPrivateType(value);
     breadcrumbs.addBreadCrumbs(
@@ -153,32 +151,25 @@ export const Filter: React.FC<Props> = observer(({ location, onFilter }) => {
   const onChangeIrb = (value: string) => {
     searchStore.setIRB(value);
   };
+  const onChooseHouseType = (value: string) => {
+    searchStore.setForHouseType(value);
+  };
   const onChooseImprovment = (value: string) => {
     searchStore.setImprovment(value);
   };
 
-  const MultiChoiceBenefits = () => {
-    const selectedImprovmentSet = new Set(
-      searchStore
-        .getFilter()
-        ["benefit"]?.split(",")
-        .filter((f: any) => f !== "")
-    );
-    return Array.from(selectedImprovmentSet)
-      .map(
-        (si: any) =>
-          FILTER_LAND_SPECS_OPTIONS.filter((s: any) => si === s.value)[0].label
-      )
-      .join(", ");
+  const MultiChoice = (prop: string, config: IOption[]) => {
+    const selectedImprovmentSet = new Set(searchStore.getFilter()[prop]?.filter((f: any) => f !== ""));
+    return Array.from(selectedImprovmentSet).map((si: any) => config.filter((s: any) => si === s.value)[0].label).join(", ");
   };
-
+  
   return (
     <div className={s.wrapper}>
       <div className={s.firstLine}>
       <InputsUnion className={s.actionDropdownUnion}>
         <BaseDropDown
           options={FILTER_ACTIONS_OPTIONS}
-          value={searchStore.getFilter()["order-type"]}
+          value={searchStore.getFilter()["advert_type"]}
           onChange={onChangeActionType}
           placeholder={FILTER_ACTIONS_OPTIONS[0].label}
           className={s.dropdownAction}
@@ -186,7 +177,7 @@ export const Filter: React.FC<Props> = observer(({ location, onFilter }) => {
         />
         <BaseDropDown
           options={FILTER_HOUSE_TYPE_OPTIONS}
-          value={searchStore.getFilter()["object-type"]}
+          value={searchStore.getFilter()["type__slug"]}
           onChange={onChangeHouseType}
           placeholder={FILTER_HOUSE_TYPE_OPTIONS[0].label}
           className={s.dropdownHouseType}
@@ -194,17 +185,22 @@ export const Filter: React.FC<Props> = observer(({ location, onFilter }) => {
         />
       </InputsUnion>
 
-      {searchStore.getFilter()["object-type"] === "house" && (
+      {searchStore.getFilter()["type__slug"] === "house" && (
         <BaseDropDown
           options={FILTER_PRIVATE_HOUSE_OPTIONS}
-          value={searchStore.getFilter()["privateType"]}
+          value={searchStore.getFilter()["privateType__in"]}
           onChange={onChangePrivateType}
-          placeholder={FILTER_PRIVATE_HOUSE_OPTIONS[0].label}
           className={s.dropdownPrivateType}
+          placeholder={
+            searchStore.getFilter()['privateType__in']?.length > 0
+              ? MultiChoice('privateType__in', FILTER_PRIVATE_HOUSE_OPTIONS)
+              : "Тип дома"
+          }
+          multi
         />
       )}
 
-      {searchStore.getFilter()["object-type"] === "house" && (
+      {searchStore.getFilter()["type__slug"] === "house" && (
         <div style={{marginRight: '8px', width: '200px'}}>
         <CompareInput
           location="search"
@@ -212,51 +208,43 @@ export const Filter: React.FC<Props> = observer(({ location, onFilter }) => {
           classNameInputTo={s.floorInputTo}
           placeholderFrom="Этажей от"
           placeholderTo="до"
-          valueFrom={searchStore.getFilter()["floor-from"]}
-          valueTo={searchStore.getFilter()["floor-to"]}
+          valueFrom={searchStore.getFilter()['params__reality_object_param__slug": "Floors", "params__value_int__gte']}
+          valueTo={searchStore.getFilter()['params__reality_object_param__slug": "Floors", "params__value_int__lte']}
           onChangeFrom={onChangePrivateFloorFrom}
           onChangeTo={onChangePrivateFloorTo}
         />
         </div>
       )}
 
-      {searchStore.getFilter()["object-type"] === "apartment" && (
+      {searchStore.getFilter()["type__slug"] === "apartment" && (
         <div className={s.mainToggleButtonWrap}>
           <ToggleButtons
             classNameButton={s.toggleButton}
             items={TOGGLE_BUTTONS_OPTIONS_APART}
-            activeValue={searchStore.getFilter()["rooms-in-apartment"]}
+            activeValue={searchStore.getFilter()["rooms-in-apartment__in"]}
             onChange={onChangePlanningApart}
             multiple
           />
         </div>
       )}
-
-      {searchStore.getFilter()["object-type"] === "apartment" && (
+      {searchStore.getFilter()["type__slug"] === "apartment" && (
         <div className={s.lowResToggleButtonWrap}>
           <ToggleButtons
             classNameButton={s.toggleButton}
             items={TOGGLE_BUTTONS_OPTIONS_APART_MOBILE}
-            activeValue={searchStore.getFilter()["rooms-in-apartment"]}
+            activeValue={searchStore.getFilter()["rooms-in-apartment__in"]}
             onChange={onChangePlanningApart}
             multiple
           />
         </div>
       )}
 
-      {/*(searchStore.getFilter()["object-type"] === "house" ||
-        searchStore.getFilter()["object-type"] === "townhouse") && (
-        <ToggleButtons
-          title={"комнат"}
-          classNameButton={s.toggleButton}
-          items={TOGGLE_BUTTONS_OPTIONS_HOUSE}
-          activeValue={searchStore.getFilter()["rooms-in-house"]}
-          onChange={onChangePlanningHouse}
-          multiple
-        />
-        )*/}
-
-      {<BaseInput type="text" placeholder="Поиск..." className={searchStore.getFilter()["object-type"] === "land" ? s.searchInputLand : s.searchInput} onChange={() => {} /*onChangeSearchValue*/}/>}
+      {<BaseInput 
+        value={searchStore.getFilter()['name__contains']} 
+        type="text" placeholder="Поиск..." 
+        className={searchStore.getFilter()["type__slug"] === "land" ? s.searchInputLand : s.searchInput} 
+        onChange={onChangeSearchValue}/>
+      }
       </div>
       <div className={s.secondLine}>
       <InputsUnion className={s.inputsUnion}>
@@ -266,8 +254,8 @@ export const Filter: React.FC<Props> = observer(({ location, onFilter }) => {
           classNameInputTo={s.priceInputTo}
           placeholderFrom="Цена от"
           placeholderTo="до"
-          valueFrom={searchStore.getFilter()["price-from"]}
-          valueTo={searchStore.getFilter()["price-to"]}
+          valueFrom={searchStore.getFilter()["price__gte"]}
+          valueTo={searchStore.getFilter()["price__lte"]}
           onChangeFrom={onChangePriceFrom}
           onChangeTo={onChangePriceTo}
           Icon={<span>₽</span>}
@@ -278,8 +266,8 @@ export const Filter: React.FC<Props> = observer(({ location, onFilter }) => {
           classNameInputTo={s.squareInputTo}
           placeholderFrom="Площадь от"
           placeholderTo="до"
-          valueFrom={searchStore.getFilter()["square-from"]}
-          valueTo={searchStore.getFilter()["square-to"]}
+          valueFrom={searchStore.getFilter()['params__reality_object_param__slug": "Total_area", "params__value_int__gte']}
+          valueTo={searchStore.getFilter()['params__reality_object_param__slug": "Total_area", "params__value_int__lte']}
           onChangeFrom={onChangeSquareFrom}
           onChangeTo={onChangeSquareTo}
           Icon={
@@ -297,8 +285,8 @@ export const Filter: React.FC<Props> = observer(({ location, onFilter }) => {
           classNameInputTo={s.priceInputTo}
           placeholderFrom="Цена от"
           placeholderTo="до"
-          valueFrom={searchStore.getFilter()["price-from"]}
-          valueTo={searchStore.getFilter()["price-to"]}
+          valueFrom={searchStore.getFilter()["price__gte"]}
+          valueTo={searchStore.getFilter()["price__lte"]}
           onChangeFrom={onChangePriceFrom}
           onChangeTo={onChangePriceTo}
           Icon={<span>₽</span>}
@@ -310,8 +298,8 @@ export const Filter: React.FC<Props> = observer(({ location, onFilter }) => {
           classNameInputTo={s.squareInputTo}
           placeholderFrom="Площадь от"
           placeholderTo="до"
-          valueFrom={searchStore.getFilter()["square-from"]}
-          valueTo={searchStore.getFilter()["square-to"]}
+          valueFrom={searchStore.getFilter()['params__reality_object_param__slug": "Total_area", "params__value_int__gte']}
+          valueTo={searchStore.getFilter()['params__reality_object_param__slug": "Total_area", "params__value_int__lte']}
           onChangeFrom={onChangeSquareFrom}
           onChangeTo={onChangeSquareTo}
           Icon={
@@ -322,44 +310,64 @@ export const Filter: React.FC<Props> = observer(({ location, onFilter }) => {
         />
       </div>
 
-      {searchStore.getFilter()["object-type"] !== "land" && (
+      {searchStore.getFilter()["type__slug"] === "apartment" && (
         <BaseDropDown
-          options={FILTER_BUILDING_TYPE_OPTIONS}
+          options={FILTER_APARTMENT_TYPE_OPTIONS}
           value={searchStore.getFilter()["building-type"]}
           onChange={onChangeBuildingType}
           placeholder={searchStore.getFilter()["building-type"]}
           className={s.dropdownBuildingType}
         />
       )}
-
-      {searchStore.getFilter()["object-type"] === "apartment" && (
+      {searchStore.getFilter()["type__slug"] === "house" && (
         <BaseDropDown
-          options={FILTER_FLOORS_OPTIONS}
-          value={searchStore.getFilter().floor}
-          onChange={onChangeFloors}
-          placeholder="Выбрать этаж"
-          className={s.dropdownFloor}
+          options={FILTER_FORHOUSE_TYPE_OPTIONS}
+          value={searchStore.getFilter()['houseType__in']}
+          onChange={onChooseHouseType}
+          className={s.dropdownBuildingType}
+          placeholder={
+            searchStore.getFilter()['houseType__in']?.length > 0
+              ? MultiChoice('houseType__in', FILTER_FORHOUSE_TYPE_OPTIONS)
+              : "Тип дома"
+          }
+          multi
         />
       )}
 
-      {searchStore.getFilter()["object-type"] === "land" && (
+
+      {searchStore.getFilter()["type__slug"] === "apartment" && (
+        <BaseDropDown
+          options={FILTER_FLOORS_OPTIONS}
+          value={searchStore.getFilter()["floor__in"]}
+          onChange={onChangeFloors}
+          className={s.dropdownFloor}
+          placeholder={
+            searchStore.getFilter()["floor__in"]?.length > 0
+              ? MultiChoice("floor__in", FILTER_FLOORS_OPTIONS)
+              : "Выбрать этаж"
+          }
+          multi
+        />
+      )}
+
+      {searchStore.getFilter()["type__slug"] === "land" && (
         <BaseDropDown
           options={FILTER_IRB_OPTIONS}
-          value={searchStore.getFilter()["building"]}
+          value={searchStore.getFilter()['params__reality_object_param__slug": "Buildings_on_the_site", "params__value_text']}
           onChange={onChangeIrb}
-          placeholder="Выбрать c ИЖС или без"
+          placeholder={FILTER_IRB_OPTIONS[0].label}
           className={s.dropdownIRB}
         />
       )}
 
-      {searchStore.getFilter()["object-type"] !== "apartment" && (
+      {searchStore.getFilter()["type__slug"] !== "apartment" && (
         <BaseDropDown
           options={FILTER_LAND_SPECS_OPTIONS}
-          value={searchStore.getFilter()["benefit"]}
+          value={searchStore.getFilter()["params__reality_object_param__slug__in"]}
           onChange={onChooseImprovment}
           placeholder={
-            searchStore.getFilter()["benefit"]
-              ? MultiChoiceBenefits()
+            searchStore.getFilter()["params__reality_object_param__slug__in"]?.length > 0
+              ? MultiChoice("params__reality_object_param__slug__in", FILTER_LAND_SPECS_OPTIONS)
               : "Выбрать благоустроенность"
           }
           multi

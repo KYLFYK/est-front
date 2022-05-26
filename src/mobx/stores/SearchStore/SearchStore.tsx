@@ -1,7 +1,7 @@
 import { makeAutoObservable } from "mobx";
 import { createContext, useContext, FC } from "react";
 import { SearchApi } from "../../../api/search/search";
-import { FILTER_ACTIONS_OPTIONS, FILTER_BUILDING_TYPE_OPTIONS, FILTER_PRIVATE_HOUSE_OPTIONS, FILTER_FLOORS_OPTIONS, 
+import { FILTER_ACTIONS_OPTIONS, FILTER_APARTMENT_TYPE_OPTIONS, FILTER_PRIVATE_HOUSE_OPTIONS, FILTER_FLOORS_OPTIONS, 
   FILTER_HOUSE_TYPE_OPTIONS, TOGGLE_BUTTONS_OPTIONS_APART, TOGGLE_BUTTONS_OPTIONS_HOUSE, FILTER_IRB_OPTIONS, 
   FILTER_LAND_SPECS_OPTIONS } from "../../../components/containers/Filter/config";
 
@@ -22,44 +22,58 @@ class SearchStore {
     this.sort = sort
   } 
   params = {}
-  initialData: any = []
+  initialData: any = {}
   filter = {
-    'object-type': FILTER_HOUSE_TYPE_OPTIONS[0].value,
-    'building-type': FILTER_BUILDING_TYPE_OPTIONS[0].value,
-    floor: undefined,
-    'price-from': undefined,
-    'price-to': undefined,
-    'square-from': undefined,
-    'square-to': undefined,
-    'rooms-in-apartment': '',
-    'rooms-in-house': '',
-    'order-type': FILTER_ACTIONS_OPTIONS[0].value,
-    searchValue: undefined,
-    'privateType': FILTER_PRIVATE_HOUSE_OPTIONS[0].value,
-    'floor-from': undefined,
-    'floor-to': undefined,
-    'building': undefined,
-    'benefit': '',
+    //дом/квартира/участок
+    'type__slug': FILTER_HOUSE_TYPE_OPTIONS[0].value,
+    //не найдено - новостройка/вторичка
+    'building-type': FILTER_APARTMENT_TYPE_OPTIONS[0].value,
+    //не найдено текстовое поле - мультивыбор первый/последний этаж и т.д
+    'floor__in': [] as Array<any>,
+    //цена от
+    'price__gte': undefined,
+    //цена до
+    'price__lte': undefined,
+
+    'params__reality_object_param__slug": "Total_area", "params__value_int__gte': undefined,
+    'params__reality_object_param__slug": "Total_area", "params__value_int__lte': undefined,
+    //количество комнат - требуются правки с сериалайзер
+    'rooms-in-apartment__in': [] as Array<any>,
+    //купить/продать
+    "advert_type": FILTER_ACTIONS_OPTIONS[0].value,
+    //поиск по названию
+    "name__contains": undefined,
+    //не найдено - уточняющий мультивыбор Дом/Таунхаус/Коттедж
+    'privateType__in': [] as Array<any>,
+
+    'params__reality_object_param__slug": "Floors", "params__value_int__gte': undefined,
+    'params__reality_object_param__slug": "Floors", "params__value_int__lte': undefined,
+    //ИЖС или садоводство 
+    'params__reality_object_param__slug": "Buildings_on_the_site", "params__value_text': undefined,
+    //мульти благоустройство - требуются правки с сериалайзер
+    'params__reality_object_param__slug__in': [] as Array<any>,
+    //мульти тип дома - требуются правки с сериалайзер
+    'houseType__in': [] as Array<any>,
   }
   setFilter(values: any) {
     this.filter = {
     ...this.filter,
-    'object-type': values['object-type'],
+    'type__slug': values['type__slug'],
     'building-type': values['building-type'],
-    floor: values.floor,
-    'price-from': values['price-from'],
-    'price-to': values['price-to'],
-    'square-from': values['square-from'],
-    'square-to': values['square-to'],
-    'rooms-in-apartment': values['rooms-in-apartment'],
-    'rooms-in-house': values['rooms-in-house'],
-    'order-type': values['order-type'],
-    searchValue: values.searchValue,
-    'privateType': values['privateType'],
-    'floor-from': values['floor-from'],
-    'floor-to': values['floor-to'],
-    'building': values['building'],
-    'benefit': values['benefit'],
+    'floor__in': values['floor__in'],
+    'price__gte': values['price__gte'],
+    'price__lte': values['price__lte'],
+    'params__reality_object_param__slug": "Total_area", "params__value_int__gte': values['params__reality_object_param__slug": "Total_area", "params__value_int__gte'],
+    'params__reality_object_param__slug": "Total_area", "params__value_int__lte': values['params__reality_object_param__slug": "Total_area", "params__value_int__lte'],
+    'rooms-in-apartment__in': values['rooms-in-apartment__in'],
+    "advert_type": values['advert_type'],
+    "name__contains": values['name__contains'],
+    'privateType__in': values['privateType__in'],
+    'params__reality_object_param__slug": "Floors", "params__value_int__gte': values['params__reality_object_param__slug": "Floors", "params__value_int__gte'],
+    'params__reality_object_param__slug": "Floors", "params__value_int__lte': values['params__reality_object_param__slug": "Floors", "params__value_int__lte'],
+    'params__reality_object_param__slug": "Buildings_on_the_site", "params__value_text': values['params__reality_object_param__slug": "Buildings_on_the_site", "params__value_text'],
+    'params__reality_object_param__slug__in': values['params__reality_object_param__slug__in'],
+    'houseType__in': values['houseType__in'],
     }
   }
   setView(value: 'map' | 'grid' | 'filter'){
@@ -95,73 +109,74 @@ class SearchStore {
   }
 
   setOrderType(value: string | number) {
-    this.filter = {...this.filter, 'order-type': value}
+    this.filter = {...this.filter, "advert_type": value}
   }
   setHouseType(value: string | number) {
+    console.log('value', value)
     this.filter = {
       ...this.filter, 
-      'object-type': value, 
-      'building-type': FILTER_BUILDING_TYPE_OPTIONS[0].value,
-      'privateType': FILTER_PRIVATE_HOUSE_OPTIONS[0].value, 
-      'benefit': '', 
-      'building': value === 'land' ? undefined : this.filter['building'],
-      'rooms-in-house': '',
-      'rooms-in-apartment': '',
+      'type__slug': value, 
+      'building-type': FILTER_APARTMENT_TYPE_OPTIONS[0].value,
+      'privateType__in': [],
+      'params__reality_object_param__slug__in': [], 
+      'params__reality_object_param__slug": "Buildings_on_the_site", "params__value_text': value !== 'land' ? undefined : this.filter['params__reality_object_param__slug": "Buildings_on_the_site", "params__value_text'],
+      'rooms-in-apartment__in': [],
     }
   }
   setFloors(value: any) {
-    this.filter = {...this.filter, floor: value}
+    const selectedImprovmentSet = new Set(this.filter['floor__in'])
+    selectedImprovmentSet.has(value) ? selectedImprovmentSet.delete(value) : selectedImprovmentSet.add(value)
+    this.filter = { ...this.filter, 'floor__in': Array.from(selectedImprovmentSet) }
   }
   setRoomsApart(value: any) {
-    const selectedPlanningSet = new Set(this.filter['rooms-in-apartment']?.split(','))
+    const selectedPlanningSet = new Set(this.filter['rooms-in-apartment__in'])
     selectedPlanningSet.has(value) ? selectedPlanningSet.delete(value) : selectedPlanningSet.add(value)
-    this.filter = { ...this.filter, 'rooms-in-apartment': Array.from(selectedPlanningSet).filter((s) => s !== '').join() || '', 'rooms-in-house': '' }
+    this.filter = { ...this.filter, 'rooms-in-apartment__in': Array.from(selectedPlanningSet) }
   }
-  setRoomsHouse(value: any) {
-    const selectedPlanningSet = new Set(this.filter['rooms-in-house']?.split(','))
-    selectedPlanningSet.has(value) ? selectedPlanningSet.delete(value) : selectedPlanningSet.add(value)
-    this.filter = { ...this.filter, 'rooms-in-house': Array.from(selectedPlanningSet).filter((s) => s !== '').join() || '', 'rooms-in-apartment': '' }
+  setSearchField(value: any) {
+    this.filter = { ...this.filter, "name__contains": value }
   }
   setBuildingType(value: any) {
     this.filter = { ...this.filter, 'building-type': value }
   }
   setPrivateType(value: any) {
-    this.filter = {...this.filter, 'privateType': value}
+    const selectedPlanningSet = new Set(this.filter['privateType__in'])
+    selectedPlanningSet.has(value) ? selectedPlanningSet.delete(value) : selectedPlanningSet.add(value)
+    this.filter = { ...this.filter, 'privateType__in': Array.from(selectedPlanningSet) }
   }
   setPriceFrom(value: any) {
-    this.filter = {...this.filter, 'price-from': value}
+    this.filter = {...this.filter, 'price__gte': value}
   }
   setPriceTo(value: any) {
-    this.filter = {...this.filter, 'price-to': value}
+    this.filter = {...this.filter, 'price__lte': value}
   }
   setSquareFrom(value: any) {
-    this.filter = {...this.filter, 'square-from': value}
+    this.filter = {...this.filter, 'params__reality_object_param__slug": "Total_area", "params__value_int__gte': value}
   }
   setSquareTo(value: any) {
-    this.filter = {...this.filter, 'square-to': value}
+    this.filter = {...this.filter, 'params__reality_object_param__slug": "Total_area", "params__value_int__lte': value}
   }
   setPrivateFloorFrom(value: any) {
-    this.filter = {...this.filter, 'floor-from': value}
+    this.filter = {...this.filter, 'params__reality_object_param__slug": "Floors", "params__value_int__gte': value}
   }
   setPrivateFloorTo(value: any) {
-    this.filter = {...this.filter, 'floor-to': value}
+    this.filter = {...this.filter, 'params__reality_object_param__slug": "Floors", "params__value_int__lte': value}
   }
   setIRB(value: any) {
-    this.filter = {...this.filter, 'building': value}
+    this.filter = {...this.filter, 'params__reality_object_param__slug": "Buildings_on_the_site", "params__value_text': value}
+  }
+  setForHouseType(value: any) {
+    const selectedImprovmentSet = new Set(this.filter['houseType__in'])
+    selectedImprovmentSet.has(value) ? selectedImprovmentSet.delete(value) : selectedImprovmentSet.add(value)
+    this.filter = { ...this.filter, 'houseType__in': Array.from(selectedImprovmentSet) }
   }
   setImprovment(value: any) {
-    const selectedImprovmentSet = new Set(this.filter['benefit']?.split(','))
+    const selectedImprovmentSet = new Set(this.filter['params__reality_object_param__slug__in'])
     selectedImprovmentSet.has(value) ? selectedImprovmentSet.delete(value) : selectedImprovmentSet.add(value)
-    this.filter = { ...this.filter, 'benefit': Array.from(selectedImprovmentSet).join(',') || '' }
+    this.filter = { ...this.filter, 'params__reality_object_param__slug__in': Array.from(selectedImprovmentSet) }
   }
   
   setParams(newParams: any) {
-    if(newParams['object-type'] === 'apartment' && !newParams['rooms-in-apartment']){
-      newParams['rooms-in-apartment'] = 'free_plan,six,five,four,three,two,one,studio'
-    }
-    if((newParams['object-type'] === 'house' || newParams['object-type'] === 'townhouse') && !newParams['rooms-in-house']){
-      newParams['rooms-in-house'] = 'six,five,four,three,two,one'
-    }
     this.params = newParams
   }
 
@@ -170,7 +185,7 @@ class SearchStore {
   }
 
   getInitialData() {
-    return Object.values(JSON.parse(JSON.stringify({ ...this.initialData})))
+    return JSON.parse(JSON.stringify({ ...this.initialData}))
   }
 
   getParams() {

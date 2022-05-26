@@ -37,7 +37,7 @@ const Finder: NextPage = observer(() => {
       searchStore.onWidthBrowser(window.innerWidth);
     }
   }, []);
-
+  
   return (
     <MainContainer
       keywords={"Поиск"}

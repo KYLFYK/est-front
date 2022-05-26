@@ -49,14 +49,14 @@ const CardContainer: React.FC<Props> = observer(({ mapData,onActiveFilter,forVie
     const classes = useStyles()
 
     const [sort, setSort] = useState(SORT_FILTER_OPTIONS[0].value)
-
+    
     let sortedData: any = []
     if(sort === 'default'){
-        sortedData = [...searchStore.getInitialData()]
+        sortedData = searchStore.getInitialData().results
     } else if(sort === 'bigger'){
-        sortedData = [...searchStore.getInitialData()?.sort((a: any, b: any) => a.price > b.price ? 1 : -1)]
+        sortedData = searchStore.getInitialData()?.results?.sort((a: any, b: any) => a.price > b.price ? 1 : -1)
     } else if(sort === 'smaller'){
-        sortedData = [...searchStore.getInitialData()?.sort((a: any, b: any) => a.price < b.price ? 1 : -1)]
+        sortedData = searchStore.getInitialData()?.results?.sort((a: any, b: any) => a.price < b.price ? 1 : -1)
     }
 
     return (

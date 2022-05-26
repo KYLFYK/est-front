@@ -30,7 +30,7 @@ export const TOGGLE_BUTTONS_OPTIONS_HOUSE: IOption[] = [
 
 export const FILTER_ACTIONS_OPTIONS: IOption[] = [
   { value: "buy", label: "Купить" },
-  { value: "sale", label: "Продать" },
+  { value: "sell", label: "Продать" },
   //{value: "rent", label: "Снять"},
 ];
 
@@ -44,11 +44,22 @@ export const FILTER_HOUSE_TYPE_OPTIONS: IOption[] = [
 export const FILTER_PRIVATE_HOUSE_OPTIONS: IOption[] = [
   { value: "house", label: "Дом" },
   { value: "townhouse", label: "Таунхаус" },
+  { value: "cottage", label: "Коттедж" },
 ];
 
-export const FILTER_BUILDING_TYPE_OPTIONS: IOption[] = [
+export const FILTER_APARTMENT_TYPE_OPTIONS: IOption[] = [
   { value: "new", label: "Новостройка" },
   { value: "old", label: "Вторичное" },
+];
+
+export const FILTER_FORHOUSE_TYPE_OPTIONS: IOption[] = [
+  { value: "brick", label: "Кирпичный" },
+  { value: "monolithic", label: "Монолитный" },
+  { value: "panel", label: "Панельный" },
+  { value: "brick-monolithic", label: "Кирпично-монолитный" },
+  { value: "blocky", label: "Блочный" },
+  { value: "wooden", label: "Деревянный" },
+  { value: "reinforced_concrete", label: "Железобетонный" },
 ];
 
 export const FILTER_FLOORS_OPTIONS: IOption[] = [
@@ -61,8 +72,8 @@ export const FILTER_FLOORS_OPTIONS: IOption[] = [
 ];
 
 export const FILTER_IRB_OPTIONS: IOption[] = [
-  { value: "true", label: "ИЖС" },
-  { value: "false", label: "Без ИЖС" },
+  { value: "Да", label: "ИЖС" },
+  { value: "Нет", label: "В садоводстве" },
 ];
 
 export const FILTER_LAND_SPECS_OPTIONS: IOption[] = [
@@ -79,4 +90,10 @@ export const FILTER_HOUSE_TYPES: IOption[] = [
   { value: "townhouse", label: "Таунхаус" },
   { value: "complex", label: "Жилой комплекс" },
   { value: "cottages", label: "Коттеджный посёлок" },
+];
+
+export const FILTER_POSITIONS_API_TYPES: IOption[] = [
+  { value: "params__reality_object_param__advert_type", label: "Тип сделки" },
+  { value: "params__reality_object_param__type__slug", label: "Тип объекта" },
+  { value: "benefit__in", label: "Благоустройство" },
 ];
