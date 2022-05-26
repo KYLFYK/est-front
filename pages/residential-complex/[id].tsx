@@ -31,6 +31,7 @@ import {DesktopOnly} from "src/components/containers/Adaptive/DesktopOnly";
 import {MobileOnly} from "../../src/components/containers/Adaptive/MobileOnly";
 import {GeneralInfoMobile} from "../../src/components/containers/GeneralInfo/GeneralInfoMobile";
 import {HorizontalTabsObjects} from "../../src/components/shared/HorizontalTabs/HorizontalTabsObjects";
+import {instanceV2} from "../../src/api/instancev2";
 
 const city = ["Москва", "Санкт-Петербург", "Крым", "Сочи", "Нижний Новгород"];
 
@@ -66,9 +67,114 @@ const tabs = [
 ];
 
 const ResidentialComplex: NextPage = observer((props: any) => {
+
+
   const store = useStore();
   const breadCrumbsStore = useBreadcrumbsStore();
   const router = useRouter();
+
+
+  const getObjectId = async () => {
+    // const res =  await instanceV2.get(`https://estat.101bot.ru/api/v1/reality-objects/${router.query.id}`)
+    const res =  await instanceV2.get(`https://estat.101bot.ru/api/v1/reality-objects/7e8b2919-0a15-4d03-8db6-ec2ae0c14533`).then(e=>e.data)
+    console.log('objectId',res)
+
+    console.log("props",props)
+
+    const objectComplex = {
+      address:res.address.full_name,
+      city:res.address.city, // crimea
+      lat:res.address.lat,
+      lng:res.address.lon,
+      images:res.images.map((img:any)=>({
+        id:img.id,
+        ult:img.image_file
+      })),
+      name:res.name,
+      infrastructure:res.infrastructure_desc,
+      info:res.params.map((general:any)=>{
+        if(general.reality_object_param.reality_object_param_group.name_rus === "Основные характеристики" ){
+          return  ({
+            label:general.reality_object_param.name_rus,
+            value:general.value_text
+          })
+        }
+      }).filter((t:any)=>t !== undefined)
+    }
+    const objectTeritori = {
+      subtitle: "Объекты на территории жилого комплекса",
+      specificationsItems:res.params.map((r:any)=>(
+          {
+            label:
+                {
+                  title:r.reality_object_param.reality_object_param_subgroup?.name_rus === 'Объекты на территории жилого комплекса' ? r.reality_object_param.name_rus:'',
+                  text: '',
+                  icon:r.reality_object_param.icon
+                }
+          }
+      )).filter((t:any)=>t.label.title !== '')
+        // {
+        //   label:{
+        //     title:res.params.find()
+        //   }
+        // }
+      // label: {title: 'Кровля', text: 'Черепица'}
+      // value: "roof"
+    }
+
+    const objectBesopasnost = {
+      subtitle: "Безопасность",
+      specificationsItems:res.params.map((r:any)=>(
+          {
+            label:
+                {
+                  title:r.reality_object_param.reality_object_param_subgroup?.name_rus === 'Безопасность' ? r.reality_object_param.name_rus:'',
+                  text: '',
+                  icon:r.reality_object_param.icon
+                }
+          }
+      )).filter((t:any)=>t.label.title !== '')
+    }
+    const objectExpert = {
+      subtitle: 'Строительно-техническая экспертиза',
+      specificationsItems:res.params.map((r:any)=>(
+          {
+            label:
+                {
+                  title:r.reality_object_param.reality_object_param_subgroup?.name_rus === 'Строительно-техническая экспертиза' ? r.reality_object_param.name_rus:'',
+                  text: r.reality_object_param.reality_object_param_subgroup?.name_rus === 'Строительно-техническая экспертиза' ? r.value_text:'',
+                  icon:r.reality_object_param.icon
+                }
+          }
+      )).filter((t:any)=>t.label.title !== '')
+    }
+    const objectInjener = {
+      subtitle: 'Инженерные коммуникации',
+      specificationsItems:res.params.map((r:any)=>(
+          {
+            label:
+                {
+                  title:r.reality_object_param.reality_object_param_subgroup?.name_rus === 'Инженерные коммуникации' ? r.reality_object_param.name_rus:'',
+                  text: r.reality_object_param.reality_object_param_subgroup?.name_rus === 'Инженерные коммуникации' ? r.value_text:'',
+                  icon:r.reality_object_param.icon
+                }
+          }
+      )).filter((t:any)=>t.label.title !== '')
+    }
+
+
+    console.log("objectTeritori",objectTeritori,objectBesopasnost,objectExpert,objectInjener)
+
+    console.log("objectComplex",objectComplex)
+  }
+
+  useEffect(()=>{
+    getObjectId()
+  },[])
+
+
+
+
 
   const general = useRef(null);
   const specs = useRef(null);

@@ -31,9 +31,13 @@ const ObjectCard: React.FC<Props> = observer(
     );
 
     function numberWithSpaces(price: any) {
-      return price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ");
+        if(price>0){
+            return price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ");
+        }
+        return price
     }
 
+      console.log('---',typeObject,JSON.parse(JSON.stringify(houseData)),houseData.type )
     return (
       <div className={s.wrapper}>
         {/*<Link href={`${TEMP_LINK}${route}/${data.id}`} passHref>*/}
@@ -67,22 +71,36 @@ const ObjectCard: React.FC<Props> = observer(
                 <div className={s.ellipsisText}> {data.address} </div>
               </p>
                 <div className={s.subtitleFloor_Type}>
-                    <p className={s.subtitle}>
-                        <Typography inline weight="light" color="tertiary">
-                            Этаж:
-                        </Typography>
-                        <Typography inline className={s.margin}>
-                            {data.property?.floor}/{data.property?.totalFloor}
-                        </Typography>
-                    </p>
-                    <p className={s.subtitle} style={{marginLeft:'10px'}}>
-                        <Typography inline weight="light" color="tertiary">
-                            Тип жилья:
-                        </Typography>
-                        <Typography inline className={s.margin}>
-                            {typeObject === "new" ? "Новостройка" : "Вторичное"}
-                        </Typography>
-                    </p>
+                    {
+                        houseData.type==="residential_complex"
+                            ?
+                            <p className={s.subtitle} >
+                                <Typography inline weight="light" color="tertiary">
+                                    Этажность:
+                                </Typography>
+                                <Typography inline className={s.margin}>
+                                    {data.property?.totalFloor}
+                                </Typography>
+                            </p>
+                            :
+                            <p className={s.subtitle}>
+                                <Typography inline weight="light" color="tertiary">
+                                    Этаж:
+                                </Typography>
+                                <Typography inline className={s.margin}>
+                                    {data.property?.floor}/{data.property?.totalFloor}
+                                </Typography>
+                            </p>
+                    }
+                            <p className={s.subtitle} style={{marginLeft:'10px'}}>
+                                <Typography inline weight="light" color="tertiary">
+                                    Тип жилья:
+                                </Typography>
+                                <Typography inline className={s.margin}>
+                                    {typeObject === "Новостройка" ? "Новостройка" : "Вторичное"}
+                                    {/*{typeObject === "Новостройка" ? "Н-cтройка" : "Вторичное"}*/}
+                                </Typography>
+                            </p>
                 </div>
               <p className={s.price}>{numberWithSpaces(data.price)} ₽</p>
             </div>

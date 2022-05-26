@@ -25,6 +25,7 @@ const ObjectSpecifications: React.FC<Props> = ({
   specificationsLists,
   title,
 }) => {
+  console.log("specificationsLists",specificationsLists)
   return (
     <div className={s.container}>
       <HeadLine title={title} className={s.headLine}>
@@ -32,7 +33,9 @@ const ObjectSpecifications: React.FC<Props> = ({
           specificationsLists.map((specList, idx) => {
             // для исключения пустого поля заголовка
             return (
-              specList.specificationsItems[0].label.title !== "" && (
+                specList.specificationsItems !== undefined
+                && specList.specificationsItems[0] !== undefined
+                && specList.specificationsItems[0].label.title !== "" && (
                 <div key={idx}>
                   <Typography weight="bold" className={s.subTitle}>
                     {specList.subtitle}

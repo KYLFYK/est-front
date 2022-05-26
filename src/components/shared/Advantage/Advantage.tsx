@@ -31,7 +31,9 @@ export const Advantage: React.FC<AdvantagePropsType> = ({
   //const textWeight = variant === "primary" ? "regular" : "light";
   return (
     <div className={classNames(css.blockAdvantage, classWrapper)}>
-      <div className={css.icon}>{children}</div>
+      <div className={css.icon}>
+        {children}
+      </div>
       <div
         className={classNames(css.text, className, {
           [css.autoWidth]: titleWeight === "regular" && titleSize === "default",

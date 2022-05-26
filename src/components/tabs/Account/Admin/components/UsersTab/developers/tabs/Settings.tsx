@@ -22,8 +22,10 @@ export const Settings: FC = () => {
   const [phoneNumbers, setPhoneNumbers] = useState<string[]>([]);
   const [selectedStatus, setSelectedStatus] = useState("Готово к проверке");
 
+
+
   return (
-    <Scroll height={'530'} >
+    <Scroll height={'510'} >
       <div
         style={{
           paddingTop: 20,
@@ -53,7 +55,6 @@ export const Settings: FC = () => {
               name={"password"}
               defaultValue={" "}
               onChange={() => {
-
               }}
             />
             <BaseInput
