@@ -13,6 +13,7 @@ import {
 } from "../../src/utils/convertPagesData/convertPagesData";
 import {useRouter} from "next/router";
 import ObjectDescription from "../../src/components/containers/ObjectDescription/ObjectDescription";
+import css from "../../styles/slider.module.scss";
 
 const city = ["Москва", "Санкт-Петербург", "Крым", "Сочи", "Нижний Новгород"];
 const personalAccount = [
@@ -179,41 +180,44 @@ const ResidentComplexV2= () => {
             footerColor={"accent"}
             refs={refs}
         >
-            <Breadcrumbs location={"object"} />
-            <Views items={views} />
-            <NameEstate item={name} />
-            <HorizontalTabsObjects tabs={tabs} refs={refs} />
-            <div ref={general}>
-                <GeneralInfoV2
-                    // info={[
-                    //     {label:name,value:''},
-                    //     {label:'Адрес',value:address},
-                    //     {label:'Срок сдачи',value:''},
-                    //     {label:name,value:''},
-                    //     {label:name,value:''},
-                    //
-                    // ]}
-                    // info={info}
-                    info={allHarakteristic}
-                    images={images}
-                    // classSlider={css.image}
-                />
+            <div className={css.vh_wh}>
+                <Breadcrumbs location={"object"} />
+                <Views items={views} />
+                <NameEstate item={name} />
+                <HorizontalTabsObjects tabs={tabs} refs={refs} />
+                <div ref={general}>
+                    <GeneralInfoV2
+                        // info={[
+                        //     {label:name,value:''},
+                        //     {label:'Адрес',value:address},
+                        //     {label:'Срок сдачи',value:''},
+                        //     {label:name,value:''},
+                        //     {label:name,value:''},
+                        //
+                        // ]}
+                        // info={info}
+                        info={allHarakteristic}
+                        images={images}
+                        // classSlider={css.image}
+                    />
+                </div>
+                <div ref={specs}>
+                    <ObjectSpecificationsV2
+                        specificationsLists={[objectTeritori,objectBesopasnost]}
+                        title={"Особенности"}
+                    />
+                </div>
+                <div ref={architec}>
+                    <ObjectSpecificationsV2
+                        specificationsLists={[objectExpert,objectInjener]}
+                        title={"Архитектурно-планировочные решения"}
+                    />
+                </div>
+                <div style={{margin:'0 60px'}}>
+                    <ObjectDescription items={[description_items]} />
+                </div>
             </div>
-            <div ref={specs}>
-                <ObjectSpecificationsV2
-                    specificationsLists={[objectTeritori,objectBesopasnost]}
-                    title={"Особенности"}
-                />
-            </div>
-            <div ref={architec}>
-                <ObjectSpecificationsV2
-                    specificationsLists={[objectExpert,objectInjener]}
-                    title={"Архитектурно-планировочные решения"}
-                />
-            </div>
-            <div style={{margin:'0 60px'}}>
-                <ObjectDescription items={[description_items]} />
-            </div>
+
         </MainContainer>
     );
 };
