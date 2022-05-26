@@ -76,8 +76,6 @@ const ResidentComplexV2= () => {
     const getObjectId = async () => {
         const id = router.query.id
         const res =  await instanceV2.get(`https://estat.101bot.ru/api/v1/reality-objects/${id}`).then(e=>e.data)
-
-        // const res =  await instanceV2.get(`https://estat.101bot.ru/api/v1/reality-objects/7e8b2919-0a15-4d03-8db6-ec2ae0c14533`).then(e=>e.data)
         console.log('objectId',res)
 
         setName(res.name)
@@ -213,9 +211,7 @@ const ResidentComplexV2= () => {
                         title={"Архитектурно-планировочные решения"}
                     />
                 </div>
-                <div style={{margin:'0 60px'}}>
-                    <ObjectDescription items={[description_items]} />
-                </div>
+                <ObjectDescription items={[description_items]} />
             </div>
 
         </MainContainer>

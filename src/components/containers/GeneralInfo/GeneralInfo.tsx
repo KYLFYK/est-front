@@ -69,7 +69,7 @@ const GeneralInfo: React.FC<Props> = observer(({ images, price, info,classSlider
 
                         </div>
                     ))
-                }}
+                }
                 </div>
             </div>
         </div>

@@ -264,9 +264,8 @@ const Apartment: NextPage = observer((props: any) => {
                 {/*        price={props.price}*/}
                 {/*    />*/}
                 {/*</MobileOnly>*/}
-                <div style={{margin:'0 60px'}}>
-                    <ObjectDescription items={[description_items]} />
-                </div>
+                <ObjectDescription items={[description_items]} />
+
 
                 {/*{(props?.online_tour?.threeD_tour?.url ||*/}
                 {/*    props?.online_tour?.vr_tour?.url) && (*/}

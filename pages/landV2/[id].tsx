@@ -73,7 +73,6 @@ const Apartment: NextPage = observer((props: any) => {
 
     const [allHarakteristic,setAllHarakteristic]=useState<any>([])
     const getApartmentId = async () => {
-        // const res =  await instanceV2.get(`https://estat.101bot.ru/api/v1/reality-objects/${router.query.id}`)
         const id = router.query.id
         const res =  await instanceV2.get(`https://estat.101bot.ru/api/v1/reality-objects/${id}`).then(e=>e.data)
         console.log('objectId',res)
@@ -264,9 +263,9 @@ const Apartment: NextPage = observer((props: any) => {
                 {/*        price={props.price}*/}
                 {/*    />*/}
                 {/*</MobileOnly>*/}
-                <div style={{margin:'0 60px'}}>
-                    <ObjectDescription items={[description_items]} />
-                </div>
+
+                <ObjectDescription items={[description_items]} />
+
 
                 {/*{(props?.online_tour?.threeD_tour?.url ||*/}
                 {/*    props?.online_tour?.vr_tour?.url) && (*/}
