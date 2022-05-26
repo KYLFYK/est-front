@@ -62,7 +62,6 @@ export const Account: FC<Props> = observer(({ }) => {
       "description": profileData?.developerProperty.description, //-
     })
   },[])
-  console.log(valueAccount)
 
   // useEffect(() => {
   //   form.setValues([

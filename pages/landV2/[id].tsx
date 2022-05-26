@@ -75,7 +75,6 @@ const Apartment: NextPage = observer((props: any) => {
     const getApartmentId = async () => {
         const id = router.query.id
         const res =  await instanceV2.get(`https://estat.101bot.ru/api/v1/reality-objects/${id}`).then(e=>e.data)
-        console.log('objectId',res)
 
         setName(res.name)
         setViews( ['11.04.2022', res.views])
@@ -160,11 +159,6 @@ const Apartment: NextPage = observer((props: any) => {
             specificationsItems:convertSpecificationsIconsText(res.params,"Мебель" )
         }
         setObjectMebel(objectMebel)
-
-
-
-        // console.log("objectTeritori",objectTeritori,objectBesopasnost,objectExpert,objectInjener)
-        console.log("objectComplex",objectComplex)
     }
 
     useEffect(()=>{

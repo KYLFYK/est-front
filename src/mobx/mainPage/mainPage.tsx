@@ -148,7 +148,6 @@ class MainPageStore {
     }
     async fetchBestOffersV2(){
         const res =  await  instanceV2.get('https://estat.101bot.ru/api/v1/reality-objects/')
-        console.log('instanceV2',res.data.results)
 
         // const inRes = res.data.results[0]
         const inRes1 = res.data.results
@@ -205,7 +204,6 @@ class MainPageStore {
 
         this.initialData.bestOffersV2= allObjectsBestOffersV2
         // type objects,этаж, type
-        console.log(allObjectsBestOffersV2)
     }
 
     async fetchComplexDeveloper(id: number) {

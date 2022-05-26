@@ -26,7 +26,7 @@ const CottagesGallery = () => {
                     {activeMenu(active)}
                 </div>
                 <div className={css.positionButton}>
-                    <ToggleButtons
+                    {/*<ToggleButtons
                         items={[
                             {label: '3D-тур', value: '3D-тур'},
                             {label: 'Галерея', value: 'Галерея'},
@@ -36,7 +36,7 @@ const CottagesGallery = () => {
                         activeValue={active}
                         classNameButton={css.buttonToggleCottages}
                         className={css.buttonToggleCottagesColor}
-                    />
+                    />*/}
                 </div>
 
             </div>

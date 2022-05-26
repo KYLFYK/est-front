@@ -77,9 +77,6 @@ const ResidentialComplex: NextPage = observer((props: any) => {
   const getObjectId = async () => {
     // const res =  await instanceV2.get(`https://estat.101bot.ru/api/v1/reality-objects/${router.query.id}`)
     const res =  await instanceV2.get(`https://estat.101bot.ru/api/v1/reality-objects/7e8b2919-0a15-4d03-8db6-ec2ae0c14533`).then(e=>e.data)
-    console.log('objectId',res)
-
-    console.log("props",props)
 
     const objectComplex = {
       address:res.address.full_name,
@@ -161,11 +158,6 @@ const ResidentialComplex: NextPage = observer((props: any) => {
           }
       )).filter((t:any)=>t.label.title !== '')
     }
-
-
-    console.log("objectTeritori",objectTeritori,objectBesopasnost,objectExpert,objectInjener)
-
-    console.log("objectComplex",objectComplex)
   }
 
   useEffect(()=>{

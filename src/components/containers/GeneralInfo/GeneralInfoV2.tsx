@@ -30,7 +30,6 @@ const GeneralInfoV2: React.FC<Props> = observer(({ images, price, info,classSlid
         }
 
     },[])
-    console.log('infoGeneral',info)
     return (
         <div className={s.container}>
             <div className={s.sliderContainer}>

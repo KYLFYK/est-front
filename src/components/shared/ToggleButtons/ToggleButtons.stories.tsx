@@ -21,12 +21,12 @@ WithoutActiveElement.args = {
 export const OneActiveElement = Template.bind({});
 OneActiveElement.args = {
     items: OPTION_DATA,
-    activeValue: OPTION_DATA[2].value
+    //activeValue: OPTION_DATA[2].value
 };
 
 export const MultipleActiveElements = Template.bind({});
 MultipleActiveElements.args = {
     items: OPTION_DATA,
-    activeValue: [OPTION_DATA[0].value, OPTION_DATA[1].value].join(','),
+    //activeValue: [OPTION_DATA[0].value, OPTION_DATA[1].value].join(','),
     multiple: true
 };

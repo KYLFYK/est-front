@@ -112,7 +112,6 @@ class SearchStore {
     this.filter = {...this.filter, "advert_type": value}
   }
   setHouseType(value: string | number) {
-    console.log('value', value)
     this.filter = {
       ...this.filter, 
       'type__slug': value, 

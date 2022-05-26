@@ -76,7 +76,6 @@ const ResidentComplexV2= () => {
     const getObjectId = async () => {
         const id = router.query.id
         const res =  await instanceV2.get(`https://estat.101bot.ru/api/v1/reality-objects/${id}`).then(e=>e.data)
-        console.log('objectId',res)
 
         setName(res.name)
         setViews( ['11.04.2022', res.views])
@@ -158,9 +157,6 @@ const ResidentComplexV2= () => {
             specificationsItems:convertSpecificationsIconsText(res.params,'Инженерные коммуникации')
         }
         setObjectInjener(objectInjener)
-
-        // console.log("objectTeritori",objectTeritori,objectBesopasnost,objectExpert,objectInjener)
-        console.log("objectComplex",objectComplex)
     }
 
     useEffect(()=>{

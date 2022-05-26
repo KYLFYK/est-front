@@ -6,7 +6,6 @@ export const transformRequestOptions = (params: any) => {
   const length = Object.entries(params).length;
   let i = 0;
   for (const key in params) {
-    //console.log(key)
     if (typeof params[key] !== "object" && params[key]) {
       options += `{"${key}": ${isNaN(params[key] / 1) ? `"${params[key]}"` : params[key]}}${i+1 < length ? ', ' : ''}`;
     } else if (typeof params[key] === "object" && params[key] && params[key].length) {

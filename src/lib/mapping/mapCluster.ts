@@ -8,7 +8,7 @@ export const MappingCluster = (objs: any) => {
             },
             geometry:{
                 type:'Point',
-                coordinates:[Number(o.latitude), Number(o.longitude)]
+                coordinates:[Number(o.address.lat), Number(o.address.lon)]
             }
         })
     })

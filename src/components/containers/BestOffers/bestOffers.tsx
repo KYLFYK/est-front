@@ -69,7 +69,6 @@ export const searchFloor = (a:any, title:string) =>{
                 : a.params.find((p:any) => p.reality_object_param.name_rus === title )?.value_int
             : 0
         :0
-    // console.log("resFloor",res)
     return res
 }
 
@@ -158,7 +157,6 @@ export const BestOffers: FC<BestOffersType> = observer(({tagsButton}) => {
         store.fetchBestOffers(10, activeFilter[0], activeFilter[1], activeFilter[2], activeFilter[3], activeFilter[4])
     }
     const [sort, setSort] = useState(SORT_FILTER_OPTIONS[0].value)
-    // console.log(JSON.parse(JSON.stringify(store.initialData.bestOffers)))
 
     return (
         <div className={css.offers}>

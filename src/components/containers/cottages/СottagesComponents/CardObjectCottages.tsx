@@ -38,7 +38,7 @@ const CardObjectVillage: FC<CardObjectCottages> = ({data}) => {
                     className={css.imagePlaning}
                 />
                 <div style={{marginTop: '20px', height: "40px"}}>
-                    <ToggleButtons
+                    {/*<ToggleButtons
                         items={[
                             {label: 'Планировка', value: 'Планировка'},
                             {label: 'Отделка', value: 'Отделка'},
@@ -47,7 +47,7 @@ const CardObjectVillage: FC<CardObjectCottages> = ({data}) => {
                         onChange={setActive}
                         activeValue={active}
                         classNameButton={css.buttonToggle}
-                    />
+                        />*/}
                 </div>
 
             </div>

@@ -37,7 +37,6 @@ const ObjectCard: React.FC<Props> = observer(
         return price
     }
 
-      console.log('---',typeObject,JSON.parse(JSON.stringify(houseData)),houseData.type )
     return (
       <div className={s.wrapper}>
         {/*<Link href={`${TEMP_LINK}${route}/${data.id}`} passHref>*/}
@@ -68,7 +67,7 @@ const ObjectCard: React.FC<Props> = observer(
                   {" "}
                   Адрес:{" "}
                 </Typography>
-                <div className={s.ellipsisText}> {data.address} </div>
+                <div className={s.ellipsisText}> {data.address.full_address} </div>
               </p>
                 <div className={s.subtitleFloor_Type}>
                     {
