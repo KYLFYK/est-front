@@ -44,7 +44,9 @@ const ObjectSpecificationsV2: React.FC<Props> = ({
                                     {specList.specificationsItems &&
                                     specList.specificationsItems.map((spec, index) => (
                                         <Advantage
-                                            variant="secondary"
+                                            titleWeight={undefined}
+                                            titleSize={undefined}
+                                            textWeight={undefined}
                                             text={spec.label.text}
                                             title={spec.label.title}
                                             key={index}
