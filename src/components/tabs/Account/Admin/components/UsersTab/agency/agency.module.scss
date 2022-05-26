@@ -444,9 +444,7 @@
 
 .tabs {
   margin: 7px 0 0 -12px !important;
-
-
-    padding: 0 ;
+    //padding: 0 ;
 
   &Wrapper {
 
@@ -473,5 +471,12 @@
   position: relative;
   height: 38px;
   cursor: pointer;
+}
+.inputTextAria{
+  display: flex;
+  min-width: 290px;
+  width: 100%;
+  resize: vertical;
+  height: 100px ;
 }
 

@@ -1,4 +1,4 @@
-import { FC, useState } from "react";
+import {FC, useEffect, useState} from "react";
 import { BaseInput } from "../../../../../../../shared/BaseInput/Input";
 import { DeveloperProfileStore } from "../../../../../../../../mobx/role/admin/profiles/developer";
 import {
@@ -43,7 +43,79 @@ export interface ILegalForm {
 export const LegalInfo: FC = observer(() => {
   const [activityKinds, setActivityKinds] = useState<string[]>([""]);
 
-  const { profileData } = DeveloperProfileStore;
+  const { profileData  ,legalInfo} = DeveloperProfileStore;
+
+  const [valueLegalInfo, setValueLegalInfo]=useState<any>({})
+
+
+  useEffect(()=>{
+    setValueLegalInfo({
+      legalFullName: profileData?.developerProperty.legalFullName,
+      legalAddress: profileData?.developerProperty.legalAddress,
+      authorizedCapital: profileData?.developerProperty.authorizedCapital // number
+          ? profileData?.developerProperty.authorizedCapital
+          : 'undefined',
+      OKFS: profileData?.developerProperty.OKFS,
+      OKOPF: profileData?.developerProperty.OKOPF,
+      OKOGU: profileData?.developerProperty.OKOGU,
+      INN: profileData?.developerProperty.INN,
+      OGRN: profileData?.developerProperty.OGRN,
+      KPP: profileData?.developerProperty.KPP,
+      OKATO: profileData?.developerProperty.OKATO,
+      OKPO: profileData?.developerProperty.OKPO,
+      OKTMO: profileData?.developerProperty.OKTMO,
+      status: profileData?.developerProperty.status
+          ? profileData?.developerProperty.status
+          : '',
+      leaderName: profileData?.developerProperty.leaderName,
+      founders: profileData?.developerProperty.founders,
+      enterpriseSize: profileData?.developerProperty.enterpriseSize // number
+          ? profileData?.developerProperty.enterpriseSize
+          : 'undefined',
+      numberOfStaff: profileData?.developerProperty.numberOfStaff // number
+          ? profileData?.developerProperty.numberOfStaff
+          : 'undefined',
+
+
+
+
+
+      filial: '',
+      revenue: profileData?.developerProperty.revenue
+          ? profileData?.developerProperty.revenue.toString()
+          : undefined,
+      netAssets: profileData?.developerProperty.netAssets
+          ? profileData?.developerProperty.netAssets.toString()
+          : undefined,
+      netProfit: profileData?.developerProperty.netProfit
+          ? profileData?.developerProperty.netProfit.toString()
+          : undefined,
+      registrationDate: profileData?.developerProperty.registrationDate
+          ? profileData?.developerProperty.registrationDate
+          : undefined,
+
+
+      registrationAuthorityName: profileData?.developerProperty.registrationAuthorityName
+          ? profileData?.developerProperty.registrationAuthorityName
+          : undefined,
+      registrationAuthorityAddress: profileData?.developerProperty
+          .registrationAuthorityAddress
+          ? profileData?.developerProperty.registrationAuthorityAddress
+          : undefined,
+      registeringAuthorityLocated: profileData?.developerProperty.registeringAuthorityLocated
+          ? profileData?.developerProperty.registeringAuthorityLocated
+          : undefined,
+      okved: "",
+      okvedAdditional: "",
+    })
+  },[])
+
+  const editValueLegalInfo = (title:string,value:string) => {
+    setValueLegalInfo({...valueLegalInfo,[title]:value})
+  }
+  const updateValueLegal = async () => {
+    await legalInfo(valueLegalInfo)
+  }
 
   const [form] = useForm<ILegalForm>({
     fullCompanyName: profileData?.developerProperty.legalFullName,
@@ -118,7 +190,8 @@ export const LegalInfo: FC = observer(() => {
                 type="text"
                 name={"fullCompanyName"}
                 defaultValue={" "}
-                onChange={() => {}}
+                onChange={(e) => editValueLegalInfo("legalFullName",e.currentTarget.value)}
+                value={valueLegalInfo.legalFullName}
               />
               <BaseInput
                 classNameWrapper={styles.largeWrapper}
@@ -128,7 +201,8 @@ export const LegalInfo: FC = observer(() => {
                 type="text"
                 name={"address"}
                 defaultValue={" "}
-                onChange={() => {}}
+                onChange={(e) => editValueLegalInfo("legalAddress",e.currentTarget.value)}
+                value={valueLegalInfo.legalAddress}
               />
               <BaseInput
                 classNameWrapper={styles.largeWrapper}
@@ -138,7 +212,8 @@ export const LegalInfo: FC = observer(() => {
                 type="text"
                 name={"capital"}
                 defaultValue={" "}
-                onChange={() => {}}
+                onChange={(e) => editValueLegalInfo("authorizedCapital",e.currentTarget.value)}
+                value={valueLegalInfo.authorizedCapital}
               />
               <BaseInput
                 classNameWrapper={styles.largeWrapper}
@@ -148,7 +223,8 @@ export const LegalInfo: FC = observer(() => {
                 type="text"
                 name={"okfs"}
                 defaultValue={" "}
-                onChange={() => {}}
+                onChange={(e) => editValueLegalInfo("OKFS",e.currentTarget.value)}
+                value={valueLegalInfo.OKFS}
               />
               <BaseInput
                 classNameWrapper={styles.largeWrapper}
@@ -158,7 +234,8 @@ export const LegalInfo: FC = observer(() => {
                 type="text"
                 name={"okopf"}
                 defaultValue={" "}
-                onChange={() => {}}
+                onChange={(e) => editValueLegalInfo("OKOPF",e.currentTarget.value)}
+                value={valueLegalInfo.OKOPF}
               />
               <BaseInput
                 classNameWrapper={styles.largeWrapper}
@@ -168,7 +245,8 @@ export const LegalInfo: FC = observer(() => {
                 type="text"
                 name={"okogu"}
                 defaultValue={" "}
-                onChange={() => {}}
+                onChange={(e) => editValueLegalInfo("OKOPF",e.currentTarget.value)}
+                value={valueLegalInfo.OKOPF}
               />
               <div className={styles.subSection}>
                 <BaseInput
@@ -179,7 +257,8 @@ export const LegalInfo: FC = observer(() => {
                   type="text"
                   name={"inn"}
                   defaultValue={" "}
-                  onChange={() => {}}
+                  onChange={(e) => editValueLegalInfo("INN",e.currentTarget.value)}
+                  value={valueLegalInfo.INN}
                 />
                 <BaseInput
                   classNameWrapper={styles.smallWrapper}
@@ -189,7 +268,8 @@ export const LegalInfo: FC = observer(() => {
                   type="text"
                   name={"ogrn"}
                   defaultValue={" "}
-                  onChange={() => {}}
+                  onChange={(e) => editValueLegalInfo("OGRN",e.currentTarget.value)}
+                  value={valueLegalInfo.OGRN}
                 />
                 <BaseInput
                   classNameWrapper={styles.smallWrapper}
@@ -199,7 +279,8 @@ export const LegalInfo: FC = observer(() => {
                   type="text"
                   name={"kpp"}
                   defaultValue={" "}
-                  onChange={() => {}}
+                  onChange={(e) => editValueLegalInfo("KPP",e.currentTarget.value)}
+                  value={valueLegalInfo.KPP}
                 />
                 <BaseInput
                   classNameWrapper={styles.smallWrapper}
@@ -209,7 +290,8 @@ export const LegalInfo: FC = observer(() => {
                   type="text"
                   name={"okato"}
                   defaultValue={" "}
-                  onChange={() => {}}
+                  onChange={(e) => editValueLegalInfo("OKATO",e.currentTarget.value)}
+                  value={valueLegalInfo.OKATO}
                 />
                 <BaseInput
                   classNameWrapper={styles.smallWrapper}
@@ -219,7 +301,8 @@ export const LegalInfo: FC = observer(() => {
                   type="text"
                   name={"okpo"}
                   defaultValue={" "}
-                  onChange={() => {}}
+                  onChange={(e) => editValueLegalInfo("OKPO",e.currentTarget.value)}
+                  value={valueLegalInfo.OKPO}
                 />
                 <BaseInput
                   classNameWrapper={styles.smallWrapper}
@@ -229,7 +312,8 @@ export const LegalInfo: FC = observer(() => {
                   type="text"
                   name={"oktmo"}
                   defaultValue={" "}
-                  onChange={() => {}}
+                  onChange={(e) => editValueLegalInfo("OKTMO",e.currentTarget.value)}
+                  value={valueLegalInfo.OKTMO}
                 />
               </div>
             </section>
@@ -243,7 +327,8 @@ export const LegalInfo: FC = observer(() => {
                 type="text"
                 name={"companyStatus"}
                 defaultValue={" "}
-                onChange={() => {}}
+                onChange={(e) => editValueLegalInfo("status",e.currentTarget.value)}
+                value={valueLegalInfo.status}
               />
               <BaseInput
                 classNameWrapper={styles.largeWrapper}
@@ -253,7 +338,8 @@ export const LegalInfo: FC = observer(() => {
                 type="text"
                 name={"director"}
                 defaultValue={" "}
-                onChange={() => {}}
+                onChange={(e) => editValueLegalInfo("leaderName",e.currentTarget.value)}
+                value={valueLegalInfo.leaderName}
               />
               <BaseInput
                 classNameWrapper={styles.largeWrapper}
@@ -263,7 +349,8 @@ export const LegalInfo: FC = observer(() => {
                 type="text"
                 name={"founder"}
                 defaultValue={" "}
-                onChange={() => {}}
+                onChange={(e) => editValueLegalInfo("founders",e.currentTarget.value)}
+                value={valueLegalInfo.founders}
               />
               <div className={styles.subSection}>
                 <BaseInput
@@ -274,7 +361,8 @@ export const LegalInfo: FC = observer(() => {
                   type="text"
                   name={"size"}
                   defaultValue={" "}
-                  onChange={() => {}}
+                  onChange={(e) => editValueLegalInfo("enterpriseSize",e.currentTarget.value)}
+                  value={valueLegalInfo.enterpriseSize}
                 />
                 <BaseInput
                   classNameWrapper={styles.mediumWrapper}
@@ -284,7 +372,8 @@ export const LegalInfo: FC = observer(() => {
                   type="text"
                   name={"personal"}
                   defaultValue={" "}
-                  onChange={() => {}}
+                  onChange={(e) => editValueLegalInfo("numberOfStaff",e.currentTarget.value)}
+                  value={valueLegalInfo.numberOfStaff}
                 />
                 <BaseInput
                   classNameWrapper={styles.mediumWrapper}
@@ -294,7 +383,8 @@ export const LegalInfo: FC = observer(() => {
                   type="text"
                   name={"filial"}
                   defaultValue={" "}
-                  onChange={() => {}}
+                  onChange={(e) => editValueLegalInfo("filial",e.currentTarget.value)}
+                  value={valueLegalInfo.filial}
                 />
                 <BaseInput
                   classNameWrapper={styles.mediumWrapper}
@@ -304,7 +394,8 @@ export const LegalInfo: FC = observer(() => {
                   type="text"
                   name={"revenue"}
                   defaultValue={" "}
-                  onChange={() => {}}
+                  onChange={(e) => editValueLegalInfo("revenue",e.currentTarget.value)}
+                  value={valueLegalInfo.revenue}
                 />
                 <BaseInput
                   classNameWrapper={styles.mediumWrapper}
@@ -314,7 +405,8 @@ export const LegalInfo: FC = observer(() => {
                   type="text"
                   name={"net"}
                   defaultValue={" "}
-                  onChange={() => {}}
+                  onChange={(e) => editValueLegalInfo("netAssets",e.currentTarget.value)}
+                  value={valueLegalInfo.netAssets}
                 />
                 <BaseInput
                   classNameWrapper={styles.mediumWrapper}
@@ -324,7 +416,8 @@ export const LegalInfo: FC = observer(() => {
                   type="text"
                   name={"netActive"}
                   defaultValue={" "}
-                  onChange={() => {}}
+                  onChange={(e) => editValueLegalInfo("netProfit",e.currentTarget.value)}
+                  value={valueLegalInfo.netProfit}
                 />
               </div>
             </section>
@@ -340,7 +433,8 @@ export const LegalInfo: FC = observer(() => {
                 type="text"
                 name={"companyRegistered"}
                 defaultValue={" "}
-                onChange={() => {}}
+                onChange={(e) => editValueLegalInfo("registrationDate",e.currentTarget.value)}
+                value={valueLegalInfo.registrationDate}
               />
               <BaseInput
                 classNameWrapper={styles.largeWrapper}
@@ -350,7 +444,8 @@ export const LegalInfo: FC = observer(() => {
                 type="text"
                 name={"registeredFrom"}
                 defaultValue={" "}
-                onChange={() => {}}
+                onChange={(e) => editValueLegalInfo("registrationAuthorityName",e.currentTarget.value)}
+                value={valueLegalInfo.registrationAuthorityName}
               />
               <BaseInput
                 classNameWrapper={styles.largeWrapper}
@@ -360,7 +455,8 @@ export const LegalInfo: FC = observer(() => {
                 type="text"
                 name={"registeredAdress"}
                 defaultValue={" "}
-                onChange={() => {}}
+                onChange={(e) => editValueLegalInfo("registrationAuthorityAddress",e.currentTarget.value)}
+                value={valueLegalInfo.registrationAuthorityAddress}
               />
               <BaseInput
                 classNameWrapper={styles.largeWrapper}
@@ -370,7 +466,8 @@ export const LegalInfo: FC = observer(() => {
                 type="text"
                 name={"registeredMember"}
                 defaultValue={" "}
-                onChange={() => {}}
+                onChange={(e) => editValueLegalInfo("registeringAuthorityLocated",e.currentTarget.value)}
+                value={valueLegalInfo.registeringAuthorityLocated}
               />
             </section>
             <section className={styles.vertical}>
@@ -383,7 +480,9 @@ export const LegalInfo: FC = observer(() => {
                 type="text"
                 name={"okved"}
                 defaultValue={" "}
-                onChange={() => {}}
+                onChange={(e) => editValueLegalInfo("okved",e.currentTarget.value)}
+                value={valueLegalInfo.okved}
+                disabled
               />
               <BaseInput
                 classNameWrapper={styles.largeWrapper}
@@ -393,7 +492,9 @@ export const LegalInfo: FC = observer(() => {
                 type="text"
                 name={"okvedAdditional"}
                 defaultValue={" "}
-                onChange={() => {}}
+                onChange={(e) => editValueLegalInfo("okvedAdditional",e.currentTarget.value)}
+                value={valueLegalInfo.okved}
+                disabled
               />
               {activityKinds.map((active, index) => (
                 <BaseInput

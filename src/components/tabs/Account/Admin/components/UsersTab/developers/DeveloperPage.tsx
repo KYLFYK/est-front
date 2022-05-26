@@ -15,6 +15,7 @@ import { observer } from "mobx-react-lite";
 import { useForm } from "../../../../../../containers/FormController";
 
 import styles from "../agency/agency.module.scss";
+import {undefinedStringAndNull} from "../../../../../../../utils/convertNullUnd/convertUndefinedNull";
 
 export const DeveloperPage: FC = observer(() => {
   const [haveUnsaved, setUnsaved] = useState<boolean>(false);
@@ -30,96 +31,99 @@ export const DeveloperPage: FC = observer(() => {
     changeProfileInfo,
   } = DeveloperProfileStore;
 
+  const Router = useRouter()
+
   const onFormChange = (changed: boolean) => {
     if (changed !== haveUnsaved) {
       setUnsaved(changed);
     }
   };
 
-  const [accountForm] = useForm<IAccountForm>(
-      {
-        companyName: profileData?.developerProperty.name,
-        developerType: profileData?.developerProperty.type,
-        address: profileData?.developerProperty.address,
-        phoneNumber: profileData?.developerProperty.phone[0]
-            ? profileData?.developerProperty.phone[0].value
-            : undefined,
-        email: profileData?.email,
-        cite: profileData?.developerProperty.site
-            ? profileData?.developerProperty.site
-            : undefined,
-        description: profileData?.developerProperty.description,
-      },
-      onFormChange
-  );
+  // const [accountForm] = useForm<IAccountForm>(
+  //     {
+  //       companyName: profileData?.developerProperty.name,
+  //       developerType: profileData?.developerProperty.type,
+  //       address: profileData?.developerProperty.address,
+  //       phoneNumber: profileData?.developerProperty.phone[0]
+  //           ? profileData?.developerProperty.phone[0].value
+  //           : undefined,
+  //       email: profileData?.email,
+  //       cite: profileData?.developerProperty.site
+  //           ? profileData?.developerProperty.site
+  //           : undefined,
+  //       description: profileData?.developerProperty.description,
+  //     },
+  //     onFormChange
+  // );
 
   useEffect(() => {
-    if ((!loaded && !errorOnLoad) || developerId !== pathDeveloperId) {
-      loadProfileInfo(pathDeveloperId);
+    if ((!loaded && !errorOnLoad) && pathDeveloperId !== undefined ) {
+        loadProfileInfo(pathDeveloperId);
     }
-  }, [loaded, errorOnLoad, loadProfileInfo, developerId]);
+  // }, [loaded, errorOnLoad, loadProfileInfo, developerId]);
+  }, []);
 
-  useEffect(() => {
-    if (loaded && developerId === pathDeveloperId) {
-      accountForm.setValues([
-        {
-          name: "companyName",
-          value: profileData?.developerProperty.name,
-        },
-        {
-          name: "developerType",
-          value: profileData?.developerProperty.type,
-        },
-        {
-          name: "address",
-          value: profileData?.developerProperty.address,
-        },
-        {
-          name: "phoneNumber",
-          value: profileData?.developerProperty.phone[0]
-              ? profileData?.developerProperty.phone[0].value
-              : undefined,
-        },
-        {
-          name: "email",
-          value: profileData?.email,
-        },
-        {
-          name: "cite",
-          value: profileData?.developerProperty.site
-              ? profileData?.developerProperty.site
-              : undefined,
-        },
-        {
-          name: "description",
-          value: profileData?.developerProperty.description,
-        },
-      ]);
-    }
-  }, [loaded, errorOnLoad, loadProfileInfo, developerId]);
+  // useEffect(() => {
+  //   if (loaded && developerId === pathDeveloperId) {
+  //     accountForm.setValues([
+  //       {
+  //         name: "companyName",
+  //         value: profileData?.developerProperty.name,
+  //       },
+  //       {
+  //         name: "developerType",
+  //         value: profileData?.developerProperty.type,
+  //       },
+  //       {
+  //         name: "address",
+  //         value: profileData?.developerProperty.address,
+  //       },
+  //       {
+  //         name: "phoneNumber",
+  //         value: profileData?.developerProperty.phone[0]
+  //             ? profileData?.developerProperty.phone[0].value
+  //             : undefined,
+  //       },
+  //       {
+  //         name: "email",
+  //         value: profileData?.email,
+  //       },
+  //       {
+  //         name: "cite",
+  //         value: profileData?.developerProperty.site
+  //             ? profileData?.developerProperty.site
+  //             : undefined,
+  //       },
+  //       {
+  //         name: "description",
+  //         value: profileData?.developerProperty.description,
+  //       },
+  //     ]);
+  //   }
+  // // }, [loaded, errorOnLoad, loadProfileInfo, developerId]);
+  // }, []);
 
   const handleChangeData = useCallback(() => {
-    const accountData = accountForm.getValues();
-
-    if (profileData !== null) {
-      changeProfileInfo({
-        ...profileData.developerProperty,
-        name: accountData.companyName as any,
-        type: accountData.developerType as any,
-        address: accountData.address as any,
-        site: accountData.companyName as any,
-        description: accountData.companyName as any,
-        phone: [
-          {
-            value: accountData.phoneNumber as any,
-            ord: 0,
-          },
-        ],
-      });
-
-      setUnsaved(false);
-    }
-  }, [accountForm, profileData]);
+    // const accountData = accountForm.getValues();
+    // if (profileData !== null) {
+    //   changeProfileInfo({
+    //     ...profileData.developerProperty,
+    //     name: undefinedStringAndNull(accountData.companyName) as any,
+    //     type: undefinedStringAndNull(accountData.developerType) as any,
+    //     address: undefinedStringAndNull(accountData.address) as any,
+    //     site: undefinedStringAndNull(accountData.companyName) as any,
+    //     description: undefinedStringAndNull(accountData.companyName) as any,
+    //     phone: [
+    //       {
+    //         value: accountData.phoneNumber as any,
+    //         ord: 0,
+    //       },
+    //     ],
+    //   },pathDeveloperId );
+    //
+    //   setUnsaved(false);
+    // }
+  }, []);
 
   return profileData !== null ? (
       <div className={styles.pageWrapper}>
@@ -156,7 +160,8 @@ export const DeveloperPage: FC = observer(() => {
               tabs={[
                 {
                   title: "Аккаунт",
-                  Component: <Account form={accountForm} />,
+                  // Component: <Account form={accountForm} />,
+                  Component: <Account  />,
                 },
                 {
                   title: "Юридические сведения",
@@ -170,6 +175,7 @@ export const DeveloperPage: FC = observer(() => {
                   title: "Статистика",
                   Component: <Statistics />,
                 },
+
                 {
                   title: "Риски",
                   Component: <Risk />,

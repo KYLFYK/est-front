@@ -3,6 +3,8 @@ import {makeAutoObservable} from "mobx";
 import {mailPage} from "../../api/mainPage/mainPage";
 import {mockObjects} from "../../components/containers/DevelopersContainer/DevelopersContainer";
 import AgentsContainerStories from "src/components/containers/AgentsContainer/AgentsContainer.stories";
+import {instanceV2} from "../../api/instancev2";
+import {searchFloor} from "../../components/containers/BestOffers/bestOffers";
 
 class MainPageStore {
     constructor() {
@@ -52,7 +54,8 @@ class MainPageStore {
             name: '',
             id: 0,
         }]
-        ,tagsButton :  ["Квартира", "Дом", "Новостройка", "Вторичное жилье", "ЖК"]
+        ,tagsButton :  ["Квартира", "Дом", "Новостройка", "Вторичное жилье", "ЖК"],
+        bestOffersV2:[]
     }
 
     async fetchAgents() {
@@ -111,7 +114,6 @@ class MainPageStore {
     async fetchBestOffers(count:number,isOld:boolean,isNew:boolean,isComplex:boolean,isHouse:boolean,isApartment:boolean) {
 
         const bestOfferNew = await mailPage.bestObjects1(count,isOld,isNew,isComplex,isHouse,isApartment)
-
         // const searchAllFloor = (type:string,object:any) =>{
         //     if(type==="apartment"){
         //         return object.property.floor
@@ -143,10 +145,69 @@ class MainPageStore {
                 files: object.files ? object.files.sort((a: any, b: any) => a.id > b.id ? 1 : -1) : [],
             }
         ))
-
-
-
     }
+    async fetchBestOffersV2(){
+        const res =  await  instanceV2.get('https://estat.101bot.ru/api/v1/reality-objects/')
+        console.log('instanceV2',res.data.results)
+
+        // const inRes = res.data.results[0]
+        const inRes1 = res.data.results
+        // const allObjectsBestOffersV2 = inRes1.map((object:any)=>({
+        //         id:object.id,
+        //         files:
+        //             object.images.map((img:any)=>({
+        //                 id:img.id,
+        //                 url:img.image_file,
+        //             }))
+        //         ,
+        //         address:object.address.full_address,
+        //         price:object.params.length>0?object.params.find( (p:any) => p.reality_object_param.name_rus==='Стоимость квартир').value_text : '',
+        //         type:object.type.slug,
+        //         name:object.name,
+        //         property:{
+        //             totalFloor:object.params.length>0? object.params.find((p:any) => p.reality_object_param.name_rus==="Этажность").value_text  : '',
+        //         },
+        //         type_residential:object.params.length>0? object.params.find((p:any) => p.reality_object_param.name_rus==="Тип жилья").value_text  : '',
+        //     })
+        // )
+        const allObjectsBestOffersV2 = inRes1.map((object:any)=>({
+                id:object.id,
+                files:
+                    object.images?.map((img:any)=>({
+                        id:img.id,
+                        url:img.image_file,
+                    }))
+                ,
+                address:object.address !== null
+                    && object.address.full_address !== null
+                        ? object.address.full_address
+                        :'',
+                // price:object.params.length>0
+                //     ?object.params.find( (p:any) => p.reality_object_param.name_rus==='Стоимость квартир').value_text
+                //     : '',
+                price:object.price,
+                type:object.type!== null
+                    && object.type.slug !== null
+                        ? object.type.slug
+                        :'',
+                name:object.name !== null ? object.name :'',
+                property:{
+                    totalFloor: searchFloor(object,"Этажность") !== undefined
+                        ? searchFloor(object,"Этажность")
+                        : 0,
+                    floor:searchFloor(object,"Этаж") !== undefined
+                        ? searchFloor(object,"Этаж")
+                        : 0
+                }
+            })
+        )
+
+
+        this.initialData.bestOffersV2= allObjectsBestOffersV2
+        // type objects,этаж, type
+        console.log(allObjectsBestOffersV2)
+    }
+
     async fetchComplexDeveloper(id: number) {
         const complex = await mailPage.bestObjectsModalDeveloper(id)
         this.initialData.complexDeveloper = complex.map((re: any) => (

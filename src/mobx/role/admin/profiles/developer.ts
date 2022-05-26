@@ -198,10 +198,10 @@ class DeveloperProfile {
     }
   };
 
-  changeProfileInfo: (data: IDeveloper) => void = async (data) => {
+  changeProfileInfo: (data: IDeveloper,id:string) => void = async (data,id:string) => {
     try {
       const response = await instance.patch(
-        `developer/${this.developerId}`,
+        `developer/${id}`,
         data,
           {
             headers: {
@@ -220,6 +220,127 @@ class DeveloperProfile {
       console.error("Profile update error", e);
     }
   };
+  updateAccount:(accountMenu:any,idAccount:string)=> void = async (accountMenu:any,idAccount:string) => {
+    try{
+      const response = await instance.patch(
+          `developer/{accountId}?accountId=${idAccount}`,
+          accountMenu,
+          {
+            headers: {
+              authorization: `Bearer ${localStorage.getItem('accessEstatum')}`
+            }
+          }
+      )
+      this.loadProfileInfo(idAccount)
+    }catch (e){
+      console.error("Profile update error", e);
+    }
+  }
+  legalInfo:(legalInfoMenu:any)=> void = async (legalInfoMenu:any) => {
+    try{
+      const response = await instance.patch(
+          `developer/${this.profileData?.id}`,
+          legalInfoMenu,
+          {
+            headers: {
+              authorization: `Bearer ${localStorage.getItem('accessEstatum')}`
+            }
+          }
+      )
+      this.loadProfileInfo(this.profileData?.id.toString()!)
+    }catch (e){
+      console.error("Profile update error", e);
+    }
+  }
 }
 
 export const DeveloperProfileStore = new DeveloperProfile();
+
+
+// "name": "Александр1",
+//     "type": "Девелоперская1 компания",
+//     "address": "str11ing",
+//     "site": "https://hilma1.com",
+//     "description": "st11ring1",
+
+type delel={
+
+  "phone": [
+    {
+      "ord": 1,
+      "value": "+7(999)999-99-99"
+    }
+  ],
+  "name": "string",
+  "type": "Девелоперская компания",
+  "logo": "https://hilma.com",
+  "address": "string",
+  "site": "https://hilma.com",
+  "description": "string",
+  "legalFullName": "string",
+  "legalAddress": "string",
+  "authorizedCapital": 0,
+  "OKFS": "string",
+  "OKOPF": "string",
+  "OKOGU": "string",
+  "INN": "000000000000",
+  "OGRN": "0000000000000",
+  "KPP": "000000000",
+  "OKATO": "66 000 000 000",
+  "OKPO": "0000000000",
+  "OKTMO": "00000000000",
+  "status": "Действующая",
+  "leaderName": "string",
+  "founders": "string",
+  "enterpriseSize": 0,
+  "numberOfStaff": 0,
+  "branch": 0,
+  "revenue": 0,
+  "netProfit": 0,
+  "netAssets": 0,
+  "registrationDate": "2022-05-20T11:34:56.998Z",
+  "registrationAuthorityName": "string",
+  "registrationAuthorityAddress": "string",
+  "registeringAuthorityLocated": "string",
+  "mainOccupation": "Деятельность заказчика-застройщика",
+  "extraOccupations": [
+    {
+      "ord": 1,
+      "value": "Подготовка к продаже собственного недвижимого имущества"
+    }
+  ],
+  "statistics": [
+    {
+      "title": "Арбитражные дела",
+      "items": [
+        {
+          "item": "Судебные дела",
+          "value": 15
+        }
+      ]
+    }
+  ],
+  "risks": [
+    {
+      "title": "Индекс финансового риска",
+      "description": "Оценка вероятности неплатежеспособности компании",
+      "value": 0
+    }
+  ],
+  "press": [
+    {
+      "id": 0,
+      "date": "2022-05-20T11:34:56.998Z",
+      "text": "string",
+      "title": "string",
+      "link": "string",
+      "logo": "string"
+    }
+  ],
+  "completedComplexAmount": 0,
+  "inProgressComplexAmount": 0,
+  "completedBuildingAmount": 0,
+  "inProgressBuildingAmount": 0,
+  "id": 0
+
+}

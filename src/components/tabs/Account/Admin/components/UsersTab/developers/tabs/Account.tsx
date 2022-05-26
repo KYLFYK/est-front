@@ -1,4 +1,4 @@
-import { FC, useEffect } from "react";
+import {FC, useEffect, useState} from "react";
 import { BaseInput } from "../../../../../../../shared/BaseInput/Input";
 import { AvatarSection } from "../../../../../../../shared/AvatarSection";
 import { DeveloperProfileStore } from "../../../../../../../../mobx/role/admin/profiles/developer";
@@ -12,6 +12,8 @@ import styles from "../../agency/agency.module.scss";
 import dealImg from "../../../../../../../../Pics/card-images/dealCard.jpg";
 import {ScrollUp} from "../../../../../../../shared/ScrollUp/ScrollUp";
 import Scroll from "../../../../../../../shared/Scroll/Scroll";
+import BaseButton from "../../../../../../../shared/BaseButton/BaseButtons";
+import {useRouter} from "next/router";
 
 export interface IAccountForm {
   companyName?: string;
@@ -24,50 +26,80 @@ export interface IAccountForm {
 }
 
 interface Props {
-  form: FormInstance<IAccountForm>;
+  // form: FormInstance<IAccountForm>;
 }
 
-export const Account: FC<Props> = observer(({ form }) => {
-  const { profileData } = DeveloperProfileStore;
+// export const Account: FC<Props> = observer(({ form }) => {
+export const Account: FC<Props> = observer(({ }) => {
+  const { profileData ,updateAccount} = DeveloperProfileStore;
 
-  useEffect(() => {
-    form.setValues([
-      {
-        name: "companyName",
-        value: profileData?.developerProperty.name,
-      },
-      {
-        name: "developerType",
-        value: profileData?.developerProperty.type,
-      },
-      {
-        name: "address",
-        value: profileData?.developerProperty.address,
-      },
-      {
-        name: "phoneNumber",
-        value: profileData?.developerProperty.phone[0]
-          ? profileData?.developerProperty.phone[0].value
-          : undefined,
-      },
-      {
-        name: "email",
-        value: profileData?.email,
-      },
-      {
-        name: "cite",
-        value: profileData?.developerProperty.site
-          ? profileData?.developerProperty.site
-          : undefined,
-      },
-      {
-        name: "description",
-        value: profileData?.developerProperty.description,
-      },
-    ]);
-  }, [profileData]);
+  const [valueAccount , setValueAccount]=useState<any>({})
+  // const [valuePhone, setValuePhone]=useState<any>({})
 
-  console.log(JSON.parse(JSON.stringify(profileData)))
+  const pathDeveloperId = useRouter().query.id as string;
+  const editValue = (title:string,value:string) => {
+    if(valueAccount[title] === title) {
+      valueAccount[title].value = value
+    }
+    setValueAccount({...valueAccount,[title]:value})
+  }
+  const saveAccount = async () => {
+    await updateAccount(valueAccount,pathDeveloperId)
+  }
+
+  useEffect(()=>{
+    setValueAccount({
+      "name": profileData?.developerProperty.name,
+      "type": profileData?.developerProperty.type,
+      "address": profileData?.developerProperty.address,
+      // "phoneNumber": profileData?.developerProperty.phone[0]    //-
+      //       ? profileData?.developerProperty.phone[0].value
+      //       : '',
+      // "email": profileData?.email,                              //-
+      "site": profileData?.developerProperty.site
+            ? profileData?.developerProperty.site
+            : '',
+      "description": profileData?.developerProperty.description, //-
+    })
+  },[])
+  console.log(valueAccount)
+
+  // useEffect(() => {
+  //   form.setValues([
+  //     {
+  //       name: "companyName",
+  //       value: profileData?.developerProperty.name,
+  //     },
+  //     {
+  //       name: "developerType",
+  //       value: profileData?.developerProperty.type,
+  //     },
+  //     {
+  //       name: "address",
+  //       value: profileData?.developerProperty.address,
+  //     },
+  //     {
+  //       name: "phoneNumber",
+  //       value: profileData?.developerProperty.phone[0]
+  //         ? profileData?.developerProperty.phone[0].value
+  //         : undefined,
+  //     },
+  //     {
+  //       name: "email",
+  //       value: profileData?.email,
+  //     },
+  //     {
+  //       name: "cite",
+  //       value: profileData?.developerProperty.site
+  //         ? profileData?.developerProperty.site
+  //         : undefined,
+  //     },
+  //     {
+  //       name: "description",
+  //       value: profileData?.developerProperty.description,
+  //     },
+  //   ]);
+  // }, []);
 
   return (
       <Scroll height={'510'} >
@@ -77,7 +109,7 @@ export const Account: FC<Props> = observer(({ form }) => {
         >
           {profileData !== null && (
             <div className={styles.form}>
-              <FormController<IAccountForm> form={form}>
+              {/*<FormController<IAccountForm> form={form}>*/}
                 <section>
                   <span className={styles.formSubTitle}>Аккаунт</span>
                   <BaseInput
@@ -86,9 +118,12 @@ export const Account: FC<Props> = observer(({ form }) => {
                     errorLabel=""
                     label="Название компании"
                     type="text"
-                    name={"companyName"}
+                    // name={"companyName"}
+                    name={"name"}
                     defaultValue={" "}
-                    onChange={() => {}}
+                    // onChange={() => {}}
+                    onChange={e=>editValue("name",e.currentTarget.value)}
+                    value={valueAccount.name}
                   />
                   <BaseInput
                     classNameWrapper={styles.inputWrapper}
@@ -96,9 +131,11 @@ export const Account: FC<Props> = observer(({ form }) => {
                     errorLabel=""
                     label="Тип застройщика"
                     type="text"
-                    name={"developerType"}
+                    // name={"developerType"}
+                    name={"type"}
                     defaultValue={" "}
-                    onChange={() => {}}
+                    onChange={e=>editValue("type",e.currentTarget.value)}
+                    value={valueAccount.type}
                   />
                   <BaseInput
                     classNameWrapper={styles.inputWrapper}
@@ -108,7 +145,8 @@ export const Account: FC<Props> = observer(({ form }) => {
                     type="text"
                     name={"address"}
                     defaultValue={" "}
-                    onChange={() => {}}
+                    onChange={e=>editValue("address",e.currentTarget.value)}
+                    value={valueAccount.address}
                   />
                   <BaseInput
                     classNameWrapper={styles.inputWrapper}
@@ -118,7 +156,9 @@ export const Account: FC<Props> = observer(({ form }) => {
                     type="tel"
                     name={"phoneNumber"}
                     defaultValue={" "}
-                    onChange={() => {}}
+                    onChange={e=>editValue("phoneNumber",e.currentTarget.value)}
+                    value={profileData?.developerProperty.phone[0].value}
+                    disabled
                   />
                   <BaseInput
                     classNameWrapper={styles.inputWrapper}
@@ -128,7 +168,9 @@ export const Account: FC<Props> = observer(({ form }) => {
                     type="email"
                     name={"email"}
                     defaultValue={" "}
-                    onChange={() => {}}
+                    onChange={e=>editValue("email",e.currentTarget.value)}
+                    value={profileData?.email}
+                    disabled
                   />
                   <BaseInput
                     classNameWrapper={styles.inputWrapper}
@@ -136,23 +178,29 @@ export const Account: FC<Props> = observer(({ form }) => {
                     errorLabel=""
                     label="Сайт"
                     type="text"
-                    name={"cite"}
+                    name={"site"}
                     defaultValue={" "}
-                    onChange={() => {}}
+                    onChange={e=>editValue("site",e.currentTarget.value)}
+                    value={valueAccount.site}
                   />
                   <BaseInput
                     classNameWrapper={styles.inputWrapper}
+                    // classNameWrapper={styles.inputTextAria}
                     className={styles.input}
                     errorLabel=""
                     label="Описание"
                     type="text"
                     name={"description"}
-                    defaultValue={" "}
-                    textArea
-                    onChange={() => {}}
+                    defaultValue={profileData?.developerProperty.description}
+                    // textArea
+                    onChange={e=>editValue("description",e.currentTarget.value)}
+                    value={valueAccount.description}
                   />
                 </section>
-              </FormController>
+                <BaseButton onClick={saveAccount}>
+                  сохранить
+                </BaseButton>
+
             </div>
           )}
           {profileData !== null && (

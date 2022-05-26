@@ -12,6 +12,7 @@ import {AgentBlock} from "../AgentsContainer/AgentBlock/AgentBlock";
 import CardBestOfferMobile from "../Card/CardBestOfferMobile";
 import { BaseDropDown } from 'src/components/shared/BaseDropDown/BaseDropDown';
 import { DROPDOWN_PLACEHOLDER, SORT_FILTER_OPTIONS } from '../PlanningFilter/config';
+import {instanceV2} from "../../../api/instancev2";
 
 type BestOffersType = {
     tagsButton: Array<string>
@@ -60,6 +61,18 @@ const SamplePrevArrow: React.FC<ArrowType> = ({onClick}) => {
 // <SampleNextArrow  onClick={()=>gotoPrev()} />
 // <SamplePrevArrow onClick={()=>gotoNext()}/>
 
+export const searchFloor = (a:any, title:string) =>{
+    const res = a.type !== null
+        ? a.params.length>0
+            ? a.params.find((p:any) => p.reality_object_param !==null && p.reality_object_param.name_rus === title )?.value_text !== ""
+                ?a.params.find((p:any) => p.reality_object_param.name_rus === title )?.value_text
+                : a.params.find((p:any) => p.reality_object_param.name_rus === title )?.value_int
+            : 0
+        :0
+    // console.log("resFloor",res)
+    return res
+}
+
 
 
 export const BestOffers: FC<BestOffersType> = observer(({tagsButton}) => {
@@ -77,7 +90,7 @@ export const BestOffers: FC<BestOffersType> = observer(({tagsButton}) => {
             {
                 breakpoint: 1430,
                 settings: {
-                    slidesToShow: 3,
+                    slidesToShow: 2,// 3 need
                     slidesToScroll: 2,
                     dots: true
                 },
@@ -108,6 +121,7 @@ export const BestOffers: FC<BestOffersType> = observer(({tagsButton}) => {
     useEffect(() => {
         store.fetchBestOffers(10, false, false, false, false, false)
         setInfinite(true)
+        store.fetchBestOffersV2()
     }, [store.fetchBestOffers])
     useEffect(()=>{
         setInfinite(true)
@@ -144,11 +158,11 @@ export const BestOffers: FC<BestOffersType> = observer(({tagsButton}) => {
         store.fetchBestOffers(10, activeFilter[0], activeFilter[1], activeFilter[2], activeFilter[3], activeFilter[4])
     }
     const [sort, setSort] = useState(SORT_FILTER_OPTIONS[0].value)
+    // console.log(JSON.parse(JSON.stringify(store.initialData.bestOffers)))
+
     return (
         <div className={css.offers}>
-
                 <HeadLine title={'Лучшие предложения'} className={css.margin}>
-            
                 <div className={css.positionButton}>
                     <div className={css.buttonLine}>
                         {
@@ -179,6 +193,26 @@ export const BestOffers: FC<BestOffersType> = observer(({tagsButton}) => {
                                         />
                                     </div>
 
+                                </div>
+                            ))
+                        }
+                    </Slider>
+                </div>
+                <div style={{marginTop: '20px'}}>
+                    <Slider {...settings} >
+                        {
+                            store.initialData.bestOffersV2 !== null && store.initialData.bestOffersV2.length > 0
+                            && store.initialData.bestOffersV2.map((t: any, index) => (
+                                <div key={index} style={{padding: '5px', marginTop: index > 1 ? "24px" : '0px'}}>
+                                    <div>
+                                        <ObjectCard
+                                            key={index}
+                                            route={t.type+"V2"}
+                                            typeObject={t.type_residential}
+                                            houseData={t}
+                                            data={t}
+                                        />
+                                    </div>
                                 </div>
                             ))
                         }

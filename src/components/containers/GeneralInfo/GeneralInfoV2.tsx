@@ -17,7 +17,7 @@ interface Props {
     classSlider?:string
 }
 
-const GeneralInfo: React.FC<Props> = observer(({ images, price, info,classSlider }) => {
+const GeneralInfoV2: React.FC<Props> = observer(({ images, price, info,classSlider }) => {
 
     const imagesUrl = images.length === 0 ? IMAGES_SET : images.map((i: any) => i.url && i.url.includes('public') ? IMAGES_SET[0] : i.url || i)
     const [height,setHeight]=useState<number>(595)
@@ -48,19 +48,19 @@ const GeneralInfo: React.FC<Props> = observer(({ images, price, info,classSlider
                 {info!== undefined &&  info.map((item, idx) => (
                     <div className={s.infoItem} key={idx}>
                         {
-                           item.value !== null &&
-                                <>
-                                    <Typography
-                                        color={item.value === '' ? 'tertiary' : 'default'}
-                                        weight={item.value === '' ? 'regular':'bold' }
-                                        className={classNames(idx > 0 && item.value === '' ? s.infoTitle : s.infoLabel)}
-                                    >
-                                        {item.label}
-                                    </Typography>
-                                    <Typography className={s.infoValue}>
-                                        {item.value}
-                                    </Typography>
-                                </>
+                            item.value !== null &&
+                            <>
+                                <Typography
+                                    color={item.value === '' ? 'tertiary' : 'default'}
+                                    weight={item.value === '' ? 'regular':'bold' }
+                                    className={classNames(idx > 0 && item.value === '' ? s.infoTitle : s.infoLabel)}
+                                >
+                                    {item.label}
+                                </Typography>
+                                <Typography className={s.infoValue}>
+                                    {item.value}
+                                </Typography>
+                            </>
 
                         }
 
@@ -71,4 +71,4 @@ const GeneralInfo: React.FC<Props> = observer(({ images, price, info,classSlider
     )
 })
 
-export default GeneralInfo
+export default GeneralInfoV2
