@@ -19,34 +19,43 @@
     gap: 30px;
   }
  }
+
 .margin{
   margin: 0;
   min-width:185px;
 }
 
- .subTitle {
-     margin-bottom: 20px;
+.subTitle {
+  margin-bottom: 20px;
 
-   @include for-size(KT1) {
-     margin-bottom: 10px;
-   }
-   @include for-size(KT2) {
-     margin-bottom: 20px;
-   }
- }
+  @include for-size(KT1) {
+    margin-bottom: 10px;
+  }
+  @include for-size(KT2) {
+    margin-bottom: 20px;
+  }
+}
 
- .container {
-   margin: 60px 0 0 60px;
+.container {
+  margin: 60px 0 0 60px;
 
-   @include for-size(KT1) {
-     margin: 0 10px 0 10px;
-     border-bottom: 1px solid #F2F2F2;
-   }
-   @include for-size(KT2) {
-     margin: 0 10px 0 10px;
-   }
-   @include for-size(KT3) {
-     margin: 60px 0 0 60px;
-     border-bottom: none;
-   }
- }
+  @include for-size(KT1) {
+    margin: 0 10px 0 10px;
+    border-bottom: 1px solid #F2F2F2;
+  }
+  @include for-size(KT2) {
+    margin: 0 10px 0 10px;
+  }
+  @include for-size(KT3) {
+    margin: 60px 0 0 60px;
+    border-bottom: none;
+  }
+}
+
+.headLine{
+  margin: 30px 0 30px 0 !important;
+}
+
+.classNameMargin {
+  height: 6px;
+}

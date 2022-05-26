@@ -31,30 +31,19 @@ export const DeveloperPage: FC = observer(() => {
     changeProfileInfo,
   } = DeveloperProfileStore;
 
-  const Router = useRouter()
-
-  const onFormChange = (changed: boolean) => {
-    if (changed !== haveUnsaved) {
-      setUnsaved(changed);
-    }
-  };
-
-  // const [accountForm] = useForm<IAccountForm>(
-  //     {
-  //       companyName: profileData?.developerProperty.name,
-  //       developerType: profileData?.developerProperty.type,
-  //       address: profileData?.developerProperty.address,
-  //       phoneNumber: profileData?.developerProperty.phone[0]
-  //           ? profileData?.developerProperty.phone[0].value
-  //           : undefined,
-  //       email: profileData?.email,
-  //       cite: profileData?.developerProperty.site
-  //           ? profileData?.developerProperty.site
-  //           : undefined,
-  //       description: profileData?.developerProperty.description,
-  //     },
-  //     onFormChange
-  // );
+  const [accountForm] = useForm<IAccountForm>({
+    companyName: profileData?.developerProperty.name,
+    developerType: profileData?.developerProperty.type,
+    address: profileData?.developerProperty.address,
+    phoneNumber: profileData?.developerProperty.phone[0]
+      ? profileData?.developerProperty.phone[0].value
+      : undefined,
+    email: profileData?.email,
+    cite: profileData?.developerProperty.site
+      ? profileData?.developerProperty.site
+      : undefined,
+    description: profileData?.developerProperty.description,
+  });
 
   useEffect(() => {
     if ((!loaded && !errorOnLoad) && pathDeveloperId !== undefined ) {

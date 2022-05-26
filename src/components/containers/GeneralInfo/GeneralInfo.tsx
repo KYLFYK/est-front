@@ -15,9 +15,10 @@ interface Props {
     price?: number,
     info: IOption[]
     classSlider?:string
+    residentialComplex?: boolean
 }
 
-const GeneralInfo: React.FC<Props> = observer(({ images, price, info,classSlider }) => {
+const GeneralInfo: React.FC<Props> = observer(({ images, price, info,classSlider, residentialComplex = false }) => {
 
     const imagesUrl = images.length === 0 ? IMAGES_SET : images.map((i: any) => i.url && i.url.includes('public') ? IMAGES_SET[0] : i.url || i)
     const [height,setHeight]=useState<number>(595)
@@ -30,7 +31,7 @@ const GeneralInfo: React.FC<Props> = observer(({ images, price, info,classSlider
         }
 
     },[])
-    console.log('infoGeneral',info)
+
     return (
         <div className={s.container}>
             <div className={s.sliderContainer}>
@@ -43,12 +44,14 @@ const GeneralInfo: React.FC<Props> = observer(({ images, price, info,classSlider
                     classSlider={classSlider}
                 />
             </div>
-            <div className={s.infoContainer}>
+            <div className={`${s.infoContainer} ${residentialComplex ? '' : s.marginTop6}`}>
                 {price && <Typography size="big" color="nude">{formatNumbersToCurrency(price)} ₽</Typography>}
-                {info!== undefined &&  info.map((item, idx) => (
-                    <div className={s.infoItem} key={idx}>
-                        {
-                           item.value !== null &&
+                <div className={residentialComplex ? '' : s.marginTop19}>
+                {info!== undefined &&
+                    info.map((item, idx) => (
+                        <div className={residentialComplex ? s.infoItemRC : s.infoItemObj} key={idx}>
+                            {
+                                item.value !== null &&
                                 <>
                                     <Typography
                                         color={item.value === '' ? 'tertiary' : 'default'}
@@ -62,10 +65,12 @@ const GeneralInfo: React.FC<Props> = observer(({ images, price, info,classSlider
                                     </Typography>
                                 </>
 
-                        }
+                            }
 
-                    </div>
-                ))}
+                        </div>
+                    ))
+                }}
+                </div>
             </div>
         </div>
     )

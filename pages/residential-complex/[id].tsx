@@ -227,6 +227,7 @@ const ResidentialComplex: NextPage = observer((props: any) => {
           <HorizontalTabsObjects tabs={tabs} refs={refs} />
           <div ref={general}>
             <GeneralInfo
+                residentialComplex
                 info={MappingGeneralInfo(
                     props.name,
                     props.address,

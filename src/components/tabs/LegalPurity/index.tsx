@@ -38,6 +38,8 @@ const LegalPurityTabs: React.FC<Props> = ({tabsData}) => {
                     ? tabsFilter
                     : [{title: "Общие сведения", Component: <LegalPurityGeneralTab data={tabsData && tabsData.general}/>}]
                 }
+                classNameMenu={css.classNameMenu}
+                classNameInfo={css.classNameInfo}
             />
         </div>
 

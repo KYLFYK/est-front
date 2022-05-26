@@ -25,9 +25,11 @@ export const CheckBox: React.FC<Props> = ({ uniqueTypesList, pressed, handlePres
                                 />
                     }
                     <div className={s.buttonTitle}>
-                        {Object.values(ObjectTypes).includes(typeOption.label as ObjectTypes) 
+                        <Typography>
+                            {Object.values(ObjectTypes).includes(typeOption.label as ObjectTypes) 
                             ? FILTER_HOUSE_TYPES.filter((s: any) => typeOption.label === s.value)[0].label 
                             : typeOption.label}
+                        </Typography>
                     </div>
                 </div>
             </button>

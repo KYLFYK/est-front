@@ -69,6 +69,7 @@ $borderRadius: 6px;
 .favorite {
     position: absolute;
     z-index: 1;
-    right: 11px;
-    top: 11px;
+    right: 10px;
+    top: 10px;
+    border: none !important;
 }

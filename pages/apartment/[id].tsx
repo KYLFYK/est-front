@@ -32,6 +32,10 @@ import ObjectLegalPurityMobile from "../../src/components/containers/ObjectLegal
 import {GeneralInfoMobile} from "../../src/components/containers/GeneralInfo/GeneralInfoMobile";
 import {HorizontalTabsObjects} from "../../src/components/shared/HorizontalTabs/HorizontalTabsObjects";
 
+const mocThreeD = {
+  threeD_tour: {url: 'http://360tour.mslu.by/'},
+  vr_tour: {url: 'http://360tour.mslu.by/'},
+}
 const city = ["Москва", "Санкт-Петербург", "Крым", "Сочи", "Нижний Новгород"];
 const personalAccount = [
   { title: "Личный кабинет", href: "/User", message: 0 },
@@ -47,6 +51,7 @@ const infrastructureInfo =
   "В 15 минутах езды расположена Ялта со своей знаменитой набережной, театр Чехова, авквариум и дельфинарий. Знаменитые дворцы, парки, ботанические сады и винные заводы расположены в получасовой доступности.";
 
 const Apartment: NextPage = observer((props: any) => {
+  
   const store = useStore();
   const breadCrumbsStore = useBreadcrumbsStore();
   const tabs = [
@@ -116,8 +121,8 @@ const Apartment: NextPage = observer((props: any) => {
         <Views items={views} />
         <NameEstate item={props.name} />
         <DesktopOnly>
-          <AdressEstate item={props.address} />
-          <HorizontalTabsObjects refs={refs} tabs={tabs} />
+        <AdressEstate item={props.address} />
+          <HorizontalTabsObjects refs={refs} tabs={tabs}/>
           <div ref={general}>
             <GeneralInfo
               info={MappingGeneralInfo(props.info_options, props.object_specs)}
@@ -127,6 +132,7 @@ const Apartment: NextPage = observer((props: any) => {
             />
           </div>
         </DesktopOnly>
+
         <MobileOnly>
           <GeneralInfoMobile
             info={MappingGeneralInfo(props.info_options, props.object_specs)}
@@ -134,6 +140,7 @@ const Apartment: NextPage = observer((props: any) => {
             price={props.price}
           />
         </MobileOnly>
+
         <ObjectDescription items={MappingDescription(props.description_items)} />
         {(props?.online_tour?.threeD_tour?.url ||
           props?.online_tour?.vr_tour?.url) && (
@@ -141,6 +148,7 @@ const Apartment: NextPage = observer((props: any) => {
             <ToursContainer Online_tour={props.online_tour} />
           </div>
         )}
+        {/*<ToursContainer Online_tour={mocThreeD} />*/}
         <div ref={architec}>
           <ObjectSpecifications
             specificationsLists={sortObject_specsTypeGuide(
@@ -165,6 +173,7 @@ const Apartment: NextPage = observer((props: any) => {
             />
           </div>
         )}
+
         <MobileOnly>
           <div ref={legal}>
             {props.legalPurityData && (

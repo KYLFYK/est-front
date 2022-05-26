@@ -1,4 +1,16 @@
+@import '../../../app/styles/colours.scss';
 .wrapper{
   padding: 20px 30px;
   height: auto !important;
+}
+.classNameMenu{
+  width: 201px !important;
+  padding: 15px 0 0 0 !important;
+  border: 1px solid $GREY_6 !important;
+}
+.classNameInfo{
+  width: 1095px !important;
+  height: 650px !important;
+  padding: 20px 0 0 30px !important;
+  border: 1px solid $GREY_6 !important;
 }

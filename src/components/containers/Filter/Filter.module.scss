@@ -10,6 +10,9 @@
     padding: 0;
     flex-wrap: wrap;
     justify-content: center;
+    max-width: $KT6;
+    margin: 0 auto;
+    box-sizing: border-box;
 
     @include for-size(KT3) {
         padding-left: 0;
@@ -174,6 +177,7 @@
     border-radius: 6px;
     @include for-size(KT3) {
         width: auto !important;
+        flex: 1;
     }
     &:hover{
         background-color: $SECONDARYBUTTONHOVER
@@ -298,11 +302,27 @@
 
 .firstLine{
     display: flex;
+
+    @include for-size(KT3) {
+        width: desktop-size(1320px);
+    }
+
+    @include for-size(KT6) {
+        width: 1320px;
+    }
 }
 
 .secondLine{
     display: flex;
     margin-top: mobile-size(8px);
+
+    @include for-size(KT3) {
+        width: desktop-size(1320px);
+    }
+
+    @include for-size(KT6) {
+        width: 1320px;
+    }
 
     @include for-size(KT3) {
         margin-top: 8px;
