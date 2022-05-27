@@ -1,6 +1,5 @@
 import { NextPage } from "next";
 import React, { useEffect, useState } from "react";
-import FormScreen from "../../../src/components/processes/create-new-object/FormScreen/FormScreen";
 import StartScreen from "../../../src/components/processes/create-new-object/StartScreen/StartScreen";
 import {
   NewObjectActionTypes,
@@ -10,6 +9,7 @@ import { MainContainer } from "../../../src/components/containers/MainContainer/
 import { useEditObject } from "../../../src/hooks/useEditObject";
 
 import s from "./index.module.scss";
+import { CreateObjectV2 } from "../../../src/components/processes/create-object-v2";
 
 const NewObjectPage: NextPage = () => {
   const [action, setAction] = useState<NewObjectActionTypes>();
@@ -52,7 +52,7 @@ const NewObjectPage: NextPage = () => {
           {presets.editMode ? (
             <>
               {info.loaded && info.loadedId === presets.object ? (
-                <FormScreen
+                <CreateObjectV2
                   objectType={objectType}
                   clearObjectType={() => setObjectType(undefined)}
                   action={action}
@@ -63,7 +63,7 @@ const NewObjectPage: NextPage = () => {
               ) : null}
             </>
           ) : (
-            <FormScreen
+            <CreateObjectV2
               objectType={objectType}
               clearObjectType={() => setObjectType(undefined)}
               action={action}
