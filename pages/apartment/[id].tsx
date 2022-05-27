@@ -1,12 +1,12 @@
-import type {NextPage} from "next";
-import {observer} from "mobx-react-lite";
-import React, {useEffect, useRef, useState} from "react";
-import {useRouter} from "next/router";
-import {MainContainer} from "../../src/components/containers/MainContainer/MainContainer";
-import {Breadcrumbs} from "../../src/components/shared/Breadcrumbs/Breadcrumbs";
-import {Views} from "../../src/components/shared/Views/Views";
-import {NameEstate} from "../../src/components/shared/NameEstate/NameEstate";
-import {AdressEstate} from "../../src/components/shared/AdressEstate/AdressEstate";
+import type { NextPage } from "next";
+import { observer } from "mobx-react-lite";
+import React, { useEffect, useRef, useState } from "react";
+import { useRouter } from "next/router";
+import { MainContainer } from "../../src/components/containers/MainContainer/MainContainer";
+import { Breadcrumbs } from "../../src/components/shared/Breadcrumbs/Breadcrumbs";
+import { Views } from "../../src/components/shared/Views/Views";
+import { NameEstate } from "../../src/components/shared/NameEstate/NameEstate";
+import { AdressEstate } from "../../src/components/shared/AdressEstate/AdressEstate";
 import GeneralInfo from "../../src/components/containers/GeneralInfo/GeneralInfo";
 import ObjectDescription from "../../src/components/containers/ObjectDescription/ObjectDescription";
 import ToursContainer from "../../src/components/containers/ToursContainer/ToursContainer";
@@ -14,28 +14,38 @@ import ObjectSpecifications from "../../src/components/containers/ObjectSpecific
 import Map from "../../src/components/containers/Maps/MapInfrastructure/index";
 import ObjectLegalPurity from "../../src/components/containers/ObjectLegalPurity/ObjectLegalPurity";
 import ObjectDeveloper from "../../src/components/containers/ObjectDeveloper/ObjectDeveloper";
-import {Mortgage} from "../../src/components/shared/Mortgage/Mortgage";
-import {Record} from "../../src/components/containers/Record/Record";
+import { Mortgage } from "../../src/components/shared/Mortgage/Mortgage";
+import { Record } from "../../src/components/containers/Record/Record";
 import RecordAgent from "../../src/components/containers/Record/RecordAgent.json";
-import {MappingDescription, MappingGeneralInfo, MappingLegalPurity,} from "src/lib/mapping/Apartment/apartmentMapping";
-import {MappingDeveloperInfo} from "src/lib/mapping/ResidentComplex/residentComplexMapping";
-import {datetoDayFormat} from "src/lib/mapping/objectDates";
-import {sortGuide, sortObject_specsTypeGuide,} from "../../src/utils/conversionIcons/conversionIcons";
-import {useStore} from "../../src/mobx/stores/ApartamentStore/ApartmentStore";
-import {useBreadcrumbsStore} from "../../src/mobx/stores/BreadcrumbsStore/BreadcrumbsStore";
-import {UrlObj} from "../../src/api/instance";
-import {FILTER_ACTIONS_OPTIONS, FILTER_HOUSE_TYPE_OPTIONS,} from "../../src/components/containers/Filter/config";
-import {MobileOnly} from "../../src/components/containers/Adaptive/MobileOnly";
-import {DesktopOnly} from "../../src/components/containers/Adaptive/DesktopOnly";
+import {
+  MappingDescription,
+  MappingGeneralInfo,
+  MappingLegalPurity,
+} from "src/lib/mapping/Apartment/apartmentMapping";
+import { MappingDeveloperInfo } from "src/lib/mapping/ResidentComplex/residentComplexMapping";
+import { datetoDayFormat } from "src/lib/mapping/objectDates";
+import {
+  sortGuide,
+  sortObject_specsTypeGuide,
+} from "../../src/utils/conversionIcons/conversionIcons";
+import { useStore } from "../../src/mobx/stores/ApartamentStore/ApartmentStore";
+import { useBreadcrumbsStore } from "../../src/mobx/stores/BreadcrumbsStore/BreadcrumbsStore";
+import { UrlObj } from "../../src/api/instance";
+import {
+  FILTER_ACTIONS_OPTIONS,
+  FILTER_HOUSE_TYPE_OPTIONS,
+} from "../../src/components/containers/Filter/config";
+import { MobileOnly } from "../../src/components/containers/Adaptive/MobileOnly";
+import { DesktopOnly } from "../../src/components/containers/Adaptive/DesktopOnly";
 import css from "../../styles/slider.module.scss";
 import ObjectLegalPurityMobile from "../../src/components/containers/ObjectLegalPurity/ObjectLegalPurityMobile";
-import {GeneralInfoMobile} from "../../src/components/containers/GeneralInfo/GeneralInfoMobile";
-import {HorizontalTabsObjects} from "../../src/components/shared/HorizontalTabs/HorizontalTabsObjects";
+import { GeneralInfoMobile } from "../../src/components/containers/GeneralInfo/GeneralInfoMobile";
+import { HorizontalTabsObjects } from "../../src/components/shared/HorizontalTabs/HorizontalTabsObjects";
 
 const mocThreeD = {
-  threeD_tour: {url: 'http://360tour.mslu.by/'},
-  vr_tour: {url: 'http://360tour.mslu.by/'},
-}
+  threeD_tour: { url: "http://360tour.mslu.by/" },
+  vr_tour: { url: "http://360tour.mslu.by/" },
+};
 const city = ["Москва", "Санкт-Петербург", "Крым", "Сочи", "Нижний Новгород"];
 const personalAccount = [
   { title: "Личный кабинет", href: "/User", message: 0 },
@@ -51,7 +61,6 @@ const infrastructureInfo =
   "В 15 минутах езды расположена Ялта со своей знаменитой набережной, театр Чехова, авквариум и дельфинарий. Знаменитые дворцы, парки, ботанические сады и винные заводы расположены в получасовой доступности.";
 
 const Apartment: NextPage = observer((props: any) => {
-  
   const store = useStore();
   const breadCrumbsStore = useBreadcrumbsStore();
   const tabs = [
@@ -89,17 +98,11 @@ const Apartment: NextPage = observer((props: any) => {
     ]);
     store.fetch(router.query.id);
     breadCrumbsStore.addBreadCrumbs(
-      `${
-        FILTER_ACTIONS_OPTIONS.filter((a: any) => props.orderType === a.value)
-          ? FILTER_ACTIONS_OPTIONS.filter(
-              (a: any) => props.orderType === a.value
-            )[0].label
-          : "нет сделки"
-      } ${
+      `Купить ${
         FILTER_HOUSE_TYPE_OPTIONS.filter((a: any) => props.type === a.value)[0]
           ? FILTER_HOUSE_TYPE_OPTIONS.filter(
               (a: any) => props.type === a.value
-            )[0].label
+            )[0]?.label
           : "нет типа"
       }`,
       1
@@ -121,8 +124,8 @@ const Apartment: NextPage = observer((props: any) => {
         <Views items={views} />
         <NameEstate item={props.name} />
         <DesktopOnly>
-        <AdressEstate item={props.address} />
-          <HorizontalTabsObjects refs={refs} tabs={tabs}/>
+          <AdressEstate item={props.address} />
+          <HorizontalTabsObjects refs={refs} tabs={tabs} />
           <div ref={general}>
             <GeneralInfo
               info={MappingGeneralInfo(props.info_options, props.object_specs)}
@@ -141,7 +144,9 @@ const Apartment: NextPage = observer((props: any) => {
           />
         </MobileOnly>
 
-        <ObjectDescription items={MappingDescription(props.description_items)} />
+        <ObjectDescription
+          items={MappingDescription(props.description_items)}
+        />
         {(props?.online_tour?.threeD_tour?.url ||
           props?.online_tour?.vr_tour?.url) && (
           <div ref={tours}>
@@ -177,7 +182,9 @@ const Apartment: NextPage = observer((props: any) => {
         <MobileOnly>
           <div ref={legal}>
             {props.legalPurityData && (
-              <ObjectLegalPurityMobile legalPurityData={props.legalPurityData} />
+              <ObjectLegalPurityMobile
+                legalPurityData={props.legalPurityData}
+              />
             )}
           </div>
         </MobileOnly>
@@ -194,13 +201,13 @@ const Apartment: NextPage = observer((props: any) => {
         </DesktopOnly>
         <Mortgage />
       </div>
-      <div ref={record} style={{backgroundColor:'#1A4862'}} >
+      <div ref={record} style={{ backgroundColor: "#1A4862" }}>
         <Record
-            Record={RecordAgent.Record}
-                title={"квартиру"}
-            nameObject={props.name}
-          />
-        </div>
+          Record={RecordAgent.Record}
+          title={"квартиру"}
+          nameObject={props.name}
+        />
+      </div>
     </MainContainer>
   );
 });
